@@ -58,7 +58,10 @@
     "check:api-package": "npm run generate:api -- --check-package",
     "release:plan": "node tools/release-plan/cli.mjs plan",
     "release:prepare": "node tools/release-plan/cli.mjs prepare",
-    "test:release-plan": "vitest run --root tools/release-plan"
+    "test:release-plan": "vitest run --root tools/release-plan",
+    "build:ai-docs": "node tools/ai-docs/cli.mjs",
+    "test:ai-docs": "node --test tools/ai-docs/corpus.test.mjs",
+    "check:ai-docs": "node tools/ai-docs/smoke.mjs"
   },
   "devDependencies": {
     "@changesets/apply-release-plan": "^8.1.1",
