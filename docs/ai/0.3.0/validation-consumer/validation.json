@@ -264,5 +264,67 @@
       "sha256": "ab536b44021f51771871ff0ff3c30f42f0547105d4133db4c281bb8361f0c413"
     }
   ],
-  "retention": "Source snapshots preserve original bytes with .txt appended; these are immutable one-time evidence, not maintained recipes. Locks/caches are excluded; original lock hashes retained. CI reruns maintained travel recipes."
+  "retention": "Source snapshots retain validated text with Git-normalized LF line endings and .txt appended; sourceHashes identify original run bytes, snapshotHashes identify repository bytes. Immutable one-time evidence, not maintained recipes. Locks/caches are excluded; original lock hashes retained. CI reruns maintained travel recipes.",
+  "snapshotHashes": [
+    {
+      "file": "sources/vite/package.json.txt",
+      "sha256": "bda1c9c80ea5e8b5d05e733fdb6b569f19c237f2643ba5137274bf1b32d4ab8b"
+    },
+    {
+      "file": "sources/vite/tsconfig.json.txt",
+      "sha256": "ec2d8f5f7615a738605b9e1f5be695c851e9e5b98c454a3db4563e4945bb4b91"
+    },
+    {
+      "file": "sources/vite/vite.config.ts.txt",
+      "sha256": "0f35242d8f1b9f414cb64f7ace57f8260234f9e6e4b464dee2957ce3017634aa"
+    },
+    {
+      "file": "sources/vite/index.html.txt",
+      "sha256": "93c8931aead8e3891e2c308f6debf83fbd42f873195050096fb176b4f4289cb0"
+    },
+    {
+      "file": "sources/vite/src/main.ts.txt",
+      "sha256": "68fdadd78e29c7267fc2600bd85e42a2048243a381718964287e9d074d7d2eb7"
+    },
+    {
+      "file": "sources/vite/src/Workshop.vue.txt",
+      "sha256": "5a3b6f04fdb41908687c755d52c41970d121f2ee282a418b78246433136be3c8"
+    },
+    {
+      "file": "sources/vite/src/SeatCounter.vue.txt",
+      "sha256": "f377839eb400a79a118d448427a7056a266615e79b5a42dca523979d2d48f0ce"
+    },
+    {
+      "file": "sources/vite/validate-browser.mjs.txt",
+      "sha256": "f8b9c34c988e58db73409ee95ca4ad67619ddfcfc3622fdba19a6f56fa168c98"
+    },
+    {
+      "file": "sources/nuxt/package.json.txt",
+      "sha256": "2958f705d97b0be5f9f29e8e1d9d0c7cee41c14fc1342f9ac6fbe509e928d380"
+    },
+    {
+      "file": "sources/nuxt/tsconfig.json.txt",
+      "sha256": "5273fab053beb56e653ac550328c9d4437173994cddddf9fdd671a7b30452929"
+    },
+    {
+      "file": "sources/nuxt/nuxt.config.ts.txt",
+      "sha256": "91a82440ff8c10b18c7ba24e741736f1b747f814be47fa82621e81ca81b65b82"
+    },
+    {
+      "file": "sources/nuxt/app/app.vue.txt",
+      "sha256": "a4b9b24d66b1cc0dc16adb00d735162eb6e5770022c4c1cd794af7dc5f11ccfd"
+    },
+    {
+      "file": "sources/nuxt/app/plugins/soxa.ts.txt",
+      "sha256": "3a4ae750cc38210d8696793a03ea40378bb6e7591a555683052d073648904290"
+    },
+    {
+      "file": "sources/nuxt/app/components/Workshop.vue.txt",
+      "sha256": "5a3b6f04fdb41908687c755d52c41970d121f2ee282a418b78246433136be3c8"
+    },
+    {
+      "file": "sources/nuxt/app/components/SeatCounter.vue.txt",
+      "sha256": "f377839eb400a79a118d448427a7056a266615e79b5a42dca523979d2d48f0ce"
+    }
+  ]
 }

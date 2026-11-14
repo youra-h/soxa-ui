@@ -51,8 +51,9 @@ in [browser evidence](./validation-consumer/browser-results.json). One browser
 test fix narrowed an ambiguous status-role locator. Environment/npm failures are
 recorded; there were no public API type errors or contract misunderstandings.
 
-The report's sourceHashes map to byte-preserving source snapshots under
-validation-consumer/sources, with .txt appended to original paths. They are
+The report's sourceHashes identify original validated bytes; snapshotHashes identify
+source snapshots under validation-consumer/sources after Git normalizes CRLF to LF,
+with .txt appended to original paths. They are
 immutable one-time validation evidence, not maintained recipes or CI fixtures.
 Restore original filenames into an external folder, install each package.json
 and run the recorded commands to reproduce. Locks, node_modules, browser binaries
