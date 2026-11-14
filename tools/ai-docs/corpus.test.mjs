@@ -3,7 +3,7 @@ import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
 import test from 'node:test'
 import { buildCorpus, digest, selectDocuments } from './corpus.mjs'
 
@@ -13,6 +13,8 @@ function fixture() {
 	const manifest = JSON.parse(
 		readFileSync(new URL('../../docs/ai/0.3.0/manifest.json', import.meta.url), 'utf8'),
 	)
+	manifest.documents = manifest.documents.slice(0, 2)
+	manifest.documents[0].related = ['vue-button']
 	const source = {
 		revision: manifest.libraryRevision,
 		path: 'packages/setup/content/descriptors/components/button.descriptor.ts',
@@ -63,8 +65,10 @@ function fixture() {
 		const file = join(root, doc.path)
 		mkdirSync(join(root, 'examples'), { recursive: true })
 		writeFileSync(file, '# Example\n')
-		for (const example of doc.examples)
+		for (const example of doc.examples) {
+			mkdirSync(dirname(join(root, example.path)), { recursive: true })
 			writeFileSync(join(root, example.path), '<template>Example</template>\n')
+		}
 	}
 	const manifestPath = join(root, 'manifest.json')
 	const save = () => writeFileSync(manifestPath, JSON.stringify(manifest))
@@ -284,4 +288,40 @@ test('source download rejects missing remote files, unsafe paths and wrong versi
 		)
 		assert.equal(existsSync(join(f.root, 'failed')), false)
 	}
+})
+
+test('Vue recipe registration retains nested Nuxt delivery without changing the schema', async () => {
+	const manifest = JSON.parse(
+		readFileSync(new URL('../../docs/ai/0.3.0/manifest.json', import.meta.url), 'utf8'),
+	)
+	assert.equal(manifest.schemaVersion, 1)
+	for (const id of [
+		'vue-start',
+		'vue-installation',
+		'vue-bindings',
+		'vue-composition',
+		'vue-controller',
+		'vue-nuxt',
+		'vue-errors',
+	])
+		assert.ok(manifest.documents.some((doc) => doc.id === id && doc.framework === 'vue'))
+	const { fetchSource } = await import('./fetch.mjs')
+	const root = mkdtempSync(join(tmpdir(), 'soxa-nested-delivery-'))
+	const requested = []
+	await fetchSource({
+		revision,
+		version: '0.3.0',
+		out: join(root, 'source'),
+		fetchFile: async (url) => {
+			requested.push(url)
+			return new Response(
+				url.endsWith('manifest.json') ? JSON.stringify(manifest) : 'public file',
+			)
+		},
+	})
+	for (const entry of manifest.documents)
+		for (const example of entry.examples) {
+			assert.ok(existsSync(join(root, 'source/docs/ai/0.3.0', example.path)))
+			assert.ok(requested.some((url) => url.endsWith('/' + example.path)))
+		}
 })

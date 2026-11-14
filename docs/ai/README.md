@@ -4,7 +4,7 @@ This directory is the library-owned source format for small, versioned AI
 documentation records. The initial release directory is **0.3.0**. The separate
 website owns its routes, localization, prose pages, rendering and public
 `llms.txt` endpoints. This format supplies metadata, a minimal shared overview,
-a sample recipe and generated API records; it does not replace those pages.
+Vue/Nuxt consumer recipes and generated API records; it does not replace those pages.
 
 The source language is English. This is public consumer documentation, not the
 repository's agent workflow. Never publish private memory, task history,
@@ -24,7 +24,8 @@ documented release. Do not ship repository AGENTS files or skills wholesale.
   The website must pin that SHA in its own configuration or lock.
 - Theme and icon versions are independent. A recipe records their exact package
   versions in `packages` when used; it must verify peer compatibility and theme
-  augmentation. The initial headless example uses neither.
+  augmentation. The minimal headless Button example uses neither; the Vue/Nuxt recipes use
+  Oren and Material 0.3.0 with verified peer compatibility.
 - The installed `@soxa-ui/setup/api.json` must match both the manifest's exact
   version and its SHA-256. The API is already published in setup 0.3.0.
   The current checkout's generated API, `latest`, a range, and a silent fallback
@@ -167,15 +168,28 @@ npm run check:ai-docs
 The first command runs offline validator/retrieval tests with small artificial API
 fixtures. The second installs exact published 0.3.0 packages in a temporary consumer
 directory, copies only public documentation/tool files, builds all API records,
-checks release source paths, typechecks/builds the attached Vue sample and tests
-click plus Enter in Chromium. It needs npm access and the repository's Playwright
+checks release source paths, typechecks/builds the attached Vue and Nuxt
+recipes and tests their form models/events, slots, keyboard and controller
+remount lifecycle in Chromium. Nuxt also checks universal SSR without JS,
+initial state across requests, unique ids/ARIA references and hydration. It needs npm access and the repository's Playwright
 Chromium (`npx playwright install chromium`). CI runs both. It does not build
 or install the current library checkout.
 
 The initial matrix is deliberate: 63 of 65 published components have Vue exports and generated API;
-only one Vue installation example is demonstrated. Other framework guide coverage,
-Nuxt/SSR, themes/extensions/ctrl and contributor instructions remain pending in the
-existing AI Docs tasks. Their API presence alone is not evidence of runnable recipes.
+the retained headless Button and the Vue/Nuxt recipes are checked. Other
+framework guides, general extension/theme-authoring and contributor instructions
+remain pending. API presence alone is not evidence of runnable recipes.
+
+Start Vue/Nuxt consumption with [vue-start](./0.3.0/vue-start.md). The separate
+records cover installation, bindings/events, composition/slots, ctrl/lifecycle,
+Nuxt SSR and common mistakes; their related IDs lead to generated API records.
+The shared Recipes and CtrlExample sources are used by both consumer scenarios.
+Validation evidence is recorded in [validation](./0.3.0/validation.md).
+
+The smoke prints its retained temporary project directory so its lockfiles and
+builds can be inspected. Every Soxa package is pinned to 0.3.0, resolves from
+npm once, and is checked in the lock. Vite uses Vue 3.5.32; Nuxt 4.6.3 uses
+Vue 3.5.44. This does not imply support for every framework/runtime version.
 
 For a new guide, reuse a checked example file, cite public release sources, add
 related IDs and update only its real coverage. For another release, obtain its

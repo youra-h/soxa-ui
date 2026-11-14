@@ -1,0 +1,35 @@
+{
+  "browser": "145.0.7632.6",
+  "runs": [
+    {
+      "name": "vite",
+      "status": "passed",
+      "checks": [
+        "visible Input label focuses field; named value model and typed change payload update",
+        "labeled CheckBox toggles with Space",
+        "Select Enter/ArrowDown/Enter model selection, custom item slot, Escape dismissal",
+        "DatePicker day ArrowUp changes named date model; keyboard opens/closes calendar",
+        "Accordion.Item scoped text/selected slot responds to keyboard",
+        "keyboard form submission",
+        "raw per-instance ctrl subscription: three mount/action/unmount/remount cycles; one event per action, reset on remount, cleanup called"
+      ],
+      "diagnostics": []
+    },
+    {
+      "name": "nuxt",
+      "status": "passed",
+      "checks": [
+        "visible Input label focuses field; named value model and typed change payload update",
+        "labeled CheckBox toggles with Space",
+        "Select Enter/ArrowDown/Enter model selection, custom item slot, Escape dismissal",
+        "DatePicker day ArrowUp changes named date model; keyboard opens/closes calendar",
+        "Accordion.Item scoped text/selected slot responds to keyboard",
+        "keyboard form submission",
+        "raw per-instance ctrl subscription: three mount/action/unmount/remount cycles; one event per action, reset on remount, cleanup called"
+      ],
+      "diagnostics": []
+    }
+  ],
+  "ssrWithoutJavaScript": "passed",
+  "consecutiveSSRRequests": "both initial state; preceding browser changes do not persist"
+}
