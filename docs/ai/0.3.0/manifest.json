@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "libraryVersion": "0.3.0",
+  "libraryRevision": "9ae988633936a03e291e8e414028456fe1039c6b",
+  "language": "en",
+  "api": {
+    "package": "@soxa-ui/setup",
+    "version": "0.3.0",
+    "export": "@soxa-ui/setup/api.json",
+    "sha256": "869aa23426237c0b130466cd0de9fa0ff8e960412a99e058de824c9be02104dd",
+    "tarball": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.3.0.tgz",
+    "integrity": "sha512-byutzJyCBW7oCrqze6Dgr1+2QZ019yAZ0kIAY7+1SWQLFE6kW53RJOpo7LH+FB9jSifY7Os2k92YUf7hVmjaZg=="
+  },
+  "coverage": {
+    "vue": {
+      "api": "generated",
+      "guides": "sample"
+    },
+    "react": {
+      "api": "generated",
+      "guides": "pending"
+    },
+    "angular": {
+      "api": "generated",
+      "guides": "pending"
+    },
+    "solid": {
+      "api": "generated",
+      "guides": "pending"
+    },
+    "svelte": {
+      "api": "generated",
+      "guides": "pending"
+    },
+    "webc": {
+      "api": "generated",
+      "guides": "pending"
+    }
+  },
+  "documents": [
+    {
+      "id": "overview",
+      "title": "Soxa UI overview",
+      "path": "overview.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "README.md"
+        }
+      ],
+      "related": ["vue-button"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "vue-button",
+      "title": "Minimal Vue Button",
+      "path": "vue-button.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "installation",
+      "component": "button",
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/setup/content/descriptors/components/button.descriptor.ts"
+        }
+      ],
+      "related": ["overview", "api-vue-button"],
+      "examples": [
+        {
+          "id": "app",
+          "path": "examples/App.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    }
+  ],
+  "packages": {
+    "@soxa-ui/vue": "0.3.0",
+    "@soxa-ui/setup": "0.3.0"
+  },
+  "contributorGuides": "pending"
+}

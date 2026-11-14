@@ -41,6 +41,10 @@ does not need this repository, descriptor internals, a GitHub checkout or TypeSc
 time. This task does not release a package: the export becomes available from npm with the
 release containing it. A local setup build already produces it.
 
+For a versioned index, selective AI retrieval and checked consumer samples, see the
+[public documentation source](../ai/README.md). Its library version and documentation
+revision are pinned independently; the website keeps its own pages and localization.
+
 ## Artifact format (schema version 1)
 
 The [committed contract](generated/contract.json) contains the same API data as the package.

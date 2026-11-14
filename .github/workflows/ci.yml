@@ -35,6 +35,7 @@ jobs:
           npm run test:min-peers
           npm run test:release-notes
           npm run test:release-plan
+          npm run test:ai-docs
           npm run test:api-docs
           npm run typecheck:api-docs
           npm run check:api-docs
@@ -44,6 +45,21 @@ jobs:
           npm run test:setup
           npm run test:plugins
           npm run test:theme
+
+  ai-docs:
+    name: AI Docs - published 0.3.0
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check:ai-docs
 
   # The matrix key isn't `adapter`: under that name the guard of tools/min-peers
   # (`workspace.spec.ts`) reads the matrix of lower bounds.
