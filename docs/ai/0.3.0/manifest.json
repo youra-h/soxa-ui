@@ -53,7 +53,7 @@
           "path": "README.md"
         }
       ],
-      "related": ["vue-button"],
+      "related": ["vue-button", "vue-start"],
       "examples": [],
       "links": []
     },
@@ -85,11 +85,227 @@
         }
       ],
       "links": []
+    },
+    {
+      "id": "vue-start",
+      "title": "Vue and Nuxt 0.3.0 entry point",
+      "path": "vue-start.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "overview",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/vue/README.md"
+        }
+      ],
+      "related": [
+        "overview",
+        "vue-installation",
+        "vue-bindings",
+        "vue-composition",
+        "vue-controller",
+        "vue-nuxt",
+        "vue-errors"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "vue-installation",
+      "title": "Install the checked Vue consumer",
+      "path": "vue-installation.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "installation",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/themes/oren/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/setup/README.md"
+        }
+      ],
+      "related": ["overview", "vue-button", "vue-nuxt", "api-vue-button"],
+      "examples": [
+        {
+          "id": "vue-main",
+          "path": "examples/vue/main.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "vue-bindings",
+      "title": "Fields, models and events",
+      "path": "vue-bindings.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "bindings",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/core/src/common/types.ts"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/vue/src/components/label/Label.vue"
+        }
+      ],
+      "related": [
+        "vue-start",
+        "vue-composition",
+        "api-vue-input",
+        "api-vue-check-box",
+        "api-vue-label",
+        "api-vue-select",
+        "api-vue-date-picker"
+      ],
+      "examples": [
+        {
+          "id": "recipes",
+          "path": "examples/TravelRecipes.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "vue-composition",
+      "title": "Compound components and slots",
+      "path": "vue-composition.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "composition",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/vue/README.md"
+        }
+      ],
+      "related": ["vue-start", "api-vue-accordion", "api-vue-accordion-item", "api-vue-select"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "vue-controller",
+      "title": "Controllers and lifecycle",
+      "path": "vue-controller.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "lifecycle",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": ["vue-start", "api-vue-button"],
+      "examples": [
+        {
+          "id": "controller",
+          "path": "examples/CtrlExample.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "vue-nuxt",
+      "title": "Nuxt universal rendering",
+      "path": "vue-nuxt.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "nuxt",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/themes/oren/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/setup/README.md"
+        }
+      ],
+      "related": ["vue-start", "vue-installation", "vue-bindings", "vue-controller"],
+      "examples": [
+        {
+          "id": "nuxt-config",
+          "path": "examples/nuxt/nuxt.config.ts",
+          "language": "ts"
+        },
+        {
+          "id": "nuxt-plugin",
+          "path": "examples/nuxt/app/plugins/soxa.ts",
+          "language": "ts"
+        },
+        {
+          "id": "nuxt-app",
+          "path": "examples/nuxt/app/app.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "vue-errors",
+      "title": "Troubleshooting this release",
+      "path": "vue-errors.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "troubleshooting",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/vue/README.md"
+        }
+      ],
+      "related": ["vue-start", "vue-bindings", "vue-controller", "vue-nuxt"],
+      "examples": [],
+      "links": []
     }
   ],
   "packages": {
     "@soxa-ui/vue": "0.3.0",
-    "@soxa-ui/setup": "0.3.0"
+    "@soxa-ui/setup": "0.3.0",
+    "@soxa-ui/core": "0.3.0",
+    "@soxa-ui/plugins": "0.3.0",
+    "@soxa-ui/theme-base": "0.3.0",
+    "@soxa-ui/theme-oren": "0.3.0",
+    "@soxa-ui/icons-material": "0.3.0"
   },
   "contributorGuides": "pending"
 }

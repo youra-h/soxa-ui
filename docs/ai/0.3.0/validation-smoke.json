@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-11-14",
+  "libraryVersion": "0.3.0",
+  "libraryRevision": "9ae988633936a03e291e8e414028456fe1039c6b",
+  "apiSha256": "869aa23426237c0b130466cd0de9fa0ff8e960412a99e058de824c9be02104dd",
+  "runtime": {
+    "node": "v24.20.0",
+    "platform": "win32"
+  },
+  "packages": {
+    "@soxa-ui/vue": "0.3.0",
+    "@soxa-ui/setup": "0.3.0",
+    "@soxa-ui/core": "0.3.0",
+    "@soxa-ui/plugins": "0.3.0",
+    "@soxa-ui/theme-base": "0.3.0",
+    "@soxa-ui/theme-oren": "0.3.0",
+    "@soxa-ui/icons-material": "0.3.0"
+  },
+  "scenarios": {
+    "vue": {
+      "vue": "3.5.32",
+      "vite": "8.2.2",
+      "typescript": "6.0.2",
+      "vueTsc": "3.3.11",
+      "lockSha256": "82d248c019bab6407d055255dfdca8688f75b0d89ed0ab2536cfea2104a0966a",
+      "result": "types, production build, Chromium models/events/slots/keyboard/controller remount and retained Button sample passed"
+    },
+    "nuxt": {
+      "nuxt": "4.6.3",
+      "vue": "3.5.44",
+      "typescript": "6.0.3",
+      "vueTsc": "3.3.13",
+      "lockSha256": "ad103c0970924b3f73cadaf80ee44a83a63f3e4cfcb28fd1b5bdf401838e163d",
+      "result": "types, production build, Chromium form interactions and JS-disabled SSR/id-reference/request isolation passed"
+    }
+  },
+  "inputs": {
+    "examples/App.vue": "a4b58a1e5b04b123e893e3423332ee76e29707786b6815aa65803132e6b7bc7f",
+    "examples/TravelRecipes.vue": "01ffa864b2e86ba7f71f39068f287f45edbf152c74567ba6a8d895bb502f8806",
+    "examples/CtrlExample.vue": "d17a7ccee08b07e88e34c66125a4fb8fc2d06fe4de11f4cccd70e195550d615b",
+    "examples/vue/main.ts": "5e946a35333d66bd34e3fe0739fdff7041c7c8925f4f829faf84dc3b046b8a49",
+    "examples/nuxt/nuxt.config.ts": "5508f6e218eeac56d8f906b409dd23385e1b24384031b2d4d1958df91d3c84f0",
+    "examples/nuxt/app/app.vue": "7162df2091a61716d5a7070a3917fe3d7c62f925f1c12d3c2d5bdcdc9913965c",
+    "examples/nuxt/app/plugins/soxa.ts": "7131d2d424b5df750ac67bff7efc91177d9b49feb54e92906d4a4d932745f35b"
+  },
+  "runnerSha256": "e0e8be3d909d64190d77d3230d34915f7b821c5151b190364435c3da178e4753",
+  "limits": [
+    "Chromium only; not a full assistive technology or browser matrix audit.",
+    "Lockfiles are retained in temporary consumer projects, not committed; their SHA256 digests identify this run.",
+    "Nuxt build reports a client chunk above 500 kB; no page errors, browser console warnings/errors or hydration warnings occurred.",
+    "Framework transitive resolutions may change on a future fresh install; library pins remain exact and lock-checked."
+  ]
+}

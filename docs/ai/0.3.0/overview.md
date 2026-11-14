@@ -16,8 +16,11 @@ Theme-owned values such as variant, view, shape and animation need the selected
 theme's type augmentation. The API was generated without a theme and cannot
 enumerate every consumer theme's values.
 
-This initial corpus contains generated component API and one Vue Button example.
-It does not establish full framework, SSR, theme or accessibility-guide coverage.
+This corpus contains generated component API, a minimal Vue Button sample and
+checked Vue/Nuxt travel-form recipes. The vue-start record routes consumers to
+installation, models/events, compound slots, controllers, SSR and troubleshooting.
+These recipes establish only their stated scenario coverage; they do not establish
+full framework or accessibility-guide coverage.
 Read the coverage matrix before treating an absent guide as supported behavior.
 Contributor instructions describe working inside the library and are a separate
 audience; they must not be mixed into application installation instructions.

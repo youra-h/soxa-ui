@@ -1,0 +1,14 @@
+<script setup lang="ts">
+import { onMounted, onUnmounted, ref } from 'vue'
+import { TButton } from '@soxa-ui/core'
+import { Button } from '@soxa-ui/vue'
+const emit = defineEmits<{cleaned: []}>()
+const counter = new TButton({ text: 'Add one seat' })
+const count = ref(0)
+const ready = ref(false)
+const changed = () => {count.value++}
+onMounted(() => {counter.events.on('change:text', changed); ready.value = true})
+onUnmounted(() => {counter.events.off('change:text', changed); counter.text = 'Released'; emit('cleaned')})
+function add() {counter.text = counter.text === 'Add one seat' ? 'Add another seat' : 'Add one seat'}
+</script>
+<template><section aria-label="Seat counter"><Button :ctrl="counter" type="button" @action:click="add"/><output data-testid="seats">Extra seats: {{ count }}</output><span v-if="ready" data-testid="ready">Counter ready</span></section></template>

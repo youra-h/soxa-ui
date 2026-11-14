@@ -1,0 +1,330 @@
+{
+  "schemaVersion": 1,
+  "scenario": "Fresh independent weekend makers workshop registration; authored from exported public Vue/Nuxt guides and generated API, not copied from attached recipe",
+  "documentationBoundary": "Only supplied public corpus read; no repository code, private memory, external documentation or sibling consumer read",
+  "corpus": {
+    "libraryVersion": "0.3.0",
+    "docsRevision": "66c9a75500f2739a9d19fd1cc5b813052280ca33",
+    "indexSha256": "dc594ec126bd00c6b6f70727202f0a736aa6971168ca4c9b23a28c20128fd58e",
+    "libraryRevision": "9ae988633936a03e291e8e414028456fe1039c6b",
+    "snapshotNote": "Pre-commit exported documentation snapshot. docsRevision is the builder base checkout identifier; content/file hashes identify actual input bytes. Final documentation provenance is the PR commit."
+  },
+  "documents": [
+    {
+      "id": "vue-start",
+      "contentSha256": "4cf4ba3c2c804cfcae31bd00f7d7cdc5b2d38ab40607b00b80ef167d81dac330",
+      "fileSha256": "b947ad4308e23c68882951e4a21c032f036a833c219ac65c393774d682f31913"
+    },
+    {
+      "id": "vue-installation",
+      "contentSha256": "007d49657212104fde2144d77b079a0b25b839dda910ef561ee8149a48f395e5",
+      "fileSha256": "ffee3ed66ab58c7134f994ee87b85333e7c5fb50196b54f863ff8e1276fcf153"
+    },
+    {
+      "id": "vue-bindings",
+      "contentSha256": "0ab0bb09d1a4f3ff463227b668fbab973635ca5c5804f99ac610fd14a16e7e65",
+      "fileSha256": "519fd897e48dd6ea5542adc11a87a52058a6edd2ae8582705caf884767fe7228"
+    },
+    {
+      "id": "vue-composition",
+      "contentSha256": "992c3d0e7825fd0326a191a609b26a48e2bbf0296b44c5e6ac4fe3ee2a2f75c1",
+      "fileSha256": "5e25554f2a828affbdd01c9704393f72eb47974d64bfe8bf168faca004461992"
+    },
+    {
+      "id": "vue-controller",
+      "contentSha256": "aa940f842c3a5111691569cf989565e40e5ec226ba79e602ef7bec26b0e7eced",
+      "fileSha256": "147946ec2742b34a01bd393c5285d6ede02a3239d609a0a837e62a30c47d8a6f"
+    },
+    {
+      "id": "vue-nuxt",
+      "contentSha256": "3cef26a133b5afab9ef70e94da6427feacbf8aa69df3bd2e61569ff7ed97431f",
+      "fileSha256": "c485fc12954e1fb27de819380a3eab999146aada0f0221c51221557766e8109f"
+    },
+    {
+      "id": "vue-errors",
+      "contentSha256": "1096b4f9969c808f96f7366b3742cf9af3be0c45028950f19038b7829e05a5b5",
+      "fileSha256": "1af81b73ea9029be5c811282dee571abce0ef781f7b2e9b96a25432806199250"
+    },
+    {
+      "id": "api-vue-input",
+      "contentSha256": "14bd1fd085144f825d74199ea64a432c619270be24808e5a54987f3b5a176be8",
+      "fileSha256": "138b5929349f3fa3de052d7a2f903bc85e8f9fefa050d7e105b78ae258763361"
+    },
+    {
+      "id": "api-vue-check-box",
+      "contentSha256": "8aecf1b2ba3dfe7b5a5b298eb54a5d21f24736593ca50b305aae602a3fbdf4b0",
+      "fileSha256": "cb6fe99355aec42cd4c4dd50e1492cb75d8402d66c0c4338fb13a1bc8ac2c6c8"
+    },
+    {
+      "id": "api-vue-select",
+      "contentSha256": "d4aac51a3977df6423fb6de698adcbf8a00b4c0c2577edeab651f141d93238a7",
+      "fileSha256": "63098152d5244e42fd536f76819033a548141f64568e1baae324e655340db91b"
+    },
+    {
+      "id": "api-vue-date-picker",
+      "contentSha256": "9224504aaf6c73283accc362de2f880f77f5139f53ff6c926e147dab1faa7538",
+      "fileSha256": "2ba18db273e8ecd3d63971f87c7748f2675cca53c178a040dd9ee46d80b828fa"
+    },
+    {
+      "id": "api-vue-accordion-item",
+      "contentSha256": "248373ab5ced8e40c63d1ebb16898f0936b7d6622d8d416fda1842204e64539e",
+      "fileSha256": "41a64d761319944dcdab75369a4b413593aadf3686cb4c5a3c738b9b362f8d01"
+    }
+  ],
+  "runtime": {
+    "vite": "7.3.1",
+    "vue": "3.5.30",
+    "vitePluginVue": "6.0.4",
+    "node": "24.20.0",
+    "vueTsc": "3.2.5",
+    "playwright": "1.58.2",
+    "chromium": "145.0.7632.6",
+    "typescript": "5.9.3",
+    "nuxt": "4.3.1",
+    "npm": "11.19.0"
+  },
+  "soxaPackages": {
+    "@soxa-ui/plugins": "0.3.0",
+    "@soxa-ui/theme-base": "0.3.0",
+    "@soxa-ui/setup": "0.3.0",
+    "@soxa-ui/icons-material": "0.3.0",
+    "@soxa-ui/theme-oren": "0.3.0",
+    "@soxa-ui/core": "0.3.0",
+    "@soxa-ui/vue": "0.3.0"
+  },
+  "commands": [
+    {
+      "outcome": "passed; exact lock retained",
+      "command": "npm.cmd install --no-audit --no-fund --cache .npm-cache --fetch-retries=0",
+      "cwd": "vite"
+    },
+    {
+      "outcome": "passed; exact lock retained",
+      "command": "npm.cmd install --no-audit --no-fund --cache .npm-cache --fetch-retries=0",
+      "cwd": "nuxt"
+    },
+    {
+      "outcome": "passed strict vue-tsc",
+      "command": "npm.cmd run typecheck",
+      "cwd": "vite"
+    },
+    {
+      "outcome": "passed 1359 modules",
+      "command": "npm.cmd run build",
+      "cwd": "vite"
+    },
+    {
+      "outcome": "passed",
+      "command": "npm.cmd run typecheck",
+      "cwd": "nuxt"
+    },
+    {
+      "outcome": "passed universal server/client production build",
+      "command": "npm.cmd run build",
+      "cwd": "nuxt"
+    },
+    {
+      "outcome": "passed browser installed inside consumer folder",
+      "command": "PLAYWRIGHT_BROWSERS_PATH=.browsers npx playwright install chromium",
+      "cwd": "vite"
+    },
+    {
+      "outcome": "production Vite preview at loopback port 4311",
+      "command": "npm.cmd run preview",
+      "cwd": "vite"
+    },
+    {
+      "outcome": "production Nuxt at loopback port 4312",
+      "command": "NITRO_HOST=127.0.0.1 NITRO_PORT=4312 npm.cmd start",
+      "cwd": "nuxt"
+    },
+    {
+      "outcome": "passed both production applications, no JS SSR, consecutive request initial state; browser-results.json",
+      "command": "PLAYWRIGHT_BROWSERS_PATH=.browsers node validate-browser.mjs",
+      "cwd": "vite"
+    }
+  ],
+  "failuresAndFixes": [
+    "Initial npm invocation hit Windows npm.ps1 execution policy; used npm.cmd.",
+    "Sandbox network npm ping/install returned EACCES and sandbox esbuild build failed; required allowed network/process execution and local cache. Original logs retained.",
+    "Playwright package had no browser executable; installed Chromium into local .browsers.",
+    "First browser test used generic status role and matched output elements as well as receipt. Corrected selector to filter receipt text; both first-attempt results and corrected results retained.",
+    "npm install reported transitive unplugin-vue-router deprecation and uncovered esbuild install scripts. No runtime warnings or console errors occurred."
+  ],
+  "consumerMisunderstandings": "No public API type errors or recipe contract misunderstandings encountered. Only browser test role locator ambiguity corrected; no type casts, warning suppression, source aliases, client-only wrappers, or repository-source dependencies.",
+  "stateAndRegistration": "Theme and material icons registered before Vite mount and at universal Nuxt plugin module scope. Form refs and raw TButton are created inside component setup, independently per SSR request and mount. Subscription is added onMounted, removed with identical handler onUnmounted; teardown mutates ctrl after off.",
+  "results": {
+    "browser": "145.0.7632.6",
+    "runs": [
+      {
+        "name": "vite",
+        "status": "passed",
+        "checks": [
+          "visible Input label focuses field; named value model and typed change payload update",
+          "labeled CheckBox toggles with Space",
+          "Select Enter/ArrowDown/Enter model selection, custom item slot, Escape dismissal",
+          "DatePicker day ArrowUp changes named date model; keyboard opens/closes calendar",
+          "Accordion.Item scoped text/selected slot responds to keyboard",
+          "keyboard form submission",
+          "raw per-instance ctrl subscription: three mount/action/unmount/remount cycles; one event per action, reset on remount, cleanup called"
+        ],
+        "diagnostics": []
+      },
+      {
+        "name": "nuxt",
+        "status": "passed",
+        "checks": [
+          "visible Input label focuses field; named value model and typed change payload update",
+          "labeled CheckBox toggles with Space",
+          "Select Enter/ArrowDown/Enter model selection, custom item slot, Escape dismissal",
+          "DatePicker day ArrowUp changes named date model; keyboard opens/closes calendar",
+          "Accordion.Item scoped text/selected slot responds to keyboard",
+          "keyboard form submission",
+          "raw per-instance ctrl subscription: three mount/action/unmount/remount cycles; one event per action, reset on remount, cleanup called"
+        ],
+        "diagnostics": []
+      }
+    ],
+    "ssrWithoutJavaScript": "passed",
+    "consecutiveSSRRequests": "both initial state; preceding browser changes do not persist"
+  },
+  "limits": [
+    "Chromium only; no WebKit/Firefox run.",
+    "No claim of complete accessibility audit or all library components.",
+    "Controller teardown was checked by observed cleanup and fresh per-mount count; internal event listener memory was not instrumented.",
+    "SSR consecutive requests demonstrate fresh rendered initial state after browser edits; no simultaneous authenticated users or application persistence implemented."
+  ],
+  "sourceHashes": [
+    {
+      "file": "vite/package.json",
+      "sha256": "8f27575fda0cdba89ab84ac8b6ea98882cce89a283933b0007ae729243e0e682"
+    },
+    {
+      "file": "vite/package-lock.json",
+      "sha256": "cf6678ec97f217b1abb91b9a64c4af670ba99ec14865ee98d3980dac0a12de42"
+    },
+    {
+      "file": "vite/tsconfig.json",
+      "sha256": "457df7a6f291aaebbcd5a2a9cdf0f4d5d7759370171fe7a4e846f61f88d033d2"
+    },
+    {
+      "file": "vite/vite.config.ts",
+      "sha256": "111e216ef3942a9f0c2fec0e6fbc2e653c4a1a131a7e5c23bc29111f58fb678e"
+    },
+    {
+      "file": "vite/index.html",
+      "sha256": "0fcfdaad5a1059dd122916c01d47abfe8e5441b7dbeb7a869ae838cba47a5d31"
+    },
+    {
+      "file": "vite/src/main.ts",
+      "sha256": "fed1322afd920b40f494a9ab2c6fe101c180f86d1dc874d1a59d75c0512662f6"
+    },
+    {
+      "file": "vite/src/Workshop.vue",
+      "sha256": "7b83bf273c39dda610b693532643f10242e348b3047b7f9cd2e8defe02873d92"
+    },
+    {
+      "file": "vite/src/SeatCounter.vue",
+      "sha256": "ab536b44021f51771871ff0ff3c30f42f0547105d4133db4c281bb8361f0c413"
+    },
+    {
+      "file": "vite/validate-browser.mjs",
+      "sha256": "903220370f77e37d8f986249835334ba5664f96a0cfc32f4085ba7c6ef707c64"
+    },
+    {
+      "file": "nuxt/package.json",
+      "sha256": "39c89a307c3875e0ca13acf6a42e78902c5203215621b858d605655d2354c7e5"
+    },
+    {
+      "file": "nuxt/package-lock.json",
+      "sha256": "04b05e366b4385362b1029038d32a7a7bdfc2c3d2c109b90d2f202c80991d1ef"
+    },
+    {
+      "file": "nuxt/tsconfig.json",
+      "sha256": "84b5deb1957675015b26ad112c2f8634cfc19e65062031d4ab7099fc3b0f68f5"
+    },
+    {
+      "file": "nuxt/nuxt.config.ts",
+      "sha256": "70f403d02bef8c306ca1d63f1fabfe17f568c1ec4582832426f41d926fe91632"
+    },
+    {
+      "file": "nuxt/app/app.vue",
+      "sha256": "235b2b6041eb19498538494a90e8786014b361bd85fb89f768fb7ccb2985eae0"
+    },
+    {
+      "file": "nuxt/app/plugins/soxa.ts",
+      "sha256": "762440244543775bfc64ff6947fb97c417e3f8dd17b2fd8bc0a615c7e952cf61"
+    },
+    {
+      "file": "nuxt/app/components/Workshop.vue",
+      "sha256": "7b83bf273c39dda610b693532643f10242e348b3047b7f9cd2e8defe02873d92"
+    },
+    {
+      "file": "nuxt/app/components/SeatCounter.vue",
+      "sha256": "ab536b44021f51771871ff0ff3c30f42f0547105d4133db4c281bb8361f0c413"
+    }
+  ],
+  "retention": "Source snapshots retain validated text with Git-normalized LF line endings and .txt appended; sourceHashes identify original run bytes, snapshotHashes identify repository bytes. Immutable one-time evidence, not maintained recipes. Locks/caches are excluded; original lock hashes retained. CI reruns maintained travel recipes.",
+  "snapshotHashes": [
+    {
+      "file": "sources/vite/package.json.txt",
+      "sha256": "bda1c9c80ea5e8b5d05e733fdb6b569f19c237f2643ba5137274bf1b32d4ab8b"
+    },
+    {
+      "file": "sources/vite/tsconfig.json.txt",
+      "sha256": "ec2d8f5f7615a738605b9e1f5be695c851e9e5b98c454a3db4563e4945bb4b91"
+    },
+    {
+      "file": "sources/vite/vite.config.ts.txt",
+      "sha256": "0f35242d8f1b9f414cb64f7ace57f8260234f9e6e4b464dee2957ce3017634aa"
+    },
+    {
+      "file": "sources/vite/index.html.txt",
+      "sha256": "93c8931aead8e3891e2c308f6debf83fbd42f873195050096fb176b4f4289cb0"
+    },
+    {
+      "file": "sources/vite/src/main.ts.txt",
+      "sha256": "68fdadd78e29c7267fc2600bd85e42a2048243a381718964287e9d074d7d2eb7"
+    },
+    {
+      "file": "sources/vite/src/Workshop.vue.txt",
+      "sha256": "5a3b6f04fdb41908687c755d52c41970d121f2ee282a418b78246433136be3c8"
+    },
+    {
+      "file": "sources/vite/src/SeatCounter.vue.txt",
+      "sha256": "f377839eb400a79a118d448427a7056a266615e79b5a42dca523979d2d48f0ce"
+    },
+    {
+      "file": "sources/vite/validate-browser.mjs.txt",
+      "sha256": "f8b9c34c988e58db73409ee95ca4ad67619ddfcfc3622fdba19a6f56fa168c98"
+    },
+    {
+      "file": "sources/nuxt/package.json.txt",
+      "sha256": "2958f705d97b0be5f9f29e8e1d9d0c7cee41c14fc1342f9ac6fbe509e928d380"
+    },
+    {
+      "file": "sources/nuxt/tsconfig.json.txt",
+      "sha256": "5273fab053beb56e653ac550328c9d4437173994cddddf9fdd671a7b30452929"
+    },
+    {
+      "file": "sources/nuxt/nuxt.config.ts.txt",
+      "sha256": "91a82440ff8c10b18c7ba24e741736f1b747f814be47fa82621e81ca81b65b82"
+    },
+    {
+      "file": "sources/nuxt/app/app.vue.txt",
+      "sha256": "a4b9b24d66b1cc0dc16adb00d735162eb6e5770022c4c1cd794af7dc5f11ccfd"
+    },
+    {
+      "file": "sources/nuxt/app/plugins/soxa.ts.txt",
+      "sha256": "3a4ae750cc38210d8696793a03ea40378bb6e7591a555683052d073648904290"
+    },
+    {
+      "file": "sources/nuxt/app/components/Workshop.vue.txt",
+      "sha256": "5a3b6f04fdb41908687c755d52c41970d121f2ee282a418b78246433136be3c8"
+    },
+    {
+      "file": "sources/nuxt/app/components/SeatCounter.vue.txt",
+      "sha256": "f377839eb400a79a118d448427a7056a266615e79b5a42dca523979d2d48f0ce"
+    }
+  ]
+}

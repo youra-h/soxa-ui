@@ -1,0 +1,27 @@
+import {chromium,expect} from '@playwright/test';
+import fs from 'node:fs';
+const browser=await chromium.launch({headless:true});
+const results={browser:browser.version(),runs:[]};
+for(const [name,url] of [['vite','http://127.0.0.1:4311'],['nuxt','http://127.0.0.1:4312']]){
+ const context=await browser.newContext();const page=await context.newPage();const diagnostics=[];
+ page.on('console',m=>{if(['error','warning'].includes(m.type()))diagnostics.push({type:m.type(),text:m.text()})});page.on('pageerror',e=>diagnostics.push({type:'pageerror',text:e.message}));
+ const checks=[];
+ try {
+ await page.goto(url);await expect(page.getByTestId('ready')).toBeVisible();
+ await page.getByText('Participant name',{exact:true}).click();await expect(page.getByRole('textbox',{name:'Participant name',exact:true})).toBeFocused();
+ await page.getByRole('textbox',{name:'Participant name',exact:true}).fill('Rowan');await expect(page.getByTestId('change')).toContainText('-> Rowan');checks.push('visible Input label focuses field; named value model and typed change payload update');
+ const checkbox=page.getByRole('checkbox',{name:'Include materials kit'});await checkbox.focus();await page.keyboard.press('Space');await expect(checkbox).toBeChecked();checks.push('labeled CheckBox toggles with Space');
+ const select=page.getByRole('combobox',{name:'Studio session'});await select.focus();await page.keyboard.press('Enter');await expect(page.locator('[data-option]').filter({hasText:'Printmaking studio'})).toBeVisible();await page.keyboard.press('ArrowDown');await page.keyboard.press('Enter');await expect(page.getByTestId('registration')).toContainText('printing');await select.press('Enter');await page.keyboard.press('Escape');await expect(select).toHaveAttribute('aria-expanded','false');checks.push('Select Enter/ArrowDown/Enter model selection, custom item slot, Escape dismissal');
+ const day=page.getByRole('spinbutton',{name:'day',exact:true});await day.focus();await page.keyboard.press('ArrowUp');await expect(page.getByTestId('registration')).toContainText('2026-11-21');const trigger=page.getByRole('button',{name:'Choose date',exact:true});await trigger.focus();await page.keyboard.press('Enter');await expect(page.getByRole('dialog',{name:'Choose date',exact:true})).toBeVisible();await page.keyboard.press('Escape');await expect(trigger).toHaveAttribute('aria-expanded','false');checks.push('DatePicker day ArrowUp changes named date model; keyboard opens/closes calendar');
+ const header=page.getByRole('button',{name:'Arrival checklist / collapsed'});await header.focus();await page.keyboard.press('Enter');await expect(page.getByRole('button',{name:'Arrival checklist / expanded'})).toHaveAttribute('aria-expanded','true');checks.push('Accordion.Item scoped text/selected slot responds to keyboard');
+ await page.getByRole('button',{name:'Reserve workshop',exact:true}).focus();await page.keyboard.press('Enter');await expect(page.getByRole('status').filter({hasText:'Workshop reserved'})).toHaveText('Workshop reserved');checks.push('keyboard form submission');
+ for(let i=0;i<3;i++){await page.getByRole('button',{name:'Add one seat',exact:true}).click();await expect(page.getByTestId('seats')).toHaveText('Extra seats: 1');await page.getByRole('button',{name:'Show or hide seat counter',exact:true}).click();await expect(page.getByTestId('cleanup')).toHaveText(`Cleanups: ${i+1}`);await page.getByRole('button',{name:'Show or hide seat counter',exact:true}).click();await expect(page.getByTestId('seats')).toHaveText('Extra seats: 0');}
+ checks.push('raw per-instance ctrl subscription: three mount/action/unmount/remount cycles; one event per action, reset on remount, cleanup called');
+ expect(diagnostics).toEqual([]);results.runs.push({name,status:'passed',checks,diagnostics});
+ }catch(e){results.runs.push({name,status:'failed',checks,error:e.message,diagnostics});await page.screenshot({path:`../${name}-failure.png`});}
+ await context.close();
+}
+const nojs=await browser.newContext({javaScriptEnabled:false});const p=await nojs.newPage();await p.goto('http://127.0.0.1:4312');await expect(p.getByRole('heading',{name:'Weekend makers workshop'})).toBeVisible();await expect(p.getByRole('textbox',{name:'Participant name',exact:true})).toBeVisible();await expect(p.getByRole('checkbox',{name:'Include materials kit'})).toBeVisible();await expect(p.getByTestId('registration')).toHaveText('|false|ceramics|2026-11-20');results.ssrWithoutJavaScript='passed';await nojs.close();
+const html1=await (await fetch('http://127.0.0.1:4312')).text();const html2=await (await fetch('http://127.0.0.1:4312')).text();fs.writeFileSync('../nuxt-ssr.html',html1);expect(html1).toContain('|false|ceramics|2026-11-20');expect(html2).toContain('|false|ceramics|2026-11-20');results.consecutiveSSRRequests='both initial state; preceding browser changes do not persist';
+fs.writeFileSync('../browser-results.json',JSON.stringify(results,null,2));console.log(JSON.stringify(results,null,2));await browser.close();if(results.runs.some(r=>r.status==='failed'))process.exitCode=1;
+

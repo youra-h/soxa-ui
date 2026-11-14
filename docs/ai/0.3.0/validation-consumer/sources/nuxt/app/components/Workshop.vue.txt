@@ -1,0 +1,33 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import type { IDatePickerProps, ISelectProps, TValuePayload } from '@soxa-ui/core'
+import { Accordion, Button, CheckBox, DatePicker, Input, Label, Select } from '@soxa-ui/vue'
+import SeatCounter from './SeatCounter.vue'
+const participant = ref('')
+const materials = ref(false)
+const session = ref<ISelectProps['value']>('ceramics')
+const day = ref<IDatePickerProps['value']>('2026-11-20')
+const sessions = [{value:'ceramics',text:'Ceramics studio'},{value:'printing',text:'Printmaking studio'},{value:'wood',text:'Woodworking studio'}]
+const change = ref('')
+const receipt = ref(false)
+const counterVisible = ref(true)
+const cleaned = ref(0)
+function record(payload: TValuePayload<string>) { change.value = `${payload.oldValue} -> ${payload.newValue}` }
+</script>
+<template>
+<main><h1>Weekend makers workshop</h1><p>Reserve a studio place and choose your supplies.</p>
+<form @submit.prevent="receipt = true">
+<label for="participant">Participant name</label><Input id="participant" v-model:value="participant" @change:value="record" />
+<Label text="Include materials kit"><CheckBox tag="span" v-model:value="materials" /></Label>
+<Select aria_label="Studio session" v-model:value="session" :items="sessions"><template #item="{text}"><span data-option>{{ text }} — hands on</span></template></Select>
+<DatePicker aria_label="Workshop date" v-model:value="day" timeZone="UTC" />
+<Button type="submit" text="Reserve workshop" variant="accent" />
+<output data-testid="registration">{{ participant }}|{{ materials }}|{{ session }}|{{ day }}</output>
+<output data-testid="change">{{ change }}</output><p v-if="receipt" role="status">Workshop reserved</p>
+</form>
+<Accordion><Accordion.Item value="arrival" text="Arrival checklist"><template #header="{text,selected}">{{ text }} / {{ selected ? 'expanded' : 'collapsed' }}</template><p>Bring an apron and arrive fifteen minutes early.</p></Accordion.Item></Accordion>
+<Button type="button" text="Show or hide seat counter" @action:click="counterVisible = !counterVisible" />
+<SeatCounter v-if="counterVisible" @cleaned="cleaned++" /><output data-testid="cleanup">Cleanups: {{ cleaned }}</output>
+</main>
+</template>
+<style>body{font-family:system-ui;margin:2rem;background:#f8f6ef;color:#263529}main{max-width:650px;margin:auto}form{display:grid;gap:1rem}output{display:block;padding:.5rem;background:#fff}h1{font-size:2rem}main>div,main>button{margin-top:1rem}</style>
