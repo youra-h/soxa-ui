@@ -4,6 +4,7 @@ import { cpSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { stripVTControlCharacters } from 'node:util'
 import { chromium } from 'playwright'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
@@ -119,14 +120,18 @@ const server = spawn(
 try {
 	const url = await new Promise((resolveUrl, reject) => {
 		let output = ''
-		const timer = setTimeout(() => reject(new Error('Preview startup timed out')), 15000)
+		const timer = setTimeout(
+			() =>
+				reject(new Error('Preview startup timed out: ' + stripVTControlCharacters(output))),
+			15000,
+		)
 		server.once('exit', (code) => {
 			clearTimeout(timer)
 			reject(new Error(`Preview exited ${code}`))
 		})
 		const read = (chunk) => {
 			output += chunk.toString()
-			const match = output.match(/http:\/\/127\.0\.0\.1:\d+\//)
+			const match = stripVTControlCharacters(output).match(/http:\/\/127\.0\.0\.1:\d+\//)
 			if (match) {
 				clearTimeout(timer)
 				resolveUrl(match[0])
