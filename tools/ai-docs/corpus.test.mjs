@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import test from 'node:test'
@@ -234,4 +234,54 @@ test('CLI writes a selective index and prevents mixing outputs from different bu
 		() => execFileSync(process.execPath, args, { stdio: 'pipe' }),
 		/Output directory must be empty/,
 	)
+})
+
+test('selective source delivery pins every request and fetches only declared public files', async () => {
+	const f = fixture()
+	const { fetchSource } = await import('./fetch.mjs')
+	const requested = []
+	const source = await fetchSource({
+		revision,
+		version: '0.3.0',
+		out: join(f.root, 'downloaded'),
+		fetchFile: async (url) => {
+			requested.push(url)
+			if (url.endsWith('manifest.json')) return new Response(JSON.stringify(f.manifest))
+			return new Response('public content')
+		},
+	})
+	assert.equal(source.files, 7)
+	assert.equal(requested.length, 6)
+	assert.ok(
+		requested.every((url) =>
+			url.startsWith('https://raw.githubusercontent.com/youra-h/soxa-ui/' + revision + '/'),
+		),
+	)
+	assert.ok(!requested.some((url) => /AGENTS|memory|test|smoke/.test(url)))
+	assert.deepEqual(JSON.parse(readFileSync(join(f.root, 'downloaded/revision.json'), 'utf8')), {
+		schemaVersion: 1,
+		docsRevision: revision,
+		libraryVersion: '0.3.0',
+	})
+})
+
+test('source download rejects missing remote files, unsafe paths and wrong versions before writing', async () => {
+	const { fetchSource } = await import('./fetch.mjs')
+	for (const mode of ['missing', 'path', 'version']) {
+		const f = fixture()
+		if (mode === 'path') f.manifest.documents[0].path = '../private.md'
+		if (mode === 'version') f.manifest.libraryVersion = '0.4.0'
+		await assert.rejects(() =>
+			fetchSource({
+				revision,
+				version: '0.3.0',
+				out: join(f.root, 'failed'),
+				fetchFile: async (url) =>
+					url.endsWith('manifest.json')
+						? new Response(JSON.stringify(f.manifest))
+						: new Response('', { status: 404 }),
+			}),
+		)
+		assert.equal(existsSync(join(f.root, 'failed')), false)
+	}
 })

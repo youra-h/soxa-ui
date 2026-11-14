@@ -41,9 +41,8 @@ with its immutable 40-character SHA. These commands run in a new consumer
 directory, outside any library workspace:
 
 ```sh
-curl -fL https://github.com/youra-h/soxa-ui/archive/<full-docs-commit-sha>.tar.gz -o source.tar.gz
-mkdir source
-tar -xzf source.tar.gz --strip-components=1 -C source
+curl -fL https://raw.githubusercontent.com/youra-h/soxa-ui/<full-docs-commit-sha>/tools/ai-docs/fetch.mjs -o fetch.mjs
+node fetch.mjs --revision <full-docs-commit-sha> --version 0.3.0 --out source
 mkdir api-source
 cd api-source
 npm init -y
@@ -52,7 +51,14 @@ cd ..
 node source/tools/ai-docs/cli.mjs --manifest source/docs/ai/0.3.0/manifest.json --package api-source/node_modules/@soxa-ui/setup --revision <full-docs-commit-sha> --out corpus-0.3.0
 ```
 
-The builder needs only Node 22.12+ and the two archive directories
+The downloader fetches only the selected release manifest, its declared prose and
+examples, and the two builder modules. Every request uses the same full SHA; a
+missing file or wrong version fails before source files are written. It records
+that SHA in `source/revision.json`. It does not download the repository's benchmarks,
+private memory, agent instructions or other release directories. A full GitHub
+archive by SHA also works, but is unnecessarily large for normal consumption.
+
+The builder needs only Node 22.12+ and the two source directories
 `docs/ai` and `tools/ai-docs`. It imports no library runtime, framework,
 TypeScript or sibling checkout. npm validates package integrity; the builder
 additionally checks the exact API bytes. The manifest records the tarball URL
