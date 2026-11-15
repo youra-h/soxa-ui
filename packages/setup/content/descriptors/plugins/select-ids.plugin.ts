@@ -1,4 +1,6 @@
-/** Popup IDs and the internal Frame lifecycle hookup. */
+/**
+ * Popup IDs and the internal Frame lifecycle hookup.
+ */
 
 import { definePlugin } from '../../../protected/define'
 import { TSelectIdsPlugin } from '@soxa-ui/plugins'
