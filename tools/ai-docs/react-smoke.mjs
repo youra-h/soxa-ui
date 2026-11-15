@@ -121,6 +121,7 @@ run(['node_modules/next/dist/bin/next', 'build', '--webpack'], next)
 const browser = await chromium.launch({ headless: true })
 try {
 	for (const [cwd, args, ssr] of [
+		[vite, ['node_modules/vite/bin/vite.js', '--host', '127.0.0.1', '--port', '0'], false],
 		[
 			vite,
 			['node_modules/vite/bin/vite.js', 'preview', '--host', '127.0.0.1', '--port', '0'],

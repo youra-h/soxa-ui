@@ -361,3 +361,34 @@ test('React guide registration and Next examples remain selectively deliverable'
 		for (const example of doc.examples)
 			assert.ok(existsSync(join(root, 'docs/ai/0.3.0', example.path)))
 })
+
+test('React topic selection returns its guide without leaking Vue recipes', () => {
+	const f = fixture()
+	f.manifest.coverage.react.guides = 'sample'
+	f.manifest.documents.push({
+		...f.manifest.documents[0],
+		id: 'react-next-fixture',
+		path: 'react.md',
+		framework: 'react',
+		topic: 'next',
+		related: [],
+	})
+	writeFileSync(join(f.root, 'react.md'), '# React Next consumer fixture\n')
+	const corpus = f.build()
+	assert.deepEqual(
+		selectDocuments(corpus, {
+			version: '0.3.0',
+			audience: 'consumer',
+			framework: 'react',
+			topic: 'next',
+		}).map((doc) => doc.id),
+		['react-next-fixture'],
+	)
+	assert.ok(
+		selectDocuments(corpus, {
+			version: '0.3.0',
+			audience: 'consumer',
+			framework: 'react',
+		}).every((doc) => doc.framework === 'react' || doc.framework === 'all'),
+	)
+})

@@ -1,0 +1,14 @@
+{
+  "ssr": "passed",
+  "interactions": "passed",
+  "reloadIsolation": "passed",
+  "aria": {
+    "duplicates": [],
+    "broken": [
+      "aria-controls:_R_ppbtb_-panel <button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_ppbtb_-tab\" aria-controls=\"_R_ppbtb_-panel\" class=\"so-button so-button--size-normal\" aria-selected=\"false\" tabindex=\"-1\"><span class=\"so-button__text\">Schedule</span></button>"
+    ],
+    "styleSheets": 1,
+    "icons": 2
+  },
+  "problems": []
+}
