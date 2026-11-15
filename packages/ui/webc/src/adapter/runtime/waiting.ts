@@ -8,7 +8,7 @@ let depth = 0
 /** Разбор очереди идёт: подключение из неё очередь не разбирает — его пришедшее заберёт тот же цикл. */
 let draining = false
 
-const waiting: (() => void)[] = []
+const waiting: ((() => void) | undefined)[] = []
 
 export function isConnecting(): boolean {
 	return depth > 0
@@ -43,7 +43,17 @@ function drainAll(): void {
 }
 
 function* drain(): Generator<() => void> {
-	for (let next = waiting.shift(); next; next = waiting.shift()) yield next
+	try {
+		// Read the live tail for callbacks appended during draining; release each before running it.
+		for (let index = 0; index < waiting.length; index += 1) {
+			const next = waiting[index]
+			waiting[index] = undefined
+
+			if (next) yield next
+		}
+	} finally {
+		waiting.length = 0
+	}
 }
 
 /** Выполнить всё: упавшая задача остальных не держит, первая ошибка уходит дальше. */

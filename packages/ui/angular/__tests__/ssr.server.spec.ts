@@ -1083,7 +1083,8 @@ describe('DateInput и DatePicker · серверный рендер', () => {
 		const root = find(page, '.picker', HTMLDivElement)
 		const field = find(root, '.so-date-picker__field', HTMLDivElement)
 		const trigger = find(field, '.so-date-picker__trigger', HTMLButtonElement)
-		const panel = pickerPanelOf(page, trigger)
+		const panel = find(page, '.so-date-picker__panel', HTMLElement)
+		expect(trigger.hasAttribute('aria-controls')).toBe(false)
 
 		expect(root.id).toBe('when')
 		expect(segmentsOf(field).map((part) => part.textContent)).toEqual(['09', '10', '2026'])
@@ -1118,7 +1119,8 @@ describe('DateInput и DatePicker · гидратация', () => {
 		const ids = parts.map((part) => part.id)
 		const root = find(document, '.picker', HTMLDivElement)
 		const trigger = find(document, '.so-date-picker__trigger', HTMLButtonElement)
-		const panel = pickerPanelOf(document, trigger)
+		const panel = find(document, '.so-date-picker__panel', HTMLElement)
+		expect(trigger.hasAttribute('aria-controls')).toBe(false)
 		const app = await hydrate(DatesPage)
 
 		await app.whenStable()

@@ -18,7 +18,7 @@
     "allowImportingTsExtensions": true,
     "module": "esnext",
     "target": "esnext",
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "esModuleInterop": true,
     "noEmit": true,
     "strict": true

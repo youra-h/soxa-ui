@@ -91,11 +91,17 @@ function drawTags(ctx: TSelectContext, own: TSelectParts): void {
 }
 
 export const selectTemplate: ITemplate<ISelect, TSelectCollectionFacade, TSelectOutputs> = {
-	create: (root, { hasSlot }) => {
+	create: (root, ctx) => {
+		const { hasSlot } = ctx
 		const { ownerDocument } = root
 		const field = createDetail(ownerDocument, TInputElement, { embedded: 'select.field' })
 		const box = ownerDocument.createElement('span')
 		const panel = createDetail(ownerDocument, TFrameElement, { embedded: 'select.frame' })
+		panel.addEventListener('so:bundle:create', (event) => {
+			if (event.target === panel && event instanceof CustomEvent) {
+				ctx.state.ids_bindPanel?.(event.detail)
+			}
+		})
 		const handle = ownerDocument.createElement('div')
 		const list = ownerDocument.createElement('div')
 		const end = ownerDocument.createComment('')

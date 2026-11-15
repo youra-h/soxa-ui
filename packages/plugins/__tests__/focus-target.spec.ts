@@ -374,7 +374,9 @@ describe('gridStopOf — остановка календаря', () => {
 		const { root, ctx, owner, engine } = calendar()
 		const place = engine.extensions.picker.pickers[0]
 
-		if (!place?.labelledBy) throw new Error('у места нет шапки')
+		const headingId = place?.headingAria.id
+
+		if (!place || !headingId) throw new Error('Missing picker heading ID')
 
 		const card = document.createElement('div')
 		const listRoot = document.createElement('div')
@@ -384,7 +386,7 @@ describe('gridStopOf — остановка календаря', () => {
 		card.className = owner.classes.resolve('__picker')
 		listRoot.className = owner.classes.resolve('__picker-list')
 		list.setAttribute('role', 'listbox')
-		heading.id = place.labelledBy
+		heading.id = headingId
 		listRoot.appendChild(list)
 		card.append(listRoot, heading)
 		root.appendChild(card)

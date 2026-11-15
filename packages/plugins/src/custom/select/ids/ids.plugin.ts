@@ -4,25 +4,20 @@ import { TCollectionBundlesPlugin } from '../../collection'
 import type { ISelect } from '@soxa-ui/core'
 import { TBasePlugin } from '../../../base'
 import type { IPluginContext } from '../../../base'
+import { TPopupControls } from '../../overlay/popup-controls'
 
-/**
- * TSelectIdsPlugin — связка «поле ↔ список» Select в документе.
- *
- * `id` списка — в `listAria`, который разметка раскладывает на список, и
- * ссылка на него `aria-controls` — в `aria` поля (`field.aria`): связку со
- * списком объявляет поле с `role="combobox"`, а не корень Select. Список
- * существует всегда — в отличие от панели у Tabs, которой может и не быть, —
- * поэтому ссылка стоит всегда.
- *
- * Сторона опций — у самих опций (`TOptionIdsPlugin`, общий с элементами
- * ListBox): у каждой своё монтирование. `aria-activedescendant` берёт `id`
- * подсвеченной опции из её набора (`TSelectKeyboardPlugin`).
- *
- * `id` — от монтирования (`createId`), а не от экземпляра: он нужен только
- * документу, и на сервере и в браузере обязан совпасть. Пишется при
- * установке, синхронно, — связка есть уже в первой (и серверной) отрисовке.
- */
+/** Keeps deterministic popup IDs and only references a bound popup. */
 export class TSelectIdsPlugin extends TBasePlugin {
+	private _controls: TPopupControls | undefined
+
+	/** Internal Frame bundle hookup, exposed only as a protected descriptor output. */
+	readonly bindPanel = (bundle: unknown): void => this._controls?.bindPanel(bundle)
+
+	override destroy(): void {
+		this._controls?.destroy()
+		super.destroy()
+	}
+
 	override install(ctx: IPluginContext): void {
 		super.install(ctx)
 
@@ -33,7 +28,15 @@ export class TSelectIdsPlugin extends TBasePlugin {
 		const listId = ctx.createId('list')
 
 		select.listAria.add('id', listId)
-		select.field.aria.add('aria-controls', listId)
+		this._controls = new TPopupControls(
+			select.field.aria,
+			listId,
+			() => select.open && select.visible,
+		)
+		const sync = (): void => this._controls?.sync()
+
+		this._listenTo(select.events, 'change:open', sync)
+		this._listenTo(select.events, 'change:visible', sync)
 
 		// A multiple combobox has an empty text input; its selected tags supply
 		// the description without replacing form hints or the consumer's name.

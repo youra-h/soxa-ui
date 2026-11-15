@@ -57,7 +57,7 @@ export type TCalendarPicker = {
 	headingAria: TAriaAttributes
 	/**
 	 * The header's `id` — it names the panel and the list (`aria_labelledBy`).
-	 * Until the ids plugin writes it — `undefined`
+	 * Undefined until the ids plugin writes it and the lazy content is first rendered.
 	 */
 	labelledBy: string | undefined
 	/** The "back" arrow's set: the name by level — a year or a page of years — is written by the names plugin */

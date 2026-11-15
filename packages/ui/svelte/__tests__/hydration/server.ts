@@ -33,6 +33,7 @@ import { install } from '@sinonjs/fake-timers'
 import { render } from 'svelte/server'
 import BadgePage from './BadgePage.test.svelte'
 import ButtonStyle from './ButtonStyle.test.svelte'
+import PopupControls from './PopupControls.test.svelte'
 import CalendarValue from './CalendarValue.test.svelte'
 import DateInputValue from './DateInputValue.test.svelte'
 import DatePickerValue from './DatePickerValue.test.svelte'
@@ -62,6 +63,10 @@ function onToday(draw: () => string): string {
  */
 export function renderServerMarkup() {
 	return {
+		'popup-controls-closed': onToday(() => render(PopupControls).body),
+		'popup-controls-open': onToday(
+			() => render(PopupControls, { props: { initialOpen: true } }).body,
+		),
 		alert: render(AlertPage).body,
 		'alert-dialog': render(AlertDialogPage).body,
 		separator: render(SeparatorPage).body,

@@ -120,6 +120,7 @@
 <!-- Пометка владельцем на панели: она вне поддерева Select, и нажатие в неё было бы мимо. -->
 <div
 	so-frame
+	(soBundleCreate)="state()['ids_bindPanel']?.($event)"
 	embedded="select.frame"
 	class="so-select__panel"
 	strategy="fixed"

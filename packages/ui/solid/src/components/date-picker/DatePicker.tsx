@@ -153,6 +153,7 @@ export function DatePicker(props: DatePickerProps): JSX.Element {
 						{single()}
 					</Show>
 					<Frame
+						onBundleCreate={state.ids_bindPanel}
 						embedded="date-picker.frame"
 						class="so-date-picker__panel"
 						tabindex="-1"

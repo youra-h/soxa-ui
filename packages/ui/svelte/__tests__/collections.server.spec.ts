@@ -228,7 +228,7 @@ describe('Select · серверный рендер', () => {
 		expect(field?.attributes.role).toBe('combobox')
 		expect(field?.attributes.value).toBe('Второй')
 		expect(field?.attributes['aria-expanded']).toBe('false')
-		expect(field?.attributes['aria-controls']).toMatch(/.+/)
+		expect(field?.attributes['aria-controls']).toBeUndefined()
 		expect(withClass(body, 'so-select__panel')).toEqual([])
 		expect(tagsWith(body, 'role', 'option')).toEqual([])
 	})

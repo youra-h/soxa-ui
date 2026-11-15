@@ -504,10 +504,11 @@ describe('сторож: сборка Calendar без узла и без типо
 		const { batch, focus, picker, view } = facade.instance.engine.extensions
 		const heard = new Set<string>()
 
-		// Наборы мест плагин связок написал при сборке: `change:pickers` уже было
+		// IDs are allocated during assembly, before the lazy headings render.
 		expect(batch.items).toHaveLength(61)
 		expect(focus.focusedDate).toBe('2026-09-10')
-		expect(picker.pickers.map((place) => place.labelledBy)).toEqual([
+		expect(picker.pickers.map((place) => place.labelledBy)).toEqual([undefined, undefined])
+		expect(picker.pickers.map((place) => place.headingAria.id)).toEqual([
 			expect.stringMatching(/\S/),
 			expect.stringMatching(/\S/),
 		])

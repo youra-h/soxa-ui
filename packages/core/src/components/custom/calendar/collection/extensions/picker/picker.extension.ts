@@ -422,7 +422,8 @@ export class TCalendarPickerExtension
 						dateFromParts(Math.min(last, LAST_YEAR), 1, 1),
 					),
 			headingAria: place.sets.heading.toObject(),
-			labelledBy: place.sets.heading.get('id'),
+			// The frame exists before its lazy heading; after opening, both stay mounted.
+			labelledBy: place.popover.contentRendered ? place.sets.heading.get('id') : undefined,
 			prevAria: place.sets.prev.toObject(),
 			nextAria: place.sets.next.toObject(),
 			prevDisabled: first - 1 < bounds.low,

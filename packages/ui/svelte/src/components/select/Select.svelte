@@ -108,6 +108,7 @@
 			{...toControlAttrs<SelectAttributes>(binding.forwardProps)}
 		/>
 	{/if}<Frame
+		onBundleCreate={state.ids_bindPanel}
 		embedded="select.frame"
 		class="so-select__panel"
 		visible={state.visible && state.open}
