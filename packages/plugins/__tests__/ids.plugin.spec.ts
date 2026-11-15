@@ -411,19 +411,30 @@ describe('коллекции', () => {
 		const bundle = new TPluginBundle(owner, 'm1')
 			.use(TCollectionBundlesPlugin)
 			.use(TCalendarIdsPlugin)
-		const headings = () => facade.pickers.map(({ labelledBy }) => labelledBy)
+		const headings = () => facade.pickers.map(({ headingAria }) => headingAria.id)
+		const labels = () => facade.pickers.map(({ labelledBy }) => labelledBy)
 
 		bundle.get(TCollectionBundlesPlugin)?.bindEngine(facade.engine)
 
 		expect(headings()).toEqual(['m1-picker-0', 'm1-picker-1'])
-		expect(facade.pickers.map(({ headingAria }) => headingAria.id)).toEqual([
-			'm1-picker-0',
-			'm1-picker-1',
-		])
+		expect(labels()).toEqual([undefined, undefined])
+
+		const first = facade.pickers[0]
+
+		if (!first) throw new Error('Missing first picker')
+
+		first.popover.open = true
+
+		expect(labels()).toEqual(['m1-picker-0', undefined])
+
+		first.popover.open = false
+
+		expect(labels()).toEqual(['m1-picker-0', undefined])
 
 		owner.months = ['2026-01-01', '2026-02-01', '2026-03-01']
 
 		expect(headings()).toEqual(['m1-picker-0', 'm1-picker-1', 'm1-picker-2'])
+		expect(labels()).toEqual(['m1-picker-0', undefined, undefined])
 	})
 })
 
