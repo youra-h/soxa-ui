@@ -114,6 +114,11 @@
       "file": "tools/ai-docs/smoke.mjs",
       "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
       "sha256": "3eed44d8bbf51979cb2ce745b4ad47ee267883e3cd341d718b66cea6eefafbaa"
+    },
+    {
+      "file": "docs/ai/README.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "6e9f3cbe6f97ad1720c4c55db37a30fad9f8863a92b509b68bd34ac0562df73a"
     }
   ],
   "maintained": {
@@ -299,6 +304,73 @@
     "result": "strict types, negative guard, production build, functional SSR/browser, reload isolation and bounded known limitations pass",
     "completeARIAValidity": false,
     "browserEvidence": "validation-react-consumer/final-browser-result.json",
-    "originalFailureEvidence": "validation-react-consumer/browser-result.json"
+    "originalFailureEvidence": "validation-react-consumer/browser-result.json",
+    "playwrightRuntime": "1.64.1",
+    "retainedSourceAdaptation": "Public playwright1.64.1 import and replay scripts; bounded semantic hydration-readiness polling before typing; requestfailed diagnostics; normalized formatting. Original byte hashes/results/package-lock digest are separate.",
+    "originalVerifierByteHashes": [
+      {
+        "file": "verify.mjs",
+        "sha256": "2cba43e1d5e5df1fa0e74e6a2e4607ff88ce2406831a641424f3a184ef802f01"
+      },
+      {
+        "file": "verify-final.mjs",
+        "sha256": "144afa762e8fa314a8d4b43d211da2776fa985ccf7e2858497d53d04caec76a2"
+      }
+    ],
+    "retainedSourceHashes": [
+      {
+        "file": "validation-react-consumer/app/layout.tsx",
+        "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+        "sha256": "da68184f9fc068bfa72f0fc99891be52d178e446ac37c88a5b177a8e80d266bc"
+      },
+      {
+        "file": "validation-react-consumer/app/page.tsx",
+        "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+        "sha256": "b32bd6e6734c1a29546dc0361d35f82f1492c36d12dca8cdba5867190e46b6bc"
+      },
+      {
+        "file": "validation-react-consumer/app/providers.tsx",
+        "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+        "sha256": "af1c0a6f7ca167639c42709ea7ff645f2e280bf72ab5ebbf43861551a268a43e"
+      },
+      {
+        "file": "validation-react-consumer/app/registration.tsx",
+        "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+        "sha256": "a2b2c9e9f1c15c59476b14e339a3a9f35406aa2384b2e081a4129318e8583150"
+      },
+      {
+        "file": "validation-react-consumer/package.json",
+        "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+        "sha256": "ae8b4db8b6b8e39bef914853a9dd7e0cb5119e6a7a07b0d6eca6e07f17a4fc00"
+      },
+      {
+        "file": "validation-react-consumer/tsconfig.json",
+        "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+        "sha256": "f8919ef2c05998ced346a51694bf02074ed2ba7250a743d3e092ed1c638674f3"
+      },
+      {
+        "file": "validation-react-consumer/verify.mjs",
+        "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+        "sha256": "b982efa7feb8b37ec10dc7dd2d97d8b84c2f7db51a6f8f561919b9ee77e76982"
+      },
+      {
+        "file": "validation-react-consumer/verify-final.mjs",
+        "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+        "sha256": "9027a0d640ab476a4cb910f55b2ce1d5b98c592f3947d9d68905ce302de26f2f"
+      }
+    ],
+    "retainedReplay": {
+      "context": "New external copy; pinned public dependencies, no library checkout resolution",
+      "commands": [
+        "npm install --no-audit --no-fund",
+        "npm run typecheck",
+        "npm run build",
+        "npm start",
+        "node verify-final.mjs",
+        "node verify.mjs (expected exit1 at inactive Schedule aria-controls)"
+      ],
+      "result": "strict types/build and final bounded browser verifier pass; original all-reference assertion fails at recorded target",
+      "harnessCorrection": "Cold hydration initially lost typed input; verifier confirms mounted public action before typing; application unchanged"
+    }
   }
 }

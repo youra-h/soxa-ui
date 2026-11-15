@@ -72,3 +72,15 @@ react-validation.json records pins, commands, normalized source SHA-256 values,
 original snapshot identity, exact final corpus input byte hashes, declared content
 hashes and outcomes. Final-corpus hashes identify exported bytes, separately from
 normalized repository source hashes. Browser evidence contains no private paths.
+
+The retained validation-react-consumer README gives external replay commands.
+Both the original strict and final bounded browser verifier are included, with
+portable public Playwright imports and exact replay pin 1.64.1. Original verifier
+byte hashes and normalized retained-source hashes are recorded separately.
+
+A fresh external replay of those retained files passed install, strict typecheck,
+production build and the final verifier; the strict original verifier reproduced
+the expected inactive Schedule target failure. A cold hydration race in the replay
+harness was corrected by waiting for an observed public action/state update before
+typing. Failed requests are recorded with console/page diagnostics. This adaptation
+is documented separately from the original independent byte snapshots.
