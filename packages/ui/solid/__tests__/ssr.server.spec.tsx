@@ -362,8 +362,8 @@ describe('DateInput и DatePicker · серверный рендер', () => {
 		expect(body).toContain('aria-haspopup="dialog"')
 		expect(body).toContain('aria-expanded="false"')
 		expect(body).toContain('data-selected="false"')
-		// Ссылка кнопки ведёт на `id` панели, которая появится на клиенте
-		expect(controls).toBeTruthy()
+		// The browser connects the trigger only after its popup mounts.
+		expect(controls).toBeUndefined()
 		expect(body).not.toContain(`id="${controls}"`)
 		expect(body).not.toContain('so-date-picker__panel')
 		expect(body).not.toContain('so-calendar')

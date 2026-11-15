@@ -145,11 +145,8 @@ describe('DatePicker · гидратация', () => {
 		expect(idsOf(container)).toEqual(ids)
 	})
 
-	/**
-	 * Панели на сервере нет, как у всех оверлеев: её рисует браузер после
-	 * гидратации. Ссылка кнопки календаря пришла от сервера и ведёт на её `id`.
-	 */
-	it('панель — в body после гидратации, ссылка кнопки календаря от сервера ведёт на неё', () => {
+	/** No dangling SSR reference; hydration links the existing trigger to its panel. */
+	it('connects the server trigger when its panel mounts', async () => {
 		const container = serve(markupOf('date-picker-value'))
 		const trigger = find(container, '.so-date-picker__trigger', HTMLElement)
 		const controls = trigger.getAttribute('aria-controls')
@@ -157,13 +154,15 @@ describe('DatePicker · гидратация', () => {
 		expect(document.querySelector('.so-date-picker__panel')).toBeNull()
 
 		hydrateServed(container, DatePickerValue, {})
+		await nextFrame()
 
 		const panel = find(document, '.so-date-picker__panel', HTMLElement)
 
 		expect(find(container, '.so-date-picker__trigger', HTMLElement)).toBe(trigger)
 		expect(container.contains(panel)).toBe(false)
-		expect(controls).toBeTruthy()
-		expect(panel.id).toBe(controls)
+		expect(controls).toBeNull()
+		expect(trigger.getAttribute('aria-controls')).toBe(panel.id)
+		expect(panel.id).toBeTruthy()
 	})
 
 	it('после кадра набор в поле доходит до значения DatePicker', async () => {

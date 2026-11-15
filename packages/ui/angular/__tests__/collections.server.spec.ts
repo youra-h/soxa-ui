@@ -1432,7 +1432,7 @@ describe('Select · серверный рендер', () => {
 		expect(field.getAttribute('value')).toBe('Второй')
 		expect(field.getAttribute('role')).toBe('combobox')
 		expect(field.getAttribute('aria-expanded')).toBe('false')
-		expect(field.getAttribute('aria-controls')).toMatch(/.+/)
+		expect(field.getAttribute('aria-controls')).toBeNull()
 		expect(panels).toHaveLength(1)
 		expect(panels[0]?.parentElement).toBe(root)
 		expect(panels[0] instanceof HTMLElement && panels[0].style.display).toBe('none')
@@ -1490,14 +1490,16 @@ describe('Select · гидратация', () => {
 		const fields = ['.single', '.multiple', '.markup'].map((root) =>
 			selectField(document, root),
 		)
-		const links = fields.map((field) => field.getAttribute('aria-controls'))
+		expect(fields.every((field) => !field.hasAttribute('aria-controls'))).toBe(true)
 		const tags = all(document, '.multiple .so-select__tags .so-tags-item')
 		const { page } = await hydrated()
 
 		expect(
 			['.single', '.multiple', '.markup'].map((root) => selectField(document, root)),
 		).toEqual(fields)
-		expect(fields.map((field) => field.getAttribute('aria-controls'))).toEqual(links)
+		const links = fields.map((field) => field.getAttribute('aria-controls'))
+		expect(new Set(links).size).toBe(3)
+		expect(links.every(Boolean)).toBe(true)
 		expect(all(document, '.multiple .so-select__tags .so-tags-item')).toEqual(tags)
 		expect(fields.map((field) => field.value)).toEqual(['Второй', '', 'Тверь'])
 

@@ -2089,7 +2089,7 @@ describe('React', () => {
 		expect(input?.getAttribute('role')).toBe('combobox')
 		expect(input?.getAttribute('value')).toBe('Второй')
 		expect(input?.getAttribute('aria-expanded')).toBe('false')
-		expect(input?.getAttribute('aria-controls')).toMatch(/.+/)
+		expect(input?.getAttribute('aria-controls')).toBeNull()
 		expect(host.querySelector('.so-select__panel')).toBeNull()
 		expect(host.querySelector('[role="option"]')).toBeNull()
 	})

@@ -1,22 +1,20 @@
 import type { IDatePicker } from '@soxa-ui/core'
 import { TBasePlugin } from '../../../base'
 import type { IPluginContext } from '../../../base'
+import { TPopupControls } from '../../overlay/popup-controls'
 
-/**
- * TDatePickerIdsPlugin — связка «кнопка календаря ↔ панель» DatePicker в
- * документе.
- *
- * `id` панели — в `panelAria`, который разметка раскладывает на панель, и
- * ссылка на него `aria-controls` — в `triggerAria` кнопки. Обе стороны
- * пишутся здесь, от одного `id`: формула одна на обе, как у Popover.
- *
- * `id` — от монтирования (`createId`), а не от экземпляра: он нужен только
- * документу, и на сервере и в браузере обязан совпасть. Пишется при
- * установке, синхронно, — связка есть уже в первой (и серверной) отрисовке.
- * `aria-controls` стоит и у закрытой панели: она всегда в документе,
- * закрытие её только прячет.
- */
+/** Keeps deterministic popup IDs and only references a bound popup. */
 export class TDatePickerIdsPlugin extends TBasePlugin {
+	private _controls: TPopupControls | undefined
+
+	/** Internal Frame bundle hookup, exposed only as a protected descriptor output. */
+	readonly bindPanel = (bundle: unknown): void => this._controls?.bindPanel(bundle)
+
+	override destroy(): void {
+		this._controls?.destroy()
+		super.destroy()
+	}
+
 	override install(ctx: IPluginContext): void {
 		super.install(ctx)
 
@@ -27,6 +25,14 @@ export class TDatePickerIdsPlugin extends TBasePlugin {
 		const panelId = ctx.createId('panel')
 
 		picker.panelAria.add('id', panelId)
-		picker.triggerAria.add('aria-controls', panelId)
+		this._controls = new TPopupControls(
+			picker.triggerAria,
+			panelId,
+			() => picker.open && picker.visible,
+		)
+		const sync = (): void => this._controls?.sync()
+
+		this._listenTo(picker.events, 'change:open', sync)
+		this._listenTo(picker.events, 'change:visible', sync)
 	}
 }

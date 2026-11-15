@@ -95,6 +95,7 @@
 -->
 <div
 	so-frame
+	(soBundleCreate)="state()['ids_bindPanel']?.($event)"
 	embedded="date-picker.frame"
 	class="so-date-picker__panel"
 	tabindex="-1"
