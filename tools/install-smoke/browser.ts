@@ -33,6 +33,22 @@ async function markupProblems(page: Page): Promise<string[]> {
 			}
 		}
 
+		// Only these two owner references are under test; Calendar naming has a separate audit.
+		for (const trigger of document.querySelectorAll(
+			'[role="combobox"], .so-date-picker__trigger',
+		)) {
+			const id = trigger.getAttribute('aria-controls')
+			if (id) {
+				const targets = [...document.querySelectorAll('[id]')].filter(
+					(node) => node.id === id,
+				)
+				if (targets.length !== 1)
+					problems.push('popup reference does not resolve uniquely: ' + id)
+			} else if (trigger.getAttribute('aria-expanded') === 'true') {
+				problems.push('expanded popup has no aria-controls')
+			}
+		}
+
 		const table = document.querySelector('table.so-table')
 
 		if (table === null || !(table.textContent ?? '').includes('Boris')) {

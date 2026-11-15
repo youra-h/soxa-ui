@@ -1,9 +1,3 @@
-import CollectionInitial from '../CollectionInitial.test.svelte'
-import AlertDialogPage from './AlertDialogPage.test.svelte'
-import AlertPage from './AlertPage.test.svelte'
-import AvatarPage from './AvatarPage.test.svelte'
-import SeparatorPage from './SeparatorPage.test.svelte'
-import CodeBlockPage from './CodeBlockPage.test.svelte'
 /**
  * Разметка сервера для гидратации — её рисует сервер той же версии Svelte,
  * что гидратирует браузер.
@@ -32,8 +26,15 @@ import CodeBlockPage from './CodeBlockPage.test.svelte'
 import '../setup'
 import { install } from '@sinonjs/fake-timers'
 import { render } from 'svelte/server'
+import CollectionInitial from '../CollectionInitial.test.svelte'
+import AlertDialogPage from './AlertDialogPage.test.svelte'
+import AlertPage from './AlertPage.test.svelte'
+import AvatarPage from './AvatarPage.test.svelte'
+import SeparatorPage from './SeparatorPage.test.svelte'
+import CodeBlockPage from './CodeBlockPage.test.svelte'
 import BadgePage from './BadgePage.test.svelte'
 import ButtonStyle from './ButtonStyle.test.svelte'
+import PopupControls from './PopupControls.test.svelte'
 import CalendarValue from './CalendarValue.test.svelte'
 import DateInputValue from './DateInputValue.test.svelte'
 import DatePickerValue from './DatePickerValue.test.svelte'
@@ -66,6 +67,10 @@ export function renderServerMarkup() {
 		'collection-initial': render(CollectionInitial).body,
 		'collection-initial-auto': render(CollectionInitial, { props: { automatic: true } }).body,
 		'collection-initial-tags': render(CollectionInitial, { props: { tags: true } }).body,
+		'popup-controls-closed': onToday(() => render(PopupControls).body),
+		'popup-controls-open': onToday(
+			() => render(PopupControls, { props: { initialOpen: true } }).body,
+		),
 		alert: render(AlertPage).body,
 		'alert-dialog': render(AlertDialogPage).body,
 		separator: render(SeparatorPage).body,

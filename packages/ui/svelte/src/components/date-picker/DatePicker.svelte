@@ -128,6 +128,7 @@
 			ctrl={ctrl.end}
 			aria_label={state.names_end}
 		/>{@render clearButton()}{@render trigger()}{/if}<Frame
+		onBundleCreate={state.ids_bindPanel}
 		embedded="date-picker.frame"
 		class="so-date-picker__panel"
 		tabindex={-1}

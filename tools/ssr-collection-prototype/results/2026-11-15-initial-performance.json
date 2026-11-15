@@ -1,12 +1,12 @@
 {
-  "measuredAt": "2026-11-15T18:27:57.477Z",
+  "measuredAt": "2026-11-15T18:48:48.306Z",
   "node": "v24.20.0",
   "react": "19.3.1",
   "mode": "production",
   "distSha256": {
-    "packages/setup": "f2f779cefde55292a480bea4f85792b2f834a90af92879832f9bb65bc3dd136a",
-    "packages/plugins": "4a9a1bda8467d9f2cf4f479f960e08cf4a47d4ca572e2c9496979bcb5a167f67",
-    "packages/ui/react": "102445065da4cceb39af9f7cef3862605b5794d28710b74f9a59b2ea56fe8b85"
+    "packages/setup": "6317957d663220164415158648e80a81c029ada45e903ab38a2d7e92688086dc",
+    "packages/plugins": "464b228c2bc9151c3f75ac87c80e10ded69529c16e468fb5957329f1c63e627b",
+    "packages/ui/react": "a689bf3a221c80d633a2f924321b59079d55bde24601d79688b332a2f1a3faa1"
   },
   "cpu": "AMD Ryzen 9 9950X3D 16-Core Processor          ",
   "runs": 9,
@@ -19,30 +19,30 @@
       "outputBytes": 39405,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 0.095,
-        "p95Ms": 0.314
+        "medianMs": 0.157,
+        "p95Ms": 0.175
       },
       "preparedMaterialization": {
-        "medianMs": 0.446,
-        "p95Ms": 0.993
+        "medianMs": 0.615,
+        "p95Ms": 4.748
       },
       "ordinaryMaterialization": {
-        "medianMs": 0.347,
-        "p95Ms": 0.588
+        "medianMs": 0.368,
+        "p95Ms": 0.646
       },
       "externalValidation": {
-        "medianMs": 0.054,
-        "p95Ms": 0.068
+        "medianMs": 0.064,
+        "p95Ms": 0.14
       },
       "initialSSR": {
-        "medianMs": 5.484,
-        "p95Ms": 9.764
+        "medianMs": 5.277,
+        "p95Ms": 9.491
       },
       "existingItemsSSR": {
-        "medianMs": 4.376,
-        "p95Ms": 9.803
+        "medianMs": 4.019,
+        "p95Ms": 8.092
       },
-      "retainedCaptureBytesPerSource": 19321
+      "retainedCaptureBytesPerSource": 19319
     },
     {
       "n": 1000,
@@ -51,28 +51,28 @@
       "outputBytes": 394905,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 0.828,
-        "p95Ms": 4.046
+        "medianMs": 0.774,
+        "p95Ms": 0.781
       },
       "preparedMaterialization": {
-        "medianMs": 2.843,
-        "p95Ms": 4.36
+        "medianMs": 2.885,
+        "p95Ms": 4.295
       },
       "ordinaryMaterialization": {
-        "medianMs": 2.556,
-        "p95Ms": 3.171
+        "medianMs": 2.486,
+        "p95Ms": 3.482
       },
       "externalValidation": {
-        "medianMs": 0.228,
-        "p95Ms": 1.103
+        "medianMs": 0.24,
+        "p95Ms": 0.27
       },
       "initialSSR": {
-        "medianMs": 64.11,
-        "p95Ms": 79.083
+        "medianMs": 59.112,
+        "p95Ms": 63.67
       },
       "existingItemsSSR": {
-        "medianMs": 56.06,
-        "p95Ms": 77.596
+        "medianMs": 44.501,
+        "p95Ms": 45.321
       },
       "retainedCaptureBytesPerSource": 168886
     },
@@ -83,28 +83,28 @@
       "outputBytes": 39405,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 0.989,
-        "p95Ms": 1.663
+        "medianMs": 0.938,
+        "p95Ms": 0.954
       },
       "preparedMaterialization": {
-        "medianMs": 0.31,
-        "p95Ms": 0.56
+        "medianMs": 0.29,
+        "p95Ms": 0.37
       },
       "ordinaryMaterialization": {
-        "medianMs": 0.271,
-        "p95Ms": 0.289
+        "medianMs": 0.26,
+        "p95Ms": 0.3
       },
       "externalValidation": {
-        "medianMs": 0.392,
-        "p95Ms": 0.506
+        "medianMs": 0.374,
+        "p95Ms": 0.44
       },
       "initialSSR": {
-        "medianMs": 5.548,
-        "p95Ms": 11.986
+        "medianMs": 5.336,
+        "p95Ms": 20.836
       },
       "existingItemsSSR": {
-        "medianMs": 3.393,
-        "p95Ms": 8.287
+        "medianMs": 3.297,
+        "p95Ms": 11.281
       },
       "retainedCaptureBytesPerSource": 243788
     },
@@ -115,28 +115,28 @@
       "outputBytes": 394905,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 9.374,
-        "p95Ms": 11.576
+        "medianMs": 9.203,
+        "p95Ms": 11.475
       },
       "preparedMaterialization": {
-        "medianMs": 3.261,
-        "p95Ms": 4.561
+        "medianMs": 3.023,
+        "p95Ms": 4.073
       },
       "ordinaryMaterialization": {
-        "medianMs": 2.824,
-        "p95Ms": 4.576
+        "medianMs": 2.619,
+        "p95Ms": 3.163
       },
       "externalValidation": {
-        "medianMs": 3.635,
-        "p95Ms": 6.938
+        "medianMs": 3.366,
+        "p95Ms": 5.426
       },
       "initialSSR": {
-        "medianMs": 67.733,
-        "p95Ms": 102.323
+        "medianMs": 71.131,
+        "p95Ms": 102.406
       },
       "existingItemsSSR": {
-        "medianMs": 46.79,
-        "p95Ms": 47.811
+        "medianMs": 42.461,
+        "p95Ms": 53.656
       },
       "retainedCaptureBytesPerSource": 2448988
     }

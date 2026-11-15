@@ -181,7 +181,8 @@ function fieldOf(owner: Document, embedded: string, className: string): TDateInp
 }
 
 export const datePickerTemplate: ITemplate<IDatePicker, unknown, TDatePickerOutputs> = {
-	create: (root, { hasSlot }) => {
+	create: (root, ctx) => {
+		const { hasSlot } = ctx
 		const { ownerDocument } = root
 		const field = fieldOf(ownerDocument, 'date-picker.field', 'so-date-picker__field')
 		const start = fieldOf(ownerDocument, 'date-picker.start', 'so-date-picker__start')
@@ -195,6 +196,11 @@ export const datePickerTemplate: ITemplate<IDatePicker, unknown, TDatePickerOutp
 		const panel = createDetail(ownerDocument, TFrameElement, {
 			embedded: 'date-picker.frame',
 			attributes: { tabindex: '-1' },
+		})
+		panel.addEventListener('so:bundle:create', (event) => {
+			if (event.target === panel && event instanceof CustomEvent) {
+				ctx.state.ids_bindPanel?.(event.detail)
+			}
 		})
 		const handle = ownerDocument.createElement('div')
 		const content = ownerDocument.createElement('div')

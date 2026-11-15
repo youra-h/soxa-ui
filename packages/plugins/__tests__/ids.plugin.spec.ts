@@ -276,7 +276,7 @@ describe('оверлеи', () => {
 		new TPluginBundle(picker, 'm1').use(TDatePickerIdsPlugin)
 
 		expect(picker.panelAria.get('id')).toBe('m1-panel')
-		expect(picker.triggerAria.get('aria-controls')).toBe('m1-panel')
+		expect(picker.triggerAria.has('aria-controls')).toBe(false)
 	})
 
 	it('пометка панели владельцем — от монтирования', () => {
@@ -293,7 +293,7 @@ describe('коллекции', () => {
 		new TPluginBundle(select, 'm1').use(TSelectIdsPlugin)
 
 		expect(select.listAria.get('id')).toBe('m1-list')
-		expect(select.field.aria.get('aria-controls')).toBe('m1-list')
+		expect(select.field.aria.has('aria-controls')).toBe(false)
 	})
 
 	/**

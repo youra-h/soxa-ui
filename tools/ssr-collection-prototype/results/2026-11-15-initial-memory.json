@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-11-15T18:28:18.518Z",
+  "measuredAt": "2026-11-15T18:49:10.294Z",
   "node": "v24.20.0",
   "react": "19.3.1",
   "mode": "production",
@@ -10,9 +10,9 @@
   "rounds": 3,
   "samplingIntervalBytes": 16384,
   "distSha256": {
-    "packages/setup": "f2f779cefde55292a480bea4f85792b2f834a90af92879832f9bb65bc3dd136a",
-    "packages/plugins": "4a9a1bda8467d9f2cf4f479f960e08cf4a47d4ca572e2c9496979bcb5a167f67",
-    "packages/ui/react": "102445065da4cceb39af9f7cef3862605b5794d28710b74f9a59b2ea56fe8b85"
+    "packages/setup": "6317957d663220164415158648e80a81c029ada45e903ab38a2d7e92688086dc",
+    "packages/plugins": "464b228c2bc9151c3f75ac87c80e10ded69529c16e468fb5957329f1c63e627b",
+    "packages/ui/react": "a689bf3a221c80d633a2f924321b59079d55bde24601d79688b332a2f1a3faa1"
   },
   "method": "Fresh process per case; real completed/aborted Fizz. Inspector sampling includes objects collected by major/minor GC: allocation estimates, not exact allocated or temporary bytes. beforeGC minus afterGC is observed reclaimed heap, not all temporary allocations. Signed post-GC heap deltas include runtime/profiler caches. Peak RSS is the OS whole-process lifetime high-water mark (imports, fixtures and warmup included), not an exact isolated SSR-phase peak. WeakRefs verify request-owned source and engine collection. Profile payload is obtained after heap measurements. Profiled runs are separate from latency measurements.",
   "results": [
@@ -23,61 +23,61 @@
       "outcome": "success",
       "inputBytes": 6991,
       "baseline": {
-        "heapUsed": 24524272,
-        "rss": 128503808,
-        "processLifetimePeakRSS": 129273856
+        "heapUsed": 24807080,
+        "rss": 128204800,
+        "processLifetimePeakRSS": 128995328
       },
       "rounds": [
         {
           "completedRequests": 3,
           "beforeGC": {
-            "heapUsed": 58341432,
-            "rss": 148910080,
-            "processLifetimePeakRSS": 148910080
+            "heapUsed": 58363720,
+            "rss": 148066304,
+            "processLifetimePeakRSS": 148066304
           },
           "afterGC": {
-            "heapUsed": 24865152,
-            "rss": 148660224,
-            "processLifetimePeakRSS": 149319680
+            "heapUsed": 24862976,
+            "rss": 148434944,
+            "processLifetimePeakRSS": 148828160
           },
-          "reclaimedHeapBytes": 33476280,
-          "retainedHeapDeltaFromBaselineBytes": 340880
+          "reclaimedHeapBytes": 33500744,
+          "retainedHeapDeltaFromBaselineBytes": 55896
         },
         {
           "completedRequests": 6,
           "beforeGC": {
-            "heapUsed": 42252472,
-            "rss": 150106112,
-            "processLifetimePeakRSS": 151216128
+            "heapUsed": 42560624,
+            "rss": 149823488,
+            "processLifetimePeakRSS": 151031808
           },
           "afterGC": {
-            "heapUsed": 25114496,
-            "rss": 150220800,
-            "processLifetimePeakRSS": 151216128
+            "heapUsed": 25126664,
+            "rss": 150097920,
+            "processLifetimePeakRSS": 151031808
           },
-          "reclaimedHeapBytes": 17137976,
-          "retainedHeapDeltaFromBaselineBytes": 590224
+          "reclaimedHeapBytes": 17433960,
+          "retainedHeapDeltaFromBaselineBytes": 319584
         },
         {
           "completedRequests": 9,
           "beforeGC": {
-            "heapUsed": 41810296,
-            "rss": 150847488,
-            "processLifetimePeakRSS": 151334912
+            "heapUsed": 41798856,
+            "rss": 151236608,
+            "processLifetimePeakRSS": 151433216
           },
           "afterGC": {
-            "heapUsed": 25161992,
-            "rss": 150917120,
-            "processLifetimePeakRSS": 151334912
+            "heapUsed": 25167192,
+            "rss": 151293952,
+            "processLifetimePeakRSS": 151433216
           },
-          "reclaimedHeapBytes": 16648304,
-          "retainedHeapDeltaFromBaselineBytes": 637720
+          "reclaimedHeapBytes": 16631664,
+          "retainedHeapDeltaFromBaselineBytes": 360112
         }
       ],
       "requests": 9,
-      "sampledAllocationEstimateBytes": 141359616,
-      "sampledAllocationEstimateBytesPerRequest": 15706624,
-      "samples": 8513,
+      "sampledAllocationEstimateBytes": 143140128,
+      "sampledAllocationEstimateBytesPerRequest": 15904459,
+      "samples": 8619,
       "weakRefs": {
         "sourcesObserved": 9,
         "sourcesAlive": 0,
@@ -92,61 +92,61 @@
       "outcome": "abort",
       "inputBytes": 6991,
       "baseline": {
-        "heapUsed": 24603464,
-        "rss": 128057344,
-        "processLifetimePeakRSS": 129212416
+        "heapUsed": 24608880,
+        "rss": 128425984,
+        "processLifetimePeakRSS": 130228224
       },
       "rounds": [
         {
           "completedRequests": 3,
           "beforeGC": {
-            "heapUsed": 40965664,
-            "rss": 136114176,
-            "processLifetimePeakRSS": 138616832
+            "heapUsed": 31912240,
+            "rss": 150310912,
+            "processLifetimePeakRSS": 150310912
           },
           "afterGC": {
-            "heapUsed": 24918640,
-            "rss": 136437760,
-            "processLifetimePeakRSS": 138616832
+            "heapUsed": 24934416,
+            "rss": 150622208,
+            "processLifetimePeakRSS": 150622208
           },
-          "reclaimedHeapBytes": 16047024,
-          "retainedHeapDeltaFromBaselineBytes": 315176
+          "reclaimedHeapBytes": 6977824,
+          "retainedHeapDeltaFromBaselineBytes": 325536
         },
         {
           "completedRequests": 6,
           "beforeGC": {
-            "heapUsed": 44779320,
-            "rss": 150360064,
-            "processLifetimePeakRSS": 150360064
+            "heapUsed": 44788864,
+            "rss": 152985600,
+            "processLifetimePeakRSS": 152985600
           },
           "afterGC": {
-            "heapUsed": 25186848,
-            "rss": 150544384,
-            "processLifetimePeakRSS": 150544384
+            "heapUsed": 25213360,
+            "rss": 153305088,
+            "processLifetimePeakRSS": 153305088
           },
-          "reclaimedHeapBytes": 19592472,
-          "retainedHeapDeltaFromBaselineBytes": 583384
+          "reclaimedHeapBytes": 19575504,
+          "retainedHeapDeltaFromBaselineBytes": 604480
         },
         {
           "completedRequests": 9,
           "beforeGC": {
-            "heapUsed": 44565488,
-            "rss": 151334912,
-            "processLifetimePeakRSS": 151560192
+            "heapUsed": 44608120,
+            "rss": 153845760,
+            "processLifetimePeakRSS": 154206208
           },
           "afterGC": {
-            "heapUsed": 25224144,
-            "rss": 151560192,
-            "processLifetimePeakRSS": 151560192
+            "heapUsed": 25237248,
+            "rss": 153919488,
+            "processLifetimePeakRSS": 154206208
           },
-          "reclaimedHeapBytes": 19341344,
-          "retainedHeapDeltaFromBaselineBytes": 620680
+          "reclaimedHeapBytes": 19370872,
+          "retainedHeapDeltaFromBaselineBytes": 628368
         }
       ],
       "requests": 9,
-      "sampledAllocationEstimateBytes": 139903392,
-      "sampledAllocationEstimateBytesPerRequest": 15544821,
-      "samples": 8423,
+      "sampledAllocationEstimateBytes": 138908192,
+      "sampledAllocationEstimateBytesPerRequest": 15434244,
+      "samples": 8360,
       "weakRefs": {
         "sourcesObserved": 9,
         "sourcesAlive": 0,
@@ -161,61 +161,61 @@
       "outcome": "success",
       "inputBytes": 6991,
       "baseline": {
-        "heapUsed": 24406696,
-        "rss": 129400832,
-        "processLifetimePeakRSS": 130220032
+        "heapUsed": 24414176,
+        "rss": 128151552,
+        "processLifetimePeakRSS": 128839680
       },
       "rounds": [
         {
           "completedRequests": 3,
           "beforeGC": {
-            "heapUsed": 50657608,
-            "rss": 142946304,
-            "processLifetimePeakRSS": 142950400
+            "heapUsed": 50664968,
+            "rss": 141795328,
+            "processLifetimePeakRSS": 141795328
           },
           "afterGC": {
-            "heapUsed": 24733848,
-            "rss": 142090240,
-            "processLifetimePeakRSS": 143224832
+            "heapUsed": 24742840,
+            "rss": 140619776,
+            "processLifetimePeakRSS": 142237696
           },
-          "reclaimedHeapBytes": 25923760,
-          "retainedHeapDeltaFromBaselineBytes": 327152
+          "reclaimedHeapBytes": 25922128,
+          "retainedHeapDeltaFromBaselineBytes": 328664
         },
         {
           "completedRequests": 6,
           "beforeGC": {
-            "heapUsed": 35334480,
-            "rss": 150781952,
-            "processLifetimePeakRSS": 152145920
+            "heapUsed": 35454664,
+            "rss": 158511104,
+            "processLifetimePeakRSS": 160002048
           },
           "afterGC": {
-            "heapUsed": 25014776,
-            "rss": 150933504,
-            "processLifetimePeakRSS": 152145920
+            "heapUsed": 25023968,
+            "rss": 158760960,
+            "processLifetimePeakRSS": 160002048
           },
-          "reclaimedHeapBytes": 10319704,
-          "retainedHeapDeltaFromBaselineBytes": 608080
+          "reclaimedHeapBytes": 10430696,
+          "retainedHeapDeltaFromBaselineBytes": 609792
         },
         {
           "completedRequests": 9,
           "beforeGC": {
-            "heapUsed": 35158392,
-            "rss": 152023040,
-            "processLifetimePeakRSS": 152145920
+            "heapUsed": 35180888,
+            "rss": 159563776,
+            "processLifetimePeakRSS": 160002048
           },
           "afterGC": {
-            "heapUsed": 25007584,
-            "rss": 152023040,
-            "processLifetimePeakRSS": 152145920
+            "heapUsed": 25016560,
+            "rss": 159592448,
+            "processLifetimePeakRSS": 160002048
           },
-          "reclaimedHeapBytes": 10150808,
-          "retainedHeapDeltaFromBaselineBytes": 600888
+          "reclaimedHeapBytes": 10164328,
+          "retainedHeapDeltaFromBaselineBytes": 602384
         }
       ],
       "requests": 9,
-      "sampledAllocationEstimateBytes": 115372168,
-      "sampledAllocationEstimateBytesPerRequest": 12819130,
-      "samples": 6931,
+      "sampledAllocationEstimateBytes": 118864888,
+      "sampledAllocationEstimateBytesPerRequest": 13207210,
+      "samples": 7146,
       "weakRefs": {
         "sourcesObserved": 0,
         "sourcesAlive": 0,
@@ -230,61 +230,61 @@
       "outcome": "abort",
       "inputBytes": 6991,
       "baseline": {
-        "heapUsed": 24505152,
-        "rss": 127950848,
-        "processLifetimePeakRSS": 130560000
+        "heapUsed": 24488192,
+        "rss": 128573440,
+        "processLifetimePeakRSS": 129196032
       },
       "rounds": [
         {
           "completedRequests": 3,
           "beforeGC": {
-            "heapUsed": 50506600,
-            "rss": 140922880,
-            "processLifetimePeakRSS": 140922880
+            "heapUsed": 38066440,
+            "rss": 132284416,
+            "processLifetimePeakRSS": 134926336
           },
           "afterGC": {
-            "heapUsed": 24779304,
-            "rss": 141127680,
-            "processLifetimePeakRSS": 141479936
+            "heapUsed": 24786816,
+            "rss": 132509696,
+            "processLifetimePeakRSS": 134926336
           },
-          "reclaimedHeapBytes": 25727296,
-          "retainedHeapDeltaFromBaselineBytes": 274152
+          "reclaimedHeapBytes": 13279624,
+          "retainedHeapDeltaFromBaselineBytes": 298624
         },
         {
           "completedRequests": 6,
           "beforeGC": {
-            "heapUsed": 35368080,
-            "rss": 157818880,
-            "processLifetimePeakRSS": 159289344
+            "heapUsed": 35631752,
+            "rss": 150048768,
+            "processLifetimePeakRSS": 151654400
           },
           "afterGC": {
-            "heapUsed": 25046920,
-            "rss": 158031872,
-            "processLifetimePeakRSS": 159289344
+            "heapUsed": 25054248,
+            "rss": 150192128,
+            "processLifetimePeakRSS": 151654400
           },
-          "reclaimedHeapBytes": 10321160,
-          "retainedHeapDeltaFromBaselineBytes": 541768
+          "reclaimedHeapBytes": 10577504,
+          "retainedHeapDeltaFromBaselineBytes": 566056
         },
         {
           "completedRequests": 9,
           "beforeGC": {
-            "heapUsed": 35209920,
-            "rss": 158937088,
-            "processLifetimePeakRSS": 159289344
+            "heapUsed": 35214072,
+            "rss": 150548480,
+            "processLifetimePeakRSS": 151654400
           },
           "afterGC": {
-            "heapUsed": 25070304,
-            "rss": 158945280,
-            "processLifetimePeakRSS": 159289344
+            "heapUsed": 25077528,
+            "rss": 150654976,
+            "processLifetimePeakRSS": 151654400
           },
-          "reclaimedHeapBytes": 10139616,
-          "retainedHeapDeltaFromBaselineBytes": 565152
+          "reclaimedHeapBytes": 10136544,
+          "retainedHeapDeltaFromBaselineBytes": 589336
         }
       ],
       "requests": 9,
-      "sampledAllocationEstimateBytes": 116756672,
-      "sampledAllocationEstimateBytesPerRequest": 12972964,
-      "samples": 7012,
+      "sampledAllocationEstimateBytes": 116543072,
+      "sampledAllocationEstimateBytesPerRequest": 12949230,
+      "samples": 7003,
       "weakRefs": {
         "sourcesObserved": 0,
         "sourcesAlive": 0,
@@ -299,61 +299,61 @@
       "outcome": "success",
       "inputBytes": 72691,
       "baseline": {
-        "heapUsed": 25137912,
-        "rss": 129130496,
-        "processLifetimePeakRSS": 129425408
+        "heapUsed": 24885664,
+        "rss": 130281472,
+        "processLifetimePeakRSS": 130547712
       },
       "rounds": [
         {
           "completedRequests": 3,
           "beforeGC": {
-            "heapUsed": 101818856,
-            "rss": 289353728,
-            "processLifetimePeakRSS": 289357824
+            "heapUsed": 68883232,
+            "rss": 283635712,
+            "processLifetimePeakRSS": 285790208
           },
           "afterGC": {
-            "heapUsed": 25387936,
-            "rss": 287588352,
-            "processLifetimePeakRSS": 290025472
+            "heapUsed": 25397432,
+            "rss": 282705920,
+            "processLifetimePeakRSS": 285790208
           },
-          "reclaimedHeapBytes": 76430920,
-          "retainedHeapDeltaFromBaselineBytes": 250024
+          "reclaimedHeapBytes": 43485800,
+          "retainedHeapDeltaFromBaselineBytes": 511768
         },
         {
           "completedRequests": 6,
           "beforeGC": {
-            "heapUsed": 111632104,
-            "rss": 324521984,
-            "processLifetimePeakRSS": 324521984
+            "heapUsed": 159001144,
+            "rss": 308842496,
+            "processLifetimePeakRSS": 309198848
           },
           "afterGC": {
-            "heapUsed": 25741496,
-            "rss": 319430656,
-            "processLifetimePeakRSS": 324800512
+            "heapUsed": 25748256,
+            "rss": 321802240,
+            "processLifetimePeakRSS": 324980736
           },
-          "reclaimedHeapBytes": 85890608,
-          "retainedHeapDeltaFromBaselineBytes": 603584
+          "reclaimedHeapBytes": 133252888,
+          "retainedHeapDeltaFromBaselineBytes": 862592
         },
         {
           "completedRequests": 9,
           "beforeGC": {
-            "heapUsed": 115961608,
-            "rss": 330051584,
-            "processLifetimePeakRSS": 330260480
+            "heapUsed": 112734992,
+            "rss": 329764864,
+            "processLifetimePeakRSS": 332279808
           },
           "afterGC": {
-            "heapUsed": 25822176,
-            "rss": 327344128,
-            "processLifetimePeakRSS": 330514432
+            "heapUsed": 25821920,
+            "rss": 327176192,
+            "processLifetimePeakRSS": 332279808
           },
-          "reclaimedHeapBytes": 90139432,
-          "retainedHeapDeltaFromBaselineBytes": 684264
+          "reclaimedHeapBytes": 86913072,
+          "retainedHeapDeltaFromBaselineBytes": 936256
         }
       ],
       "requests": 9,
-      "sampledAllocationEstimateBytes": 1404085048,
-      "sampledAllocationEstimateBytesPerRequest": 156009450,
-      "samples": 81651,
+      "sampledAllocationEstimateBytes": 1400207848,
+      "sampledAllocationEstimateBytesPerRequest": 155578650,
+      "samples": 81408,
       "weakRefs": {
         "sourcesObserved": 9,
         "sourcesAlive": 0,
@@ -368,61 +368,61 @@
       "outcome": "abort",
       "inputBytes": 72691,
       "baseline": {
-        "heapUsed": 24957528,
-        "rss": 128458752,
-        "processLifetimePeakRSS": 129343488
+        "heapUsed": 24972952,
+        "rss": 131047424,
+        "processLifetimePeakRSS": 131055616
       },
       "rounds": [
         {
           "completedRequests": 3,
           "beforeGC": {
-            "heapUsed": 93774280,
-            "rss": 282812416,
-            "processLifetimePeakRSS": 282816512
+            "heapUsed": 103396400,
+            "rss": 290582528,
+            "processLifetimePeakRSS": 290648064
           },
           "afterGC": {
-            "heapUsed": 25483960,
-            "rss": 279388160,
-            "processLifetimePeakRSS": 283459584
+            "heapUsed": 25452496,
+            "rss": 286302208,
+            "processLifetimePeakRSS": 291254272
           },
-          "reclaimedHeapBytes": 68290320,
-          "retainedHeapDeltaFromBaselineBytes": 526432
+          "reclaimedHeapBytes": 77943904,
+          "retainedHeapDeltaFromBaselineBytes": 479544
         },
         {
           "completedRequests": 6,
           "beforeGC": {
-            "heapUsed": 95623664,
-            "rss": 310456320,
-            "processLifetimePeakRSS": 310456320
+            "heapUsed": 111663168,
+            "rss": 324866048,
+            "processLifetimePeakRSS": 324866048
           },
           "afterGC": {
-            "heapUsed": 25776608,
-            "rss": 308170752,
-            "processLifetimePeakRSS": 311119872
+            "heapUsed": 25728824,
+            "rss": 322674688,
+            "processLifetimePeakRSS": 325558272
           },
-          "reclaimedHeapBytes": 69847056,
-          "retainedHeapDeltaFromBaselineBytes": 819080
+          "reclaimedHeapBytes": 85934344,
+          "retainedHeapDeltaFromBaselineBytes": 755872
         },
         {
           "completedRequests": 9,
           "beforeGC": {
-            "heapUsed": 97666280,
-            "rss": 316715008,
-            "processLifetimePeakRSS": 316715008
+            "heapUsed": 111431760,
+            "rss": 329908224,
+            "processLifetimePeakRSS": 331960320
           },
           "afterGC": {
-            "heapUsed": 25795368,
-            "rss": 314294272,
-            "processLifetimePeakRSS": 317243392
+            "heapUsed": 25796232,
+            "rss": 327348224,
+            "processLifetimePeakRSS": 331960320
           },
-          "reclaimedHeapBytes": 71870912,
-          "retainedHeapDeltaFromBaselineBytes": 837840
+          "reclaimedHeapBytes": 85635528,
+          "retainedHeapDeltaFromBaselineBytes": 823280
         }
       ],
       "requests": 9,
-      "sampledAllocationEstimateBytes": 1391814904,
-      "sampledAllocationEstimateBytesPerRequest": 154646100,
-      "samples": 80895,
+      "sampledAllocationEstimateBytes": 1403886768,
+      "sampledAllocationEstimateBytesPerRequest": 155987419,
+      "samples": 81630,
       "weakRefs": {
         "sourcesObserved": 9,
         "sourcesAlive": 0,
@@ -437,61 +437,61 @@
       "outcome": "success",
       "inputBytes": 72691,
       "baseline": {
-        "heapUsed": 24769296,
-        "rss": 128196608,
-        "processLifetimePeakRSS": 128589824
+        "heapUsed": 24775192,
+        "rss": 128360448,
+        "processLifetimePeakRSS": 128954368
       },
       "rounds": [
         {
           "completedRequests": 3,
           "beforeGC": {
-            "heapUsed": 87691808,
-            "rss": 277729280,
-            "processLifetimePeakRSS": 280182784
+            "heapUsed": 88296072,
+            "rss": 277700608,
+            "processLifetimePeakRSS": 279797760
           },
           "afterGC": {
-            "heapUsed": 25198368,
-            "rss": 277114880,
-            "processLifetimePeakRSS": 280182784
+            "heapUsed": 25206784,
+            "rss": 277032960,
+            "processLifetimePeakRSS": 279797760
           },
-          "reclaimedHeapBytes": 62493440,
-          "retainedHeapDeltaFromBaselineBytes": 429072
+          "reclaimedHeapBytes": 63089288,
+          "retainedHeapDeltaFromBaselineBytes": 431592
         },
         {
           "completedRequests": 6,
           "beforeGC": {
-            "heapUsed": 121358496,
-            "rss": 294318080,
-            "processLifetimePeakRSS": 294793216
+            "heapUsed": 121249512,
+            "rss": 293441536,
+            "processLifetimePeakRSS": 294338560
           },
           "afterGC": {
-            "heapUsed": 25572144,
-            "rss": 290205696,
-            "processLifetimePeakRSS": 295227392
+            "heapUsed": 25580704,
+            "rss": 291229696,
+            "processLifetimePeakRSS": 294404096
           },
-          "reclaimedHeapBytes": 95786352,
-          "retainedHeapDeltaFromBaselineBytes": 802848
+          "reclaimedHeapBytes": 95668808,
+          "retainedHeapDeltaFromBaselineBytes": 805512
         },
         {
           "completedRequests": 9,
           "beforeGC": {
-            "heapUsed": 116944912,
-            "rss": 299180032,
-            "processLifetimePeakRSS": 302415872
+            "heapUsed": 117898912,
+            "rss": 298409984,
+            "processLifetimePeakRSS": 301883392
           },
           "afterGC": {
-            "heapUsed": 25569976,
-            "rss": 296550400,
-            "processLifetimePeakRSS": 302415872
+            "heapUsed": 25578448,
+            "rss": 296423424,
+            "processLifetimePeakRSS": 301883392
           },
-          "reclaimedHeapBytes": 91374936,
-          "retainedHeapDeltaFromBaselineBytes": 800680
+          "reclaimedHeapBytes": 92320464,
+          "retainedHeapDeltaFromBaselineBytes": 803256
         }
       ],
       "requests": 9,
-      "sampledAllocationEstimateBytes": 1135401352,
-      "sampledAllocationEstimateBytesPerRequest": 126155706,
-      "samples": 66226,
+      "sampledAllocationEstimateBytes": 1142920936,
+      "sampledAllocationEstimateBytesPerRequest": 126991215,
+      "samples": 66688,
       "weakRefs": {
         "sourcesObserved": 0,
         "sourcesAlive": 0,
@@ -506,613 +506,613 @@
       "outcome": "abort",
       "inputBytes": 72691,
       "baseline": {
-        "heapUsed": 24834272,
-        "rss": 129019904,
+        "heapUsed": 24843008,
+        "rss": 128655360,
+        "processLifetimePeakRSS": 129556480
+      },
+      "rounds": [
+        {
+          "completedRequests": 3,
+          "beforeGC": {
+            "heapUsed": 90508448,
+            "rss": 274784256,
+            "processLifetimePeakRSS": 274788352
+          },
+          "afterGC": {
+            "heapUsed": 25300992,
+            "rss": 271048704,
+            "processLifetimePeakRSS": 275484672
+          },
+          "reclaimedHeapBytes": 65207456,
+          "retainedHeapDeltaFromBaselineBytes": 457984
+        },
+        {
+          "completedRequests": 6,
+          "beforeGC": {
+            "heapUsed": 119270400,
+            "rss": 294330368,
+            "processLifetimePeakRSS": 295317504
+          },
+          "afterGC": {
+            "heapUsed": 25607288,
+            "rss": 291807232,
+            "processLifetimePeakRSS": 295317504
+          },
+          "reclaimedHeapBytes": 93663112,
+          "retainedHeapDeltaFromBaselineBytes": 764280
+        },
+        {
+          "completedRequests": 9,
+          "beforeGC": {
+            "heapUsed": 118363856,
+            "rss": 298778624,
+            "processLifetimePeakRSS": 300335104
+          },
+          "afterGC": {
+            "heapUsed": 25623824,
+            "rss": 296677376,
+            "processLifetimePeakRSS": 300335104
+          },
+          "reclaimedHeapBytes": 92740032,
+          "retainedHeapDeltaFromBaselineBytes": 780816
+        }
+      ],
+      "requests": 9,
+      "sampledAllocationEstimateBytes": 1130060336,
+      "sampledAllocationEstimateBytesPerRequest": 125562260,
+      "samples": 65908,
+      "weakRefs": {
+        "sourcesObserved": 0,
+        "sourcesAlive": 0,
+        "enginesObserved": 9,
+        "enginesAlive": 0
+      }
+    },
+    {
+      "n": 100,
+      "nested": true,
+      "mode": "initial",
+      "outcome": "success",
+      "inputBytes": 51891,
+      "baseline": {
+        "heapUsed": 24775160,
+        "rss": 130932736,
+        "processLifetimePeakRSS": 130945024
+      },
+      "rounds": [
+        {
+          "completedRequests": 3,
+          "beforeGC": {
+            "heapUsed": 50936368,
+            "rss": 159592448,
+            "processLifetimePeakRSS": 159592448
+          },
+          "afterGC": {
+            "heapUsed": 25100704,
+            "rss": 159961088,
+            "processLifetimePeakRSS": 159961088
+          },
+          "reclaimedHeapBytes": 25835664,
+          "retainedHeapDeltaFromBaselineBytes": 325544
+        },
+        {
+          "completedRequests": 6,
+          "beforeGC": {
+            "heapUsed": 48663952,
+            "rss": 160571392,
+            "processLifetimePeakRSS": 161816576
+          },
+          "afterGC": {
+            "heapUsed": 25364160,
+            "rss": 160710656,
+            "processLifetimePeakRSS": 161816576
+          },
+          "reclaimedHeapBytes": 23299792,
+          "retainedHeapDeltaFromBaselineBytes": 589000
+        },
+        {
+          "completedRequests": 9,
+          "beforeGC": {
+            "heapUsed": 47906608,
+            "rss": 161472512,
+            "processLifetimePeakRSS": 161816576
+          },
+          "afterGC": {
+            "heapUsed": 25404776,
+            "rss": 160555008,
+            "processLifetimePeakRSS": 161816576
+          },
+          "reclaimedHeapBytes": 22501832,
+          "retainedHeapDeltaFromBaselineBytes": 629616
+        }
+      ],
+      "requests": 9,
+      "sampledAllocationEstimateBytes": 157795616,
+      "sampledAllocationEstimateBytesPerRequest": 17532846,
+      "samples": 9513,
+      "weakRefs": {
+        "sourcesObserved": 9,
+        "sourcesAlive": 0,
+        "enginesObserved": 9,
+        "enginesAlive": 0
+      }
+    },
+    {
+      "n": 100,
+      "nested": true,
+      "mode": "initial",
+      "outcome": "abort",
+      "inputBytes": 51891,
+      "baseline": {
+        "heapUsed": 24841840,
+        "rss": 128901120,
+        "processLifetimePeakRSS": 129605632
+      },
+      "rounds": [
+        {
+          "completedRequests": 3,
+          "beforeGC": {
+            "heapUsed": 31836696,
+            "rss": 148082688,
+            "processLifetimePeakRSS": 148279296
+          },
+          "afterGC": {
+            "heapUsed": 25185288,
+            "rss": 148467712,
+            "processLifetimePeakRSS": 148484096
+          },
+          "reclaimedHeapBytes": 6651408,
+          "retainedHeapDeltaFromBaselineBytes": 343448
+        },
+        {
+          "completedRequests": 6,
+          "beforeGC": {
+            "heapUsed": 48509680,
+            "rss": 157114368,
+            "processLifetimePeakRSS": 157114368
+          },
+          "afterGC": {
+            "heapUsed": 25464912,
+            "rss": 157380608,
+            "processLifetimePeakRSS": 157458432
+          },
+          "reclaimedHeapBytes": 23044768,
+          "retainedHeapDeltaFromBaselineBytes": 623072
+        },
+        {
+          "completedRequests": 9,
+          "beforeGC": {
+            "heapUsed": 47461120,
+            "rss": 157704192,
+            "processLifetimePeakRSS": 157827072
+          },
+          "afterGC": {
+            "heapUsed": 25470192,
+            "rss": 157790208,
+            "processLifetimePeakRSS": 157827072
+          },
+          "reclaimedHeapBytes": 21990928,
+          "retainedHeapDeltaFromBaselineBytes": 628352
+        }
+      ],
+      "requests": 9,
+      "sampledAllocationEstimateBytes": 156831160,
+      "sampledAllocationEstimateBytesPerRequest": 17425684,
+      "samples": 9459,
+      "weakRefs": {
+        "sourcesObserved": 9,
+        "sourcesAlive": 0,
+        "enginesObserved": 9,
+        "enginesAlive": 0
+      }
+    },
+    {
+      "n": 100,
+      "nested": true,
+      "mode": "items",
+      "outcome": "success",
+      "inputBytes": 51891,
+      "baseline": {
+        "heapUsed": 24645456,
+        "rss": 128544768,
+        "processLifetimePeakRSS": 129060864
+      },
+      "rounds": [
+        {
+          "completedRequests": 3,
+          "beforeGC": {
+            "heapUsed": 50882544,
+            "rss": 141041664,
+            "processLifetimePeakRSS": 141041664
+          },
+          "afterGC": {
+            "heapUsed": 24953840,
+            "rss": 141131776,
+            "processLifetimePeakRSS": 142315520
+          },
+          "reclaimedHeapBytes": 25928704,
+          "retainedHeapDeltaFromBaselineBytes": 308384
+        },
+        {
+          "completedRequests": 6,
+          "beforeGC": {
+            "heapUsed": 35648848,
+            "rss": 150540288,
+            "processLifetimePeakRSS": 151597056
+          },
+          "afterGC": {
+            "heapUsed": 25202608,
+            "rss": 150654976,
+            "processLifetimePeakRSS": 151597056
+          },
+          "reclaimedHeapBytes": 10446240,
+          "retainedHeapDeltaFromBaselineBytes": 557152
+        },
+        {
+          "completedRequests": 9,
+          "beforeGC": {
+            "heapUsed": 35357160,
+            "rss": 151945216,
+            "processLifetimePeakRSS": 151945216
+          },
+          "afterGC": {
+            "heapUsed": 25235472,
+            "rss": 151953408,
+            "processLifetimePeakRSS": 151953408
+          },
+          "reclaimedHeapBytes": 10121688,
+          "retainedHeapDeltaFromBaselineBytes": 590016
+        }
+      ],
+      "requests": 9,
+      "sampledAllocationEstimateBytes": 117605368,
+      "sampledAllocationEstimateBytesPerRequest": 13067263,
+      "samples": 7064,
+      "weakRefs": {
+        "sourcesObserved": 0,
+        "sourcesAlive": 0,
+        "enginesObserved": 9,
+        "enginesAlive": 0
+      }
+    },
+    {
+      "n": 100,
+      "nested": true,
+      "mode": "items",
+      "outcome": "abort",
+      "inputBytes": 51891,
+      "baseline": {
+        "heapUsed": 24736584,
+        "rss": 128077824,
+        "processLifetimePeakRSS": 130387968
+      },
+      "rounds": [
+        {
+          "completedRequests": 3,
+          "beforeGC": {
+            "heapUsed": 51029752,
+            "rss": 140988416,
+            "processLifetimePeakRSS": 140988416
+          },
+          "afterGC": {
+            "heapUsed": 25010016,
+            "rss": 141590528,
+            "processLifetimePeakRSS": 141590528
+          },
+          "reclaimedHeapBytes": 26019736,
+          "retainedHeapDeltaFromBaselineBytes": 273432
+        },
+        {
+          "completedRequests": 6,
+          "beforeGC": {
+            "heapUsed": 35954072,
+            "rss": 159391744,
+            "processLifetimePeakRSS": 160141312
+          },
+          "afterGC": {
+            "heapUsed": 25277864,
+            "rss": 158720000,
+            "processLifetimePeakRSS": 160141312
+          },
+          "reclaimedHeapBytes": 10676208,
+          "retainedHeapDeltaFromBaselineBytes": 541280
+        },
+        {
+          "completedRequests": 9,
+          "beforeGC": {
+            "heapUsed": 35457056,
+            "rss": 159608832,
+            "processLifetimePeakRSS": 160141312
+          },
+          "afterGC": {
+            "heapUsed": 25301264,
+            "rss": 159801344,
+            "processLifetimePeakRSS": 160141312
+          },
+          "reclaimedHeapBytes": 10155792,
+          "retainedHeapDeltaFromBaselineBytes": 564680
+        }
+      ],
+      "requests": 9,
+      "sampledAllocationEstimateBytes": 116055800,
+      "sampledAllocationEstimateBytesPerRequest": 12895089,
+      "samples": 6973,
+      "weakRefs": {
+        "sourcesObserved": 0,
+        "sourcesAlive": 0,
+        "enginesObserved": 9,
+        "enginesAlive": 0
+      }
+    },
+    {
+      "n": 1000,
+      "nested": true,
+      "mode": "initial",
+      "outcome": "success",
+      "inputBytes": 521691,
+      "baseline": {
+        "heapUsed": 26946192,
+        "rss": 131952640,
+        "processLifetimePeakRSS": 131960832
+      },
+      "rounds": [
+        {
+          "completedRequests": 3,
+          "beforeGC": {
+            "heapUsed": 107283704,
+            "rss": 304254976,
+            "processLifetimePeakRSS": 307167232
+          },
+          "afterGC": {
+            "heapUsed": 27474872,
+            "rss": 303284224,
+            "processLifetimePeakRSS": 307167232
+          },
+          "reclaimedHeapBytes": 79808832,
+          "retainedHeapDeltaFromBaselineBytes": 528680
+        },
+        {
+          "completedRequests": 6,
+          "beforeGC": {
+            "heapUsed": 141303744,
+            "rss": 311611392,
+            "processLifetimePeakRSS": 312471552
+          },
+          "afterGC": {
+            "heapUsed": 27776912,
+            "rss": 307023872,
+            "processLifetimePeakRSS": 312483840
+          },
+          "reclaimedHeapBytes": 113526832,
+          "retainedHeapDeltaFromBaselineBytes": 830720
+        },
+        {
+          "completedRequests": 9,
+          "beforeGC": {
+            "heapUsed": 139557304,
+            "rss": 316145664,
+            "processLifetimePeakRSS": 319475712
+          },
+          "afterGC": {
+            "heapUsed": 27779464,
+            "rss": 313929728,
+            "processLifetimePeakRSS": 319475712
+          },
+          "reclaimedHeapBytes": 111777840,
+          "retainedHeapDeltaFromBaselineBytes": 833272
+        }
+      ],
+      "requests": 9,
+      "sampledAllocationEstimateBytes": 1555675208,
+      "sampledAllocationEstimateBytesPerRequest": 172852801,
+      "samples": 90855,
+      "weakRefs": {
+        "sourcesObserved": 9,
+        "sourcesAlive": 0,
+        "enginesObserved": 9,
+        "enginesAlive": 0
+      }
+    },
+    {
+      "n": 1000,
+      "nested": true,
+      "mode": "initial",
+      "outcome": "abort",
+      "inputBytes": 521691,
+      "baseline": {
+        "heapUsed": 26992264,
+        "rss": 131567616,
+        "processLifetimePeakRSS": 132747264
+      },
+      "rounds": [
+        {
+          "completedRequests": 3,
+          "beforeGC": {
+            "heapUsed": 81641448,
+            "rss": 291500032,
+            "processLifetimePeakRSS": 291500032
+          },
+          "afterGC": {
+            "heapUsed": 27519616,
+            "rss": 287350784,
+            "processLifetimePeakRSS": 291934208
+          },
+          "reclaimedHeapBytes": 54121832,
+          "retainedHeapDeltaFromBaselineBytes": 527352
+        },
+        {
+          "completedRequests": 6,
+          "beforeGC": {
+            "heapUsed": 102004832,
+            "rss": 318042112,
+            "processLifetimePeakRSS": 318042112
+          },
+          "afterGC": {
+            "heapUsed": 27811568,
+            "rss": 315273216,
+            "processLifetimePeakRSS": 318414848
+          },
+          "reclaimedHeapBytes": 74193264,
+          "retainedHeapDeltaFromBaselineBytes": 819304
+        },
+        {
+          "completedRequests": 9,
+          "beforeGC": {
+            "heapUsed": 103748992,
+            "rss": 323895296,
+            "processLifetimePeakRSS": 324419584
+          },
+          "afterGC": {
+            "heapUsed": 27822080,
+            "rss": 321347584,
+            "processLifetimePeakRSS": 324468736
+          },
+          "reclaimedHeapBytes": 75926912,
+          "retainedHeapDeltaFromBaselineBytes": 829816
+        }
+      ],
+      "requests": 9,
+      "sampledAllocationEstimateBytes": 1563769776,
+      "sampledAllocationEstimateBytesPerRequest": 173752197,
+      "samples": 91363,
+      "weakRefs": {
+        "sourcesObserved": 9,
+        "sourcesAlive": 0,
+        "enginesObserved": 9,
+        "enginesAlive": 0
+      }
+    },
+    {
+      "n": 1000,
+      "nested": true,
+      "mode": "items",
+      "outcome": "success",
+      "inputBytes": 521691,
+      "baseline": {
+        "heapUsed": 26788432,
+        "rss": 130519040,
+        "processLifetimePeakRSS": 130588672
+      },
+      "rounds": [
+        {
+          "completedRequests": 3,
+          "beforeGC": {
+            "heapUsed": 133885880,
+            "rss": 295346176,
+            "processLifetimePeakRSS": 297119744
+          },
+          "afterGC": {
+            "heapUsed": 27295616,
+            "rss": 292982784,
+            "processLifetimePeakRSS": 297119744
+          },
+          "reclaimedHeapBytes": 106590264,
+          "retainedHeapDeltaFromBaselineBytes": 507184
+        },
+        {
+          "completedRequests": 6,
+          "beforeGC": {
+            "heapUsed": 138211760,
+            "rss": 316776448,
+            "processLifetimePeakRSS": 319070208
+          },
+          "afterGC": {
+            "heapUsed": 27602352,
+            "rss": 314544128,
+            "processLifetimePeakRSS": 319070208
+          },
+          "reclaimedHeapBytes": 110609408,
+          "retainedHeapDeltaFromBaselineBytes": 813920
+        },
+        {
+          "completedRequests": 9,
+          "beforeGC": {
+            "heapUsed": 136782648,
+            "rss": 320495616,
+            "processLifetimePeakRSS": 323821568
+          },
+          "afterGC": {
+            "heapUsed": 27602768,
+            "rss": 318500864,
+            "processLifetimePeakRSS": 323821568
+          },
+          "reclaimedHeapBytes": 109179880,
+          "retainedHeapDeltaFromBaselineBytes": 814336
+        }
+      ],
+      "requests": 9,
+      "sampledAllocationEstimateBytes": 1138175720,
+      "sampledAllocationEstimateBytesPerRequest": 126463969,
+      "samples": 66372,
+      "weakRefs": {
+        "sourcesObserved": 0,
+        "sourcesAlive": 0,
+        "enginesObserved": 9,
+        "enginesAlive": 0
+      }
+    },
+    {
+      "n": 1000,
+      "nested": true,
+      "mode": "items",
+      "outcome": "abort",
+      "inputBytes": 521691,
+      "baseline": {
+        "heapUsed": 26867264,
+        "rss": 129314816,
         "processLifetimePeakRSS": 129855488
       },
       "rounds": [
         {
           "completedRequests": 3,
           "beforeGC": {
-            "heapUsed": 90729464,
-            "rss": 274685952,
-            "processLifetimePeakRSS": 274690048
+            "heapUsed": 105458248,
+            "rss": 284717056,
+            "processLifetimePeakRSS": 284721152
           },
           "afterGC": {
-            "heapUsed": 25264136,
-            "rss": 270442496,
-            "processLifetimePeakRSS": 275341312
+            "heapUsed": 27305800,
+            "rss": 280547328,
+            "processLifetimePeakRSS": 285163520
           },
-          "reclaimedHeapBytes": 65465328,
-          "retainedHeapDeltaFromBaselineBytes": 429864
+          "reclaimedHeapBytes": 78152448,
+          "retainedHeapDeltaFromBaselineBytes": 438536
         },
         {
           "completedRequests": 6,
           "beforeGC": {
-            "heapUsed": 120647544,
-            "rss": 294281216,
-            "processLifetimePeakRSS": 295014400
+            "heapUsed": 139329832,
+            "rss": 307163136,
+            "processLifetimePeakRSS": 307568640
           },
           "afterGC": {
-            "heapUsed": 25550976,
-            "rss": 291979264,
-            "processLifetimePeakRSS": 295284736
+            "heapUsed": 27583272,
+            "rss": 304582656,
+            "processLifetimePeakRSS": 307949568
           },
-          "reclaimedHeapBytes": 95096568,
-          "retainedHeapDeltaFromBaselineBytes": 716704
+          "reclaimedHeapBytes": 111746560,
+          "retainedHeapDeltaFromBaselineBytes": 716008
         },
         {
           "completedRequests": 9,
           "beforeGC": {
-            "heapUsed": 120640880,
-            "rss": 298610688,
-            "processLifetimePeakRSS": 300752896
+            "heapUsed": 142265776,
+            "rss": 312205312,
+            "processLifetimePeakRSS": 314855424
           },
           "afterGC": {
-            "heapUsed": 25608320,
-            "rss": 296529920,
-            "processLifetimePeakRSS": 300752896
+            "heapUsed": 27640408,
+            "rss": 310022144,
+            "processLifetimePeakRSS": 314855424
           },
-          "reclaimedHeapBytes": 95032560,
-          "retainedHeapDeltaFromBaselineBytes": 774048
+          "reclaimedHeapBytes": 114625368,
+          "retainedHeapDeltaFromBaselineBytes": 773144
         }
       ],
       "requests": 9,
-      "sampledAllocationEstimateBytes": 1139547184,
-      "sampledAllocationEstimateBytesPerRequest": 126616354,
-      "samples": 66471,
-      "weakRefs": {
-        "sourcesObserved": 0,
-        "sourcesAlive": 0,
-        "enginesObserved": 9,
-        "enginesAlive": 0
-      }
-    },
-    {
-      "n": 100,
-      "nested": true,
-      "mode": "initial",
-      "outcome": "success",
-      "inputBytes": 51891,
-      "baseline": {
-        "heapUsed": 24754008,
-        "rss": 129060864,
-        "processLifetimePeakRSS": 129617920
-      },
-      "rounds": [
-        {
-          "completedRequests": 3,
-          "beforeGC": {
-            "heapUsed": 38826800,
-            "rss": 149569536,
-            "processLifetimePeakRSS": 150519808
-          },
-          "afterGC": {
-            "heapUsed": 25112336,
-            "rss": 149389312,
-            "processLifetimePeakRSS": 150519808
-          },
-          "reclaimedHeapBytes": 13714464,
-          "retainedHeapDeltaFromBaselineBytes": 358328
-        },
-        {
-          "completedRequests": 6,
-          "beforeGC": {
-            "heapUsed": 48257960,
-            "rss": 166907904,
-            "processLifetimePeakRSS": 168165376
-          },
-          "afterGC": {
-            "heapUsed": 25395360,
-            "rss": 167141376,
-            "processLifetimePeakRSS": 168165376
-          },
-          "reclaimedHeapBytes": 22862600,
-          "retainedHeapDeltaFromBaselineBytes": 641352
-        },
-        {
-          "completedRequests": 9,
-          "beforeGC": {
-            "heapUsed": 47969288,
-            "rss": 168759296,
-            "processLifetimePeakRSS": 168759296
-          },
-          "afterGC": {
-            "heapUsed": 25400520,
-            "rss": 168759296,
-            "processLifetimePeakRSS": 168759296
-          },
-          "reclaimedHeapBytes": 22568768,
-          "retainedHeapDeltaFromBaselineBytes": 646512
-        }
-      ],
-      "requests": 9,
-      "sampledAllocationEstimateBytes": 156599256,
-      "sampledAllocationEstimateBytesPerRequest": 17399917,
-      "samples": 9443,
-      "weakRefs": {
-        "sourcesObserved": 9,
-        "sourcesAlive": 0,
-        "enginesObserved": 9,
-        "enginesAlive": 0
-      }
-    },
-    {
-      "n": 100,
-      "nested": true,
-      "mode": "initial",
-      "outcome": "abort",
-      "inputBytes": 51891,
-      "baseline": {
-        "heapUsed": 24833312,
-        "rss": 129028096,
-        "processLifetimePeakRSS": 129826816
-      },
-      "rounds": [
-        {
-          "completedRequests": 3,
-          "beforeGC": {
-            "heapUsed": 38945576,
-            "rss": 150855680,
-            "processLifetimePeakRSS": 151441408
-          },
-          "afterGC": {
-            "heapUsed": 25187448,
-            "rss": 151060480,
-            "processLifetimePeakRSS": 151441408
-          },
-          "reclaimedHeapBytes": 13758128,
-          "retainedHeapDeltaFromBaselineBytes": 354136
-        },
-        {
-          "completedRequests": 6,
-          "beforeGC": {
-            "heapUsed": 48385392,
-            "rss": 157147136,
-            "processLifetimePeakRSS": 157147136
-          },
-          "afterGC": {
-            "heapUsed": 25443960,
-            "rss": 156364800,
-            "processLifetimePeakRSS": 157229056
-          },
-          "reclaimedHeapBytes": 22941432,
-          "retainedHeapDeltaFromBaselineBytes": 610648
-        },
-        {
-          "completedRequests": 9,
-          "beforeGC": {
-            "heapUsed": 47504632,
-            "rss": 157765632,
-            "processLifetimePeakRSS": 157765632
-          },
-          "afterGC": {
-            "heapUsed": 25467560,
-            "rss": 157868032,
-            "processLifetimePeakRSS": 157872128
-          },
-          "reclaimedHeapBytes": 22037072,
-          "retainedHeapDeltaFromBaselineBytes": 634248
-        }
-      ],
-      "requests": 9,
-      "sampledAllocationEstimateBytes": 152230288,
-      "sampledAllocationEstimateBytesPerRequest": 16914476,
-      "samples": 9172,
-      "weakRefs": {
-        "sourcesObserved": 9,
-        "sourcesAlive": 0,
-        "enginesObserved": 9,
-        "enginesAlive": 0
-      }
-    },
-    {
-      "n": 100,
-      "nested": true,
-      "mode": "items",
-      "outcome": "success",
-      "inputBytes": 51891,
-      "baseline": {
-        "heapUsed": 24863888,
-        "rss": 128380928,
-        "processLifetimePeakRSS": 128815104
-      },
-      "rounds": [
-        {
-          "completedRequests": 3,
-          "beforeGC": {
-            "heapUsed": 50879368,
-            "rss": 141582336,
-            "processLifetimePeakRSS": 141586432
-          },
-          "afterGC": {
-            "heapUsed": 24948936,
-            "rss": 141299712,
-            "processLifetimePeakRSS": 142061568
-          },
-          "reclaimedHeapBytes": 25930432,
-          "retainedHeapDeltaFromBaselineBytes": 85048
-        },
-        {
-          "completedRequests": 6,
-          "beforeGC": {
-            "heapUsed": 35499144,
-            "rss": 150290432,
-            "processLifetimePeakRSS": 151494656
-          },
-          "afterGC": {
-            "heapUsed": 25197704,
-            "rss": 150470656,
-            "processLifetimePeakRSS": 151494656
-          },
-          "reclaimedHeapBytes": 10301440,
-          "retainedHeapDeltaFromBaselineBytes": 333816
-        },
-        {
-          "completedRequests": 9,
-          "beforeGC": {
-            "heapUsed": 35362784,
-            "rss": 151347200,
-            "processLifetimePeakRSS": 151494656
-          },
-          "afterGC": {
-            "heapUsed": 25230584,
-            "rss": 150769664,
-            "processLifetimePeakRSS": 151494656
-          },
-          "reclaimedHeapBytes": 10132200,
-          "retainedHeapDeltaFromBaselineBytes": 366696
-        }
-      ],
-      "requests": 9,
-      "sampledAllocationEstimateBytes": 118437512,
-      "sampledAllocationEstimateBytesPerRequest": 13159724,
-      "samples": 7115,
-      "weakRefs": {
-        "sourcesObserved": 0,
-        "sourcesAlive": 0,
-        "enginesObserved": 9,
-        "enginesAlive": 0
-      }
-    },
-    {
-      "n": 100,
-      "nested": true,
-      "mode": "items",
-      "outcome": "abort",
-      "inputBytes": 51891,
-      "baseline": {
-        "heapUsed": 24732440,
-        "rss": 128618496,
-        "processLifetimePeakRSS": 130527232
-      },
-      "rounds": [
-        {
-          "completedRequests": 3,
-          "beforeGC": {
-            "heapUsed": 51029312,
-            "rss": 141197312,
-            "processLifetimePeakRSS": 141197312
-          },
-          "afterGC": {
-            "heapUsed": 25001312,
-            "rss": 141434880,
-            "processLifetimePeakRSS": 141762560
-          },
-          "reclaimedHeapBytes": 26028000,
-          "retainedHeapDeltaFromBaselineBytes": 268872
-        },
-        {
-          "completedRequests": 6,
-          "beforeGC": {
-            "heapUsed": 35848040,
-            "rss": 158380032,
-            "processLifetimePeakRSS": 159674368
-          },
-          "afterGC": {
-            "heapUsed": 25269160,
-            "rss": 158515200,
-            "processLifetimePeakRSS": 159674368
-          },
-          "reclaimedHeapBytes": 10578880,
-          "retainedHeapDeltaFromBaselineBytes": 536720
-        },
-        {
-          "completedRequests": 9,
-          "beforeGC": {
-            "heapUsed": 35411192,
-            "rss": 158543872,
-            "processLifetimePeakRSS": 159674368
-          },
-          "afterGC": {
-            "heapUsed": 25293064,
-            "rss": 158744576,
-            "processLifetimePeakRSS": 159674368
-          },
-          "reclaimedHeapBytes": 10118128,
-          "retainedHeapDeltaFromBaselineBytes": 560624
-        }
-      ],
-      "requests": 9,
-      "sampledAllocationEstimateBytes": 114364768,
-      "sampledAllocationEstimateBytesPerRequest": 12707196,
-      "samples": 6873,
-      "weakRefs": {
-        "sourcesObserved": 0,
-        "sourcesAlive": 0,
-        "enginesObserved": 9,
-        "enginesAlive": 0
-      }
-    },
-    {
-      "n": 1000,
-      "nested": true,
-      "mode": "initial",
-      "outcome": "success",
-      "inputBytes": 521691,
-      "baseline": {
-        "heapUsed": 26904696,
-        "rss": 132075520,
-        "processLifetimePeakRSS": 132083712
-      },
-      "rounds": [
-        {
-          "completedRequests": 3,
-          "beforeGC": {
-            "heapUsed": 100377832,
-            "rss": 294625280,
-            "processLifetimePeakRSS": 298483712
-          },
-          "afterGC": {
-            "heapUsed": 27402056,
-            "rss": 293376000,
-            "processLifetimePeakRSS": 298483712
-          },
-          "reclaimedHeapBytes": 72975776,
-          "retainedHeapDeltaFromBaselineBytes": 497360
-        },
-        {
-          "completedRequests": 6,
-          "beforeGC": {
-            "heapUsed": 142379952,
-            "rss": 309596160,
-            "processLifetimePeakRSS": 309596160
-          },
-          "afterGC": {
-            "heapUsed": 27774872,
-            "rss": 305180672,
-            "processLifetimePeakRSS": 310390784
-          },
-          "reclaimedHeapBytes": 114605080,
-          "retainedHeapDeltaFromBaselineBytes": 870176
-        },
-        {
-          "completedRequests": 9,
-          "beforeGC": {
-            "heapUsed": 140949456,
-            "rss": 314720256,
-            "processLifetimePeakRSS": 316465152
-          },
-          "afterGC": {
-            "heapUsed": 27774944,
-            "rss": 312651776,
-            "processLifetimePeakRSS": 316465152
-          },
-          "reclaimedHeapBytes": 113174512,
-          "retainedHeapDeltaFromBaselineBytes": 870248
-        }
-      ],
-      "requests": 9,
-      "sampledAllocationEstimateBytes": 1555743120,
-      "sampledAllocationEstimateBytesPerRequest": 172860347,
-      "samples": 90851,
-      "weakRefs": {
-        "sourcesObserved": 9,
-        "sourcesAlive": 0,
-        "enginesObserved": 9,
-        "enginesAlive": 0
-      }
-    },
-    {
-      "n": 1000,
-      "nested": true,
-      "mode": "initial",
-      "outcome": "abort",
-      "inputBytes": 521691,
-      "baseline": {
-        "heapUsed": 26993240,
-        "rss": 131100672,
-        "processLifetimePeakRSS": 131108864
-      },
-      "rounds": [
-        {
-          "completedRequests": 3,
-          "beforeGC": {
-            "heapUsed": 87937624,
-            "rss": 297308160,
-            "processLifetimePeakRSS": 297308160
-          },
-          "afterGC": {
-            "heapUsed": 27496840,
-            "rss": 294457344,
-            "processLifetimePeakRSS": 297861120
-          },
-          "reclaimedHeapBytes": 60440784,
-          "retainedHeapDeltaFromBaselineBytes": 503600
-        },
-        {
-          "completedRequests": 6,
-          "beforeGC": {
-            "heapUsed": 110853192,
-            "rss": 326791168,
-            "processLifetimePeakRSS": 326791168
-          },
-          "afterGC": {
-            "heapUsed": 27792888,
-            "rss": 323985408,
-            "processLifetimePeakRSS": 327499776
-          },
-          "reclaimedHeapBytes": 83060304,
-          "retainedHeapDeltaFromBaselineBytes": 799648
-        },
-        {
-          "completedRequests": 9,
-          "beforeGC": {
-            "heapUsed": 113116584,
-            "rss": 332754944,
-            "processLifetimePeakRSS": 332754944
-          },
-          "afterGC": {
-            "heapUsed": 27812272,
-            "rss": 329961472,
-            "processLifetimePeakRSS": 333451264
-          },
-          "reclaimedHeapBytes": 85304312,
-          "retainedHeapDeltaFromBaselineBytes": 819032
-        }
-      ],
-      "requests": 9,
-      "sampledAllocationEstimateBytes": 1561819480,
-      "sampledAllocationEstimateBytesPerRequest": 173535498,
-      "samples": 91190,
-      "weakRefs": {
-        "sourcesObserved": 9,
-        "sourcesAlive": 0,
-        "enginesObserved": 9,
-        "enginesAlive": 0
-      }
-    },
-    {
-      "n": 1000,
-      "nested": true,
-      "mode": "items",
-      "outcome": "success",
-      "inputBytes": 521691,
-      "baseline": {
-        "heapUsed": 26784648,
-        "rss": 130031616,
-        "processLifetimePeakRSS": 131104768
-      },
-      "rounds": [
-        {
-          "completedRequests": 3,
-          "beforeGC": {
-            "heapUsed": 126353776,
-            "rss": 313044992,
-            "processLifetimePeakRSS": 313044992
-          },
-          "afterGC": {
-            "heapUsed": 27285784,
-            "rss": 308105216,
-            "processLifetimePeakRSS": 313720832
-          },
-          "reclaimedHeapBytes": 99067992,
-          "retainedHeapDeltaFromBaselineBytes": 501136
-        },
-        {
-          "completedRequests": 6,
-          "beforeGC": {
-            "heapUsed": 139395352,
-            "rss": 316661760,
-            "processLifetimePeakRSS": 319361024
-          },
-          "afterGC": {
-            "heapUsed": 27593664,
-            "rss": 314699776,
-            "processLifetimePeakRSS": 319361024
-          },
-          "reclaimedHeapBytes": 111801688,
-          "retainedHeapDeltaFromBaselineBytes": 809016
-        },
-        {
-          "completedRequests": 9,
-          "beforeGC": {
-            "heapUsed": 138280728,
-            "rss": 320778240,
-            "processLifetimePeakRSS": 323280896
-          },
-          "afterGC": {
-            "heapUsed": 27596024,
-            "rss": 318648320,
-            "processLifetimePeakRSS": 323280896
-          },
-          "reclaimedHeapBytes": 110684704,
-          "retainedHeapDeltaFromBaselineBytes": 811376
-        }
-      ],
-      "requests": 9,
-      "sampledAllocationEstimateBytes": 1130585792,
-      "sampledAllocationEstimateBytesPerRequest": 125620644,
-      "samples": 65925,
-      "weakRefs": {
-        "sourcesObserved": 0,
-        "sourcesAlive": 0,
-        "enginesObserved": 9,
-        "enginesAlive": 0
-      }
-    },
-    {
-      "n": 1000,
-      "nested": true,
-      "mode": "items",
-      "outcome": "abort",
-      "inputBytes": 521691,
-      "baseline": {
-        "heapUsed": 26856984,
-        "rss": 129769472,
-        "processLifetimePeakRSS": 129941504
-      },
-      "rounds": [
-        {
-          "completedRequests": 3,
-          "beforeGC": {
-            "heapUsed": 105267864,
-            "rss": 284803072,
-            "processLifetimePeakRSS": 284803072
-          },
-          "afterGC": {
-            "heapUsed": 27315128,
-            "rss": 280977408,
-            "processLifetimePeakRSS": 285208576
-          },
-          "reclaimedHeapBytes": 77952736,
-          "retainedHeapDeltaFromBaselineBytes": 458144
-        },
-        {
-          "completedRequests": 6,
-          "beforeGC": {
-            "heapUsed": 138350280,
-            "rss": 307056640,
-            "processLifetimePeakRSS": 307580928
-          },
-          "afterGC": {
-            "heapUsed": 27624984,
-            "rss": 302796800,
-            "processLifetimePeakRSS": 307888128
-          },
-          "reclaimedHeapBytes": 110725296,
-          "retainedHeapDeltaFromBaselineBytes": 768000
-        },
-        {
-          "completedRequests": 9,
-          "beforeGC": {
-            "heapUsed": 139363192,
-            "rss": 312340480,
-            "processLifetimePeakRSS": 312340480
-          },
-          "afterGC": {
-            "heapUsed": 27636304,
-            "rss": 310370304,
-            "processLifetimePeakRSS": 313479168
-          },
-          "reclaimedHeapBytes": 111726888,
-          "retainedHeapDeltaFromBaselineBytes": 779320
-        }
-      ],
-      "requests": 9,
-      "sampledAllocationEstimateBytes": 1135727736,
-      "sampledAllocationEstimateBytesPerRequest": 126191971,
-      "samples": 66235,
+      "sampledAllocationEstimateBytes": 1142211080,
+      "sampledAllocationEstimateBytesPerRequest": 126912342,
+      "samples": 66625,
       "weakRefs": {
         "sourcesObserved": 0,
         "sourcesAlive": 0,

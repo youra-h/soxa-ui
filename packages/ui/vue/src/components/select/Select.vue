@@ -147,6 +147,7 @@ export default {
 			(`--so-swipe-offset`) into the panel itself.
 		-->
 		<Frame
+			@bundle:create="ids_bindPanel"
 			embedded="select.frame"
 			:visible="visible && open"
 			strategy="fixed"
