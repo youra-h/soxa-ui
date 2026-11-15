@@ -200,7 +200,13 @@ function formattedTime(
 		timeZone: 'UTC',
 	})
 
-	return formatter.formatToParts(Date.UTC(year, month - 1, day, hour, minute, second))
+	return formatter
+		.formatToParts(Date.UTC(year, month - 1, day, hour, minute, second))
+		.map((part) =>
+			part.type === 'literal'
+				? { ...part, value: part.value.replace(/[\u00a0\u202f]/g, ' ') }
+				: part,
+		)
 }
 
 /** Части и литералы даты по форматтеру поля — с теми же опциями. */
