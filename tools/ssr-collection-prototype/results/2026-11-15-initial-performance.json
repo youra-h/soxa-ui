@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-11-15T17:31:29.176Z",
+  "measuredAt": "2026-11-15T18:04:22.994Z",
   "node": "v24.20.0",
   "react": "19.3.1",
   "mode": "production",
@@ -19,18 +19,30 @@
       "outputBytes": 39405,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 0.192,
-        "p95Ms": 0.225
+        "medianMs": 0.096,
+        "p95Ms": 0.107
+      },
+      "preparedMaterialization": {
+        "medianMs": 0.375,
+        "p95Ms": 0.625
+      },
+      "ordinaryMaterialization": {
+        "medianMs": 0.329,
+        "p95Ms": 0.458
+      },
+      "externalValidation": {
+        "medianMs": 0.054,
+        "p95Ms": 0.091
       },
       "initialSSR": {
-        "medianMs": 5.244,
-        "p95Ms": 11.731
+        "medianMs": 5.133,
+        "p95Ms": 8.784
       },
       "existingItemsSSR": {
-        "medianMs": 4.62,
-        "p95Ms": 10.426
+        "medianMs": 3.938,
+        "p95Ms": 8.369
       },
-      "retainedCaptureBytesPerSource": 18916
+      "retainedCaptureBytesPerSource": 19345
     },
     {
       "n": 1000,
@@ -39,59 +51,96 @@
       "outputBytes": 394905,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 0.887,
-        "p95Ms": 0.991
+        "medianMs": 0.843,
+        "p95Ms": 3.885
+      },
+      "preparedMaterialization": {
+        "medianMs": 2.721,
+        "p95Ms": 3.2
+      },
+      "ordinaryMaterialization": {
+        "medianMs": 2.465,
+        "p95Ms": 3.197
+      },
+      "externalValidation": {
+        "medianMs": 0.22,
+        "p95Ms": 1.287
       },
       "initialSSR": {
-        "medianMs": 59.991,
-        "p95Ms": 86.596
+        "medianMs": 59.999,
+        "p95Ms": 82.454
       },
       "existingItemsSSR": {
-        "medianMs": 42.031,
-        "p95Ms": 57.98
+        "medianMs": 43.843,
+        "p95Ms": 52.78
       },
-      "retainedCaptureBytesPerSource": 168886
+      "retainedCaptureBytesPerSource": 170571
     },
     {
       "n": 100,
       "nested": true,
-      "inputBytes": 51791,
+      "inputBytes": 51891,
       "outputBytes": 39405,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 1.555,
-        "p95Ms": 1.649
+        "medianMs": 1.475,
+        "p95Ms": 1.606
+      },
+      "preparedMaterialization": {
+        "medianMs": 0.283,
+        "p95Ms": 3.918
+      },
+      "ordinaryMaterialization": {
+        "medianMs": 0.258,
+        "p95Ms": 0.262
+      },
+      "externalValidation": {
+        "medianMs": 0.425,
+        "p95Ms": 0.514
       },
       "initialSSR": {
-        "medianMs": 7.94,
-        "p95Ms": 10.314
+        "medianMs": 6.178,
+        "p95Ms": 21.66
       },
       "existingItemsSSR": {
-        "medianMs": 3.526,
-        "p95Ms": 9.434
+        "medianMs": 4.368,
+        "p95Ms": 11.953
       },
-      "retainedCaptureBytesPerSource": 243776
+      "retainedCaptureBytesPerSource": 243788
     },
     {
       "n": 1000,
       "nested": true,
-      "inputBytes": 520691,
+      "inputBytes": 521691,
       "outputBytes": 394905,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 10.279,
-        "p95Ms": 13.774
+        "medianMs": 9.112,
+        "p95Ms": 10.392
+      },
+      "preparedMaterialization": {
+        "medianMs": 3.102,
+        "p95Ms": 4.869
+      },
+      "ordinaryMaterialization": {
+        "medianMs": 2.731,
+        "p95Ms": 3.296
+      },
+      "externalValidation": {
+        "medianMs": 3.329,
+        "p95Ms": 6.113
       },
       "initialSSR": {
-        "medianMs": 64.11,
-        "p95Ms": 97.89
+        "medianMs": 65.218,
+        "p95Ms": 68.223
       },
       "existingItemsSSR": {
-        "medianMs": 41.529,
-        "p95Ms": 47.449
+        "medianMs": 43.631,
+        "p95Ms": 72.788
       },
-      "retainedCaptureBytesPerSource": 2448982
+      "retainedCaptureBytesPerSource": 2448994
     }
   ],
+  "stageScope": "capture includes deep copy, freeze and structural validation. Materialization excludes capture/engine creation; prepared adds links to ordinary factory/batch/meta work. External validation directly probes the existing private implementation method over a complete engine; it is separate from structural source validation. Timers cannot be summed into total SSR.",
   "scope": "Synchronous React renderToString over built packages; no HTTP, RSC, browser or hydration timing. Heap is retained snapshot data after GC in a fresh child process per case, not peak process memory."
 }

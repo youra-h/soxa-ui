@@ -93,3 +93,17 @@ node --expose-gc tools/ssr-collection-prototype/initial-performance.mjs
 [Сохранённый запуск](results/2026-11-15-initial-performance.json) привязан к
 хешам собранного JS. Это один локальный production React SSR замер; он не
 измеряет HTTP, RSC или гидратацию и не утверждает приемлемость deep copy.
+
+Дополнительные стадии подготовки и память после success/abort описаны в
+[методике](TRANSPORT.md#стоимость-кандидата). Профилируемый memory probe запускается
+отдельно, после latency-замера:
+
+```powershell
+$env:NODE_ENV = 'production'
+node --expose-gc tools/ssr-collection-prototype/initial-memory.mjs
+```
+
+[Результат памяти](results/2026-11-15-initial-memory.json) содержит sampling
+выделений, OS peak RSS, знаковые post-GC heap deltas и WeakRef cleanup для
+16 случаев. Это оценки с указанными пределами, а не точные allocation/phase-peak
+счётчики. Оба инструмента используют поддерживаемую metadata `_.payload`.

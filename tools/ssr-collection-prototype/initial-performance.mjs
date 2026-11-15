@@ -1,15 +1,12 @@
+import { input, tree, distHash } from './initial-fixture.mjs'
+import { createEngineTabs, TTabs, batchOf } from '@soxa-ui/core'
 import assert from 'node:assert/strict'
 import { performance } from 'node:perf_hooks'
 import { cpus } from 'node:os'
 import { spawnSync } from 'node:child_process'
-import { readdirSync, readFileSync } from 'node:fs'
-import { createHash } from 'node:crypto'
-import { fileURLToPath } from 'node:url'
-import { join, relative } from 'node:path'
-import { createElement as h, Fragment, version as reactVersion } from 'react'
+import { version as reactVersion } from 'react'
 import { renderToString } from 'react-dom/server'
 import { JSDOM } from 'jsdom'
-import { Tabs } from '@soxa-ui/react'
 import { TCollectionInitialSource } from '@soxa-ui/setup'
 
 // Run after npm run build: this measures the built workspace packages.
@@ -17,49 +14,6 @@ if (!global.gc) throw new Error('Run with node --expose-gc.')
 const sizes = process.argv.includes('--quick') ? [10, 100] : [100, 1000]
 const runs = process.argv.includes('--quick') ? 3 : 9
 const warmups = 3
-
-function input(n, nested) {
-	return {
-		items: Array.from({ length: n }, (_, i) => ({
-			value: `v${i}`,
-			text: `Item ${i}`,
-			_: { active: i === 1 },
-			...(nested
-				? {
-						_extra: {
-							nodes: Array.from({ length: 16 }, (_, j) => ({
-								key: j,
-								data: [j, j + 1, j + 2],
-							})),
-						},
-					}
-				: {}),
-		})),
-		panels: Array.from({ length: n }, (_, i) => ({ value: `v${i}` })),
-	}
-}
-
-function tree(source, prepared) {
-	const panels = source.panels.map((panel, ordinal) =>
-		h(
-			Tabs.Content,
-			{
-				key: ordinal,
-				...(prepared ? { initial: ordinal } : { value: panel.value }),
-			},
-			`Panel ${ordinal}`,
-		),
-	)
-	return h(
-		Tabs,
-		prepared
-			? { initial: source, content: h(Fragment, null, ...panels) }
-			: {
-					items: source.items,
-					content: h(Fragment, null, ...panels),
-				},
-	)
-}
 
 /** Validate equivalent output outside the timer; generated ids may differ in spelling. */
 function canonical(html, n) {
@@ -129,6 +83,45 @@ async function measurePair(initialTree, legacyTree) {
 	return Object.fromEntries(Object.entries(times).map(([mode, values]) => [mode, stats(values)]))
 }
 
+/** Setup is outside the timer; these probes keep the production implementation intact. */
+async function measureStage(prepare, execute) {
+	const times = []
+	for (let i = -warmups; i < runs; i++) {
+		const prepared = prepare()
+		const start = performance.now()
+		execute(prepared)
+		const elapsed = performance.now() - start
+		await Promise.resolve()
+		if (i >= 0) times.push(elapsed)
+	}
+	return stats(times)
+}
+
+async function stages(source) {
+	const mount = { createId: (part) => `benchmark-${part}` }
+	const prepare = () => ({
+		captured: new TCollectionInitialSource({ initial: source }),
+		engine: createEngineTabs({ owner: new TTabs() }),
+	})
+	const preparedMaterialization = await measureStage(prepare, ({ captured, engine }) =>
+		captured.materialize(engine, mount),
+	)
+	const ordinaryMaterialization = await measureStage(
+		() => createEngineTabs({ owner: new TTabs() }),
+		(engine) => {
+			batchOf(engine).items = source.items
+		},
+	)
+	const { captured, engine } = prepare()
+	captured.materialize(engine, mount)
+	const external = new TCollectionInitialSource({ initial: source, engine })
+	// This tools-only probe names the implementation method, not a consumer API.
+	const validate = Reflect.get(external, '_validateExternal')
+	assert.equal(typeof validate, 'function')
+	const externalValidation = await measure(() => Reflect.apply(validate, external, [engine]))
+	return { preparedMaterialization, ordinaryMaterialization, externalValidation }
+}
+
 let retained = []
 function captureMemory(source) {
 	for (let i = 0; i < 30; i++) new TCollectionInitialSource({ initial: source })
@@ -165,25 +158,6 @@ function isolatedMemory(n, nested) {
 	return Number(result.stdout)
 }
 
-function distHash(packagePath) {
-	const directory = fileURLToPath(new URL('../../' + packagePath + '/dist/', import.meta.url))
-	const hash = createHash('sha256')
-	function visit(folder) {
-		for (const entry of readdirSync(folder, { withFileTypes: true }).sort((a, b) =>
-			a.name.localeCompare(b.name),
-		)) {
-			const path = join(folder, entry.name)
-			if (entry.isDirectory()) visit(path)
-			else if (entry.name.endsWith('.js')) {
-				hash.update(relative(directory, path))
-				hash.update(readFileSync(path))
-			}
-		}
-	}
-	visit(directory)
-	return hash.digest('hex')
-}
-
 const results = []
 for (const nested of [false, true])
 	for (const n of sizes) {
@@ -201,6 +175,7 @@ for (const nested of [false, true])
 			outputBytes: Buffer.byteLength(initialHtml),
 			equivalentHtmlIgnoringGeneratedIds: true,
 			capture: await measure(() => new TCollectionInitialSource({ initial: source })),
+			...(await stages(source)),
 			...(await measurePair(initialTree, legacyTree)),
 			retainedCaptureBytesPerSource: isolatedMemory(n, nested),
 		})
@@ -222,6 +197,8 @@ process.stdout.write(
 			runs,
 			warmups,
 			results,
+			stageScope:
+				'capture includes deep copy, freeze and structural validation. Materialization excludes capture/engine creation; prepared adds links to ordinary factory/batch/meta work. External validation directly probes the existing private implementation method over a complete engine; it is separate from structural source validation. Timers cannot be summed into total SSR.',
 			scope: 'Synchronous React renderToString over built packages; no HTTP, RSC, browser or hydration timing. Heap is retained snapshot data after GC in a fresh child process per case, not peak process memory.',
 		},
 		null,

@@ -179,47 +179,106 @@ React client directive (47). Полный Chromium: 129 файлов, 4473 те�
 
 ## Стоимость кандидата
 
-После сборки пакетов:
+После сборки пакетов, последовательно без параллельных сборок:
 
 ```powershell
 $env:NODE_ENV = 'production'
 node --expose-gc tools/ssr-collection-prototype/initial-performance.mjs
+node --expose-gc tools/ssr-collection-prototype/initial-memory.mjs
 ```
 
-[Скрипт](initial-performance.mjs) проверяет эквивалентность HTML, состава,
-активности, одной Tab-остановки и парных ссылок перед измерением. Написание
-generated ids нормализуется только в assertion за пределами таймера.
-Реальный renderer выдаёт исходный HTML. Используются собранные пакеты checkout.
+Оба инструмента используют [одну фикстуру](initial-fixture.mjs) и собранные
+пакеты checkout. Nested — 16 объектов с массивами на item в поддерживаемой
+metadata `_.payload`, которая реально попадает в engine. Для 1000 items вход
+занимает 521,691 bytes. Размеры 100/1000, flat/nested сохранены в обоих JSON.
 
-[Результат](results/2026-11-15-initial-performance.json) содержит хеши JS setup/plugins/React,
-версии, CPU, median/p95 и удерживаемый снимок. Сохранён финальный локальный
-production-запуск 15.11.2026 17:31 UTC: Node 24.20.0, React 19.3.1,
-Ryzen 9 9950X3D; три прогрева и девять измерений с чередованием SSR-режимов.
-Таймер capture входит в полный initial SSR: столбцы не складываются.
+### Время и стадии
 
-| Items | Metadata | Capture, median ms | Initial SSR, median ms | Existing items SSR, median ms | Retained snapshot, bytes |
-| ----- | -------- | -----------------: | ---------------------: | ----------------------------: | -----------------------: |
-| 100   | flat     |              0.192 |                  5.244 |                          4.62 |                    18916 |
-| 1000  | flat     |              0.887 |                 59.991 |                        42.031 |                   168886 |
-| 100   | nested   |              1.555 |                   7.94 |                         3.526 |                   243776 |
-| 1000  | nested   |             10.279 |                  64.11 |                        41.529 |                  2448982 |
+[Скрипт](initial-performance.mjs) проверяет эквивалентность полного HTML,
+состава, активности, одной Tab-остановки и взаимных ссылок до измерений.
+Generated ids нормализуются только в assertion вне таймера; renderer выдаёт
+исходный HTML. Три прогрева и девять измерений, SSR-режимы чередуются.
+[Результат](results/2026-11-15-initial-performance.json): 15.11.2026 18:04 UTC,
+Node 24.20.0, React 19.3.1, Ryzen 9 9950X3D, production; хеши JS внутри JSON.
 
-Nested содержит 16 вложенных объектов с массивами на item. Для 1000 items
-вход занимает 520,691 bytes. Цена одного capture в этом запуске около 10 ms, а
-удерживаемого снимка — 2.45 MB; полный initial путь включает и другие затраты.
-Глубокий снимок обходит весь вход, включая вложенные поля. Его стоимость
-существенна на большом вложенном source; вариант не объявляется оптимальным
-или окончательно утверждённым владельцем. В повторных локальных запусках
-capture вложенного source на 1000 items занимал около 10–15 ms;
-вариация полного SSR ещё выше. Один результат не задаёт стабильную задержку.
+| Items | Metadata | Capture + shape validation, ms | External validation, ms | Prepared materialization, ms | Ordinary materialization, ms |
+| ----- | -------- | -----------------------------: | ----------------------: | ---------------------------: | ---------------------------: |
+| 100   | flat     |                          0.096 |                   0.054 |                        0.375 |                        0.329 |
+| 1000  | flat     |                          0.843 |                    0.22 |                        2.721 |                        2.465 |
+| 100   | nested   |                          1.475 |                   0.425 |                        0.283 |                        0.258 |
+| 1000  | nested   |                          9.112 |                   3.329 |                        3.102 |                        2.731 |
+
+Capture включает глубокую копию, freeze и структурную валидацию source:
+производственный путь не подменяется ради отделения этих операций. Отдельная
+validation проверяет существующий complete external engine методом
+`_validateExternal`: это tools-only probe текущей реализации, а не API для
+потребителя. Materialization измеряет штатные factory/batch/meta; prepared
+дополнительно строит связи. Создание engine и capture исключены из таймера
+материализации. Эти таймеры относятся к разным стадиям/путям и не складываются
+в total SSR.
+
+| Items | Metadata | Initial SSR, median ms | Existing items SSR, median ms | Retained snapshot, bytes |
+| ----- | -------- | ---------------------: | ----------------------------: | -----------------------: |
+| 100   | flat     |                  5.133 |                         3.938 |                    19345 |
+| 1000  | flat     |                 59.999 |                        43.843 |                   170571 |
+| 100   | nested   |                  6.178 |                         4.368 |                   243788 |
+| 1000  | nested   |                 65.218 |                        43.631 |                  2448994 |
+
+В этой фикстуре capture 1000 вложенных items занял около 9.1 ms, удерживаемый
+снимок — 2.45 MB. Полный initial SSR включает дополнительные затраты помимо
+копирования. Снимок обходит весь вход; deep copy остаётся проверяемым кандидатом,
+без согласованного порога приемлемости или утверждения окончательной архитектуры.
+Полный таймер — React renderToString; HTTP, Flight/RSC и гидратация в него не входят.
+
+### Временные выделения, пик и success/abort cleanup
+
+[Скрипт памяти](initial-memory.mjs) запускает отдельный процесс для каждого из
+16 случаев: initial/items × success/abort × 100/1000 × flat/nested.
+[Сырой результат](results/2026-11-15-initial-memory.json) содержит 3 серии по
+3 запроса, исходные bytes, baseline и memory до/после GC каждой серии.
+Перед ними — 3 прогрева по 10 items. Это отдельные профилируемые прогоны:
+их накладные расходы не входят в latency-таблицу.
+
+Success — реальный завершённый Fizz. Abort — тот же Tabs плюс Suspense с
+request-local pending resource: shell действительно выдаётся, затем stream
+отменяется, проверяется ровно один ожидаемый callback ошибки. HTML/chunks,
+stream и request graph выходят из helper перед тремя GC с переходами event loop.
+
+Allocation sampling V8 Inspector использует интервал 16 KiB и оба флага
+includeObjectsCollectedByMajorGC/MinorGC: временные уже собранные объекты
+учитываются в **оценке** выделений. Она включает также collect/assert и runtime
+измерительного batch. Это не точный счётчик байтов и не отдельная
+цена копирования. `beforeGC.heapUsed - afterGC.heapUsed` — наблюдаемый объём
+освобождённого heap, а не все временные выделения между GC. Profiling payload
+получается после memory readings, чтобы сам returned profile не попал в retained.
+
+Peak — `process.resourceUsage().maxRSS * 1024`, абсолютный OS high-water RSS
+всей жизни свежего процесса, включая imports/fixture/warmup и profiler overhead.
+Baseline peak и конечный peak сохранены отдельно. Это не изолированный точный
+пик фазы SSR; нулевой прирост high-water не означает нулевую память операции.
+Post-GC heap delta знаковая, включает runtime/JIT/profiler caches и также не
+приравнивается к размеру request или утечке. MB = 1,000,000 bytes.
+
+Для 1000 items с вложенной metadata:
+
+| Mode    | Outcome | Sampled allocation estimate, MB/request | Whole-process peak RSS, MB | Post-GC heap delta after 9 requests, MB | Live sources / engines |
+| ------- | ------- | --------------------------------------: | -------------------------: | --------------------------------------: | ---------------------: |
+| initial | success |                                 173.198 |                    318.665 |                                   0.861 |                  0 / 0 |
+| initial | abort   |                                 173.405 |                    324.162 |                                   0.827 |                  0 / 0 |
+| items   | success |                                 125.727 |                    322.085 |                                   0.812 |                  0 / 0 |
+| items   | abort   |                                 125.710 |                    307.917 |                                   0.769 |                  0 / 0 |
+
+WeakRef-аудит наблюдал ровно 9 созданных source (initial) и 9 request-owned
+engine (оба режима), после success и abort живых осталось **0 во всех 16 случаях**.
+Обычный items не создаёт initial source. Исходный plain input намеренно остаётся
+живым как fixture; внешние engine/ctrl не предсоздаются ради этого замера.
+Сохранённый retained heap — диагностический остаток после полного SSR; отдельно
+удерживаемый snapshot в таблице полного SSR измерен другим свежим процессом после GC.
 
 Убран отдельный Set предков на каждый вложенный объект; prepared link находится
-через owner-local Map по ctrl. Проверка актуального членства и поиск первой пары
-по текущему value ещё читают batch; они не объявляются O(1). Снимок измеряется
-отдельным процессом после GC, а не вместе с мусором предшествующих рендеров.
-Это удерживаемые данные, не пиковая память и не объём всех временных аллокаций.
-Полный таймер покрывает синхронный React renderToString; HTTP, Flight/RSC,
-браузер и гидратация в него не входят. Один локальный запуск не задаёт SLA.
+через owner-local Map по ctrl. Проверка текущего членства и поиск первой пары
+по live value ещё читают batch и не объявляются O(1). Эти измерения предъявляют
+стоимость и пределы кандидата; один локальный запуск не задаёт SLA.
 
 ## Next App Router: граница host
 
