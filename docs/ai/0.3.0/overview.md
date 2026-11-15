@@ -24,3 +24,7 @@ full framework or accessibility-guide coverage.
 Read the coverage matrix before treating an absent guide as supported behavior.
 Contributor instructions describe working inside the library and are a separate
 audience; they must not be mixed into application installation instructions.
+
+React and Next.js consumers start with react-start. Its related records cover
+installation, typed state callbacks, scoped render slots, controllers and the
+Next App Router client boundary. Framework recipe coverage remains sample.

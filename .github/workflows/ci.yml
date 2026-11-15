@@ -60,6 +60,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run check:ai-docs
+      - run: npm run check:ai-docs:react
 
   # The matrix key isn't `adapter`: under that name the guard of tools/min-peers
   # (`workspace.spec.ts`) reads the matrix of lower bounds.

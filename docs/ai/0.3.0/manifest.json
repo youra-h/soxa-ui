@@ -18,7 +18,7 @@
     },
     "react": {
       "api": "generated",
-      "guides": "pending"
+      "guides": "sample"
     },
     "angular": {
       "api": "generated",
@@ -53,7 +53,7 @@
           "path": "README.md"
         }
       ],
-      "related": ["vue-button", "vue-start"],
+      "related": ["vue-button", "vue-start", "react-start"],
       "examples": [],
       "links": []
     },
@@ -296,6 +296,260 @@
       "related": ["vue-start", "vue-bindings", "vue-controller", "vue-nuxt"],
       "examples": [],
       "links": []
+    },
+    {
+      "id": "react-start",
+      "title": "React and Next.js consumer entry point",
+      "path": "react-start.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "overview",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": [
+        "overview",
+        "react-installation",
+        "react-bindings",
+        "react-composition",
+        "react-controller",
+        "react-next",
+        "react-errors"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "react-installation",
+      "title": "Install and register React",
+      "path": "react-installation.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "installation",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": ["react-start"],
+      "examples": [
+        {
+          "id": "react-main",
+          "path": "examples/react/main.tsx",
+          "language": "tsx"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "react-bindings",
+      "title": "State, callback props and accessible fields",
+      "path": "react-bindings.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "bindings",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": [
+        "react-start",
+        "api-react-input",
+        "api-react-check-box",
+        "api-react-label",
+        "api-react-select",
+        "api-react-date-picker"
+      ],
+      "examples": [
+        {
+          "id": "react-recipes",
+          "path": "examples/react/TravelRecipes.tsx",
+          "language": "tsx"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "react-composition",
+      "title": "Children, parts and scoped render slots",
+      "path": "react-composition.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "composition",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": [
+        "react-start",
+        "api-react-accordion",
+        "api-react-accordion-item",
+        "api-react-select"
+      ],
+      "examples": [
+        {
+          "id": "react-recipes",
+          "path": "examples/react/TravelRecipes.tsx",
+          "language": "tsx"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "react-controller",
+      "title": "Controllers, DOM refs and lifetime",
+      "path": "react-controller.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "lifecycle",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": ["react-start", "api-react-button"],
+      "examples": [
+        {
+          "id": "react-controller",
+          "path": "examples/react/CtrlExample.tsx",
+          "language": "tsx"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "react-next",
+      "title": "Next.js App Router and SSR",
+      "path": "react-next.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "next",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": ["react-start", "api-react-tabs", "api-react-tabs-item", "api-react-tabs-content"],
+      "examples": [
+        {
+          "id": "next-layout",
+          "path": "examples/next/app/layout.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "next-providers",
+          "path": "examples/next/app/providers.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "next-page",
+          "path": "examples/next/app/page.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "next-client-form",
+          "path": "examples/next/app/client-form.tsx",
+          "language": "tsx"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "react-errors",
+      "title": "Troubleshoot the checked release",
+      "path": "react-errors.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "troubleshooting",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": ["react-start"],
+      "examples": [],
+      "links": []
     }
   ],
   "packages": {
@@ -305,7 +559,8 @@
     "@soxa-ui/plugins": "0.3.0",
     "@soxa-ui/theme-base": "0.3.0",
     "@soxa-ui/theme-oren": "0.3.0",
-    "@soxa-ui/icons-material": "0.3.0"
+    "@soxa-ui/icons-material": "0.3.0",
+    "@soxa-ui/react": "0.3.0"
   },
   "contributorGuides": "pending"
 }

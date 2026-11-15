@@ -14,6 +14,7 @@ function fixture() {
 		readFileSync(new URL('../../docs/ai/0.3.0/manifest.json', import.meta.url), 'utf8'),
 	)
 	manifest.documents = manifest.documents.slice(0, 2)
+	manifest.coverage.react.guides = 'pending'
 	manifest.documents[0].related = ['vue-button']
 	const source = {
 		revision: manifest.libraryRevision,
@@ -324,4 +325,39 @@ test('Vue recipe registration retains nested Nuxt delivery without changing the 
 			assert.ok(existsSync(join(root, 'source/docs/ai/0.3.0', example.path)))
 			assert.ok(requested.some((url) => url.endsWith('/' + example.path)))
 		}
+})
+
+test('React guide registration and Next examples remain selectively deliverable', async () => {
+	const manifest = JSON.parse(
+		readFileSync(new URL('../../docs/ai/0.3.0/manifest.json', import.meta.url), 'utf8'),
+	)
+	assert.equal(manifest.packages['@soxa-ui/react'], '0.3.0')
+	assert.equal(manifest.packages['@soxa-ui/vue'], '0.3.0')
+	assert.equal(manifest.coverage.react.guides, 'sample')
+	const guides = manifest.documents.filter((doc) => doc.framework === 'react')
+	assert.deepEqual(
+		guides.map((doc) => doc.id),
+		[
+			'react-start',
+			'react-installation',
+			'react-bindings',
+			'react-composition',
+			'react-controller',
+			'react-next',
+			'react-errors',
+		],
+	)
+	assert.equal(guides.find((doc) => doc.id === 'react-next').topic, 'next')
+	const { fetchSource } = await import('./fetch.mjs')
+	const root = mkdtempSync(join(tmpdir(), 'soxa-react-delivery-'))
+	await fetchSource({
+		revision,
+		version: '0.3.0',
+		out: root,
+		fetchFile: async (url) =>
+			new Response(url.endsWith('manifest.json') ? JSON.stringify(manifest) : 'public file'),
+	})
+	for (const doc of guides)
+		for (const example of doc.examples)
+			assert.ok(existsSync(join(root, 'docs/ai/0.3.0', example.path)))
 })
