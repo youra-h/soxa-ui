@@ -63,6 +63,22 @@ jobs:
       - run: npm run check:ai-docs:react
       - run: npm run check:ai-docs:angular
 
+  ai-docs-svelte-development:
+    name: AI Docs - Svelte development tarballs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npm run check:ai-docs:svelte:development -- --skip-build
+
   # The matrix key isn't `adapter`: under that name the guard of tools/min-peers
   # (`workspace.spec.ts`) reads the matrix of lower bounds.
   adapters:

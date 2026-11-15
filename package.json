@@ -63,7 +63,9 @@
     "test:ai-docs": "node --test tools/ai-docs/corpus.test.mjs",
     "check:ai-docs": "node tools/ai-docs/smoke.mjs",
     "check:ai-docs:react": "node tools/ai-docs/react-smoke.mjs",
-    "check:ai-docs:angular": "node tools/ai-docs/angular-smoke.mjs"
+    "check:ai-docs:angular": "node tools/ai-docs/angular-smoke.mjs",
+    "check:ai-docs:svelte": "node tools/ai-docs/svelte-smoke.mjs",
+    "check:ai-docs:svelte:development": "node tools/ai-docs/svelte-smoke.mjs --development"
   },
   "devDependencies": {
     "@changesets/apply-release-plan": "^8.1.1",

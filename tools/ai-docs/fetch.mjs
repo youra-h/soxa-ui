@@ -7,7 +7,7 @@ const versionPattern = /^\d+\.\d+\.\d+(?:-[a-zA-Z0-9.-]+)?$/
 function relativePath(path) {
 	if (
 		typeof path !== 'string' ||
-		!/^[a-zA-Z0-9_./-]+$/.test(path) ||
+		!/^[a-zA-Z0-9_./+-]+$/.test(path) ||
 		path.startsWith('/') ||
 		path.split('/').some((part) => !part || part === '.' || part === '..')
 	)

@@ -1,0 +1,24 @@
+{
+  "name": "soxa-svelte-recipes",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "svelte-check --tsconfig ./tsconfig.json --fail-on-warnings",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@soxa-ui/core": "0.3.0",
+    "@soxa-ui/setup": "0.3.0",
+    "@soxa-ui/svelte": "0.3.0",
+    "@soxa-ui/theme-oren": "0.3.0",
+    "@soxa-ui/icons-material": "0.3.0"
+  },
+  "devDependencies": {
+    "svelte": "5.57.2",
+    "svelte-check": "4.7.7",
+    "typescript": "6.0.3",
+    "vite": "8.3.5",
+    "@sveltejs/vite-plugin-svelte": "7.3.1",
+    "@types/node": "24.19.2"
+  }
+}

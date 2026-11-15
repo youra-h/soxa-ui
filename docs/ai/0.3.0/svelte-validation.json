@@ -1,0 +1,579 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-15",
+  "libraryVersion": "0.3.0",
+  "libraryRevision": "9ae988633936a03e291e8e414028456fe1039c6b",
+  "sourceRevision": "4ffd0a93fc544241b73a02b9d22a43cd0f694393",
+  "apiSha256": "869aa23426237c0b130466cd0de9fa0ff8e960412a99e058de824c9be02104dd",
+  "coverage": "sample-runtime; strict type readiness blocked",
+  "maintained": {
+    "strictTypes": {
+      "passed": false,
+      "errorCountPerConsumer": 1,
+      "warningCountPerConsumer": 0,
+      "diagnostic": "TS2440: Import declaration conflicts with local declaration of Teleport",
+      "file": "node_modules/@soxa-ui/svelte/dist/adapter/runtime/Teleport.svelte.d.ts:1:8",
+      "typescriptReproduced": ["6.0.3", "5.9.3"],
+      "suppressed": false
+    },
+    "production": {
+      "svelte": true,
+      "sveltekit": true
+    },
+    "browser": {
+      "passed": true,
+      "consoleWarnings": 0,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "scenarios": [
+        "Input typing, old/new payload and reset",
+        "Label focus; CheckBox Space",
+        "Select ArrowDown/End/Enter/Escape and scoped item/item-leading",
+        "DatePicker ArrowRight/Enter/Escape",
+        "Accordion header scope; save Enter; Tab order",
+        "three controller remounts",
+        "Kit route away/back cleanup",
+        "two no-JS requests after client mutation; initial state/icons/unique ids"
+      ]
+    },
+    "completeARIAValidity": false,
+    "knownLimits": [
+      {
+        "kind": "hydrated hidden Calendar aria-labelledby target missing",
+        "count": 1
+      },
+      {
+        "kind": "raw SSR Select aria-controls list target missing",
+        "count": 1
+      },
+      {
+        "kind": "raw SSR DatePicker trigger aria-controls panel target missing",
+        "count": 1
+      }
+    ],
+    "commands": [
+      {
+        "command": "npm run check:ai-docs:svelte",
+        "exitCode": 1,
+        "result": "production/runtime passed; strict types failed"
+      },
+      {
+        "command": "npm run test:ai-docs",
+        "exitCode": 0,
+        "tests": 33
+      },
+      {
+        "command": "npm run check:ai-docs",
+        "exitCode": 0
+      },
+      {
+        "command": "npm run check:ai-docs:react",
+        "exitCode": 0
+      },
+      {
+        "command": "npm run check:ai-docs:angular",
+        "exitCode": 0
+      },
+      {
+        "command": "targeted eslint / prettier --check / English guards / git diff --check",
+        "exitCode": 0
+      }
+    ],
+    "buildAdvisories": [
+      "CSR plugin announces default config",
+      "Kit build inherits NO_COLOR/FORCE_COLOR conflict",
+      "Existing Angular default bundle budget advisory retained"
+    ],
+    "locks": {
+      "svelte": {
+        "sha256": "e871653960f7290b1b39d8a5dab5716ba88d3808f4d84b9409e833e7cdbf9d2c",
+        "directPackages": {
+          "name": "soxa-svelte-recipes",
+          "private": true,
+          "type": "module",
+          "scripts": {
+            "check": "svelte-check --tsconfig ./tsconfig.json --fail-on-warnings",
+            "build": "vite build"
+          },
+          "dependencies": {
+            "@soxa-ui/core": "0.3.0",
+            "@soxa-ui/setup": "0.3.0",
+            "@soxa-ui/svelte": "0.3.0",
+            "@soxa-ui/theme-oren": "0.3.0",
+            "@soxa-ui/icons-material": "0.3.0"
+          },
+          "devDependencies": {
+            "svelte": "5.57.2",
+            "svelte-check": "4.7.7",
+            "typescript": "6.0.3",
+            "vite": "8.3.5",
+            "@sveltejs/vite-plugin-svelte": "7.3.1",
+            "@types/node": "24.19.2"
+          }
+        }
+      },
+      "sveltekit": {
+        "sha256": "050fcd48ddf23b0b1f4c11749cb6370df8d750913fbe3c7a0ab831e698706727",
+        "directPackages": {
+          "name": "soxa-sveltekit-recipes",
+          "private": true,
+          "type": "module",
+          "scripts": {
+            "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --fail-on-warnings",
+            "build": "vite build"
+          },
+          "dependencies": {
+            "@soxa-ui/core": "0.3.0",
+            "@soxa-ui/setup": "0.3.0",
+            "@soxa-ui/svelte": "0.3.0",
+            "@soxa-ui/theme-oren": "0.3.0",
+            "@soxa-ui/icons-material": "0.3.0"
+          },
+          "devDependencies": {
+            "svelte": "5.57.2",
+            "svelte-check": "4.7.7",
+            "typescript": "6.0.3",
+            "vite": "8.3.5",
+            "@sveltejs/vite-plugin-svelte": "7.3.1",
+            "@types/node": "24.19.2",
+            "@sveltejs/kit": "3.0.0",
+            "@sveltejs/adapter-node": "6.0.0"
+          }
+        }
+      }
+    }
+  },
+  "publicDelivery": {
+    "docsRevision": "4ffd0a93fc544241b73a02b9d22a43cd0f694393",
+    "files": 79,
+    "bytes": 119527,
+    "corpusRecords": 410,
+    "allDeclaredSvelteFilesTrackedAndByteEqual": true,
+    "checkedOccurrences": 24,
+    "apiDigestVerified": true,
+    "inputRecords": [
+      {
+        "id": "api-svelte-accordion",
+        "fileSha256": "4a1f1ed87c09f4c5a8a1dc1aacea375ee1001d2ea1b6859c89ed323686ac2b32",
+        "contentSha256": "2998e4308c688581810b8d2ad8b0655b2c77a759b2bab62f65d7421940bd8b8b"
+      },
+      {
+        "id": "api-svelte-button",
+        "fileSha256": "7146f44e0a652e8a6d63a055e417f19d2ce0a50713aac14dfeff33044bc4ffda",
+        "contentSha256": "6c252073662db1fb5b29724e0f20276645945af9d9c82c200b932fa4471ba446"
+      },
+      {
+        "id": "api-svelte-check-box",
+        "fileSha256": "91f511b7402c6a4b24e7241a36c190818cf4cdedfe1d45548513b4714ace4ec4",
+        "contentSha256": "3a7373b11a04bd40ccbb9c2caaf90efccf3314caa9568f254d181599341b6e70"
+      },
+      {
+        "id": "api-svelte-date-picker",
+        "fileSha256": "d8795e86923b7fe5fe686b898a3265ccfdc96669ebaafd22976db3048451cab5",
+        "contentSha256": "e026746ac6f985663df8756589520ab6fc18c2f6ecb1bb2b84179e8aa51e20ee"
+      },
+      {
+        "id": "api-svelte-input",
+        "fileSha256": "162fbebd1f9acf73cd4425681f041df6b7d7f1183db572ce784c0ecd2644929c",
+        "contentSha256": "290694129a374f025b683a7565f0d1abbe7b03a4cd3df45f09a497e5a25033e8"
+      },
+      {
+        "id": "api-svelte-label",
+        "fileSha256": "9a0626f4b2382edad7a280947cf40d0563f582db91d20d76a6e842af015eeb25",
+        "contentSha256": "a052a8b4ee4f98d4b555879f2bc08a7155b6d9b8f022ccbc0762f27040b40535"
+      },
+      {
+        "id": "api-svelte-select",
+        "fileSha256": "c9ab0402811c5dc5b99b614ebcf4e761789221f7b531c645074f665ab73b056c",
+        "contentSha256": "e14dc873d9c4a91f6a02c81cef50fd7e4cb7da1a63cba8f014512214b39975cb"
+      },
+      {
+        "id": "overview",
+        "fileSha256": "98a0cfc061942abcfa517ef1aeab6554e238a350e480052cfbccab7d0b53ee99",
+        "contentSha256": "06417fc705b099b244692100cecbcf1299cd9da423c774dd1b3d010c62f825c7"
+      },
+      {
+        "id": "svelte-bindings",
+        "fileSha256": "52d4088d217a933f69d164acfc29cafc0c3e7d29450a202aa2ebff1e9aaf4e53",
+        "contentSha256": "a85f06724cf981c2295eca193d2475e2ade92bb6d458cc27ac51b6b2870e149b"
+      },
+      {
+        "id": "svelte-composition",
+        "fileSha256": "3ea18bef82d4ac9d0a2002c1dc296166b6854212a7892a36520591d48c8e4726",
+        "contentSha256": "a25bec74af6afe1889272acdc9fc54d5cd893ef198fabebb21f180d96f1585a0"
+      },
+      {
+        "id": "svelte-controller",
+        "fileSha256": "697d1a63c75d273c71e7801e118efd58c6f9a94a2506d126f5d480c62b7fc3a5",
+        "contentSha256": "50b4ecb80c053f6949925dc16e2d51169049f6a298f6a7c4281c7537a3524799"
+      },
+      {
+        "id": "svelte-errors",
+        "fileSha256": "6d19a035ea740003fde2cdecce1e7df6adeee9c0b6132ace8f9377e80dfef91e",
+        "contentSha256": "cc130015ef63eeb5c1db8ab8f4e055d243bc886f2df473cfa7ec5420b5c6a246"
+      },
+      {
+        "id": "svelte-installation",
+        "fileSha256": "a108beac1e5f6e954802c409c58113e29af2b23f7605317d6b3e8d83185f54e4",
+        "contentSha256": "01bbbf1f2674fb6ccd2b02beb724fb17e9bbfbed9bafbe674e7c46d739cb05d5"
+      },
+      {
+        "id": "svelte-start",
+        "fileSha256": "34a1a538dcb84bc2d83f7641d26937aef0375f0b1ad38aa46e83ef2ee484567d",
+        "contentSha256": "31f279eb2a635e2f56ebd201be988d9882a512a7c0a3f679dbc7e5179b203f70"
+      },
+      {
+        "id": "svelte-sveltekit",
+        "fileSha256": "a274666ce249b567b4f8a2ce9e3aa2626704e8836952c576046d1c88f7a13e88",
+        "contentSha256": "a0834b78124780d614cba41f10a3283f60395b55602cce242a02606c3966e7ac"
+      }
+    ]
+  },
+  "independent": {
+    "docsRevision": "4ffd0a93fc544241b73a02b9d22a43cd0f694393",
+    "inputBoundary": "Only exported consumer JSON; no library source or private context",
+    "inputRecords": [
+      {
+        "name": "api-svelte-accordion.json",
+        "sha256": "4a1f1ed87c09f4c5a8a1dc1aacea375ee1001d2ea1b6859c89ed323686ac2b32",
+        "consumerContentSha256": "2998e4308c688581810b8d2ad8b0655b2c77a759b2bab62f65d7421940bd8b8b",
+        "recordDeclaredSha256": "2998e4308c688581810b8d2ad8b0655b2c77a759b2bab62f65d7421940bd8b8b",
+        "readForImplementation": true,
+        "examples": []
+      },
+      {
+        "name": "api-svelte-button.json",
+        "sha256": "7146f44e0a652e8a6d63a055e417f19d2ce0a50713aac14dfeff33044bc4ffda",
+        "consumerContentSha256": "6c252073662db1fb5b29724e0f20276645945af9d9c82c200b932fa4471ba446",
+        "recordDeclaredSha256": "6c252073662db1fb5b29724e0f20276645945af9d9c82c200b932fa4471ba446",
+        "readForImplementation": true,
+        "examples": []
+      },
+      {
+        "name": "api-svelte-check-box.json",
+        "sha256": "91f511b7402c6a4b24e7241a36c190818cf4cdedfe1d45548513b4714ace4ec4",
+        "consumerContentSha256": "3a7373b11a04bd40ccbb9c2caaf90efccf3314caa9568f254d181599341b6e70",
+        "recordDeclaredSha256": "3a7373b11a04bd40ccbb9c2caaf90efccf3314caa9568f254d181599341b6e70",
+        "readForImplementation": true,
+        "examples": []
+      },
+      {
+        "name": "api-svelte-date-picker.json",
+        "sha256": "d8795e86923b7fe5fe686b898a3265ccfdc96669ebaafd22976db3048451cab5",
+        "consumerContentSha256": "e026746ac6f985663df8756589520ab6fc18c2f6ecb1bb2b84179e8aa51e20ee",
+        "recordDeclaredSha256": "e026746ac6f985663df8756589520ab6fc18c2f6ecb1bb2b84179e8aa51e20ee",
+        "readForImplementation": false,
+        "examples": []
+      },
+      {
+        "name": "api-svelte-input.json",
+        "sha256": "162fbebd1f9acf73cd4425681f041df6b7d7f1183db572ce784c0ecd2644929c",
+        "consumerContentSha256": "290694129a374f025b683a7565f0d1abbe7b03a4cd3df45f09a497e5a25033e8",
+        "recordDeclaredSha256": "290694129a374f025b683a7565f0d1abbe7b03a4cd3df45f09a497e5a25033e8",
+        "readForImplementation": true,
+        "examples": []
+      },
+      {
+        "name": "api-svelte-label.json",
+        "sha256": "9a0626f4b2382edad7a280947cf40d0563f582db91d20d76a6e842af015eeb25",
+        "consumerContentSha256": "a052a8b4ee4f98d4b555879f2bc08a7155b6d9b8f022ccbc0762f27040b40535",
+        "recordDeclaredSha256": "a052a8b4ee4f98d4b555879f2bc08a7155b6d9b8f022ccbc0762f27040b40535",
+        "readForImplementation": true,
+        "examples": []
+      },
+      {
+        "name": "api-svelte-select.json",
+        "sha256": "c9ab0402811c5dc5b99b614ebcf4e761789221f7b531c645074f665ab73b056c",
+        "consumerContentSha256": "e14dc873d9c4a91f6a02c81cef50fd7e4cb7da1a63cba8f014512214b39975cb",
+        "recordDeclaredSha256": "e14dc873d9c4a91f6a02c81cef50fd7e4cb7da1a63cba8f014512214b39975cb",
+        "readForImplementation": true,
+        "examples": []
+      },
+      {
+        "name": "overview.json",
+        "sha256": "98a0cfc061942abcfa517ef1aeab6554e238a350e480052cfbccab7d0b53ee99",
+        "consumerContentSha256": "06417fc705b099b244692100cecbcf1299cd9da423c774dd1b3d010c62f825c7",
+        "recordDeclaredSha256": "06417fc705b099b244692100cecbcf1299cd9da423c774dd1b3d010c62f825c7",
+        "origin": "https://github.com/youra-h/soxa-ui/blob/4ffd0a93fc544241b73a02b9d22a43cd0f694393/docs/ai/0.3.0/overview.md",
+        "readForImplementation": false,
+        "examples": []
+      },
+      {
+        "name": "svelte-bindings.json",
+        "sha256": "52d4088d217a933f69d164acfc29cafc0c3e7d29450a202aa2ebff1e9aaf4e53",
+        "consumerContentSha256": "a85f06724cf981c2295eca193d2475e2ade92bb6d458cc27ac51b6b2870e149b",
+        "recordDeclaredSha256": "a85f06724cf981c2295eca193d2475e2ade92bb6d458cc27ac51b6b2870e149b",
+        "origin": "https://github.com/youra-h/soxa-ui/blob/4ffd0a93fc544241b73a02b9d22a43cd0f694393/docs/ai/0.3.0/svelte-bindings.md",
+        "readForImplementation": true,
+        "examples": []
+      },
+      {
+        "name": "svelte-composition.json",
+        "sha256": "3ea18bef82d4ac9d0a2002c1dc296166b6854212a7892a36520591d48c8e4726",
+        "consumerContentSha256": "a25bec74af6afe1889272acdc9fc54d5cd893ef198fabebb21f180d96f1585a0",
+        "recordDeclaredSha256": "a25bec74af6afe1889272acdc9fc54d5cd893ef198fabebb21f180d96f1585a0",
+        "origin": "https://github.com/youra-h/soxa-ui/blob/4ffd0a93fc544241b73a02b9d22a43cd0f694393/docs/ai/0.3.0/svelte-composition.md",
+        "readForImplementation": true,
+        "examples": []
+      },
+      {
+        "name": "svelte-controller.json",
+        "sha256": "697d1a63c75d273c71e7801e118efd58c6f9a94a2506d126f5d480c62b7fc3a5",
+        "consumerContentSha256": "50b4ecb80c053f6949925dc16e2d51169049f6a298f6a7c4281c7537a3524799",
+        "recordDeclaredSha256": "50b4ecb80c053f6949925dc16e2d51169049f6a298f6a7c4281c7537a3524799",
+        "origin": "https://github.com/youra-h/soxa-ui/blob/4ffd0a93fc544241b73a02b9d22a43cd0f694393/docs/ai/0.3.0/svelte-controller.md",
+        "readForImplementation": true,
+        "examples": []
+      },
+      {
+        "name": "svelte-errors.json",
+        "sha256": "6d19a035ea740003fde2cdecce1e7df6adeee9c0b6132ace8f9377e80dfef91e",
+        "consumerContentSha256": "cc130015ef63eeb5c1db8ab8f4e055d243bc886f2df473cfa7ec5420b5c6a246",
+        "recordDeclaredSha256": "cc130015ef63eeb5c1db8ab8f4e055d243bc886f2df473cfa7ec5420b5c6a246",
+        "origin": "https://github.com/youra-h/soxa-ui/blob/4ffd0a93fc544241b73a02b9d22a43cd0f694393/docs/ai/0.3.0/svelte-errors.md",
+        "readForImplementation": true,
+        "examples": []
+      },
+      {
+        "name": "svelte-installation.json",
+        "sha256": "a108beac1e5f6e954802c409c58113e29af2b23f7605317d6b3e8d83185f54e4",
+        "consumerContentSha256": "01bbbf1f2674fb6ccd2b02beb724fb17e9bbfbed9bafbe674e7c46d739cb05d5",
+        "recordDeclaredSha256": "01bbbf1f2674fb6ccd2b02beb724fb17e9bbfbed9bafbe674e7c46d739cb05d5",
+        "origin": "https://github.com/youra-h/soxa-ui/blob/4ffd0a93fc544241b73a02b9d22a43cd0f694393/docs/ai/0.3.0/svelte-installation.md",
+        "readForImplementation": true,
+        "examples": [
+          {
+            "path": "examples/svelte/CtrlExample.svelte",
+            "sha256": "276a2de98c48eaa0bab3ed87a2ea995f0b36d6c86b9f22935a36a747f7b39597",
+            "declaredSha256": "276a2de98c48eaa0bab3ed87a2ea995f0b36d6c86b9f22935a36a747f7b39597"
+          },
+          {
+            "path": "examples/svelte/index.html",
+            "sha256": "cc6586bf5184b183f6505964ec6239c2525370165ef88af2528c8d75e0836d63",
+            "declaredSha256": "cc6586bf5184b183f6505964ec6239c2525370165ef88af2528c8d75e0836d63"
+          },
+          {
+            "path": "examples/svelte/main.ts",
+            "sha256": "68df20198ee93cf7ab237cd4d6d27096db1b132a6fde0d5277252092f98845c1",
+            "declaredSha256": "68df20198ee93cf7ab237cd4d6d27096db1b132a6fde0d5277252092f98845c1"
+          },
+          {
+            "path": "examples/svelte/package.json",
+            "sha256": "2545e0f9db1034e1da77c453d3db057eae49a74639becc2e2af5251a52bb22d9",
+            "declaredSha256": "2545e0f9db1034e1da77c453d3db057eae49a74639becc2e2af5251a52bb22d9"
+          },
+          {
+            "path": "examples/svelte/Recipes.svelte",
+            "sha256": "88e7ee00af95712dc5a3a92df435c15fd76b8fe61b9e473cceffaf529f29b6c4",
+            "declaredSha256": "88e7ee00af95712dc5a3a92df435c15fd76b8fe61b9e473cceffaf529f29b6c4"
+          },
+          {
+            "path": "examples/svelte/setup.ts",
+            "sha256": "e1306640b231fd4b2f87653d1b309cc3a2bf053d2e1014154d11de650b449f24",
+            "declaredSha256": "e1306640b231fd4b2f87653d1b309cc3a2bf053d2e1014154d11de650b449f24"
+          },
+          {
+            "path": "examples/svelte/tsconfig.json",
+            "sha256": "2f92c8aa02380ddd42fb6479f314f0f7f46473c4361a5f64065d7cab10fed2ab",
+            "declaredSha256": "2f92c8aa02380ddd42fb6479f314f0f7f46473c4361a5f64065d7cab10fed2ab"
+          },
+          {
+            "path": "examples/svelte/vite.config.ts",
+            "sha256": "086007b1d9e86620e3a8d5add42ef616d26277eb6cd85c0e9f0ab18fad675263",
+            "declaredSha256": "086007b1d9e86620e3a8d5add42ef616d26277eb6cd85c0e9f0ab18fad675263"
+          },
+          {
+            "path": "examples/sveltekit/package.json",
+            "sha256": "71e1b14db1477b2676907a6242044481a52184f5a42756cea0e7898ec69289c0",
+            "declaredSha256": "71e1b14db1477b2676907a6242044481a52184f5a42756cea0e7898ec69289c0"
+          },
+          {
+            "path": "examples/sveltekit/src/app.html",
+            "sha256": "838a02cedffb17130f7ea7be10888b7da85532b48c52c3f6814bf2d386f1a84d",
+            "declaredSha256": "838a02cedffb17130f7ea7be10888b7da85532b48c52c3f6814bf2d386f1a84d"
+          },
+          {
+            "path": "examples/sveltekit/src/lib/CtrlExample.svelte",
+            "sha256": "276a2de98c48eaa0bab3ed87a2ea995f0b36d6c86b9f22935a36a747f7b39597",
+            "declaredSha256": "276a2de98c48eaa0bab3ed87a2ea995f0b36d6c86b9f22935a36a747f7b39597"
+          },
+          {
+            "path": "examples/sveltekit/src/lib/Recipes.svelte",
+            "sha256": "88e7ee00af95712dc5a3a92df435c15fd76b8fe61b9e473cceffaf529f29b6c4",
+            "declaredSha256": "88e7ee00af95712dc5a3a92df435c15fd76b8fe61b9e473cceffaf529f29b6c4"
+          },
+          {
+            "path": "examples/sveltekit/src/routes/+layout.svelte",
+            "sha256": "6161c24d9076b7de96b9703784f7ec7965837943eae9a51d71ec373ec9fa90c6",
+            "declaredSha256": "6161c24d9076b7de96b9703784f7ec7965837943eae9a51d71ec373ec9fa90c6"
+          },
+          {
+            "path": "examples/sveltekit/src/routes/+page.svelte",
+            "sha256": "0767878db45da76c1d5f020f458a01fb99b4686f1a8bdf0d0d8413dabeb6822d",
+            "declaredSha256": "0767878db45da76c1d5f020f458a01fb99b4686f1a8bdf0d0d8413dabeb6822d"
+          },
+          {
+            "path": "examples/sveltekit/src/routes/away/+page.svelte",
+            "sha256": "b51b5d75c1a05e8d465c7dcf86c63abed182345f2b660426bfe809a4f7027690",
+            "declaredSha256": "b51b5d75c1a05e8d465c7dcf86c63abed182345f2b660426bfe809a4f7027690"
+          },
+          {
+            "path": "examples/sveltekit/tsconfig.json",
+            "sha256": "e0990f8eb303019604eaed942b2a9e0579e4cf606863841f6ae14ea6e62a12e3",
+            "declaredSha256": "e0990f8eb303019604eaed942b2a9e0579e4cf606863841f6ae14ea6e62a12e3"
+          },
+          {
+            "path": "examples/sveltekit/vite.config.ts",
+            "sha256": "76f143124542af40aae02895f31d100a1879fa4c2b4e22c9d975405e9b0f2ed1",
+            "declaredSha256": "76f143124542af40aae02895f31d100a1879fa4c2b4e22c9d975405e9b0f2ed1"
+          }
+        ]
+      },
+      {
+        "name": "svelte-start.json",
+        "sha256": "34a1a538dcb84bc2d83f7641d26937aef0375f0b1ad38aa46e83ef2ee484567d",
+        "consumerContentSha256": "31f279eb2a635e2f56ebd201be988d9882a512a7c0a3f679dbc7e5179b203f70",
+        "recordDeclaredSha256": "31f279eb2a635e2f56ebd201be988d9882a512a7c0a3f679dbc7e5179b203f70",
+        "origin": "https://github.com/youra-h/soxa-ui/blob/4ffd0a93fc544241b73a02b9d22a43cd0f694393/docs/ai/0.3.0/svelte-start.md",
+        "readForImplementation": false,
+        "examples": []
+      },
+      {
+        "name": "svelte-sveltekit.json",
+        "sha256": "a274666ce249b567b4f8a2ce9e3aa2626704e8836952c576046d1c88f7a13e88",
+        "consumerContentSha256": "a0834b78124780d614cba41f10a3283f60395b55602cce242a02606c3966e7ac",
+        "recordDeclaredSha256": "a0834b78124780d614cba41f10a3283f60395b55602cce242a02606c3966e7ac",
+        "origin": "https://github.com/youra-h/soxa-ui/blob/4ffd0a93fc544241b73a02b9d22a43cd0f694393/docs/ai/0.3.0/svelte-sveltekit.md",
+        "readForImplementation": false,
+        "examples": []
+      }
+    ],
+    "runtime": {
+      "node": "v24.20.0",
+      "npm": "11.19.0",
+      "platform": "win32"
+    },
+    "dependencies": {
+      "@soxa-ui/core": {
+        "requested": "0.3.0",
+        "installed": "0.3.0"
+      },
+      "@soxa-ui/setup": {
+        "requested": "0.3.0",
+        "installed": "0.3.0"
+      },
+      "@soxa-ui/svelte": {
+        "requested": "0.3.0",
+        "installed": "0.3.0"
+      },
+      "@soxa-ui/theme-oren": {
+        "requested": "0.3.0",
+        "installed": "0.3.0"
+      },
+      "@soxa-ui/icons-material": {
+        "requested": "0.3.0",
+        "installed": "0.3.0"
+      },
+      "svelte": {
+        "requested": "5.57.2",
+        "installed": "5.57.2"
+      },
+      "svelte-check": {
+        "requested": "4.7.7",
+        "installed": "4.7.7"
+      },
+      "typescript": {
+        "requested": "6.0.3",
+        "installed": "6.0.3"
+      },
+      "vite": {
+        "requested": "8.3.5",
+        "installed": "8.3.5"
+      },
+      "@sveltejs/vite-plugin-svelte": {
+        "requested": "7.3.1",
+        "installed": "7.3.1"
+      },
+      "@types/node": {
+        "requested": "24.19.2",
+        "installed": "24.19.2"
+      }
+    },
+    "libraryVersions": {
+      "@soxa-ui/core": "0.3.0",
+      "@soxa-ui/icons-material": "0.3.0",
+      "@soxa-ui/plugins": "0.3.0",
+      "@soxa-ui/setup": "0.3.0",
+      "@soxa-ui/svelte": "0.3.0",
+      "@soxa-ui/theme-base": "0.3.0",
+      "@soxa-ui/theme-oren": "0.3.0"
+    },
+    "lock": {
+      "file": "package-lock.json",
+      "sha256": "e871653960f7290b1b39d8a5dab5716ba88d3808f4d84b9409e833e7cdbf9d2c"
+    },
+    "compiler": {
+      "strict": true,
+      "skipLibCheck": false,
+      "failOnWarnings": true
+    },
+    "strictTypeResult": {
+      "passed": false,
+      "errorCount": 1,
+      "warningCount": 0,
+      "diagnostic": "Import declaration conflicts with local declaration of 'Teleport'.",
+      "file": "node_modules/@soxa-ui/svelte/dist/adapter/runtime/Teleport.svelte.d.ts:1:8",
+      "preservedPublishedVersion": true
+    },
+    "productionBuild": {
+      "passed": true
+    },
+    "browser": {
+      "browserVersion": "156.0.8078.4",
+      "checks": [
+        {
+          "name": "Nested Label names Input",
+          "status": "passed"
+        },
+        {
+          "name": "Value payload exposes previous string",
+          "status": "passed"
+        },
+        {
+          "name": "Label checkbox supports Space and controlled value",
+          "status": "passed"
+        },
+        {
+          "name": "Select keyboard changes application state and item snippet",
+          "status": "passed"
+        },
+        {
+          "name": "Escape closes reopened Select",
+          "status": "passed"
+        },
+        {
+          "name": "Submit Button saves controlled snapshot without navigation",
+          "status": "passed"
+        },
+        {
+          "name": "Native onclick writes state back into field",
+          "status": "passed"
+        },
+        {
+          "name": "Compound Accordion header scope updates",
+          "status": "passed"
+        },
+        {
+          "name": "No browser errors or warnings",
+          "status": "passed"
+        }
+      ],
+      "issues": [],
+      "failure": null
+    },
+    "limitations": [
+      "Strict types remain blocked by exact published 0.3.0 declaration; runtime success is not a passing type result.",
+      "CSR only; independent app does not claim SvelteKit SSR, controller lifecycle, DatePicker or general accessibility validation."
+    ]
+  }
+}

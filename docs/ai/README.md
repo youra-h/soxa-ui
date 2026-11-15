@@ -208,3 +208,41 @@ Run `npm run check:ai-docs:angular` for exact published 0.3.0 standalone CSR
 and Angular SSR recipes: strict ngc/AOT, negative template guard, production
 build, model/events, Forms, scoped slots, keyboard, controller teardown and hydration.
 Coverage remains sample. See [Angular validation](./0.3.0/angular-validation.md).
+
+Svelte/SvelteKit consumption starts with [svelte-start](./0.3.0/svelte-start.md).
+Run `npm run check:ai-docs:svelte` for exact published consumers. This diagnostic
+currently fails strict declarations (published Teleport TS2440); it is deliberately
+not added to the shared CI job until the owner resolves the release blocker.
+Runtime coverage is sample, not full typed readiness. See
+[Svelte validation](./0.3.0/svelte-validation.md) for the tested limits.
+
+Svelte record navigation: [installation](./0.3.0/svelte-installation.md),
+[bindings](./0.3.0/svelte-bindings.md), [composition](./0.3.0/svelte-composition.md),
+[controller](./0.3.0/svelte-controller.md), [SvelteKit](./0.3.0/svelte-sveltekit.md),
+and [errors](./0.3.0/svelte-errors.md). Generated API is reached by related record IDs.
+
+### Svelte development validation
+
+The published 0.3.0 diagnostic remains separate and intentionally exits nonzero
+on its immutable Teleport TS2440 declarations. Fixes in the development branch
+do not change those npm bytes or the 0.3.0 corpus/API pins.
+
+Run `npm run check:ai-docs:svelte:development` to build the current checkout,
+pack its full Soxa dependency closure and install it into new temporary Svelte
+and SvelteKit consumers. After an explicit `npm run build`, use
+`npm run check:ai-docs:svelte:development -- --skip-build`. The command verifies
+that package sources match the fetched `origin/main`, checks npm peers, each
+tarball's integrity and exact version, unique package copies, the installed
+development API digest, strict positive and negative templates, production,
+keyboard/controllers and universal SSR/hydration/navigation. Every ARIA reference
+must resolve in SSR and hydrated/open/closed states; published exceptions are
+never accepted in this mode. CI runs this development check after building.
+
+Its evidence.json records the exact source revision, package versions and origins,
+tarball/API/input/lock digests and consumer outcomes. These artifacts retain the
+workspace's current version numbers; they are unpublished development builds,
+not evidence that npm 0.3.0 or npm latest contains the fixes. The development API
+is recorded for auditing and never fed into the published corpus builder.
+See [separate development evidence](./validation/svelte-development.md).
+A future fixed published release requires its own exact-version corpus and
+independent published-package validation before strict readiness can be claimed.
