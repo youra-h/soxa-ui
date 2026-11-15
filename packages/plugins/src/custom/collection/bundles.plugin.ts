@@ -39,22 +39,22 @@ export class TCollectionBundlesPlugin extends TBasePlugin<any, TBundlesEvents> {
 		this._whenAccepted(() => {
 			const plain = plainOf<IComponentView>(engine)
 
-			// Синхронизация реестра bundles с жизненным циклом элементов коллекции:
-			// элемент ушёл — его запись снимается тем же путём, что и кончившееся
-			// монтирование, с `bundle:unregistered`
+			// Keep bundle entries aligned with collection membership: removing an item
+			// releases its entry through the same bundle:unregistered path as
+			// the end of its mount.
 			this._listenTo(plain?.events, 'item:removed', (e) => {
 				const uid = this._uid(e.item)
 
 				if (uid !== undefined && this._bundles.has(uid)) this.unregister(uid)
 			})
 
-			// Очистка шлёт `item:removed` каждому элементу раньше `reset`: к нему
-			// остаются только записи, чьих элементов в коллекции не было
+			// Clearing emits item:removed before reset, which then releases entries
+			// whose items were already absent from the collection.
 			this._listenTo(plain?.events, 'reset', () => {
 				for (const uid of [...this._bundles.keys()]) this.unregister(uid)
 			})
 
-			// Оповещаем плагины о том, что коллекция привязана.
+			// Notify the other plugins after the collection has been accepted.
 			this.events.emit('engine:bound', engine)
 		})
 	}
