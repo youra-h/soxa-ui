@@ -15,6 +15,7 @@ function fixture() {
 	)
 	manifest.documents = manifest.documents.slice(0, 2)
 	manifest.coverage.react.guides = 'pending'
+	manifest.coverage.angular.guides = 'pending'
 	manifest.documents[0].related = ['vue-button']
 	const source = {
 		revision: manifest.libraryRevision,

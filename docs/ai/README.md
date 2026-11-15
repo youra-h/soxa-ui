@@ -202,3 +202,9 @@ Run `npm run check:ai-docs:react` for its separate published-package smoke;
 the existing `check:ai-docs` retains Vue/Nuxt verification. React recipes cover a
 form, scoped slots, controller cleanup and Next SSR/RSC boundaries; coverage
 remains sample. See [React validation](./0.3.0/react-validation.md) for evidence.
+
+Angular consumption starts with [angular-start](./0.3.0/angular-start.md).
+Run `npm run check:ai-docs:angular` for exact published 0.3.0 standalone CSR
+and Angular SSR recipes: strict ngc/AOT, negative template guard, production
+build, model/events, Forms, scoped slots, keyboard, controller teardown and hydration.
+Coverage remains sample. See [Angular validation](./0.3.0/angular-validation.md).

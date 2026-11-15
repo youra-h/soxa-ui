@@ -22,7 +22,7 @@
     },
     "angular": {
       "api": "generated",
-      "guides": "pending"
+      "guides": "sample"
     },
     "solid": {
       "api": "generated",
@@ -53,7 +53,7 @@
           "path": "README.md"
         }
       ],
-      "related": ["vue-button", "vue-start", "react-start"],
+      "related": ["vue-button", "vue-start", "react-start", "angular-start"],
       "examples": [],
       "links": []
     },
@@ -550,6 +550,239 @@
       "related": ["react-start"],
       "examples": [],
       "links": []
+    },
+    {
+      "id": "angular-start",
+      "title": "Angular 0.3.0 consumer entry point",
+      "path": "angular-start.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "overview",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": [
+        "overview",
+        "angular-installation",
+        "angular-bindings",
+        "angular-composition",
+        "angular-controller",
+        "angular-ssr",
+        "angular-errors"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "angular-installation",
+      "title": "Install and register standalone Angular",
+      "path": "angular-installation.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "installation",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": ["angular-start", "api-angular-button"],
+      "examples": [
+        {
+          "id": "angular-package-json",
+          "path": "examples/angular/package.json",
+          "language": "json"
+        },
+        {
+          "id": "angular-angular-json",
+          "path": "examples/angular/angular.json",
+          "language": "json"
+        },
+        {
+          "id": "angular-tsconfig-json",
+          "path": "examples/angular/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "angular-tsconfig-app-json",
+          "path": "examples/angular/tsconfig.app.json",
+          "language": "json"
+        },
+        {
+          "id": "angular-src-main-ts",
+          "path": "examples/angular/src/main.ts",
+          "language": "ts"
+        },
+        {
+          "id": "angular-src-index-html",
+          "path": "examples/angular/src/index.html",
+          "language": "html"
+        },
+        {
+          "id": "angular-src-styles-css",
+          "path": "examples/angular/src/styles.css",
+          "language": "css"
+        },
+        {
+          "id": "angular-src-app-app-config-ts",
+          "path": "examples/angular/src/app/app.config.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "angular-bindings",
+      "title": "Signals, model outputs and Angular Forms",
+      "path": "angular-bindings.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "bindings",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": [
+        "angular-start",
+        "api-angular-input",
+        "api-angular-check-box",
+        "api-angular-label",
+        "api-angular-select",
+        "api-angular-date-picker"
+      ],
+      "examples": [
+        {
+          "id": "angular-src-app-app-ts",
+          "path": "examples/angular/src/app/app.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "angular-composition",
+      "title": "Parts and scoped templates",
+      "path": "angular-composition.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "composition",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": [
+        "angular-start",
+        "api-angular-accordion",
+        "api-angular-accordion-item",
+        "api-angular-select"
+      ],
+      "examples": [
+        {
+          "id": "angular-src-app-app-ts",
+          "path": "examples/angular/src/app/app.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "angular-controller",
+      "title": "Controllers, refs and component lifetime",
+      "path": "angular-controller.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "lifecycle",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": ["angular-start", "api-angular-button"],
+      "examples": [
+        {
+          "id": "angular-src-app-controller-ts",
+          "path": "examples/angular/src/app/controller.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "angular-ssr",
+      "title": "Angular SSR and hydration",
+      "path": "angular-ssr.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "ssr",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": ["angular-start", "api-angular-select", "api-angular-date-picker"],
+      "examples": [
+        {
+          "id": "angular-src-main-server-ts",
+          "path": "examples/angular/src/main.server.ts",
+          "language": "ts"
+        },
+        {
+          "id": "angular-src-server-ts",
+          "path": "examples/angular/src/server.ts",
+          "language": "ts"
+        },
+        {
+          "id": "angular-src-app-app-config-server-ts",
+          "path": "examples/angular/src/app/app.config.server.ts",
+          "language": "ts"
+        },
+        {
+          "id": "angular-src-app-app-routes-server-ts",
+          "path": "examples/angular/src/app/app.routes.server.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "angular-errors",
+      "title": "Troubleshoot Angular 0.3.0 consumption",
+      "path": "angular-errors.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "troubleshooting",
+      "component": null,
+      "status": "ready",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": ["angular-start"],
+      "examples": [],
+      "links": []
     }
   ],
   "packages": {
@@ -560,7 +793,8 @@
     "@soxa-ui/theme-base": "0.3.0",
     "@soxa-ui/theme-oren": "0.3.0",
     "@soxa-ui/icons-material": "0.3.0",
-    "@soxa-ui/react": "0.3.0"
+    "@soxa-ui/react": "0.3.0",
+    "@soxa-ui/angular": "0.3.0"
   },
   "contributorGuides": "pending"
 }
