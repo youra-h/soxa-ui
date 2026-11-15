@@ -15,6 +15,7 @@ function fixture() {
 	)
 	manifest.documents = manifest.documents.slice(0, 2)
 	manifest.coverage.react.guides = 'pending'
+	manifest.coverage.angular.guides = 'pending'
 	manifest.documents[0].related = ['vue-button']
 	const source = {
 		revision: manifest.libraryRevision,
@@ -391,4 +392,104 @@ test('React topic selection returns its guide without leaking Vue recipes', () =
 			framework: 'react',
 		}).every((doc) => doc.framework === 'react' || doc.framework === 'all'),
 	)
+})
+
+test('Angular recipes retain exact pins, API relations and standalone nested sources', async () => {
+	const manifest = JSON.parse(
+		readFileSync(new URL('../../docs/ai/0.3.0/manifest.json', import.meta.url), 'utf8'),
+	)
+	assert.equal(manifest.schemaVersion, 1)
+	assert.equal(manifest.packages['@soxa-ui/angular'], '0.3.0')
+	assert.equal(manifest.coverage.angular.guides, 'sample')
+	const guides = manifest.documents.filter((doc) => doc.framework === 'angular')
+	assert.deepEqual(
+		guides.map((doc) => doc.id),
+		[
+			'angular-start',
+			'angular-installation',
+			'angular-bindings',
+			'angular-composition',
+			'angular-controller',
+			'angular-ssr',
+			'angular-errors',
+		],
+	)
+	assert.ok(
+		guides.find((doc) => doc.id === 'angular-bindings').related.includes('api-angular-input'),
+	)
+	assert.ok(
+		guides
+			.find((doc) => doc.id === 'angular-composition')
+			.related.includes('api-angular-accordion-item'),
+	)
+	const examples = guides.flatMap((doc) => doc.examples)
+	for (const file of [
+		'package.json',
+		'angular.json',
+		'tsconfig.json',
+		'tsconfig.app.json',
+		'src/main.ts',
+		'src/main.server.ts',
+		'src/server.ts',
+		'src/styles.css',
+		'src/app/app.ts',
+		'src/app/controller.ts',
+		'src/app/app.config.ts',
+		'src/app/app.config.server.ts',
+		'src/app/app.routes.server.ts',
+	])
+		assert.ok(
+			examples.some((example) => example.path === 'examples/angular/' + file),
+			file,
+		)
+	const { fetchSource } = await import('./fetch.mjs')
+	const root = mkdtempSync(join(tmpdir(), 'soxa-angular-delivery-'))
+	const requested = []
+	await fetchSource({
+		revision,
+		version: '0.3.0',
+		out: root,
+		fetchFile: async (url) => {
+			requested.push(url)
+			return new Response(
+				url.endsWith('manifest.json') ? JSON.stringify(manifest) : 'public source',
+			)
+		},
+	})
+	for (const example of examples) {
+		assert.ok(existsSync(join(root, 'docs/ai/0.3.0', example.path)))
+		assert.ok(requested.some((url) => url.endsWith('/' + example.path)))
+	}
+})
+
+test('Angular SSR selection excludes other framework recipes and keeps shared records', () => {
+	const f = fixture()
+	f.manifest.coverage.angular.guides = 'sample'
+	f.manifest.documents.push({
+		...f.manifest.documents[0],
+		id: 'angular-ssr-fixture',
+		path: 'angular.md',
+		framework: 'angular',
+		topic: 'ssr',
+		related: [],
+	})
+	writeFileSync(join(f.root, 'angular.md'), '# Angular consumer fixture\n')
+	const corpus = f.build()
+	assert.deepEqual(
+		selectDocuments(corpus, {
+			version: '0.3.0',
+			audience: 'consumer',
+			framework: 'angular',
+			topic: 'ssr',
+		}).map((doc) => doc.id),
+		['angular-ssr-fixture'],
+	)
+	const selected = selectDocuments(corpus, {
+		version: '0.3.0',
+		audience: 'consumer',
+		framework: 'angular',
+	})
+	assert.ok(selected.some((doc) => doc.framework === 'all'))
+	assert.ok(selected.every((doc) => doc.framework === 'angular' || doc.framework === 'all'))
+	assert.ok(!selected.some((doc) => /vue|react/.test(doc.framework)))
 })

@@ -1,0 +1,9 @@
+{
+  "duplicateIds": [],
+  "missingReferences": [
+    {
+      "attribute": "aria-controls",
+      "id": "ng-6-list"
+    }
+  ]
+}

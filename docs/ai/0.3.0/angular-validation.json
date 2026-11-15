@@ -1,0 +1,775 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-15",
+  "libraryVersion": "0.3.0",
+  "libraryRevision": "9ae988633936a03e291e8e414028456fe1039c6b",
+  "maintained": {
+    "sourceRevision": "abed1184bf02c9f18450ee34bb3eecb30e7a5fe1",
+    "commands": [
+      "npm run test:ai-docs",
+      "npm run check:ai-docs:angular",
+      "npm run check:ai-docs",
+      "npm run check:ai-docs:react",
+      "targeted eslint",
+      "prettier --check",
+      "node tools/english/comments.mjs origin/main",
+      "git diff --check"
+    ],
+    "tests": 32,
+    "ngc": "strictTemplates=true; strict=true; skipLibCheck=false; extendedDiagnostics.defaultCategory=error; negative Button text input guard",
+    "ssr": "RenderMode.Server; zero prerendered routes; fresh no-JS requests after mutation",
+    "completeARIAValidity": false,
+    "knownLimits": [
+      {
+        "name": "Raw SSR closed Select portal target absent",
+        "kind": "published portal contract observation"
+      },
+      {
+        "name": "Hydrated hidden Calendar picker label target absent",
+        "followUp": "https://app.clickup.com/t/1an4hvw5ykx"
+      }
+    ],
+    "buildBudget": {
+      "maximumWarning": "500kB",
+      "maximumError": "1MB",
+      "observation": "Default initial size advisory remains visible for maintained and independent consumers; no warning suppressed or hard limit relaxed"
+    }
+  },
+  "independent": {
+    "schema": "independent-angular-consumer-evidence-v1",
+    "timestamp": "2026-11-15T09:45:52.136Z",
+    "provenance": {
+      "inputFiles": [
+        {
+          "name": "angular-bindings.json",
+          "sha256": "3576a093c6e4c3a68eb75446fc5de6579cc328c49e13cf025ce0532a6ac61b8b",
+          "contentSha256": "f4155994f50f05b70af356cebf78ff06f07ec41a81367cbb179f9e5339384e37"
+        },
+        {
+          "name": "angular-composition.json",
+          "sha256": "493fb8635b0a3300c15bca352baf43f4c8335173fc6e88d1e3e96d41fd680361",
+          "contentSha256": "669e4d8c8fa53ce18b50b4bc90ab736910b4b8ef86c31c1a60acae1064824774"
+        },
+        {
+          "name": "angular-controller.json",
+          "sha256": "6a2c122d055a4f667df1da3181e4e24f9c9f01ac63887121b423e7cdb85c181d",
+          "contentSha256": "0cdb404f3b6d7082a9eabe35efe6fec0f7436ab92015ca829bc4ccfd6f2fe41f"
+        },
+        {
+          "name": "angular-errors.json",
+          "sha256": "c72bd45044c0609e9f47c72351605f79fb0e5833aa0d7c7190f02b8637b822b1",
+          "contentSha256": "590c3fe54bc68ad559392e97b9e7474c9f36f6de9a87890dcd957d2bd04c306a"
+        },
+        {
+          "name": "angular-installation.json",
+          "sha256": "b18c8a8a6202024af533db427bbb9424be9be1cfd7de7276363de54eca182e8f",
+          "contentSha256": "f49b2f90bb888a7765618be7986b91a185bfa6525616dc61c62ac6d06ec4b67a"
+        },
+        {
+          "name": "angular-ssr.json",
+          "sha256": "da337a83110e747784704a923586728c27123e5f9286ab3c75cbc646f7b45b6d",
+          "contentSha256": "9b59c9947053939af92354729ae02ac70742e3c395784743e63b282e7e473d62"
+        },
+        {
+          "name": "angular-start.json",
+          "sha256": "c73c2024dfe95958c08da4af6b09199e227ff55c7c6a36a2bb4eff72d9d02827",
+          "contentSha256": "976cf999fa7bbf529d890ecaa05b28967798d14e43e9ddff1d288d3b75a50804"
+        },
+        {
+          "name": "api-angular-accordion-item.json",
+          "sha256": "5ad0a5c70b8c1e446c115dcb27f588d0fa61caa29d9650e4e15b26ccc58182bc",
+          "contentSha256": "aadbb655943679787c795636e3f8c83ec8b9aa2e6f7565cdaec710d05a1c1b63"
+        },
+        {
+          "name": "api-angular-accordion.json",
+          "sha256": "abb6c37b836b35fb8a3d57bdcdb6fbd9a8b5d5c68a2bdeed5df565972cf41869",
+          "contentSha256": "32125e14b23c9eab223b66ba53b532640abb4eb9b06eecab6a907acd0a6db014"
+        },
+        {
+          "name": "api-angular-button.json",
+          "sha256": "a4eb0774bc2a21c1936ac8bd51e61fd1bae2c7bb10b49ef6a916cfd2d4e713e9",
+          "contentSha256": "6965cb3f7b9d40bccc9afce4c9d38e63411ecce4e484ac5642cacb55941cec21"
+        },
+        {
+          "name": "api-angular-check-box.json",
+          "sha256": "aa3492de496f6786d0f8fbcd42ca1226efa0ba0faa13bdcd56fd3d9195851b52",
+          "contentSha256": "f0b666519cdd6ed883bb1542bcd86ee1a7fc92ce387bbe8d798d6066c4292e29"
+        },
+        {
+          "name": "api-angular-date-picker.json",
+          "sha256": "e984b76b0562ad94a1db3351d4cc31c2ed8c6def1c14ce882c75326004a13177",
+          "contentSha256": "96f68030070f9e6bc9d59690c3b2ddded74e38b6c0eb094354f9e2b8f9ad8cb0"
+        },
+        {
+          "name": "api-angular-input.json",
+          "sha256": "0abe6837f8530be8a86a9d780324c89ba4312fede4911e68de5e6c3e58c7e95f",
+          "contentSha256": "b44b1efd8dd7fba698657e113197d00db974bbe5bc54e580c208c5bbe88c6f32"
+        },
+        {
+          "name": "api-angular-label.json",
+          "sha256": "3d1462289536f06b53552ca0706130bbb1f159436a25def0f0b3e164b13341e1",
+          "contentSha256": "acc19246fd5763dd63c005af22bf6a4f068257336f3bbaf9ef62478fc584cbc7"
+        },
+        {
+          "name": "api-angular-select.json",
+          "sha256": "996bc73000fe14fd988b1747c4a38e06b00de6dcc77428cbce22769fd6cdc9b8",
+          "contentSha256": "70ba62e237ef480280ca833f8fc9af622e07ab711f9aa9704f67796c99aed786"
+        },
+        {
+          "name": "overview.json",
+          "sha256": "39717d76cda9abd06c97102b2dd97f6a28d172af5f0715d21f52ef3b515987f9",
+          "contentSha256": "e09dcc3410da7c061eb3e9ed462ae05a1961b6ddac4dbd8153ea335c123ac01e"
+        }
+      ],
+      "constraints": "Only the selected 16 exported documentation records, their attached snippets, and installed published npm package declarations used. No project/private-memory/source/maintained-fixture reads. No library edits.",
+      "independentScenario": "Library collection reservation, created independently; configuration/SSR scaffolding copied from supplied docs.",
+      "inputSnapshotRevision": "e8dbdf982f6efade6d3553c746084ebb5c1c16b8"
+    },
+    "runtime": {
+      "node": "v24.20.0",
+      "npm": "11.19.0",
+      "browserRunner": "playwright@1.56.1",
+      "browser": "local Playwright Chromium 1194"
+    },
+    "packagePins": {
+      "dependencies": {
+        "@angular/common": "22.2.5",
+        "@angular/compiler": "22.2.5",
+        "@angular/core": "22.2.5",
+        "@angular/forms": "22.2.5",
+        "@angular/platform-browser": "22.2.5",
+        "@angular/platform-server": "22.2.5",
+        "@angular/compiler-cli": "22.2.5",
+        "@angular/build": "22.2.5",
+        "@angular/cli": "22.2.5",
+        "@angular/ssr": "22.2.5",
+        "@angular/router": "22.2.5",
+        "@soxa-ui/angular": "0.3.0",
+        "@soxa-ui/core": "0.3.0",
+        "@soxa-ui/setup": "0.3.0",
+        "@soxa-ui/plugins": "0.3.0",
+        "@soxa-ui/theme-base": "0.3.0",
+        "@soxa-ui/theme-oren": "0.3.0",
+        "@soxa-ui/icons-material": "0.3.0",
+        "rxjs": "7.8.2",
+        "tslib": "2.8.1",
+        "express": "5.1.0"
+      },
+      "devDependencies": {
+        "typescript": "6.0.2",
+        "@types/node": "24.10.0",
+        "@types/express": "5.0.3"
+      }
+    },
+    "commands": [
+      {
+        "command": "npm --version",
+        "exit": 1,
+        "note": "PowerShell npm.ps1 execution policy blocked; switched to npm.cmd"
+      },
+      {
+        "command": "npm.cmd view @soxa-ui/angular@0.3.0 version --fetch-retries=0 --fetch-timeout=15000",
+        "exit": 1,
+        "note": "Sandbox socket denied EACCES"
+      },
+      {
+        "command": "npm.cmd install --no-audit --no-fund --cache .npm-cache",
+        "exit": 0,
+        "escalated": true,
+        "note": "Exact pins from docs; npm install scripts warning left untouched"
+      },
+      {
+        "command": "npm.cmd run typecheck",
+        "exit": 0,
+        "note": "ngc strictTemplates/strict TS/skipLibCheck false"
+      },
+      {
+        "command": "npm.cmd run build",
+        "exit": -1073741819,
+        "note": "Sandbox esbuild denied ancestor directory traversal"
+      },
+      {
+        "command": "npm.cmd run build",
+        "exit": 0,
+        "escalated": true,
+        "note": "Production AOT and Server-mode SSR build; 0 prerendered routes, initial total 687.86 kB"
+      },
+      {
+        "command": "npm.cmd install --no-save --package-lock=false --no-audit --no-fund --cache .npm-cache playwright@1.56.1",
+        "exit": 0,
+        "escalated": true
+      },
+      {
+        "command": "$env:PORT=4149; node dist/app/server/server.mjs",
+        "note": "loopback SSR server"
+      },
+      {
+        "command": "node probe.mjs",
+        "exit": 0,
+        "note": "Initial SSR hydration and labels probe"
+      },
+      {
+        "command": "node verify.mjs",
+        "exit": 1,
+        "note": "First runner asserted disabled before Angular scheduled render; fixed runner to wait for rendered state. No app change."
+      },
+      {
+        "command": "node verify.mjs",
+        "exit": 0,
+        "note": "14 actual browser/SSR checks"
+      },
+      {
+        "command": "node raw-a11y.mjs",
+        "exit": 0,
+        "note": "Raw SSR ID/reference observation"
+      },
+      {
+        "command": "npm.cmd run typecheck with temporary [text]=\"42\"",
+        "exit": 1,
+        "note": "Expected TS2322 number not assignable to string; restored app source"
+      },
+      {
+        "command": "npm.cmd run typecheck",
+        "exit": 0,
+        "note": "Restored valid source"
+      }
+    ],
+    "browserResults": {
+      "results": [
+        {
+          "name": "dynamic raw HTML initial values and hydration metadata",
+          "status": "pass"
+        },
+        {
+          "name": "raw SSR usable without JavaScript",
+          "status": "pass"
+        },
+        {
+          "name": "initial hydration and accessible labels",
+          "status": "pass"
+        },
+        {
+          "name": "typed model and Soxa event synchronized",
+          "status": "pass"
+        },
+        {
+          "name": "Reactive FormControl user change and touched",
+          "status": "pass"
+        },
+        {
+          "name": "form disable",
+          "status": "pass"
+        },
+        {
+          "name": "nullable reset",
+          "status": "pass"
+        },
+        {
+          "name": "composite Select keyboard opens",
+          "status": "pass"
+        },
+        {
+          "name": "composite Select keyboard selection updates ngModel",
+          "status": "pass"
+        },
+        {
+          "name": "checkbox model and action output",
+          "status": "pass"
+        },
+        {
+          "name": "second dynamic request isolates component state",
+          "status": "pass"
+        },
+        {
+          "name": "fresh hydration restores initial state",
+          "status": "pass"
+        },
+        {
+          "name": "hydrated IDs unique and ARIA references resolve",
+          "status": "pass"
+        },
+        {
+          "name": "no browser console warnings/errors or hydration errors",
+          "status": "pass"
+        }
+      ],
+      "errors": []
+    },
+    "rawAria": {
+      "duplicateIds": [],
+      "missingReferences": [
+        {
+          "attribute": "aria-controls",
+          "id": "ng-6-list"
+        }
+      ]
+    },
+    "docsGaps": [
+      "Supplied SSR routes use RenderMode.Prerender, so their unchanged configuration cannot establish dynamic per-request rendering. This independent app switches to RenderMode.Server using the installed Angular declaration.",
+      "Raw SSR Select aria-controls references ng-6-list which is absent until portal hydration; hydrated IDs and references pass. Supplied docs mention possible absent overlay but do not explicitly spell out this unresolved reference.",
+      "The selected records refer to angular-validation.md, which is not part of the authorized 16-record input set; no validation claims from that record were available or used."
+    ],
+    "scope": "This proves this independently reconstructed pinned Angular consumer only; no full documentation/framework/browser completion claim. DatePicker/controller/slots intentionally not exercised.",
+    "correctionRecheck": {
+      "timestamp": "2026-11-15T09:47:09.841Z",
+      "file": "angular-ssr.json",
+      "fileSha256": "c684d0ba0c4dcc26ff6d555501942ebbee63b1d539d1402067523bd84291cf54",
+      "contentSha256": "9b59c9947053939af92354729ae02ac70742e3c395784743e63b282e7e473d62",
+      "declaredContentSha256": "9b59c9947053939af92354729ae02ac70742e3c395784743e63b282e7e473d62",
+      "docsRevision": "14f3d51ed1f907d349faa8b054497271e051c6c5",
+      "observedConfig": {
+        "path": "examples/angular/src/app/app.routes.server.ts",
+        "content": "import { RenderMode } from '@angular/ssr'\nimport type { ServerRoute } from '@angular/ssr'\n\nexport const serverRoutes: ServerRoute[] = [\n\t{\n\t\tpath: '**',\n\t\trenderMode: RenderMode.Server,\n\t},\n]\n",
+        "exampleSha256": "395826c24990eedaa585cb961b17daa8a30aec244621f34e3e8020824b01c696",
+        "renderMode": "Server"
+      },
+      "result": "Corrected attached wildcard route uses RenderMode.Server, resolving original dynamic per-request SSR documentation gap.",
+      "scope": "Read-only corrected SSR document recheck only; original input hashes and original observed gaps preserved; no test rerun.",
+      "docsRevisionSource": "origin URL blob revision"
+    },
+    "retainedSourceDirectory": "validation-angular-consumer",
+    "retainedAdaptation": "Formatting normalized; runner accepts CONSUMER_URL; Playwright pinned as dev dependency; failed-request diagnostics added. Original byte hashes retained separately. Default CLI initial warning budget restored to 500kB, hard error remains 1MB; advisory is visible.",
+    "originalSourceByteHashes": [
+      {
+        "file": "package.json",
+        "sha256": "7f3e1aa3f9c93192957a0727caa69c58201f2a06be6513f5a8dfebe8155d1eae"
+      },
+      {
+        "file": "package-lock.json",
+        "sha256": "ac47ab6b1ed2c31c4528d871731f9b92aea1ba33e12938169b5895f3158fea95"
+      },
+      {
+        "file": "angular.json",
+        "sha256": "f706d36150adbc8d25cec8862c2f785ae6febf40d3022a9bb43e67916fc246da"
+      },
+      {
+        "file": "tsconfig.json",
+        "sha256": "9e5a005af65e347785e12eecc4064aaa619462234b71adc93d3c6fb6b4f82ec7"
+      },
+      {
+        "file": "tsconfig.app.json",
+        "sha256": "c9cda37eb8c73392044c481910ded9a8864558a0ef975e598890b74d42d79178"
+      },
+      {
+        "file": "src/index.html",
+        "sha256": "a9bb76aa43d3aefcc9e7ce9bc1c3b6fab639ff32fc41d11ec33d8f7ce017dd4d"
+      },
+      {
+        "file": "src/main.ts",
+        "sha256": "c95ea0acf9d3847d9a0d79279a6d90793048acd23f6ced9f695335728b068bdd"
+      },
+      {
+        "file": "src/main.server.ts",
+        "sha256": "44343ccc8c1c4413b4116ff12a19eeff054580afe7de4f22aac1acc491fbbb20"
+      },
+      {
+        "file": "src/server.ts",
+        "sha256": "170153b4a44ff7fc21e4d4ba69017b2e5d05fe854682f5d0fb0e89492aee9bcb"
+      },
+      {
+        "file": "src/styles.css",
+        "sha256": "db51ce029398c768737c2c9d63a6f4e5b29ec303199ad5675e44ef58e115c08b"
+      },
+      {
+        "file": "src/app/app.ts",
+        "sha256": "92dfbc77b07797faec7d93c10332fbfa0ff423a1987796532bf66ea2b7d48535"
+      },
+      {
+        "file": "src/app/app.config.ts",
+        "sha256": "2985bd13e3c265236b5c7526521d6c3e22cd98aaf8d5305533cd223ae36b6419"
+      },
+      {
+        "file": "src/app/app.config.server.ts",
+        "sha256": "4d38aeb7f4e056bfa87464e4300b1478143dbabceebfcaf46eb412ba63940c20"
+      },
+      {
+        "file": "src/app/app.routes.server.ts",
+        "sha256": "7e99670e64c0bdbb87fcfc08a8545058388d85469f2f6bf4b05685b1da7cf3ee"
+      },
+      {
+        "file": "verify.mjs",
+        "sha256": "86d8d3aec47c9b6af2e33997e0da6145e2b915180444d76c9eb898c28f3ac62a"
+      },
+      {
+        "file": "raw-a11y.mjs",
+        "sha256": "fdddabe86f372eab4a36944a56f43264ee65dfb02be203d2812f3889ad048528"
+      }
+    ],
+    "retainedReplay": {
+      "context": "New external copy of retained public sources; no monorepo resolution",
+      "commands": [
+        "npm install --no-audit --no-fund",
+        "npm run typecheck",
+        "npm run build",
+        "PORT=4151 npm start",
+        "CONSUMER_URL=http://127.0.0.1:4151 node verify.mjs",
+        "CONSUMER_URL=http://127.0.0.1:4151 node raw-a11y.mjs"
+      ],
+      "result": "strict ngc, production dynamic SSR build, all 14 browser/SSR checks and raw reference probe passed",
+      "completeARIAValidity": false,
+      "packageLockByteSha256": "67f5a625169e7bdcb88246bb794d91b93e896d380bef87b7db178de49eb5bb23",
+      "budgetRecheck": {
+        "change": "Only maxWarning restored to default500kB; maxError1MB unchanged",
+        "commands": [
+          "npm run build (maintained CSR)",
+          "npm run build (maintained dynamic SSR)",
+          "npm run build (retained independent dynamic SSR)"
+        ],
+        "result": "All three builds exit0; visible initial-size advisories339.66kB/376.04kB/187.86kB over500kB; functional sources unchanged"
+      }
+    }
+  },
+  "docsCorrections": [
+    {
+      "finding": "Attached wildcard Prerender route did not prove per-request SSR",
+      "resolution": "Maintained and independent routes use RenderMode.Server; corrected immutable SSR record re-read"
+    },
+    {
+      "finding": "Initial selected records referred to external validation evidence without exact observed raw reference limit",
+      "resolution": "Delivered angular-ssr now states exact portal and hidden Calendar observations directly; errors related includes angular-ssr"
+    },
+    {
+      "finding": "Manual ref semantics review",
+      "resolution": "Angular template reference on a Soxa component resolves the component instance, plain native host resolves DOM element; typed viewChild documented"
+    }
+  ],
+  "sourceInputs": [
+    {
+      "file": ".github/workflows/ci.yml",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "3aac91923efbbbe059965e80a173e0af95234b6227e2f6999bfb5424a5930196"
+    },
+    {
+      "file": "docs/ai/0.3.0/angular-bindings.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "368ba139341edb47648455ca465ac3186502f2a9d077d2a54153b3a5a2f7a42c"
+    },
+    {
+      "file": "docs/ai/0.3.0/angular-composition.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "ace95607c1018ed5783ca8bdc80edcf7d004e5b2d25b141ce57f46c7da534e26"
+    },
+    {
+      "file": "docs/ai/0.3.0/angular-controller.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "3fa61458f3fc68cc3abc04baabf93d38cefac08468aa4c26b61efd98240f32cb"
+    },
+    {
+      "file": "docs/ai/0.3.0/angular-errors.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "9c7e889e88b93ff7e6d93fb6ae416b86be54b97e63cdad21e1116872908609ff"
+    },
+    {
+      "file": "docs/ai/0.3.0/angular-installation.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "7267efa7771ee5577949e6bd6a7dfa331cc596e3d0ff6899cfb4779884cfea57"
+    },
+    {
+      "file": "docs/ai/0.3.0/angular-ssr.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "0b54d2b67eac5aa77b959a41aae814ddcc416c1754cbfa8e99163ecb61dad4aa"
+    },
+    {
+      "file": "docs/ai/0.3.0/angular-start.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "976cf999fa7bbf529d890ecaa05b28967798d14e43e9ddff1d288d3b75a50804"
+    },
+    {
+      "file": "docs/ai/0.3.0/angular-validation.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "fb6998365b3258000c24fb09a7d883c3e70c20adbcc31db3fa8a4cca2b225233"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/angular.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "ca29659c169d961ea9440b7c84630c545b93196a66fafc82986c0135d15315cd"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/package.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "7f3e1aa3f9c93192957a0727caa69c58201f2a06be6513f5a8dfebe8155d1eae"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/src/app/app.config.server.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "4d38aeb7f4e056bfa87464e4300b1478143dbabceebfcaf46eb412ba63940c20"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/src/app/app.config.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "2985bd13e3c265236b5c7526521d6c3e22cd98aaf8d5305533cd223ae36b6419"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/src/app/app.routes.server.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "395826c24990eedaa585cb961b17daa8a30aec244621f34e3e8020824b01c696"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/src/app/app.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "4454af8eb7ebd4ac496f8a99a3da9979f81e7688a4dde45d06e8efe3571c6ad0"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/src/app/controller.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "61ffcb172881b57354712eee7a8f814fdf48338c9c9a2fad70ef7da2a474902d"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/src/index.html",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "be4d6559d75a208306698ce200bf82f6fd8d0a279faed86027e4a75b74623a5b"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/src/main.server.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "44343ccc8c1c4413b4116ff12a19eeff054580afe7de4f22aac1acc491fbbb20"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/src/main.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "c95ea0acf9d3847d9a0d79279a6d90793048acd23f6ced9f695335728b068bdd"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/src/server.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "170153b4a44ff7fc21e4d4ba69017b2e5d05fe854682f5d0fb0e89492aee9bcb"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/src/styles.css",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "db51ce029398c768737c2c9d63a6f4e5b29ec303199ad5675e44ef58e115c08b"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/tsconfig.app.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "c9cda37eb8c73392044c481910ded9a8864558a0ef975e598890b74d42d79178"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/angular/tsconfig.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "e4e641ba603014625fa2179df7255e9c55987442d9a815298385116cea358d2f"
+    },
+    {
+      "file": "docs/ai/0.3.0/manifest.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "b9938e62f9600a842c2408c7ec89a44a301c638144e41235831e09cb03c84cb0"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/README.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "7aab6a21cc45e4b04a5d8066673a2db94cd881c60a61bd26a593d0ed2563603a"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/angular.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "ca29659c169d961ea9440b7c84630c545b93196a66fafc82986c0135d15315cd"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/browser-results.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "dd0fdaae8b72f141556014695335f0e03683fc88c9e24c9c9092f84b5bc54aca"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/package.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "7ba2e31f3fae8db78dbf45e6c0fa63118c6cacc5ee2c7b07b6daf91c224c2ff6"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/raw-a11y.mjs",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "fcb83d8b14ee94cd532c1105c55a8632cb8b01c71732bb7378ddb1404e313883"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/raw-aria-results.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "5d4bf51842dc4484feb678ff8736091f387efc29726792e2c386c9e08cf13ebf"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/src/app/app.config.server.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "4d38aeb7f4e056bfa87464e4300b1478143dbabceebfcaf46eb412ba63940c20"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/src/app/app.config.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "2985bd13e3c265236b5c7526521d6c3e22cd98aaf8d5305533cd223ae36b6419"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/src/app/app.routes.server.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "395826c24990eedaa585cb961b17daa8a30aec244621f34e3e8020824b01c696"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/src/app/app.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "9e7e324d9b9d6845d7ad5f2c7c92dbd8d8d6a10c953571924b24436ab586666c"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/src/index.html",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "a9bb76aa43d3aefcc9e7ce9bc1c3b6fab639ff32fc41d11ec33d8f7ce017dd4d"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/src/main.server.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "44343ccc8c1c4413b4116ff12a19eeff054580afe7de4f22aac1acc491fbbb20"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/src/main.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "c95ea0acf9d3847d9a0d79279a6d90793048acd23f6ced9f695335728b068bdd"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/src/server.ts",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "170153b4a44ff7fc21e4d4ba69017b2e5d05fe854682f5d0fb0e89492aee9bcb"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/src/styles.css",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "db51ce029398c768737c2c9d63a6f4e5b29ec303199ad5675e44ef58e115c08b"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/tsconfig.app.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "c9cda37eb8c73392044c481910ded9a8864558a0ef975e598890b74d42d79178"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/tsconfig.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "9e5a005af65e347785e12eecc4064aaa619462234b71adc93d3c6fb6b4f82ec7"
+    },
+    {
+      "file": "docs/ai/0.3.0/validation-angular-consumer/verify.mjs",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "3d7859fdee1f70bfae45974a6e5773707a0b5999aa97e22191b56c896f25696b"
+    },
+    {
+      "file": "docs/ai/README.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "85c54e1596021d2ae26f2b55058e99b70b2f7970f84fa9964dd7f751bb458df5"
+    },
+    {
+      "file": "package.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "f076e2692ba5dd449fb36dc811ebe4715d53d4f91ad9d5ef79c849c79a84a657"
+    },
+    {
+      "file": "tools/ai-docs/angular-smoke.mjs",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "913750002a74fa592ad072b1fba7761586b6be55012a8918f7782a849af94695"
+    },
+    {
+      "file": "tools/ai-docs/corpus.test.mjs",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "b5b2f869f1fcf4d1b24799e2bad89daba97d2c1b03062a7dbaf602762f9e70ae"
+    },
+    {
+      "file": "tools/ai-docs/static-server.mjs",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "cf7836ae1e345d7c816795b111e12184e6b338425a7338b767def3c3bf96ff3f"
+    }
+  ],
+  "finalExport": {
+    "docsRevision": "abed1184bf02c9f18450ee34bb3eecb30e7a5fe1",
+    "definition": "Hashes below are exact generated record bytes; document.sha256 hashes normalized authored content; sourceInputs also cover attached examples",
+    "inputs": [
+      {
+        "id": "angular-bindings",
+        "file": "documents/angular-bindings.json",
+        "byteSha256": "be4cf61adabc65d2954282def08c1b30fe016948a49dfe183a6268f5d30d6c69",
+        "declaredContentSha256": "368ba139341edb47648455ca465ac3186502f2a9d077d2a54153b3a5a2f7a42c"
+      },
+      {
+        "id": "angular-composition",
+        "file": "documents/angular-composition.json",
+        "byteSha256": "2ccc023e34187ccee202260e6dcbef73418994c94e476506954fadfb158ecc77",
+        "declaredContentSha256": "ace95607c1018ed5783ca8bdc80edcf7d004e5b2d25b141ce57f46c7da534e26"
+      },
+      {
+        "id": "angular-controller",
+        "file": "documents/angular-controller.json",
+        "byteSha256": "72aeb2220a97f8927b2a3b4c6fade89ffee5c31cbc1fc587ef597b59d0d9cf82",
+        "declaredContentSha256": "3fa61458f3fc68cc3abc04baabf93d38cefac08468aa4c26b61efd98240f32cb"
+      },
+      {
+        "id": "angular-errors",
+        "file": "documents/angular-errors.json",
+        "byteSha256": "28464526bcbd90350a16f3d21c1cbc5cc7bab65f5af617c554702789a3891b2c",
+        "declaredContentSha256": "9c7e889e88b93ff7e6d93fb6ae416b86be54b97e63cdad21e1116872908609ff"
+      },
+      {
+        "id": "angular-installation",
+        "file": "documents/angular-installation.json",
+        "byteSha256": "77440bd68f0cad8fa621aff63bd2077bedfb743c35f8719d940ebe8080516f9b",
+        "declaredContentSha256": "7267efa7771ee5577949e6bd6a7dfa331cc596e3d0ff6899cfb4779884cfea57"
+      },
+      {
+        "id": "angular-ssr",
+        "file": "documents/angular-ssr.json",
+        "byteSha256": "8d11b5beaa2bec0a9a400da7d0338d055363a4297f49e9ba74e44b86341708a9",
+        "declaredContentSha256": "0b54d2b67eac5aa77b959a41aae814ddcc416c1754cbfa8e99163ecb61dad4aa"
+      },
+      {
+        "id": "angular-start",
+        "file": "documents/angular-start.json",
+        "byteSha256": "6c22bf7a3a3492774a374390ad8f122fc1696ace64c4279340434e9026b64175",
+        "declaredContentSha256": "976cf999fa7bbf529d890ecaa05b28967798d14e43e9ddff1d288d3b75a50804"
+      },
+      {
+        "id": "api-angular-accordion",
+        "file": "documents/api-angular-accordion.json",
+        "byteSha256": "abb6c37b836b35fb8a3d57bdcdb6fbd9a8b5d5c68a2bdeed5df565972cf41869",
+        "declaredContentSha256": "32125e14b23c9eab223b66ba53b532640abb4eb9b06eecab6a907acd0a6db014"
+      },
+      {
+        "id": "api-angular-accordion-item",
+        "file": "documents/api-angular-accordion-item.json",
+        "byteSha256": "5ad0a5c70b8c1e446c115dcb27f588d0fa61caa29d9650e4e15b26ccc58182bc",
+        "declaredContentSha256": "aadbb655943679787c795636e3f8c83ec8b9aa2e6f7565cdaec710d05a1c1b63"
+      },
+      {
+        "id": "api-angular-button",
+        "file": "documents/api-angular-button.json",
+        "byteSha256": "a4eb0774bc2a21c1936ac8bd51e61fd1bae2c7bb10b49ef6a916cfd2d4e713e9",
+        "declaredContentSha256": "6965cb3f7b9d40bccc9afce4c9d38e63411ecce4e484ac5642cacb55941cec21"
+      },
+      {
+        "id": "api-angular-check-box",
+        "file": "documents/api-angular-check-box.json",
+        "byteSha256": "aa3492de496f6786d0f8fbcd42ca1226efa0ba0faa13bdcd56fd3d9195851b52",
+        "declaredContentSha256": "f0b666519cdd6ed883bb1542bcd86ee1a7fc92ce387bbe8d798d6066c4292e29"
+      },
+      {
+        "id": "api-angular-date-picker",
+        "file": "documents/api-angular-date-picker.json",
+        "byteSha256": "e984b76b0562ad94a1db3351d4cc31c2ed8c6def1c14ce882c75326004a13177",
+        "declaredContentSha256": "96f68030070f9e6bc9d59690c3b2ddded74e38b6c0eb094354f9e2b8f9ad8cb0"
+      },
+      {
+        "id": "api-angular-input",
+        "file": "documents/api-angular-input.json",
+        "byteSha256": "0abe6837f8530be8a86a9d780324c89ba4312fede4911e68de5e6c3e58c7e95f",
+        "declaredContentSha256": "b44b1efd8dd7fba698657e113197d00db974bbe5bc54e580c208c5bbe88c6f32"
+      },
+      {
+        "id": "api-angular-label",
+        "file": "documents/api-angular-label.json",
+        "byteSha256": "3d1462289536f06b53552ca0706130bbb1f159436a25def0f0b3e164b13341e1",
+        "declaredContentSha256": "acc19246fd5763dd63c005af22bf6a4f068257336f3bbaf9ef62478fc584cbc7"
+      },
+      {
+        "id": "api-angular-select",
+        "file": "documents/api-angular-select.json",
+        "byteSha256": "996bc73000fe14fd988b1747c4a38e06b00de6dcc77428cbce22769fd6cdc9b8",
+        "declaredContentSha256": "70ba62e237ef480280ca833f8fc9af622e07ab711f9aa9704f67796c99aed786"
+      },
+      {
+        "id": "overview",
+        "file": "documents/overview.json",
+        "byteSha256": "e09226ff5c3f65ba0884ffbc2f6254d0cf0b1b6026f44a1adc3a665ddac3e08e",
+        "declaredContentSha256": "e09dcc3410da7c061eb3e9ed462ae05a1961b6ddac4dbd8153ea335c123ac01e"
+      }
+    ]
+  }
+}

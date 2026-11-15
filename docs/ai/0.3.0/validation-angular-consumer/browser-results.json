@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "name": "dynamic raw HTML initial values and hydration metadata",
+      "status": "pass"
+    },
+    {
+      "name": "raw SSR usable without JavaScript",
+      "status": "pass"
+    },
+    {
+      "name": "initial hydration and accessible labels",
+      "status": "pass"
+    },
+    {
+      "name": "typed model and Soxa event synchronized",
+      "status": "pass"
+    },
+    {
+      "name": "Reactive FormControl user change and touched",
+      "status": "pass"
+    },
+    {
+      "name": "form disable",
+      "status": "pass"
+    },
+    {
+      "name": "nullable reset",
+      "status": "pass"
+    },
+    {
+      "name": "composite Select keyboard opens",
+      "status": "pass"
+    },
+    {
+      "name": "composite Select keyboard selection updates ngModel",
+      "status": "pass"
+    },
+    {
+      "name": "checkbox model and action output",
+      "status": "pass"
+    },
+    {
+      "name": "second dynamic request isolates component state",
+      "status": "pass"
+    },
+    {
+      "name": "fresh hydration restores initial state",
+      "status": "pass"
+    },
+    {
+      "name": "hydrated IDs unique and ARIA references resolve",
+      "status": "pass"
+    },
+    {
+      "name": "no browser console warnings/errors or hydration errors",
+      "status": "pass"
+    }
+  ],
+  "errors": []
+}
