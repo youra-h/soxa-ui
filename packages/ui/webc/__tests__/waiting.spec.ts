@@ -49,4 +49,32 @@ describe('ожидание подключения', () => {
 		expect(order).toEqual([1, 2, 11, 12, 21])
 		expect(isConnecting()).toBe(false)
 	})
+
+	it('после ошибок выполняет всю очередь, пробрасывает первую и допускает новое подключение', () => {
+		const first = new Error('first connection failed')
+		const second = new Error('second connection failed')
+		const order: number[] = []
+
+		expect(() =>
+			connecting(() => {
+				wait(() => {
+					connect(1, [11], order)
+					throw first
+				})
+				wait(() => {
+					connect(2, [], order)
+					throw second
+				})
+				connect(3, [], order)
+			}),
+		).toThrow(first)
+
+		expect(order).toEqual([1, 2, 3, 11])
+		expect(isConnecting()).toBe(false)
+
+		connect(4, [41], order)
+
+		expect(order).toEqual([1, 2, 3, 11, 4, 41])
+		expect(isConnecting()).toBe(false)
+	})
 })
