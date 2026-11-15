@@ -66,6 +66,7 @@ export class App {
 		{ value: 'north', text: 'North reading room' },
 		{ value: 'south', text: 'South archive' },
 	]
+
 	constructor() {
 		afterNextRender(() => this.ready.set(true))
 	}

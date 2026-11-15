@@ -41,7 +41,7 @@ not claimed**:
 
 `npm run check:ai-docs` and `npm run check:ai-docs:react` also passed as Vue/Nuxt
 and React/Next regressions. Their existing bundler size advisories remain visible;
-Angular production builds and ngc have no warnings. Install-script advisories
+Angular ngc has no warnings. The CLI default 500 kB initial warning budget remains active: maintained CSR/SSR and independent builds emit the expected size advisory while staying below the unchanged 1 MB hard error limit. Install-script advisories
 from npm 11 concern third-party native dependencies and do not alter package pins.
 
 The independent empty-context reconstruction, its immutable exported input IDs

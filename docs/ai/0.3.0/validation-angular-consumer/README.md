@@ -37,6 +37,7 @@ scoped slots belong to the separate maintained smoke and are not claimed by
 this independent example.
 
 Retained adaptations are formatting, a pinned Playwright dev dependency, an
-optional URL and failed-request diagnostics. Original byte hashes and normalized
+optional URL, failed-request diagnostics and restoration of the default 500 kB
+initial warning budget (the 1 MB hard error limit is unchanged). Original byte hashes and normalized
 retained hashes are distinct in the evidence. No library sources or private
 project memory are needed for this replay.

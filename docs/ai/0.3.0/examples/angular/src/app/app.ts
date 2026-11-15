@@ -114,6 +114,7 @@ export class App {
 		{ value: 'kzn', text: 'Kazan' },
 		{ value: 'msk', text: 'Moscow' },
 	]
+
 	constructor() {
 		afterNextRender(() => this.mounted.set(true))
 	}
