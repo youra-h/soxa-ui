@@ -164,6 +164,7 @@ export function DatePicker(props: DatePickerProps): ReactElement | null {
 					</>
 				)}
 				<Frame
+					ref={state.ids_bindPanel}
 					embedded="date-picker.frame"
 					className="so-date-picker__panel"
 					tabIndex={-1}

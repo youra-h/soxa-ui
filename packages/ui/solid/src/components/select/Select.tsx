@@ -162,6 +162,7 @@ export function Select(props: SelectProps): JSX.Element {
 						}
 					/>
 					<Frame
+						onBundleCreate={state.ids_bindPanel}
 						embedded="select.frame"
 						class="so-select__panel"
 						visible={state.visible && state.open}

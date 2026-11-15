@@ -191,6 +191,7 @@ export default { ...SetupDatePicker, components: { Button, Calendar, DateInput, 
 			плагин якоря, сдвиг во время жеста (`--so-swipe-offset`) — плагин жеста.
 		-->
 		<Frame
+			@bundle:create="ids_bindPanel"
 			embedded="date-picker.frame"
 			class="so-date-picker__panel"
 			tabindex="-1"

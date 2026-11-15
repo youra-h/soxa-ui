@@ -165,6 +165,7 @@ export function Select(props: SelectProps): ReactElement | null {
 					/>
 				)}
 				<Frame
+					ref={state.ids_bindPanel}
 					embedded="select.frame"
 					className="so-select__panel"
 					visible={state.visible && open}
