@@ -10,4 +10,6 @@
 - A hydration mismatch: compare raw HTML and initial state, remove invalid nesting and browser access during construction; do not suppress the error or turn off SSR globally.
 - A compiler check that accepts [text]="42": ensure ngc, strictTemplates and the component import are active; the maintained smoke deliberately verifies this negative case.
 
+For the exact closed portal/reference observations of this release, request angular-ssr.
+
 Use the pinned package manifest (`examples/angular/package.json`) to reproduce this release. Later library declarations must not silently redefine 0.3.0 examples. Validation (`angular-validation.md`) distinguishes tested behavior and known published defects.

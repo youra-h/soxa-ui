@@ -49,3 +49,12 @@ and hashes, retained sources, exact commands/errors and outcomes are recorded in
 angular-validation.json. This evidence is distinct from the maintained smoke;
 consumer API comes from the published 0.3.0 artifact and release revision
 9ae988633936a03e291e8e414028456fe1039c6b.
+
+The empty-context agent built a distinct Library collection reservation app from
+16 exported records, with no private memory or repository access. Its 14 checks,
+strict ngc negative guard, production dynamic SSR and zero browser diagnostics
+passed. It discovered the initial attached prerender route and selected Server
+mode; the corrected immutable SSR record was separately re-read. The retained
+source in validation-angular-consumer was replayed in a new external project: ngc,
+production build and all 14 checks passed again. DatePicker, controller and slots
+are covered by the maintained smoke, not this distinct reconstruction.

@@ -66,6 +66,8 @@ for (const ssr of [false, true]) {
 		],
 		cwd,
 	)
+
+	// Prove the check covers component templates rather than TypeScript alone.
 	const app = join(cwd, 'src/app/app.ts')
 	const original = readFileSync(app, 'utf8')
 	writeFileSync(app, original.replace('text="Reset name"', '[text]="42"'))
@@ -91,6 +93,7 @@ for (const ssr of [false, true]) {
 		writeFileSync(app, original)
 	}
 	assert.ok(rejected, 'Angular must reject an invalid component template input')
+
 	run(['node_modules/@angular/cli/bin/ng.js', 'build'], cwd)
 	const browser = await chromium.launch({ headless: true })
 	let production
@@ -100,6 +103,7 @@ for (const ssr of [false, true]) {
 			cpSync(join(root, 'tools/ai-docs/static-server.mjs'), join(cwd, 'static-server.mjs'))
 			production = await serve(cwd, ['static-server.mjs'])
 		}
+
 		await checkPage(browser, production.url, ssr, {
 			afterInteractions: async (page, input) => {
 				assert.ok(
@@ -113,6 +117,7 @@ for (const ssr of [false, true]) {
 				await page.getByRole('button', { name: 'Reset name', exact: true }).click()
 				await eventually(() => input.inputValue(), 'Reset')
 				assert.equal(await input.inputValue(), 'Reset')
+
 				const email = page.getByRole('textbox', { name: 'Contact email', exact: true })
 				await email.fill('next@example.com')
 				await email.blur()
@@ -130,6 +135,8 @@ for (const ssr of [false, true]) {
 				await eventually(() => email.inputValue(), '')
 				assert.equal(await email.inputValue(), '')
 				await page.getByTestId('form-state').filter({ hasText: 'null|false' }).waitFor()
+
+				// Keep the known 0.3.0 hidden picker defect bounded; all other targets must exist.
 				const broken = await missingReferences(page)
 				assert.equal(broken.length, 1, 'Exact known hidden Calendar label gap')
 				const [gap] = broken

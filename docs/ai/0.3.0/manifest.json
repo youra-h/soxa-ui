@@ -780,7 +780,7 @@
           "path": "packages/ui/angular/README.md"
         }
       ],
-      "related": ["angular-start"],
+      "related": ["angular-start", "angular-ssr"],
       "examples": [],
       "links": []
     }
