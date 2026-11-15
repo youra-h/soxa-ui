@@ -569,6 +569,45 @@ describe('Calendar · выбор месяца и года', () => {
 		expect(document.querySelector('.so-calendar__picker')).toBeNull()
 	})
 
+	it('keeps picker labels valid before mounting, through years, closing and reopening', async () => {
+		await render()
+
+		const dialog = node('.so-popover__panel')
+
+		expect(dialog.getAttribute('aria-labelledby')).toBeNull()
+		expect(document.querySelector('.so-calendar__picker-heading')).toBeNull()
+
+		await openPicker()
+
+		const label = heading()
+		const list = node('.so-calendar__picker-list [role="listbox"]')
+		const expectLabel = () => {
+			expect(label.id).not.toBe('')
+			expect(document.getElementById(label.id)).toBe(label)
+			expect(label.textContent?.trim()).not.toBe('')
+			expect(dialog.getAttribute('aria-labelledby')).toBe(label.id)
+			expect(list.getAttribute('aria-labelledby')).toBe(label.id)
+		}
+
+		expectLabel()
+		heading().click()
+		await nextFrame()
+		expectLabel()
+
+		await pick('2026')
+		expectLabel()
+		await pick('Mar')
+
+		expect(title().getAttribute('aria-expanded')).toBe('false')
+		expectLabel()
+
+		await openPicker()
+
+		expect(heading()).toBe(label)
+		expect(node('.so-calendar__picker-list [role="listbox"]')).toBe(list)
+		expectLabel()
+	})
+
 	it('нажатие на заголовок открывает панель: 12 месяцев, выбран месяц сетки, в шапке год', async () => {
 		await render()
 		await openPicker()

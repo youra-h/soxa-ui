@@ -164,6 +164,58 @@ function type(keys: string): void {
 	}
 }
 
+describe('DatePicker lazy picker labels', () => {
+	it.each([false, true])(
+		'keyboard selection and Escape keep all label targets mounted (StrictMode=%s)',
+		async (strict) => {
+			const seen = await bound(
+				'2026-11-14',
+				{ timeZone: 'UTC', aria_label: 'Departure' },
+				(element) => (strict ? <StrictMode>{element}</StrictMode> : element),
+			)
+			const expectLabels = () => {
+				for (const element of nodes('[aria-labelledby]')) {
+					for (const id of element.getAttribute('aria-labelledby')?.split(/\s+/) ?? []) {
+						expect(document.getElementById(id), id).not.toBeNull()
+					}
+				}
+			}
+
+			expectLabels()
+			await openPanel()
+			expectLabels()
+
+			const pickerPanel = node('.so-date-picker__panel .so-popover__panel')
+
+			expect(pickerPanel.style.display).toBe('none')
+			expect(pickerPanel.hasAttribute('aria-labelledby')).toBe(false)
+			expect(document.querySelector('.so-calendar__picker-heading')).toBeNull()
+
+			focus(dayCell('2026-11-14'))
+			press(dayCell('2026-11-14'), 'ArrowRight')
+			await nextFrame()
+			press(dayCell('2026-11-15'), 'Enter')
+			await nextFrame()
+
+			expect(seen.value).toBe('2026-11-15')
+			expect(isOpen()).toBe(false)
+			expect(document.activeElement).toBe(node('.so-date-input__segment[data-type="month"]'))
+			expectLabels()
+
+			await openPanel()
+			expectLabels()
+			press(dayCell('2026-11-15'), 'Escape')
+			await nextFrame()
+
+			expect(pickerPanel.style.display).toBe('none')
+			expect(pickerPanel.hasAttribute('aria-labelledby')).toBe(false)
+			expect(isOpen()).toBe(false)
+			expect(document.activeElement).toBe(node('.so-date-input__segment[data-type="month"]'))
+			expectLabels()
+		},
+	)
+})
+
 describe('DatePicker · одна дата', () => {
 	it('поле с кнопкой календаря в слоте, панель — диалог в body', async () => {
 		const { container } = await render(<DatePicker id="when" aria_label="Дата заезда" />)
