@@ -22,7 +22,10 @@ const apps: App[] = []
  * Разметка сервера — приложение (`server`) и содержимое телепортов
  * (`teleported`).
  */
-export async function hydrate(render: () => VNode): Promise<{
+export async function hydrate(
+	render: () => VNode,
+	beforeHydrate?: (client: HTMLElement) => void,
+): Promise<{
 	server: HTMLElement
 	teleported: HTMLElement
 	client: HTMLElement
@@ -42,6 +45,8 @@ export async function hydrate(render: () => VNode): Promise<{
 	document.body.innerHTML = context.teleports?.body ?? ''
 	document.body.append(client)
 	containers.push(client)
+
+	beforeHydrate?.(client)
 
 	const app = createSSRApp({ render })
 

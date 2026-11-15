@@ -29,6 +29,7 @@ import { type IAdapterContext, type IComponentContract, type TInstanceState } fr
 import type { IPluginBundle } from '@soxa-ui/plugins'
 import { VueProfile } from '../common'
 import { bindingOf } from './view'
+import { useHydratedAttributes } from './hydrated-attributes'
 
 /** The public properties and getters of the controller (`TInstance`), without its methods. */
 export type TExtractControllerState<TInstance> = {
@@ -225,6 +226,8 @@ function elementOf(root: unknown): Element | null {
  */
 function useRootElement(adapter: IAdapterContext): Ref<Element | null> | undefined {
 	if (!adapter.bundle?.get(TElementPlugin)) return undefined
+
+	useHydratedAttributes()
 
 	const rootElement = ref<Element | null>(null)
 
