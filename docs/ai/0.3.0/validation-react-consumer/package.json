@@ -10,7 +10,7 @@
     "verify:all-references": "node verify.mjs"
   },
   "dependencies": {
-    "next": "16.2.3",
+    "next": "16.4.1",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "@soxa-ui/react": "0.3.0",
