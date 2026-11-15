@@ -654,6 +654,46 @@ describe('повторное открытие', () => {
 })
 
 describe('шапка', () => {
+	it('labels follow lazy content independently for each grid place', () => {
+		const setup = calendar({ months: ['2026-01-01', '2026-09-01'] })
+
+		setup.picker.pickerSets(0).heading.add('id', 'heading-0')
+		setup.picker.pickerSets(1).heading.add('id', 'heading-1')
+
+		const first = panel(setup, 0)
+		const second = panel(setup, 1)
+		const changes = vi.fn()
+
+		setup.facade.events.on('change:pickers', () => changes(setup.facade.pickers))
+
+		expect(first.headingAria).toEqual({ id: 'heading-0' })
+		expect(first.labelledBy).toBeUndefined()
+		expect(second.labelledBy).toBeUndefined()
+		expect(setup.facade.pickers.every((picker) => picker.list === undefined)).toBe(true)
+
+		open(setup, 1)
+
+		const list = pickerList(setup, 1)
+
+		expect(changes).toHaveBeenLastCalledWith([
+			expect.objectContaining({ labelledBy: undefined, list: undefined }),
+			expect.objectContaining({ labelledBy: 'heading-1', list }),
+		])
+
+		second.popover.open = false
+
+		expect(panel(setup, 1).labelledBy).toBe('heading-1')
+		expect(panel(setup, 1).list).toBe(list)
+
+		open(setup, 1)
+
+		expect(panel(setup, 1).labelledBy).toBe('heading-1')
+		expect(panel(setup, 1).popover).toBe(second.popover)
+		expect(panel(setup, 1).list).toBe(list)
+		expect(panel(setup, 0).labelledBy).toBeUndefined()
+		expect(panel(setup, 0).list).toBeUndefined()
+	})
+
 	it('id шапки — из наборов места; его смена — change:pickers', () => {
 		const setup = calendar()
 		const changes = vi.fn()
@@ -664,6 +704,10 @@ describe('шапка', () => {
 		setup.picker.pickerSets(0).heading.add('id', 'heading-0')
 
 		expect(changes).toHaveBeenCalledTimes(1)
+		expect(panel(setup).labelledBy).toBeUndefined()
+
+		open(setup)
+
 		expect(panel(setup).labelledBy).toBe('heading-0')
 		expect(panel(setup).headingAria).toEqual({ id: 'heading-0' })
 	})

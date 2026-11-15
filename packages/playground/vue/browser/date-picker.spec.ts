@@ -111,6 +111,34 @@ afterEach(() => {
 	cleanup()
 })
 
+describe('lazy picker labels', () => {
+	it('keeps all label targets after keyboard selection, reopening and Escape', async () => {
+		const ctrl = await show({ value: '2026-11-14', timeZone: 'UTC' })
+		const expectLabels = () => {
+			for (const element of document.querySelectorAll('[aria-labelledby]')) {
+				for (const id of element.getAttribute('aria-labelledby')?.split(/\s+/) ?? []) {
+					expect(document.getElementById(id), id).not.toBeNull()
+				}
+			}
+		}
+
+		await userEvent.click(trigger())
+		await expect.poll(active).toBe(day('2026-11-14'))
+		expectLabels()
+		await userEvent.keyboard('{ArrowRight}{Enter}')
+		await expect.poll(() => ctrl.value).toBe('2026-11-15')
+		await expect.poll(isOpen).toBe(false)
+		expectLabels()
+
+		await userEvent.click(trigger())
+		await expect.poll(active).toBe(day('2026-11-15'))
+		expectLabels()
+		await userEvent.keyboard('{Escape}')
+		await expect.poll(isOpen).toBe(false)
+		expectLabels()
+	})
+})
+
 describe('открытие', () => {
 	it('кнопка открывает панель под полем, фокус — на выбранном дне', async () => {
 		await show({ value: '2026-05-12' })
