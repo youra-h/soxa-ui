@@ -53,3 +53,6 @@ select, item-leading and Accordion scopes. Production plus nine Chromium checks
 passed, zero browser diagnostics; strict check found only the same Teleport error.
 Its CSR scenario does not claim independent SSR, date or ctrl lifetime coverage.
 Final input/example hashes are recorded separately from maintained recipe hashes.
+
+The immutable published baseline remains unchanged. Fixes are independently
+checked as unpublished tarballs in [development validation](../validation/svelte-development.md).

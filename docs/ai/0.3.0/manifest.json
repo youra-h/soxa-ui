@@ -921,7 +921,7 @@
         },
         {
           "id": "sveltekit-7",
-          "path": "examples/sveltekit/tsconfig.json",
+          "path": "examples/sveltekit/sveltekit-config.json",
           "language": "json"
         },
         {

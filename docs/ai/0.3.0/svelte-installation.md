@@ -3,7 +3,10 @@
 Use Node 22.12+ and the attached complete project files. Save them by their
 example paths into a new consumer directory, then run npm install, npm run check,
 and npm run build. Keep the generated package-lock.json. The SvelteKit project
-includes the same Recipes.svelte and CtrlExample.svelte under src/lib.
+includes the same Recipes.svelte and CtrlExample.svelte under src/lib. Its npm
+prepare script copies sveltekit-config.json to tsconfig.json before checking or
+building, so SvelteKit can resolve its generated $app/tsconfig after installation.
+Keep both package.json and sveltekit-config.json when downloading the example.
 
 Core/setup/plugins/adapters use exact 0.3.0. This recipe independently selects
 Oren 0.3.0 and Material icons 0.3.0; compatible peer ranges were verified in the

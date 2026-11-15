@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --fail-on-warnings",
-    "build": "vite build"
+    "build": "vite build",
+    "prepare": "node -e \"require('node:fs').copyFileSync('sveltekit-config.json', 'tsconfig.json')\""
   },
   "dependencies": {
     "@soxa-ui/core": "0.3.0",
