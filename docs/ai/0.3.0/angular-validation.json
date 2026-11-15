@@ -4,7 +4,7 @@
   "libraryVersion": "0.3.0",
   "libraryRevision": "9ae988633936a03e291e8e414028456fe1039c6b",
   "maintained": {
-    "sourceRevision": "dde25f89e2ec94e02206d186f12b2e05467e41fd",
+    "sourceRevision": "abed1184bf02c9f18450ee34bb3eecb30e7a5fe1",
     "commands": [
       "npm run test:ai-docs",
       "npm run check:ai-docs:angular",
@@ -28,7 +28,12 @@
         "name": "Hydrated hidden Calendar picker label target absent",
         "followUp": "https://app.clickup.com/t/1an4hvw5ykx"
       }
-    ]
+    ],
+    "buildBudget": {
+      "maximumWarning": "500kB",
+      "maximumError": "1MB",
+      "observation": "Default initial size advisory remains visible for maintained and independent consumers; no warning suppressed or hard limit relaxed"
+    }
   },
   "independent": {
     "schema": "independent-angular-consumer-evidence-v1",
@@ -323,7 +328,7 @@
       "docsRevisionSource": "origin URL blob revision"
     },
     "retainedSourceDirectory": "validation-angular-consumer",
-    "retainedAdaptation": "Formatting normalized; runner accepts CONSUMER_URL; Playwright pinned as dev dependency; failed-request diagnostics added. Original byte hashes retained separately.",
+    "retainedAdaptation": "Formatting normalized; runner accepts CONSUMER_URL; Playwright pinned as dev dependency; failed-request diagnostics added. Original byte hashes retained separately. Default CLI initial warning budget restored to 500kB, hard error remains 1MB; advisory is visible.",
     "originalSourceByteHashes": [
       {
         "file": "package.json",
@@ -402,7 +407,16 @@
       ],
       "result": "strict ngc, production dynamic SSR build, all 14 browser/SSR checks and raw reference probe passed",
       "completeARIAValidity": false,
-      "packageLockByteSha256": "67f5a625169e7bdcb88246bb794d91b93e896d380bef87b7db178de49eb5bb23"
+      "packageLockByteSha256": "67f5a625169e7bdcb88246bb794d91b93e896d380bef87b7db178de49eb5bb23",
+      "budgetRecheck": {
+        "change": "Only maxWarning restored to default500kB; maxError1MB unchanged",
+        "commands": [
+          "npm run build (maintained CSR)",
+          "npm run build (maintained dynamic SSR)",
+          "npm run build (retained independent dynamic SSR)"
+        ],
+        "result": "All three builds exit0; visible initial-size advisories339.66kB/376.04kB/187.86kB over500kB; functional sources unchanged"
+      }
     }
   },
   "docsCorrections": [
@@ -448,7 +462,7 @@
     {
       "file": "docs/ai/0.3.0/angular-installation.md",
       "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
-      "sha256": "e44ddc5025aed8481293e95b0fa28e9ff1a5f621d9c14114f3da455831327060"
+      "sha256": "7267efa7771ee5577949e6bd6a7dfa331cc596e3d0ff6899cfb4779884cfea57"
     },
     {
       "file": "docs/ai/0.3.0/angular-ssr.md",
@@ -463,12 +477,12 @@
     {
       "file": "docs/ai/0.3.0/angular-validation.md",
       "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
-      "sha256": "bf611d27213adec8154edfd52877949832e71450b8a13fe8e078e9481eba5b5c"
+      "sha256": "fb6998365b3258000c24fb09a7d883c3e70c20adbcc31db3fa8a4cca2b225233"
     },
     {
       "file": "docs/ai/0.3.0/examples/angular/angular.json",
       "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
-      "sha256": "f706d36150adbc8d25cec8862c2f785ae6febf40d3022a9bb43e67916fc246da"
+      "sha256": "ca29659c169d961ea9440b7c84630c545b93196a66fafc82986c0135d15315cd"
     },
     {
       "file": "docs/ai/0.3.0/examples/angular/package.json",
@@ -493,7 +507,7 @@
     {
       "file": "docs/ai/0.3.0/examples/angular/src/app/app.ts",
       "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
-      "sha256": "7d18273f1cf9627b2f510aa9e4cbefcbd2ca22044fc272a861a34fcb8ff76978"
+      "sha256": "4454af8eb7ebd4ac496f8a99a3da9979f81e7688a4dde45d06e8efe3571c6ad0"
     },
     {
       "file": "docs/ai/0.3.0/examples/angular/src/app/controller.ts",
@@ -543,12 +557,12 @@
     {
       "file": "docs/ai/0.3.0/validation-angular-consumer/README.md",
       "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
-      "sha256": "cf0e2ad2194c80304c996ac5ffa22fc6c04ece552e0b0ebc4dfd086ff12911d8"
+      "sha256": "7aab6a21cc45e4b04a5d8066673a2db94cd881c60a61bd26a593d0ed2563603a"
     },
     {
       "file": "docs/ai/0.3.0/validation-angular-consumer/angular.json",
       "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
-      "sha256": "f706d36150adbc8d25cec8862c2f785ae6febf40d3022a9bb43e67916fc246da"
+      "sha256": "ca29659c169d961ea9440b7c84630c545b93196a66fafc82986c0135d15315cd"
     },
     {
       "file": "docs/ai/0.3.0/validation-angular-consumer/browser-results.json",
@@ -588,7 +602,7 @@
     {
       "file": "docs/ai/0.3.0/validation-angular-consumer/src/app/app.ts",
       "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
-      "sha256": "ffb0bc8887c3d4993d316c07c774563cbc5f31e52f633f2f314383faf9071e95"
+      "sha256": "9e7e324d9b9d6845d7ad5f2c7c92dbd8d8d6a10c953571924b24436ab586666c"
     },
     {
       "file": "docs/ai/0.3.0/validation-angular-consumer/src/index.html",
@@ -657,49 +671,49 @@
     }
   ],
   "finalExport": {
-    "docsRevision": "dde25f89e2ec94e02206d186f12b2e05467e41fd",
-    "definition": "Hashes below are the exact generated record bytes; document.sha256 hashes normalized authored content; sourceInputs also cover attached examples",
+    "docsRevision": "abed1184bf02c9f18450ee34bb3eecb30e7a5fe1",
+    "definition": "Hashes below are exact generated record bytes; document.sha256 hashes normalized authored content; sourceInputs also cover attached examples",
     "inputs": [
       {
         "id": "angular-bindings",
         "file": "documents/angular-bindings.json",
-        "byteSha256": "2ef9c36d337dafc9e9cb0bd9bb82bc929f888ece862f9709182c7a5ca9c68b90",
+        "byteSha256": "be4cf61adabc65d2954282def08c1b30fe016948a49dfe183a6268f5d30d6c69",
         "declaredContentSha256": "368ba139341edb47648455ca465ac3186502f2a9d077d2a54153b3a5a2f7a42c"
       },
       {
         "id": "angular-composition",
         "file": "documents/angular-composition.json",
-        "byteSha256": "47525b23980b49cc19410a817b0dbcfe5019515dcbc787acfd2f21c459b9a805",
+        "byteSha256": "2ccc023e34187ccee202260e6dcbef73418994c94e476506954fadfb158ecc77",
         "declaredContentSha256": "ace95607c1018ed5783ca8bdc80edcf7d004e5b2d25b141ce57f46c7da534e26"
       },
       {
         "id": "angular-controller",
         "file": "documents/angular-controller.json",
-        "byteSha256": "7794c8c73e31bb0d043db101cef06862ed19694839f865201a22f0215417dfa9",
+        "byteSha256": "72aeb2220a97f8927b2a3b4c6fade89ffee5c31cbc1fc587ef597b59d0d9cf82",
         "declaredContentSha256": "3fa61458f3fc68cc3abc04baabf93d38cefac08468aa4c26b61efd98240f32cb"
       },
       {
         "id": "angular-errors",
         "file": "documents/angular-errors.json",
-        "byteSha256": "ade70645ebcf2c547e601f0bf6c1a952001ac9edf45e9a437980aae7e2dc4edc",
+        "byteSha256": "28464526bcbd90350a16f3d21c1cbc5cc7bab65f5af617c554702789a3891b2c",
         "declaredContentSha256": "9c7e889e88b93ff7e6d93fb6ae416b86be54b97e63cdad21e1116872908609ff"
       },
       {
         "id": "angular-installation",
         "file": "documents/angular-installation.json",
-        "byteSha256": "61721f6e57fae71dc1cffaae24374d78f778f285b366e69790de86f3a05f4a82",
-        "declaredContentSha256": "e44ddc5025aed8481293e95b0fa28e9ff1a5f621d9c14114f3da455831327060"
+        "byteSha256": "77440bd68f0cad8fa621aff63bd2077bedfb743c35f8719d940ebe8080516f9b",
+        "declaredContentSha256": "7267efa7771ee5577949e6bd6a7dfa331cc596e3d0ff6899cfb4779884cfea57"
       },
       {
         "id": "angular-ssr",
         "file": "documents/angular-ssr.json",
-        "byteSha256": "dfe4eab1c778da0e82799452e918478a7107b64134df82a75ca624d8c121e2d7",
+        "byteSha256": "8d11b5beaa2bec0a9a400da7d0338d055363a4297f49e9ba74e44b86341708a9",
         "declaredContentSha256": "0b54d2b67eac5aa77b959a41aae814ddcc416c1754cbfa8e99163ecb61dad4aa"
       },
       {
         "id": "angular-start",
         "file": "documents/angular-start.json",
-        "byteSha256": "d96497ef1e06eaaaec18c2d2c8ef95fe4fd32a2bb2cb8cffc0cf3c0f9054eeb1",
+        "byteSha256": "6c22bf7a3a3492774a374390ad8f122fc1696ace64c4279340434e9026b64175",
         "declaredContentSha256": "976cf999fa7bbf529d890ecaa05b28967798d14e43e9ddff1d288d3b75a50804"
       },
       {
@@ -753,7 +767,7 @@
       {
         "id": "overview",
         "file": "documents/overview.json",
-        "byteSha256": "382f71c756bfe833948772fae140faefa59a66129cbdd20261047d4f21fd586c",
+        "byteSha256": "e09226ff5c3f65ba0884ffbc2f6254d0cf0b1b6026f44a1adc3a665ddac3e08e",
         "declaredContentSha256": "e09dcc3410da7c061eb3e9ed462ae05a1961b6ddac4dbd8153ea335c123ac01e"
       }
     ]
