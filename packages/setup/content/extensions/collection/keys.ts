@@ -8,6 +8,7 @@
 import type { TCollectionBundlesPlugin } from '@soxa-ui/plugins'
 import type { IElevatorKey } from '../../../protected/adapter/elevator'
 import type { TCollectionMembers } from './members.class'
+import type { TCollectionInitialSource } from './initial-source.class'
 
 /**
  * The registry of the nearest collection's item bundles
@@ -27,4 +28,9 @@ export const COLLECTION_BUNDLES_ELEVATOR: IElevatorKey<TCollectionBundlesPlugin 
  */
 export const COLLECTION_MEMBERS_ELEVATOR: IElevatorKey<TCollectionMembers> = {
 	name: 'soxa:collection-members',
+}
+
+/** The nearest prepared source; a legacy owner lowers null instead of inheriting one. */
+export const COLLECTION_INITIAL_ELEVATOR: IElevatorKey<TCollectionInitialSource | null> = {
+	name: 'soxa:collection-initial',
 }

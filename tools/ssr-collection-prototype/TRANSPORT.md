@@ -1,9 +1,17 @@
-# Gate доставки принятых SSR-деклараций
+# Доставка начального состава для SSR-коллекций
 
 Задача [1an4hvw5ytb](https://app.clickup.com/t/1an4hvw5ytb), 15.11.2026.
-**Gate не пройден. Общий production-механизм не реализован.**
-Решение владельца от 13:26 о едином механизме для React/Vue/Svelte/Solid
-сохраняется. Этот результат не разрешает отдельные обходы в адаптерах.
+**Пункт 1 выбран владельцем; production-интеграция ещё не завершена.**
+Комментарии владельца 2244 и план 2254 разрешают совместимый явный initial.
+Отрицательный native transport gate ниже сохраняется как историческое
+доказательство границ прежнего API; он не запрещает выбранный явный вход.
+
+Текущий независимый срез в setup: immutable owner-local снимок plain data,
+штатная materialization через factory/batch/meta, resolver по ordinal до
+создания части и общий read-only state port с одним итоговым aria.
+Native adapters и production ids plugin пока этот срез не потребляют.
+Отдельное разрешение на два protected файла ожидается. Это промежуточный
+результат, не приёмка задачи.
 
 Исходные 24 файла эксперимента перенесены без merge из
 [PR #881](https://github.com/youra-h/soxa-ui/pull/881), head
@@ -58,62 +66,105 @@ SSR-регистрации элементов из React-разметки. Вс�
 и исправление Tags этим этапом не проверяются. Зелёный запуск доказывает
 воспроизводимость наблюдений; он не означает прохождение gate.
 
-## Контракт общего слоя после появления достоверного входа
+## Выбранный контракт общего слоя
 
-Внутренний вход должен содержать **принятые декларации**, а не события выполнения:
+```tsx
+<Tabs
+  initial={{
+    items: [
+      { value: 'general', text: 'General' },
+      { value: 'privacy', _: { active: true } },
+    ],
+    panels: [{ value: 'general' }, { value: 'privacy', id: 'privacy-panel' }],
+  }}
+  content={
+    <>
+      <Tabs.Content initial={0}>General</Tabs.Content>
+      <Tabs.Content initial={1}>Private</Tabs.Content>
+    </>
+  }
+>
+  <Tabs.Item initial={0} />
+  <Tabs.Item initial={1} />
+</Tabs>
+```
 
-- request identity и владельца cleanup; attempt/branch identity и происхождение
-  подтверждения принятия, замены или отмены;
-- owner identity и part identity отдельно от `value`, native mount id и порядка.
-  Повторяющиеся и `undefined` value остаются отдельными декларациями;
-- начальные props/meta и принадлежность owner; принятые связанные части и их
-  пользовательские id должны быть доступны до чтения раннего конца пары;
-- completion/abort/error освобождают request-state. При замене ветки удаляются
-  только её декларации; nested owner не получает план скрытого соседа.
+Это целевая форма, ещё не подключённая к публичным компонентам. Корневой
+initial — plain serializable data, без helper import или класса на RSC
+boundary. У Tags тот же механизм: items и Item initial={ordinal}.
+Ordinal — позиция в явном source, а не счётчик исполнения. Duplicate и
+undefined value остаются отдельными models. Поиск пары сохраняет нынешнюю
+семантику первого item по каноническому value.
 
-Общий слой связывает этот вход с существующими collection/meta/activation
-механизмами и правилом поиска панели по `value`. Отдельное active/selected
-состояние, ранний live `attach` и подмена внешнего engine не допускаются.
-Внешние ctrl/engine сохраняют identity/ownership; подготовка и отмена не пишут
-в них и не уничтожают их. Native id монтирования и приоритет id приложения
-сохраняются. Клиентский commit/attach/cleanup остаётся прежним.
+Снимок читается один раз на native owner mount. После materialization
+источник истины — engine; повторная сборка и mount части не повторяют
+начальную активацию или metadata. Обновления приходят существующими
+items/engine/ctrl. Части получают тот же materialized ctrl до create.
+При ordinal запрещён второй источник model props/meta на части; DOM attrs
+и слоты сохраняются. Vue implicit defaults требуют native presence/
+normalization до resolver; эта интеграция ещё предстоит.
+После удаления или замены исходного ctrl remount его ordinal диагностирует
+отсутствие модели в актуальном engine; initial не восстанавливает её скрыто.
 
-Сейчас нет вызова общего слоя, который можно честно заполнить таким входом для
-всех SSR-адаптеров: **transport остаётся незаполненной частью контракта**.
-Поэтому чистый тест объекта с вручную вызванным accept не заменяет интеграцию.
+Внешние engine/ctrl сохраняют identity/ownership. Initial описывает уже
+существующие порядок, props и metadata; проверка не создаёт и не заменяет
+внешние models. Plain metadata сравнивается по содержимому snapshot, не
+по identity клонированного объекта. Отдельного active/selected state нет.
 
-## Карта ответственности и текущая проверенность
+Табовый ids plugin получает prepared link до install и остаётся единственным
+автором правил пары. Общий read-only state port возвращает один итоговый
+state.aria из актуального core aria и immutable link. Второго mutable aria
+store и дополнительных template spreads нет. Пока port проверен через
+настоящий exchange с подставленным readonly link; production plugin wiring
+ещё отсутствует.
 
-| Адаптер        | Общая точка после gate                                                                                              | Нативная доставка / identity                                                                                                                                                 | Проверка и статус                                                                                                                                       |
-| -------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| React          | Расширение подготовки через context `use/get` и собственный content lift key; item и Tabs binding читают общий вход | `useAdapterContext`, Context/Elevate, `useId`; клиентский приём в effect. Для SSR принятой произвольной Suspense-ветки до раннего HTML сигнала в проверенных API не получено | Восемь новых native сценариев; gate открыт. Production не менялся                                                                                       |
-| Vue            | Тот же общий вход в collection extensions и binding                                                                 | provide/inject, slots, native `useId`, async setup/server renderer; ранняя сериализация требует отдельной доставки                                                           | Исторические sync/hydration positive и inactive-nested negative сохранены. Новая transport-интеграция не реализована; вывод React на Vue не переносится |
-| Svelte         | Тот же общий вход; compiler/runtime доставляет контекст                                                             | context/snippet, `$props.id()`, собственный SSR payload. Async при включённой поддержке требует самостоятельной проверки                                                     | Те же границы исторического результата; transport не сертифицирован                                                                                     |
-| Solid          | Тот же общий вход; adapter runtime сохраняет hydration ownership                                                    | Provider/owner, lazy children, `createUniqueId`, streaming/hydration windows                                                                                                 | Те же границы исторического результата; transport не сертифицирован                                                                                     |
-| Angular        | Общий контракт используется только при необходимости; второй расчёт активности не нужен                             | DI/APP_ID, живой серверный DOM до стабилизации                                                                                                                               | Контроль исторической настоящей SSR/hydration фикстуры без кандидата; новый механизм не подключался                                                     |
-| Web Components | Принятый клиентский attach/detach/destroy; без искусственной SSR-фазы                                               | connected/disconnected, waiting/deferral, перемещение/пересборка                                                                                                             | Исходники и [инструкции адаптера](../../packages/ui/webc/AGENTS.md) проверены; нового runtime-результата этот tools этап не заявляет                    |
+## Недостающий механизм и узкая защищённая граница
 
-Это карта для продолжения, не требуемая планом карта успешно реализованных
-`adapter -> общий вызов -> native signal -> test`.
+В [TOwnBundle](../../packages/setup/protected/adapter/context/own-bundle.class.ts)
+descriptor plugins устанавливаются через bundle.use в конструкторе, а
+TInputPort.seed выполняется позже. Carrier prop не успевает передать link
+до синхронной записи ids plugin в external ctrl.aria. PluginProps также
+управляет внешними, а не уже объявленными собственными plugins.
+Позднее исправление id оставило бы speculative writes и не исправило бы уже
+сериализованный ранний tab.
 
-Проверенные существующие seams:
+Предложено ровно два protected файла:
 
-- [TAdapterContext](../../packages/setup/protected/adapter/context/adapter-context.class.ts)
-  уже даёт `use/get`, events и attach/detach/destroy; менять этот файл для
-  исследовательского контракта не требуется.
-- [Content lift keys](../../packages/setup/content/extensions/collection/keys.ts)
-  показывают, что новый собственный ключ можно разместить в content.
-- [TCollectionItemExtension](../../packages/setup/content/extensions/collection/collection-item.extension.class.ts)
-  берёт assembly props до connect, а live состав и meta пишет на attach.
-- [TTabsContentBindingExtension](../../packages/setup/content/extensions/tabs/tabs-content-binding.extension.class.ts)
-  пишет только свою сторону на assembly; чужому табу отдаёт panel id на attach.
-- [useAdapterContext](../../packages/ui/react/src/adapter/runtime/useAdapterContext.ts)
-  и [scope](../../packages/ui/react/src/adapter/elevator/scope.class.ts)
-  владеют сборкой и дочерним лифтом, но не полным root приложения или чужими
-  Context. Изменение content/protected не создаёт renderer provenance.
+- [types.ts](../../packages/setup/protected/adapter/context/types.ts): optional
+  typed per-mount plugin installation options в context options / bundle mount.
+- [own-bundle.class.ts](../../packages/setup/protected/adapter/context/own-bundle.class.ts):
+  перед install уже объявленного descriptor plugin объединить его static
+  options с per-mount options; приоритет у per-mount. Без input прежний путь.
 
-Необходимость protected-правки **не доказана**. Новая логика в разрешённых
-core/plugins сама по себе не является причиной отдельного permission gate.
+Это явный вход одного mount, без descriptor mutation, registry, exchange
+или content dependency. Он не добавляет произвольные plugins. Ambient
+WeakMap/global transport не используется. Developer proposal опубликован
+в задаче; ответ владельца ещё ожидается. Protected файлы не изменялись.
+
+Общий state port пользуется существующими getSnapshot/subscribe. Третьего
+protected изменения по текущему исполняемому proof не требуется. Проверены
+stable snapshot, live readonly link и core aria changes, cleanup обеих
+подписок и abandoned assembly без core writes или удержанных слушателей.
+
+## Текущая проверенность и оставшаяся работа
+
+- Source/resolver: настоящие factory/batch/meta, Tabs и Tags, ordinal
+  identities, custom ids, read-once, внешние models/meta, ошибки и owner
+  isolation. Mount initial части не повторяет meta.apply.
+- Common state port: настоящий setup exchange, link пока тестовый. Эти
+  unit tests не доказывают native SSR HTML или hydration.
+- Initial без children: штатный data renderer рисует prepared ctrl без ordinal.
+  Он должен получить тот же link и не повторять metadata seed. Это ещё не
+  подключено; новые ctrl после live items replacement не являются исходными
+  initial models и не должны получать их ordinal identity.
+- Native adapters: production integration не подключена. Старые negative
+  assertions и исторические JSON сохраняются.
+- После разрешения остаются plugin carrier/descriptors/generated surfaces
+  всех шести адаптеров, native retention/presence, настоящие SSR/hydration/
+  lifecycle/ownership проверки, build/types, install smokes, Chromium/
+  WebKit и полный remote CI точного PR head.
+- Ветви вне явного initial — выбранная граница, а не провал пункта 1.
+  Lazy content ради discovery не исполняется; scan/replay/HTML patch запрещены.
 
 ## Next App Router: граница host
 
@@ -141,60 +192,16 @@ host границу исполнения всего приложения.
 Подтверждённого способа подключить исследованный host replay к App Router
 без нового требования к приложению сейчас **нет**.
 
-## Конкретное решение владельца
+## Решение владельца и статус продолжения
 
-Открытый вопрос — источник полного начального состава, а не право продолжить
-исследование или редактировать protected. Пример действующего consumer API:
+Владелец выбрал пункт 1: совместимый явный initial с полным начальным
+описанием состава и пар, plain object на RSC boundary. Повторное разрешение
+на сам initial API, имена или обычную внутреннюю архитектуру не требуется.
+Разрешение на breaking прежнего API не получено.
 
-```tsx
-function RemotePanel() {
-  const settings = useContext(ApplicationContext)
-  return (
-    <Tabs.Content value="privacy" id={settings.panelId}>
-      Private
-    </Tabs.Content>
-  )
-}
+Пункт 2 — host/renderer integration — остаётся разрешённым исследованием
+при доказанном провале выбранного варианта. Сейчас подтверждена конкретная
+недостающая protected проводка пункта 1; это не такой провал.
 
-;<Tabs content={<RemotePanel />}>
-  <Tabs.Item value="general" text="General" />
-  <Tabs.Item value="privacy" text="Privacy" active />
-</Tabs>
-```
-
-До выполнения RemotePanel библиотека не знает `settings.panelId`. Локальный
-дополнительный renderer не получает этот чужой Context автоматически;
-полный host replay выходит за границу компонента и всё ещё требует provenance
-принятых веток/удержания ресурсов. Перечисленные проверки не позволяют обещать
-прозрачное решение для этого примера и произвольного Suspense в Next.
-
-Предлагаемый выбор, сохраняющий **один** общий механизм:
-
-1. **Пересмотр требования, ограниченный контракт:** согласовать явное полное начальное
-   описание состава и связей как источник SSR для случаев с поздними
-   декларациями. Это меняет требование «прежний consumer API без участия
-   приложения» и решение владельца «не вводить публичный API ради обхода».
-   Это запрос пересмотра конкретного требования, а не разрешённая реализация
-   текущей задачи. Возможная форма для
-   обсуждения: `const initial = prepareTabs({ items, panels })` и
-   `<Tabs initial={initial}>…</Tabs>`; items/meta/ids берутся из одного initial,
-   а не дублируются активностью в разметке. Имена/публичный API не утверждены
-   и код этой формы не написан. Все адаптеры потребляют один внутренний вход;
-   live lifecycle сохраняется. Прежняя разметка остаётся поддержанной, но
-   полная SSR-гарантия требует такого входа. Произвольные поздние условия и
-   обёртки, отсутствующие в initial, этим вариантом не покрываются.
-2. **Сохранить прозрачный произвольный consumer API:** выбрать интеграцию
-   уровня SSR-host/renderer, которая действительно получает принятую ветку и
-   сохраняет request resources до ранней сериализации. Потребуется отдельное
-   решение о поддерживаемых host/версиях, включая Next App Router, и новый
-   интеграционный gate. Проверенные публичные hooks этого transport не дали;
-   готовой или гарантированно совместимой Next-интеграции здесь нет. Продолжение
-   в рамках прежнего API — проверить конкретную host-интеграцию, перенос RSC
-   ресурсов/Context/native ids между фазами, семантику повторного выполнения и
-   discarded/async ветки на настоящем Next. Это исследование сохраняет текущий
-   контракт и остаётся в этой же задаче; его успех этими наблюдениями не обещан.
-
-Выбор не отменяет задачу и не разрешает выпуск частных исправлений вместо
-общего механизма. До выбора и прохождения transport gate production adapters
-не меняются; статус задачи — вопросы/OVERVIEW, не APPROVED. Остаток остаётся
-в этой же задаче, зависимые задачи не разблокируются.
+Все связанные остатки остаются в задаче 1an4hvw5ytb и draft PR #882.
+Зелёные независимые unit tests не означают APPROVED или завершение задачи.

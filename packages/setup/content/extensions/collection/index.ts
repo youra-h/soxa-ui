@@ -7,3 +7,27 @@ export type {
 	TCollectionOwner,
 	TMemberAdapter,
 } from './types'
+
+export { TCollectionInitialSource } from './initial-source.class'
+export { TCollectionInitialExtension } from './initial.extension.class'
+export {
+	createCollectionInitialSource,
+	collectionInitialSourceOf,
+	resolveCollectionInitialItem,
+	resolveCollectionInitialPanel,
+} from './initial'
+export type {
+	ICollectionInitialSource,
+	ICollectionInitialPanel,
+	ICollectionInitialLink,
+	ICollectionInitialOptions,
+	ICollectionInitialExtensionOptions,
+	TCollectionInitialMount,
+} from './initial.types'
+
+export { TCollectionAriaState } from './aria-state.class'
+export type {
+	ICollectionAriaLink,
+	ICollectionAriaStateOptions,
+	TCollectionStatePort,
+} from './aria-state.types'
