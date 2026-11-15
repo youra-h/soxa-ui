@@ -1,0 +1,436 @@
+{
+  "checkedAt": "2026-11-15T14:00:14.206Z",
+  "environment": {
+    "node": "v24.20.0",
+    "dependencies": {
+      "@soxa-ui/core": "0.4.0",
+      "@soxa-ui/react": "0.4.0",
+      "@soxa-ui/vue": "0.4.0",
+      "react": "19.3.1",
+      "react-dom": "19.3.1",
+      "vue": "3.5.44",
+      "@vue/server-renderer": "3.5.44",
+      "jsdom": "30.1.3",
+      "@soxa-ui/svelte": "0.4.0",
+      "@soxa-ui/solid": "0.4.0",
+      "@soxa-ui/angular": "0.4.0",
+      "svelte": "5.57.2",
+      "solid-js": "1.9.17",
+      "vite": "8.3.4",
+      "vite-plugin-solid": "2.11.14",
+      "@sveltejs/vite-plugin-svelte": "7.3.1",
+      "@angular/common": "22.2.3",
+      "@angular/compiler": "22.2.3",
+      "@angular/core": "22.2.3",
+      "@angular/forms": "22.2.3",
+      "@angular/platform-browser": "22.2.3",
+      "@angular/platform-server": "22.2.3",
+      "rxjs": "7.8.2"
+    }
+  },
+  "gate": "NOT PASSED: no production transport is implemented or certified by this experiment",
+  "observations": [
+    {
+      "scenario": "local native rendering of the exact same library subtree",
+      "trace": [
+        {
+          "event": "tab",
+          "value": "selected",
+          "id": "_R_2nj_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "panel",
+          "id": "_R_5_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "tab",
+          "value": "selected",
+          "id": "_R_5f7_",
+          "context": {
+            "panelId": "application-panel",
+            "language": "application-language"
+          }
+        },
+        {
+          "event": "panel",
+          "id": "_R_b_",
+          "context": {
+            "panelId": "application-panel",
+            "language": "application-language"
+          }
+        }
+      ],
+      "result": "The nested request loses application context and uses its own native id namespace."
+    },
+    {
+      "scenario": "whole root native replay, same element object and deterministic application",
+      "first": [
+        {
+          "event": "tab",
+          "value": "selected",
+          "id": "_R_2nj_",
+          "context": {
+            "panelId": "application-panel",
+            "language": "application-language"
+          }
+        },
+        {
+          "event": "panel",
+          "id": "_R_5_",
+          "context": {
+            "panelId": "application-panel",
+            "language": "application-language"
+          }
+        }
+      ],
+      "second": [
+        {
+          "event": "tab",
+          "value": "selected",
+          "id": "_R_2nj_",
+          "context": {
+            "panelId": "application-panel",
+            "language": "application-language"
+          }
+        },
+        {
+          "event": "panel",
+          "id": "_R_5_",
+          "context": {
+            "panelId": "application-panel",
+            "language": "application-language"
+          }
+        }
+      ],
+      "identicalHtml": true,
+      "result": "Host replay preserves context and native ids in this case; it is not a library hook."
+    },
+    {
+      "scenario": "ordinary library markup, native renderToString abandons suspended primary",
+      "trace": [
+        {
+          "event": "tab",
+          "value": "outside",
+          "id": "_R_1j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "tab",
+          "value": "primary",
+          "id": "_R_6j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "wait"
+        },
+        {
+          "event": "tab",
+          "value": "fallback",
+          "id": "_R_2j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        }
+      ],
+      "accepted": {
+        "tabs": ["Outside", "Fallback"],
+        "controls": ["_R_5j_-panel", "_R_6j_-panel"],
+        "panels": []
+      },
+      "result": "Execution is not membership; no effect or cleanup announces abandonment on the server."
+    },
+    {
+      "scenario": "ordinary library markup, native all-ready buffering after primary resolves",
+      "trace": [
+        {
+          "event": "tab",
+          "value": "outside",
+          "id": "_R_1j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "tab",
+          "value": "primary",
+          "id": "_R_6j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "wait"
+        },
+        {
+          "event": "tab",
+          "value": "fallback",
+          "id": "_R_2j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "shell",
+          "arguments": 0
+        },
+        {
+          "event": "wait"
+        },
+        {
+          "event": "resolved"
+        },
+        {
+          "event": "all-ready",
+          "arguments": 0
+        }
+      ],
+      "accepted": {
+        "tabs": ["Outside", "Primary"],
+        "controls": ["_R_5j_-panel", "_R_mj_-panel"],
+        "panels": []
+      },
+      "result": "The host knows completion, but receives no accepted declaration set or branch identities."
+    },
+    {
+      "scenario": "host replay with explicitly retained resolved application resource",
+      "trace": [
+        {
+          "event": "tab",
+          "value": "outside",
+          "id": "_R_1j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "tab",
+          "value": "primary",
+          "id": "_R_6j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "wait"
+        },
+        {
+          "event": "resolved"
+        }
+      ],
+      "identicalHtml": true,
+      "result": "This replay avoids fallback execution; retaining application resources is a host input."
+    },
+    {
+      "scenario": "whole root replay with a request-local application resource provider",
+      "first": [
+        {
+          "event": "tab",
+          "value": "outside",
+          "id": "_R_1j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "tab",
+          "value": "primary",
+          "id": "_R_6j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "wait"
+        },
+        {
+          "event": "tab",
+          "value": "fallback",
+          "id": "_R_2j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "shell",
+          "arguments": 0
+        },
+        {
+          "event": "wait"
+        },
+        {
+          "event": "resolved"
+        },
+        {
+          "event": "all-ready",
+          "arguments": 0
+        }
+      ],
+      "second": [
+        {
+          "event": "tab",
+          "value": "outside",
+          "id": "_R_1j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "tab",
+          "value": "primary",
+          "id": "_R_6j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "wait"
+        },
+        {
+          "event": "tab",
+          "value": "fallback",
+          "id": "_R_2j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "shell",
+          "arguments": 0
+        },
+        {
+          "event": "wait"
+        },
+        {
+          "event": "resolved"
+        },
+        {
+          "event": "all-ready",
+          "arguments": 0
+        }
+      ],
+      "identicalHtml": true,
+      "result": "Both completed requests execute the discarded fallback; another pass is not an acceptance signal."
+    },
+    {
+      "scenario": "native static prerender waits for primary completion",
+      "trace": [
+        {
+          "event": "tab",
+          "value": "outside",
+          "id": "_R_1j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "tab",
+          "value": "fallback",
+          "id": "_R_2j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "tab",
+          "value": "primary",
+          "id": "_R_6j_",
+          "context": {
+            "panelId": "default-panel",
+            "language": "default-language"
+          }
+        },
+        {
+          "event": "wait"
+        },
+        {
+          "event": "resolved"
+        }
+      ],
+      "accepted": {
+        "tabs": ["Outside", "Primary"],
+        "controls": ["_R_5j_-panel", "_R_mj_-panel"],
+        "panels": []
+      },
+      "resultKeys": ["postponed", "prelude"],
+      "postponed": null,
+      "result": "Static prerender also executes the discarded fallback; its result exposes prelude and opaque postponed state."
+    },
+    {
+      "scenario": "late custom panel id, data tab, native all-ready buffering",
+      "trace": [
+        {
+          "event": "tab",
+          "value": "selected",
+          "id": "_R_2nj_",
+          "context": {
+            "panelId": "application-panel",
+            "language": "application-language"
+          }
+        },
+        {
+          "event": "shell",
+          "arguments": 0
+        },
+        {
+          "event": "panel",
+          "id": "_R_5_",
+          "context": {
+            "panelId": "application-panel",
+            "language": "application-language"
+          }
+        },
+        {
+          "event": "all-ready",
+          "arguments": 0
+        }
+      ],
+      "accepted": {
+        "tabs": ["Selected"],
+        "controls": ["_R_1j_-panel"],
+        "panels": [
+          {
+            "id": "application-panel",
+            "labelledby": "_R_1j_-tab"
+          }
+        ]
+      },
+      "result": "Buffering the host stream does not replay the already rendered earlier tab."
+    }
+  ],
+  "diagnostics": [],
+  "limits": [
+    "All Tabs components are unchanged published @soxa-ui/react 0.4.0; application wrappers only record observations.",
+    "HTML is inspected as test output; it is never modified or consumed as a preparation plan.",
+    "Whole-root replay is a positive deterministic control, not a claim that replay is universally impossible.",
+    "The trace is speculative execution, not an accepted declaration transport.",
+    "No Next integration, production adapter changes, hydration or performance claim in this gate test."
+  ]
+}
