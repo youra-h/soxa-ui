@@ -407,6 +407,25 @@ describe('collection initial resolution through the existing owner lift', () => 
 		return { source, owner, facade, elevator }
 	}
 
+	it('resolves frozen panel props without evaluating native children during assembly', () => {
+		const { owner, facade, elevator } = prepared()
+		const children = vi.fn(() => 'lazy panel')
+		const props = Object.freeze({
+			initial: 1,
+			get children() {
+				return children()
+			},
+		})
+		const options = resolveCollectionInitialPanel(TabsContentDescriptor(), { props }, elevator)
+		const panel = createAdapterContext(TabsContentDescriptor(), options)
+		expect(children).not.toHaveBeenCalled()
+		expect(Reflect.get(options.props ?? {}, 'id')).toBe('custom-panel')
+		expect(Reflect.get(options.props ?? {}, 'children')).toBe('lazy panel')
+		expect(children).toHaveBeenCalledTimes(1)
+		panel.destroy()
+		facade.destroy()
+		owner.destroy()
+	})
 	it('resolves to the exact factory model before create, then uses the existing registrar', () => {
 		const { source, owner, facade, elevator } = prepared()
 		const options = resolveCollectionInitialItem(

@@ -2,6 +2,8 @@ import { afterEach, describe, it, expect, vi } from 'vitest'
 import { TTabs, TEvented, createEngineTabs } from '@soxa-ui/core'
 import { render } from 'svelte/server'
 import Example from './CollectionInitial.test.svelte'
+import Matrix from './CollectionInitialMatrix.test.svelte'
+import type { ICollectionInitialSource } from '@soxa-ui/svelte'
 
 afterEach(() => vi.restoreAllMocks())
 
@@ -91,4 +93,143 @@ it('leaves an external engine unchanged after server rendering', () => {
 	expect(items.map((item) => ({ ...engine.extensions.meta.get(item) }))).toEqual(metadata)
 	expect(items.map((item) => item.aria.toObject())).toEqual(aria)
 	expect(items.map((item) => item.closeAria.toObject())).toEqual(closeAria)
+})
+
+function matrix(
+	source: ICollectionInitialSource,
+	props: {
+		automatic?: boolean
+		before?: boolean
+		tags?: boolean
+		nested?: boolean
+		discover?: () => void
+	} = {},
+) {
+	return render(Matrix, { props: { source, ...props } }).body
+}
+function parts(body: string, role: string) {
+	return (body.match(/<[^>]+>/g) ?? [])
+		.filter((tag) => tag.includes('role="' + role + '"'))
+		.map((tag) =>
+			Object.fromEntries(
+				[...tag.matchAll(/([\w-]+)="([^"]*)"/g)].map(([, key, value]) => [key, value]),
+			),
+		)
+}
+
+describe('initial source native SSR matrix', () => {
+	it.each([0, 1, -1])('serializes active item %s with one tab stop', (active) => {
+		const body = matrix({
+			items: [0, 1].map((value) => ({
+				value,
+				text: String(value),
+				_: { active: value === active },
+			})),
+			panels: [{ value: 0 }, { value: 1 }],
+		})
+		const tabs = parts(body, 'tab')
+		expect(tabs.map((tab) => tab['aria-selected'])).toEqual([
+			String(active === 0),
+			String(active === 1),
+		])
+		expect(tabs.filter((tab) => tab.tabindex === '0')).toHaveLength(1)
+		expect(parts(body, 'tabpanel')).toHaveLength(active < 0 ? 0 : 1)
+	})
+	it.each(['disabled', 'visible', 'rendered'])('uses the engine %s policy', (field) => {
+		const body = matrix(
+			{
+				items: [
+					{ value: 'a', text: 'A', id: 'excluded-tab', [field]: field === 'disabled' },
+					{ value: 'b', text: 'B', id: 'available-tab' },
+				],
+			},
+			{ automatic: true },
+		)
+		const stops = parts(body, 'tab').filter((tab) => tab.tabindex === '0')
+		expect(stops).toHaveLength(1)
+		expect(stops[0].id).toBe('available-tab')
+		const excluded = parts(body, 'tab').find((tab) => tab.id === 'excluded-tab')
+		if (field === 'disabled') expect(excluded?.['data-disabled']).toBe('true')
+		if (field === 'visible')
+			expect(body).toMatch(/class="so-tabs-item[^"]*" style="[^"]*display: none"/)
+		if (field === 'rendered') expect(excluded).toBeUndefined()
+	})
+	it.each([false, true])(
+		'keeps duplicate and undefined models distinct, auto=%s',
+		(automatic) => {
+			const body = matrix(
+				{
+					items: [
+						{ text: 'A' },
+						{ text: 'B' },
+						{ value: 'x', text: 'C' },
+						{ value: 'x', text: 'D', _: { active: true } },
+					],
+				},
+				{ automatic },
+			)
+			const tabs = parts(body, 'tab')
+			expect(tabs).toHaveLength(4)
+			expect(new Set(tabs.map((tab) => tab.id)).size).toBe(4)
+			expect(tabs.map((tab) => tab.tabindex)).toEqual(['-1', '-1', '-1', '0'])
+			for (const text of ['A', 'B', 'C', 'D']) expect(body).toContain('>' + text + '<')
+		},
+	)
+	it.each([false, true])('links custom ids when panels precede tabs=%s', (before) => {
+		const body = matrix(
+			{
+				items: [
+					{ value: 'a', text: 'A' },
+					{ value: 'b', text: 'B', id: 'matrix-tab', _: { active: true } },
+				],
+				panels: [{ value: 'a' }, { value: 'b', id: 'matrix-panel' }],
+			},
+			{ before },
+		)
+		const tabs = parts(body, 'tab'),
+			panels = parts(body, 'tabpanel')
+		expect(tabs[1].id).toBe('matrix-tab')
+		expect(tabs[1]['aria-controls']).toBe('matrix-panel')
+		expect(panels).toHaveLength(1)
+		expect(panels[0].id).toBe('matrix-panel')
+		expect(panels[0]['aria-labelledby']).toBe('matrix-tab')
+		const panelPosition = body.indexOf('id="matrix-panel"')
+		const tabPosition = body.indexOf('id="matrix-tab"')
+		expect(before ? panelPosition < tabPosition : panelPosition > tabPosition).toBe(true)
+	})
+	it.each([0, 1, -1])('prepares Tags selected item %s', (selected) => {
+		const body = matrix(
+			{
+				items: [0, 1].map((value) => ({
+					value,
+					text: String(value),
+					_: { selected: value === selected },
+				})),
+			},
+			{ tags: true },
+		)
+		const options = parts(body, 'option')
+		expect(options.map((item) => item['aria-selected'])).toEqual([
+			String(selected === 0),
+			String(selected === 1),
+		])
+		expect(options.filter((item) => item.tabindex === '0')).toHaveLength(1)
+	})
+	it('keeps nested owners separate and does not invoke inactive snippets for discovery', () => {
+		const discover = vi.fn()
+		const body = matrix(
+			{
+				items: [
+					{ value: 'a', text: 'A' },
+					{ value: 'b', text: 'B', _: { active: true } },
+				],
+				panels: [{ value: 'a' }, { value: 'b' }],
+			},
+			{ nested: true, discover },
+		)
+		expect(discover).not.toHaveBeenCalled()
+		expect(parts(body, 'tab')).toHaveLength(3)
+		expect(body).not.toContain('Hidden')
+		expect(parts(body, 'tabpanel').some((panel) => panel.id === 'nested-panel')).toBe(true)
+	})
 })

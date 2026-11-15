@@ -84,21 +84,25 @@ function preparedPluginOptions(
 	)
 }
 
-/** Hide the consumed input without evaluating native child/slot getters. */
-function consumedInitialProps(props: object): object {
+/** Overlay consumed/prepared inputs without evaluating native child or slot getters. */
+function initialPropsView(props: object, overrides: object): object {
+	const read = (key: PropertyKey) =>
+		Reflect.has(overrides, key) ? Reflect.get(overrides, key) : Reflect.get(props, key)
 	return new Proxy(
 		{},
 		{
-			get: (_target, key) => (key === 'initial' ? undefined : Reflect.get(props, key)),
-			has: (_target, key) => Reflect.has(props, key),
-			ownKeys: () => Reflect.ownKeys(props),
+			get: (_target, key) => read(key),
+			has: (_target, key) => Reflect.has(overrides, key) || Reflect.has(props, key),
+			ownKeys: () => [...new Set([...Reflect.ownKeys(props), ...Reflect.ownKeys(overrides)])],
 			getOwnPropertyDescriptor: (_target, key) =>
-				Reflect.has(props, key)
+				Reflect.has(overrides, key) || Reflect.has(props, key)
 					? {
 							configurable: true,
 							enumerable:
-								Reflect.getOwnPropertyDescriptor(props, key)?.enumerable ?? false,
-							get: () => (key === 'initial' ? undefined : Reflect.get(props, key)),
+								Reflect.getOwnPropertyDescriptor(overrides, key)?.enumerable ??
+								Reflect.getOwnPropertyDescriptor(props, key)?.enumerable ??
+								false,
+							get: () => read(key),
 						}
 					: undefined,
 		},
@@ -112,7 +116,7 @@ export function collectionInitialOwnerOptions<TInstance extends object>(
 ): IAdapterContextOptions<TInstance> {
 	const props =
 		options.props && Reflect.get(options.props, 'initial') !== undefined
-			? consumedInitialProps(options.props)
+			? initialPropsView(options.props, { initial: undefined })
 			: options.props
 	return source
 		? { ...options, props, pluginOptions: preparedPluginOptions(descriptor, options) }
@@ -204,7 +208,7 @@ export function resolveCollectionInitialPanel<TInstance extends object>(
 
 	return {
 		...options,
-		props: { ...props, ...panel },
+		props: initialPropsView(props, panel),
 		pluginOptions: preparedPluginOptions(descriptor, {
 			...options,
 			pluginOptions: [
@@ -255,7 +259,7 @@ export function collectionInitialInputs(
 		context.bundle?.get(TCollectionInitialPlugin) &&
 		Reflect.get(props, 'initial') !== undefined
 	)
-		return consumedInitialProps(props)
+		return initialPropsView(props, { initial: undefined })
 	const part = context.bundle?.get(TCollectionInitialPartPlugin)
 	return part?.prepared
 		? initialPartProps(

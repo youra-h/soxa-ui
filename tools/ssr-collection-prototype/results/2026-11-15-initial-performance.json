@@ -1,10 +1,10 @@
 {
-  "measuredAt": "2026-11-15T18:04:22.994Z",
+  "measuredAt": "2026-11-15T18:27:57.477Z",
   "node": "v24.20.0",
   "react": "19.3.1",
   "mode": "production",
   "distSha256": {
-    "packages/setup": "e768ccc785fe6d255169d75ca8f5813b21fd296902df68dd9edb8056cdfac889",
+    "packages/setup": "f2f779cefde55292a480bea4f85792b2f834a90af92879832f9bb65bc3dd136a",
     "packages/plugins": "4a9a1bda8467d9f2cf4f479f960e08cf4a47d4ca572e2c9496979bcb5a167f67",
     "packages/ui/react": "102445065da4cceb39af9f7cef3862605b5794d28710b74f9a59b2ea56fe8b85"
   },
@@ -19,30 +19,30 @@
       "outputBytes": 39405,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 0.096,
-        "p95Ms": 0.107
+        "medianMs": 0.095,
+        "p95Ms": 0.314
       },
       "preparedMaterialization": {
-        "medianMs": 0.375,
-        "p95Ms": 0.625
+        "medianMs": 0.446,
+        "p95Ms": 0.993
       },
       "ordinaryMaterialization": {
-        "medianMs": 0.329,
-        "p95Ms": 0.458
+        "medianMs": 0.347,
+        "p95Ms": 0.588
       },
       "externalValidation": {
         "medianMs": 0.054,
-        "p95Ms": 0.091
+        "p95Ms": 0.068
       },
       "initialSSR": {
-        "medianMs": 5.133,
-        "p95Ms": 8.784
+        "medianMs": 5.484,
+        "p95Ms": 9.764
       },
       "existingItemsSSR": {
-        "medianMs": 3.938,
-        "p95Ms": 8.369
+        "medianMs": 4.376,
+        "p95Ms": 9.803
       },
-      "retainedCaptureBytesPerSource": 19345
+      "retainedCaptureBytesPerSource": 19321
     },
     {
       "n": 1000,
@@ -51,30 +51,30 @@
       "outputBytes": 394905,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 0.843,
-        "p95Ms": 3.885
+        "medianMs": 0.828,
+        "p95Ms": 4.046
       },
       "preparedMaterialization": {
-        "medianMs": 2.721,
-        "p95Ms": 3.2
+        "medianMs": 2.843,
+        "p95Ms": 4.36
       },
       "ordinaryMaterialization": {
-        "medianMs": 2.465,
-        "p95Ms": 3.197
+        "medianMs": 2.556,
+        "p95Ms": 3.171
       },
       "externalValidation": {
-        "medianMs": 0.22,
-        "p95Ms": 1.287
+        "medianMs": 0.228,
+        "p95Ms": 1.103
       },
       "initialSSR": {
-        "medianMs": 59.999,
-        "p95Ms": 82.454
+        "medianMs": 64.11,
+        "p95Ms": 79.083
       },
       "existingItemsSSR": {
-        "medianMs": 43.843,
-        "p95Ms": 52.78
+        "medianMs": 56.06,
+        "p95Ms": 77.596
       },
-      "retainedCaptureBytesPerSource": 170571
+      "retainedCaptureBytesPerSource": 168886
     },
     {
       "n": 100,
@@ -83,28 +83,28 @@
       "outputBytes": 39405,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 1.475,
-        "p95Ms": 1.606
+        "medianMs": 0.989,
+        "p95Ms": 1.663
       },
       "preparedMaterialization": {
-        "medianMs": 0.283,
-        "p95Ms": 3.918
+        "medianMs": 0.31,
+        "p95Ms": 0.56
       },
       "ordinaryMaterialization": {
-        "medianMs": 0.258,
-        "p95Ms": 0.262
+        "medianMs": 0.271,
+        "p95Ms": 0.289
       },
       "externalValidation": {
-        "medianMs": 0.425,
-        "p95Ms": 0.514
+        "medianMs": 0.392,
+        "p95Ms": 0.506
       },
       "initialSSR": {
-        "medianMs": 6.178,
-        "p95Ms": 21.66
+        "medianMs": 5.548,
+        "p95Ms": 11.986
       },
       "existingItemsSSR": {
-        "medianMs": 4.368,
-        "p95Ms": 11.953
+        "medianMs": 3.393,
+        "p95Ms": 8.287
       },
       "retainedCaptureBytesPerSource": 243788
     },
@@ -115,30 +115,30 @@
       "outputBytes": 394905,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 9.112,
-        "p95Ms": 10.392
+        "medianMs": 9.374,
+        "p95Ms": 11.576
       },
       "preparedMaterialization": {
-        "medianMs": 3.102,
-        "p95Ms": 4.869
+        "medianMs": 3.261,
+        "p95Ms": 4.561
       },
       "ordinaryMaterialization": {
-        "medianMs": 2.731,
-        "p95Ms": 3.296
+        "medianMs": 2.824,
+        "p95Ms": 4.576
       },
       "externalValidation": {
-        "medianMs": 3.329,
-        "p95Ms": 6.113
+        "medianMs": 3.635,
+        "p95Ms": 6.938
       },
       "initialSSR": {
-        "medianMs": 65.218,
-        "p95Ms": 68.223
+        "medianMs": 67.733,
+        "p95Ms": 102.323
       },
       "existingItemsSSR": {
-        "medianMs": 43.631,
-        "p95Ms": 72.788
+        "medianMs": 46.79,
+        "p95Ms": 47.811
       },
-      "retainedCaptureBytesPerSource": 2448994
+      "retainedCaptureBytesPerSource": 2448988
     }
   ],
   "stageScope": "capture includes deep copy, freeze and structural validation. Materialization excludes capture/engine creation; prepared adds links to ordinary factory/batch/meta work. External validation directly probes the existing private implementation method over a complete engine; it is separate from structural source validation. Timers cannot be summed into total SSR.",
