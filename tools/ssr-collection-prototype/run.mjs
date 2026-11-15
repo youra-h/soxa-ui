@@ -17,6 +17,21 @@ const dependencies = {
 	vue: '3.5.44',
 	'@vue/server-renderer': '3.5.44',
 	jsdom: '30.1.3',
+	'@soxa-ui/svelte': '0.4.0',
+	'@soxa-ui/solid': '0.4.0',
+	'@soxa-ui/angular': '0.4.0',
+	svelte: '5.57.2',
+	'solid-js': '1.9.17',
+	vite: '8.3.4',
+	'vite-plugin-solid': '2.11.14',
+	'@sveltejs/vite-plugin-svelte': '7.3.1',
+	'@angular/common': '22.2.3',
+	'@angular/compiler': '22.2.3',
+	'@angular/core': '22.2.3',
+	'@angular/forms': '22.2.3',
+	'@angular/platform-browser': '22.2.3',
+	'@angular/platform-server': '22.2.3',
+	rxjs: '7.8.2',
 }
 
 cpSync(new URL('./fixture/', import.meta.url), directory, { recursive: true })
@@ -54,4 +69,23 @@ for (const [name, version] of Object.entries(dependencies)) {
 
 execFileSync(process.execPath, ['hydration.mjs'], { cwd: directory, stdio: 'inherit' })
 execFileSync(process.execPath, ['--expose-gc', 'check.mjs'], { cwd: directory, stdio: 'inherit' })
+execFileSync(process.execPath, ['--expose-gc', 'cross-check.mjs'], {
+	cwd: directory,
+	stdio: 'inherit',
+})
+for (const framework of ['vue', 'svelte', 'solid']) {
+	execFileSync(process.execPath, ['cross-hydration.mjs', framework], {
+		cwd: directory,
+		stdio: 'inherit',
+	})
+}
+execFileSync(process.execPath, ['cross-angular.mjs'], { cwd: directory, stdio: 'inherit' })
+for (const scenario of ['sync', 'conditional', 'nested']) {
+	execFileSync(process.execPath, ['cross-angular-hydration.mjs', scenario], {
+		cwd: directory,
+		stdio: 'inherit',
+	})
+}
+execFileSync(process.execPath, ['cross-summary.mjs'], { cwd: directory, stdio: 'inherit' })
 console.log('Evidence: ' + join(directory, 'report.json'))
+console.log('Cross-adapter evidence: ' + join(directory, 'cross-results.json'))

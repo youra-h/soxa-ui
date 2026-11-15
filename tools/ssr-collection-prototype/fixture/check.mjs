@@ -226,7 +226,7 @@ const report = {
 	timing,
 	limits: [
 		'Standalone instrumented fixture on published packages; no library or protected-layer changes.',
-		'React and Vue prototype only; Svelte, Solid and Angular are not claimed as prototyped.',
+		'This first-phase report covers React and Vue only; see cross-results.json for the separate Vue/Svelte/Solid candidates and Angular control.',
 		'The two-pass collector deliberately records render work without commit-aware branch ownership; the failing adversarial cases are evidence against this implementation.',
 		'External engines are rejected without mutation rather than silently replaced.',
 		'Client hydration checked in jsdom; not a full Next/Nuxt application or browser benchmark.',
