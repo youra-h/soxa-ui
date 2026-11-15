@@ -34,7 +34,11 @@ import { Controller } from './controller'
 	template: `<main>
 		<h1>Travel preferences</h1>
 		<label so-label text="Traveler name" position="top">
-			<div so-input [(value)]="name" (soChangeValue)="lastChange.set($event.newValue)"></div>
+			<div
+				so-input
+				[(value)]="name"
+				(soChangeValue)="lastChange.set($event.newValue); lastOld.set($event.oldValue)"
+			></div>
 		</label>
 		<label so-label text="Accept travel policy"
 			><span so-check-box [(value)]="accepted"></span
@@ -51,6 +55,7 @@ import { Controller } from './controller'
 			></div>
 		</label>
 		<output data-testid="values">{{ name() }}|{{ destination() }}|{{ departure() }}</output>
+		<output data-testid="old-value">{{ lastOld() }}</output>
 		<output data-testid="change">{{ lastChange() }}</output>
 		<button so-button text="Reset name" (soActionPress)="name.set('Reset')"></button>
 		<label so-label text="Contact email" position="top"
@@ -99,6 +104,7 @@ export class App {
 	readonly destination = signal('kzn')
 	readonly departure = signal<TDatePickerValue>('2026-11-14')
 	readonly lastChange = signal('')
+	readonly lastOld = signal('')
 	readonly email = new FormControl<string | null>('hello@example.com')
 	readonly saved = signal(false)
 	readonly mounted = signal(false)

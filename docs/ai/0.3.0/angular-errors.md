@@ -1,6 +1,6 @@
 # Troubleshoot Angular 0.3.0 consumption
 
-- A blank field with no compiler diagnostic: verify the standalone component import and attribute selector. Use <div so-input>, not <so-input> or <input so-input>.
+- A blank field with no compiler diagnostic: verify the standalone component import and attribute selector. Use `<div so-input>`, not `<so-input>` or `<input so-input>`.
 - A runtime message requesting provideAttrs: add it to the shared application providers, not route/component providers.
 - Unstyled controls: put theme CSS in global styles listed by angular.json, and register theme setup/icons once in shared code. CSS imported by main.ts does not reliably reach the page.
 - An untyped output or missing event: use valueChange for the current model and soChangeValue for { oldValue, newValue }. React callback names and Vue update:value syntax are not Angular outputs.

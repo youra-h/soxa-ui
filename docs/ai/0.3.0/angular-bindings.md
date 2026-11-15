@@ -10,4 +10,4 @@ Choose one state owner per control. Import FormsModule for [(ngModel)] (the Sele
 
 User changes update the form; disable()/enable() reaches the control, and focus leaving the whole control sets touched. reset() on a nullable FormControl keeps null in the form and clears the UI to its descriptor default. A non-nullable FormControl resets to its initial value. Avoid a conflicting disabled input on a form-owned control.
 
-Wrap fields in <label so-label text="?"> for visible accessible names; import TLabelComponent. Select forwards attributes to its field. DatePicker is a group, so the example also supplies aria_label="Departure". Keep labels visible and test keyboard navigation; shared principles are in overview.
+Wrap fields in `<label so-label text="?">` for visible accessible names; import TLabelComponent. Select forwards attributes to its field. DatePicker is a group, so the example also supplies aria_label="Departure". Keep labels visible and test keyboard navigation; shared principles are in overview.

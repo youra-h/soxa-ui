@@ -1,6 +1,6 @@
 ﻿import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { cpSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
+import { cpSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -97,14 +97,19 @@ for (const ssr of [false, true]) {
 	try {
 		if (ssr) production = await serve(cwd, ['dist/app/server/server.mjs'])
 		else {
-			writeFileSync(
-				join(cwd, 'static-server.mjs'),
-				`import {createServer} from 'node:http';import {readFile} from 'node:fs/promises';import {extname,join} from 'node:path';const types={'.js':'text/javascript','.css':'text/css','.html':'text/html'};const server=createServer(async(req,res)=>{try {const file=join('dist/app/browser',req.url==='/'?'index.html':req.url);res.setHeader('Content-Type',types[extname(file)]||'application/octet-stream');res.end(await readFile(file))}catch{res.statusCode=404;res.end()}});server.listen(0,'127.0.0.1',()=>console.log('http://127.0.0.1:'+server.address().port));`,
-			)
+			cpSync(join(root, 'tools/ai-docs/static-server.mjs'), join(cwd, 'static-server.mjs'))
 			production = await serve(cwd, ['static-server.mjs'])
 		}
 		await checkPage(browser, production.url, ssr, {
 			afterInteractions: async (page, input) => {
+				assert.ok(
+					(
+						await page
+							.locator('html')
+							.evaluate((el) => getComputedStyle(el).colorScheme)
+					).includes('light'),
+				)
+				assert.equal(await page.getByTestId('old-value').textContent(), '')
 				await page.getByRole('button', { name: 'Reset name', exact: true }).click()
 				await eventually(() => input.inputValue(), 'Reset')
 				assert.equal(await input.inputValue(), 'Reset')
@@ -125,11 +130,26 @@ for (const ssr of [false, true]) {
 				await eventually(() => email.inputValue(), '')
 				assert.equal(await email.inputValue(), '')
 				await page.getByTestId('form-state').filter({ hasText: 'null|false' }).waitFor()
-				console.log('Hydrated references:', JSON.stringify(await missingReferences(page)))
+				const broken = await missingReferences(page)
+				assert.equal(broken.length, 1, 'Exact known hidden Calendar label gap')
+				const [gap] = broken
+				assert.equal(gap.attr, 'aria-labelledby')
+				assert.equal(gap.role, 'dialog')
+				assert.equal(gap.label, null)
+				assert.equal(gap.hidden, true)
+				assert.equal(gap.withinDatePicker, true)
+				assert.deepEqual(gap.classes.split(' ').sort(), ['so-frame', 'so-popover__panel'])
+				assert.match(gap.id, /^ng-\d+-picker-0$/)
 			},
 			validateSSRReferences: (broken) => {
-				console.log('Raw SSR references:', JSON.stringify(broken))
-				assert.deepEqual(broken, [])
+				assert.equal(broken.length, 1, 'Closed Select portal is browser mounted')
+				assert.equal(broken[0].attr, 'aria-controls')
+				assert.equal(broken[0].role, 'combobox')
+				assert.equal(broken[0].label, null)
+				assert.equal(broken[0].classes, '')
+				assert.equal(broken[0].hidden, false)
+				assert.equal(broken[0].withinDatePicker, false)
+				assert.match(broken[0].id, /^ng-\d+-list$/)
 			},
 		})
 	} finally {
