@@ -26,7 +26,7 @@ function press(element: Element, key: string): void {
 describe('popup references across SSR and hydration', () => {
 	for (const initialOpen of [false, true]) {
 		it(
-			'keeps server controls and connects unique targets; initialOpen=' + initialOpen,
+			'preserves server nodes and connects unique targets; initialOpen=' + initialOpen,
 			async () => {
 				const container = serve(
 					markupOf(initialOpen ? 'popup-controls-open' : 'popup-controls-closed'),
@@ -46,6 +46,8 @@ describe('popup references across SSR and hydration', () => {
 				linked()
 				expect(select.open).toBe(initialOpen)
 				expect(picker.open).toBe(initialOpen)
+				expect(field.getAttribute('aria-expanded')).toBe(String(initialOpen))
+				expect(trigger.getAttribute('aria-expanded')).toBe(String(initialOpen))
 				await nextFrame()
 				picker.open = false
 				select.open = false
