@@ -1,5 +1,5 @@
 {
-  "measuredAt": "2026-11-15T17:25:17.121Z",
+  "measuredAt": "2026-11-15T17:31:29.176Z",
   "node": "v24.20.0",
   "react": "19.3.1",
   "mode": "production",
@@ -20,15 +20,15 @@
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
         "medianMs": 0.192,
-        "p95Ms": 0.206
+        "p95Ms": 0.225
       },
       "initialSSR": {
-        "medianMs": 5.273,
-        "p95Ms": 13.908
+        "medianMs": 5.244,
+        "p95Ms": 11.731
       },
       "existingItemsSSR": {
-        "medianMs": 4.154,
-        "p95Ms": 7.945
+        "medianMs": 4.62,
+        "p95Ms": 10.426
       },
       "retainedCaptureBytesPerSource": 18916
     },
@@ -39,16 +39,16 @@
       "outputBytes": 394905,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 0.925,
-        "p95Ms": 0.987
+        "medianMs": 0.887,
+        "p95Ms": 0.991
       },
       "initialSSR": {
-        "medianMs": 72.482,
-        "p95Ms": 123.461
+        "medianMs": 59.991,
+        "p95Ms": 86.596
       },
       "existingItemsSSR": {
-        "medianMs": 59.8,
-        "p95Ms": 73.004
+        "medianMs": 42.031,
+        "p95Ms": 57.98
       },
       "retainedCaptureBytesPerSource": 168886
     },
@@ -59,16 +59,16 @@
       "outputBytes": 39405,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 1.547,
-        "p95Ms": 1.646
+        "medianMs": 1.555,
+        "p95Ms": 1.649
       },
       "initialSSR": {
-        "medianMs": 9.609,
-        "p95Ms": 14.438
+        "medianMs": 7.94,
+        "p95Ms": 10.314
       },
       "existingItemsSSR": {
-        "medianMs": 5.833,
-        "p95Ms": 10.747
+        "medianMs": 3.526,
+        "p95Ms": 9.434
       },
       "retainedCaptureBytesPerSource": 243776
     },
@@ -79,16 +79,16 @@
       "outputBytes": 394905,
       "equivalentHtmlIgnoringGeneratedIds": true,
       "capture": {
-        "medianMs": 15.345,
-        "p95Ms": 20.703
+        "medianMs": 10.279,
+        "p95Ms": 13.774
       },
       "initialSSR": {
-        "medianMs": 106.647,
-        "p95Ms": 123.513
+        "medianMs": 64.11,
+        "p95Ms": 97.89
       },
       "existingItemsSSR": {
-        "medianMs": 71.111,
-        "p95Ms": 76.327
+        "medianMs": 41.529,
+        "p95Ms": 47.449
       },
       "retainedCaptureBytesPerSource": 2448982
     }
