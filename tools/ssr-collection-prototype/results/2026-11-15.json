@@ -1,0 +1,197 @@
+{
+  "diagnostics": [],
+  "checkedAt": "2026-11-15T12:40:23.993Z",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpu": "AMD Ryzen 9 9950X3D 16-Core Processor          ",
+    "dependencies": {
+      "@soxa-ui/core": "0.4.0",
+      "@soxa-ui/react": "0.4.0",
+      "@soxa-ui/vue": "0.4.0",
+      "react": "19.3.1",
+      "react-dom": "19.3.1",
+      "vue": "3.5.44",
+      "@vue/server-renderer": "3.5.44",
+      "jsdom": "30.1.3"
+    }
+  },
+  "disposition": "REJECTED as a general implementation; synchronous proof of concept only",
+  "observations": [
+    {
+      "framework": "react",
+      "scenario": "synchronous wrapped declarations",
+      "baseline": {
+        "tabs": ["Tab 0", "Tab 1"],
+        "stops": [null, null],
+        "activePanel": false,
+        "activeLink": false
+      },
+      "candidate": {
+        "tabs": ["Tab 0", "Tab 1"],
+        "stops": ["-1", "0"],
+        "activePanel": true,
+        "activeLink": true
+      }
+    },
+    {
+      "framework": "vue",
+      "scenario": "synchronous declarations",
+      "baseline": {
+        "tabs": ["Tab 0", "Tab 1"],
+        "stops": ["0", "0"],
+        "activePanel": true,
+        "activeLink": true
+      },
+      "candidate": {
+        "tabs": ["Tab 0", "Tab 1"],
+        "stops": ["-1", "0"],
+        "activePanel": true,
+        "activeLink": true
+      }
+    },
+    {
+      "scenario": "external engine",
+      "unchangedOnRejection": true,
+      "supported": false
+    },
+    {
+      "scenario": "concurrent requests",
+      "separatePlans": true,
+      "count": 3
+    }
+  ],
+  "rejections": [
+    {
+      "scenario": "react custom panel id",
+      "actual": {
+        "tabs": ["Tab 0", "Tab 1"],
+        "stops": ["-1", "0"],
+        "activePanel": true,
+        "activeLink": false
+      },
+      "reason": "Collecting items alone does not prepare the panel-to-tab id link before HTML."
+    },
+    {
+      "scenario": "vue custom panel id",
+      "actual": {
+        "tabs": ["Tab 0", "Tab 1"],
+        "stops": ["-1", "0"],
+        "activePanel": true,
+        "activeLink": false
+      },
+      "reason": "Collecting items alone does not prepare the panel-to-tab id link before HTML."
+    },
+    {
+      "scenario": "React suspended branch abandoned by renderToString",
+      "engineValues": ["0", "1", "fallback"],
+      "actual": {
+        "tabs": ["Tab 0", "Fallback"],
+        "stops": ["-1", "-1"],
+        "activePanel": true,
+        "activeLink": false
+      },
+      "reason": "A tab in abandoned work is retained and activates a panel whose tab is absent."
+    },
+    {
+      "scenario": "React streaming boundary resolved",
+      "engineValues": ["0", "1", "fallback"],
+      "actual": {
+        "tabs": ["Tab 0", "Tab 1"],
+        "stops": ["-1", "0"],
+        "activePanel": true,
+        "activeLink": true
+      },
+      "reason": "A discarded fallback declaration survives even after onAllReady."
+    },
+    {
+      "scenario": "React nested sets",
+      "reason": "useId scope positions change when the discovery wrappers are replaced by real adapter structure."
+    }
+  ],
+  "hydration": {
+    "sameTabNode": true,
+    "samePanelNode": true,
+    "switchedToFirst": true,
+    "errors": [],
+    "recoverable": []
+  },
+  "timing": [
+    {
+      "framework": "react",
+      "tabs": 100,
+      "warmups": 5,
+      "measuredRounds": 9,
+      "medianMs": {
+        "baseline": 7.767499999999927,
+        "prepared": 8.776500000000397,
+        "prototype": 9.660600000000159
+      },
+      "medianHeapDeltaBytes": {
+        "baseline": 11352848,
+        "prepared": 12643936,
+        "prototype": 13350776
+      },
+      "meaning": "Elapsed time of server calls; heap delta immediately after a call, not peak memory or retained memory. Compare prototype versus prepared to isolate discovery overhead with the same completed HTML. Published baseline React omits panel content and is not equivalent work.",
+      "samplesMs": {
+        "baseline": [
+          7.434399999999869, 8.019199999999955, 8.451900000000023, 7.767499999999927,
+          7.509300000000167, 7.556299999999737, 7.050600000000031, 15.726300000000265,
+          14.897500000000036
+        ],
+        "prepared": [
+          8.726400000000012, 9.116400000000112, 8.515699999999924, 8.634800000000268,
+          8.776500000000397, 8.080800000000181, 8.803000000000338, 20.94589999999971,
+          21.260400000000118
+        ],
+        "prototype": [
+          9.216899999999896, 9.660600000000159, 9.671699999999873, 9.502199999999903,
+          9.647600000000239, 9.608799999999974, 26.282600000000002, 26.189200000000255,
+          26.476900000000114
+        ]
+      }
+    },
+    {
+      "framework": "vue",
+      "tabs": 100,
+      "warmups": 5,
+      "measuredRounds": 9,
+      "medianMs": {
+        "baseline": 45.9409999999998,
+        "prepared": 38.5650999999998,
+        "prototype": 38.044700000000375
+      },
+      "medianHeapDeltaBytes": {
+        "baseline": 30981576,
+        "prepared": 26025112,
+        "prototype": 27145120
+      },
+      "meaning": "Elapsed time of server calls; heap delta immediately after a call, not peak memory or retained memory. Compare prototype versus prepared to isolate discovery overhead with the same completed HTML. Published baseline React omits panel content and is not equivalent work.",
+      "samplesMs": {
+        "baseline": [
+          66.76670000000013, 46.08969999999999, 45.9409999999998, 41.03819999999996,
+          60.2203999999997, 38.77589999999964, 50.640699999999924, 41.39649999999983,
+          44.289199999999255
+        ],
+        "prepared": [
+          40.87429999999995, 36.353799999999865, 38.5650999999998, 36.31700000000001,
+          38.633200000000215, 46.262399999999616, 39.967499999999745, 32.0650999999998,
+          38.063100000000304
+        ],
+        "prototype": [
+          59.316699999999855, 58.33770000000004, 40.02359999999999, 56.1246000000001,
+          36.32290000000012, 36.04479999999967, 38.044700000000375, 35.00870000000032,
+          37.70399999999972
+        ]
+      }
+    }
+  ],
+  "limits": [
+    "Standalone instrumented fixture on published packages; no library or protected-layer changes.",
+    "React and Vue prototype only; Svelte, Solid and Angular are not claimed as prototyped.",
+    "The two-pass collector deliberately records render work without commit-aware branch ownership; the failing adversarial cases are evidence against this implementation.",
+    "External engines are rejected without mutation rather than silently replaced.",
+    "Client hydration checked in jsdom; not a full Next/Nuxt application or browser benchmark."
+  ]
+}
