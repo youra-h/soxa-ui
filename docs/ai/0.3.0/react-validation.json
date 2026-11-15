@@ -1,0 +1,304 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-15",
+  "libraryVersion": "0.3.0",
+  "libraryRevision": "9ae988633936a03e291e8e414028456fe1039c6b",
+  "sourceRevision": "78f12b9e621289bb5835f95bdaa877fca706ede8",
+  "sourceInputs": [
+    {
+      "file": ".github/workflows/ci.yml",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "03f2e4a0828e249de234cc1eff466687c36ad0c6e0cd756635b35adcb516108a"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/next/app/client-form.tsx",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "d40af7d607165ce88fba3e06498a25799199ac4dcb78a51834e22710d817a333"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/next/app/layout.tsx",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "2fdf29b28f4386de499df33e34aac43051494e155d20026bc2e40921d5de61f2"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/next/app/page.tsx",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "13f0f8a09ef856426d4142e692147fe99b577a391453428ae2dbd1fa69b416cd"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/next/app/providers.tsx",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "08a579cdd6d2fa6539b8f3e42fc95e1a3da7780c9331ab57e5a63109eee9d157"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/react/CtrlExample.tsx",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "76ae8139494c37a9c4e3ecd744dc4b2137621cb16341322e0360615ce3dd106f"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/react/TravelRecipes.tsx",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "e02745b0a76f0759517fc7a0317658aed6f97b82ffc762d5984c10b6d02b072b"
+    },
+    {
+      "file": "docs/ai/0.3.0/examples/react/main.tsx",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "93c99a5b7c752511be83e4fb4dab719e186e5b6cc4e0d9e9cbca0b8e5b92551a"
+    },
+    {
+      "file": "docs/ai/0.3.0/manifest.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "728ad04c8eaca1816b53698c38859fa26a503cde35a6d3518443801d2d4f8c20"
+    },
+    {
+      "file": "docs/ai/0.3.0/overview.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "e09dcc3410da7c061eb3e9ed462ae05a1961b6ddac4dbd8153ea335c123ac01e"
+    },
+    {
+      "file": "docs/ai/0.3.0/react-bindings.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "60f2e1a5f2bf99f3e8c08cbbda04b40f124322b5063ecf76820c39525d17d7d9"
+    },
+    {
+      "file": "docs/ai/0.3.0/react-composition.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "bd7ad4dada7fd13b61c3472937eb545922c78faf70c8d6653ee51d73f405710c"
+    },
+    {
+      "file": "docs/ai/0.3.0/react-controller.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "803e4b01cd24dfc25c25b67addd7e4b88736c1030ea426e8c94b915198a18d5a"
+    },
+    {
+      "file": "docs/ai/0.3.0/react-errors.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "f2532fc3ecdefeb90bc89da858c11cbedc22ac05f28579bfd149e8b077b1fcdb"
+    },
+    {
+      "file": "docs/ai/0.3.0/react-installation.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "59d7d859b132b35ffb0eb27648915f267bf5b594c08c0a03375c2fdc716d0f51"
+    },
+    {
+      "file": "docs/ai/0.3.0/react-next.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "9ddfddc92bf74a5661e11fcc0d6502e5d7f07e65827e329c1aed1909a94ef645"
+    },
+    {
+      "file": "docs/ai/0.3.0/react-start.md",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "f381a0f4da21b2917e6791f3882bcea4f20d7a18ae1d5617e34ae8636937f834"
+    },
+    {
+      "file": "package.json",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "dfd9664fe009a0f32d552ec970d6178a14d302d9c025dcac8a1c3122a40f75e3"
+    },
+    {
+      "file": "tools/ai-docs/consumer-browser.mjs",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "b135a5dea8edff8b18c3d1d7acd3ac245b4a04837e927121a7f21a7d8ceb6037"
+    },
+    {
+      "file": "tools/ai-docs/corpus.test.mjs",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "0a9ec1efd18d3297fdd008ab5eeebbb637f908f9a68c0981e98a8d309c395665"
+    },
+    {
+      "file": "tools/ai-docs/react-smoke.mjs",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "92aa729d71396aa7c3d096b70451ab263e6df87c0b80ada7dd5b48d182c6388b"
+    },
+    {
+      "file": "tools/ai-docs/smoke.mjs",
+      "normalization": "UTF-8; CRLF replaced by LF; all other bytes retained",
+      "sha256": "3eed44d8bbf51979cb2ce745b4ad47ee267883e3cd341d718b66cea6eefafbaa"
+    }
+  ],
+  "maintained": {
+    "commands": [
+      "npm run test:ai-docs",
+      "npm run check:ai-docs",
+      "npm run check:ai-docs:react",
+      "targeted eslint",
+      "prettier --check",
+      "node tools/english/comments.mjs origin/main",
+      "git diff --check"
+    ],
+    "tests": 30,
+    "types": "strict true; skipLibCheck false; target ES2022; lib ES2024+DOM+DOM.Iterable",
+    "scenarios": [
+      "Vite development StrictMode",
+      "Vite production",
+      "Next production HTML and hydration",
+      "three controller remounts",
+      "Vue and Nuxt regression"
+    ],
+    "completeARIAValidity": false,
+    "knownLimits": [
+      {
+        "name": "Tabs active content absent raw SSR; inactive panel unmounted",
+        "followUp": "https://app.clickup.com/t/1an4hvw5ykt"
+      },
+      {
+        "name": "Closed hidden Calendar picker dialog label target absent",
+        "followUp": "https://app.clickup.com/t/1an4hvw5ykx"
+      }
+    ]
+  },
+  "independent": {
+    "context": "fork none; exported consumer corpus and empty external consumer only; published npm declarations allowed; no repository/memory/maintained source access",
+    "scenario": "Workshop registration form; typed Input and CheckBox callbacks; scoped Accordion; Next server Tabs",
+    "pins": {
+      "node": "24.20.0",
+      "npm": "11.19.0",
+      "next": "16.2.3",
+      "react": "19.3.0",
+      "react-dom": "19.3.0",
+      "@soxa-ui/react": "0.3.0",
+      "@soxa-ui/core": "0.3.0",
+      "@soxa-ui/setup": "0.3.0",
+      "@soxa-ui/plugins": "0.3.0",
+      "@soxa-ui/theme-base": "0.3.0",
+      "@soxa-ui/theme-oren": "0.3.0",
+      "@soxa-ui/icons-material": "0.3.0",
+      "typescript": "6.0.2",
+      "@types/react": "19.2.14",
+      "@types/react-dom": "19.2.3",
+      "@types/node": "24.10.0"
+    },
+    "packageLockByteSha256": "e42bd13be6f21d3dd59f057e32989d2549baddfce2c636ad4fdfe75e6280a822",
+    "originalSnapshot": {
+      "docsRevision": "4e65a8ce904fc5d24dcc8f2be764357c1aba4fde",
+      "identityNote": "Uncommitted authored inputs; base checkout revision does not identify immutable docs source",
+      "bundleByteSha256": "a95d1b5ac85afffaa221e51a6c88c4166c57f2141a9afb893d020fdac955bb53",
+      "inputs": [
+        {
+          "id": "api-react-accordion",
+          "file": "documents/api-react-accordion.json",
+          "declaredContentSha256": "c82c8e97c637d3b548079d4292f95cf9e9ee71b4f6b2c905b029cb3a00cfe51f"
+        },
+        {
+          "id": "api-react-accordion-item",
+          "file": "documents/api-react-accordion-item.json",
+          "declaredContentSha256": "e63543ef342d351fabb69a3cf014c580320629770f8b6f3b3fc9aeaf129802c8"
+        },
+        {
+          "id": "api-react-button",
+          "file": "documents/api-react-button.json",
+          "declaredContentSha256": "4cd915778530d736273afc9a59d95785cb1a5e6e6192f77693106a259f234ce6"
+        },
+        {
+          "id": "api-react-check-box",
+          "file": "documents/api-react-check-box.json",
+          "declaredContentSha256": "a179dc2c1b00925631edb933a4489a886aaf00f045bb9fae6ddc686a879b93f4"
+        },
+        {
+          "id": "api-react-input",
+          "file": "documents/api-react-input.json",
+          "declaredContentSha256": "6f39e2d3273fecaf769acd03c8bc59e2ae2018ebbb25d8213c2ce32caae05cbf"
+        },
+        {
+          "id": "api-react-label",
+          "file": "documents/api-react-label.json",
+          "declaredContentSha256": "47f2d8b98bd2f198d43571f08a658a885d4e877d33d6a1487176128905364232"
+        },
+        {
+          "id": "api-react-tabs",
+          "file": "documents/api-react-tabs.json",
+          "declaredContentSha256": "6e2756b71b63918abff2d5c37150d40f3a8c1fc31d465768416e9000fb2f691f"
+        },
+        {
+          "id": "api-react-tabs-content",
+          "file": "documents/api-react-tabs-content.json",
+          "declaredContentSha256": "5dbddb9993447a44d4040250e535626fbcbed4cfc3a9f0d31e4376be8883b6fa"
+        },
+        {
+          "id": "api-react-tabs-item",
+          "file": "documents/api-react-tabs-item.json",
+          "declaredContentSha256": "1744093d1ae1d2308e560d764e26bb1ac6d5a7588545e4c3d5e87bbc778c3a33"
+        },
+        {
+          "id": "react-bindings",
+          "file": "documents/react-bindings.json",
+          "declaredContentSha256": "60f2e1a5f2bf99f3e8c08cbbda04b40f124322b5063ecf76820c39525d17d7d9"
+        },
+        {
+          "id": "react-composition",
+          "file": "documents/react-composition.json",
+          "declaredContentSha256": "bd7ad4dada7fd13b61c3472937eb545922c78faf70c8d6653ee51d73f405710c"
+        },
+        {
+          "id": "react-errors",
+          "file": "documents/react-errors.json",
+          "declaredContentSha256": "6dc8cdd1508066fe38b7db6878c5a105f97eeabd2065aa5e49415a58119f4220"
+        },
+        {
+          "id": "react-installation",
+          "file": "documents/react-installation.json",
+          "declaredContentSha256": "9cc0289a55c4c734c99ffccfdc60323f5448738827cd48ad0014309476b3e0c0"
+        },
+        {
+          "id": "react-next",
+          "file": "documents/react-next.json",
+          "declaredContentSha256": "499160203a4d1c9fe3d80f601e9085dfa43f56d6e16aac57c2ff1d29c5dfd935"
+        },
+        {
+          "id": "react-start",
+          "file": "documents/react-start.json",
+          "declaredContentSha256": "f381a0f4da21b2917e6791f3882bcea4f20d7a18ae1d5617e34ae8636937f834"
+        }
+      ],
+      "result": "types/build/functions passed; complete ARIA reference check failed at inactive Tabs panel"
+    },
+    "finalSnapshot": {
+      "docsRevision": "6d1e3a8e104a5a5ace18814aa009bfceea5b2a2c",
+      "schemaVersion": 1,
+      "hashDefinition": "byteSha256 hashes complete file bytes; declaredContentSha256 copies document.sha256",
+      "inputs": [
+        {
+          "byteSha256": "d53629676d061bc0e282f0294f0524a31aa38977dbc83e148d4eba648c8c064f",
+          "declaredContentSha256": null,
+          "file": "index.json"
+        },
+        {
+          "byteSha256": "507b5665d7ebe50bb08f0efd01a72a6987170f94354f256512ae18110d3d735e",
+          "declaredContentSha256": null,
+          "file": "bundles/consumer-react.txt"
+        },
+        {
+          "byteSha256": "0d0e73e26916084366e86600707b1b6ce7e693fe6968654dfc8facae84a90cde",
+          "declaredContentSha256": "59d7d859b132b35ffb0eb27648915f267bf5b594c08c0a03375c2fdc716d0f51",
+          "file": "documents/react-installation.json"
+        },
+        {
+          "byteSha256": "fffbfcde6f5df4e0661e2f362a99f88750f1037716df84d643c3d1584e76f400",
+          "declaredContentSha256": "9ddfddc92bf74a5661e11fcc0d6502e5d7f07e65827e329c1aed1909a94ef645",
+          "file": "documents/react-next.json"
+        },
+        {
+          "byteSha256": "2090b47698d6b71062549ddf939aac5230d583d8391660791ee7775b5a638cc0",
+          "declaredContentSha256": "f2532fc3ecdefeb90bc89da858c11cbedc22ac05f28579bfd149e8b077b1fcdb",
+          "file": "documents/react-errors.json"
+        }
+      ]
+    },
+    "commands": [
+      "npm.cmd run typecheck (next typegen && tsc --noEmit)",
+      "remove expect-error guard: tsc fails TS2322; restore guard: passes",
+      "npm.cmd run build (next build --webpack)",
+      "npm.cmd start; node verify-final.mjs"
+    ],
+    "findings": [
+      "Next declarations require ES2024 PromiseWithResolvers with skipLibCheck false",
+      "next typegen uses jsx react-jsx",
+      "PowerShell execution policy/BOM fixed only in exercise harness",
+      "inactive Tabs target absent, confirmed active Tabs SSR panel absence"
+    ],
+    "result": "strict types, negative guard, production build, functional SSR/browser, reload isolation and bounded known limitations pass",
+    "completeARIAValidity": false,
+    "browserEvidence": "validation-react-consumer/final-browser-result.json",
+    "originalFailureEvidence": "validation-react-consumer/browser-result.json"
+  }
+}
