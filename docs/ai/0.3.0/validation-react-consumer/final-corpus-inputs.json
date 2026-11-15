@@ -1,0 +1,32 @@
+{
+  "docsRevision": "6d1e3a8e104a5a5ace18814aa009bfceea5b2a2c",
+  "schemaVersion": 1,
+  "hashDefinition": "byteSha256 hashes complete file bytes; declaredContentSha256 copies document.sha256",
+  "inputs": [
+    {
+      "byteSha256": "d53629676d061bc0e282f0294f0524a31aa38977dbc83e148d4eba648c8c064f",
+      "declaredContentSha256": null,
+      "file": "index.json"
+    },
+    {
+      "byteSha256": "507b5665d7ebe50bb08f0efd01a72a6987170f94354f256512ae18110d3d735e",
+      "declaredContentSha256": null,
+      "file": "bundles/consumer-react.txt"
+    },
+    {
+      "byteSha256": "0d0e73e26916084366e86600707b1b6ce7e693fe6968654dfc8facae84a90cde",
+      "declaredContentSha256": "59d7d859b132b35ffb0eb27648915f267bf5b594c08c0a03375c2fdc716d0f51",
+      "file": "documents/react-installation.json"
+    },
+    {
+      "byteSha256": "fffbfcde6f5df4e0661e2f362a99f88750f1037716df84d643c3d1584e76f400",
+      "declaredContentSha256": "9ddfddc92bf74a5661e11fcc0d6502e5d7f07e65827e329c1aed1909a94ef645",
+      "file": "documents/react-next.json"
+    },
+    {
+      "byteSha256": "2090b47698d6b71062549ddf939aac5230d583d8391660791ee7775b5a638cc0",
+      "declaredContentSha256": "f2532fc3ecdefeb90bc89da858c11cbedc22ac05f28579bfd149e8b077b1fcdb",
+      "file": "documents/react-errors.json"
+    }
+  ]
+}

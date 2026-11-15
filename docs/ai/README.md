@@ -4,7 +4,7 @@ This directory is the library-owned source format for small, versioned AI
 documentation records. The initial release directory is **0.3.0**. The separate
 website owns its routes, localization, prose pages, rendering and public
 `llms.txt` endpoints. This format supplies metadata, a minimal shared overview,
-Vue/Nuxt consumer recipes and generated API records; it does not replace those pages.
+Vue/Nuxt and React/Next.js consumer recipes and generated API records; it does not replace those pages.
 
 The source language is English. This is public consumer documentation, not the
 repository's agent workflow. Never publish private memory, task history,
@@ -176,7 +176,7 @@ Chromium (`npx playwright install chromium`). CI runs both. It does not build
 or install the current library checkout.
 
 The initial matrix is deliberate: 63 of 65 published components have Vue exports and generated API;
-the retained headless Button and the Vue/Nuxt recipes are checked. Other
+the retained headless Button, Vue/Nuxt and React/Next recipes are checked. Remaining
 framework guides, general extension/theme-authoring and contributor instructions
 remain pending. API presence alone is not evidence of runnable recipes.
 
@@ -196,3 +196,9 @@ related IDs and update only its real coverage. For another release, obtain its
 published setup API, verify npm provenance/release revision, record its exact digest
 and independently selected package pins, then run the external checks for that
 release. Do not hand-edit generated API records.
+
+React/Next.js consumption starts with [react-start](./0.3.0/react-start.md).
+Run `npm run check:ai-docs:react` for its separate published-package smoke;
+the existing `check:ai-docs` retains Vue/Nuxt verification. React recipes cover a
+form, scoped slots, controller cleanup and Next SSR/RSC boundaries; coverage
+remains sample. See [React validation](./0.3.0/react-validation.md) for evidence.

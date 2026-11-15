@@ -1,0 +1,32 @@
+{
+  "functionalSSR": "passed",
+  "interactions": "passed",
+  "reloadIsolation": "passed",
+  "documentedSSRLimitations": [
+    {
+      "attribute": "aria-controls",
+      "target": "_R_ppbtb_-panel",
+      "role": "tab",
+      "text": "Schedule"
+    },
+    {
+      "attribute": "aria-controls",
+      "target": "_R_19pbtb_-panel",
+      "role": "tab",
+      "text": "Venue"
+    }
+  ],
+  "documentedBrowserLimitations": [
+    "aria-controls:_R_ppbtb_-panel <button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_ppbtb_-tab\" aria-controls=\"_R_ppbtb_-panel\" class=\"so-button so-button--size-normal\" aria-selected=\"false\" tabindex=\"-1\"><span class=\"so-button__text\">Schedule</span></button>"
+  ],
+  "aria": {
+    "duplicates": [],
+    "broken": [
+      "aria-controls:_R_ppbtb_-panel <button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_ppbtb_-tab\" aria-controls=\"_R_ppbtb_-panel\" class=\"so-button so-button--size-normal\" aria-selected=\"false\" tabindex=\"-1\"><span class=\"so-button__text\">Schedule</span></button>"
+    ],
+    "styleSheets": 1,
+    "icons": 2
+  },
+  "problems": [],
+  "completeARIAValidity": false
+}
