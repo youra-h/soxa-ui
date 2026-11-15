@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getAllContexts, mount, unmount, untrack } from 'svelte'
-	import Teleport from './Teleport.svelte'
+	// Keep the self-import distinct from the component name emitted by svelte-package.
+	import TeleportContent from './Teleport.svelte'
 	import type { TTeleportProps } from './types'
 
 	const props: TTeleportProps = $props()
@@ -64,7 +65,7 @@
 	$effect(() => {
 		if (phase !== 'wrapped') return
 
-		const content = mount(Teleport, {
+		const content = mount(TeleportContent, {
 			target: wrapperNode(),
 			props: { to: undefined, disabled: true, children: props.children },
 			context,
