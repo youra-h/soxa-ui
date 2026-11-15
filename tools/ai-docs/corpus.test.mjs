@@ -16,6 +16,7 @@ function fixture() {
 	manifest.documents = manifest.documents.slice(0, 2)
 	manifest.coverage.react.guides = 'pending'
 	manifest.coverage.angular.guides = 'pending'
+	manifest.coverage.svelte.guides = 'pending'
 	manifest.documents[0].related = ['vue-button']
 	const source = {
 		revision: manifest.libraryRevision,
@@ -492,4 +493,49 @@ test('Angular SSR selection excludes other framework recipes and keeps shared re
 	assert.ok(selected.some((doc) => doc.framework === 'all'))
 	assert.ok(selected.every((doc) => doc.framework === 'angular' || doc.framework === 'all'))
 	assert.ok(!selected.some((doc) => /vue|react/.test(doc.framework)))
+})
+
+test('SvelteKit plus-prefixed routes are selectively delivered without accepting traversal', async () => {
+	const { fetchSource } = await import('./fetch.mjs')
+	const manifest = JSON.parse(
+		readFileSync(new URL('../../docs/ai/0.3.0/manifest.json', import.meta.url), 'utf8'),
+	)
+	const requests = []
+	const out = mkdtempSync(join(tmpdir(), 'soxa-svelte-delivery-'))
+	await fetchSource({
+		revision,
+		version: '0.3.0',
+		out,
+		fetchFile: async (url) => {
+			const file = url.split('/' + revision + '/')[1]
+			requests.push(file)
+			return {
+				ok: true,
+				text: async () => readFileSync(new URL('../../' + file, import.meta.url), 'utf8'),
+			}
+		},
+	})
+	assert.ok(requests.includes('docs/ai/0.3.0/examples/sveltekit/src/routes/+page.svelte'))
+	assert.ok(requests.includes('docs/ai/0.3.0/examples/sveltekit/src/routes/+layout.svelte'))
+	assert.ok(requests.includes('docs/ai/0.3.0/examples/sveltekit/src/routes/away/+page.svelte'))
+	assert.equal(manifest.coverage.svelte.guides, 'sample')
+	for (const unsafe of [
+		'examples/../secret',
+		'examples/%2e%2e/secret',
+		'examples/+page.svelte?query',
+		'examples/+page.svelte#hash',
+	]) {
+		const bad = structuredClone(manifest)
+		bad.documents.find((d) => d.id === 'svelte-installation').examples[0].path = unsafe
+		await assert.rejects(
+			() =>
+				fetchSource({
+					revision,
+					version: '0.3.0',
+					out: mkdtempSync(join(tmpdir(), 'soxa-svelte-rejected-')),
+					fetchFile: async () => ({ ok: true, text: async () => JSON.stringify(bad) }),
+				}),
+			/Invalid documentation file path/,
+		)
+	}
 })

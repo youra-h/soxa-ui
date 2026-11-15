@@ -208,3 +208,15 @@ Run `npm run check:ai-docs:angular` for exact published 0.3.0 standalone CSR
 and Angular SSR recipes: strict ngc/AOT, negative template guard, production
 build, model/events, Forms, scoped slots, keyboard, controller teardown and hydration.
 Coverage remains sample. See [Angular validation](./0.3.0/angular-validation.md).
+
+Svelte/SvelteKit consumption starts with [svelte-start](./0.3.0/svelte-start.md).
+Run `npm run check:ai-docs:svelte` for exact published consumers. This diagnostic
+currently fails strict declarations (published Teleport TS2440); it is deliberately
+not added to the shared CI job until the owner resolves the release blocker.
+Runtime coverage is sample, not full typed readiness. See
+[Svelte validation](./0.3.0/svelte-validation.md) for the tested limits.
+
+Svelte record navigation: [installation](./0.3.0/svelte-installation.md),
+[bindings](./0.3.0/svelte-bindings.md), [composition](./0.3.0/svelte-composition.md),
+[controller](./0.3.0/svelte-controller.md), [SvelteKit](./0.3.0/svelte-sveltekit.md),
+and [errors](./0.3.0/svelte-errors.md). Generated API is reached by related record IDs.

@@ -28,3 +28,8 @@ audience; they must not be mixed into application installation instructions.
 React and Next.js consumers start with react-start. Its related records cover
 installation, typed state callbacks, scoped render slots, controllers and the
 Next App Router client boundary. Framework recipe coverage remains sample.
+
+Svelte/SvelteKit consumers start with svelte-start. Its narrow runtime recipes
+cover controlled callback values, snippets and request-local controllers. Exact
+0.3.0 currently has a strict declaration blocker; consult svelte-errors and
+svelte-validation before interpreting sample coverage as typed readiness.

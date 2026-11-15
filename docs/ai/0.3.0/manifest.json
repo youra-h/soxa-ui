@@ -30,7 +30,7 @@
     },
     "svelte": {
       "api": "generated",
-      "guides": "pending"
+      "guides": "sample"
     },
     "webc": {
       "api": "generated",
@@ -53,7 +53,7 @@
           "path": "README.md"
         }
       ],
-      "related": ["vue-button", "vue-start", "react-start", "angular-start"],
+      "related": ["vue-button", "vue-start", "react-start", "angular-start", "svelte-start"],
       "examples": [],
       "links": []
     },
@@ -783,6 +783,295 @@
       "related": ["angular-start", "angular-ssr"],
       "examples": [],
       "links": []
+    },
+    {
+      "id": "svelte-start",
+      "title": "Svelte and SvelteKit 0.3.0",
+      "path": "svelte-start.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": [
+        "overview",
+        "svelte-installation",
+        "svelte-bindings",
+        "svelte-composition",
+        "svelte-controller",
+        "svelte-sveltekit",
+        "svelte-errors"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "svelte-installation",
+      "title": "Install the Svelte consumer",
+      "path": "svelte-installation.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "installation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": ["overview", "svelte-errors", "api-svelte-button"],
+      "examples": [
+        {
+          "id": "svelte-0",
+          "path": "examples/svelte/CtrlExample.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "svelte-1",
+          "path": "examples/svelte/index.html",
+          "language": "html"
+        },
+        {
+          "id": "svelte-2",
+          "path": "examples/svelte/main.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "svelte-3",
+          "path": "examples/svelte/package.json",
+          "language": "json"
+        },
+        {
+          "id": "svelte-4",
+          "path": "examples/svelte/Recipes.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "svelte-5",
+          "path": "examples/svelte/setup.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "svelte-6",
+          "path": "examples/svelte/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "svelte-7",
+          "path": "examples/svelte/vite.config.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "sveltekit-0",
+          "path": "examples/sveltekit/package.json",
+          "language": "json"
+        },
+        {
+          "id": "sveltekit-1",
+          "path": "examples/sveltekit/src/app.html",
+          "language": "html"
+        },
+        {
+          "id": "sveltekit-2",
+          "path": "examples/sveltekit/src/lib/CtrlExample.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "sveltekit-3",
+          "path": "examples/sveltekit/src/lib/Recipes.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "sveltekit-4",
+          "path": "examples/sveltekit/src/routes/+layout.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "sveltekit-5",
+          "path": "examples/sveltekit/src/routes/+page.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "sveltekit-6",
+          "path": "examples/sveltekit/src/routes/away/+page.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "sveltekit-7",
+          "path": "examples/sveltekit/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "sveltekit-8",
+          "path": "examples/sveltekit/vite.config.ts",
+          "language": "typescript"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "svelte-bindings",
+      "title": "Controlled values and events",
+      "path": "svelte-bindings.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "bindings",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": [
+        "api-svelte-input",
+        "api-svelte-check-box",
+        "api-svelte-select",
+        "api-svelte-date-picker",
+        "api-svelte-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "svelte-composition",
+      "title": "Compound components and snippets",
+      "path": "svelte-composition.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "composition",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": ["api-svelte-accordion", "api-svelte-select"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "svelte-controller",
+      "title": "Controllers, references and cleanup",
+      "path": "svelte-controller.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "controller",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": ["api-svelte-button", "api-svelte-input"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "svelte-sveltekit",
+      "title": "Universal SvelteKit rendering",
+      "path": "svelte-sveltekit.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "ssr",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": ["svelte-installation", "svelte-errors"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "svelte-errors",
+      "title": "Release-specific mistakes and limits",
+      "path": "svelte-errors.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "errors",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": ["svelte-bindings", "svelte-controller", "svelte-sveltekit"],
+      "examples": [],
+      "links": []
     }
   ],
   "packages": {
@@ -794,7 +1083,8 @@
     "@soxa-ui/theme-oren": "0.3.0",
     "@soxa-ui/icons-material": "0.3.0",
     "@soxa-ui/react": "0.3.0",
-    "@soxa-ui/angular": "0.3.0"
+    "@soxa-ui/angular": "0.3.0",
+    "@soxa-ui/svelte": "0.3.0"
   },
   "contributorGuides": "pending"
 }
