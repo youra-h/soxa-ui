@@ -33,10 +33,10 @@ const compilerOptions = {
 	module: 'ESNext',
 	moduleResolution: 'Bundler',
 	strict: true,
-	skipLibCheck: true,
+	skipLibCheck: false,
 	noEmit: true,
 	jsx: 'react-jsx',
-	lib: ['ES2022', 'DOM'],
+	lib: ['ES2024', 'DOM', 'DOM.Iterable'],
 	esModuleInterop: true,
 }
 
@@ -141,7 +141,7 @@ try {
 					if (ssr) {
 						const inactive = page.getByRole('tab', { name: 'Privacy', exact: true })
 						const expected = await inactive.getAttribute('aria-controls')
-						const broken = await missingReferences(page)
+						const broken = await checkedReferences(page)
 						assert.equal(
 							broken.length,
 							1,
@@ -151,7 +151,7 @@ try {
 						assert.equal(broken[0].id, expected)
 						await inactive.click()
 						await page.getByRole('tabpanel', { name: 'Privacy', exact: true }).waitFor()
-						const switched = await missingReferences(page)
+						const switched = await checkedReferences(page)
 						assert.equal(switched.length, 1)
 						assert.equal(switched[0].attr, 'aria-controls')
 						assert.equal(
@@ -160,7 +160,7 @@ try {
 								.getByRole('tab', { name: 'General', exact: true })
 								.getAttribute('aria-controls'),
 						)
-					} else assert.deepEqual(await missingReferences(page), [])
+					} else assert.deepEqual(await checkedReferences(page), [])
 				},
 				validateSSRReferences: (broken) => {
 					assert.equal(broken.length, 4, 'Exact known 0.3.0 raw SSR reference gaps')
@@ -198,6 +198,11 @@ try {
 					await page.goto(production.url)
 					await page.getByRole('tab', { name: 'General', exact: true }).waitFor()
 					assert.equal(
+						await page.getByText('General settings', { exact: true }).count(),
+						0,
+						'Known 0.3.0 active Tabs SSR content gap',
+					)
+					assert.equal(
 						await page.locator('.so-calendar').count(),
 						0,
 						'Portal calendar is client mounted',
@@ -223,3 +228,18 @@ try {
 console.log(
 	'Published 0.3.0: React StrictMode and Next types/build/browser/SSR passed (' + directory + ')',
 )
+
+async function checkedReferences(page) {
+	const missing = await missingReferences(page)
+	const hiddenPickerLabels = missing.filter(
+		(entry) =>
+			entry.attr === 'aria-labelledby' &&
+			entry.role === 'dialog' &&
+			entry.classes === 'so-frame so-popover__panel' &&
+			entry.hidden &&
+			entry.withinDatePicker &&
+			entry.id.endsWith('-picker-0'),
+	)
+	assert.equal(hiddenPickerLabels.length, 1, 'Exact published hidden Calendar picker label gap')
+	return missing.filter((entry) => !hiddenPickerLabels.includes(entry))
+}

@@ -19,3 +19,8 @@
 
 Report a reproducible 0.3.0 library defect separately with exact pins, inputs and
 errors. This documentation does not promise fixes from a newer unpublished API.
+
+Known bounded ARIA observations for 0.3.0: closed/unmounted portal and Tabs
+panel controls may target absent elements; a hidden Calendar month picker dialog
+can retain a label reference after its heading unmounts. See react-next and the
+validation evidence before asserting complete SSR or retained-DOM ARIA coverage.

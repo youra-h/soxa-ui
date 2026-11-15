@@ -167,6 +167,8 @@ export async function missingReferences(page) {
 						role: el.getAttribute('role'),
 						label: el.getAttribute('aria-label'),
 						classes: el.className,
+						hidden: el.getClientRects().length === 0,
+						withinDatePicker: Boolean(el.closest('.so-date-picker__panel')),
 					})),
 			),
 		),

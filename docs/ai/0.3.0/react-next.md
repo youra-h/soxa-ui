@@ -36,8 +36,11 @@ before their contents are associated after mount. Even the initially active
 Tabs.Content is absent with JavaScript disabled in 0.3.0; inactive Tabs content is unmounted,
 so its panel target remains absent until activated. Do not claim all references
 resolve in raw HTML. The smoke checks this exact bounded set of missing targets
-and rejects additional gaps. Labels/descriptions must resolve. Console warnings
+and rejects additional gaps. Visible labels/descriptions must resolve. After the DatePicker scenario, one
+closed, display:none Calendar picker popover retains an aria-labelledby to its
+unmounted picker heading in 0.3.0; the smoke checks that precise hidden owner
+and target suffix, never exempts a visible dialog or any additional label gap. Console warnings
 and hydration errors are failures.
 
-The active Tabs SSR limitation is tracked in the public issue linked from
-react-validation; this corpus does not change the published package.
+These observations are limitations of the published package. Application code
+should not rewrite generated ARIA attributes to conceal them.

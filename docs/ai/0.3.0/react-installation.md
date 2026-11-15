@@ -16,6 +16,7 @@ supplies component behavior and role icons. Register once per module environment
 not on each render or request. Create an HTML root with id="root" for main.tsx.
 
 Use strict TypeScript with jsx=react-jsx, moduleResolution=Bundler, target=ES2022,
-lib=[ES2022, DOM] and noEmit. The negative disabled="yes" example is guarded by
+lib=[ES2024, DOM, DOM.Iterable], noEmit and skipLibCheck=false. ES2024 declarations cover Next 16.2.3 dependencies
+that use PromiseWithResolvers; the emitted JavaScript target remains ES2022. The negative disabled="yes" example is guarded by
 @ts-expect-error: an unused directive means public props stopped being checked.
 For Next.js use react-next's registration boundary and CSS layout instead.

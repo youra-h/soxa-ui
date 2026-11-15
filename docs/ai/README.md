@@ -176,7 +176,7 @@ Chromium (`npx playwright install chromium`). CI runs both. It does not build
 or install the current library checkout.
 
 The initial matrix is deliberate: 63 of 65 published components have Vue exports and generated API;
-the retained headless Button and the Vue/Nuxt recipes are checked. Remaining
+the retained headless Button, Vue/Nuxt and React/Next recipes are checked. Remaining
 framework guides, general extension/theme-authoring and contributor instructions
 remain pending. API presence alone is not evidence of runnable recipes.
 
