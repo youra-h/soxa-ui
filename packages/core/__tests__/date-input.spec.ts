@@ -81,7 +81,11 @@ function fieldFormatter(locale: string, calendar = 'gregory'): Intl.DateTimeForm
 function expectedSegments(formatter: Intl.DateTimeFormat, date: string): string[] {
 	const [year, month, day] = date.split('-').map(Number)
 
-	return formatter.formatToParts(Date.UTC(year, month - 1, day)).map(({ value }) => value)
+	return formatter
+		.formatToParts(Date.UTC(year, month - 1, day))
+		.map(({ type, value }) =>
+			type === 'literal' ? value.replace(/[\u00a0\u202f]/g, ' ') : value,
+		)
 }
 
 /** Имя части по `Intl.DisplayNames`. */
@@ -127,7 +131,9 @@ function expectedTimeSegments(
 ): string[] {
 	return timeFormatter(locale, timePrecision)
 		.formatToParts(utcOf(dateTime))
-		.map(({ value }) => value)
+		.map(({ type, value }) =>
+			type === 'literal' ? value.replace(/[\u00a0\u202f]/g, ' ') : value,
+		)
 }
 
 /** Часть даты со временем по форматтеру — как её пишет локаль. */

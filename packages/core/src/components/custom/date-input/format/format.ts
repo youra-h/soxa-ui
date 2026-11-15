@@ -116,10 +116,15 @@ function tokensOf(
 		if (part !== undefined && !seen.has(part)) {
 			seen.add(part)
 			tokens.push(part)
-		} else if (last?.type === 'literal') {
-			tokens[tokens.length - 1] = { type: 'literal', text: last.text + value }
 		} else {
-			tokens.push({ type: 'literal', text: value })
+			// ICU versions disagree on non-breaking spaces; stabilize SSR literals without changing bidi marks.
+			const text = value.replace(/[\u00a0\u202f]/g, ' ')
+
+			if (last?.type === 'literal') {
+				tokens[tokens.length - 1] = { type: 'literal', text: last.text + text }
+			} else {
+				tokens.push({ type: 'literal', text })
+			}
 		}
 	}
 
