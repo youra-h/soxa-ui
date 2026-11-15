@@ -26,6 +26,7 @@ export const TabsContentInputNames = [
 	'visible',
 	'direction',
 	'value',
+	'initial',
 	'id',
 ] as const
 export const TabsContentOutputNames = [
@@ -48,6 +49,7 @@ export const TabsContentOutputNames = [
 		{ name: 'visible', transform: booleanInput },
 		'direction',
 		'value',
+		'initial',
 		'id',
 	],
 	outputs: [...TabsContentOutputNames],
@@ -78,6 +80,7 @@ export abstract class TTabsContentSurface<TInstance extends IEntity> extends TVi
 	declare visible: TInputValue<typeof descriptor, 'visible'>
 	declare direction: TInputValue<typeof descriptor, 'direction'>
 	declare value: TInputValue<typeof descriptor, 'value'>
+	declare initial: TInputValue<typeof descriptor, 'initial'>
 	declare id: TInputValue<typeof descriptor, 'id'>
 	declare readonly soBundleCreate: TOutputEmitter<typeof descriptor, 'bundle:create'>
 	declare readonly soPluginEvent: TOutputEmitter<typeof descriptor, 'plugin:event'>

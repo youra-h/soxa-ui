@@ -69,11 +69,12 @@ import type {
 	TTabsCollection,
 	TTabsCollectionExtensions,
 } from '@soxa-ui/core'
-import { TIdPlugin, TTabsItemIdsPlugin } from '@soxa-ui/plugins'
+import { TCollectionInitialPartPlugin, TIdPlugin, TTabsItemIdsPlugin } from '@soxa-ui/plugins'
 import type { TCollectionBundlesPlugin } from '@soxa-ui/plugins'
 import type { TInstanceContext } from '../../../protected/adapter/context'
 import { ITEM_CONTEXT_ELEVATOR } from '../../../protected/adapter/elevator/keys'
 import type { TCollectionItemFacade } from '../collection'
+import { collectionInitialSourceOf } from '../collection/initial'
 import { COLLECTION_BUNDLES_ELEVATOR, COLLECTION_MEMBERS_ELEVATOR } from '../collection/keys'
 import type { ITabsContentBindingOptions } from './types'
 
@@ -100,6 +101,26 @@ function findByValue(engine: TTabsCollection, value: unknown): ITabsItem | undef
 }
 
 export class TTabsContentBindingExtension {
+	private _snapshot: Readonly<Record<string, unknown>> = Object.freeze({})
+	private readonly _listeners = new Set<() => void>()
+
+	getSnapshot(): Readonly<Record<string, unknown>> {
+		return this._snapshot
+	}
+	subscribe(listener: () => void): () => void {
+		this._listeners.add(listener)
+		return () => this._listeners.delete(listener)
+	}
+	private _write(link: Readonly<Record<string, unknown>>): void {
+		if (
+			this._snapshot.id === link.id &&
+			this._snapshot['aria-labelledby'] === link['aria-labelledby']
+		)
+			return
+		this._snapshot = Object.freeze(link)
+		for (const listener of this._listeners) listener()
+	}
+
 	constructor(
 		context: TInstanceContext<TCollectionItemFacade>,
 		options: ITabsContentBindingOptions,
@@ -119,6 +140,9 @@ export class TTabsContentBindingExtension {
 		const members = elevator(COLLECTION_MEMBERS_ELEVATOR).up()
 		/** The `id` the application gave the panel. */
 		const idPlugin = context.bundle?.get(TIdPlugin)
+		const part = context.bundle?.get(TCollectionInitialPartPlugin)
+		const initial = part?.prepared ? collectionInitialSourceOf(elevator) : undefined
+		if (initial && part) part.aria = this
 
 		/** The tab bound now. */
 		let boundItem: ITabsItem | undefined
@@ -128,18 +152,33 @@ export class TTabsContentBindingExtension {
 		let boundIds: TTabsItemIdsPlugin | undefined
 		/** The context is accepted: subscribing to foreign buses is allowed. */
 		let attached = false
+		let releaseIds: (() => void) | undefined
 
 		/**
 		 * The panel's side: the application's `id`, else the one the tab wrote,
 		 * and the link to the tab. Without a tab only the own `id` stays.
 		 */
 		const linkPanel = (): void => {
-			content.aria.add('id', idPlugin?.id ?? boundItem?.aria.get('aria-controls'))
-			content.aria.add('aria-labelledby', boundItem?.aria.get('id'))
+			const prepared = boundItem ? initial?.link(boundItem) : undefined
+			const tab = boundIds?.getSnapshot()
+			const id =
+				idPlugin?.id ??
+				(initial
+					? (tab?.['aria-controls'] ?? prepared?.panelId)
+					: boundItem?.aria.get('aria-controls'))
+			const labelledby = initial ? (tab?.id ?? prepared?.tabId) : boundItem?.aria.get('id')
+
+			if (initial) this._write({ id, 'aria-labelledby': labelledby })
+			else {
+				content.aria.add('id', idPlugin?.id ?? boundItem?.aria.get('aria-controls'))
+				content.aria.add('aria-labelledby', boundItem?.aria.get('id'))
+			}
 		}
 
 		/** The tab's `aria-controls` no longer follows this panel: back to the formula. */
 		const unlinkTab = (): void => {
+			releaseIds?.()
+			releaseIds = undefined
 			if (idPlugin) boundIds?.unbindPanel(idPlugin)
 
 			boundIds = undefined
@@ -164,6 +203,8 @@ export class TTabsContentBindingExtension {
 
 			boundIds = ids
 			ids.bindPanel(idPlugin)
+			if (initial) releaseIds = ids.subscribe(linkPanel)
+			linkPanel()
 		}
 
 		/**
@@ -210,6 +251,7 @@ export class TTabsContentBindingExtension {
 		bind(findByValue(engine, content.value))
 
 		context.events.on('attach', () => {
+			part?.pluginMount?.accept()
 			attached = true
 			members?.add(adapter, context)
 			// The tab found on assembly: subscribed now, and what it wrote since
@@ -238,8 +280,11 @@ export class TTabsContentBindingExtension {
 			unbind()
 			attached = false
 
-			content.aria.remove('id')
-			content.aria.remove('aria-labelledby')
+			if (!initial) {
+				content.aria.remove('id')
+				content.aria.remove('aria-labelledby')
+			}
+			this._listeners.clear()
 		})
 	}
 }

@@ -5,6 +5,7 @@
  * (активность и ARIA-связка, выводятся фасадом). Смешивать нельзя: core
  * отвечает за props и events, коллекционная часть — за членство в коллекции.
  */
+import { CollectionInitialPartPluginDescriptor } from '../../plugins/collection-initial.plugin'
 
 import { defineComponent, defineDescriptor } from '../../../../protected/define'
 import { TTabsContent, TTabsContentCollectionFacade } from '@soxa-ui/core'
@@ -29,6 +30,7 @@ export const TabsContentDescriptor = defineDescriptor(() =>
 		},
 
 		plugins: [
+			CollectionInitialPartPluginDescriptor,
 			// `id` панели — проп `id`: на панель ведёт `aria-controls` её таба, и
 			// `id` приложения главнее формулы таба. На панель и в ссылку таба его
 			// кладёт связка панели (`TTabsContentBindingExtension`)

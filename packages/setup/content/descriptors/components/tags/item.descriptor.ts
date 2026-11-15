@@ -17,6 +17,7 @@
  * Select: за жизнь тега он не меняется, и разметка отдаёт его кнопке через
  * `ctrl`.
  */
+import { CollectionInitialPartPluginDescriptor } from '../../plugins/collection-initial.plugin'
 
 import { defineComponent, defineDescriptor, defineType } from '../../../../protected/define'
 import { TTagsItem } from '@soxa-ui/core'
@@ -68,6 +69,7 @@ export const TagsItemDescriptor = defineDescriptor(() =>
 		},
 
 		plugins: [
+			CollectionInitialPartPluginDescriptor,
 			// Корень — пилюля вокруг строки и крестика, фокус держит остановка
 			// тега: с выбором — строка-опция, без выбора — крестик (у строки
 			// `listitem` `tabindex` нет). Туда `focused = true` и ставит фокус

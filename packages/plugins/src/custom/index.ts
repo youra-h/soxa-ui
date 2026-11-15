@@ -52,3 +52,5 @@ export * from './code-block'
 export * from './alert'
 export * from './avatar'
 export * from './alert-dialog'
+
+export * from './collection-initial'

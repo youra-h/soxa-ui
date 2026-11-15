@@ -77,7 +77,26 @@ export class TOwnBundle implements IBundleTenancy {
 	) {
 		const bundle = new TPluginBundle(_instance, mount.mountId, mount.locale)
 
-		for (const plugin of _descriptor.plugins) bundle.use(plugin.ctor, plugin.options ?? {})
+		const options = new Map<TPluginCtor, object>()
+
+		for (const entry of mount.pluginOptions ?? []) {
+			if (!ownPluginsOf(_descriptor).has(entry.ctor) || options.has(entry.ctor)) {
+				throw new Error(
+					'Mount installation options must name each declared plugin at most once.',
+				)
+			}
+
+			options.set(entry.ctor, entry.options ?? {})
+		}
+
+		for (const plugin of _descriptor.plugins) {
+			const input = options.get(plugin.ctor)
+
+			bundle.use(
+				plugin.ctor,
+				input ? { ...plugin.options, ...input } : (plugin.options ?? {}),
+			)
+		}
 
 		this.bundle = bundle
 		this._external = new TExternalPlugins(bundle, _instance, ownPluginsOf(_descriptor))

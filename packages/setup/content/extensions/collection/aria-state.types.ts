@@ -12,5 +12,6 @@ export interface ICollectionAriaLink {
 
 export interface ICollectionAriaStateOptions {
 	readonly state: TCollectionStatePort
-	readonly link: ICollectionAriaLink
+	readonly link?: ICollectionAriaLink
+	readonly outputs?: readonly ICollectionAriaLink[]
 }

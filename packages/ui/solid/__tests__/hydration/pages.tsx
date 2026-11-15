@@ -567,3 +567,34 @@ export function AlertDialogPage(): JSX.Element {
 		</AlertDialog>
 	)
 }
+
+/** Explicit composition is delivered through the normal native provider. */
+export function CollectionInitial(props: { automatic?: boolean } = {}) {
+	const initial = {
+		items: [
+			{ value: 'a', text: 'A' },
+			{ value: 'b', text: 'B', id: 'tab-b', _: { active: true } },
+		],
+		panels: [{ value: 'a' }, { value: 'b', id: 'panel-b' }],
+	}
+	return (
+		<Tabs
+			initial={initial}
+			content={
+				<>
+					<Tabs.Content initial={0}>A</Tabs.Content>
+					<Tabs.Content initial={1}>B</Tabs.Content>
+				</>
+			}
+		>
+			{props.automatic ? undefined : (
+				<>
+					<div>
+						<Tabs.Item initial={0} />
+					</div>
+					<Tabs.Item initial={1} />
+				</>
+			)}
+		</Tabs>
+	)
+}

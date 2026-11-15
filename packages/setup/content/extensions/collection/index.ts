@@ -12,6 +12,10 @@ export { TCollectionInitialSource } from './initial-source.class'
 export { TCollectionInitialExtension } from './initial.extension.class'
 export {
 	createCollectionInitialSource,
+	collectionInitialOwnerOptions,
+	collectionInitialInputs,
+	collectionInitialPrepared,
+	collectionInitialState,
 	collectionInitialSourceOf,
 	resolveCollectionInitialItem,
 	resolveCollectionInitialPanel,

@@ -1,3 +1,6 @@
+import { collectionInitialOwnerOptions } from '@soxa-ui/setup'
+import { TCollectionInitialExtension } from '@soxa-ui/setup'
+import { useCollectionInitial } from '../../adapter'
 import {
 	TCollectionExtension,
 	TDragAndDropCollectionExtension,
@@ -20,16 +23,22 @@ export function setupTabs(
 	props: Record<string, unknown>,
 	onUpdate: TUpdateListener,
 ): TBinding<ITabs, TTabsCollectionFacade> {
-	const adapter = createWebcAdapterContext(host, TabsDescriptor(), { ctrl, props })
+	const source = useCollectionInitial(host, props, '')
+	const adapter = createWebcAdapterContext(
+		host,
+		TabsDescriptor(),
+		collectionInitialOwnerOptions(TabsDescriptor(), { ctrl, props }, source),
+	)
 	const elevator = createWebcElevator(host)
 
 	const collectionAdapter = createWebcAdapterContext(
 		host,
 		TabsCollectionDescriptor(),
-		{ props, options: { owner: adapter.instance, engine: props['engine'] } },
+		{ props, options: { owner: adapter.instance, engine: source?.engine ?? props['engine'] } },
 		{ bundle: adapter.bundle },
 	)
 		.use(TCollectionExtension, { elevator })
+		.use(TCollectionInitialExtension, { source, elevator })
 		.use(TDragAndDropCollectionExtension, { elevator })
 
 	const facade = useCollectionAdapter(collectionAdapter, host, onUpdate)

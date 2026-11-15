@@ -10,7 +10,7 @@ import type { TTranslations } from '../../../locale/types'
  */
 export class TTagsItemNamesPlugin extends TNamesPlugin<ITagsItem> {
 	protected override _name(owner: ITagsItem, translations: TTranslations): void {
-		owner.closeAria.add('aria-label', formatName(translations.tags.close, owner.text))
+		this._setName('closeAria', owner.closeAria, formatName(translations.tags.close, owner.text))
 	}
 
 	protected override _watch(owner: ITagsItem, name: () => void): void {

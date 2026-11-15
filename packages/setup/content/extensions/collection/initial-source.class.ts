@@ -20,7 +20,7 @@ function isPlain(value: unknown): value is Record<string, unknown> {
 }
 
 /** Snapshot before any engine writes: later edits to the application's object are not new input. */
-function copy(value: unknown, ancestors: ReadonlySet<object> = new Set()): unknown {
+function copy(value: unknown, ancestors: Set<object> = new Set()): unknown {
 	if (
 		value === undefined ||
 		value === null ||
@@ -36,17 +36,22 @@ function copy(value: unknown, ancestors: ReadonlySet<object> = new Set()): unkno
 	}
 	if (ancestors.has(value)) throw new Error('Collection initial source must not be cyclic.')
 
-	const path = new Set([...ancestors, value])
+	ancestors.add(value)
 
 	if (Object.getOwnPropertySymbols(value).length > 0) {
 		throw new Error('Collection initial source must not contain symbol keys.')
 	}
 
-	if (Array.isArray(value)) return Object.freeze(value.map((entry) => copy(entry, path)))
-
-	return Object.freeze(
-		Object.fromEntries(Object.entries(value).map(([key, entry]) => [key, copy(entry, path)])),
-	)
+	try {
+		if (Array.isArray(value)) return Object.freeze(value.map((entry) => copy(entry, ancestors)))
+		return Object.freeze(
+			Object.fromEntries(
+				Object.entries(value).map(([key, entry]) => [key, copy(entry, ancestors)]),
+			),
+		)
+	} finally {
+		ancestors.delete(value)
+	}
 }
 
 /** Compare captured plain data by content; cloning must not change external metadata identity. */
@@ -161,7 +166,8 @@ export class TCollectionInitialSource {
 	readonly source: ICollectionInitialSource
 	private _engine: TCollectionEngine<any, any> | undefined
 	private _items: readonly object[] | undefined
-	private _links: readonly ICollectionInitialLink[] | undefined
+	private readonly _links = new Map<object, ICollectionInitialLink>()
+	private readonly _ordinals = new Map<object, number>()
 	private readonly _external: TCollectionEngine<any, any> | undefined
 	private readonly _panelDefaultValue: string | number | undefined
 
@@ -228,6 +234,8 @@ export class TCollectionInitialSource {
 			return {
 				tabId: idOf(source) ?? mount.createId(`initial-tab-${ordinal}`),
 				panelId: mount.createId(`initial-panel-${ordinal}`),
+				tabFallbackId: mount.createId(`initial-tab-${ordinal}`),
+				panelFallbackId: mount.createId(`initial-panel-${ordinal}`),
 			}
 		})
 
@@ -242,7 +250,10 @@ export class TCollectionInitialSource {
 
 		this._engine = engine
 		this._items = Object.freeze([...items])
-		this._links = Object.freeze(links.map((link) => Object.freeze(link)))
+		items.forEach((item, index) => {
+			this._links.set(item, Object.freeze(links[index]))
+			this._ordinals.set(item, index)
+		})
 	}
 
 	item<T extends object>(ordinal: unknown, ctor: new (...args: any[]) => T, ctrl?: T): T {
@@ -272,9 +283,11 @@ export class TCollectionInitialSource {
 	}
 
 	link(item: object): ICollectionInitialLink | undefined {
-		const index = this.items.indexOf(item)
+		return this._links.get(item)
+	}
 
-		return this._links?.[index]
+	ordinal(item: object): number | undefined {
+		return this._ordinals.get(item)
 	}
 
 	panelLink(ordinal: unknown): ICollectionInitialLink | undefined {

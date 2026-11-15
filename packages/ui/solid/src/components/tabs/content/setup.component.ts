@@ -1,3 +1,5 @@
+import { collectionInitialInputs } from '@soxa-ui/setup'
+import { resolveCollectionInitialPanel } from '@soxa-ui/setup'
 import {
 	TTabsContentBindingExtension,
 	TabsCollectionContentDescriptor,
@@ -15,14 +17,18 @@ import type { TabsContentProps } from './base.component'
 /** Панель таба: свой таб по `value` находит лифтом `TTabsContentBindingExtension`. */
 export function setupTabsContent(props: TabsContentProps) {
 	const { elevator } = useElevator()
-	const adapter = createSolidAdapterContext(TabsContentDescriptor(), {
-		ctrl: props.ctrl,
-		props,
-	})
+	const adapter = createSolidAdapterContext(
+		TabsContentDescriptor(),
+		resolveCollectionInitialPanel(
+			TabsContentDescriptor(),
+			{ ctrl: props.ctrl, props },
+			elevator,
+		),
+	)
 
 	const content = createSolidAdapterContext(
 		TabsCollectionContentDescriptor(),
-		{ props },
+		{ props: collectionInitialInputs(adapter, props) },
 		{ bundle: adapter.bundle },
 	).use(TTabsContentBindingExtension, { adapter, elevator })
 

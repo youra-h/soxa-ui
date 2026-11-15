@@ -1,3 +1,6 @@
+import { collectionInitialOwnerOptions } from '@soxa-ui/setup'
+import { TCollectionInitialExtension } from '@soxa-ui/setup'
+import { useCollectionInitial } from '../../adapter'
 import { TCollectionExtension, TagsCollectionDescriptor, TagsDescriptor } from '@soxa-ui/setup'
 import {
 	createSvelteAdapterContext,
@@ -12,9 +15,13 @@ import type { TagsProps } from './base.component'
 export function setupTags(getProps: () => TagsProps, mountId: string, receive: TRootReceiver) {
 	const elevator = useElevator()
 	const props = getProps()
+	const source = useCollectionInitial(props)
 	const adapter = createSvelteAdapterContext(TagsDescriptor(), {
-		ctrl: props.ctrl,
-		props,
+		...collectionInitialOwnerOptions(
+			TagsDescriptor(),
+			{ ctrl: props.ctrl, props, mountId },
+			source,
+		),
 		mountId,
 	})
 
@@ -23,10 +30,12 @@ export function setupTags(getProps: () => TagsProps, mountId: string, receive: T
 		{
 			props,
 			mountId,
-			options: { owner: adapter.instance, engine: props.engine },
+			options: { owner: adapter.instance, engine: source?.engine ?? props.engine },
 		},
 		{ bundle: adapter.bundle },
-	).use(TCollectionExtension, { elevator })
+	)
+		.use(TCollectionExtension, { elevator })
+		.use(TCollectionInitialExtension, { source, elevator })
 
 	const collectionBinding = useCollectionAdapter(collectionAdapter, getProps)
 	const owner = useAdapter(adapter, getProps, receive)

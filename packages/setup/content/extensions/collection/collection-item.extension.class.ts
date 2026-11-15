@@ -56,6 +56,7 @@
  * its data, even when the owner renders it inside a section — and only from
  * its own collection: submenu items inside a menu group are the submenu's.
  */
+import { TCollectionInitialPartPlugin } from '@soxa-ui/plugins'
 
 import { TItemContext, batchOf, factoryOf, metaOf, plainOf } from '@soxa-ui/core'
 import type { TCollectionEngine, TRemoveEvent } from '@soxa-ui/core'
@@ -110,8 +111,7 @@ export class TCollectionItemExtension {
 		const link = engine ? elevator(ITEM_GROUP_ELEVATOR).up() : undefined
 		const groupKey = link && link.engine === engine ? link.key : undefined
 		const initial = collectionInitialSourceOf(elevator)
-		const declared =
-			Reflect.get(props, 'initial') !== undefined && initial?.items.includes(item)
+		const declared = initial?.ordinal(item) !== undefined
 		const meta = declared ? {} : collectItemProps(context.descriptor.props, props)
 		// The facade gets the item context on assembly: the markup reads it
 		// from the first render
@@ -126,6 +126,7 @@ export class TCollectionItemExtension {
 		}
 
 		context.events.on('attach', () => {
+			context.bundle?.get(TCollectionInitialPartPlugin)?.pluginMount?.accept()
 			plain?.events.on('item:removed', removed)
 
 			// The group key goes only to an item the entry adds to the list: a

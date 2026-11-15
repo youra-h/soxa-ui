@@ -1,3 +1,6 @@
+import { collectionInitialOwnerOptions } from '@soxa-ui/setup'
+import { TCollectionInitialExtension } from '@soxa-ui/setup'
+import { useCollectionInitial } from '../../adapter'
 import {
 	TCollectionExtension,
 	TDragAndDropCollectionExtension,
@@ -23,10 +26,11 @@ export default {
 	extends: BaseTabs,
 	expose: useExpose(),
 	setup(props: TabsProps, { emit }: SetupContext) {
-		const adapter = createVueAdapterContext(TabsDescriptor(), {
-			ctrl: props.ctrl,
-			props,
-		})
+		const source = useCollectionInitial(props, '')
+		const adapter = createVueAdapterContext(
+			TabsDescriptor(),
+			collectionInitialOwnerOptions(TabsDescriptor(), { ctrl: props.ctrl, props }, source),
+		)
 
 		const collectionAdapter = createVueAdapterContext(
 			TabsCollectionDescriptor(),
@@ -35,11 +39,12 @@ export default {
 				// Готовая коллекция снаружи. Дали — фасад работает на ней и своей
 				// не создаёт, лишь доложит недостающие расширения в неё же.
 				// Не дали — соберёт свою. Развилка в `completeEngine`
-				options: { owner: adapter.instance, engine: props.engine },
+				options: { owner: adapter.instance, engine: source?.engine ?? props.engine },
 			},
 			{ bundle: adapter.bundle },
 		)
 			.use(TCollectionExtension, { elevator: VueElevatorFactory })
+			.use(TCollectionInitialExtension, { source, elevator: VueElevatorFactory })
 			.use(TDragAndDropCollectionExtension, { elevator: VueElevatorFactory })
 
 		const refsCollection = useCollectionAdapter(collectionAdapter, props, emit)

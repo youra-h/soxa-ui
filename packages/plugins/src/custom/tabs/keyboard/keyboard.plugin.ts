@@ -64,8 +64,8 @@ export class TTabsKeyboardPlugin extends TBasePlugin<ITabs, TTabsKeyboardPluginE
 	/** Фокус закрываемого таба — ждёт, пока таб закроют и он уйдёт из списка. */
 	private _leaving: TLeavingFocus<ITabsItem, undefined> | null = null
 
-	override install(ctx: IPluginContext): void {
-		super.install(ctx)
+	override install(ctx: IPluginContext, options?: unknown): void {
+		super.install(ctx, options)
 
 		this._owner = ctx.getInstance<ITabs>()
 		this._elements = ctx.get(TCollectionElements) ?? null

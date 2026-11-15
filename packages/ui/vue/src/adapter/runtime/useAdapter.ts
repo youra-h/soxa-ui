@@ -16,6 +16,8 @@
 
 import {
 	ref,
+	inject,
+	ssrContextKey,
 	shallowReactive,
 	watch,
 	onBeforeUnmount,
@@ -25,7 +27,14 @@ import {
 	type Ref,
 } from 'vue'
 import { TElementPlugin } from '@soxa-ui/plugins'
-import { type IAdapterContext, type IComponentContract, type TInstanceState } from '@soxa-ui/setup'
+import {
+	collectionInitialInputs,
+	collectionInitialState,
+	collectionInitialPrepared,
+	type IAdapterContext,
+	type IComponentContract,
+	type TInstanceState,
+} from '@soxa-ui/setup'
 import type { IPluginBundle } from '@soxa-ui/plugins'
 import { VueProfile } from '../common'
 import { bindingOf } from './view'
@@ -104,6 +113,11 @@ export function useAdapterParts(
 	emit?: (event: string, ...args: unknown[]) => void,
 ): Readonly<Record<string, unknown>> {
 	const link = adapter.connect(VueProfile)
+	// Prepared membership exists before children. Vue SSR has no unmount cleanup,
+	// so its snapshot must not accept foreign subscriptions or replace an engine owner.
+	if (collectionInitialPrepared(adapter) && inject(ssrContextKey, null) !== null) {
+		return { ...collectionInitialState(adapter, link.state).getSnapshot() }
+	}
 	const offs: Array<() => void> = []
 
 	// 1. Core → Vue: one shallow reactive record per context. The subscription
@@ -134,7 +148,7 @@ export function useAdapterParts(
 	const state = shallowReactive(record)
 
 	offs.push(
-		link.state.subscribe((name, value) => {
+		collectionInitialState(adapter, link.state).subscribe((name, value) => {
 			if (Object.hasOwn(record, name)) state[name] = value
 			else define(record, name, value)
 		}),
@@ -160,7 +174,7 @@ export function useAdapterParts(
 		if (!instance || instance.vnode === vnode) return
 
 		vnode = instance.vnode
-		link.inputs.full(props)
+		link.inputs.full(collectionInitialInputs(adapter, props))
 	})
 
 	// 3. The component is accepted: in Vue that is `setup()` itself, with no

@@ -35,6 +35,7 @@ export const TabsItemInputNames = [
 	'aria_label',
 	'aria_labelledBy',
 	'aria_describedBy',
+	'initial',
 	'id',
 	'active',
 ] as const
@@ -90,6 +91,7 @@ export const TabsItemOutputNames = [
 		'aria_label',
 		'aria_labelledBy',
 		'aria_describedBy',
+		'initial',
 		'id',
 		{ name: 'active', transform: booleanInput },
 	],
@@ -136,6 +138,7 @@ export abstract class TTabsItemSurface<TInstance extends IEntity> extends TViewS
 	declare aria_label: TInputValue<typeof descriptor, 'aria_label'>
 	declare aria_labelledBy: TInputValue<typeof descriptor, 'aria_labelledBy'>
 	declare aria_describedBy: TInputValue<typeof descriptor, 'aria_describedBy'>
+	declare initial: TInputValue<typeof descriptor, 'initial'>
 	declare id: TInputValue<typeof descriptor, 'id'>
 	declare active: TInputValue<typeof descriptor, 'active'>
 	declare readonly soBundleCreate: TOutputEmitter<typeof descriptor, 'bundle:create'>

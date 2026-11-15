@@ -98,6 +98,8 @@
       "DrawerProps",
       "FieldProps",
       "FrameProps",
+      "ICollectionInitialPanel",
+      "ICollectionInitialSource",
       "IconProps",
       "InputControlProps",
       "InputProps",
@@ -280,6 +282,8 @@
       "FieldProps",
       "FrameEventProps",
       "FrameProps",
+      "ICollectionInitialPanel",
+      "ICollectionInitialSource",
       "IconEventProps",
       "IconProps",
       "InputAttributes",
@@ -529,6 +533,8 @@
       "FieldProps",
       "FrameEventProps",
       "FrameProps",
+      "ICollectionInitialPanel",
+      "ICollectionInitialSource",
       "IconEventProps",
       "IconProps",
       "InputAttributes",
@@ -778,6 +784,8 @@
       "FieldProps",
       "FrameEventProps",
       "FrameProps",
+      "ICollectionInitialPanel",
+      "ICollectionInitialSource",
       "IconEventProps",
       "IconProps",
       "InputAttributes",
@@ -976,6 +984,8 @@
       "toastsOf"
     ],
     "types": [
+      "ICollectionInitialPanel",
+      "ICollectionInitialSource",
       "TAccordionElementProps",
       "TAccordionItemElementProps",
       "TAlertDialogElementProps",
@@ -1340,6 +1350,6 @@
       "ɵSubtreeDirective",
       "ɵValueAccessorDirective"
     ],
-    "types": ["TToastRender"]
+    "types": ["ICollectionInitialPanel", "ICollectionInitialSource", "TToastRender"]
   }
 }

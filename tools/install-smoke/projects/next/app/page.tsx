@@ -29,18 +29,35 @@ export default function Home() {
 			<Select placeholder="City" aria_label="City" items={cities} />
 			<Table aria_label="Staff" columns={columns} items={rows} />
 			<DatePicker aria_label="Date" />
-			<Tabs
-				aria_label="Settings"
-				content={
-					<>
-						<Tabs.Content value="general">General settings</Tabs.Content>
-						<Tabs.Content value="privacy">Privacy settings</Tabs.Content>
-					</>
-				}
-			>
-				<Tabs.Item value="general" text="General" active />
-				<Tabs.Item value="privacy" text="Privacy" />
-			</Tabs>
+			<div data-initial-source>
+				<Tabs
+					aria_label="Settings"
+					initial={{
+						items: [
+							{ value: 'general', text: 'General' },
+							{
+								value: 'privacy',
+								text: 'Privacy',
+								id: 'privacy-tab',
+								_: { active: true },
+							},
+						],
+						panels: [
+							{ value: 'general', id: 'general-panel' },
+							{ value: 'privacy', id: 'privacy-panel' },
+						],
+					}}
+					content={
+						<>
+							<Tabs.Content initial={0}>General settings</Tabs.Content>
+							<Tabs.Content initial={1}>Privacy settings</Tabs.Content>
+						</>
+					}
+				>
+					<Tabs.Item initial={0} />
+					<Tabs.Item initial={1} />
+				</Tabs>
+			</div>
 			{false && (
 				// @ts-expect-error `disabled` is a boolean: the adapter's types reach the project
 				<Button disabled="yes" />

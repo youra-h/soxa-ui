@@ -1,3 +1,6 @@
+import { collectionInitialInputs } from '@soxa-ui/setup'
+import { initialAssemblyProps } from '../../../adapter'
+import { resolveCollectionInitialPanel } from '@soxa-ui/setup'
 import {
 	TTabsContentBindingExtension,
 	TabsContentDescriptor,
@@ -24,14 +27,18 @@ export default {
 	extends: BaseTabsContent,
 	expose: useExpose(),
 	setup(props: TabsContentProps, { emit }: SetupContext) {
-		const adapter = createVueAdapterContext(TabsContentDescriptor(), {
-			ctrl: props.ctrl,
-			props,
-		})
+		const adapter = createVueAdapterContext(
+			TabsContentDescriptor(),
+			resolveCollectionInitialPanel(
+				TabsContentDescriptor(),
+				{ ctrl: initialAssemblyProps(props).ctrl, props: initialAssemblyProps(props) },
+				VueElevatorFactory,
+			),
+		)
 
 		const contentAdapter = createVueAdapterContext(
 			TabsCollectionContentDescriptor(),
-			{ props },
+			{ props: collectionInitialInputs(adapter, props) },
 			{ bundle: adapter.bundle },
 		).use(TTabsContentBindingExtension, { adapter, elevator: VueElevatorFactory })
 

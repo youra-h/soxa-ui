@@ -47,6 +47,27 @@ async function markupProblems(page: Page): Promise<string[]> {
 			problems.push('у стрелки Select нет иконки: пакет иконок не подключён')
 		}
 
+		const fixture = document.querySelector('[data-initial-source]')
+		if (fixture) {
+			const tabs = [...fixture.querySelectorAll('[role="tab"]')]
+			const panel = fixture.querySelector('[role="tabpanel"]')
+			if (
+				tabs.length !== 2 ||
+				tabs[0].getAttribute('tabindex') !== '-1' ||
+				tabs[1].getAttribute('tabindex') !== '0' ||
+				tabs[1].getAttribute('aria-selected') !== 'true'
+			)
+				problems.push(
+					'Initial collection membership or roving stop differs from its declared source',
+				)
+			if (
+				tabs[1]?.id !== 'privacy-tab' ||
+				panel?.id !== 'privacy-panel' ||
+				tabs[1]?.getAttribute('aria-controls') !== panel?.id ||
+				panel?.getAttribute('aria-labelledby') !== tabs[1]?.id
+			)
+				problems.push('Initial collection reciprocal document links are inconsistent')
+		}
 		return problems
 	}, PARTS)
 }
@@ -157,6 +178,23 @@ async function use(page: Page, url: string, problems: string[]): Promise<void> {
 
 	if (!(await holds(async () => (await field.inputValue()) === 'Moscow'))) {
 		problems.push(`выбор в Select не дошёл до поля: «${await field.inputValue()}»`)
+	}
+
+	const initialTabs = page.locator('[data-initial-source]')
+	if (await initialTabs.count()) {
+		const first = initialTabs.getByRole('tab', { name: 'General', exact: true })
+		await first.click()
+		if (!(await holds(async () => (await first.getAttribute('aria-selected')) === 'true')))
+			problems.push('Hydrated initial collection did not activate the clicked tab')
+		await first.focus()
+		await page.keyboard.press('ArrowRight')
+		const next = initialTabs.getByRole('tab', { name: 'Privacy', exact: true })
+		if (
+			!(await holds(
+				async () => await next.evaluate((node) => node === document.activeElement),
+			))
+		)
+			problems.push('Hydrated initial collection did not move keyboard focus')
 	}
 
 	const openDialog = page.getByRole('button', { name: 'Open dialog' })

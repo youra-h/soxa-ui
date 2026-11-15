@@ -1,3 +1,5 @@
+import { collectionInitialInputs } from '@soxa-ui/setup'
+import { resolveCollectionInitialPanel } from '@soxa-ui/setup'
 import {
 	TTabsContentBindingExtension,
 	TabsCollectionContentDescriptor,
@@ -19,12 +21,20 @@ export function setupTabsContent(
 	props: Record<string, unknown>,
 	onUpdate: TUpdateListener,
 ): TBinding<ITabsContent, TTabsContentCollectionFacade> {
-	const adapter = createWebcAdapterContext(host, TabsContentDescriptor(), { ctrl, props })
+	const adapter = createWebcAdapterContext(
+		host,
+		TabsContentDescriptor(),
+		resolveCollectionInitialPanel(
+			TabsContentDescriptor(),
+			{ ctrl, props },
+			createWebcElevator(host),
+		),
+	)
 
 	const contentAdapter = createWebcAdapterContext(
 		host,
 		TabsCollectionContentDescriptor(),
-		{ props },
+		{ props: collectionInitialInputs(adapter, props) },
 		{ bundle: adapter.bundle },
 	).use(TTabsContentBindingExtension, { adapter, elevator: createWebcElevator(host) })
 

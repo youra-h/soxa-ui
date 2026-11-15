@@ -6,21 +6,14 @@ import type { TCollectionInitialSource } from './initial-source.class'
 import type { TCollectionEngine } from '@soxa-ui/core'
 import type { IPluginBundle } from '@soxa-ui/plugins'
 
-/** Plain declarations; materialized models belong to one owner, never to this source. */
-export interface ICollectionInitialSource {
-	readonly items: readonly Readonly<Record<string, unknown>>[]
-	readonly panels?: readonly ICollectionInitialPanel[]
-}
-
-export interface ICollectionInitialPanel {
-	readonly value?: string | number
-	readonly id?: string
-}
+export type { ICollectionInitialSource, ICollectionInitialPanel } from '@soxa-ui/plugins'
 
 /** IDs describe document relationships, independently of the item's value or mount order. */
 export interface ICollectionInitialLink {
 	readonly tabId: string
 	readonly panelId: string
+	readonly tabFallbackId?: string
+	readonly panelFallbackId?: string
 }
 
 export interface ICollectionInitialOptions {

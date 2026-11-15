@@ -136,3 +136,8 @@ export {
 	AlertDialogLayoutPluginDescriptor,
 	AlertDialogNamesPluginDescriptor,
 } from './alert-dialog.plugin'
+
+export {
+	CollectionInitialPluginDescriptor,
+	CollectionInitialPartPluginDescriptor,
+} from './collection-initial.plugin'

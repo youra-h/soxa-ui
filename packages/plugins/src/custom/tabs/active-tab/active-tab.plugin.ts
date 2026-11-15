@@ -35,8 +35,8 @@ export class TTabsActiveTabPlugin extends TBasePlugin<ITabs, TTabsActiveTabPlugi
 	/** Last published measurement, retained by reference for the next notification. */
 	private _offset: TActiveTabOffset | null = null
 
-	override install(ctx: IPluginContext): void {
-		super.install(ctx)
+	override install(ctx: IPluginContext, options?: unknown): void {
+		super.install(ctx, options)
 
 		this._tabs = ctx.getInstance<ITabs>()
 		this._collectionElements = ctx.get(TCollectionElements) ?? null

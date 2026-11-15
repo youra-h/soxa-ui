@@ -27,7 +27,13 @@ import {
 	runWithOwner,
 	type Accessor,
 } from 'solid-js'
-import { toInstanceState } from '@soxa-ui/setup'
+import { isServer } from 'solid-js/web'
+import {
+	collectionInitialInputs,
+	collectionInitialPrepared,
+	collectionInitialState,
+	toInstanceState,
+} from '@soxa-ui/setup'
 import type { IAdapterContext, IComponentContract, TAdapterState, TExchange } from '@soxa-ui/setup'
 import { SolidProfile } from '../common'
 import { createShallowState, joinState, type TJoinedState } from './state'
@@ -86,12 +92,20 @@ function useExchange(
 	props: object,
 ): { binding: TExchange; state: Readonly<Record<string, unknown>> } {
 	const binding = adapter.connect(SolidProfile)
+
+	// Prepared SSR reads a snapshot without accepting foreign subscriptions or engine ownership.
+	if (isServer && collectionInitialPrepared(adapter)) {
+		return {
+			binding,
+			state: { ...collectionInitialState(adapter, binding.state).getSnapshot() },
+		}
+	}
 	const [state, write, updates] = createShallowState()
 
 	onCleanup(binding.updates.listen(updates))
-	onCleanup(binding.state.subscribe(write))
+	onCleanup(collectionInitialState(adapter, binding.state).subscribe(write))
 
-	createEffect(() => binding.inputs.full(props))
+	createEffect(() => binding.inputs.full(collectionInitialInputs(adapter, props)))
 
 	// Children run in document order, so items join the collection in DOM order
 	adapter.attach()

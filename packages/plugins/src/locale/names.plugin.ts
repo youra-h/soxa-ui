@@ -25,6 +25,41 @@ export abstract class TNamesPlugin<
 	TOwner extends object,
 	TEvents extends TPluginEvents = TPluginEvents,
 > extends TBasePlugin<TOwner, TEvents> {
+	private _snapshot: Readonly<Record<string, Readonly<Record<string, unknown>>>> = Object.freeze(
+		{},
+	)
+	private readonly _listeners = new Set<() => void>()
+
+	getSnapshot(): Readonly<Record<string, Readonly<Record<string, unknown>>>> {
+		return this._snapshot
+	}
+	subscribe(listener: () => void): () => void {
+		this._listeners.add(listener)
+		return () => this._listeners.delete(listener)
+	}
+
+	/** Prepared mounts name their own DOM without changing a shared data model. */
+	protected _setName(
+		field: string,
+		target: { add(name: 'aria-label', value: string): unknown },
+		label: string,
+	): void {
+		if (!this.pluginMount) {
+			target.add('aria-label', label)
+			return
+		}
+		if (this._snapshot[field]?.['aria-label'] === label) return
+		this._snapshot = Object.freeze({
+			...this._snapshot,
+			[field]: Object.freeze({ 'aria-label': label }),
+		})
+		for (const listener of this._listeners) listener()
+	}
+
+	override destroy(): void {
+		this._listeners.clear()
+		super.destroy()
+	}
 	override install(ctx: IPluginContext, options?: unknown): void {
 		super.install(ctx, options)
 
@@ -37,6 +72,7 @@ export abstract class TNamesPlugin<
 		name()
 		this._listenTo(ctx.locale.events, 'change', name)
 		this._watch(owner, name, ctx)
+		if (this.pluginMount) this._whenAccepted(name)
 	}
 
 	/** Записать имена владельцу по строкам локали. */

@@ -15,7 +15,7 @@ import type { TTranslations } from '../../../locale/types'
  */
 export class TTabsItemNamesPlugin extends TNamesPlugin<ITabsItem> {
 	protected override _name(owner: ITabsItem, translations: TTranslations): void {
-		owner.closeAria.add('aria-label', formatName(translations.tabs.close, owner.text))
+		this._setName('closeAria', owner.closeAria, formatName(translations.tabs.close, owner.text))
 	}
 
 	protected override _watch(owner: ITabsItem, name: () => void): void {

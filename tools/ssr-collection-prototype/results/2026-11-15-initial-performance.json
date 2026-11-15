@@ -1,0 +1,97 @@
+{
+  "measuredAt": "2026-11-15T17:25:17.121Z",
+  "node": "v24.20.0",
+  "react": "19.3.1",
+  "mode": "production",
+  "distSha256": {
+    "packages/setup": "e768ccc785fe6d255169d75ca8f5813b21fd296902df68dd9edb8056cdfac889",
+    "packages/plugins": "4a9a1bda8467d9f2cf4f479f960e08cf4a47d4ca572e2c9496979bcb5a167f67",
+    "packages/ui/react": "102445065da4cceb39af9f7cef3862605b5794d28710b74f9a59b2ea56fe8b85"
+  },
+  "cpu": "AMD Ryzen 9 9950X3D 16-Core Processor          ",
+  "runs": 9,
+  "warmups": 3,
+  "results": [
+    {
+      "n": 100,
+      "nested": false,
+      "inputBytes": 6991,
+      "outputBytes": 39405,
+      "equivalentHtmlIgnoringGeneratedIds": true,
+      "capture": {
+        "medianMs": 0.192,
+        "p95Ms": 0.206
+      },
+      "initialSSR": {
+        "medianMs": 5.273,
+        "p95Ms": 13.908
+      },
+      "existingItemsSSR": {
+        "medianMs": 4.154,
+        "p95Ms": 7.945
+      },
+      "retainedCaptureBytesPerSource": 18916
+    },
+    {
+      "n": 1000,
+      "nested": false,
+      "inputBytes": 72691,
+      "outputBytes": 394905,
+      "equivalentHtmlIgnoringGeneratedIds": true,
+      "capture": {
+        "medianMs": 0.925,
+        "p95Ms": 0.987
+      },
+      "initialSSR": {
+        "medianMs": 72.482,
+        "p95Ms": 123.461
+      },
+      "existingItemsSSR": {
+        "medianMs": 59.8,
+        "p95Ms": 73.004
+      },
+      "retainedCaptureBytesPerSource": 168886
+    },
+    {
+      "n": 100,
+      "nested": true,
+      "inputBytes": 51791,
+      "outputBytes": 39405,
+      "equivalentHtmlIgnoringGeneratedIds": true,
+      "capture": {
+        "medianMs": 1.547,
+        "p95Ms": 1.646
+      },
+      "initialSSR": {
+        "medianMs": 9.609,
+        "p95Ms": 14.438
+      },
+      "existingItemsSSR": {
+        "medianMs": 5.833,
+        "p95Ms": 10.747
+      },
+      "retainedCaptureBytesPerSource": 243776
+    },
+    {
+      "n": 1000,
+      "nested": true,
+      "inputBytes": 520691,
+      "outputBytes": 394905,
+      "equivalentHtmlIgnoringGeneratedIds": true,
+      "capture": {
+        "medianMs": 15.345,
+        "p95Ms": 20.703
+      },
+      "initialSSR": {
+        "medianMs": 106.647,
+        "p95Ms": 123.513
+      },
+      "existingItemsSSR": {
+        "medianMs": 71.111,
+        "p95Ms": 76.327
+      },
+      "retainedCaptureBytesPerSource": 2448982
+    }
+  ],
+  "scope": "Synchronous React renderToString over built packages; no HTTP, RSC, browser or hydration timing. Heap is retained snapshot data after GC in a fresh child process per case, not peak process memory."
+}

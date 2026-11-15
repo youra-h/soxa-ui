@@ -10,6 +10,7 @@
  * (`mode="none"`) набор — список без действия у строк, и клавиатура молчит.
  * См. AGENTS, «Граница переиспользования» и «Готовые паттерны».
  */
+import { CollectionInitialPluginDescriptor } from '../../plugins/collection-initial.plugin'
 
 import { defineComponent, defineDescriptor, defineType } from '../../../../protected/define'
 import { TTags } from '@soxa-ui/core'
@@ -91,6 +92,7 @@ export const TagsDescriptor = defineDescriptor(() =>
 		},
 
 		plugins: [
+			CollectionInitialPluginDescriptor,
 			// Фокус держит остановка набора — с выбором тег-остановка, без него
 			// первый крестик, — а корень — ряд тегов: туда `focused = true` и
 			// ставит фокус. Остановку плагин берёт у модели, через реестр

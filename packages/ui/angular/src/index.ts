@@ -88,3 +88,5 @@ export { TCodeBlockComponent } from './components/code-block'
 export { TAlertComponent } from './components/alert'
 export { TAvatarComponent, TAvatarGroupComponent } from './components/avatar'
 export { TSeparatorComponent } from './components/separator'
+
+export type { ICollectionInitialSource, ICollectionInitialPanel } from '@soxa-ui/plugins'

@@ -40069,6 +40069,14 @@
           "default": "\"\""
         },
         {
+          "name": "initial",
+          "canonicalName": "initial",
+          "type": "number | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
           "name": "id",
           "canonicalName": "id",
           "type": "string | undefined",
@@ -40154,6 +40162,7 @@
             "tag": ":tag",
             "direction": ":direction",
             "value": ":value",
+            "initial": ":initial",
             "id": ":id"
           },
           "events": {
@@ -40194,6 +40203,7 @@
             "tag": "tag",
             "direction": "direction",
             "value": "value",
+            "initial": "initial",
             "id": "id"
           },
           "events": {
@@ -40226,6 +40236,7 @@
             "visible": "[visible]",
             "direction": "[direction]",
             "value": "[value]",
+            "initial": "[initial]",
             "id": "[id]"
           },
           "events": {
@@ -40266,6 +40277,7 @@
             "tag": "tag",
             "direction": "direction",
             "value": "value",
+            "initial": "initial",
             "id": "id"
           },
           "events": {
@@ -40299,6 +40311,7 @@
             "tag": "tag",
             "direction": "direction",
             "value": "value",
+            "initial": "initial",
             "id": "id"
           },
           "events": {
@@ -40332,6 +40345,7 @@
             "tag": "tag",
             "direction": "direction",
             "value": "value",
+            "initial": "initial",
             "id": "id"
           },
           "events": {
@@ -40508,6 +40522,14 @@
           "default": "undefined"
         },
         {
+          "name": "initial",
+          "canonicalName": "initial",
+          "type": "number | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
           "name": "id",
           "canonicalName": "id",
           "type": "string | undefined",
@@ -40673,6 +40695,7 @@
             "aria_label": ":aria_label",
             "aria_labelledBy": ":aria_labelledBy",
             "aria_describedBy": ":aria_describedBy",
+            "initial": ":initial",
             "id": ":id",
             "active": ":active"
           },
@@ -40751,6 +40774,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "id": "id",
             "active": "active"
           },
@@ -40812,6 +40836,7 @@
             "aria_label": "[aria_label]",
             "aria_labelledBy": "[aria_labelledBy]",
             "aria_describedBy": "[aria_describedBy]",
+            "initial": "[initial]",
             "id": "[id]",
             "active": "[active]"
           },
@@ -40890,6 +40915,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "id": "id",
             "active": "active"
           },
@@ -40952,6 +40978,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "id": "id",
             "active": "active"
           },
@@ -41014,6 +41041,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "id": "id",
             "active": "active"
           },
@@ -41241,6 +41269,14 @@
           "name": "aria_describedBy",
           "canonicalName": "aria:describedBy",
           "type": "string | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "initial",
+          "canonicalName": "initial",
+          "type": "import(\"@soxa-ui/setup\").ICollectionInitialSource | undefined",
           "required": false,
           "hasDefault": true,
           "default": "undefined"
@@ -41551,6 +41587,7 @@
             "aria_label": ":aria_label",
             "aria_labelledBy": ":aria_labelledBy",
             "aria_describedBy": ":aria_describedBy",
+            "initial": ":initial",
             "engine": ":engine",
             "items": ":items",
             "trackBy": ":trackBy"
@@ -41662,6 +41699,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "engine": "engine",
             "items": "items",
             "trackBy": "trackBy"
@@ -41750,6 +41788,7 @@
             "aria_label": "[aria_label]",
             "aria_labelledBy": "[aria_labelledBy]",
             "aria_describedBy": "[aria_describedBy]",
+            "initial": "[initial]",
             "engine": "[engine]",
             "items": "[items]",
             "trackBy": "[trackBy]"
@@ -41867,6 +41906,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "engine": "engine",
             "items": "items",
             "trackBy": "trackBy"
@@ -41956,6 +41996,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "engine": "engine",
             "items": "items",
             "trackBy": "trackBy"
@@ -42045,6 +42086,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "engine": "engine",
             "items": "items",
             "trackBy": "trackBy"
@@ -42276,6 +42318,14 @@
           "default": "undefined"
         },
         {
+          "name": "initial",
+          "canonicalName": "initial",
+          "type": "number | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
           "name": "selected",
           "canonicalName": "selected",
           "type": "boolean | undefined",
@@ -42430,6 +42480,7 @@
             "aria_label": ":aria_label",
             "aria_labelledBy": ":aria_labelledBy",
             "aria_describedBy": ":aria_describedBy",
+            "initial": ":initial",
             "selected": ":selected"
           },
           "events": {
@@ -42507,6 +42558,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "selected": "selected"
           },
           "events": {
@@ -42567,6 +42619,7 @@
             "aria_label": "[aria_label]",
             "aria_labelledBy": "[aria_labelledBy]",
             "aria_describedBy": "[aria_describedBy]",
+            "initial": "[initial]",
             "selected": "[selected]"
           },
           "events": {
@@ -42644,6 +42697,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "selected": "selected"
           },
           "events": {
@@ -42705,6 +42759,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "selected": "selected"
           },
           "events": {
@@ -42766,6 +42821,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "selected": "selected"
           },
           "events": {
@@ -42987,6 +43043,14 @@
           "name": "aria_describedBy",
           "canonicalName": "aria:describedBy",
           "type": "string | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "initial",
+          "canonicalName": "initial",
+          "type": "import(\"@soxa-ui/setup\").ICollectionInitialSource | undefined",
           "required": false,
           "hasDefault": true,
           "default": "undefined"
@@ -43308,6 +43372,7 @@
             "aria_label": ":aria_label",
             "aria_labelledBy": ":aria_labelledBy",
             "aria_describedBy": ":aria_describedBy",
+            "initial": ":initial",
             "engine": ":engine",
             "items": ":items",
             "trackBy": ":trackBy",
@@ -43416,6 +43481,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "engine": "engine",
             "items": "items",
             "trackBy": "trackBy",
@@ -43500,6 +43566,7 @@
             "aria_label": "[aria_label]",
             "aria_labelledBy": "[aria_labelledBy]",
             "aria_describedBy": "[aria_describedBy]",
+            "initial": "[initial]",
             "engine": "[engine]",
             "items": "[items]",
             "trackBy": "[trackBy]",
@@ -43614,6 +43681,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "engine": "engine",
             "items": "items",
             "trackBy": "trackBy",
@@ -43699,6 +43767,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "engine": "engine",
             "items": "items",
             "trackBy": "trackBy",
@@ -43784,6 +43853,7 @@
             "aria_label": "aria_label",
             "aria_labelledBy": "aria_labelledBy",
             "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
             "engine": "engine",
             "items": "items",
             "trackBy": "trackBy",
@@ -49035,6 +49105,52 @@
         "solid": { "props": {}, "events": {}, "models": {}, "slots": {} },
         "svelte": { "props": {}, "events": {}, "models": {}, "slots": {} },
         "webc": { "props": {}, "events": {}, "models": {}, "slots": {} }
+      }
+    },
+    "CollectionInitialPartPluginDescriptor": {
+      "source": "packages/setup/content/descriptors/plugins/collection-initial.plugin.ts",
+      "props": [
+        {
+          "name": "initial",
+          "canonicalName": "initial",
+          "type": "number | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "frameworks": {
+        "vue": { "props": { "initial": ":initial" }, "events": {}, "models": {}, "slots": {} },
+        "react": { "props": { "initial": "initial" }, "events": {}, "models": {}, "slots": {} },
+        "angular": { "props": { "initial": "[initial]" }, "events": {}, "models": {}, "slots": {} },
+        "solid": { "props": { "initial": "initial" }, "events": {}, "models": {}, "slots": {} },
+        "svelte": { "props": { "initial": "initial" }, "events": {}, "models": {}, "slots": {} },
+        "webc": { "props": { "initial": "initial" }, "events": {}, "models": {}, "slots": {} }
+      }
+    },
+    "CollectionInitialPluginDescriptor": {
+      "source": "packages/setup/content/descriptors/plugins/collection-initial.plugin.ts",
+      "props": [
+        {
+          "name": "initial",
+          "canonicalName": "initial",
+          "type": "import(\"@soxa-ui/setup\").ICollectionInitialSource | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        }
+      ],
+      "events": [],
+      "slots": [],
+      "frameworks": {
+        "vue": { "props": { "initial": ":initial" }, "events": {}, "models": {}, "slots": {} },
+        "react": { "props": { "initial": "initial" }, "events": {}, "models": {}, "slots": {} },
+        "angular": { "props": { "initial": "[initial]" }, "events": {}, "models": {}, "slots": {} },
+        "solid": { "props": { "initial": "initial" }, "events": {}, "models": {}, "slots": {} },
+        "svelte": { "props": { "initial": "initial" }, "events": {}, "models": {}, "slots": {} },
+        "webc": { "props": { "initial": "initial" }, "events": {}, "models": {}, "slots": {} }
       }
     },
     "DateInputClipboardPluginDescriptor": {

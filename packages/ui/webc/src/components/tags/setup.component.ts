@@ -1,3 +1,6 @@
+import { collectionInitialOwnerOptions } from '@soxa-ui/setup'
+import { TCollectionInitialExtension } from '@soxa-ui/setup'
+import { useCollectionInitial } from '../../adapter'
 import { TCollectionExtension, TagsCollectionDescriptor, TagsDescriptor } from '@soxa-ui/setup'
 import type { ITags, TTagsCollectionFacade } from '@soxa-ui/core'
 import {
@@ -15,14 +18,21 @@ export function setupTags(
 	props: Record<string, unknown>,
 	onUpdate: TUpdateListener,
 ): TBinding<ITags, TTagsCollectionFacade> {
-	const adapter = createWebcAdapterContext(host, TagsDescriptor(), { ctrl, props })
+	const source = useCollectionInitial(host, props)
+	const adapter = createWebcAdapterContext(
+		host,
+		TagsDescriptor(),
+		collectionInitialOwnerOptions(TagsDescriptor(), { ctrl, props }, source),
+	)
 
 	const collectionAdapter = createWebcAdapterContext(
 		host,
 		TagsCollectionDescriptor(),
-		{ props, options: { owner: adapter.instance, engine: props['engine'] } },
+		{ props, options: { owner: adapter.instance, engine: source?.engine ?? props['engine'] } },
 		{ bundle: adapter.bundle },
-	).use(TCollectionExtension, { elevator: createWebcElevator(host) })
+	)
+		.use(TCollectionExtension, { elevator: createWebcElevator(host) })
+		.use(TCollectionInitialExtension, { source, elevator: createWebcElevator(host) })
 
 	const facade = useCollectionAdapter(collectionAdapter, host, onUpdate)
 	const owner = useAdapter(adapter, host, onUpdate)

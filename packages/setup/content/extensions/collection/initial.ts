@@ -1,6 +1,17 @@
 /**
  * Shared initial-source capture and part resolution before component assembly.
  */
+import { TCollectionAriaState } from './aria-state.class'
+import type { TCollectionStatePort } from './aria-state.types'
+import {
+	TPluginMount,
+	TTabsItemNamesPlugin,
+	TTagsItemNamesPlugin,
+	TTabsItemIdsPlugin,
+	TCollectionInitialPartPlugin,
+	TCollectionInitialPlugin,
+} from '@soxa-ui/plugins'
+
 import { TCollectionEngine } from '@soxa-ui/core'
 import type {
 	IAdapterContextOptions,
@@ -51,20 +62,81 @@ function rejectConflictingProps(props: object, names: readonly string[] = []): v
 	}
 }
 
+/** Create one acceptance gate for this bundle's already-declared plugins. */
+function preparedPluginOptions(
+	descriptor: Pick<IComponentDescriptor, 'plugins'>,
+	options: IAdapterContextOptions,
+): NonNullable<IAdapterContextOptions['pluginOptions']> {
+	const mount = new TPluginMount()
+	const overrides = new Map<import('../../../protected').TPluginCtor, object | undefined>()
+	for (const entry of options.pluginOptions ?? []) {
+		if (
+			overrides.has(entry.ctor) ||
+			!descriptor.plugins.some((plugin) => plugin.ctor === entry.ctor)
+		)
+			throw new Error(
+				'Mount installation options must name each declared plugin at most once.',
+			)
+		overrides.set(entry.ctor, entry.options)
+	}
+	return descriptor.plugins.map((plugin) =>
+		plugin.with({ ...overrides.get(plugin.ctor), pluginMount: mount }),
+	)
+}
+
+/** Hide the consumed input without evaluating native child/slot getters. */
+function consumedInitialProps(props: object): object {
+	return new Proxy(
+		{},
+		{
+			get: (_target, key) => (key === 'initial' ? undefined : Reflect.get(props, key)),
+			has: (_target, key) => Reflect.has(props, key),
+			ownKeys: () => Reflect.ownKeys(props),
+			getOwnPropertyDescriptor: (_target, key) =>
+				Reflect.has(props, key)
+					? {
+							configurable: true,
+							enumerable:
+								Reflect.getOwnPropertyDescriptor(props, key)?.enumerable ?? false,
+							get: () => (key === 'initial' ? undefined : Reflect.get(props, key)),
+						}
+					: undefined,
+		},
+	)
+}
+
+export function collectionInitialOwnerOptions<TInstance extends object>(
+	descriptor: Pick<IComponentDescriptor, 'plugins'>,
+	options: IAdapterContextOptions<TInstance>,
+	source?: TCollectionInitialSource,
+): IAdapterContextOptions<TInstance> {
+	const props =
+		options.props && Reflect.get(options.props, 'initial') !== undefined
+			? consumedInitialProps(options.props)
+			: options.props
+	return source
+		? { ...options, props, pluginOptions: preparedPluginOptions(descriptor, options) }
+		: props === options.props
+			? options
+			: { ...options, props }
+}
+
 /** Resolve before creating the item context: the ordinal renders the existing data model. */
 export function resolveCollectionInitialItem<TInstance extends object>(
-	descriptor: Pick<IComponentDescriptor, 'ctor' | 'props'> & {
+	descriptor: Pick<IComponentDescriptor, 'ctor' | 'props' | 'plugins'> & {
 		readonly ctor: new (...args: any[]) => TInstance
 	},
 	options: IAdapterContextOptions<TInstance>,
 	elevator: TElevatorFactory,
 ): IAdapterContextOptions<TInstance> {
 	const props = options.props ?? {}
-	const ordinal: unknown = Reflect.get(props, 'initial')
+	const requested: unknown = Reflect.get(props, 'initial')
+	const source = collectionInitialSourceOf(elevator)
+	const automatic = options.ctrl && source?.ordinal(options.ctrl)
+	const ordinal: unknown =
+		requested ?? (automatic !== undefined && automatic >= 0 ? automatic : undefined)
 
 	if (ordinal === undefined) return options
-
-	const source = collectionInitialSourceOf(elevator)
 
 	if (!source) throw new Error('Collection initial part needs its own prepared owner source.')
 
@@ -74,18 +146,36 @@ export function resolveCollectionInitialItem<TInstance extends object>(
 			.filter(
 				(prop) =>
 					!prop.protected &&
-					!['ctrl', 'embedded', 'pluginProps', 'initial'].includes(prop.name.name),
+					!['ctrl', 'embedded', 'pluginProps', 'initial', 'tag'].includes(prop.name.name),
 			)
 			.map((prop) => prop.name.name),
 	)
 
 	const ctrl = source.item(ordinal, descriptor.ctor, options.ctrl)
 
-	return { ...options, ctrl }
+	const id = source.source.items[Number(ordinal)].id
+	const declaredId = typeof id === 'string' ? id : undefined
+	const link = source.link(ctrl)
+	const part = descriptor.plugins.find((plugin) => plugin.ctor === TCollectionInitialPartPlugin)
+	const ids = descriptor.plugins.find((plugin) => plugin.ctor === TTabsItemIdsPlugin)
+	if (!part) throw new Error('Collection initial part requires its declared input plugin.')
+	const pluginOptions = [
+		...(options.pluginOptions ?? []),
+		part.with({ prepared: true, id: declaredId }),
+		...(ids && link ? [ids.with({ initial: link })] : []),
+	]
+
+	return {
+		...options,
+		ctrl,
+		props: initialPartProps(descriptor, props, declaredId),
+		pluginOptions: preparedPluginOptions(descriptor, { ...options, pluginOptions }),
+	}
 }
 
 /** Panel declarations supply their initial value and id; the panel remains outside membership. */
 export function resolveCollectionInitialPanel<TInstance extends object>(
+	descriptor: Pick<IComponentDescriptor, 'plugins'>,
 	options: IAdapterContextOptions<TInstance>,
 	elevator: TElevatorFactory,
 ): IAdapterContextOptions<TInstance> {
@@ -101,6 +191,8 @@ export function resolveCollectionInitialPanel<TInstance extends object>(
 	rejectConflictingProps(props)
 
 	const panel = source.panel(ordinal)
+	const part = descriptor.plugins.find((plugin) => plugin.ctor === TCollectionInitialPartPlugin)
+	if (!part) throw new Error('Collection initial panel requires its declared input plugin.')
 
 	if (
 		options.ctrl &&
@@ -110,5 +202,91 @@ export function resolveCollectionInitialPanel<TInstance extends object>(
 		throw new Error('Collection initial panel and ctrl must have the same value.')
 	}
 
-	return { ...options, props: { ...props, ...panel } }
+	return {
+		...options,
+		props: { ...props, ...panel },
+		pluginOptions: preparedPluginOptions(descriptor, {
+			...options,
+			pluginOptions: [
+				...(options.pluginOptions ?? []),
+				part.with({ prepared: true, panel: true, ...panel }),
+			],
+		}),
+	}
+}
+
+/** Prepared data owns model inputs; native runtimes keep plugin/attribute inputs live. */
+function initialPartProps(
+	descriptor: Pick<IComponentDescriptor, 'props'>,
+	props: object,
+	id?: string,
+	panel?: { value: string | number | undefined },
+): object {
+	const managed = new Set([
+		'active',
+		'selected',
+		...descriptor.props
+			.filter(
+				(prop) =>
+					!prop.protected &&
+					!['ctrl', 'embedded', 'pluginProps'].includes(prop.name.name),
+			)
+			.map((prop) => prop.name.name),
+	])
+	return new Proxy(props, {
+		get(target, key, receiver) {
+			if (key === 'id') return id
+			if (key === 'value' && panel) return panel.value
+			return typeof key === 'string' && managed.has(key)
+				? undefined
+				: Reflect.get(target, key, receiver)
+		},
+		has(target, key) {
+			return !(typeof key === 'string' && managed.has(key)) && Reflect.has(target, key)
+		},
+	})
+}
+
+export function collectionInitialInputs(
+	context: import('../../../protected').IAdapterContext,
+	props: object,
+): object {
+	if (
+		context.bundle?.get(TCollectionInitialPlugin) &&
+		Reflect.get(props, 'initial') !== undefined
+	)
+		return consumedInitialProps(props)
+	const part = context.bundle?.get(TCollectionInitialPartPlugin)
+	return part?.prepared
+		? initialPartProps(
+				context.descriptor,
+				props,
+				part.declaredId,
+				part.panel ? { value: part.declaredValue } : undefined,
+			)
+		: props
+}
+
+/** All adapters read the same single derived ARIA port; no adapter merges relationships. */
+export function collectionInitialState(
+	context: import('../../../protected').IAdapterContext,
+	state: TCollectionStatePort,
+): TCollectionStatePort {
+	if (!context.descriptor.props.some((prop) => prop.name.name === 'aria')) return state
+	const ids = context.bundle?.get(TTabsItemIdsPlugin)
+	const link = ids?.initial ? ids : context.bundle?.get(TCollectionInitialPartPlugin)?.aria
+	const names =
+		context.bundle?.get(TTabsItemNamesPlugin) ?? context.bundle?.get(TTagsItemNamesPlugin)
+	const outputs = names?.pluginMount ? [names] : []
+	return link || outputs.length ? new TCollectionAriaState({ state, link, outputs }) : state
+}
+
+/** Prepared assembly can render its full source before the native mount accepts it. */
+export function collectionInitialPrepared(
+	context: import('../../../protected').IAdapterContext,
+): boolean {
+	return Boolean(
+		context.bundle?.get(TCollectionInitialPlugin)?.pluginMount ??
+		context.bundle?.get(TCollectionInitialPartPlugin)?.pluginMount,
+	)
 }

@@ -1,3 +1,4 @@
+import CollectionInitial from '../CollectionInitial.test.svelte'
 import AlertDialogPage from './AlertDialogPage.test.svelte'
 import AlertPage from './AlertPage.test.svelte'
 import AvatarPage from './AvatarPage.test.svelte'
@@ -62,6 +63,9 @@ function onToday(draw: () => string): string {
  */
 export function renderServerMarkup() {
 	return {
+		'collection-initial': render(CollectionInitial).body,
+		'collection-initial-auto': render(CollectionInitial, { props: { automatic: true } }).body,
+		'collection-initial-tags': render(CollectionInitial, { props: { tags: true } }).body,
 		alert: render(AlertPage).body,
 		'alert-dialog': render(AlertDialogPage).body,
 		separator: render(SeparatorPage).body,

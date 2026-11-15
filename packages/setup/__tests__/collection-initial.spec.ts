@@ -1,6 +1,7 @@
 import {
 	createAdapterContext,
 	createCollectionInitialSource,
+	collectionInitialOwnerOptions,
 	collectionInitialSourceOf,
 	resolveCollectionInitialItem,
 	resolveCollectionInitialPanel,
@@ -8,6 +9,7 @@ import {
 	TCollectionExtension,
 	TCollectionItemExtension,
 	TabsDescriptor,
+	TabsContentDescriptor,
 	TabsCollectionDescriptor,
 	TabsItemDescriptor,
 	TabsCollectionItemDescriptor,
@@ -130,6 +132,8 @@ describe('collection initial source', () => {
 		expect(source.link(items[0])).toEqual({
 			tabId: 'owner-initial-tab-0',
 			panelId: 'later-panel',
+			tabFallbackId: 'owner-initial-tab-0',
+			panelFallbackId: 'owner-initial-panel-0',
 		})
 		expect(source.link(items[1])?.panelId).toBe('owner-initial-panel-1')
 		expect(source.panelLink(0)).toBe(source.link(items[0]))
@@ -167,6 +171,8 @@ describe('collection initial source', () => {
 		expect(source.link(first)).toEqual({
 			tabId: 'custom-tab',
 			panelId: 'owner-initial-panel-0',
+			tabFallbackId: 'owner-initial-tab-0',
+			panelFallbackId: 'owner-initial-panel-0',
 		})
 		expect(source.panelLink(0)).toBe(source.link(second))
 		expect(source.panelLink(1)).toBe(source.link(first))
@@ -483,6 +489,7 @@ describe('collection initial resolution through the existing owner lift', () => 
 	it('resolves panel input without registering a panel as an item', () => {
 		const { source, owner, facade, elevator } = prepared()
 		const options = resolveCollectionInitialPanel(
+			TabsContentDescriptor(),
 			{ props: { initial: 1, 'data-extra': 'allowed' } },
 			elevator,
 		)
@@ -553,7 +560,9 @@ describe('collection initial resolution through the existing owner lift', () => 
 			resolveCollectionInitialItem(TabsItemDescriptor(), { props: { initial: 0 } }, elevator),
 		).toThrow('own prepared owner')
 		expect(resolveCollectionInitialItem(TabsItemDescriptor(), legacy, elevator)).toBe(legacy)
-		expect(resolveCollectionInitialPanel(legacy, elevator)).toBe(legacy)
+		expect(resolveCollectionInitialPanel(TabsContentDescriptor(), legacy, elevator)).toBe(
+			legacy,
+		)
 		expect(createCollectionInitialSource({ items: [] })).toBeUndefined()
 		expect(() => createCollectionInitialSource({ initial: { items: [] }, engine: {} })).toThrow(
 			'engine',
@@ -573,4 +582,21 @@ describe('collection initial resolution through the existing owner lift', () => 
 		facade.destroy()
 		owner.destroy()
 	})
+})
+
+it('consumes a frozen initial prop without evaluating native child getters', () => {
+	const initial = { items: [] }
+	const children = vi.fn(() => 'lazy children')
+	const props = Object.freeze({
+		initial,
+		get children() {
+			return children()
+		},
+	})
+	const source = createCollectionInitialSource(props)
+	const options = collectionInitialOwnerOptions(TabsDescriptor(), { props }, source)
+	expect(children).not.toHaveBeenCalled()
+	expect(Reflect.get(options.props ?? {}, 'initial')).toBeUndefined()
+	expect(Reflect.get(options.props ?? {}, 'children')).toBe('lazy children')
+	expect(children).toHaveBeenCalledTimes(1)
 })

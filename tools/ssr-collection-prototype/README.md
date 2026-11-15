@@ -1,8 +1,10 @@
 # SSR коллекций: исследовательская фикстура
 
 Текущая задача — [1an4hvw5ytb](https://app.clickup.com/t/1an4hvw5ytb).
-**Gate доставки принятых деклараций до HTML не пройден; общий production-механизм
-не реализован.** [Контракт, новые проверки и вопрос владельцу](TRANSPORT.md).
+**Выбранный владельцем explicit initial реализован во всех шести адаптерах.**
+[Контракт, карта проверок и измеренная стоимость кандидата](TRANSPORT.md).
+Содержимое fixture и старые JSON ниже сохраняют историю предыдущего transport
+эксперимента; они не заменяют production-тесты нового initial.
 
 Решение владельца от **15.11.2026 13:26** требует одного механизма для
 React/Vue/Svelte/Solid с Angular как контролем и проверкой применимого
@@ -72,5 +74,22 @@ HTML; React baseline панели не рисует и равной работо
 Гидратация baseline проверялась в jsdom, включая отдельно собранные клиентские
 Svelte/Solid-модули и Angular provideClientHydration. Реальный Tab, раскладка,
 полные Next/Nuxt/SvelteKit/SolidStart и новые production-регрессии не заявляются.
-Публичное API и protected не менялись; tools-only changeset не нужен.
+В историческом baseline публичное API и protected не менялись; tools-only
+changeset ему не требовался. Текущая production-интеграция несёт patch changeset
+и два protected изменения по отдельному согласию владельца 2319.
 Merge/release не входят в этот этап.
+
+## Измерение текущего initial
+
+После `npm run build`:
+
+```powershell
+$env:NODE_ENV = 'production'
+node --expose-gc tools/ssr-collection-prototype/initial-performance.mjs
+```
+
+[Скрипт](initial-performance.mjs) сравнивает полный SSR с прежним items при
+эквивалентном HTML и отдельно измеряет capture и удерживаемый снимок.
+[Сохранённый запуск](results/2026-11-15-initial-performance.json) привязан к
+хешам собранного JS. Это один локальный production React SSR замер; он не
+измеряет HTTP, RSC или гидратацию и не утверждает приемлемость deep copy.

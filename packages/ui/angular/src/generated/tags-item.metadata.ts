@@ -36,6 +36,7 @@ export const TagsItemInputNames = [
 	'aria_label',
 	'aria_labelledBy',
 	'aria_describedBy',
+	'initial',
 	'selected',
 ] as const
 export const TagsItemOutputNames = [
@@ -90,6 +91,7 @@ export const TagsItemOutputNames = [
 		'aria_label',
 		'aria_labelledBy',
 		'aria_describedBy',
+		'initial',
 		{ name: 'selected', transform: booleanInput },
 	],
 	outputs: [...TagsItemOutputNames],
@@ -136,6 +138,7 @@ export abstract class TTagsItemSurface<TInstance extends IEntity> extends TViewS
 	declare aria_label: TInputValue<typeof descriptor, 'aria_label'>
 	declare aria_labelledBy: TInputValue<typeof descriptor, 'aria_labelledBy'>
 	declare aria_describedBy: TInputValue<typeof descriptor, 'aria_describedBy'>
+	declare initial: TInputValue<typeof descriptor, 'initial'>
 	declare selected: TInputValue<typeof descriptor, 'selected'>
 	declare readonly soBundleCreate: TOutputEmitter<typeof descriptor, 'bundle:create'>
 	declare readonly soPluginEvent: TOutputEmitter<typeof descriptor, 'plugin:event'>

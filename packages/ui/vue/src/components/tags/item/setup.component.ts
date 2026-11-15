@@ -1,3 +1,6 @@
+import { collectionInitialInputs } from '@soxa-ui/setup'
+import { initialAssemblyProps } from '../../../adapter'
+import { resolveCollectionInitialItem } from '@soxa-ui/setup'
 import {
 	TCollectionItemExtension,
 	TagsItemDescriptor,
@@ -23,14 +26,18 @@ export default {
 	extends: BaseTagsItem,
 	expose: useExpose(),
 	setup(props: TagsItemProps, { emit }: SetupContext) {
-		const adapter = createVueAdapterContext(TagsItemDescriptor(), {
-			ctrl: props.ctrl,
-			props,
-		})
+		const adapter = createVueAdapterContext(
+			TagsItemDescriptor(),
+			resolveCollectionInitialItem(
+				TagsItemDescriptor(),
+				{ ctrl: initialAssemblyProps(props).ctrl, props: initialAssemblyProps(props) },
+				VueElevatorFactory,
+			),
+		)
 
 		const itemAdapter = createVueAdapterContext(
 			TagsCollectionItemDescriptor(),
-			{ props },
+			{ props: collectionInitialInputs(adapter, props) },
 			{ bundle: adapter.bundle },
 		).use(TCollectionItemExtension, { adapter, elevator: VueElevatorFactory })
 

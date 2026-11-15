@@ -6,6 +6,7 @@
  *
  * Добавляет: orientation, alignment, position, view, closable + плагины Tabs.
  */
+import { CollectionInitialPluginDescriptor } from '../../plugins/collection-initial.plugin'
 
 import { defineComponent, defineDescriptor, defineType } from '../../../../protected/define'
 import { TTabs } from '@soxa-ui/core'
@@ -94,6 +95,7 @@ export const TabsDescriptor = defineDescriptor(() =>
 		},
 
 		plugins: [
+			CollectionInitialPluginDescriptor,
 			ScrollFocusPluginDescriptor.with({ target: barOf }),
 			// Фокус держит таб-остановка, а корень — рамка со списком и панелями:
 			// туда `focused = true` и ставит фокус, как Tab, мимо кнопки в

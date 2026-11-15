@@ -1,3 +1,5 @@
+import { collectionInitialInputs } from '@soxa-ui/setup'
+import { resolveCollectionInitialItem } from '@soxa-ui/setup'
 import {
 	TCollectionItemExtension,
 	TagsCollectionItemDescriptor,
@@ -21,14 +23,17 @@ export function setupTagsItem(
 	const elevator = useElevator()
 	const props = getProps()
 	const adapter = createSvelteAdapterContext(TagsItemDescriptor(), {
-		ctrl: props.ctrl,
-		props,
+		...resolveCollectionInitialItem(
+			TagsItemDescriptor(),
+			{ ctrl: props.ctrl, props, mountId },
+			elevator,
+		),
 		mountId,
 	})
 
 	const item = createSvelteAdapterContext(
 		TagsCollectionItemDescriptor(),
-		{ props, mountId },
+		{ props: collectionInitialInputs(adapter, props), mountId },
 		{ bundle: adapter.bundle },
 	).use(TCollectionItemExtension, { adapter, elevator })
 

@@ -36,25 +36,27 @@ export class TCollectionBundlesPlugin extends TBasePlugin<any, TBundlesEvents> {
 
 		this._engine = engine
 
-		const plain = plainOf<IComponentView>(engine)
+		this._whenAccepted(() => {
+			const plain = plainOf<IComponentView>(engine)
 
-		// Синхронизация реестра bundles с жизненным циклом элементов коллекции:
-		// элемент ушёл — его запись снимается тем же путём, что и кончившееся
-		// монтирование, с `bundle:unregistered`
-		this._listenTo(plain?.events, 'item:removed', (e) => {
-			const uid = this._uid(e.item)
+			// Синхронизация реестра bundles с жизненным циклом элементов коллекции:
+			// элемент ушёл — его запись снимается тем же путём, что и кончившееся
+			// монтирование, с `bundle:unregistered`
+			this._listenTo(plain?.events, 'item:removed', (e) => {
+				const uid = this._uid(e.item)
 
-			if (uid !== undefined && this._bundles.has(uid)) this.unregister(uid)
+				if (uid !== undefined && this._bundles.has(uid)) this.unregister(uid)
+			})
+
+			// Очистка шлёт `item:removed` каждому элементу раньше `reset`: к нему
+			// остаются только записи, чьих элементов в коллекции не было
+			this._listenTo(plain?.events, 'reset', () => {
+				for (const uid of [...this._bundles.keys()]) this.unregister(uid)
+			})
+
+			// Оповещаем плагины о том, что коллекция привязана.
+			this.events.emit('engine:bound', engine)
 		})
-
-		// Очистка шлёт `item:removed` каждому элементу раньше `reset`: к нему
-		// остаются только записи, чьих элементов в коллекции не было
-		this._listenTo(plain?.events, 'reset', () => {
-			for (const uid of [...this._bundles.keys()]) this.unregister(uid)
-		})
-
-		// Оповещаем плагины о том, что коллекция привязана.
-		this.events.emit('engine:bound', engine)
 	}
 
 	/** Ссылка на коллекцию, к которой привязан реестр. */

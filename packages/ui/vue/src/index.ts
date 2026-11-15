@@ -220,3 +220,5 @@ export { Separator } from './components/separator'
 export type { SeparatorProps } from './components/separator'
 
 export type { AlertDialogProps } from './components/alert-dialog/base.component'
+
+export type { ICollectionInitialSource, ICollectionInitialPanel } from '@soxa-ui/plugins'

@@ -256,3 +256,5 @@ export type {
 } from './components/avatar'
 export { Separator } from './components/separator'
 export type { SeparatorProps, SeparatorEventProps } from './components/separator'
+
+export type { ICollectionInitialSource, ICollectionInitialPanel } from '@soxa-ui/plugins'
