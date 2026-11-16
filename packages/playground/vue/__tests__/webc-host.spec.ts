@@ -941,6 +941,8 @@ describe('хост Web Components · даты', () => {
 			props: { aria_label: 'Дата' },
 			onEvent: (name) => events.push(name),
 		})
+		await nextFrame()
+
 		const picker = find(node, '.so-date-picker')
 		const trigger = find(picker, '.so-date-picker__field .so-date-picker__trigger')
 		const panel = find(document.body, ':scope > .so-date-picker__panel')

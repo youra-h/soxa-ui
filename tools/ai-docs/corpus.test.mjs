@@ -539,3 +539,34 @@ test('SvelteKit plus-prefixed routes are selectively delivered without accepting
 		)
 	}
 })
+
+test('development tarballs identify committed PR sources and reject uncommitted packages', async () => {
+	const { committedLibraryRevision } = await import('./svelte-development.mjs')
+	const root = mkdtempSync(join(tmpdir(), 'soxa-development-revision-'))
+	const git = (...args) =>
+		execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: 'pipe' }).trim()
+	git('init', '--initial-branch=main')
+	mkdirSync(join(root, 'packages'))
+	const source = join(root, 'packages/source.txt')
+	writeFileSync(source, 'main')
+	git('add', '.')
+	const commit = () =>
+		git('-c', 'user.name=Test', '-c', 'user.email=test@example.com', 'commit', '-m', 'fixture')
+	commit()
+	git('update-ref', 'refs/remotes/origin/main', 'HEAD')
+	git('switch', '-c', 'fix/local-theme')
+	writeFileSync(source, 'PR fix')
+	git('add', '.')
+	commit()
+
+	assert.notEqual(git('rev-parse', 'HEAD'), git('rev-parse', 'origin/main'))
+	assert.equal(committedLibraryRevision(root), git('rev-parse', 'HEAD'))
+
+	writeFileSync(source, 'dirty')
+	assert.throws(() => committedLibraryRevision(root))
+	git('add', '.')
+	assert.throws(() => committedLibraryRevision(root))
+	commit()
+	writeFileSync(join(root, 'packages/untracked.txt'), 'untracked')
+	assert.throws(() => committedLibraryRevision(root), /No untracked library sources/)
+})
