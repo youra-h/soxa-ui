@@ -1,0 +1,250 @@
+[
+  {
+    "file": "@radix-ui/react-tabs/dist/index.mjs",
+    "sha256": "add042d623442590b3b54de2a5ed9840a8461314a193737414498860e0c49ac8",
+    "matches": [
+      {
+        "line": 14,
+        "text": "import { useControllableState } from \"@radix-ui/react-use-controllable-state\";"
+      },
+      {
+        "line": 41,
+        "text": "const [value, setValue] = useControllableState({"
+      },
+      {
+        "line": 44,
+        "text": "defaultProp: defaultValue ?? \"\","
+      },
+      {
+        "line": 104,
+        "text": "const triggerId = makeTriggerId(context.baseId, value);"
+      },
+      {
+        "line": 105,
+        "text": "const contentId = makeContentId(context.baseId, value);"
+      },
+      {
+        "line": 106,
+        "text": "const isSelected = value === context.value;"
+      },
+      {
+        "line": 160,
+        "text": "const triggerId = makeTriggerId(context.baseId, value);"
+      },
+      {
+        "line": 161,
+        "text": "const contentId = makeContentId(context.baseId, value);"
+      },
+      {
+        "line": 162,
+        "text": "const isSelected = value === context.value;"
+      },
+      {
+        "line": 189,
+        "text": "function makeTriggerId(baseId, value) {"
+      },
+      {
+        "line": 192,
+        "text": "__name(makeTriggerId, \"makeTriggerId\");"
+      },
+      {
+        "line": 193,
+        "text": "function makeContentId(baseId, value) {"
+      },
+      {
+        "line": 196,
+        "text": "__name(makeContentId, \"makeContentId\");"
+      }
+    ]
+  },
+  {
+    "file": "@radix-ui/react-collection/dist/index.mjs",
+    "sha256": "52a6719c7c1a7a5202ab5ae58bb552f0d7853965a0833cf0e71749ac580e349f",
+    "matches": [
+      {
+        "line": 46,
+        "text": "React.useEffect(() => {"
+      },
+      {
+        "line": 47,
+        "text": "context.itemMap.set(ref, { ref, ...itemData });"
+      },
+      {
+        "line": 48,
+        "text": "return () => void context.itemMap.delete(ref);"
+      }
+    ]
+  },
+  {
+    "file": "@ark-ui/react/dist/components/tabs/use-tabs.js",
+    "sha256": "e468d5d4eb7a20bc90a725be23e87eda20b5c8f6733c039421bc07fd2a657067",
+    "matches": [
+      {
+        "line": 12,
+        "text": "const machineProps = {"
+      },
+      {
+        "line": 18,
+        "text": "const service = useMachine(tabs.machine, machineProps);"
+      },
+      {
+        "line": 19,
+        "text": "return tabs.connect(service, normalizeProps);"
+      }
+    ]
+  },
+  {
+    "file": "@zag-js/tabs/dist/tabs.machine.js",
+    "sha256": "b24f2c7583bd760456918a8325a369de767b8c70ee4b4dc547a2ae4623ce080b",
+    "matches": [
+      {
+        "line": 49,
+        "text": "defaultValue: null,"
+      },
+      {
+        "line": 59,
+        "text": "defaultValue: prop(\"defaultValue\"),"
+      },
+      {
+        "line": 60,
+        "text": "value: prop(\"value\"),"
+      },
+      {
+        "line": 66,
+        "text": "defaultValue: prop(\"value\") || prop(\"defaultValue\"),"
+      },
+      {
+        "line": 72,
+        "text": "ssr: bindable(() => ({ defaultValue: true })),"
+      },
+      {
+        "line": 74,
+        "text": "defaultValue: null"
+      },
+      {
+        "line": 77,
+        "text": "defaultValue: false"
+      }
+    ]
+  },
+  {
+    "file": "@zag-js/tabs/dist/tabs.connect.js",
+    "sha256": "a07dfeac8854cabf475e23f8ee0f232b930cd50c9285e93e426f51ab6c92f38f",
+    "matches": [
+      {
+        "line": 52,
+        "text": "selected: context.get(\"value\") === props.value,"
+      },
+      {
+        "line": 163,
+        "text": "\"aria-controls\": triggerState.selected ? dom.getContentId(scope, value) : void 0,"
+      },
+      {
+        "line": 191,
+        "text": "getContentProps(props) {"
+      },
+      {
+        "line": 199,
+        "text": "\"aria-labelledby\": dom.getTriggerId(scope, value),"
+      }
+    ]
+  },
+  {
+    "file": "@zag-js/tabs/dist/tabs.dom.js",
+    "sha256": "4fad29116855fc10ebb6f0c59c6f01a9dbe3caa6f7b6de4af4ed56c7210289bc",
+    "matches": [
+      {
+        "line": 52,
+        "text": "var getElements = (ctx) => {"
+      },
+      {
+        "line": 54,
+        "text": "return (0, import_dom_query.queryAll)(getListEl(ctx), selector);"
+      },
+      {
+        "line": 58,
+        "text": "var getNextTriggerEl = (ctx, opts) => (0, import_dom_query.nextById)(getElements(ctx), getTriggerId(ctx, opts.value), opts.loopFocus);"
+      }
+    ]
+  },
+  {
+    "file": "@base-ui/react/tabs/root/TabsRoot.js",
+    "sha256": "405698662733a1e222caf547b86d095d16ae692759715da2e52685e6cdd41487",
+    "matches": [
+      {
+        "line": 10,
+        "text": "var _useControlled = require(\"@base-ui/utils/useControlled\");"
+      },
+      {
+        "line": 28,
+        "text": "defaultValue: defaultValueProp = 0,"
+      },
+      {
+        "line": 32,
+        "text": "value: valueProp,"
+      },
+      {
+        "line": 42,
+        "text": "const [value, setValue] = (0, _useControlled.useControlled)({"
+      },
+      {
+        "line": 43,
+        "text": "controlled: valueProp,"
+      },
+      {
+        "line": 44,
+        "text": "default: defaultValueProp,"
+      },
+      {
+        "line": 48,
+        "text": "const isControlled = valueProp !== undefined;"
+      },
+      {
+        "line": 105,
+        "text": "const registerMountedTabPanel = (0, _useStableCallback.useStableCallback)((panelValue, panelId) => {"
+      },
+      {
+        "line": 145,
+        "text": "registerMountedTabPanel,"
+      },
+      {
+        "line": 149,
+        "text": "}), [getTabElementBySelectedValue, getTabIdByPanelValue, getTabPanelIdByValue, onValueChange, orientation, registerMountedTabPanel, setTabMap, tabActivationDirection, value]);"
+      },
+      {
+        "line": 173,
+        "text": "// useControlled warns if defaultValue changes after mount, but the"
+      }
+    ]
+  },
+  {
+    "file": "@base-ui/react/tabs/panel/TabsPanel.js",
+    "sha256": "2d84eb86445c6d4acc84d8fce2bac61f277f05fe62d495e52c53e1dbaf3e6dbb",
+    "matches": [
+      {
+        "line": 11,
+        "text": "var _useIsoLayoutEffect = require(\"@base-ui/utils/useIsoLayoutEffect\");"
+      },
+      {
+        "line": 46,
+        "text": "registerMountedTabPanel"
+      },
+      {
+        "line": 53,
+        "text": "const open = value === selectedValue;"
+      },
+      {
+        "line": 92,
+        "text": "(0, _useIsoLayoutEffect.useIsoLayoutEffect)(() => {"
+      },
+      {
+        "line": 99,
+        "text": "return registerMountedTabPanel(value, id);"
+      },
+      {
+        "line": 100,
+        "text": "}, [hidden, keepMounted, value, id, registerMountedTabPanel]);"
+      }
+    ]
+  }
+]

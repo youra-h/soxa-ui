@@ -1,0 +1,821 @@
+{
+  "browser": "156.0.8078.4",
+  "rows": [
+    {
+      "library": "ark",
+      "hydrated": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "tabs:_R_0_:trigger-a",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": null,
+            "targetExists": false
+          },
+          {
+            "text": "B",
+            "id": "tabs:_R_0_:trigger-b",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "tabs:_R_0_:content-b",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "tabs:_R_0_:trigger-c",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": null,
+            "targetExists": false
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-b",
+            "id": "tabs:_R_0_:content-b",
+            "labelledBy": "tabs:_R_0_:trigger-b",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["B"],
+        "fallback": false,
+        "focused": "ABCPANEL-aPANEL-bPANEL-cPANEL-fallback",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "afterClick": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "tabs:_R_0_:trigger-a",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "tabs:_R_0_:content-a",
+            "targetExists": true
+          },
+          {
+            "text": "B",
+            "id": "tabs:_R_0_:trigger-b",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": null,
+            "targetExists": false
+          },
+          {
+            "text": "C",
+            "id": "tabs:_R_0_:trigger-c",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": null,
+            "targetExists": false
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-a",
+            "id": "tabs:_R_0_:content-a",
+            "labelledBy": "tabs:_R_0_:trigger-a",
+            "labelExists": true
+          },
+          {
+            "text": "PANEL-b",
+            "id": "tabs:_R_0_:content-b",
+            "labelledBy": "tabs:_R_0_:trigger-b",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["A"],
+        "fallback": false,
+        "focused": "A",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "duringFallback": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "tabs:_r_0_:trigger-a",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": null,
+            "targetExists": false
+          },
+          {
+            "text": "C",
+            "id": "tabs:_r_0_:trigger-c",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "tabs:_r_0_:content-c",
+            "targetExists": true
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-a",
+            "id": "tabs:_r_0_:content-a",
+            "labelledBy": "tabs:_r_0_:trigger-a",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["C"],
+        "fallback": true,
+        "focused": "C",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "resolved": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "tabs:_r_0_:trigger-a",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": null,
+            "targetExists": false
+          },
+          {
+            "text": "B",
+            "id": "tabs:_r_0_:trigger-b",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "tabs:_r_0_:content-b",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "tabs:_r_0_:trigger-c",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": null,
+            "targetExists": false
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-b",
+            "id": "tabs:_r_0_:content-b",
+            "labelledBy": "tabs:_r_0_:trigger-b",
+            "labelExists": true
+          },
+          {
+            "text": "PANEL-c",
+            "id": "tabs:_r_0_:content-c",
+            "labelledBy": "tabs:_r_0_:trigger-c",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["B"],
+        "fallback": false,
+        "focused": "B",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "removed": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "tabs:_r_0_:trigger-a",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": null,
+            "targetExists": false
+          },
+          {
+            "text": "C",
+            "id": "tabs:_r_0_:trigger-c",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "tabs:_r_0_:content-c",
+            "targetExists": true
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-a",
+            "id": "tabs:_r_0_:content-a",
+            "labelledBy": "tabs:_r_0_:trigger-a",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["C"],
+        "fallback": false,
+        "focused": "C",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "diagnostics": []
+    },
+    {
+      "library": "radix",
+      "hydrated": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "radix-_R_0_-trigger-a",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_R_0_-content-a",
+            "targetExists": true
+          },
+          {
+            "text": "B",
+            "id": "radix-_R_0_-trigger-b",
+            "selected": "true",
+            "tabIndex": "-1",
+            "controls": "radix-_R_0_-content-b",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "radix-_R_0_-trigger-c",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_R_0_-content-c",
+            "targetExists": true
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-b",
+            "id": "radix-_R_0_-content-b",
+            "labelledBy": "radix-_R_0_-trigger-b",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 0,
+        "selectedTabs": ["B"],
+        "fallback": false,
+        "focused": "ABCPANEL-b",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "afterClick": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "radix-_R_0_-trigger-a",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "radix-_R_0_-content-a",
+            "targetExists": true
+          },
+          {
+            "text": "B",
+            "id": "radix-_R_0_-trigger-b",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_R_0_-content-b",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "radix-_R_0_-trigger-c",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_R_0_-content-c",
+            "targetExists": true
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-a",
+            "id": "radix-_R_0_-content-a",
+            "labelledBy": "radix-_R_0_-trigger-a",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["A"],
+        "fallback": false,
+        "focused": "A",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "duringFallback": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "radix-_r_0_-trigger-a",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_r_0_-content-a",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "radix-_r_0_-trigger-c",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "radix-_r_0_-content-c",
+            "targetExists": true
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-c",
+            "id": "radix-_r_0_-content-c",
+            "labelledBy": "radix-_r_0_-trigger-c",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["C"],
+        "fallback": true,
+        "focused": "C",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "resolved": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "radix-_r_0_-trigger-a",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_r_0_-content-a",
+            "targetExists": true
+          },
+          {
+            "text": "B",
+            "id": "radix-_r_0_-trigger-b",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "radix-_r_0_-content-b",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "radix-_r_0_-trigger-c",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_r_0_-content-c",
+            "targetExists": true
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-b",
+            "id": "radix-_r_0_-content-b",
+            "labelledBy": "radix-_r_0_-trigger-b",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["B"],
+        "fallback": false,
+        "focused": "B",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "removed": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "radix-_r_0_-trigger-a",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_r_0_-content-a",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "radix-_r_0_-trigger-c",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "radix-_r_0_-content-c",
+            "targetExists": true
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-c",
+            "id": "radix-_r_0_-content-c",
+            "labelledBy": "radix-_r_0_-trigger-c",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["C"],
+        "fallback": false,
+        "focused": "C",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "diagnostics": []
+    },
+    {
+      "library": "shadcn-radix",
+      "hydrated": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "radix-_R_0_-trigger-a",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_R_0_-content-a",
+            "targetExists": true
+          },
+          {
+            "text": "B",
+            "id": "radix-_R_0_-trigger-b",
+            "selected": "true",
+            "tabIndex": "-1",
+            "controls": "radix-_R_0_-content-b",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "radix-_R_0_-trigger-c",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_R_0_-content-c",
+            "targetExists": true
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-b",
+            "id": "radix-_R_0_-content-b",
+            "labelledBy": "radix-_R_0_-trigger-b",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 0,
+        "selectedTabs": ["B"],
+        "fallback": false,
+        "focused": "ABCPANEL-b",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "afterClick": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "radix-_R_0_-trigger-a",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "radix-_R_0_-content-a",
+            "targetExists": true
+          },
+          {
+            "text": "B",
+            "id": "radix-_R_0_-trigger-b",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_R_0_-content-b",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "radix-_R_0_-trigger-c",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_R_0_-content-c",
+            "targetExists": true
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-a",
+            "id": "radix-_R_0_-content-a",
+            "labelledBy": "radix-_R_0_-trigger-a",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["A"],
+        "fallback": false,
+        "focused": "A",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "duringFallback": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "radix-_r_0_-trigger-a",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_r_0_-content-a",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "radix-_r_0_-trigger-c",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "radix-_r_0_-content-c",
+            "targetExists": true
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-c",
+            "id": "radix-_r_0_-content-c",
+            "labelledBy": "radix-_r_0_-trigger-c",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["C"],
+        "fallback": true,
+        "focused": "C",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "resolved": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "radix-_r_0_-trigger-a",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_r_0_-content-a",
+            "targetExists": true
+          },
+          {
+            "text": "B",
+            "id": "radix-_r_0_-trigger-b",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "radix-_r_0_-content-b",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "radix-_r_0_-trigger-c",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_r_0_-content-c",
+            "targetExists": true
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-b",
+            "id": "radix-_r_0_-content-b",
+            "labelledBy": "radix-_r_0_-trigger-b",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["B"],
+        "fallback": false,
+        "focused": "B",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "removed": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "radix-_r_0_-trigger-a",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "radix-_r_0_-content-a",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "radix-_r_0_-trigger-c",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "radix-_r_0_-content-c",
+            "targetExists": true
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-c",
+            "id": "radix-_r_0_-content-c",
+            "labelledBy": "radix-_r_0_-trigger-c",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["C"],
+        "fallback": false,
+        "focused": "C",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "diagnostics": []
+    },
+    {
+      "library": "shadcn-base",
+      "hydrated": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "base-ui-_R_5_",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": null,
+            "targetExists": false
+          },
+          {
+            "text": "B",
+            "id": "base-ui-_R_9_",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "base-ui-_R_a_",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "base-ui-_R_d_",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": null,
+            "targetExists": false
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-b",
+            "id": "base-ui-_R_a_",
+            "labelledBy": "base-ui-_R_9_",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["B"],
+        "fallback": false,
+        "focused": "ABCPANEL-b",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "afterClick": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "base-ui-_R_5_",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "base-ui-_R_6_",
+            "targetExists": true
+          },
+          {
+            "text": "B",
+            "id": "base-ui-_R_9_",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "base-ui-_R_a_",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "base-ui-_R_d_",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": null,
+            "targetExists": false
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-a",
+            "id": "base-ui-_R_6_",
+            "labelledBy": "base-ui-_R_5_",
+            "labelExists": true
+          },
+          {
+            "text": "PANEL-b",
+            "id": "base-ui-_R_a_",
+            "labelledBy": "base-ui-_R_9_",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["A"],
+        "fallback": false,
+        "focused": "A",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "duringFallback": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "base-ui-_r_0_",
+            "selected": "true",
+            "tabIndex": "-1",
+            "controls": "base-ui-_r_3_",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "base-ui-_r_2_",
+            "selected": "false",
+            "tabIndex": "0",
+            "controls": null,
+            "targetExists": false
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-a",
+            "id": "base-ui-_r_3_",
+            "labelledBy": "base-ui-_r_0_",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["A"],
+        "fallback": true,
+        "focused": "C",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "resolved": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "base-ui-_r_0_",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": "base-ui-_r_3_",
+            "targetExists": true
+          },
+          {
+            "text": "B",
+            "id": "base-ui-_r_a_",
+            "selected": "true",
+            "tabIndex": "0",
+            "controls": "base-ui-_r_4_",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "base-ui-_r_2_",
+            "selected": "false",
+            "tabIndex": "-1",
+            "controls": null,
+            "targetExists": false
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-a",
+            "id": "base-ui-_r_3_",
+            "labelledBy": "base-ui-_r_0_",
+            "labelExists": true
+          },
+          {
+            "text": "PANEL-b",
+            "id": "base-ui-_r_4_",
+            "labelledBy": "base-ui-_r_a_",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["B"],
+        "fallback": false,
+        "focused": "B",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "removed": {
+        "tabs": [
+          {
+            "text": "A",
+            "id": "base-ui-_r_0_",
+            "selected": "true",
+            "tabIndex": "-1",
+            "controls": "base-ui-_r_3_",
+            "targetExists": true
+          },
+          {
+            "text": "C",
+            "id": "base-ui-_r_2_",
+            "selected": "false",
+            "tabIndex": "0",
+            "controls": null,
+            "targetExists": false
+          }
+        ],
+        "panels": [
+          {
+            "text": "PANEL-a",
+            "id": "base-ui-_r_3_",
+            "labelledBy": "base-ui-_r_0_",
+            "labelExists": true
+          }
+        ],
+        "tabStops": 1,
+        "selectedTabs": ["A"],
+        "fallback": false,
+        "focused": "C",
+        "sameNodes": true,
+        "recoverable": []
+      },
+      "diagnostics": []
+    }
+  ]
+}
