@@ -1,0 +1,18 @@
+[
+  {
+    "name": "legacy-client",
+    "sameNodes": false,
+    "diagnostics": [],
+    "recoverable": [
+      "Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  <Tree>\n    <Tabs content={<TabsContent>}>\n      <div data-disabled=\"false\" className=\"so-tabs so...\" style={{}} ref={function attach}>\n        <Elevate layer={Map}>\n          <div className=\"so-tabs__bar\">\n            <div className=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\">\n              <TabsItem value=\"a\" text=\"A\">\n                <div\n                  data-disabled=\"false\"\n                  data-closable=\"false\"\n                  className=\"so-tabs-item so-tabs-item--size-normal\"\n+                 style={{order:-1}}\n-                 style={{order:\"0\"}}\n                  ref={function attach}\n-                 data-selected=\"false\"\n                >\n                  <Button embedded=\"tabs.row\" type=\"button\" disabled={false} size=\"normal\" variant={undefined} role=\"tab\" ...>\n                    <button\n                      data-disabled=\"false\"\n                      type=\"button\"\n                      role=\"tab\"\n                      id=\"_R_1j_-tab\"\n                      aria-controls=\"_R_1j_-panel\"\n                      ref={function attach}\n                      className=\"so-button so-button--size-normal\"\n                      style={{}}\n-                     aria-selected=\"false\"\n-                     tabindex=\"0\"\n                    >\n              <TabsItem value=\"b\" text=\"B\" active={true}>\n                <div\n                  data-disabled=\"false\"\n                  data-closable=\"false\"\n                  className=\"so-tabs-item so-tabs-item--size-normal\"\n+                 style={{order:-1}}\n-                 style={{order:\"1\"}}\n                  ref={function attach}\n-                 data-selected=\"true\"\n                >\n                  <Button embedded=\"tabs.row\" type=\"button\" disabled={false} size=\"normal\" variant={undefined} role=\"tab\" ...>\n                    <button\n                      data-disabled=\"false\"\n                      type=\"button\"\n                      role=\"tab\"\n                      id=\"_R_2j_-tab\"\n                      aria-controls=\"_R_2j_-panel\"\n                      ref={function attach}\n                      className=\"so-button so-button--size-normal\"\n                      style={{}}\n-                     aria-selected=\"true\"\n-                     tabindex=\"0\"\n                    >\n          ...\n-       <div role=\"tabpanel\" tabindex=\"0\" id=\"_R_2j_-panel\" aria-labelledby=\"_R_2j_-tab\" className=\"so-tabs-content\">\n"
+    ],
+    "panel": "PANEL-b"
+  },
+  {
+    "name": "matching-early-client",
+    "sameNodes": true,
+    "diagnostics": [],
+    "recoverable": [],
+    "panel": "PANEL-b"
+  }
+]

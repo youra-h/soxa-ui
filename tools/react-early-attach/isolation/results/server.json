@@ -1,0 +1,64 @@
+{
+  "node": "v24.20.0",
+  "rows": [
+    {
+      "name": "sync",
+      "html": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:1\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_2j_-tab\" aria-controls=\"_R_2j_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div></div></div><div role=\"tabpanel\" tabindex=\"0\" id=\"_R_2j_-panel\" aria-labelledby=\"_R_2j_-tab\" class=\"so-tabs-content\">PANEL-b</div></div>",
+      "before": [["a", "b"]],
+      "tabStops": 2,
+      "destroyed": 10,
+      "retainedContexts": 0,
+      "weakObservations": 31,
+      "alive": 0
+    },
+    {
+      "name": "suspended-user-wrapper",
+      "html": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><!--$!--><template data-msg=\"Switched to client rendering because the server rendering aborted due to:\n\nThe server used &quot;renderToString&quot; which does not support Suspense. If you intended for this Suspense boundary to render the fallback content on the server consider throwing an Error somewhere within the Suspense boundary. If you intended to have the server wait for the suspended component please switch to &quot;renderToPipeableStream&quot; which supports Suspense on the server\" data-cstck=\"\n    at Wait (&lt;anonymous&gt;)\n    at SomeComponent (D:/projects/soxa-a/tools/react-early-attach/isolation/server.spec.tsx:52:26)\n    at Suspense (&lt;anonymous&gt;)\n    at div (&lt;anonymous&gt;)\n    at div (&lt;anonymous&gt;)\n    at Elevate (D:/projects/soxa-a/packages/ui/react/src/adapter/elevator/Elevate.tsx:8:20)\n    at div (&lt;anonymous&gt;)\n    at Tabs (D:/projects/soxa-a/packages/ui/react/src/components/tabs/Tabs.tsx:18:84)\"></template><span>FALLBACK</span><!--/$--></div></div><div role=\"tabpanel\" tabindex=\"0\" id=\"_R_6j_-panel\" aria-labelledby=\"_R_6j_-tab\" class=\"so-tabs-content\">GHOST-PANEL-b</div></div>",
+      "before": [["a", "b"]],
+      "destroyed": 10
+    },
+    {
+      "name": "stream-resolved",
+      "prefix": "LEFT-",
+      "html": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><!--$--><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:1\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_6j_-tab\" aria-controls=\"_R_6j_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><!--/$--></div></div><div role=\"tabpanel\" tabindex=\"0\" id=\"_R_6j_-panel\" aria-labelledby=\"_R_6j_-tab\" class=\"so-tabs-content\">LEFT-PANEL-b</div></div>",
+      "errors": [],
+      "before": [["a", "b", "fallback"]],
+      "destroyed": 13,
+      "retainedContexts": 0,
+      "weakObservations": 40,
+      "alive": 0
+    },
+    {
+      "name": "stream-resolved",
+      "prefix": "RIGHT-",
+      "html": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><!--$--><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:1\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_6j_-tab\" aria-controls=\"_R_6j_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><!--/$--></div></div><div role=\"tabpanel\" tabindex=\"0\" id=\"_R_6j_-panel\" aria-labelledby=\"_R_6j_-tab\" class=\"so-tabs-content\">RIGHT-PANEL-b</div></div>",
+      "errors": [],
+      "before": [["a", "b", "fallback"]],
+      "destroyed": 13,
+      "retainedContexts": 0,
+      "weakObservations": 40,
+      "alive": 1
+    },
+    {
+      "name": "stream-abort",
+      "prefix": "ABORT-",
+      "html": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><!--$?--><template id=\"B:0\"></template><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:2\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_2j_-tab\" aria-controls=\"_R_2j_-panel\" aria-selected=\"false\" tabindex=\"-1\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">FALLBACK</span></button></div><!--/$--></div></div><div role=\"tabpanel\" tabindex=\"0\" id=\"_R_6j_-panel\" aria-labelledby=\"_R_6j_-tab\" class=\"so-tabs-content\">ABORT-PANEL-b</div></div><script>requestAnimationFrame(function(){$RT=performance.now()});</script><div hidden id=\"S:0\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:1\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_6j_-tab\" aria-controls=\"_R_6j_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><template id=\"P:1\"></template></div><script>$RX=function(b,c,d,e,f){var a=document.getElementById(b);a&&(b=a.previousSibling,b.data=\"$!\",a=a.dataset,null!=c&&(a.dgst=c),d&&(a.msg=d),e&&(a.stck=e),f&&(a.cstck=f),b._reactRetry&&b._reactRetry())};;$RX(\"B:0\",null,\"Switched to client rendering because the server rendering aborted due to:\\n\\nisolation abort\",\"Switched to client rendering because the server rendering aborted due to:\\n\\nError: isolation abort\\n    at Immediate.\\u003canonymous> (D:/projects/soxa-a/tools/react-early-attach/isolation/server.spec.tsx:133:42)\\n    at process.processImmediate (node:internal/timers:574:21)\",\"\\n    at Wait (\\u003canonymous>)\\n    at SomeComponent (D:/projects/soxa-a/tools/react-early-attach/isolation/server.spec.tsx:52:26)\\n    at Suspense (\\u003canonymous>)\\n    at div (\\u003canonymous>)\\n    at div (\\u003canonymous>)\\n    at Elevate (D:/projects/soxa-a/packages/ui/react/src/adapter/elevator/Elevate.tsx:8:20)\\n    at div (\\u003canonymous>)\\n    at Tabs (D:/projects/soxa-a/packages/ui/react/src/components/tabs/Tabs.tsx:18:84)\")</script>",
+      "errors": ["Error: isolation abort"],
+      "before": [["a", "b", "fallback"]],
+      "destroyed": 13,
+      "retainedContexts": 0,
+      "weakObservations": 40,
+      "alive": 0
+    },
+    {
+      "name": "application-error",
+      "destroyed": 5,
+      "retainedContexts": 0
+    },
+    {
+      "name": "external-ctrl-refused",
+      "destroyed": 0,
+      "unchanged": true
+    }
+  ]
+}
