@@ -3,7 +3,7 @@ import { AsyncLocalStorage } from 'node:async_hooks'
 const requests = new AsyncLocalStorage()
 let earlyClient = false
 
-/** Host-owned scope; only the experiment's renderer knows when execution ends. */
+/** Resource scope used by the experiment's host and native subtree candidates. */
 export class TIsolatedExecution {
 	contexts = []
 	references = []
@@ -54,19 +54,21 @@ export class TIsolatedExecution {
 
 export function installIsolationHooks() {
 	Reflect.set(globalThis, '__ssrIsolation', {
-		checkInput(options) {
-			if (!requests.getStore()) return
+		checkInput(options, componentScope) {
+			const execution = componentScope ?? requests.getStore()
+			if (!execution) return
+			if (execution.closed) throw new Error('Assembly after SSR scope disposal')
 			if (options.ctrl || options.options?.engine || options.props?.engine) {
 				throw new Error(
 					'Prototype only: externally supplied ctrl/engine require an explicit isolation design',
 				)
 			}
 		},
-		capture(context) {
-			requests.getStore()?.capture(context)
+		capture(context, componentScope) {
+			;(componentScope ?? requests.getStore())?.capture(context)
 		},
-		early() {
-			return !!requests.getStore() || earlyClient
+		early(componentScope) {
+			return !!componentScope || !!requests.getStore() || earlyClient
 		},
 	})
 }

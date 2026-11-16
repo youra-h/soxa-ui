@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import base from '../vitest.config.ts'
+import path from 'node:path'
 
 export default defineConfig({
 	resolve: base.resolve,
@@ -18,22 +19,30 @@ export default defineConfig({
 					throw new Error('Runtime anchor changed')
 				return source
 					.replace(
+						"import { accepting } from './accepting'",
+						`import { accepting } from './accepting'\nimport { ComponentIsolationContext } from ${JSON.stringify(path.join(import.meta.dirname, 'component-scope.tsx').replaceAll('\\', '/'))}`,
+					)
+					.replace(
+						'const mountId = useId()',
+						'const mountId = useId()\nconst componentIsolation = useContext(ComponentIsolationContext)',
+					)
+					.replace(
 						'private _destroyed = false',
 						'private _destroyed = false\n isolationAttached = false',
 					)
 					.replace(
 						create,
 						`
-          globalThis.__ssrIsolation?.checkInput(options)
+          globalThis.__ssrIsolation?.checkInput(options, componentIsolation)
           const context = createAdapterContext(descriptor, { mountId: id, locale, ...options }, config)
-          globalThis.__ssrIsolation?.capture(context)
+          globalThis.__ssrIsolation?.capture(context, componentIsolation)
           return context
         `,
 					)
 					.replace(
 						built,
 						`${built}
-          if (globalThis.__ssrIsolation?.early()) {
+          if (globalThis.__ssrIsolation?.early(componentIsolation)) {
             attachAll(built.contexts)
             built.isolationAttached = true
           }

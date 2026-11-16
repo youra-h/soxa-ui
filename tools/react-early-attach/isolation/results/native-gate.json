@@ -1,0 +1,96 @@
+{
+  "react": "19.3.1",
+  "node": "v24.20.0",
+  "rows": [
+    {
+      "name": "native-lifetime-sync",
+      "signals": ["null"],
+      "sameCachedObject": false,
+      "panel": false,
+      "note": "No host-owned scope or application wrapper was installed."
+    },
+    {
+      "name": "native-lifetime-resolved",
+      "signals": ["null", "null"],
+      "errors": [],
+      "html": "<!--$--><div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:-1\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><div data-disabled=\"false\" data-closable=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:-1\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_2j_-tab\" aria-controls=\"_R_2j_-panel\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div></div></div></div><!--/$-->"
+    },
+    {
+      "name": "native-lifetime-abort",
+      "signals": ["null", "null"],
+      "errors": ["Error: native gate abort"],
+      "html": "<!--$!--><template data-msg=\"Switched to client rendering because the server rendering aborted due to:\n\nnative gate abort\" data-stck=\"Switched to client rendering because the server rendering aborted due to:\n\nError: native gate abort\n    at Immediate.&lt;anonymous&gt; (D:/projects/soxa-a/tools/react-early-attach/isolation/native-gate.spec.tsx:83:40)\n    at process.processImmediate (node:internal/timers:574:21)\" data-cstck=\"\n    at Probe (&lt;anonymous&gt;)\n    at Suspense (&lt;anonymous&gt;)\"></template><span>WAITING</span><!--/$-->"
+    },
+    {
+      "name": "component-local-scope",
+      "order": ["parent returns JSX", "parent scope disposed", "child executes"],
+      "captured": 0,
+      "destroyed": 0,
+      "panel": false
+    },
+    {
+      "name": "subrenderer-execution",
+      "outerId": "_R_2_",
+      "contexts": 31,
+      "html": "<span id=\"_R_1_\">DEFAULT</span><div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_6e_-tab\" aria-controls=\"_R_6e_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:1\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_ae_-tab\" aria-controls=\"_R_ae_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div></div></div><div role=\"tabpanel\" tabindex=\"0\" id=\"_R_ae_-panel\" aria-labelledby=\"_R_ae_-tab\" class=\"so-tabs-content\">PANEL-b</div></div>"
+    },
+    {
+      "name": "subrenderer-execution",
+      "outerId": "_R_3_",
+      "contexts": 31,
+      "html": "<span id=\"_R_1_\">DEFAULT</span><div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_6e_-tab\" aria-controls=\"_R_6e_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:1\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_ae_-tab\" aria-controls=\"_R_ae_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div></div></div><div role=\"tabpanel\" tabindex=\"0\" id=\"_R_ae_-panel\" aria-labelledby=\"_R_ae_-tab\" class=\"so-tabs-content\">PANEL-b</div></div>"
+    },
+    {
+      "name": "local-subrenderer-context-and-ids",
+      "outerHtml": "<span id=\"_R_1_\">APPLICATION</span>",
+      "observed": [
+        {
+          "context": "APPLICATION",
+          "id": "_R_1_",
+          "kind": "outer"
+        },
+        {
+          "context": "DEFAULT",
+          "id": "_R_1_",
+          "kind": "isolated"
+        },
+        {
+          "context": "DEFAULT",
+          "id": "_R_1_",
+          "kind": "isolated"
+        }
+      ],
+      "foreignContextPreserved": false,
+      "uniqueInnerIds": false,
+      "note": "Candidate returns null deliberately: emitted strings are recorded, not inserted into application HTML."
+    },
+    {
+      "name": "native-end-marker-sync",
+      "html": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_6d_-tab\" aria-controls=\"_R_6d_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:1\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_qd_-tab\" aria-controls=\"_R_qd_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div></div></div><div role=\"tabpanel\" tabindex=\"0\" id=\"_R_qd_-panel\" aria-labelledby=\"_R_qd_-tab\" class=\"so-tabs-content\">PANEL-b</div></div><div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_6e_-tab\" aria-controls=\"_R_6e_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:1\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_qe_-tab\" aria-controls=\"_R_qe_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div></div></div><div role=\"tabpanel\" tabindex=\"0\" id=\"_R_qe_-panel\" aria-labelledby=\"_R_qe_-tab\" class=\"so-tabs-content\">PANEL-b</div></div>",
+      "foreignContextPreserved": true,
+      "uniqueNativeIds": true,
+      "scopes": [
+        {
+          "closed": true,
+          "destroyed": 10
+        },
+        {
+          "closed": true,
+          "destroyed": 10
+        }
+      ]
+    },
+    {
+      "name": "native-end-marker-stream",
+      "html": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><!--$--><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:1\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_6j_-tab\" aria-controls=\"_R_6j_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><!--/$--></div></div><div role=\"tabpanel\" tabindex=\"0\" id=\"_R_6j_-panel\" aria-labelledby=\"_R_6j_-tab\" class=\"so-tabs-content\">PANEL-b</div></div>",
+      "failures": [],
+      "note": "The marker disposes the owner while the native renderer still has pending descendants."
+    },
+    {
+      "name": "native-end-marker-late-item",
+      "html": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\"></span></button></div><!--$!--><template data-msg=\"Switched to client rendering because the server rendering errored:\n\nAssembly after SSR scope disposal\" data-stck=\"Switched to client rendering because the server rendering errored:\n\nError: Assembly after SSR scope disposal\n    at Object.checkInput (D:/projects/soxa-a/tools/react-early-attach/isolation/scope.mjs:60:32)\n    at create (D:/projects/soxa-a/packages/ui/react/src/adapter/runtime/useAdapterContext.ts:132:38)\n    at D:/projects/soxa-a/packages/ui/react/src/components/tabs/item/setup.component.ts:13:19\n    at assemble (D:/projects/soxa-a/packages/ui/react/src/adapter/runtime/useAdapterContext.ts:138:28)\n    at useAdapterContext (D:/projects/soxa-a/packages/ui/react/src/adapter/runtime/useAdapterContext.ts:153:17)\n    at useSetupTabsItem (D:/projects/soxa-a/packages/ui/react/src/components/tabs/item/setup.component.ts:12:6)\n    at TabsItem (D:/projects/soxa-a/packages/ui/react/src/components/tabs/item/Item.tsx:24:48)\n    at Object.react_stack_bottom_frame (D:\\projects\\soxa-a\\node_modules\\react-dom\\cjs\\react-dom-server.node.development.js:10956:18)\n    at renderWithHooks (D:\\projects\\soxa-a\\node_modules\\react-dom\\cjs\\react-dom-server.node.development.js:5633:19)\n    at renderElement (D:\\projects\\soxa-a\\node_modules\\react-dom\\cjs\\react-dom-server.node.development.js:6068:23)\" data-cstck=\"\n    at TabsItem (D:/projects/soxa-a/packages/ui/react/src/components/tabs/item/Item.tsx:18:90)\n    at Wait (&lt;anonymous&gt;)\n    at Suspense (&lt;anonymous&gt;)\n    at div (&lt;anonymous&gt;)\n    at div (&lt;anonymous&gt;)\n    at Elevate (D:/projects/soxa-a/packages/ui/react/src/adapter/elevator/Elevate.tsx:8:20)\n    at div (&lt;anonymous&gt;)\n    at Tabs (D:/projects/soxa-a/packages/ui/react/src/components/tabs/Tabs.tsx:18:84)\n    at ComponentScopedTabs (D:/projects/soxa-a/tools/react-early-attach/isolation/component-scope.tsx:19:51)\"></template><span>WAITING</span><!--/$--></div></div><div role=\"tabpanel\" tabindex=\"0\" id=\"_R_6j_-panel\" aria-labelledby=\"_R_6j_-tab\" class=\"so-tabs-content\">PANEL-b</div></div>",
+      "failures": ["Error: Assembly after SSR scope disposal"],
+      "note": "The marker disposes the owner while the native renderer still has pending descendants."
+    }
+  ]
+}
