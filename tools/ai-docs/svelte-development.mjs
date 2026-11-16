@@ -13,21 +13,13 @@ import {
 export const digest = (file) => createHash('sha256').update(readFileSync(file)).digest('hex')
 const read = (file) => JSON.parse(readFileSync(file, 'utf8'))
 
-/** Pack the complete dependency closure; version numbers alone do not identify unpublished fixes. */
-export function prepareDevelopment(root, directory, npmCli, skipBuild) {
-	const npm = (args, cwd = root, capture = true) =>
-		execFileSync(process.execPath, [npmCli, ...args], {
-			cwd,
-			encoding: 'utf8',
-			stdio: capture ? 'pipe' : 'inherit',
-			maxBuffer: 64 * 1024 * 1024,
-		})
-
-	const libraryRevision = execFileSync('git', ['rev-parse', 'origin/main'], {
+/** Identify the committed sources being packed; reject dirty, staged and untracked package edits. */
+export function committedLibraryRevision(root) {
+	const libraryRevision = execFileSync('git', ['rev-parse', 'HEAD'], {
 		cwd: root,
 		encoding: 'utf8',
 	}).trim()
-	// Documentation may be dirty while editing; all packed sources must exactly match main.
+	// Documentation may be dirty while editing; packed sources must match the checked-out commit, including PR fixes.
 	for (const args of [
 		['diff', '--exit-code', libraryRevision, '--', 'packages'],
 		['diff', '--exit-code', '--cached', libraryRevision, '--', 'packages'],
@@ -41,6 +33,21 @@ export function prepareDevelopment(root, directory, npmCli, skipBuild) {
 		'',
 		'No untracked library sources',
 	)
+
+	return libraryRevision
+}
+
+/** Pack the complete dependency closure; version numbers alone do not identify unpublished fixes. */
+export function prepareDevelopment(root, directory, npmCli, skipBuild) {
+	const npm = (args, cwd = root, capture = true) =>
+		execFileSync(process.execPath, [npmCli, ...args], {
+			cwd,
+			encoding: 'utf8',
+			stdio: capture ? 'pipe' : 'inherit',
+			maxBuffer: 64 * 1024 * 1024,
+		})
+
+	const libraryRevision = committedLibraryRevision(root)
 
 	if (!skipBuild) npm(['run', 'build'], root, false)
 	const workspaces = JSON.parse(npm(['query', '.workspace'])).filter(
@@ -103,7 +110,7 @@ export function prepareDevelopment(root, directory, npmCli, skipBuild) {
 
 	return {
 		libraryRevision,
-		librarySource: 'origin/main merged into docsRevision; no package source changes',
+		librarySource: 'checked-out commit; no uncommitted package source changes',
 		developmentApiSha256: digest(join(root, 'packages/setup/dist/api.json')),
 		corpusVersion: '0.3.0 (separate published API; development API is not a corpus input)',
 		packages,
