@@ -1,0 +1,99 @@
+{
+  "mode": "engine",
+  "node": "v24.20.0",
+  "count": 353,
+  "diagnostics": [],
+  "rows": [
+    {
+      "name": "markup-active-second",
+      "outcome": "completed",
+      "result": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">A</span></button></div><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_2j_-tab\" aria-controls=\"_R_2j_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">B</span></button></div></div></div></div>",
+      "values": [[]]
+    },
+    {
+      "name": "data-active-second-control",
+      "outcome": "completed",
+      "result": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" aria-selected=\"false\" tabindex=\"-1\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">A</span></button></div><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:1\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" aria-selected=\"true\" tabindex=\"0\" id=\"_R_2j_-tab\" aria-controls=\"_R_2j_-panel\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">B</span></button></div></div></div><div role=\"tabpanel\" tabindex=\"0\" id=\"_R_2j_-panel\" aria-labelledby=\"_R_2j_-tab\" class=\"so-tabs-content\">PANEL-b</div></div>",
+      "values": [["a", "b"]]
+    },
+    {
+      "name": "listbox-selected-second",
+      "outcome": "completed",
+      "result": "<div data-disabled=\"false\" data-content-fit=\"truncate\" data-indicator=\"none\" class=\"so-list-box so-list-box--size-normal\"><div class=\"so-list-box__list\" tabindex=\"0\" role=\"listbox\"><div data-disabled=\"false\" data-highlighted=\"false\" data-selected=\"false\" data-content-fit=\"truncate\" data-indicator=\"none\" class=\"so-list-box-item so-list-box-item--size-normal\" style=\"order:0\"><div data-disabled=\"false\" role=\"option\" id=\"_R_1d_-option\" tabindex=\"-1\" aria-selected=\"false\" data-highlighted=\"false\" data-selected=\"false\" data-content-fit=\"truncate\" data-indicator=\"none\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">A</span></div></div><div data-disabled=\"false\" data-highlighted=\"false\" data-selected=\"true\" data-content-fit=\"truncate\" data-indicator=\"none\" class=\"so-list-box-item so-list-box-item--size-normal\" style=\"order:0\"><div data-disabled=\"false\" role=\"option\" id=\"_R_2d_-option\" tabindex=\"-1\" aria-selected=\"true\" data-highlighted=\"false\" data-selected=\"true\" data-content-fit=\"truncate\" data-indicator=\"none\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">B</span></div></div></div></div>",
+      "values": [[]]
+    },
+    {
+      "name": "late-custom-panel-id",
+      "outcome": "completed",
+      "result": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_j_-tab\" aria-controls=\"_R_j_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">B</span></button></div></div></div></div>",
+      "values": [[]]
+    },
+    {
+      "name": "fallback-no-retry",
+      "html": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">A</span></button></div><!--$!--><template data-msg=\"Switched to client rendering because the server rendering aborted due to:\n\nThe server used &quot;renderToString&quot; which does not support Suspense. If you intended for this Suspense boundary to render the fallback content on the server consider throwing an Error somewhere within the Suspense boundary. If you intended to have the server wait for the suspended component please switch to &quot;renderToPipeableStream&quot; which supports Suspense on the server\" data-cstck=\"\n    at Never (&lt;anonymous&gt;)\n    at Suspense (&lt;anonymous&gt;)\n    at div (&lt;anonymous&gt;)\n    at div (&lt;anonymous&gt;)\n    at Elevate (D:/projects/soxa-a/packages/ui/react/src/adapter/elevator/Elevate.tsx:8:20)\n    at div (&lt;anonymous&gt;)\n    at Tabs (D:/projects/soxa-a/packages/ui/react/src/components/tabs/Tabs.tsx:18:84)\"></template><span>FALLBACK</span><!--/$--></div></div></div>",
+      "values": [[]]
+    },
+    {
+      "name": "stream-resolved",
+      "html": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">A</span></button></div><!--$--><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_6j_-tab\" aria-controls=\"_R_6j_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">B</span></button></div><span>RESOLVED</span><!--/$--></div></div></div>",
+      "values": [[]],
+      "errors": []
+    },
+    {
+      "name": "stream-abort",
+      "html": "<div data-disabled=\"false\" class=\"so-tabs so-tabs--size-normal so-tabs--orientation-horizontal\"><div class=\"so-tabs__bar\"><div class=\"so-tabs__list\" role=\"tablist\" aria-orientation=\"horizontal\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"false\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_1j_-tab\" aria-controls=\"_R_1j_-panel\" aria-selected=\"false\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">A</span></button></div><!--$?--><template id=\"B:0\"></template><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_2j_-tab\" aria-controls=\"_R_2j_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">FALLBACK</span></button></div><!--/$--></div></div></div><script>requestAnimationFrame(function(){$RT=performance.now()});</script><div hidden id=\"S:0\"><div data-disabled=\"false\" data-closable=\"false\" data-selected=\"true\" class=\"so-tabs-item so-tabs-item--size-normal\" style=\"order:0\"><button data-disabled=\"false\" type=\"button\" role=\"tab\" id=\"_R_6j_-tab\" aria-controls=\"_R_6j_-panel\" aria-selected=\"true\" tabindex=\"0\" class=\"so-button so-button--size-normal\"><span class=\"so-button__text\">B</span></button></div><template id=\"P:1\"></template></div><script>$RX=function(b,c,d,e,f){var a=document.getElementById(b);a&&(b=a.previousSibling,b.data=\"$!\",a=a.dataset,null!=c&&(a.dgst=c),d&&(a.msg=d),e&&(a.stck=e),f&&(a.cstck=f),b._reactRetry&&b._reactRetry())};;$RX(\"B:0\",null,\"Switched to client rendering because the server rendering aborted due to:\\n\\nexperiment abort\",\"Switched to client rendering because the server rendering aborted due to:\\n\\nError: experiment abort\\n    at Immediate.\\u003canonymous> (D:/projects/soxa-a/tools/react-early-attach/experiment.spec.tsx:187:40)\\n    at process.processImmediate (node:internal/timers:574:21)\",\"\\n    at Wait (\\u003canonymous>)\\n    at Suspense (\\u003canonymous>)\\n    at div (\\u003canonymous>)\\n    at div (\\u003canonymous>)\\n    at Elevate (D:/projects/soxa-a/packages/ui/react/src/adapter/elevator/Elevate.tsx:8:20)\\n    at div (\\u003canonymous>)\\n    at Tabs (D:/projects/soxa-a/packages/ui/react/src/components/tabs/Tabs.tsx:18:84)\")</script>",
+      "values": [[]],
+      "errors": ["Error: experiment abort"]
+    },
+    {
+      "name": "whole-request-gc",
+      "assemblies": 840,
+      "alive": 0,
+      "heapDelta": 356528,
+      "note": "WeakRef observation after 8 GC turns; heap delta includes runtime caches, not isolated leak bytes."
+    },
+    {
+      "name": "owner-retained-gc",
+      "values": [],
+      "note": "Probe intentionally retains the internal owner engine to inspect membership; this is not a whole-request leak claim."
+    },
+    {
+      "name": "aborted-request-gc",
+      "requests": 10,
+      "observations": 210,
+      "alive": 10,
+      "aliveKinds": [
+        "engine",
+        "model",
+        "bundle",
+        "bundle",
+        "engine",
+        "assembly",
+        "context",
+        "model",
+        "bundle",
+        "engine"
+      ],
+      "note": "Includes assembly/context/model/bundle/engine weak references; duplicate observations are possible. Nonzero survivors are reported, not classified as a proven leak."
+    },
+    {
+      "name": "aborted-request-gc",
+      "requests": 50,
+      "observations": 1050,
+      "alive": 10,
+      "aliveKinds": [
+        "engine",
+        "model",
+        "bundle",
+        "bundle",
+        "engine",
+        "assembly",
+        "context",
+        "model",
+        "bundle",
+        "engine"
+      ],
+      "note": "Includes assembly/context/model/bundle/engine weak references; duplicate observations are possible. Nonzero survivors are reported, not classified as a proven leak."
+    }
+  ]
+}

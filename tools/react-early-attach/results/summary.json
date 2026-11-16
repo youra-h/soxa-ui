@@ -1,0 +1,1418 @@
+{
+  "revision": "83761911a15e3a76b13095c7448d80c62b0f2a71",
+  "node": "v24.20.0",
+  "react": "19.3.1",
+  "note": "Recorded observations, including candidate failures. A green runner means the experiment executed, not that the candidate passes acceptance.",
+  "modes": [
+    {
+      "mode": "baseline",
+      "diagnostics": [],
+      "cases": [
+        {
+          "name": "markup-active-second",
+          "outcome": "completed",
+          "values": [[]],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": null,
+              "selected": null,
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_2j_-tab",
+              "tabIndex": null,
+              "selected": null,
+              "controls": "_R_2j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 0,
+          "panels": [],
+          "options": []
+        },
+        {
+          "name": "data-active-second-control",
+          "outcome": "completed",
+          "values": [["a", "b"]],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "-1",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_2j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_2j_-panel",
+              "targetExists": true
+            }
+          ],
+          "tabStops": 1,
+          "panels": [
+            {
+              "id": "_R_2j_-panel",
+              "text": "PANEL-b"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "listbox-selected-second",
+          "outcome": "completed",
+          "values": [[]],
+          "tabs": [],
+          "tabStops": 0,
+          "panels": [],
+          "options": [
+            {
+              "text": "A",
+              "selected": null
+            },
+            {
+              "text": "B",
+              "selected": null
+            }
+          ]
+        },
+        {
+          "name": "late-custom-panel-id",
+          "outcome": "completed",
+          "values": [[]],
+          "tabs": [
+            {
+              "text": "B",
+              "id": "_R_j_-tab",
+              "tabIndex": null,
+              "selected": null,
+              "controls": "_R_j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 0,
+          "panels": [],
+          "options": []
+        },
+        {
+          "name": "fallback-no-retry",
+          "values": [[]],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": null,
+              "selected": null,
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 0,
+          "panels": [],
+          "options": []
+        },
+        {
+          "name": "stream-resolved",
+          "values": [[]],
+          "errors": [],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": null,
+              "selected": null,
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_6j_-tab",
+              "tabIndex": null,
+              "selected": null,
+              "controls": "_R_6j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 0,
+          "panels": [],
+          "options": []
+        },
+        {
+          "name": "stream-abort",
+          "values": [[]],
+          "errors": ["Error: experiment abort"],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": null,
+              "selected": null,
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "FALLBACK",
+              "id": "_R_2j_-tab",
+              "tabIndex": null,
+              "selected": null,
+              "controls": "_R_2j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_6j_-tab",
+              "tabIndex": null,
+              "selected": null,
+              "controls": "_R_6j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 0,
+          "panels": [],
+          "options": []
+        },
+        {
+          "name": "whole-request-gc",
+          "assemblies": 840,
+          "alive": 0,
+          "heapDelta": 306504,
+          "note": "WeakRef observation after 8 GC turns; heap delta includes runtime caches, not isolated leak bytes."
+        },
+        {
+          "name": "owner-retained-gc",
+          "values": [],
+          "note": "Probe intentionally retains the internal owner engine to inspect membership; this is not a whole-request leak claim."
+        },
+        {
+          "name": "aborted-request-gc",
+          "requests": 10,
+          "observations": 210,
+          "alive": 7,
+          "aliveKinds": ["model", "bundle", "model", "bundle", "engine", "engine", "engine"],
+          "note": "Includes assembly/context/model/bundle/engine weak references; duplicate observations are possible. Nonzero survivors are reported, not classified as a proven leak."
+        },
+        {
+          "name": "aborted-request-gc",
+          "requests": 50,
+          "observations": 1050,
+          "alive": 7,
+          "aliveKinds": ["model", "bundle", "model", "bundle", "engine", "engine", "engine"],
+          "note": "Includes assembly/context/model/bundle/engine weak references; duplicate observations are possible. Nonzero survivors are reported, not classified as a proven leak."
+        }
+      ],
+      "client": {
+        "mode": "baseline",
+        "appliedModes": [
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline",
+          "baseline"
+        ],
+        "diagnostics": [],
+        "rows": [
+          {
+            "name": "hydration-and-switch",
+            "server": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": null,
+                  "tabIndex": null
+                },
+                {
+                  "text": "B",
+                  "selected": null,
+                  "tabIndex": null
+                }
+              ],
+              "panels": []
+            },
+            "sameNodes": true,
+            "recoverable": [],
+            "hydrated": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "false",
+                  "tabIndex": "-1"
+                },
+                {
+                  "text": "B",
+                  "selected": "true",
+                  "tabIndex": "0"
+                }
+              ],
+              "panels": ["PANEL-b"]
+            },
+            "afterClick": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "true",
+                  "tabIndex": "0"
+                },
+                {
+                  "text": "B",
+                  "selected": "false",
+                  "tabIndex": "-1"
+                }
+              ],
+              "panels": ["PANEL-a"]
+            }
+          },
+          {
+            "name": "strict-mode",
+            "state": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "false",
+                  "tabIndex": "-1"
+                },
+                {
+                  "text": "B",
+                  "selected": "true",
+                  "tabIndex": "0"
+                }
+              ],
+              "panels": ["PANEL-b"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "mode": "early",
+      "diagnostics": [],
+      "cases": [
+        {
+          "name": "markup-active-second",
+          "outcome": "completed",
+          "values": [["a", "b"]],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "0",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_2j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_2j_-panel",
+              "targetExists": true
+            }
+          ],
+          "tabStops": 2,
+          "panels": [
+            {
+              "id": "_R_2j_-panel",
+              "text": "PANEL-b"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "data-active-second-control",
+          "outcome": "completed",
+          "values": [["a", "b"]],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "-1",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_2j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_2j_-panel",
+              "targetExists": true
+            }
+          ],
+          "tabStops": 1,
+          "panels": [
+            {
+              "id": "_R_2j_-panel",
+              "text": "PANEL-b"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "listbox-selected-second",
+          "outcome": "completed",
+          "values": [["a", "b"]],
+          "tabs": [],
+          "tabStops": 0,
+          "panels": [],
+          "options": [
+            {
+              "text": "A",
+              "selected": "false"
+            },
+            {
+              "text": "B",
+              "selected": "true"
+            }
+          ]
+        },
+        {
+          "name": "late-custom-panel-id",
+          "outcome": "completed",
+          "values": [["b"]],
+          "tabs": [
+            {
+              "text": "B",
+              "id": "_R_j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 1,
+          "panels": [
+            {
+              "id": "custom-panel",
+              "text": "PANEL-b"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "fallback-no-retry",
+          "values": [["a", "ghost"]],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "0",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 1,
+          "panels": [
+            {
+              "id": "_R_6j_-panel",
+              "text": "PANEL-ghost"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "stream-resolved",
+          "values": [["a", "b", "fallback"]],
+          "errors": [],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "0",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_6j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_6j_-panel",
+              "targetExists": true
+            }
+          ],
+          "tabStops": 2,
+          "panels": [
+            {
+              "id": "_R_6j_-panel",
+              "text": "PANEL-b"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "stream-abort",
+          "values": [["a", "b", "fallback"]],
+          "errors": ["Error: experiment abort"],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "0",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "FALLBACK",
+              "id": "_R_2j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_2j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_6j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_6j_-panel",
+              "targetExists": true
+            }
+          ],
+          "tabStops": 3,
+          "panels": [
+            {
+              "id": "_R_6j_-panel",
+              "text": "PANEL-b"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "whole-request-gc",
+          "assemblies": 840,
+          "alive": 0,
+          "heapDelta": 300120,
+          "note": "WeakRef observation after 8 GC turns; heap delta includes runtime caches, not isolated leak bytes."
+        },
+        {
+          "name": "owner-retained-gc",
+          "values": ["ghost"],
+          "note": "Probe intentionally retains the internal owner engine to inspect membership; this is not a whole-request leak claim."
+        },
+        {
+          "name": "aborted-request-gc",
+          "requests": 10,
+          "observations": 210,
+          "alive": 13,
+          "aliveKinds": [
+            "model",
+            "bundle",
+            "model",
+            "bundle",
+            "engine",
+            "context",
+            "model",
+            "bundle",
+            "context",
+            "model",
+            "bundle",
+            "engine",
+            "engine"
+          ],
+          "note": "Includes assembly/context/model/bundle/engine weak references; duplicate observations are possible. Nonzero survivors are reported, not classified as a proven leak."
+        },
+        {
+          "name": "aborted-request-gc",
+          "requests": 50,
+          "observations": 1050,
+          "alive": 13,
+          "aliveKinds": [
+            "model",
+            "bundle",
+            "model",
+            "bundle",
+            "engine",
+            "context",
+            "model",
+            "bundle",
+            "context",
+            "model",
+            "bundle",
+            "engine",
+            "engine"
+          ],
+          "note": "Includes assembly/context/model/bundle/engine weak references; duplicate observations are possible. Nonzero survivors are reported, not classified as a proven leak."
+        }
+      ],
+      "client": {
+        "mode": "early",
+        "appliedModes": [
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early",
+          "early"
+        ],
+        "diagnostics": [],
+        "rows": [
+          {
+            "name": "hydration-and-switch",
+            "server": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "false",
+                  "tabIndex": "0"
+                },
+                {
+                  "text": "B",
+                  "selected": "true",
+                  "tabIndex": "0"
+                }
+              ],
+              "panels": ["PANEL-b"]
+            },
+            "sameNodes": true,
+            "recoverable": [],
+            "hydrated": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "false",
+                  "tabIndex": "-1"
+                },
+                {
+                  "text": "B",
+                  "selected": "true",
+                  "tabIndex": "0"
+                }
+              ],
+              "panels": ["PANEL-b"]
+            },
+            "afterClick": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "true",
+                  "tabIndex": "0"
+                },
+                {
+                  "text": "B",
+                  "selected": "false",
+                  "tabIndex": "-1"
+                }
+              ],
+              "panels": ["PANEL-a"]
+            }
+          },
+          {
+            "name": "strict-mode",
+            "state": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "false",
+                  "tabIndex": "-1"
+                },
+                {
+                  "text": "B",
+                  "selected": "true",
+                  "tabIndex": "0"
+                }
+              ],
+              "panels": ["PANEL-b"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "mode": "engine",
+      "diagnostics": [],
+      "cases": [
+        {
+          "name": "markup-active-second",
+          "outcome": "completed",
+          "values": [[]],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "0",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_2j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_2j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 2,
+          "panels": [],
+          "options": []
+        },
+        {
+          "name": "data-active-second-control",
+          "outcome": "completed",
+          "values": [["a", "b"]],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "-1",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_2j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_2j_-panel",
+              "targetExists": true
+            }
+          ],
+          "tabStops": 1,
+          "panels": [
+            {
+              "id": "_R_2j_-panel",
+              "text": "PANEL-b"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "listbox-selected-second",
+          "outcome": "completed",
+          "values": [[]],
+          "tabs": [],
+          "tabStops": 0,
+          "panels": [],
+          "options": [
+            {
+              "text": "A",
+              "selected": "false"
+            },
+            {
+              "text": "B",
+              "selected": "true"
+            }
+          ]
+        },
+        {
+          "name": "late-custom-panel-id",
+          "outcome": "completed",
+          "values": [[]],
+          "tabs": [
+            {
+              "text": "B",
+              "id": "_R_j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 1,
+          "panels": [],
+          "options": []
+        },
+        {
+          "name": "fallback-no-retry",
+          "values": [[]],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "0",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 1,
+          "panels": [],
+          "options": []
+        },
+        {
+          "name": "stream-resolved",
+          "values": [[]],
+          "errors": [],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "0",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_6j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_6j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 2,
+          "panels": [],
+          "options": []
+        },
+        {
+          "name": "stream-abort",
+          "values": [[]],
+          "errors": ["Error: experiment abort"],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "0",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "FALLBACK",
+              "id": "_R_2j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_2j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_6j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_6j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 3,
+          "panels": [],
+          "options": []
+        },
+        {
+          "name": "whole-request-gc",
+          "assemblies": 840,
+          "alive": 0,
+          "heapDelta": 356528,
+          "note": "WeakRef observation after 8 GC turns; heap delta includes runtime caches, not isolated leak bytes."
+        },
+        {
+          "name": "owner-retained-gc",
+          "values": [],
+          "note": "Probe intentionally retains the internal owner engine to inspect membership; this is not a whole-request leak claim."
+        },
+        {
+          "name": "aborted-request-gc",
+          "requests": 10,
+          "observations": 210,
+          "alive": 10,
+          "aliveKinds": [
+            "engine",
+            "model",
+            "bundle",
+            "bundle",
+            "engine",
+            "assembly",
+            "context",
+            "model",
+            "bundle",
+            "engine"
+          ],
+          "note": "Includes assembly/context/model/bundle/engine weak references; duplicate observations are possible. Nonzero survivors are reported, not classified as a proven leak."
+        },
+        {
+          "name": "aborted-request-gc",
+          "requests": 50,
+          "observations": 1050,
+          "alive": 10,
+          "aliveKinds": [
+            "engine",
+            "model",
+            "bundle",
+            "bundle",
+            "engine",
+            "assembly",
+            "context",
+            "model",
+            "bundle",
+            "engine"
+          ],
+          "note": "Includes assembly/context/model/bundle/engine weak references; duplicate observations are possible. Nonzero survivors are reported, not classified as a proven leak."
+        }
+      ],
+      "client": {
+        "mode": "engine",
+        "appliedModes": [
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine",
+          "engine"
+        ],
+        "diagnostics": [],
+        "rows": [
+          {
+            "name": "hydration-and-switch",
+            "server": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "false",
+                  "tabIndex": "0"
+                },
+                {
+                  "text": "B",
+                  "selected": "true",
+                  "tabIndex": "0"
+                }
+              ],
+              "panels": []
+            },
+            "sameNodes": true,
+            "recoverable": [],
+            "hydrated": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "false",
+                  "tabIndex": "-1"
+                },
+                {
+                  "text": "B",
+                  "selected": "true",
+                  "tabIndex": "0"
+                }
+              ],
+              "panels": ["PANEL-b"]
+            },
+            "afterClick": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "true",
+                  "tabIndex": "0"
+                },
+                {
+                  "text": "B",
+                  "selected": "false",
+                  "tabIndex": "-1"
+                }
+              ],
+              "panels": ["PANEL-a"]
+            }
+          },
+          {
+            "name": "strict-mode",
+            "state": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "false",
+                  "tabIndex": "-1"
+                },
+                {
+                  "text": "B",
+                  "selected": "true",
+                  "tabIndex": "0"
+                }
+              ],
+              "panels": ["PANEL-b"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "mode": "engine-part",
+      "diagnostics": [],
+      "cases": [
+        {
+          "name": "markup-active-second",
+          "outcome": "completed",
+          "values": [["a", "b"]],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "0",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_2j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_2j_-panel",
+              "targetExists": true
+            }
+          ],
+          "tabStops": 2,
+          "panels": [
+            {
+              "id": "_R_2j_-panel",
+              "text": "PANEL-b"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "data-active-second-control",
+          "outcome": "completed",
+          "values": [["a", "b"]],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "-1",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_2j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_2j_-panel",
+              "targetExists": true
+            }
+          ],
+          "tabStops": 1,
+          "panels": [
+            {
+              "id": "_R_2j_-panel",
+              "text": "PANEL-b"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "listbox-selected-second",
+          "outcome": "completed",
+          "values": [["a", "b"]],
+          "tabs": [],
+          "tabStops": 0,
+          "panels": [],
+          "options": [
+            {
+              "text": "A",
+              "selected": "false"
+            },
+            {
+              "text": "B",
+              "selected": "true"
+            }
+          ]
+        },
+        {
+          "name": "late-custom-panel-id",
+          "outcome": "completed",
+          "values": [["b"]],
+          "tabs": [
+            {
+              "text": "B",
+              "id": "_R_j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 1,
+          "panels": [
+            {
+              "id": "custom-panel",
+              "text": "PANEL-b"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "fallback-no-retry",
+          "values": [["a", "ghost"]],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "0",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            }
+          ],
+          "tabStops": 1,
+          "panels": [
+            {
+              "id": "_R_6j_-panel",
+              "text": "PANEL-ghost"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "stream-resolved",
+          "values": [["a", "b", "fallback"]],
+          "errors": [],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "0",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_6j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_6j_-panel",
+              "targetExists": true
+            }
+          ],
+          "tabStops": 2,
+          "panels": [
+            {
+              "id": "_R_6j_-panel",
+              "text": "PANEL-b"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "stream-abort",
+          "values": [["a", "b", "fallback"]],
+          "errors": ["Error: experiment abort"],
+          "tabs": [
+            {
+              "text": "A",
+              "id": "_R_1j_-tab",
+              "tabIndex": "0",
+              "selected": "false",
+              "controls": "_R_1j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "FALLBACK",
+              "id": "_R_2j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_2j_-panel",
+              "targetExists": false
+            },
+            {
+              "text": "B",
+              "id": "_R_6j_-tab",
+              "tabIndex": "0",
+              "selected": "true",
+              "controls": "_R_6j_-panel",
+              "targetExists": true
+            }
+          ],
+          "tabStops": 3,
+          "panels": [
+            {
+              "id": "_R_6j_-panel",
+              "text": "PANEL-b"
+            }
+          ],
+          "options": []
+        },
+        {
+          "name": "whole-request-gc",
+          "assemblies": 840,
+          "alive": 0,
+          "heapDelta": 268200,
+          "note": "WeakRef observation after 8 GC turns; heap delta includes runtime caches, not isolated leak bytes."
+        },
+        {
+          "name": "owner-retained-gc",
+          "values": ["ghost"],
+          "note": "Probe intentionally retains the internal owner engine to inspect membership; this is not a whole-request leak claim."
+        },
+        {
+          "name": "aborted-request-gc",
+          "requests": 10,
+          "observations": 210,
+          "alive": 21,
+          "aliveKinds": [
+            "assembly",
+            "context",
+            "model",
+            "bundle",
+            "context",
+            "model",
+            "bundle",
+            "engine",
+            "assembly",
+            "context",
+            "model",
+            "bundle",
+            "context",
+            "model",
+            "bundle",
+            "engine",
+            "assembly",
+            "context",
+            "model",
+            "bundle",
+            "engine"
+          ],
+          "note": "Includes assembly/context/model/bundle/engine weak references; duplicate observations are possible. Nonzero survivors are reported, not classified as a proven leak."
+        },
+        {
+          "name": "aborted-request-gc",
+          "requests": 50,
+          "observations": 1050,
+          "alive": 21,
+          "aliveKinds": [
+            "assembly",
+            "context",
+            "model",
+            "bundle",
+            "context",
+            "model",
+            "bundle",
+            "engine",
+            "assembly",
+            "context",
+            "model",
+            "bundle",
+            "context",
+            "model",
+            "bundle",
+            "engine",
+            "assembly",
+            "context",
+            "model",
+            "bundle",
+            "engine"
+          ],
+          "note": "Includes assembly/context/model/bundle/engine weak references; duplicate observations are possible. Nonzero survivors are reported, not classified as a proven leak."
+        }
+      ],
+      "client": {
+        "mode": "engine-part",
+        "appliedModes": [
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part",
+          "engine-part"
+        ],
+        "diagnostics": [],
+        "rows": [
+          {
+            "name": "hydration-and-switch",
+            "server": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "false",
+                  "tabIndex": "0"
+                },
+                {
+                  "text": "B",
+                  "selected": "true",
+                  "tabIndex": "0"
+                }
+              ],
+              "panels": ["PANEL-b"]
+            },
+            "sameNodes": true,
+            "recoverable": [],
+            "hydrated": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "false",
+                  "tabIndex": "-1"
+                },
+                {
+                  "text": "B",
+                  "selected": "true",
+                  "tabIndex": "0"
+                }
+              ],
+              "panels": ["PANEL-b"]
+            },
+            "afterClick": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "true",
+                  "tabIndex": "0"
+                },
+                {
+                  "text": "B",
+                  "selected": "false",
+                  "tabIndex": "-1"
+                }
+              ],
+              "panels": ["PANEL-a"]
+            }
+          },
+          {
+            "name": "strict-mode",
+            "state": {
+              "tabs": [
+                {
+                  "text": "A",
+                  "selected": "false",
+                  "tabIndex": "-1"
+                },
+                {
+                  "text": "B",
+                  "selected": "true",
+                  "tabIndex": "0"
+                }
+              ],
+              "panels": ["PANEL-b"]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

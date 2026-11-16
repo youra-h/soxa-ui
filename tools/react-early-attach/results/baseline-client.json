@@ -1,0 +1,108 @@
+{
+  "mode": "baseline",
+  "appliedModes": [
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline",
+    "baseline"
+  ],
+  "diagnostics": [],
+  "rows": [
+    {
+      "name": "hydration-and-switch",
+      "server": {
+        "tabs": [
+          {
+            "text": "A",
+            "selected": null,
+            "tabIndex": null
+          },
+          {
+            "text": "B",
+            "selected": null,
+            "tabIndex": null
+          }
+        ],
+        "panels": []
+      },
+      "sameNodes": true,
+      "recoverable": [],
+      "hydrated": {
+        "tabs": [
+          {
+            "text": "A",
+            "selected": "false",
+            "tabIndex": "-1"
+          },
+          {
+            "text": "B",
+            "selected": "true",
+            "tabIndex": "0"
+          }
+        ],
+        "panels": ["PANEL-b"]
+      },
+      "afterClick": {
+        "tabs": [
+          {
+            "text": "A",
+            "selected": "true",
+            "tabIndex": "0"
+          },
+          {
+            "text": "B",
+            "selected": "false",
+            "tabIndex": "-1"
+          }
+        ],
+        "panels": ["PANEL-a"]
+      }
+    },
+    {
+      "name": "strict-mode",
+      "state": {
+        "tabs": [
+          {
+            "text": "A",
+            "selected": "false",
+            "tabIndex": "-1"
+          },
+          {
+            "text": "B",
+            "selected": "true",
+            "tabIndex": "0"
+          }
+        ],
+        "panels": ["PANEL-b"]
+      }
+    }
+  ]
+}
