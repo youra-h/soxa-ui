@@ -136,3 +136,4 @@ export {
 	AlertDialogLayoutPluginDescriptor,
 	AlertDialogNamesPluginDescriptor,
 } from './alert-dialog.plugin'
+export { FrameThemePluginDescriptor } from './frame-theme.plugin'

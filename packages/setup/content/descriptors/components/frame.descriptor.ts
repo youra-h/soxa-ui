@@ -2,13 +2,14 @@
  * Frame descriptor, extending LayerDescriptor with coordinates, dimensions,
  * positioning strategy, contained layout and a default slot.
  * Layer supplies visibility, teleport target and the shared stacking order;
- * plugins supply layout, anchoring and the accessible name.
+ * plugins supply layout, anchoring, local theme inheritance and the accessible name.
  */
 
 import { defineComponent, defineDescriptor } from '../../../protected/define'
 import { TFrame } from '@soxa-ui/core'
 import {
 	FrameLayoutPluginDescriptor,
+	FrameThemePluginDescriptor,
 	AnchorPluginDescriptor,
 	AriaPluginDescriptor,
 } from '../plugins'
@@ -46,6 +47,11 @@ export const FrameDescriptor = defineDescriptor(() =>
 			],
 		},
 
-		plugins: [FrameLayoutPluginDescriptor, AnchorPluginDescriptor, AriaPluginDescriptor],
+		plugins: [
+			FrameLayoutPluginDescriptor,
+			AnchorPluginDescriptor,
+			FrameThemePluginDescriptor,
+			AriaPluginDescriptor,
+		],
 	}),
 )
