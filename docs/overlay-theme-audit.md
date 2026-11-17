@@ -83,6 +83,11 @@ Vue typecheck, ESLint and formatting checks pass. Temporarily removing
 (`oren-dark` expected, theme attribute absent); restoring it makes the guard
 pass. The temporary mutation is not part of this change.
 
+The first remote WebKit job could not launch: `ubuntu-latest` selected
+Ubuntu 26.04 while its restored browser required `libicudata.so.74`. The
+browser matrix is pinned to Ubuntu 24.04 and its cache key now includes that
+Ubuntu release and runner architecture to prevent incompatible reuse.
+
 ## Re-run
 
 ```sh
@@ -92,5 +97,6 @@ npm run test:layout:webkit -- layer-theme.spec.ts
 ```
 
 The last command uses the repository's Docker runner on Windows. This follow-up
-changes tests and documentation only; no package changeset is required.
+changes tests, documentation and the browser CI environment; no package
+changeset is required.
 The implementation remains the shared fix from #887.
