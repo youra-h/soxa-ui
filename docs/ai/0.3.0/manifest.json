@@ -1351,7 +1351,13 @@
         }
       ],
       "related": ["solid-start"],
-      "examples": [],
+      "examples": [
+        {
+          "id": "solid-validation-evidence",
+          "path": "solid-validation.json",
+          "language": "json"
+        }
+      ],
       "links": []
     }
   ],

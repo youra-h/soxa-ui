@@ -133,7 +133,30 @@ for (const ssr of [false, true]) {
 						'--port',
 						'0',
 					],
+			{ probe: !ssr },
 		)
+		if (ssr) {
+			// Do not warm the lazy home route before checking its first no-JS response.
+			const cold = await browser.newContext({ javaScriptEnabled: false })
+			try {
+				const page = await cold.newPage()
+				await page.goto(production.url)
+				assert.equal(
+					await page.getByRole('textbox', { name: 'Traveler name', exact: true }).count(),
+					1,
+					'First SSR request contains the form',
+				)
+				assert.equal(
+					await page
+						.getByRole('textbox', { name: 'Traveler name', exact: true })
+						.inputValue(),
+					'',
+				)
+				result.coldSSR = true
+			} finally {
+				await cold.close()
+			}
+		}
 		await checkPage(browser, production.url, ssr, {
 			afterInteractions: async (page, input) => {
 				await page.getByRole('button', { name: 'Reset name', exact: true }).click()

@@ -27,3 +27,14 @@ targets for closed Select/DatePicker portals. Hydrated calendar open/close retai
 one hidden dialog's missing aria-labelledby target. Roles, labels, target suffixes,
 classes and hidden state are bounded explicitly; additional gaps fail the smoke.
 These immutable 0.3.0 observations do not establish current-development behavior.
+
+The attached structured evidence measures immutable documentation source
+e5a005fc2b428963e6974a58bf3366bedbfc3723. Public SHA download delivered
+107 files (152500 bytes); its downloaded builder produced 418 records using
+published setup@0.3.0. Input hashes identify recipe files separately from the
+exported corpus bytes. That initial snapshot used an HTTP readiness probe and
+did not establish cold-route SSR. An independent consumer found that its first
+SolidStart response could be empty. The maintained app now wraps lazy route
+children in Solid Suspense; the smoke checks the first no-JS home response
+without a warming probe before testing hydration. Updated-source evidence is
+recorded separately from that original snapshot.

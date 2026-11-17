@@ -1,0 +1,549 @@
+{
+  "provenance": "published-0.3.0",
+  "docsRevision": "e5a005fc2b428963e6974a58bf3366bedbfc3723",
+  "nodeVersion": "v24.20.0",
+  "tools": [
+    {
+      "path": "tools/ai-docs/solid-smoke.mjs",
+      "sha256": "1032e10c7b5259c9f35b2dd550eac98cd5fe898835fa40b74840594632dca79c"
+    },
+    {
+      "path": "tools/ai-docs/consumer-browser.mjs",
+      "sha256": "b135a5dea8edff8b18c3d1d7acd3ac245b4a04837e927121a7f21a7d8ceb6037"
+    },
+    {
+      "path": "tools/ai-docs/corpus.mjs",
+      "sha256": "e0263bdf01c5d509dad397decf5cb9f6e399ecce8d1d05090f72cdc1652003dd"
+    }
+  ],
+  "consumers": [
+    {
+      "name": "solid",
+      "packages": [
+        {
+          "name": "@soxa-ui/core",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/core/-/core-0.3.0.tgz",
+          "integrity": "sha512-ghErTeKN4O0KQes4xXUQvCZFpdpI/O70HB/0YISVqwTZYRhDtFXNLu9LgbMo85sl6AB41CnUmDOHjjtvLMsbMQ=="
+        },
+        {
+          "name": "@soxa-ui/icons-material",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/icons-material/-/icons-material-0.3.0.tgz",
+          "integrity": "sha512-1KPSA8uq3WRloanjSJdtsdtGuqcZdCzbmWOlSx0Ev60vDvri4rm3sUSc/ONHEHl0T8aya8IzVA+YhZYGLIqe0A=="
+        },
+        {
+          "name": "@soxa-ui/plugins",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/plugins/-/plugins-0.3.0.tgz",
+          "integrity": "sha512-FT4UEZyCiLm0+35jdk8ZwBLwTDk6kF6PwGMJYREyM09cVbT2UD0AaVnGkV22JnhUmOHJ7ow8EOioak+KLjy2mg=="
+        },
+        {
+          "name": "@soxa-ui/setup",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.3.0.tgz",
+          "integrity": "sha512-byutzJyCBW7oCrqze6Dgr1+2QZ019yAZ0kIAY7+1SWQLFE6kW53RJOpo7LH+FB9jSifY7Os2k92YUf7hVmjaZg=="
+        },
+        {
+          "name": "@soxa-ui/solid",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/solid/-/solid-0.3.0.tgz",
+          "integrity": "sha512-U7k0MK39p4ANx5M8G5BfXVCOX6RmsDJAoN7ZeXFU/X+eRkKjvm22M2ImhFiURc46drc27ftgOVeScvTwb7n45g=="
+        },
+        {
+          "name": "@soxa-ui/theme-base",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/theme-base/-/theme-base-0.3.0.tgz",
+          "integrity": "sha512-BulGjcSLIa40RM0tp1Anxhyoebtznv3KfpprbL/xpBh23MeColR2iZ5u009IRSv5o6gujZNAGgv+tQVkSgseOA=="
+        },
+        {
+          "name": "@soxa-ui/theme-oren",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/theme-oren/-/theme-oren-0.3.0.tgz",
+          "integrity": "sha512-GNPQMg40uacSwgtcWP0HKj9v08RLJnuKPSRR+17L7OXNATtE1LqqAFUPNT+ij5FPzFumtczclz0BXRt5v9IOVQ=="
+        }
+      ],
+      "lockSha256": "777d4035871ec191f5620e355174e1e2b5f2f256b954da5df57c40219048bf07",
+      "strictTypes": true,
+      "browser": true,
+      "inputs": [
+        {
+          "path": "solid/CtrlExample.tsx",
+          "sha256": "429647005474553b185a6e2070a45a5ff1554d9d6712fbea32cbdcc69b19a2a2"
+        },
+        {
+          "path": "solid/index.html",
+          "sha256": "659fb2dcec6382c9cebda3f92ca6656e12160699cd882081c82e1961df5d6753"
+        },
+        {
+          "path": "solid/main.tsx",
+          "sha256": "05d183e6e6ba556d4f768b3ec244c0a146ff0300712a4b0dde8ebd3eaac69550"
+        },
+        {
+          "path": "solid/package.json",
+          "sha256": "f5e55901e8806b66ef9cdb267113d5f192ebc347fdaf17466e23e524eb0f79ea"
+        },
+        {
+          "path": "solid/Recipes.tsx",
+          "sha256": "d4d7fffaa457f2a2bf4df362eeada58e782b2706a76a719b7644ef1e532e535b"
+        },
+        {
+          "path": "solid/setup.ts",
+          "sha256": "ea2ef4f4f1e611ae5dbc2268ddc07cecd15d4e6ff59c0d573959f1ba90582b52"
+        },
+        {
+          "path": "solid/tsconfig.json",
+          "sha256": "71942352e61afc1f654c63ccdca697f8dbf0688c1db8e1b5c4483304d00f1b4b"
+        },
+        {
+          "path": "solid/vite.config.ts",
+          "sha256": "e3cbcccc0210c8670961e09cce31be44a2f9ad6defbd030b20f838de9904d532"
+        }
+      ],
+      "apiSha256": "869aa23426237c0b130466cd0de9fa0ff8e960412a99e058de824c9be02104dd",
+      "productionBuild": true,
+      "hydratedReferenceGaps": [
+        {
+          "id": "cl-25-picker-0",
+          "attr": "aria-labelledby",
+          "role": "dialog",
+          "label": null,
+          "classes": "so-frame so-popover__panel",
+          "hidden": true,
+          "withinDatePicker": true
+        }
+      ]
+    },
+    {
+      "name": "solidstart",
+      "packages": [
+        {
+          "name": "@soxa-ui/core",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/core/-/core-0.3.0.tgz",
+          "integrity": "sha512-ghErTeKN4O0KQes4xXUQvCZFpdpI/O70HB/0YISVqwTZYRhDtFXNLu9LgbMo85sl6AB41CnUmDOHjjtvLMsbMQ=="
+        },
+        {
+          "name": "@soxa-ui/icons-material",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/icons-material/-/icons-material-0.3.0.tgz",
+          "integrity": "sha512-1KPSA8uq3WRloanjSJdtsdtGuqcZdCzbmWOlSx0Ev60vDvri4rm3sUSc/ONHEHl0T8aya8IzVA+YhZYGLIqe0A=="
+        },
+        {
+          "name": "@soxa-ui/plugins",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/plugins/-/plugins-0.3.0.tgz",
+          "integrity": "sha512-FT4UEZyCiLm0+35jdk8ZwBLwTDk6kF6PwGMJYREyM09cVbT2UD0AaVnGkV22JnhUmOHJ7ow8EOioak+KLjy2mg=="
+        },
+        {
+          "name": "@soxa-ui/setup",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.3.0.tgz",
+          "integrity": "sha512-byutzJyCBW7oCrqze6Dgr1+2QZ019yAZ0kIAY7+1SWQLFE6kW53RJOpo7LH+FB9jSifY7Os2k92YUf7hVmjaZg=="
+        },
+        {
+          "name": "@soxa-ui/solid",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/solid/-/solid-0.3.0.tgz",
+          "integrity": "sha512-U7k0MK39p4ANx5M8G5BfXVCOX6RmsDJAoN7ZeXFU/X+eRkKjvm22M2ImhFiURc46drc27ftgOVeScvTwb7n45g=="
+        },
+        {
+          "name": "@soxa-ui/theme-base",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/theme-base/-/theme-base-0.3.0.tgz",
+          "integrity": "sha512-BulGjcSLIa40RM0tp1Anxhyoebtznv3KfpprbL/xpBh23MeColR2iZ5u009IRSv5o6gujZNAGgv+tQVkSgseOA=="
+        },
+        {
+          "name": "@soxa-ui/theme-oren",
+          "version": "0.3.0",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/theme-oren/-/theme-oren-0.3.0.tgz",
+          "integrity": "sha512-GNPQMg40uacSwgtcWP0HKj9v08RLJnuKPSRR+17L7OXNATtE1LqqAFUPNT+ij5FPzFumtczclz0BXRt5v9IOVQ=="
+        }
+      ],
+      "lockSha256": "4f15241f0a0a8b9b0fb144cd85f736783910d803bc4b82490e699b4edddd67b7",
+      "strictTypes": true,
+      "browser": true,
+      "inputs": [
+        {
+          "path": "solidstart/package.json",
+          "sha256": "5af18381643db92436a8ee556104ac83f345a145e0af549f9f38856349c02580"
+        },
+        {
+          "path": "solidstart/tsconfig.json",
+          "sha256": "9650ccef1e713805a7bd55647cac6d94a1bd3b4d61f15767af87d854d84b0458"
+        },
+        {
+          "path": "solidstart/vite.config.ts",
+          "sha256": "13401b2dc5d31c1d3e270aa08ce35497d02c72d5dd0bd626c3a07a7f2ebf0bc3"
+        },
+        {
+          "path": "solidstart/src/app.tsx",
+          "sha256": "fd76ab690df5debb490bf1bcc0441610405b6e6981eb0b90becfb75157dadbf4"
+        },
+        {
+          "path": "solidstart/src/CtrlExample.tsx",
+          "sha256": "429647005474553b185a6e2070a45a5ff1554d9d6712fbea32cbdcc69b19a2a2"
+        },
+        {
+          "path": "solidstart/src/entry-client.tsx",
+          "sha256": "df2bef1355f4a61ee517463f20706d2eca8c886f1061c183a8bcb8e971a94a52"
+        },
+        {
+          "path": "solidstart/src/entry-server.tsx",
+          "sha256": "e32871314767c7f60140c3a288e4b8a52d69422375f4dbad3f13f396c3bc2420"
+        },
+        {
+          "path": "solidstart/src/env.d.ts",
+          "sha256": "682e7deb9a0710aae7d8d68fdd3f8beff467d5669c1432c9c85000501121bb42"
+        },
+        {
+          "path": "solidstart/src/Recipes.tsx",
+          "sha256": "d4d7fffaa457f2a2bf4df362eeada58e782b2706a76a719b7644ef1e532e535b"
+        },
+        {
+          "path": "solidstart/src/setup.ts",
+          "sha256": "ea2ef4f4f1e611ae5dbc2268ddc07cecd15d4e6ff59c0d573959f1ba90582b52"
+        },
+        {
+          "path": "solidstart/src/routes/away.tsx",
+          "sha256": "66bf17460a3cfd32e78d202411648f01b2648d2c09ada28d6925ae1d2e0e684a"
+        },
+        {
+          "path": "solidstart/src/routes/index.tsx",
+          "sha256": "33c3b5604b3b16690f11862f9549f6e72347ef98e0d30cbe4b100732d1899c46"
+        }
+      ],
+      "apiSha256": "869aa23426237c0b130466cd0de9fa0ff8e960412a99e058de824c9be02104dd",
+      "productionBuild": true,
+      "hydratedReferenceGaps": [
+        {
+          "id": "cl-4-picker-0",
+          "attr": "aria-labelledby",
+          "role": "dialog",
+          "label": null,
+          "classes": "so-frame so-popover__panel",
+          "hidden": true,
+          "withinDatePicker": true
+        }
+      ],
+      "ssrReferenceGaps": [
+        {
+          "id": "0000000100000000030-list",
+          "attr": "aria-controls",
+          "role": "combobox",
+          "label": "Destination",
+          "classes": "",
+          "hidden": false,
+          "withinDatePicker": false
+        },
+        {
+          "id": "0000000100000000040-panel",
+          "attr": "aria-controls",
+          "role": null,
+          "label": "Choose date",
+          "classes": "so-button so-button--size-normal so-date-picker__trigger ",
+          "hidden": false,
+          "withinDatePicker": false
+        }
+      ]
+    }
+  ],
+  "corpusInputs": [
+    {
+      "id": "api-solid-accordion",
+      "sha256": "6982b93f1bf9cca1fc66a50a45504721b74d240736ff0a4157b3f1effa8030a9"
+    },
+    {
+      "id": "api-solid-accordion-item",
+      "sha256": "b0b4529c60c9bb249fefff340c439f0b185c2eb4aebc800800ceb7c470268403"
+    },
+    {
+      "id": "api-solid-badge",
+      "sha256": "e82c9a5c706f6771fa0306ea35f72a37787d258d2e91d3b33605ab425b55d3ae"
+    },
+    {
+      "id": "api-solid-breadcrumbs",
+      "sha256": "c00bc4f622fa39a3077170794bf0704f3e7c09aabf7bd501e48b6f8103472bcd"
+    },
+    {
+      "id": "api-solid-breadcrumbs-item",
+      "sha256": "885b061a89a460aa5780730c1b5fc37545b9ff41a886559395145c1d14297ddf"
+    },
+    {
+      "id": "api-solid-button",
+      "sha256": "458fb235887dafa6db9b0cdf462aeeaa8e0dd6f831e42985220ddc349b5e2618"
+    },
+    {
+      "id": "api-solid-calendar",
+      "sha256": "728fe79c402dee426b4c3c66b56254d2fff6d6bb770e19bfc08d454f2dfa394c"
+    },
+    {
+      "id": "api-solid-calendar-item",
+      "sha256": "7448c5015bed793850b8ebd12749bd3853b230016708691184240cbdbfc7a4f4"
+    },
+    {
+      "id": "api-solid-check-box",
+      "sha256": "9ae9cb85fe38a9f8da1ee5f81fd6551fbabeb97e1843cd865db4be7448cbf923"
+    },
+    {
+      "id": "api-solid-code-block",
+      "sha256": "00dcc6396eb6cc947aa803006502beb6a7cce0e13a0ef9ce7c93bac9b5521fee"
+    },
+    {
+      "id": "api-solid-component-view",
+      "sha256": "744b0120e579a8177765c915bb188694a1e1e11237352730a6e9b31f61a52b37"
+    },
+    {
+      "id": "api-solid-date-input",
+      "sha256": "f64bfc7d59cf7e325908c68699ac9694eef17213de092c26e7c20fc9a0bdcffd"
+    },
+    {
+      "id": "api-solid-date-picker",
+      "sha256": "8f445c9b25f2afbf6e23e908315876c3d7da2719423859c10954936f8fcc1f66"
+    },
+    {
+      "id": "api-solid-dialog",
+      "sha256": "dfa5bba5fd998e67c0b70317b22311ce9849f27ff6d02034eec017ad4b0d8f88"
+    },
+    {
+      "id": "api-solid-drag-and-drop",
+      "sha256": "54fb59736e76eb0ab4e70137dbf1355338004c43b5d30a6d6b16e8f371cf9157"
+    },
+    {
+      "id": "api-solid-drawer",
+      "sha256": "f18b72c645fa8b131401a734a802f26591e941dadcdf448d2e6752b04afc2c54"
+    },
+    {
+      "id": "api-solid-field",
+      "sha256": "6c78e8f643da536313ebe0e252be73e8e95aad547b31ae9d65775ccd3e957a4d"
+    },
+    {
+      "id": "api-solid-frame",
+      "sha256": "d30680419ff15e54fab07e1fb022ee6f9c1ee04ee10483dbb8ddd2670e6e11f3"
+    },
+    {
+      "id": "api-solid-icon",
+      "sha256": "438ddb581be79de0a0219aa709e956b14ee1f4fc444e5bed7ac03393a6dbda47"
+    },
+    {
+      "id": "api-solid-input",
+      "sha256": "4f58f00d46a47ca8cdc625947cbff268d993d253ddaa5326b7871f5a8450133f"
+    },
+    {
+      "id": "api-solid-label",
+      "sha256": "6e490ad53e7a105b100c170a1d4eedb13ece859a2b4a57d0372cbc641d96eb1b"
+    },
+    {
+      "id": "api-solid-list-box",
+      "sha256": "5fef3c297b5f5f72f7c29aa7129e8b96777ca62378ab2e408102692a20bb5ac7"
+    },
+    {
+      "id": "api-solid-list-box-group",
+      "sha256": "588257185f99748921ed6dc56478a096c7b776c9f8ecef1cd28b65de1e12b876"
+    },
+    {
+      "id": "api-solid-list-box-item",
+      "sha256": "ee0a47970b970fd9f5029555d025791c1465e7307c63a35c7920a5dbd236180c"
+    },
+    {
+      "id": "api-solid-menu",
+      "sha256": "74ac8fad8908b29100b0244618c78183be50353963a89a2ff87d1aa2c8351fd5"
+    },
+    {
+      "id": "api-solid-menu-checkbox-item",
+      "sha256": "6e3cad67b45a9c4368e8e800469c14cfa1d3b6eec1ef4d453dcb7856875e9af8"
+    },
+    {
+      "id": "api-solid-menu-group",
+      "sha256": "b7f08fd09e669cc12366059579e3cd944219b8b71e35498fc2d14b5a3643b13a"
+    },
+    {
+      "id": "api-solid-menu-item",
+      "sha256": "6e704d952f318032fcfbd94c6b74c2b956887924f36aa3abc5080b8976a0a6ef"
+    },
+    {
+      "id": "api-solid-menu-popover-item",
+      "sha256": "f65ad3a5749472cdcae4bf4a1b2db19c0b52cf598de051683b982323765f3f5b"
+    },
+    {
+      "id": "api-solid-menu-radio-group",
+      "sha256": "445a3b736fe89e88edddf222a4476c3a2fe15a5937bacd9bef1ca620689cca89"
+    },
+    {
+      "id": "api-solid-menu-radio-item",
+      "sha256": "8d069c0da10caa51ac0920a085d8a638be069c12ee74ef591c38fc3d511dc3d5"
+    },
+    {
+      "id": "api-solid-menu-separator",
+      "sha256": "87a6cab2ed24eb4dbd6a339e3103e9b2311435df481c02ba4d7a8b2e941b35f0"
+    },
+    {
+      "id": "api-solid-menu-submenu",
+      "sha256": "1b10369ca0f788df54b0200ab967bbdfc56ffe99f334d0abfe854180e960d841"
+    },
+    {
+      "id": "api-solid-number-input",
+      "sha256": "aa130c4e6994c481a0692d5979dbe1b52a70743eb82cd322788b8ab402c0575c"
+    },
+    {
+      "id": "api-solid-pagination",
+      "sha256": "81e54a8b385842278f786f505be6573688bd4250c478fc722b529e5601838710"
+    },
+    {
+      "id": "api-solid-popover",
+      "sha256": "79803ae472817dbaffd34281151e92dce54d11620bc013ae72c48b5199f70ee7"
+    },
+    {
+      "id": "api-solid-progress-linear",
+      "sha256": "ac57b7f780bb04107d2fb0eb94386f0eec069a6294fb1d0a5d6b14deac700ab3"
+    },
+    {
+      "id": "api-solid-progress-spinner",
+      "sha256": "83b49d2697eb6b32b3f4af9c13d0ce7e620976e9f913158220b38eccbb76559a"
+    },
+    {
+      "id": "api-solid-radio-group",
+      "sha256": "4abdeb5b797a6b70183ccad0249969a267e94fe420254641329fa2ea22bcfafd"
+    },
+    {
+      "id": "api-solid-radio-group-item",
+      "sha256": "060a4d8153ea9b2c7562385af95c22fb19d0f73b3a0e9a20bd4f3d80b66d6306"
+    },
+    {
+      "id": "api-solid-rating",
+      "sha256": "d28ed254fbe9be58d50acd3e47e772a7b9f12e463992e45dda0ebba575cd8dc6"
+    },
+    {
+      "id": "api-solid-scroller",
+      "sha256": "b5028665daa33919319a904a64e5666efbbc9d8e78427f02349c1b6792bab3f4"
+    },
+    {
+      "id": "api-solid-select",
+      "sha256": "986573b2a43535ad5bd4e0f992d21c19d712863c85b0194197fdb72b2d91d575"
+    },
+    {
+      "id": "api-solid-select-group",
+      "sha256": "d8f2ceba2cb26caa08d043d5d161629e5cfbdf172cd1636910af08d3df5a51d4"
+    },
+    {
+      "id": "api-solid-select-item",
+      "sha256": "0ac950a54b7feb2c779acd47d84692917de34d4cebed402cd67201a714db18ed"
+    },
+    {
+      "id": "api-solid-skeleton",
+      "sha256": "d436c1c7e0ee63da495e3e8c1a7a2b208c40afec66f1a2ea654b99829251d35c"
+    },
+    {
+      "id": "api-solid-slider",
+      "sha256": "abe64a6aadc40aacb4687d4122bf5bb3872e152143ca9322375b584dc82d288b"
+    },
+    {
+      "id": "api-solid-switch",
+      "sha256": "ffbd861fabc4008bc46b0c17ef15fe843b608773df525d92d0345eb2a89b0689"
+    },
+    {
+      "id": "api-solid-table",
+      "sha256": "5f4406b797bd577fe8125dbd50dc9b5e761636cb48329c74110aaaa7b489cf21"
+    },
+    {
+      "id": "api-solid-table-column",
+      "sha256": "4de1f2f586a41c7f3c1b9b8906b7cfc813a188f8b9105faf79a757069335583b"
+    },
+    {
+      "id": "api-solid-table-row",
+      "sha256": "fa4a976df3cdec57435a31fa41e7d351ca6b3d5b20edfa5a1d9d756d1c78fb4e"
+    },
+    {
+      "id": "api-solid-tabs",
+      "sha256": "eeb453de326ca3d15ac788e36abe4c557f3122b6444ccc8a046fbf05b630941a"
+    },
+    {
+      "id": "api-solid-tabs-content",
+      "sha256": "347c8ba47bd74ef66f49f412257b1eb65f5914a6cc604fbf30aab14f367456ea"
+    },
+    {
+      "id": "api-solid-tabs-item",
+      "sha256": "d245cedb145ad0306ea9b6a25f981c5af990cab7805befa61a6b90c46a941623"
+    },
+    {
+      "id": "api-solid-tags",
+      "sha256": "bdfdf7df2fe3b83f61dedb4ec67241e7be0f55436925229d82b33cc580eb2ebb"
+    },
+    {
+      "id": "api-solid-tags-item",
+      "sha256": "684f6ad73ccab8259dbef8259afbf19b7ee2d4ab990c8ea69500e7d0cf9226a5"
+    },
+    {
+      "id": "api-solid-textarea",
+      "sha256": "b067fb1359677b2e1e8edd7a62ceee66b87d6be9fc5c616be44126559942c506"
+    },
+    {
+      "id": "api-solid-toasts",
+      "sha256": "0c1327c62285bdb443a4b687f37fd3be6c9e03ed89c1d5fff6db651ce692fffb"
+    },
+    {
+      "id": "api-solid-toggle-button",
+      "sha256": "30f3aaed31f0b25938e05577292c97c4a50b7e6b838d0ca47feb574a86302f3c"
+    },
+    {
+      "id": "api-solid-toggle-group",
+      "sha256": "1ebadf92028a06051acea12c9c893db54d278e09d370f5cef60fa8141898b09e"
+    },
+    {
+      "id": "api-solid-toggle-group-item",
+      "sha256": "ba8a36775f4187eca9461924fb613fbb0a4aceaed74f36314ba7195ddb229049"
+    },
+    {
+      "id": "api-solid-tooltip",
+      "sha256": "7906d7bc18e0aa6907c0f3853ea23369d63e35a702f173799fe8b8ae0a330012"
+    },
+    {
+      "id": "api-solid-virtual",
+      "sha256": "09a08b3851fbc24564c44a30c90e213e83b6c60b8dcaf941b04c17d90251fad7"
+    },
+    {
+      "id": "overview",
+      "sha256": "63a30e004b7e85b16adb4adc8b4634bba1edc21b8766ba5f79a5422ba0fd0ab0"
+    },
+    {
+      "id": "solid-bindings",
+      "sha256": "5add675a4acdb03e0abb8a82d4338e87227fcb2cbbd75bd3c5156fc90b560ee0"
+    },
+    {
+      "id": "solid-composition",
+      "sha256": "009900b1b02ce440523ed096ec5111e2dcca19749bc86a0e543a24e26d866d8b"
+    },
+    {
+      "id": "solid-controller",
+      "sha256": "2d6dae28a73ff3b199c4244296de8e1041cf2f647c5ffa799988bc7144e83a34"
+    },
+    {
+      "id": "solid-errors",
+      "sha256": "8dafff626dd8a87a7ceb9e877accac8b81dc47ea88184187b574ca8af6d45464"
+    },
+    {
+      "id": "solid-installation",
+      "sha256": "b97ded8ad2a4d98dee2ed8abe45d529afcb2731dbb09ba6a78193c83e8eb7c9f"
+    },
+    {
+      "id": "solid-solidstart",
+      "sha256": "0fe89c3a9790468f0e294be9df757f34db35cb825bc5a59743329f4f6f3c12ec"
+    },
+    {
+      "id": "solid-start",
+      "sha256": "f1b26ac6aabe817a19ff72dc45b521f055c2b21e03da0180dfeb88da8b441852"
+    },
+    {
+      "id": "solid-validation",
+      "sha256": "30b1f068aee8848f2a3b3865afea0076b2ec35332eb49bed4f4408da34efe13c"
+    }
+  ],
+  "publicDelivery": {
+    "docsRevision": "e5a005fc2b428963e6974a58bf3366bedbfc3723",
+    "files": 107,
+    "bytes": 152500,
+    "records": 418,
+    "method": "fetch.mjs from public immutable GitHub SHA followed by downloaded cli.mjs and exact npm setup@0.3.0"
+  },
+  "scope": "Initial published-package validation with a warming readiness request; cold lazy-route SSR was not tested in this snapshot. See corrected-source evidence separately."
+}

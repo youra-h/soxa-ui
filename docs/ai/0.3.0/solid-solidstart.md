@@ -20,3 +20,10 @@ The smoke checks HTML with JavaScript disabled, two independent requests after
 client mutations, unique ids, icons/theme, hydration diagnostics, interactive
 state, and client navigation away/back. Missing portal ARIA targets are recorded
 as release limits in solid-errors/solid-validation, not hidden by disabling SSR.
+
+Wrap Router root children in Solid Suspense, as in the attached app.tsx.
+FileRoutes loads route modules lazily: without this boundary, the first request
+to a fresh server can produce an empty route while later requests succeed.
+A health check must not warm the route before asserting cold no-JS SSR.
+The smoke disables its HTTP readiness probe for SolidStart, then verifies the
+first home response contains the form before running hydrated interactions.
