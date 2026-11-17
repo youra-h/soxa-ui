@@ -1,15 +1,15 @@
 {
   "provenance": "published-0.3.0",
-  "docsRevision": "e5a005fc2b428963e6974a58bf3366bedbfc3723",
+  "docsRevision": "7ccbde9db519476a26a8e40839cf2e3eddbe8d7c",
   "nodeVersion": "v24.20.0",
   "tools": [
     {
       "path": "tools/ai-docs/solid-smoke.mjs",
-      "sha256": "1032e10c7b5259c9f35b2dd550eac98cd5fe898835fa40b74840594632dca79c"
+      "sha256": "ad21ab242ddea76ffbbed0c3384131e5b9ff33b3f143ffa61865c3f433d47533"
     },
     {
       "path": "tools/ai-docs/consumer-browser.mjs",
-      "sha256": "b135a5dea8edff8b18c3d1d7acd3ac245b4a04837e927121a7f21a7d8ceb6037"
+      "sha256": "1e0bcf759c4b36c36bfe90ec01ad6302f7266175452c435e2dd40bdb0cd058c4"
     },
     {
       "path": "tools/ai-docs/corpus.mjs",
@@ -178,7 +178,7 @@
         },
         {
           "path": "solidstart/src/app.tsx",
-          "sha256": "fd76ab690df5debb490bf1bcc0441610405b6e6981eb0b90becfb75157dadbf4"
+          "sha256": "8e42ca943bddaebf9bd5d55b555a93a1514c33f9195d4977d6946ef829421add"
         },
         {
           "path": "solidstart/src/CtrlExample.tsx",
@@ -215,6 +215,7 @@
       ],
       "apiSha256": "869aa23426237c0b130466cd0de9fa0ff8e960412a99e058de824c9be02104dd",
       "productionBuild": true,
+      "coldSSR": true,
       "hydratedReferenceGaps": [
         {
           "id": "cl-4-picker-0",
@@ -228,7 +229,7 @@
       ],
       "ssrReferenceGaps": [
         {
-          "id": "0000000100000000030-list",
+          "id": "0000000100000000000030-list",
           "attr": "aria-controls",
           "role": "combobox",
           "label": "Destination",
@@ -237,7 +238,7 @@
           "withinDatePicker": false
         },
         {
-          "id": "0000000100000000040-panel",
+          "id": "0000000100000000000040-panel",
           "attr": "aria-controls",
           "role": null,
           "label": "Choose date",
@@ -503,47 +504,65 @@
     },
     {
       "id": "overview",
-      "sha256": "63a30e004b7e85b16adb4adc8b4634bba1edc21b8766ba5f79a5422ba0fd0ab0"
+      "sha256": "8ce4f9f98a095da9a122cb65a586086435a2a9f5da08493be5423c094ddef920"
     },
     {
       "id": "solid-bindings",
-      "sha256": "5add675a4acdb03e0abb8a82d4338e87227fcb2cbbd75bd3c5156fc90b560ee0"
+      "sha256": "8ddc6fe0aa3f70f93fa8a7e45be335de3cf21123f832ac1ad93aff9f2ad05630"
     },
     {
       "id": "solid-composition",
-      "sha256": "009900b1b02ce440523ed096ec5111e2dcca19749bc86a0e543a24e26d866d8b"
+      "sha256": "93863751d37a9459b63e8a04be584ae8ed7c6f735e6bf125879ce7a138b73d0a"
     },
     {
       "id": "solid-controller",
-      "sha256": "2d6dae28a73ff3b199c4244296de8e1041cf2f647c5ffa799988bc7144e83a34"
+      "sha256": "a563d7f827ab83814cc927d8b72a734a7546e7697d877be084a711d2da289fad"
     },
     {
       "id": "solid-errors",
-      "sha256": "8dafff626dd8a87a7ceb9e877accac8b81dc47ea88184187b574ca8af6d45464"
+      "sha256": "f79cb3a61bf78eef6bf0400cb0dbe5f1d6ad8a71d3ba6967ff94eeb13e24d637"
     },
     {
       "id": "solid-installation",
-      "sha256": "b97ded8ad2a4d98dee2ed8abe45d529afcb2731dbb09ba6a78193c83e8eb7c9f"
+      "sha256": "9fd9185643919e8621ccd938734e5bf0fb69e928a1069d45066180d5f2f38709"
     },
     {
       "id": "solid-solidstart",
-      "sha256": "0fe89c3a9790468f0e294be9df757f34db35cb825bc5a59743329f4f6f3c12ec"
+      "sha256": "987a9f088a1b07de6f54ffe1a08d973c441ef4c22981c01cc257322acd810a4e"
     },
     {
       "id": "solid-start",
-      "sha256": "f1b26ac6aabe817a19ff72dc45b521f055c2b21e03da0180dfeb88da8b441852"
+      "sha256": "3691f280ce909123daf3d5406592616ad0baaf7dd25c2046d489ed737dee6b80"
     },
     {
       "id": "solid-validation",
-      "sha256": "30b1f068aee8848f2a3b3865afea0076b2ec35332eb49bed4f4408da34efe13c"
+      "sha256": "65572db6a7184ae1a8b8ceb33127ccba1bfebafff5d531f514c72016122b2cb0"
     }
   ],
   "publicDelivery": {
-    "docsRevision": "e5a005fc2b428963e6974a58bf3366bedbfc3723",
-    "files": 107,
-    "bytes": 152500,
+    "docsRevision": "7ccbde9db519476a26a8e40839cf2e3eddbe8d7c",
+    "files": 108,
+    "bytes": 173595,
     "records": 418,
     "method": "fetch.mjs from public immutable GitHub SHA followed by downloaded cli.mjs and exact npm setup@0.3.0"
   },
-  "scope": "Initial published-package validation with a warming readiness request; cold lazy-route SSR was not tested in this snapshot. See corrected-source evidence separately."
+  "initialValidation": {
+    "docsRevision": "e5a005fc2b428963e6974a58bf3366bedbfc3723",
+    "archivedEvidenceDocsRevision": "7ccbde9db519476a26a8e40839cf2e3eddbe8d7c",
+    "path": "docs/ai/0.3.0/solid-validation.json",
+    "limitation": "Readiness GET warmed the home route, so the initial check did not detect missing cold SSR Suspense."
+  },
+  "independentConsumer": {
+    "docsRevision": "7ccbde9db519476a26a8e40839cf2e3eddbe8d7c",
+    "status": "PASS",
+    "checks": 16,
+    "originalEvidencePath": "validation-solid-consumer/original-browser-evidence.json",
+    "originalEvidenceSha256": "c36635949bf8b3a01c2da054bf8e89743bda7c54beee607237ccb92802ca89d4",
+    "replayEvidencePath": "validation-solid-consumer/evidence.json",
+    "replayEvidenceSha256": "6a21aeeeab98948bd7e4f2236afb94b1cb91bab3e6d255cc9bb4b8a244b6d94c",
+    "retainedVerifierPath": "validation-solid-consumer/verifier.mjs",
+    "retainedVerifierSha256": "71a8b719f1a0d034a96eb98bf400e68bcccd1a297e525e5321fc796aa6104db9",
+    "lockSha256": "88dc9171dd468df24e7d28e88461bb457b45e6c052635f7fba609cc8e27a9a1a",
+    "scope": "Independently authored SolidStart workshop app, then fresh external replay of retained formatted files. Published corpus inputs and original source hashes remain separate."
+  }
 }

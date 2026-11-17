@@ -28,13 +28,30 @@ one hidden dialog's missing aria-labelledby target. Roles, labels, target suffix
 classes and hidden state are bounded explicitly; additional gaps fail the smoke.
 These immutable 0.3.0 observations do not establish current-development behavior.
 
-The attached structured evidence measures immutable documentation source
-e5a005fc2b428963e6974a58bf3366bedbfc3723. Public SHA download delivered
-107 files (152500 bytes); its downloaded builder produced 418 records using
-published setup@0.3.0. Input hashes identify recipe files separately from the
-exported corpus bytes. That initial snapshot used an HTTP readiness probe and
-did not establish cold-route SSR. An independent consumer found that its first
-SolidStart response could be empty. The maintained app now wraps lazy route
-children in Solid Suspense; the smoke checks the first no-JS home response
-without a warming probe before testing hydration. Updated-source evidence is
-recorded separately from that original snapshot.
+The attached structured evidence measures corrected immutable source
+7ccbde9db519476a26a8e40839cf2e3eddbe8d7c. Public SHA download delivered
+108 files (173595 bytes); its downloaded builder produced 418 records using
+published setup@0.3.0. Recipe-input hashes and exported corpus-byte hashes are
+recorded separately. Later evidence-only edits do not retarget that snapshot.
+
+The initial e5a005fc2b428963e6974a58bf3366bedbfc3723 snapshot warmed the route
+with its readiness GET and did not establish cold-route SSR. An independent
+consumer found that its first SolidStart response could be empty. The maintained
+app now wraps lazy route children in Solid Suspense; the smoke disables the HTTP
+probe and checks the first no-JS home response before testing hydration.
+The initial warm-only evidence remains at the archived revision/path in JSON.
+This was an application setup/documentation correction, not a Soxa runtime patch.
+
+An agent with no library source or project memory built a different SolidStart
+workshop signup from the exported consumer JSON. After reading the corrected
+immutable source, all 16 checks passed: strict/negative types, production, cold
+no-JS SSR, form/callback/reverse updates, keyboard Select/Calendar, live Accordion
+focus, root refs, explicit subscription cleanup, three remounts, route teardown,
+request isolation, unique ids/icons and clean browser diagnostics.
+
+The independent source, portable verifier, lock, original response and input
+hashes are retained under validation-solid-consumer. Original evidence is kept
+separately from a fresh external replay of the formatted retained files.
+That replay also passed all 16 checks and npm ls, with the same bounded release
+ARIA observations. The fixture changes a disposed controller after removing its
+listener to test observable cleanup; this is not a heap-leak audit.

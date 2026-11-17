@@ -257,3 +257,9 @@ The smoke uses no workspace library sources and keeps strict declaration checkin
 It retains corpus/input/lock hashes and exact bounded ARIA observations, without
 turning those observations into an assertion of complete ARIA validity.
 See [Solid validation](./0.3.0/solid-validation.md). Framework coverage is sample.
+
+The [independent SolidStart consumer](./0.3.0/validation-solid-consumer/README.md)
+retains a different workshop application, its exact lock and a portable verifier.
+It found the initial cold-route Suspense omission; corrected-public-corpus
+validation and a fresh replay passed all 16 checks. The original evidence and
+raw first-response snapshot are preserved separately.
