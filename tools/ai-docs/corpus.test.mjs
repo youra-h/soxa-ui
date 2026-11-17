@@ -17,6 +17,7 @@ function fixture() {
 	manifest.coverage.react.guides = 'pending'
 	manifest.coverage.angular.guides = 'pending'
 	manifest.coverage.svelte.guides = 'pending'
+	manifest.coverage.solid.guides = 'pending'
 	manifest.documents[0].related = ['vue-button']
 	const source = {
 		revision: manifest.libraryRevision,
@@ -569,4 +570,41 @@ test('development tarballs identify committed PR sources and reject uncommitted 
 	commit()
 	writeFileSync(join(root, 'packages/untracked.txt'), 'untracked')
 	assert.throws(() => committedLibraryRevision(root), /No untracked library sources/)
+})
+
+test('Solid consumer files are delivered as complete standalone projects', async () => {
+	const { fetchSource } = await import('./fetch.mjs')
+	const out = mkdtempSync(join(tmpdir(), 'soxa-solid-delivery-'))
+	const requests = []
+	await fetchSource({
+		revision,
+		version: '0.3.0',
+		out,
+		fetchFile: async (url) => {
+			const file = url.split('/' + revision + '/')[1]
+			requests.push(file)
+			return {
+				ok: true,
+				text: async () => readFileSync(new URL('../../' + file, import.meta.url), 'utf8'),
+			}
+		},
+	})
+	const manifest = JSON.parse(readFileSync(join(out, 'docs/ai/0.3.0/manifest.json'), 'utf8'))
+	assert.equal(manifest.coverage.solid.guides, 'sample')
+	assert.equal(manifest.packages['@soxa-ui/solid'], '0.3.0')
+	for (const file of [
+		'solid/package.json',
+		'solid/Recipes.tsx',
+		'solidstart/src/routes/away.tsx',
+		'solidstart/src/entry-server.tsx',
+	]) {
+		assert.ok(requests.includes('docs/ai/0.3.0/examples/' + file))
+	}
+	const records = manifest.documents.filter((doc) => doc.framework === 'solid')
+	assert.equal(records.length, 8)
+	assert.ok(records.every((doc) => doc.audience === 'consumer'))
+	assert.equal(
+		readFileSync(join(out, 'docs/ai/0.3.0/examples/solid/Recipes.tsx'), 'utf8'),
+		readFileSync(join(out, 'docs/ai/0.3.0/examples/solidstart/src/Recipes.tsx'), 'utf8'),
+	)
 })
