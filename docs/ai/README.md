@@ -278,3 +278,8 @@ This is not framework SSR or a test of the Safari application.
 The single hidden Calendar label gap and Vite chunk-size warning are retained
 explicitly. Evidence includes corpus/input/API/tool/lock hashes and npm origins.
 Set `SOXA_WEBC_SMOKE_DIR` to an empty output directory to retain a known location.
+
+The [independent Web Components consumer](./0.3.0/validation-webc-consumer/README.md)
+retains a different workshop signup, exact lock, corpus hashes and portable verifier.
+Its 13 Chromium checks and strict/negative types passed; a replay of the formatted
+retained source is recorded separately.

@@ -1,0 +1,30 @@
+﻿body {
+	font-family: system-ui, sans-serif;
+	margin: 2rem;
+	background: #faf8f5;
+	color: #28231f;
+}
+main {
+	max-width: 40rem;
+	margin: auto;
+}
+form,
+so-locale-provider {
+	display: grid;
+	gap: 1rem;
+}
+.field {
+	display: grid;
+	gap: 0.4rem;
+}
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+output {
+	overflow-wrap: anywhere;
+}
+#listener-count {
+	margin-left: 1rem;
+}

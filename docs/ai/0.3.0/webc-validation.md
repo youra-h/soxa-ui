@@ -28,3 +28,10 @@ aria-labelledby target ending in -picker-0 without a matching element. This is
 the same bounded release observation documented in solid-validation. It is kept
 visible and bounded in this check; additional broken references fail validation.
 The example does not patch the published package or claim complete ARIA validity.
+
+A fresh application agent used only the exported consumer JSON to build a
+different workshop signup. Its strict/negative types, production build and
+13 Chromium checks passed after reading the committed corpus. The independent
+source, lock, portable verifier and original/final input hashes are retained
+under validation-webc-consumer. Its browser claim is Chromium-only; the maintained
+recipe's separate WebKit result is not attributed to that agent.

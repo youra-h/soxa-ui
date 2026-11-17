@@ -1,0 +1,27 @@
+﻿{
+  "name": "soxa-webc-workshop-cold-consumer",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview --host 127.0.0.1",
+    "verify": "node verify.mjs"
+  },
+  "dependencies": {
+    "@soxa-ui/webc": "0.3.0",
+    "@soxa-ui/setup": "0.3.0",
+    "@soxa-ui/plugins": "0.3.0",
+    "@soxa-ui/theme-oren": "0.3.0",
+    "@soxa-ui/icons-material": "0.3.0"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vite": "8.3.5",
+    "@types/node": "24.19.2"
+  }
+}
