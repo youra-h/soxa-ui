@@ -8,7 +8,7 @@
 
 **Перенесённая панель сохраняет тему якоря.** Общий `TFrameThemePlugin`
 в `FrameDescriptor` переносит ближайший `data-so-theme` якоря на
-корень панели. Menu, Select, Popover и Tooltip сохраняют локальную схему
+корень панели. Menu, Select, DatePicker, Popover и Tooltip сохраняют локальную схему
 во всех адаптерах. Плагин следует смене темы, появлению и удалению ближайшей
 границы, перемещению и замене якоря, включая shadow DOM. Явный
 `data-so-theme` панели главнее; после его удаления снова действует
@@ -18,6 +18,9 @@
 Frame без якоря и модальные Dialog/Drawer этим механизмом не охвачены.
 Проверки — `plugins/__tests__/frame-theme.plugin.spec.ts` и
 `playground/vue/browser/layer-theme.spec.ts`.
+
+Инвентарь компонентов, воспроизведение #888 и контракт `target` для слоёв
+без якоря — в [аудите наследования темы](../overlay-theme-audit.md).
 
 **Видимость владельца скрывает и его панель.** У Popover, Tooltip, Select,
 DatePicker и меню `visible` управляет всем компонентом, а `open` — раскрытием
