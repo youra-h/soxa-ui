@@ -263,3 +263,18 @@ retains a different workshop application, its exact lock and a portable verifier
 It found the initial cold-route Suspense omission; corrected-public-corpus
 validation and a fresh replay passed all 16 checks. The original evidence and
 raw first-response snapshot are preserved separately.
+
+Web Components consumers start with [webc-start](./0.3.0/webc-start.md).
+The eight sample records cover [registration](./0.3.0/webc-installation.md),
+[properties/events](./0.3.0/webc-bindings.md), [compound slots](./0.3.0/webc-composition.md),
+[connection/cleanup](./0.3.0/webc-lifecycle.md), [browser/server HTML boundaries](./0.3.0/webc-environment.md),
+[release limits](./0.3.0/webc-errors.md) and [validation](./0.3.0/webc-validation.md).
+Run `npm run check:ai-docs:webc` to install exact registry packages in a new
+external Vite consumer, check strict/negative types and production, exercise
+Chromium keyboard/form/events/layer teardown, and distinguish raw server-authored
+HTML from client upgrade. Append `-- --webkit` to run the same recipe and
+HTML upgrade in WebKit using the matching Playwright Linux image through Docker.
+This is not framework SSR or a test of the Safari application.
+The single hidden Calendar label gap and Vite chunk-size warning are retained
+explicitly. Evidence includes corpus/input/API/tool/lock hashes and npm origins.
+Set `SOXA_WEBC_SMOKE_DIR` to an empty output directory to retain a known location.
