@@ -246,3 +246,14 @@ is recorded for auditing and never fed into the published corpus builder.
 See [separate development evidence](./validation/svelte-development.md).
 A future fixed published release requires its own exact-version corpus and
 independent published-package validation before strict readiness can be claimed.
+
+Solid/SolidStart consumption starts with [solid-start](./0.3.0/solid-start.md).
+Use [installation](./0.3.0/solid-installation.md), [bindings](./0.3.0/solid-bindings.md),
+[composition](./0.3.0/solid-composition.md), [controllers](./0.3.0/solid-controller.md),
+[SolidStart](./0.3.0/solid-solidstart.md) and [release limits](./0.3.0/solid-errors.md).
+Run `npm run check:ai-docs:solid` for strict published 0.3.0 types, production,
+keyboard/model/callbacks, scoped slots, root refs, teardown and universal SSR.
+The smoke uses no workspace library sources and keeps strict declaration checking.
+It retains corpus/input/lock hashes and exact bounded ARIA observations, without
+turning those observations into an assertion of complete ARIA validity.
+See [Solid validation](./0.3.0/solid-validation.md). Framework coverage is sample.

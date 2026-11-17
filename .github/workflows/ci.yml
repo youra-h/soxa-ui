@@ -62,6 +62,7 @@ jobs:
       - run: npm run check:ai-docs
       - run: npm run check:ai-docs:react
       - run: npm run check:ai-docs:angular
+      - run: npm run check:ai-docs:solid
 
   ai-docs-svelte-development:
     name: AI Docs - Svelte development tarballs

@@ -26,7 +26,7 @@
     },
     "solid": {
       "api": "generated",
-      "guides": "pending"
+      "guides": "sample"
     },
     "svelte": {
       "api": "generated",
@@ -53,7 +53,14 @@
           "path": "README.md"
         }
       ],
-      "related": ["vue-button", "vue-start", "react-start", "angular-start", "svelte-start"],
+      "related": [
+        "vue-button",
+        "vue-start",
+        "react-start",
+        "angular-start",
+        "svelte-start",
+        "solid-start"
+      ],
       "examples": [],
       "links": []
     },
@@ -1072,6 +1079,280 @@
       "related": ["svelte-bindings", "svelte-controller", "svelte-sveltekit"],
       "examples": [],
       "links": []
+    },
+    {
+      "id": "solid-start",
+      "title": "Solid and SolidStart 0.3.0",
+      "path": "solid-start.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": [
+        "overview",
+        "solid-installation",
+        "solid-bindings",
+        "solid-composition",
+        "solid-controller",
+        "solid-solidstart",
+        "solid-errors",
+        "solid-validation"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-installation",
+      "title": "Install and configure Solid consumers",
+      "path": "solid-installation.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "installation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": ["solid-start", "solid-validation"],
+      "examples": [
+        {
+          "id": "solid-example-0",
+          "path": "examples/solid/Recipes.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-1",
+          "path": "examples/solidstart/src/Recipes.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-2",
+          "path": "examples/solid/CtrlExample.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-3",
+          "path": "examples/solidstart/src/CtrlExample.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-4",
+          "path": "examples/solid/setup.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "solid-example-5",
+          "path": "examples/solidstart/src/setup.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "solid-example-6",
+          "path": "examples/solid/main.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-7",
+          "path": "examples/solid/index.html",
+          "language": "html"
+        },
+        {
+          "id": "solid-example-8",
+          "path": "examples/solid/vite.config.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "solid-example-9",
+          "path": "examples/solidstart/vite.config.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "solid-example-10",
+          "path": "examples/solidstart/src/app.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-11",
+          "path": "examples/solidstart/src/routes/index.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-12",
+          "path": "examples/solidstart/src/routes/away.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-13",
+          "path": "examples/solidstart/src/entry-client.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-14",
+          "path": "examples/solidstart/src/entry-server.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-15",
+          "path": "examples/solidstart/src/env.d.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "solid-example-16",
+          "path": "examples/solid/package.json",
+          "language": "json"
+        },
+        {
+          "id": "solid-example-17",
+          "path": "examples/solid/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "solid-example-18",
+          "path": "examples/solidstart/package.json",
+          "language": "json"
+        },
+        {
+          "id": "solid-example-19",
+          "path": "examples/solidstart/tsconfig.json",
+          "language": "json"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "solid-bindings",
+      "title": "Controlled signals and callback events",
+      "path": "solid-bindings.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "bindings",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": [
+        "solid-start",
+        "api-solid-input",
+        "api-solid-check-box",
+        "api-solid-select",
+        "api-solid-date-picker",
+        "api-solid-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-composition",
+      "title": "Compound parts, children and live slot scope",
+      "path": "solid-composition.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "composition",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": [
+        "solid-start",
+        "api-solid-accordion",
+        "api-solid-accordion-item",
+        "api-solid-select"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-controller",
+      "title": "Controllers, root refs and cleanup",
+      "path": "solid-controller.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "controller",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": ["solid-start", "api-solid-button"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-solidstart",
+      "title": "SolidStart universal rendering and hydration",
+      "path": "solid-solidstart.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "ssr",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": ["solid-start", "solid-validation"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-errors",
+      "title": "Solid release-specific mistakes and limits",
+      "path": "solid-errors.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "errors",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": ["solid-start", "solid-validation"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-validation",
+      "title": "Published Solid consumer validation",
+      "path": "solid-validation.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "validation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": ["solid-start"],
+      "examples": [],
+      "links": []
     }
   ],
   "packages": {
@@ -1084,7 +1365,8 @@
     "@soxa-ui/icons-material": "0.3.0",
     "@soxa-ui/react": "0.3.0",
     "@soxa-ui/angular": "0.3.0",
-    "@soxa-ui/svelte": "0.3.0"
+    "@soxa-ui/svelte": "0.3.0",
+    "@soxa-ui/solid": "0.3.0"
   },
   "contributorGuides": "pending"
 }
