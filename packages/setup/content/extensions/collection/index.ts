@@ -9,5 +9,5 @@ export type {
 } from './types'
 
 export { TCollectionPreparationExtension } from './collection-preparation.extension.class'
-export type { ICollectionPreparationOptions, ICollectionPreparationRegistration } from './types'
+export type { ICollectionPreparationOptions } from './types'
 export { TCollectionItemPreparationExtension } from './collection-item-preparation.extension.class'

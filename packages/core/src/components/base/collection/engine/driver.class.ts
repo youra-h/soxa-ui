@@ -6,6 +6,8 @@ import type {
 	TCollectionStorageDriverEvents,
 } from './types'
 import { TEvented } from '../../../../common/event'
+import { TCollectionTransactions } from './transactions/transactions.class'
+import type { ICollectionTransactions } from './transactions'
 
 export class TCollectionStorageDriver<T> implements ICollectionStorageDriver<T> {
 	private _storage: IStorage<T> // Хранилище элементов коллекции
@@ -17,6 +19,8 @@ export class TCollectionStorageDriver<T> implements ICollectionStorageDriver<T> 
 
 	/** Сколько команд записи применяется сейчас — с вложенными, из хуков. */
 	private _applying = 0
+
+	private _transactions: ICollectionTransactions<T> | undefined
 
 	public readonly events = new TEvented<TCollectionStorageDriverEvents<T>>()
 
@@ -39,6 +43,13 @@ export class TCollectionStorageDriver<T> implements ICollectionStorageDriver<T> 
 	 */
 	public valueOf(): T[] {
 		return [...this._storage.items]
+	}
+
+	/** Pending operations are allocated only when a collection opts into them. */
+	public get transactions(): ICollectionTransactions<T> {
+		this._transactions ??= new TCollectionTransactions<T>()
+
+		return this._transactions
 	}
 
 	/**

@@ -1,19 +1,19 @@
 /**
- * Owns an opt-in item's unaccepted assembly until attach or expiry.
+ * Confirms an item's engine transaction on attach and releases it on teardown.
  */
+import type { ICollectionTransaction } from '@soxa-ui/core'
 import type { TInstanceContext } from '../../../protected/adapter/context'
 import { ITEM_CONTEXT_ELEVATOR } from '../../../protected/adapter/elevator/keys'
 import { COLLECTION_PREPARATION_ELEVATOR } from './keys'
 import { TCollectionItemExtension } from './collection-item.extension.class'
 import type { TCollectionPreparationExtension } from './collection-preparation.extension.class'
-import type { ICollectionPreparationRegistration } from './types'
 import type { ICollectionItemExtensionOptions, TCollectionItemFacade } from './types'
 
-/** A pending mount, enabled only below an owner that explicitly opted into preparation. */
 export class TCollectionItemPreparationExtension {
 	private _preparation: TCollectionPreparationExtension | undefined
 	private _item: TCollectionItemExtension | undefined
-	private _registration: ICollectionPreparationRegistration | undefined
+	private _model: object | undefined
+	private _transaction: ICollectionTransaction | undefined
 
 	constructor(
 		context: TInstanceContext<TCollectionItemFacade>,
@@ -21,28 +21,42 @@ export class TCollectionItemPreparationExtension {
 	) {
 		const preparation = options.elevator(COLLECTION_PREPARATION_ELEVATOR).up()
 		const engine = options.elevator(ITEM_CONTEXT_ELEVATOR).up()
+
 		if (!preparation || preparation.closed || preparation.engine !== engine) return
-		this._preparation = preparation
-		this._item = context.get(TCollectionItemExtension)
-		if (!this._item)
+
+		const item = context.get(TCollectionItemExtension)
+
+		if (!item) {
 			throw new Error('Collection item preparation requires the ordinary item extension')
-		// Ordinary attach is installed first: it supplies the live subscriptions and any deferred entry.
+		}
+
+		this._preparation = preparation
+		this._item = item
+		this._model = options.adapter.instance
+
+		// Ordinary attach runs first and installs the live subscriptions.
 		context.events.on('attach', () => {
-			this._registration?.commit()
-			this._registration = undefined
+			this._transaction?.commit()
+			this._transaction = undefined
 		})
+
 		context.events.on('destroy', () => {
-			this._registration?.cancel()
-			this._registration = undefined
+			// The assembly is already being destroyed; forget its pending receipt.
+			this._transaction?.cancel()
+			this._transaction = undefined
+
 			this._preparation = undefined
 			this._item = undefined
+			this._model = undefined
 		})
 	}
 
-	/** The adapter supplies teardown for the whole assembly, not only the item facade. */
-	bindLifetime(destroy: () => void): void {
-		if (!this._preparation || !this._item || this._registration) return
+	/** The adapter supplies teardown for the whole assembly, including its own context. */
+	public bindLifetime(destroy: () => void): void {
+		if (!this._preparation || !this._item || !this._model || this._transaction) return
+
 		const item = this._item
-		this._registration = this._preparation.prepare(() => item.prepare(), destroy)
+
+		this._transaction = this._preparation.prepare(this._model, () => item.prepare(), destroy)
 	}
 }

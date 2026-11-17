@@ -1,44 +1,69 @@
 /**
- * Enables initial collection preparation only for owners that explicitly install it.
+ * Connects an opted-in collection owner to the engine's preparation lifecycle.
  */
+import { preparationOf, TPreparationExtension } from '@soxa-ui/core'
+import type { ICollectionTransaction, IPreparationExtension } from '@soxa-ui/core'
 import type { TInstanceContext } from '../../../protected/adapter/context'
-import type { TCollectionOwner } from './types'
 import { COLLECTION_PREPARATION_ELEVATOR } from './keys'
-import { preparationState } from './preparation-state.class'
-import type { TCollectionPreparationState } from './preparation-state.class'
-import type { ICollectionPreparationOptions, ICollectionPreparationRegistration } from './types'
+import type { ICollectionPreparationOptions, TCollectionOwner } from './types'
 
-/** Opt-in initial preparation. This does not accept components or replace attach. */
 export class TCollectionPreparationExtension {
-	readonly engine: TCollectionOwner['engine']
-	private readonly _state: TCollectionPreparationState
-	private _closed = false
+	public readonly engine: TCollectionOwner['engine']
+
+	private readonly _preparation: IPreparationExtension<object>
 	private readonly _timeout: number
+	private _closed = false
 
 	constructor(
 		private readonly _context: TInstanceContext<TCollectionOwner>,
 		options: ICollectionPreparationOptions,
 	) {
-		const timeout = options.timeout ?? 1_000
-		if (!Number.isFinite(timeout) || timeout < 0)
-			throw new Error('Collection preparation timeout must be finite and non-negative')
-		this._timeout = timeout
 		this.engine = _context.instance.engine
-		this._state = preparationState(this.engine)
+		this._timeout = options.timeout ?? 1_000
+
+		const preparation = preparationOf<object>(this.engine)
+
+		if (preparation) {
+			this._preparation = preparation
+		} else {
+			const extension = new TPreparationExtension<object>()
+
+			this.engine.use(extension)
+			this._preparation = extension
+		}
+
 		options.elevator(COLLECTION_PREPARATION_ELEVATOR).down(this)
-		_context.events.on('attach', () => this._state.accept(_context))
+
+		_context.events.on('attach', () => {
+			this._preparation.accept(_context)
+		})
+
 		_context.events.on('destroy', () => {
 			this._closed = true
-			this._state.release(_context)
+
+			this._preparation.release(_context)
 		})
 	}
 
-	get closed(): boolean {
+	public get closed(): boolean {
 		return this._closed
 	}
 
-	prepare(initialize: () => void, destroy: () => void): ICollectionPreparationRegistration {
-		if (this._closed) throw new Error('Cannot prepare an item for a destroyed collection owner')
-		return this._state.prepare(this._context, this._timeout, initialize, destroy)
+	/** Supply the engine with initialization and full teardown for this mount attempt. */
+	public prepare(
+		item: object,
+		initialize: () => void,
+		rollback: () => void,
+	): ICollectionTransaction {
+		if (this._closed) {
+			throw new Error('Cannot prepare an item for a destroyed collection owner')
+		}
+
+		return this._preparation.prepare(item, {
+			owner: this._context,
+			timeout: this._timeout,
+			initialize,
+			rollback,
+		})
 	}
 }

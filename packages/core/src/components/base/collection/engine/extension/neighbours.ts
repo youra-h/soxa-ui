@@ -6,6 +6,7 @@ import type { IFilterExtension } from './filter/types'
 import type { IGroupExtension } from './group/types'
 import type { IMetaExtension } from './meta/types'
 import type { IPlainExtension } from './plain/types'
+import type { IPreparationExtension } from './preparation/types'
 import type { ISelectionExtension } from './selection/types'
 import type { IExtension } from './types'
 
@@ -63,6 +64,12 @@ function isMeta<TItem extends object>(ext: IExtension<TItem>): ext is IMetaExten
 
 function isPlain<TItem extends object>(ext: IExtension<TItem>): ext is IPlainExtension<TItem> {
 	return 'insert' in ext && 'push' in ext && 'move' in ext
+}
+
+function isPreparation<TItem extends object>(
+	ext: IExtension<TItem>,
+): ext is IPreparationExtension<TItem> {
+	return 'prepare' in ext && 'accept' in ext && 'release' in ext
 }
 
 function isSelection<TItem extends object>(
@@ -151,6 +158,15 @@ export function plainOf<TItem extends object>(
 	const ext = neighbours?.extensions.plain
 
 	return ext && isPlain(ext) ? ext : undefined
+}
+
+/** Initial collection preparation, when the engine explicitly enables it. */
+export function preparationOf<TItem extends object>(
+	neighbours: TNeighbours<TItem> | null | undefined,
+): IPreparationExtension<TItem> | undefined {
+	const ext = neighbours?.extensions.preparation
+
+	return ext && isPreparation(ext) ? ext : undefined
 }
 
 /** Выбор коллекции, если он есть: выбранные элементы и режим. */

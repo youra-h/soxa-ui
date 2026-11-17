@@ -10,8 +10,8 @@
  *   context goes into the facade, `meta` is taken from the props. Nothing is
  *   written into the owner's storage by ordinary assembly. An explicit
  *   preparation extension can initialize membership before acceptance. The
- *   context releases the assembly props on `connect()`, so the extension is installed right after the context is
- *   created;
+ *   context releases the assembly props on `connect()`, so the extension is
+ *   installed right after the context is created;
  * - **entry** (`attach`) — registration in the owner's collection and
  *   `meta.apply`. This writes into someone else's storage, so it waits until
  *   the framework accepts the component: React assembles on render, and a
@@ -135,7 +135,9 @@ export class TCollectionItemExtension {
 
 			if (register) this._leave = register(item, context.bundle)
 
-			if (accepted) members?.add(adapter, context)
+			if (accepted) {
+				members?.add(adapter, context)
+			}
 
 			// `meta` after the registration: the engine applies it to an item already in it
 			metaOf<object>(engine)?.apply(item, grouped ? { ...meta, group: groupKey } : meta)
@@ -144,8 +146,11 @@ export class TCollectionItemExtension {
 		context.events.on('attach', () => {
 			plain?.events.on('item:removed', removed)
 
-			if (!this._initialized) this._enter(true)
-			else members?.add(adapter, context)
+			if (!this._initialized) {
+				this._enter(true)
+			} else {
+				members?.add(adapter, context)
+			}
 		})
 
 		context.events.on('destroy', () => {
@@ -164,13 +169,17 @@ export class TCollectionItemExtension {
 	}
 
 	/** Initialize membership and meta only; acceptance and subscriptions still wait for attach. */
-	prepare(): void {
+	public prepare(): void {
 		this._enter(false)
 	}
 
 	private _enter(accepted: boolean): void {
 		if (this._initialized) return
-		if (!this._initialize) throw new Error('Cannot initialize a destroyed collection item')
+
+		if (!this._initialize) {
+			throw new Error('Cannot initialize a destroyed collection item')
+		}
+
 		this._initialize(accepted)
 		this._initialized = true
 	}

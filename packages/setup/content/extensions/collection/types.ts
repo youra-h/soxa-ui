@@ -56,9 +56,3 @@ export interface ICollectionPreparationOptions {
 	/** Maximum lifetime of an unaccepted assembly; expired assemblies can be rebuilt. */
 	timeout?: number
 }
-
-/** A pending mount's ownership receipt, independent of the item's value. */
-export interface ICollectionPreparationRegistration {
-	commit(): void
-	cancel(): void
-}

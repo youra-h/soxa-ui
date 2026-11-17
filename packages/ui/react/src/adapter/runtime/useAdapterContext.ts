@@ -98,7 +98,9 @@ class TBuilt<T extends TAdapterContexts> {
 
 	readonly destroy = (): void => {
 		if (this._destroyed) return
+
 		this._destroyed = true
+
 		// Rollback also releases draft registrations held by an external ctrl or engine.
 		drafts.accept(this.held)
 		destroyAll(this.contexts)
@@ -133,10 +135,12 @@ export function useAdapterContext<T extends TAdapterContexts>(
 			return createAdapterContext(descriptor, { mountId: id, locale, ...options }, config)
 		}
 		const built = new TBuilt(factory(create, scope.elevator), scope, held)
+
 		try {
 			prepare?.(built.contexts, built.destroy)
 		} catch (error) {
 			built.destroy()
+
 			throw error
 		}
 

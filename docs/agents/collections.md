@@ -1789,6 +1789,14 @@ Accordion `aria-expanded`. Атрибут знает паттерн, а не м�
 
 ### Initial preparation is explicit and owner-scoped
 
+The collection driver owns pending transactions: one item reference per attempt,
+commit, rollback, owner-scoped cleanup and expiry. It creates the registry lazily;
+ordinary collections do not allocate it. The optional driver contract preserves
+compatibility with existing custom drivers. The core preparation extension
+decides when initial registration is allowed. Setup only installs that extension
+and connects it to attach, teardown and the adapter's full cleanup callback.
+There is no pending-state registry or timer in setup.
+
 React Tabs installs `TCollectionPreparationExtension` on its owner and
 `TCollectionItemPreparationExtension` on its items. Other collections retain their
 ordinary attach-only membership. Preparation initializes the existing item model
