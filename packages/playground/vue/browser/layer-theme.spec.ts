@@ -5,6 +5,7 @@ import { Button, Input, Popover } from '@soxa-ui/vue'
 import type { DescriptorSlots, PopoverDescriptor } from '@soxa-ui/setup'
 import type { IPreviewHandle } from '@soxa-ui/playground-shared'
 import { loadHost } from '../src/hosts'
+import { opacity, pixel, style } from './colors'
 import '@soxa-ui/theme-oren'
 
 let handle: IPreviewHandle | undefined
@@ -39,6 +40,19 @@ function openPanel(component: string): HTMLElement | undefined {
 	)
 }
 
+/** A sticky descendant must receive the panel's opaque surface in either scheme. */
+function expectPanelSurface(panel: HTMLElement): void {
+	const probe = document.createElement('div')
+	probe.style.backgroundColor = 'var(--so-place-surface)'
+	panel.append(probe)
+	try {
+		const background = style(probe).backgroundColor
+		expect(opacity(background)).toBe(1)
+		expect(pixel([background])).toEqual(pixel([style(panel).backgroundColor]))
+	} finally {
+		probe.remove()
+	}
+}
 const adapters = ['vue', 'react', 'solid', 'svelte', 'angular', 'webc'] as const
 const anchored = ['menu', 'popover', 'tooltip', 'select', 'date-picker'] as const
 const cases = adapters.flatMap((adapter) =>
@@ -66,10 +80,14 @@ it.each(cases)(
 			localSurface,
 		)
 
+		if (component !== 'tooltip') expectPanelSurface(panel)
+
 		scope.dataset.soTheme = 'oren'
 		await expect
 			.poll(() => getComputedStyle(panel).getPropertyValue('--so-component-surface'))
 			.toBe(getComputedStyle(scope).getPropertyValue('--so-component-surface'))
+
+		if (component !== 'tooltip') expectPanelSurface(panel)
 
 		panel.dataset.soTheme = 'oren-dark'
 		await expect

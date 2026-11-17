@@ -109,15 +109,12 @@
 	 * «таблетка» Tabs. Литерал, а не ступень: в светлой схеме контрол
 	 * приподнят над страницей ровно тем, что он белее её. */
 	--so-component-surface: #fff;
-	/* Поверхность места — то, на чём стоят компоненты: страница, карточка,
-	 * панель. Это не цвет компонента, а сообщение места: объявляет её тот,
-	 * кто красит фон, — здесь страница (ступень 50), панели темы — миксином
-	 * `surface` из `mixins/_place.scss`, карточку приложения — приложение.
-	 * Читает её тот, кому нужен непрозрачный фон «как под ним», —
-	 * закреплённая шапка Table: вуаль не годится, сквозь неё видно строки,
-	 * которые уходят под шапку. В тёмной схеме не переопределяется, как
-	 * `--so-component-text`: выбор ступени тот же. */
-	--so-place-surface: var(--so-neutral-50);
+	/* The page surface defaults to step 50. A scheme boundary may also be an
+	 * overlay panel: Frame carries data-so-theme across its teleport. Prefer
+	 * that panel's surface so the scheme does not replace the local surface
+	 * declared by the base layer with the page color. Sticky Table heads read
+	 * this opaque backing to cover the rows scrolling underneath them. */
+	--so-place-surface: var(--so-panel-surface, var(--so-neutral-50));
 	/* Ручка Switch и Slider — см. tokens-dark.css, там роли расходятся */
 	--so-component-knob: #fff;
 	/* Вуаль утопленного — того, что уводят за поверхность: подложка Dialog,
