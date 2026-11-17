@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en" data-so-theme="oren">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Server-authored enhancement</title>
+	</head>
+	<body>
+		<h1>Server-authored HTML</h1>
+		<button is="so-button" type="button">Native server button</button>
+		<div is="so-input" aria_label="Enhanced field" value="Server seed"></div>
+		<noscript>The button is native; the custom field needs JavaScript.</noscript>
+		<output id="status"></output>
+		<script type="module" src="/upgrade.ts"></script>
+	</body>
+</html>

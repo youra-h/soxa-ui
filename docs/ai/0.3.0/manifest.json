@@ -34,7 +34,7 @@
     },
     "webc": {
       "api": "generated",
-      "guides": "pending"
+      "guides": "sample"
     }
   },
   "documents": [
@@ -59,7 +59,8 @@
         "react-start",
         "angular-start",
         "svelte-start",
-        "solid-start"
+        "solid-start",
+        "webc-start"
       ],
       "examples": [],
       "links": []
@@ -1359,6 +1360,280 @@
         }
       ],
       "links": []
+    },
+    {
+      "id": "webc-start",
+      "title": "Web Components 0.3.0 entry point",
+      "path": "webc-start.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "overview",
+        "webc-installation",
+        "webc-bindings",
+        "webc-composition",
+        "webc-lifecycle",
+        "webc-environment",
+        "webc-errors",
+        "webc-validation"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "webc-installation",
+      "title": "Install and register the browser consumer",
+      "path": "webc-installation.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "installation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "webc-start",
+        "api-webc-button",
+        "api-webc-input",
+        "api-webc-check-box",
+        "api-webc-select",
+        "api-webc-select-item",
+        "api-webc-date-picker",
+        "api-webc-accordion",
+        "api-webc-accordion-item",
+        "api-webc-label"
+      ],
+      "examples": [
+        {
+          "id": "webc-example-0",
+          "path": "examples/webc/package.json",
+          "language": "json"
+        },
+        {
+          "id": "webc-example-1",
+          "path": "examples/webc/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "webc-example-2",
+          "path": "examples/webc/index.html",
+          "language": "html"
+        },
+        {
+          "id": "webc-example-3",
+          "path": "examples/webc/setup.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "webc-example-4",
+          "path": "examples/webc/main.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "webc-upgrade-html",
+          "path": "examples/webc/upgrade.html",
+          "language": "html"
+        },
+        {
+          "id": "webc-upgrade-ts",
+          "path": "examples/webc/upgrade.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "webc-vite-config-ts",
+          "path": "examples/webc/vite.config.ts",
+          "language": "typescript"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "webc-bindings",
+      "title": "Element properties, DOM events and form values",
+      "path": "webc-bindings.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "bindings",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "webc-start",
+        "api-webc-button",
+        "api-webc-input",
+        "api-webc-check-box",
+        "api-webc-select",
+        "api-webc-select-item",
+        "api-webc-date-picker",
+        "api-webc-accordion",
+        "api-webc-accordion-item",
+        "api-webc-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "webc-composition",
+      "title": "Compound elements and unscoped light-DOM slots",
+      "path": "webc-composition.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "composition",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "webc-start",
+        "api-webc-button",
+        "api-webc-input",
+        "api-webc-check-box",
+        "api-webc-select",
+        "api-webc-select-item",
+        "api-webc-date-picker",
+        "api-webc-accordion",
+        "api-webc-accordion-item",
+        "api-webc-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "webc-lifecycle",
+      "title": "Connection, controllers and application cleanup",
+      "path": "webc-lifecycle.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "lifecycle",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "webc-start",
+        "api-webc-button",
+        "api-webc-input",
+        "api-webc-check-box",
+        "api-webc-select",
+        "api-webc-select-item",
+        "api-webc-date-picker",
+        "api-webc-accordion",
+        "api-webc-accordion-item",
+        "api-webc-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "webc-environment",
+      "title": "Customized built-ins and server-authored HTML",
+      "path": "webc-environment.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "ssr",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "webc-start",
+        "api-webc-button",
+        "api-webc-input",
+        "api-webc-check-box",
+        "api-webc-select",
+        "api-webc-select-item",
+        "api-webc-date-picker",
+        "api-webc-accordion",
+        "api-webc-accordion-item",
+        "api-webc-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "webc-errors",
+      "title": "Web Components release-specific mistakes and limits",
+      "path": "webc-errors.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "errors",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "webc-start",
+        "api-webc-button",
+        "api-webc-input",
+        "api-webc-check-box",
+        "api-webc-select",
+        "api-webc-select-item",
+        "api-webc-date-picker",
+        "api-webc-accordion",
+        "api-webc-accordion-item",
+        "api-webc-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "webc-validation",
+      "title": "Published Web Components consumer validation",
+      "path": "webc-validation.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "validation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": ["webc-start"],
+      "examples": [
+        {
+          "id": "webc-validation-evidence",
+          "path": "webc-validation.json",
+          "language": "json"
+        }
+      ],
+      "links": []
     }
   ],
   "packages": {
@@ -1372,7 +1647,8 @@
     "@soxa-ui/react": "0.3.0",
     "@soxa-ui/angular": "0.3.0",
     "@soxa-ui/svelte": "0.3.0",
-    "@soxa-ui/solid": "0.3.0"
+    "@soxa-ui/solid": "0.3.0",
+    "@soxa-ui/webc": "0.3.0"
   },
   "contributorGuides": "pending"
 }

@@ -37,3 +37,7 @@ svelte-validation before interpreting sample coverage as typed readiness.
 Solid/SolidStart consumers start with solid-start. Its related records cover
 signals and callback props, live slot scope, per-instance controllers, root refs
 and universal SSR. These checked scenarios establish sample coverage only.
+
+Web Components consumers start with webc-start. These browser-only recipes cover
+customized built-ins, typed properties, prefixed events, light-DOM slots and
+client enhancement of server-authored HTML, with explicit browser/SSR limits.

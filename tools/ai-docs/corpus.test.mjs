@@ -18,6 +18,7 @@ function fixture() {
 	manifest.coverage.angular.guides = 'pending'
 	manifest.coverage.svelte.guides = 'pending'
 	manifest.coverage.solid.guides = 'pending'
+	manifest.coverage.webc.guides = 'pending'
 	manifest.documents[0].related = ['vue-button']
 	const source = {
 		revision: manifest.libraryRevision,
@@ -607,4 +608,59 @@ test('Solid consumer files are delivered as complete standalone projects', async
 		readFileSync(join(out, 'docs/ai/0.3.0/examples/solid/Recipes.tsx'), 'utf8'),
 		readFileSync(join(out, 'docs/ai/0.3.0/examples/solidstart/src/Recipes.tsx'), 'utf8'),
 	)
+})
+
+test('Web Components consumers are selectively delivered with complete browser-only inputs', async () => {
+	const { fetchSource } = await import('./fetch.mjs')
+	const out = mkdtempSync(join(tmpdir(), 'soxa-webc-delivery-'))
+	const requested = []
+	await fetchSource({
+		revision,
+		version: '0.3.0',
+		out,
+		fetchFile: async (url) => {
+			const file = url.split('/' + revision + '/')[1]
+			requested.push(file)
+			return {
+				ok: true,
+				text: async () => readFileSync(new URL('../../' + file, import.meta.url), 'utf8'),
+			}
+		},
+	})
+	const manifest = JSON.parse(readFileSync(join(out, 'docs/ai/0.3.0/manifest.json'), 'utf8'))
+	assert.equal(manifest.coverage.webc.guides, 'sample')
+	assert.equal(manifest.packages['@soxa-ui/webc'], '0.3.0')
+	const records = manifest.documents.filter((doc) => doc.framework === 'webc')
+	assert.equal(records.length, 8)
+	assert.ok(records.every((doc) => doc.audience === 'consumer'))
+	for (const file of [
+		'package.json',
+		'tsconfig.json',
+		'main.ts',
+		'setup.ts',
+		'index.html',
+		'upgrade.html',
+		'upgrade.ts',
+		'vite.config.ts',
+	]) {
+		assert.ok(requested.includes('docs/ai/0.3.0/examples/webc/' + file), file)
+	}
+	const f = fixture()
+	f.manifest.coverage.webc.guides = 'sample'
+	f.manifest.documents.push({
+		...f.manifest.documents[0],
+		id: 'webc-fixture',
+		framework: 'webc',
+		path: 'webc.md',
+		related: [],
+	})
+	writeFileSync(join(f.root, 'webc.md'), '# Browser application')
+	const selected = selectDocuments(f.build(), {
+		version: '0.3.0',
+		audience: 'consumer',
+		framework: 'webc',
+	})
+	assert.ok(selected.some((doc) => doc.framework === 'all'))
+	assert.ok(selected.some((doc) => doc.id === 'webc-fixture'))
+	assert.ok(selected.every((doc) => ['all', 'webc'].includes(doc.framework)))
 })

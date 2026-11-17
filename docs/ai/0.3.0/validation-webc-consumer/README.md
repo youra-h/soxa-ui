@@ -1,0 +1,13 @@
+﻿# Independent Web Components consumer
+
+This community workshop signup was built from the copied public JSON corpus, using exact npm Soxa 0.3.0 packages. It is a separate consumer, without source aliases or dependency declaration edits.
+
+Use Node 24+, then `npm ci`, `npm run check`, and `npm run build`. Run `npm run dev` for the application. The production build includes the main signup and `upgrade.html`.
+
+`node verify.mjs` runs strict types, production build and the Chromium assertions, then writes `evidence.json`. The verifier requires Playwright as a test tool. Install it separately with `npm install --no-save --package-lock=false playwright@1.64.1`, then run `npx playwright install chromium`; alternatively set `PLAYWRIGHT_MODULE` to the file URL of an existing Playwright module. That environment variable is not application code and no machine path is embedded in this example.
+
+The application covers controlled Input, CheckBox, Select and DatePicker, a two-item Accordion, visible names, keyboard interactions, before-event cancellation, reverse property writes, native FormData and a separate Select domain code. The teardown check simulates host navigation while the DatePicker is open, removes the subtree, checks remote layer removal, and dispatches on a retained detached field to verify application listeners were aborted. The upgrade page establishes browser enhancement of server-authored HTML; it is not framework SSR or hydration.
+
+`original-input-hashes.json` preserves the original corpus input hashes. The final evidence and final-input-hashes.json identify the consumed corpus. validation-inputs.json retains its immutable source revision and hashes; the verifier reuses that provenance rather than requiring a second copy of generated public API documents. After re-reading the final corpus, this consumer switched from detached innerHTML to direct createElement(tag, { is }) construction and repeated the full check. Only Chromium was independently tested here; no polyfill/browser-matrix claim is made. Exact 0.3.0 has the documented hidden Calendar dialog ARIA reference issue. The root registration produces Vite's chunk-size warning. npm installation reported four high severity vulnerabilities; no automatic version upgrade was applied.
+
+The original corpus was a draft export; the final assessment uses committed documentation source `9fe3cf506f6491c454f90f9b2f83e77d28455393`. Retained code was formatted after the independent run and replayed separately in another external consumer directory. The original independent result is evidence.json; replay-evidence.json records that replay.
