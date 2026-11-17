@@ -267,3 +267,66 @@ it('Vue: issue #888 trigger slot and Input retain the local theme on first click
 	expect(getComputedStyle(panel).getPropertyValue('--so-component-surface')).toBe(local)
 	expect(getComputedStyle(input).getPropertyValue('--so-component-surface')).toBe(local)
 })
+
+it.each(adapters)(
+	'%s: Breadcrumbs overflow Menu retains the local theme',
+	async (adapter) => {
+		const host = await loadHost(adapter)
+		handle = host.mount(scope, { component: 'breadcrumbs', props: { maxItems: 3 } })
+		await expect.poll(() => scope.querySelector('.so-breadcrumbs__trigger')).not.toBeNull()
+		const trigger = scope.querySelector('.so-breadcrumbs__trigger')
+		if (!(trigger instanceof HTMLElement)) throw new Error('Missing overflow trigger')
+		await userEvent.click(trigger)
+		await expect.poll(() => openPanel('menu')).toBeDefined()
+		const panel = openPanel('menu')
+		if (!panel) throw new Error('Missing overflow menu')
+		expect(scope.contains(panel)).toBe(false)
+		for (const theme of ['oren-dark', 'oren']) {
+			scope.dataset.soTheme = theme
+			await expect.poll(() => panel.dataset.soTheme).toBe(theme)
+			await expect
+				.poll(() => getComputedStyle(panel).getPropertyValue('--so-component-surface'))
+				.toBe(getComputedStyle(scope).getPropertyValue('--so-component-surface'))
+		}
+	},
+	30000,
+)
+
+it.each(
+	adapters.flatMap((adapter) =>
+		['calendar', 'date-picker'].map((component) => [adapter, component] as const),
+	),
+)(
+	'%s: %s month/year picker keeps the local theme',
+	async (adapter, component) => {
+		const host = await loadHost(adapter)
+		handle = host.mount(scope, {
+			component,
+			props: component === 'date-picker' ? { open: true } : {},
+		})
+		const calendar = () =>
+			component === 'date-picker'
+				? openPanel('date-picker')?.querySelector('.so-calendar')
+				: scope.querySelector('.so-calendar')
+		await expect
+			.poll(() => calendar()?.querySelector('.so-calendar__title') ?? null)
+			.not.toBeNull()
+		const trigger = calendar()?.querySelector('.so-calendar__title')
+		if (!(trigger instanceof HTMLElement)) throw new Error('Missing calendar title')
+		await userEvent.click(trigger)
+		await expect
+			.poll(() => openPanel('popover')?.querySelector('.so-calendar__picker-list') ?? null)
+			.not.toBeNull()
+		const panel = openPanel('popover')
+		if (!panel) throw new Error('Missing month/year picker')
+		expect(calendar()?.contains(panel)).toBe(true)
+		expect(panel.hasAttribute('data-so-theme')).toBe(false)
+		for (const theme of ['oren-dark', 'oren']) {
+			scope.dataset.soTheme = theme
+			await expect
+				.poll(() => getComputedStyle(panel).getPropertyValue('--so-component-surface'))
+				.toBe(getComputedStyle(scope).getPropertyValue('--so-component-surface'))
+		}
+	},
+	30000,
+)

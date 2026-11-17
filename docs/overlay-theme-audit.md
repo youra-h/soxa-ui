@@ -15,15 +15,17 @@ installed packages contain the fix. No second implementation is needed.
 The six adapters are Vue, React, Solid, Svelte, Angular and Web Components.
 The inventory follows every component that renders or moves a layer.
 
-| Component / part                           | Theme source                                    | Browser coverage in all six adapters                                                             |
-| ------------------------------------------ | ----------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Menu, Popover, Tooltip, Select, DatePicker | Nearest anchor theme, through Frame             | Initial open, dynamic theme, explicit panel override, scope removal, closed update and reopening |
-| Menu.Submenu                               | Anchor in the parent menu panel, through Frame  | Nested opening and subsequent theme changes                                                      |
-| Menu.PopoverItem                           | Anchor in the parent menu panel, through Frame  | Lazy first opening and subsequent theme changes                                                  |
-| Popover with `contained`                   | DOM ancestry                                    | Initial open and theme changes without a copied attribute                                        |
-| Frame                                      | Anchor when supplied; otherwise target ancestry | Shared plugin unit tests; browser checks through all anchored consumers above                    |
-| Dialog, AlertDialog, Drawer, Toasts        | Target ancestry                                 | Explicit themed target and subsequent theme changes                                              |
-| Other components and ordinary parts        | DOM ancestry                                    | Source inventory: no independent portal to escape the theme boundary                             |
+| Component / part                                            | Theme source                                    | Browser coverage in all six adapters                                                             |
+| ----------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Menu, Popover, Tooltip, Select, DatePicker                  | Nearest anchor theme, through Frame             | Initial open, dynamic theme, explicit panel override, scope removal, closed update and reopening |
+| Menu.Submenu                                                | Anchor in the parent menu panel, through Frame  | Nested opening and subsequent theme changes                                                      |
+| Menu.PopoverItem                                            | Anchor in the parent menu panel, through Frame  | Lazy first opening and subsequent theme changes                                                  |
+| Popover with `contained`                                    | DOM ancestry                                    | Initial open and theme changes without a copied attribute                                        |
+| Breadcrumbs overflow                                        | Embedded Menu anchor, through Frame             | First overflow opening and theme changes                                                         |
+| Calendar month/year picker, standalone or inside DatePicker | Contained Popover and DOM ancestry              | First picker opening and theme changes                                                           |
+| Frame                                                       | Anchor when supplied; otherwise target ancestry | Shared plugin unit tests; browser checks through all anchored consumers above                    |
+| Dialog, AlertDialog, Drawer, Toasts                         | Target ancestry                                 | Explicit themed target and subsequent theme changes                                              |
+| Other components and ordinary parts                         | DOM ancestry                                    | Source inventory: no independent portal to escape the theme boundary                             |
 
 The shared plugin's unit tests additionally cover replacing/moving the anchor,
 adding/removing a nearer scope, equal-value explicit writes, cleanup,
@@ -76,7 +78,7 @@ audit's browser evidence.
 
 ## Validation
 
-The expanded suite has 103 passing cases in Chromium and 103 in WebKit
+The expanded suite has 121 passing cases in Chromium and 121 in WebKit
 through the Windows Docker runner. The 10 shared-plugin unit tests, playground
 Vue typecheck, ESLint and formatting checks pass. Temporarily removing
 `FrameThemePluginDescriptor` from Frame makes the exact #888 guard fail
