@@ -97,13 +97,18 @@ class TBuilt<T extends TAdapterContexts> {
 	}
 
 	readonly destroy = (): void => {
-		destroyAll(this.contexts)
+		if (this._destroyed) return
 		this._destroyed = true
+		// Rollback also releases draft registrations held by an external ctrl or engine.
+		drafts.accept(this.held)
+		destroyAll(this.contexts)
 	}
 }
 
 export function useAdapterContext<T extends TAdapterContexts>(
 	factory: (create: TCreateAdapterContext, elevator: TElevatorFactory) => T,
+	/** Optional preparation receives teardown only after the whole assembly exists. */
+	prepare?: (contexts: T, destroy: () => void) => void,
 ): TAssembly<T> {
 	const mountId = useId()
 	const locale = useContext(LocaleContext)
@@ -128,6 +133,12 @@ export function useAdapterContext<T extends TAdapterContexts>(
 			return createAdapterContext(descriptor, { mountId: id, locale, ...options }, config)
 		}
 		const built = new TBuilt(factory(create, scope.elevator), scope, held)
+		try {
+			prepare?.(built.contexts, built.destroy)
+		} catch (error) {
+			built.destroy()
+			throw error
+		}
 
 		drafts.add(held, built.destroy, id)
 
@@ -136,7 +147,7 @@ export function useAdapterContext<T extends TAdapterContexts>(
 	// The factory of the last render, not of the one the effect saw
 	const rebuild = useEffectEvent(() => assemble(parent))
 
-	if (!ref.current) {
+	if (!ref.current || ref.current.destroyed) {
 		ref.current = assemble(parent)
 	}
 

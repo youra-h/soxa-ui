@@ -7,3 +7,7 @@ export type {
 	TCollectionOwner,
 	TMemberAdapter,
 } from './types'
+
+export { TCollectionPreparationExtension } from './collection-preparation.extension.class'
+export type { ICollectionPreparationOptions, ICollectionPreparationRegistration } from './types'
+export { TCollectionItemPreparationExtension } from './collection-item-preparation.extension.class'

@@ -1,20 +1,8 @@
 /**
- * Tabs и Accordion в React: пересборка владельца, сервер и гидратация.
- *
- * Механика та же, что у ListBox (`list-box-elevator.spec.tsx`): элемент
- * разметки входит в коллекцию при коммите, а пересобранный владелец
- * (StrictMode, `<Activity>`) — это новый движок, и элементы пересобираются
- * вслед за ним. В живом движке остаются ровно элементы разметки, по одному
- * разу и в порядке DOM, и клик работает с ним: активирует таб вместе с его
- * панелью, раскрывает секцию.
- *
- * Своё у Tabs — панель. Таб из данных связка находит уже в сборке, поэтому
- * сервер рисует панель активного таба с её стороной ARIA-связки. Табы разметки
- * сервер рисует без того, что пишет коллекция, а панель находит их после
- * коммита — гидратация сходится, панель появляется следом.
- *
- * `engine` снаружи здесь не передаётся: готовый движок у пересобранного
- * владельца — отдельная задача.
+ * Tabs and Accordion lifecycle, server rendering and hydration in React.
+ * Reassembled owners replace their engines; children follow the new lift.
+ * Tabs explicitly prepare initial membership before rendering, while subscriptions
+ * and acceptance remain on commit. Accordion retains its ordinary attach path.
  */
 
 import { describe, it, expect, vi } from 'vitest'
@@ -350,7 +338,7 @@ describe('сервер', () => {
 		)
 	})
 
-	it('табы и панели из разметки гидратируются без расхождений, панель — после коммита', () => {
+	it('табы и панели из разметки гидратируются без расхождений, панель готова на сервере', () => {
 		const element = (
 			<Tabs content={<Tabs.Content value="b">Панель B</Tabs.Content>}>
 				<Tabs.Item value="a" text="A" />
@@ -358,8 +346,10 @@ describe('сервер', () => {
 			</Tabs>
 		)
 
-		// Табы разметки входят в коллекцию при коммите: сервер панели не рисует
-		expect(serverMarkup(element).querySelector('.so-tabs-content')).toBeNull()
+		// Tabs opt into initial membership before rendering; live acceptance still waits for commit.
+		expect(serverMarkup(element).querySelector('.so-tabs-content')?.textContent).toBe(
+			'Панель B',
+		)
 
 		const { onRecoverableError } = hydrate(element)
 

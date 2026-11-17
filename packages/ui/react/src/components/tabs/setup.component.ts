@@ -1,5 +1,6 @@
 import {
 	TCollectionExtension,
+	TCollectionPreparationExtension,
 	TDragAndDropCollectionExtension,
 	TabsCollectionDescriptor,
 	TabsDescriptor,
@@ -23,6 +24,7 @@ export function useSetupTabs(props: TabsProps) {
 			{ bundle: adapter.bundle },
 		)
 			.use(TCollectionExtension, { elevator })
+			.use(TCollectionPreparationExtension, { elevator })
 			.use(TDragAndDropCollectionExtension, { elevator })
 
 		return [adapter, collectionAdapter] as const

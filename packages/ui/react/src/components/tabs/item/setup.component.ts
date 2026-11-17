@@ -1,5 +1,6 @@
 import {
 	TCollectionItemExtension,
+	TCollectionItemPreparationExtension,
 	TabsCollectionItemDescriptor,
 	TabsItemDescriptor,
 } from '@soxa-ui/setup'
@@ -9,17 +10,22 @@ import type { TabsItemProps } from './base.component'
 export function useSetupTabsItem(props: TabsItemProps) {
 	const {
 		contexts: [adapter, item],
-	} = useAdapterContext((create, elevator) => {
-		const adapter = create(TabsItemDescriptor(), { ctrl: props.ctrl, props })
+	} = useAdapterContext(
+		(create, elevator) => {
+			const adapter = create(TabsItemDescriptor(), { ctrl: props.ctrl, props })
 
-		const item = create(
-			TabsCollectionItemDescriptor(),
-			{ props },
-			{ bundle: adapter.bundle },
-		).use(TCollectionItemExtension, { adapter, elevator })
+			const item = create(
+				TabsCollectionItemDescriptor(),
+				{ props },
+				{ bundle: adapter.bundle },
+			)
+				.use(TCollectionItemExtension, { adapter, elevator })
+				.use(TCollectionItemPreparationExtension, { adapter, elevator })
 
-		return [adapter, item] as const
-	})
+			return [adapter, item] as const
+		},
+		([, item], destroy) => item.get(TCollectionItemPreparationExtension)?.bindLifetime(destroy),
+	)
 
 	return {
 		...useCollectionAdapter(useAdapter(adapter, props), item, props),

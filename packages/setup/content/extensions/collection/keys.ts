@@ -8,6 +8,7 @@
 import type { TCollectionBundlesPlugin } from '@soxa-ui/plugins'
 import type { IElevatorKey } from '../../../protected/adapter/elevator'
 import type { TCollectionMembers } from './members.class'
+import type { TCollectionPreparationExtension } from './collection-preparation.extension.class'
 
 /**
  * The registry of the nearest collection's item bundles
@@ -27,4 +28,9 @@ export const COLLECTION_BUNDLES_ELEVATOR: IElevatorKey<TCollectionBundlesPlugin 
  */
 export const COLLECTION_MEMBERS_ELEVATOR: IElevatorKey<TCollectionMembers> = {
 	name: 'soxa:collection-members',
+}
+
+/** An opt-in initial preparation scope, separate from ordinary collection membership. */
+export const COLLECTION_PREPARATION_ELEVATOR: IElevatorKey<TCollectionPreparationExtension> = {
+	name: 'soxa:collection-preparation',
 }

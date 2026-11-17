@@ -1786,3 +1786,23 @@ Angular рисует точно:
 Accordion `aria-expanded`. Атрибут знает паттерн, а не механизм активации.
 
 Подробности — в разделе «Доступность (a11y)».
+
+### Initial preparation is explicit and owner-scoped
+
+React Tabs installs `TCollectionPreparationExtension` on its owner and
+`TCollectionItemPreparationExtension` on its items. Other collections retain their
+ordinary attach-only membership. Preparation initializes the existing item model
+and metadata without accepting the component; attach remains responsible for live
+subscriptions and confirmation. No new consumer props or Suspense wrapper are required.
+
+A pending assembly expires after 1000 ms by default. Its rollback invokes the
+adapter's teardown for the whole assembly. A late render or effect setup rebuilds
+a destroyed assembly before accepting it. Once any owner of an engine is live,
+new items enter only on attach, so a child's render cannot update a live owner.
+Existing data models keep their ownership; rollback removes only a speculative
+markup membership. Pending registrations are keyed by attempt, never by value.
+
+This initial preparation does not buffer or rewrite SSR HTML. Earlier serialized
+tab stops, late custom panel IDs, and panels outside suspended branches remain
+separate SSR concerns. It does not establish all-or-nothing transactions for
+engine state or events.

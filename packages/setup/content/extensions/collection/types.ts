@@ -49,3 +49,16 @@ export interface ICollectionItemExtensionOptions {
 	adapter: TMemberAdapter
 	elevator: TElevatorFactory
 }
+
+/** Options for an owner that explicitly enables initial membership preparation. */
+export interface ICollectionPreparationOptions {
+	elevator: TElevatorFactory
+	/** Maximum lifetime of an unaccepted assembly; expired assemblies can be rebuilt. */
+	timeout?: number
+}
+
+/** A pending mount's ownership receipt, independent of the item's value. */
+export interface ICollectionPreparationRegistration {
+	commit(): void
+	cancel(): void
+}
