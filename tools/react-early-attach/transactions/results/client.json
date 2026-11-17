@@ -1,0 +1,94 @@
+[
+  {
+    "name": "ordinary-commit",
+    "values": ["a", "b"],
+    "counters": {
+      "prepare": 2,
+      "commit": 2,
+      "rollback": 0,
+      "rebuild": 0
+    },
+    "pending": 0,
+    "sameModels": true,
+    "diagnostics": []
+  },
+  {
+    "name": "suspense-late-retry",
+    "initial": ["a", "b"],
+    "afterRollback": ["a"],
+    "pendingAfterRollback": 0,
+    "afterRetry": ["a", "b"],
+    "pendingAfterRetry": 0,
+    "recreated": true,
+    "counters": {
+      "prepare": 5,
+      "commit": 2,
+      "rollback": 3,
+      "rebuild": 0
+    },
+    "diagnostics": []
+  },
+  {
+    "name": "abandoned-no-retry",
+    "values": ["a"],
+    "sameNeighbor": true,
+    "pending": 0,
+    "counters": {
+      "prepare": 4,
+      "commit": 1,
+      "rollback": 3,
+      "rebuild": 0
+    },
+    "diagnostics": []
+  },
+  {
+    "name": "external-data-model",
+    "sameModel": true,
+    "pending": 0,
+    "counters": {
+      "prepare": 2,
+      "commit": 0,
+      "rollback": 2,
+      "rebuild": 0
+    },
+    "diagnostics": []
+  },
+  {
+    "name": "strict-mode",
+    "values": ["a", "b"],
+    "pending": 0,
+    "counters": {
+      "prepare": 6,
+      "commit": 6,
+      "rollback": 0,
+      "rebuild": 11
+    },
+    "diagnostics": []
+  },
+  {
+    "name": "rollback-before-passive-attach",
+    "values": ["a", "b"],
+    "pending": 0,
+    "counters": {
+      "prepare": 4,
+      "commit": 2,
+      "rollback": 2,
+      "rebuild": 2
+    },
+    "diagnostics": []
+  },
+  {
+    "name": "hydration-after-server-rollback",
+    "sameNodes": true,
+    "recoverable": [],
+    "pending": 0,
+    "diagnostics": []
+  },
+  {
+    "name": "equal-value-siblings",
+    "values": ["same"],
+    "sameNeighbor": true,
+    "pending": 0,
+    "diagnostics": []
+  }
+]

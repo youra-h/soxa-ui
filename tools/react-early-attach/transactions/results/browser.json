@@ -1,0 +1,108 @@
+{
+  "browser": "156.0.8078.4",
+  "rows": [
+    {
+      "name": "late-suspense-retry",
+      "round": 0,
+      "afterRollback": {
+        "values": ["a"],
+        "modelIds": [3],
+        "pending": 0,
+        "counters": {
+          "prepare": 4,
+          "commit": 1,
+          "rollback": 3,
+          "rebuild": 0
+        },
+        "tabs": ["A"]
+      },
+      "afterRetry": {
+        "values": ["a", "b"],
+        "modelIds": [3, 22],
+        "pending": 0,
+        "counters": {
+          "prepare": 6,
+          "commit": 2,
+          "rollback": 4,
+          "rebuild": 1
+        },
+        "tabs": ["A", "B"]
+      }
+    },
+    {
+      "name": "late-suspense-retry",
+      "round": 1,
+      "afterRollback": {
+        "values": ["a"],
+        "modelIds": [26],
+        "pending": 0,
+        "counters": {
+          "prepare": 4,
+          "commit": 1,
+          "rollback": 3,
+          "rebuild": 0
+        },
+        "tabs": ["A"]
+      },
+      "afterRetry": {
+        "values": ["a", "b"],
+        "modelIds": [26, 45],
+        "pending": 0,
+        "counters": {
+          "prepare": 6,
+          "commit": 2,
+          "rollback": 4,
+          "rebuild": 1
+        },
+        "tabs": ["A", "B"]
+      }
+    },
+    {
+      "name": "late-suspense-retry",
+      "round": 2,
+      "afterRollback": {
+        "values": ["a"],
+        "modelIds": [49],
+        "pending": 0,
+        "counters": {
+          "prepare": 4,
+          "commit": 1,
+          "rollback": 3,
+          "rebuild": 0
+        },
+        "tabs": ["A"]
+      },
+      "afterRetry": {
+        "values": ["a", "b"],
+        "modelIds": [49, 68],
+        "pending": 0,
+        "counters": {
+          "prepare": 6,
+          "commit": 2,
+          "rollback": 4,
+          "rebuild": 1
+        },
+        "tabs": ["A", "B"]
+      }
+    },
+    {
+      "name": "rollback-before-attach",
+      "state": {
+        "values": ["a", "b"],
+        "modelIds": [82, 84],
+        "pending": 0,
+        "counters": {
+          "prepare": 4,
+          "commit": 2,
+          "rollback": 2,
+          "rebuild": 2
+        },
+        "tabs": ["A", "B"]
+      }
+    },
+    {
+      "name": "diagnostics",
+      "messages": []
+    }
+  ]
+}
