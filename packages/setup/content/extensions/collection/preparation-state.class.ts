@@ -93,7 +93,14 @@ export class TCollectionPreparationState {
 		this._deadline = deadline
 		this._timer = setTimeout(this._expire, Math.max(0, deadline - Date.now()))
 		// The same implementation runs in browsers and must not keep a Node process alive.
-		this._timer.unref?.()
+		const timer: unknown = this._timer
+		if (
+			timer !== null &&
+			typeof timer === 'object' &&
+			'unref' in timer &&
+			typeof timer.unref === 'function'
+		)
+			timer.unref()
 	}
 
 	private readonly _expire = (): void => {
