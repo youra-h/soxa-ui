@@ -1,0 +1,110 @@
+{
+  "variant": "after",
+  "framework": "react",
+  "kind": "tabs",
+  "mode": "initial",
+  "renders": 5,
+  "scope": "Separate CPU profiling run; not latency samples.",
+  "top": [
+    [
+      "(garbage collector)",
+      83807
+    ],
+    [
+      "(anonymous)",
+      49859
+    ],
+    [
+      "getSnapshot",
+      30594
+    ],
+    [
+      "post",
+      21131
+    ],
+    [
+      "resolveCollectionInitialItem",
+      16152
+    ],
+    [
+      "use",
+      14866
+    ],
+    [
+      "read",
+      14568
+    ],
+    [
+      "initialPartProps",
+      11637
+    ],
+    [
+      "useAdapterContext",
+      11575
+    ],
+    [
+      "pick$1",
+      10831
+    ],
+    [
+      "run",
+      10542
+    ],
+    [
+      "TOwnBundle",
+      9948
+    ],
+    [
+      "valueOf",
+      7573
+    ],
+    [
+      "install",
+      7160
+    ],
+    [
+      "forward",
+      7101
+    ],
+    [
+      "useExchange",
+      6628
+    ],
+    [
+      "preparedPluginOptions",
+      6120
+    ],
+    [
+      "_get",
+      6100
+    ],
+    [
+      "prepare",
+      6084
+    ],
+    [
+      "findByValue",
+      5990
+    ],
+    [
+      "add",
+      5909
+    ],
+    [
+      "collectionInitialState",
+      5740
+    ],
+    [
+      "get",
+      5575
+    ],
+    [
+      "of",
+      5490
+    ],
+    [
+      "useAdapter",
+      5482
+    ]
+  ]
+}

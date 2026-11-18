@@ -1,0 +1,11 @@
+{
+  "variant": "before",
+  "framework": "webc",
+  "kind": "tabs",
+  "mode": "data",
+  "library": "soxa",
+  "n": 1000,
+  "surface": "ssr",
+  "status": "not-applicable",
+  "reason": "No supported Web Components server renderer in Soxa."
+}

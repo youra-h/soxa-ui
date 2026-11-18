@@ -1,0 +1,110 @@
+{
+  "variant": "after",
+  "framework": "react",
+  "kind": "tags",
+  "mode": "initial",
+  "renders": 5,
+  "scope": "Separate CPU profiling run; not latency samples.",
+  "top": [
+    [
+      "(garbage collector)",
+      44164
+    ],
+    [
+      "(anonymous)",
+      25518
+    ],
+    [
+      "post",
+      18823
+    ],
+    [
+      "getSnapshot",
+      18764
+    ],
+    [
+      "get",
+      8994
+    ],
+    [
+      "resolveCollectionInitialItem",
+      8962
+    ],
+    [
+      "useAdapterContext",
+      8419
+    ],
+    [
+      "initialPartProps",
+      8291
+    ],
+    [
+      "add",
+      8212
+    ],
+    [
+      "valueOf",
+      7729
+    ],
+    [
+      "read",
+      7212
+    ],
+    [
+      "TagsItem",
+      6403
+    ],
+    [
+      "indexOfName",
+      6337
+    ],
+    [
+      "TOwnBundle",
+      6248
+    ],
+    [
+      "run",
+      6119
+    ],
+    [
+      "_get",
+      5894
+    ],
+    [
+      "install",
+      5512
+    ],
+    [
+      "pick$1",
+      5507
+    ],
+    [
+      "_read",
+      5234
+    ],
+    [
+      "useExchange",
+      4968
+    ],
+    [
+      "use",
+      4456
+    ],
+    [
+      "emit",
+      4369
+    ],
+    [
+      "prepare",
+      4320
+    ],
+    [
+      "toObject",
+      4221
+    ],
+    [
+      "createAdapterContext",
+      3905
+    ]
+  ]
+}

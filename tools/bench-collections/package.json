@@ -1,0 +1,26 @@
+{
+  "name": "bench-collections",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bench": "node run.mjs"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "vue": "3.5.44",
+    "solid-js": "1.9.17",
+    "svelte": "5.57.2",
+    "@ark-ui/react": "5.40.0",
+    "@ark-ui/vue": "5.40.0",
+    "@ark-ui/solid": "5.40.0",
+    "@ark-ui/svelte": "5.25.1",
+    "@mui/material": "9.5.0",
+    "@emotion/react": "11.14.0",
+    "@emotion/styled": "11.14.1",
+    "radix-ui": "1.8.1",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "tailwind-merge": "3.7.0"
+  }
+}

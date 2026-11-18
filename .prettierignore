@@ -23,6 +23,11 @@ CHANGELOG.md
 tools/bench-pages/results
 tools/bench-compare/results
 tools/bench-ssr/results
+tools/bench-collections/results
+tools/bench-collections/.cache
+# Upstream shadcn source snapshots and benchmark evidence retain their original formatting.
+tools/bench-collections/shadcn
+benchmarks/collections/raw
 
 # Benchmark evidence is preserved exactly, including compact JSON and model responses.
 tools/bench-table/results

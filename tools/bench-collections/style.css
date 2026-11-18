@@ -1,0 +1,34 @@
+html {
+	font-family: sans-serif;
+}
+body {
+	margin: 0;
+}
+#root {
+	padding: 12px;
+}
+[data-part='list'],
+[data-slot='tabs-list'] {
+	display: flex;
+	flex-wrap: wrap;
+}
+[data-part='trigger'],
+[data-part='item'] {
+	padding: 4px 8px;
+}
+[role='listbox'],
+[data-slot='toggle-group'] {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+[data-slot='toggle-group'] > [data-bench-option] {
+	flex: 0 0 auto;
+}
+[data-scope='listbox'] [role='option'] {
+	border: 1px solid #ddd;
+	border-radius: 12px;
+}
+[data-scope='listbox'] [role='option'][aria-selected='true'] {
+	background: #dbeafe;
+}

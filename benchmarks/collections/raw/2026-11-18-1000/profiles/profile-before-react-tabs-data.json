@@ -1,0 +1,110 @@
+{
+  "variant": "before",
+  "framework": "react",
+  "kind": "tabs",
+  "mode": "data",
+  "renders": 5,
+  "scope": "Separate CPU profiling run; not latency samples.",
+  "top": [
+    [
+      "(garbage collector)",
+      58489
+    ],
+    [
+      "(anonymous)",
+      33043
+    ],
+    [
+      "post",
+      18327
+    ],
+    [
+      "getSnapshot",
+      15600
+    ],
+    [
+      "_write",
+      14435
+    ],
+    [
+      "useExchange",
+      11072
+    ],
+    [
+      "read",
+      11044
+    ],
+    [
+      "toObject",
+      10672
+    ],
+    [
+      "run",
+      10242
+    ],
+    [
+      "useAdapterContext",
+      9948
+    ],
+    [
+      "created",
+      8586
+    ],
+    [
+      "add",
+      7797
+    ],
+    [
+      "useAdapter",
+      7538
+    ],
+    [
+      "members",
+      6846
+    ],
+    [
+      "findByValue",
+      6534
+    ],
+    [
+      "of",
+      5859
+    ],
+    [
+      "forward",
+      5737
+    ],
+    [
+      "get",
+      5548
+    ],
+    [
+      "use",
+      5426
+    ],
+    [
+      "toRootProps",
+      4991
+    ],
+    [
+      "valueOf",
+      4314
+    ],
+    [
+      "TabsItem",
+      4270
+    ],
+    [
+      "_get",
+      4269
+    ],
+    [
+      "on",
+      3797
+    ],
+    [
+      "install",
+      3754
+    ]
+  ]
+}

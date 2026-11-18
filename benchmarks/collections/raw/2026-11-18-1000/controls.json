@@ -1,0 +1,12 @@
+{
+  "node": {
+    "before": 95,
+    "pinned": 104,
+    "released": 95
+  },
+  "client": {
+    "baseline": 13,
+    "held": 59,
+    "freed": 13
+  }
+}

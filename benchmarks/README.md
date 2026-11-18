@@ -13,17 +13,18 @@
 Замер — своя папка: в её `README.md` стенд, условия и методика, рядом — журналы по файлу на
 платформу.
 
-| Папка                                   | Что меряет                                                                                                           | Стенд                                                  |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| [`table/`](table/README.md)             | таблица на 5000 строк рядом с таблицами библиотек соседей; `history.md` — история до 2026-10-24                      | [`tools/bench-table`](../tools/bench-table/)           |
-| [`pages/`](pages/README.md)             | страницы компонентов: вес десятков копий, утечки по циклам и за долгую сессию; `report.md` — отчёт для статьи        | [`tools/bench-pages`](../tools/bench-pages/)           |
-| [`compare/`](compare/README.md)         | страницы компонентов soxa рядом с соседями: вес, монтирование, утечки, размер сборки                                 | [`tools/bench-compare`](../tools/bench-compare/)       |
-| [`ssr/`](ssr/README.md)                 | серверный рендер: утечки на тысячах рендеров в Node и языки соседних запросов; `report.md` — отчёт                   | [`tools/bench-ssr`](../tools/bench-ssr/)               |
-| [`parity/`](parity/README.md)           | одинаковость платформ: события и дерево доступности после каждого шага сценария; `report.md` — отчёт                 | [`tools/bench-pages`](../tools/bench-pages/)           |
-| [`interaction/`](interaction/README.md) | отклик на действие на странице из 50 копий, с замедлением процессора, и перерисовки на действие; `report.md` — отчёт | [`tools/bench-pages`](../tools/bench-pages/)           |
-| [`install/`](install/README.md)         | продакшен-сборка чистого проекта с пакетами из тарболлов: начальная загрузка по пакетам и бюджет инструмента         | [`tools/install-smoke`](../tools/install-smoke/)       |
-| [`validation/`](validation/README.md)   | сводный отчёт по памяти, жизненному циклу и отклику со свежими raw/manifest и проверкой полноты                      | [`tools/bench-validation`](../tools/bench-validation/) |
-| [`ai/`](ai/README.md)                   | заранее фиксируемое Vue сравнение AI и Soxa; реальные model inputs и ручные проверки имеют отдельный статус          | [`tools/bench-ai`](../tools/bench-ai/)                 |
+| Папка                                   | Что меряет                                                                                                           | Стенд                                                    |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| [`table/`](table/README.md)             | таблица на 5000 строк рядом с таблицами библиотек соседей; `history.md` — история до 2026-10-24                      | [`tools/bench-table`](../tools/bench-table/)             |
+| [`pages/`](pages/README.md)             | страницы компонентов: вес десятков копий, утечки по циклам и за долгую сессию; `report.md` — отчёт для статьи        | [`tools/bench-pages`](../tools/bench-pages/)             |
+| [`compare/`](compare/README.md)         | страницы компонентов soxa рядом с соседями: вес, монтирование, утечки, размер сборки                                 | [`tools/bench-compare`](../tools/bench-compare/)         |
+| [`ssr/`](ssr/README.md)                 | серверный рендер: утечки на тысячах рендеров в Node и языки соседних запросов; `report.md` — отчёт                   | [`tools/bench-ssr`](../tools/bench-ssr/)                 |
+| [`collections/`](collections/README.md) | 1000 Tabs и Tags до и после подготовки SSR: корректность HTML, сервер, клиент, память и соседние библиотеки          | [`tools/bench-collections`](../tools/bench-collections/) |
+| [`parity/`](parity/README.md)           | одинаковость платформ: события и дерево доступности после каждого шага сценария; `report.md` — отчёт                 | [`tools/bench-pages`](../tools/bench-pages/)             |
+| [`interaction/`](interaction/README.md) | отклик на действие на странице из 50 копий, с замедлением процессора, и перерисовки на действие; `report.md` — отчёт | [`tools/bench-pages`](../tools/bench-pages/)             |
+| [`install/`](install/README.md)         | продакшен-сборка чистого проекта с пакетами из тарболлов: начальная загрузка по пакетам и бюджет инструмента         | [`tools/install-smoke`](../tools/install-smoke/)         |
+| [`validation/`](validation/README.md)   | сводный отчёт по памяти, жизненному циклу и отклику со свежими raw/manifest и проверкой полноты                      | [`tools/bench-validation`](../tools/bench-validation/)   |
+| [`ai/`](ai/README.md)                   | заранее фиксируемое Vue сравнение AI и Soxa; реальные model inputs и ручные проверки имеют отдельный статус          | [`tools/bench-ai`](../tools/bench-ai/)                   |
 
 ## Как вести журнал
 
