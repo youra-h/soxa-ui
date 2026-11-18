@@ -1,5 +1,3 @@
-import { collectionInitialInputs } from '@soxa-ui/setup'
-import { resolveCollectionInitialItem } from '@soxa-ui/setup'
 import {
 	TCollectionItemExtension,
 	TagsCollectionItemDescriptor,
@@ -21,20 +19,12 @@ export function setupTagsItem(
 	props: Record<string, unknown>,
 	onUpdate: TUpdateListener,
 ): TBinding<ITagsItem, TTagsItemCollectionFacade> {
-	const adapter = createWebcAdapterContext(
-		host,
-		TagsItemDescriptor(),
-		resolveCollectionInitialItem(
-			TagsItemDescriptor(),
-			{ ctrl, props },
-			createWebcElevator(host),
-		),
-	)
+	const adapter = createWebcAdapterContext(host, TagsItemDescriptor(), { ctrl, props })
 
 	const itemAdapter = createWebcAdapterContext(
 		host,
 		TagsCollectionItemDescriptor(),
-		{ props: collectionInitialInputs(adapter, props) },
+		{ props },
 		{ bundle: adapter.bundle },
 	).use(TCollectionItemExtension, { adapter, elevator: createWebcElevator(host) })
 

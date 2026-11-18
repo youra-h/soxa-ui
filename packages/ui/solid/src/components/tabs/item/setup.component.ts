@@ -1,5 +1,3 @@
-import { collectionInitialInputs } from '@soxa-ui/setup'
-import { resolveCollectionInitialItem } from '@soxa-ui/setup'
 import {
 	TCollectionItemExtension,
 	TabsCollectionItemDescriptor,
@@ -16,14 +14,11 @@ import type { TabsItemProps } from './base.component'
 
 export function setupTabsItem(props: TabsItemProps) {
 	const { elevator } = useElevator()
-	const adapter = createSolidAdapterContext(
-		TabsItemDescriptor(),
-		resolveCollectionInitialItem(TabsItemDescriptor(), { ctrl: props.ctrl, props }, elevator),
-	)
+	const adapter = createSolidAdapterContext(TabsItemDescriptor(), { ctrl: props.ctrl, props })
 
 	const item = createSolidAdapterContext(
 		TabsCollectionItemDescriptor(),
-		{ props: collectionInitialInputs(adapter, props) },
+		{ props },
 		{ bundle: adapter.bundle },
 	).use(TCollectionItemExtension, { adapter, elevator })
 

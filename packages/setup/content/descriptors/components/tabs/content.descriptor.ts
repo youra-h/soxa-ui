@@ -30,7 +30,7 @@ export const TabsContentDescriptor = defineDescriptor(() =>
 		},
 
 		plugins: [
-			CollectionInitialPartPluginDescriptor,
+			CollectionInitialPartPluginDescriptor.with({ panel: true }),
 			// `id` панели — проп `id`: на панель ведёт `aria-controls` её таба, и
 			// `id` приложения главнее формулы таба. На панель и в ссылку таба его
 			// кладёт связка панели (`TTabsContentBindingExtension`)

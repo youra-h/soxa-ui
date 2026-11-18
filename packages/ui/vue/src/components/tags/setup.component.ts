@@ -1,6 +1,3 @@
-import { collectionInitialOwnerOptions } from '@soxa-ui/setup'
-import { TCollectionInitialExtension } from '@soxa-ui/setup'
-import { useCollectionInitial } from '../../adapter'
 import { TCollectionExtension, TagsDescriptor, TagsCollectionDescriptor } from '@soxa-ui/setup'
 import {
 	useAdapter,
@@ -18,11 +15,7 @@ export default {
 	extends: BaseTags,
 	expose: useExpose(),
 	setup(props: TagsProps, { emit }: SetupContext) {
-		const source = useCollectionInitial(props)
-		const adapter = createVueAdapterContext(
-			TagsDescriptor(),
-			collectionInitialOwnerOptions(TagsDescriptor(), { ctrl: props.ctrl, props }, source),
-		)
+		const adapter = createVueAdapterContext(TagsDescriptor(), { ctrl: props.ctrl, props })
 
 		const collectionAdapter = createVueAdapterContext(
 			TagsCollectionDescriptor(),
@@ -31,12 +24,10 @@ export default {
 				// Готовая коллекция снаружи. Дали — фасад работает на ней и своей
 				// не создаёт, лишь доложит недостающие расширения в неё же.
 				// Не дали — соберёт свою. Развилка в `completeEngine`
-				options: { owner: adapter.instance, engine: source?.engine ?? props.engine },
+				options: { owner: adapter.instance, engine: props.engine },
 			},
 			{ bundle: adapter.bundle },
-		)
-			.use(TCollectionExtension, { elevator: VueElevatorFactory })
-			.use(TCollectionInitialExtension, { source, elevator: VueElevatorFactory })
+		).use(TCollectionExtension, { elevator: VueElevatorFactory })
 
 		const refsCollection = useCollectionAdapter(collectionAdapter, props, emit)
 		const refs = useAdapter(adapter, props, emit)

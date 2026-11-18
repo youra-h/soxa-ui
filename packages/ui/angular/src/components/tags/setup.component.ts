@@ -1,6 +1,3 @@
-import { collectionInitialOwnerOptions } from '@soxa-ui/setup'
-import { TCollectionInitialExtension } from '@soxa-ui/setup'
-import { useCollectionInitial } from '../../adapter'
 import { TCollectionExtension, TagsCollectionDescriptor, TagsDescriptor } from '@soxa-ui/setup'
 import type { ITags, ITagsProps, TTagsCollectionFacade } from '@soxa-ui/core'
 import {
@@ -18,20 +15,14 @@ export function setupTags(
 	props: object,
 	engine: ITagsProps['engine'],
 ): TBinding<ITags, TTagsCollectionFacade> {
-	const source = useCollectionInitial(props)
-	const adapter = createAngularAdapterContext(
-		TagsDescriptor(),
-		collectionInitialOwnerOptions(TagsDescriptor(), { ctrl, props }, source),
-	)
+	const adapter = createAngularAdapterContext(TagsDescriptor(), { ctrl, props })
 	const owner = useAdapter(adapter)
 
 	const collectionAdapter = createAngularAdapterContext(
 		TagsCollectionDescriptor(),
-		{ props, options: { owner: adapter.instance, engine: source?.engine ?? engine } },
+		{ props, options: { owner: adapter.instance, engine: engine } },
 		{ bundle: adapter.bundle },
-	)
-		.use(TCollectionExtension, { elevator: AngularElevatorFactory })
-		.use(TCollectionInitialExtension, { source, elevator: AngularElevatorFactory })
+	).use(TCollectionExtension, { elevator: AngularElevatorFactory })
 
 	return joinBindings(owner, useCollectionAdapter(collectionAdapter))
 }

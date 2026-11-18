@@ -8,7 +8,12 @@
  */
 
 import { useContext, useEffect, useEffectEvent, useId, useMemo, useReducer, useRef } from 'react'
-import { createAdapterContext } from '@soxa-ui/setup'
+import {
+	createAdapterContext,
+	TCollectionPreparation,
+	TCollectionPreparationLifetime,
+	collectionNeedsPreparation,
+} from '@soxa-ui/setup'
 import type { IAdapterContext, TElevatorFactory } from '@soxa-ui/setup'
 import { ElevatorContext, type TElevatorLayer } from '../elevator/layer'
 import { LocaleContext } from '../locale/context'
@@ -109,17 +114,27 @@ export function useAdapterContext<T extends TAdapterContexts>(
 	const locale = useContext(LocaleContext)
 	const parent = useContext(ElevatorContext)
 	const ref = useRef<TBuilt<T> | null>(null)
+	const preparationLifetime = useRef<TCollectionPreparationLifetime | null>(null)
 	// The layer the last effect setup ran with
 	const settled = useRef<TElevatorLayer | null>(null)
 	const [, rerender] = useReducer(nextVersion, 0)
 	const assemble = (layer: TElevatorLayer): TBuilt<T> => {
 		const scope = new TReactElevatorScope(layer)
+		let preparation: TCollectionPreparation | undefined
 		const held: object[] = []
 		// A retry of a discarded render over the same `ctrl` keeps the discarded one's id
 		let id = mountId
 		// A mount id and a locale given explicitly as options stay with whoever
 		// gave them
 		const create: TCreateAdapterContext = (descriptor, options, config) => {
+			if (collectionNeedsPreparation(descriptor, config)) {
+				preparationLifetime.current ??= new TCollectionPreparationLifetime()
+				preparation ??= new TCollectionPreparation(
+					scope.elevator,
+					preparationLifetime.current,
+				)
+				config = { ...config, preparation: config?.preparation ?? preparation }
+			}
 			const taken = drafts.take(options)
 
 			held.push(...taken.held)

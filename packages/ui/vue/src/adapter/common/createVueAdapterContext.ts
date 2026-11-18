@@ -1,10 +1,14 @@
 import { inject, toRaw, useId } from 'vue'
 import {
 	createAdapterContext,
+	TCollectionPreparation,
+	collectionNeedsPreparation,
 	type IAdapterContextConfig,
 	type IAdapterContextOptions,
 } from '@soxa-ui/setup'
 import { LOCALE_KEY } from '../locale/key'
+import { VueElevatorFactory } from '../elevator'
+import { initialAssemblyProps } from '../runtime/collection-initial'
 
 /**
  * Опции и конфиг — те же, что у `createAdapterContext`: setup их экспортирует,
@@ -57,5 +61,16 @@ export const createVueAdapterContext: typeof createAdapterContext = (descriptor,
 			mountId: options.mountId ?? useId(),
 			locale: options.locale ?? inject(LOCALE_KEY, undefined),
 		},
-		config,
+		{
+			...config,
+			preparation:
+				config?.preparation ??
+				(collectionNeedsPreparation(descriptor, config)
+					? new TCollectionPreparation(
+							VueElevatorFactory,
+							undefined,
+							initialAssemblyProps,
+						)
+					: undefined),
+		},
 	)

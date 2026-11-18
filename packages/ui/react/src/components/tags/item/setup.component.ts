@@ -1,5 +1,3 @@
-import { collectionInitialInputs } from '@soxa-ui/setup'
-import { resolveCollectionInitialItem } from '@soxa-ui/setup'
 import {
 	TCollectionItemExtension,
 	TagsCollectionItemDescriptor,
@@ -12,18 +10,11 @@ export function useSetupTagsItem(props: TagsItemProps) {
 	const {
 		contexts: [adapter, item],
 	} = useAdapterContext((create, elevator) => {
-		const adapter = create(
-			TagsItemDescriptor(),
-			resolveCollectionInitialItem(
-				TagsItemDescriptor(),
-				{ ctrl: props.ctrl, props },
-				elevator,
-			),
-		)
+		const adapter = create(TagsItemDescriptor(), { ctrl: props.ctrl, props })
 
 		const item = create(
 			TagsCollectionItemDescriptor(),
-			{ props: collectionInitialInputs(adapter, props) },
+			{ props },
 			{ bundle: adapter.bundle },
 		).use(TCollectionItemExtension, { adapter, elevator })
 

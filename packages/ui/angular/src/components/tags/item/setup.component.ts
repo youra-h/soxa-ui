@@ -1,5 +1,3 @@
-import { collectionInitialInputs } from '@soxa-ui/setup'
-import { resolveCollectionInitialItem } from '@soxa-ui/setup'
 import {
 	TCollectionItemExtension,
 	TagsCollectionItemDescriptor,
@@ -20,15 +18,12 @@ export function setupTagsItem(
 	ctrl: ITagsItem | undefined,
 	props: object,
 ): TBinding<ITagsItem, TTagsItemCollectionFacade> {
-	const adapter = createAngularAdapterContext(
-		TagsItemDescriptor(),
-		resolveCollectionInitialItem(TagsItemDescriptor(), { ctrl, props }, AngularElevatorFactory),
-	)
+	const adapter = createAngularAdapterContext(TagsItemDescriptor(), { ctrl, props })
 	const owner = useAdapter(adapter)
 
 	const item = createAngularAdapterContext(
 		TagsCollectionItemDescriptor(),
-		{ props: collectionInitialInputs(adapter, props) },
+		{ props },
 		{ bundle: adapter.bundle },
 	).use(TCollectionItemExtension, { adapter, elevator: AngularElevatorFactory })
 

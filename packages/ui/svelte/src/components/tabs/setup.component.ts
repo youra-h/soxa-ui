@@ -1,6 +1,3 @@
-import { collectionInitialOwnerOptions } from '@soxa-ui/setup'
-import { TCollectionInitialExtension } from '@soxa-ui/setup'
-import { useCollectionInitial } from '../../adapter'
 import {
 	TCollectionExtension,
 	TDragAndDropCollectionExtension,
@@ -20,13 +17,10 @@ import type { TabsProps } from './base.component'
 export function setupTabs(getProps: () => TabsProps, mountId: string, receive: TRootReceiver) {
 	const elevator = useElevator()
 	const props = getProps()
-	const source = useCollectionInitial(props, '')
+
 	const adapter = createSvelteAdapterContext(TabsDescriptor(), {
-		...collectionInitialOwnerOptions(
-			TabsDescriptor(),
-			{ ctrl: props.ctrl, props, mountId },
-			source,
-		),
+		ctrl: props.ctrl,
+		props,
 		mountId,
 	})
 
@@ -35,12 +29,11 @@ export function setupTabs(getProps: () => TabsProps, mountId: string, receive: T
 		{
 			props,
 			mountId,
-			options: { owner: adapter.instance, engine: source?.engine ?? props.engine },
+			options: { owner: adapter.instance, engine: props.engine },
 		},
 		{ bundle: adapter.bundle },
 	)
 		.use(TCollectionExtension, { elevator })
-		.use(TCollectionInitialExtension, { source, elevator })
 		.use(TDragAndDropCollectionExtension, { elevator })
 
 	const collectionBinding = useCollectionAdapter(collectionAdapter, getProps)

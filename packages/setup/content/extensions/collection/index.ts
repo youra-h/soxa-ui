@@ -9,6 +9,12 @@ export type {
 } from './types'
 
 export { TCollectionInitialSource } from './initial-source.class'
+export {
+	TCollectionPreparation,
+	TCollectionPreparationLifetime,
+	collectionPreparedSource,
+	collectionNeedsPreparation,
+} from './preparation.class'
 export { TCollectionInitialExtension } from './initial.extension.class'
 export {
 	createCollectionInitialSource,

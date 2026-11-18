@@ -1,5 +1,3 @@
-import { collectionInitialInputs } from '@soxa-ui/setup'
-import { resolveCollectionInitialPanel } from '@soxa-ui/setup'
 import {
 	TTabsContentBindingExtension,
 	TabsCollectionContentDescriptor,
@@ -20,18 +18,11 @@ export function setupTabsContent(
 	ctrl: ITabsContent | undefined,
 	props: object,
 ): TBinding<ITabsContent, TTabsContentCollectionFacade> {
-	const adapter = createAngularAdapterContext(
-		TabsContentDescriptor(),
-		resolveCollectionInitialPanel(
-			TabsContentDescriptor(),
-			{ ctrl, props },
-			AngularElevatorFactory,
-		),
-	)
+	const adapter = createAngularAdapterContext(TabsContentDescriptor(), { ctrl, props })
 
 	const content = createAngularAdapterContext(
 		TabsCollectionContentDescriptor(),
-		{ props: collectionInitialInputs(adapter, props) },
+		{ props },
 		{ bundle: adapter.bundle },
 	).use(TTabsContentBindingExtension, { adapter, elevator: AngularElevatorFactory })
 

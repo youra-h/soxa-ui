@@ -1,5 +1,3 @@
-import { collectionInitialInputs } from '@soxa-ui/setup'
-import { resolveCollectionInitialPanel } from '@soxa-ui/setup'
 import {
 	TTabsContentBindingExtension,
 	TabsCollectionContentDescriptor,
@@ -23,17 +21,14 @@ export function setupTabsContent(
 	const elevator = useElevator()
 	const props = getProps()
 	const adapter = createSvelteAdapterContext(TabsContentDescriptor(), {
-		...resolveCollectionInitialPanel(
-			TabsContentDescriptor(),
-			{ ctrl: props.ctrl, props, mountId },
-			elevator,
-		),
+		ctrl: props.ctrl,
+		props,
 		mountId,
 	})
 
 	const content = createSvelteAdapterContext(
 		TabsCollectionContentDescriptor(),
-		{ props: collectionInitialInputs(adapter, props), mountId },
+		{ props, mountId },
 		{ bundle: adapter.bundle },
 	).use(TTabsContentBindingExtension, { adapter, elevator })
 

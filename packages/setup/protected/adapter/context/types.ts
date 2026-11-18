@@ -113,6 +113,8 @@ export interface IAdapterContextOptions<TInstance extends object = object> {
 export type TBundleMount = Pick<IAdapterContextOptions, 'mountId' | 'locale' | 'pluginOptions'>
 
 export interface IAdapterContextConfig {
+	/** Native runtime supplies a shared preparation policy before construction. */
+	preparation?: import('./preparation.types').IAdapterPreparation
 	/**
 	 * A ready plugin bundle, passed by whoever assembled it (a collection
 	 * adapter shares the component's bundle with the facade). Without it the

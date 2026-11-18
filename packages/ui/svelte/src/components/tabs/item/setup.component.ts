@@ -1,5 +1,3 @@
-import { collectionInitialInputs } from '@soxa-ui/setup'
-import { resolveCollectionInitialItem } from '@soxa-ui/setup'
 import {
 	TCollectionItemExtension,
 	TabsCollectionItemDescriptor,
@@ -23,17 +21,14 @@ export function setupTabsItem(
 	const elevator = useElevator()
 	const props = getProps()
 	const adapter = createSvelteAdapterContext(TabsItemDescriptor(), {
-		...resolveCollectionInitialItem(
-			TabsItemDescriptor(),
-			{ ctrl: props.ctrl, props, mountId },
-			elevator,
-		),
+		ctrl: props.ctrl,
+		props,
 		mountId,
 	})
 
 	const item = createSvelteAdapterContext(
 		TabsCollectionItemDescriptor(),
-		{ props: collectionInitialInputs(adapter, props), mountId },
+		{ props, mountId },
 		{ bundle: adapter.bundle },
 	).use(TCollectionItemExtension, { adapter, elevator })
 

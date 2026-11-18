@@ -95,7 +95,7 @@ export const TabsDescriptor = defineDescriptor(() =>
 		},
 
 		plugins: [
-			CollectionInitialPluginDescriptor,
+			CollectionInitialPluginDescriptor.with({ panelDefaultValue: '' }),
 			ScrollFocusPluginDescriptor.with({ target: barOf }),
 			// Фокус держит таб-остановка, а корень — рамка со списком и панелями:
 			// туда `focused = true` и ставит фокус, как Tab, мимо кнопки в

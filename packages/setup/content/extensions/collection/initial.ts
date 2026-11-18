@@ -252,7 +252,7 @@ function initialPartProps(
 }
 
 export function collectionInitialInputs(
-	context: import('../../../protected').IAdapterContext,
+	context: Pick<import('../../../protected').IAdapterContext, 'descriptor' | 'bundle'>,
 	props: object,
 ): object {
 	if (

@@ -1,6 +1,3 @@
-import { collectionInitialOwnerOptions } from '@soxa-ui/setup'
-import { TCollectionInitialExtension } from '@soxa-ui/setup'
-import { useCollectionInitial } from '../../adapter'
 import {
 	TCollectionExtension,
 	TDragAndDropCollectionExtension,
@@ -17,23 +14,18 @@ import {
 import type { TabsProps } from './base.component'
 
 export function setupTabs(props: TabsProps) {
-	const source = useCollectionInitial(props, '')
 	const { elevator, layer } = useElevator()
-	const adapter = createSolidAdapterContext(
-		TabsDescriptor(),
-		collectionInitialOwnerOptions(TabsDescriptor(), { ctrl: props.ctrl, props }, source),
-	)
+	const adapter = createSolidAdapterContext(TabsDescriptor(), { ctrl: props.ctrl, props })
 
 	const collectionAdapter = createSolidAdapterContext(
 		TabsCollectionDescriptor(),
 		{
 			props,
-			options: { owner: adapter.instance, engine: source?.engine ?? props.engine },
+			options: { owner: adapter.instance, engine: props.engine },
 		},
 		{ bundle: adapter.bundle },
 	)
 		.use(TCollectionExtension, { elevator })
-		.use(TCollectionInitialExtension, { source, elevator })
 		.use(TDragAndDropCollectionExtension, { elevator })
 
 	const collectionBinding = useCollectionAdapter(collectionAdapter, props)
