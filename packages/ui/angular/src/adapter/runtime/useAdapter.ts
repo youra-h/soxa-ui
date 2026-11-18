@@ -13,8 +13,21 @@
  * joins them. AGENTS.md (Angular), «Коллекция: два контекста — одна связка».
  */
 
-import { computed, signal, type EventEmitter, type Signal } from '@angular/core'
-import { toInstanceState } from '@soxa-ui/setup'
+import { isPlatformBrowser } from '@angular/common'
+import {
+	computed,
+	inject,
+	PLATFORM_ID,
+	signal,
+	type EventEmitter,
+	type Signal,
+} from '@angular/core'
+import {
+	collectionInitialInputs,
+	collectionInitialPrepared,
+	collectionInitialState,
+	toInstanceState,
+} from '@soxa-ui/setup'
 import type {
 	DescriptorAllEvents,
 	DescriptorComponentProps,
@@ -135,22 +148,31 @@ function useExchange<C extends IComponentContract>(
 	adapter: IAdapterContext<C>,
 ): TExchange<TAdapterState<C>> {
 	const binding = adapter.connect(AngularProfile)
+
 	// The signal itself is the state: a `computed` over it only forwarded the snapshot
 	const state = signal(toInstanceState<C>(NO_SNAPSHOT))
-	const unsubscribe = binding.state.subscribe(() =>
-		state.set(toInstanceState<C>(binding.state.getSnapshot())),
-	)
+	const port = collectionInitialState(adapter, binding.state)
+
+	const serverInitial =
+		collectionInitialPrepared(adapter) && !isPlatformBrowser(inject(PLATFORM_ID))
+
+	const unsubscribe = serverInitial
+		? () => {}
+		: port.subscribe(() => state.set(toInstanceState<C>(port.getSnapshot())))
+
+	if (serverInitial) state.set(toInstanceState<C>(port.getSnapshot()))
 
 	// `ngOnInit` creates the binding, on the server too: the hooks run in
 	// template order, and markup items enter the collection in DOM order
-	adapter.attach()
+	// Prepared SSR reads a snapshot without taking ownership of an external engine.
+	if (!serverInitial) adapter.attach()
 
 	return {
 		state,
 
 		// A delta, not `full`: that would reset the other inputs to their defaults
 		syncInputs(inputs: object): void {
-			binding.inputs.delta(inputs)
+			binding.inputs.delta(collectionInitialInputs(adapter, inputs))
 		},
 
 		resetInputs(names: readonly string[]): void {
@@ -164,6 +186,8 @@ function useExchange<C extends IComponentContract>(
 		// `ngOnDestroy` or, for a collection item, from its collection before
 		// the siblings go one by one (`TCollectionMembers`)
 		syncEvents(outputOf: TOutputOf): () => void {
+			if (serverInitial) return () => {}
+
 			const stop = binding.events.listen((exportName, args) =>
 				outputOf(exportName)?.emit(payloadOf(args)),
 			)

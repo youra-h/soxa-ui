@@ -4,7 +4,12 @@
 
 import type { TEvented } from '@soxa-ui/core'
 import type { ILocaleSource, IPluginBundle } from '@soxa-ui/plugins'
-import type { IComponentContract, IComponentDescriptor, IPluginsContract } from '../../define'
+import type {
+	IComponentContract,
+	IComponentDescriptor,
+	IPluginDefinition,
+	IPluginsContract,
+} from '../../define'
 import type { IAdapterProfile } from '../../naming'
 import type { TExchange } from '../exchange/exchange.class'
 import type { TMember } from '../exchange/member.class'
@@ -67,6 +72,8 @@ export type TAnyExtensionCtor = new (...args: any[]) => unknown
 /** Options of creating an adapter context: a ready instance (`ctrl`) or the constructor's props and options. */
 export interface IAdapterContextOptions<TInstance extends object = object> {
 	ctrl?: TInstance
+	/** Per-mount installation options for plugins already declared by the descriptor. */
+	pluginOptions?: readonly IPluginDefinition[]
 	/**
 	 * The framework's props. `object`, not `Record<string, unknown>`: adapters
 	 * declare props as interfaces without an index signature. They are read by
@@ -103,9 +110,11 @@ export interface IAdapterContextOptions<TInstance extends object = object> {
 }
 
 /** What the own bundle takes from the mount: the mount id and the subtree's locale. */
-export type TBundleMount = Pick<IAdapterContextOptions, 'mountId' | 'locale'>
+export type TBundleMount = Pick<IAdapterContextOptions, 'mountId' | 'locale' | 'pluginOptions'>
 
 export interface IAdapterContextConfig {
+	/** Native runtime supplies a shared preparation policy before construction. */
+	preparation?: import('./preparation.types').IAdapterPreparation
 	/**
 	 * A ready plugin bundle, passed by whoever assembled it (a collection
 	 * adapter shares the component's bundle with the facade). Without it the

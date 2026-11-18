@@ -23,10 +23,7 @@ export default {
 	extends: BaseTabs,
 	expose: useExpose(),
 	setup(props: TabsProps, { emit }: SetupContext) {
-		const adapter = createVueAdapterContext(TabsDescriptor(), {
-			ctrl: props.ctrl,
-			props,
-		})
+		const adapter = createVueAdapterContext(TabsDescriptor(), { ctrl: props.ctrl, props })
 
 		const collectionAdapter = createVueAdapterContext(
 			TabsCollectionDescriptor(),

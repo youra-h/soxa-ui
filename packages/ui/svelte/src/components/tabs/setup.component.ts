@@ -17,6 +17,7 @@ import type { TabsProps } from './base.component'
 export function setupTabs(getProps: () => TabsProps, mountId: string, receive: TRootReceiver) {
 	const elevator = useElevator()
 	const props = getProps()
+
 	const adapter = createSvelteAdapterContext(TabsDescriptor(), {
 		ctrl: props.ctrl,
 		props,

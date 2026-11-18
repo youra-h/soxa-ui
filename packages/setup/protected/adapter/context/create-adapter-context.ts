@@ -92,6 +92,10 @@ export function createAdapterContext<TInstance extends object, TPlugins extends 
 	options: IAdapterContextOptions<TInstance>,
 	config: IAdapterContextConfig = {},
 ): IAdapterContext<TContextContract<TInstance, TPlugins>> {
+	// Resolve the assembly before choosing a model or installing plugins.
+	const prepared = config.preparation?.prepare(descriptor, options, config)
+	options = prepared?.options ?? options
+
 	const props = options.props ?? {}
 	const embedded = embeddedOf(options)
 
@@ -121,7 +125,7 @@ export function createAdapterContext<TInstance extends object, TPlugins extends 
 		// 6. Плагины реестра и объявление набора
 		tenancy.complete()
 
-		return new TAdapterContext<TContextContract<TInstance, TPlugins>>(
+		const context = new TAdapterContext<TContextContract<TInstance, TPlugins>>(
 			descriptor,
 			instance,
 			tenancy,
@@ -129,5 +133,16 @@ export function createAdapterContext<TInstance extends object, TPlugins extends 
 			props,
 			embedded,
 		)
+
+		try {
+			prepared?.complete?.(context)
+		} catch (error) {
+			// A failed completion must release the plugins and state already assembled above.
+			context.destroy()
+
+			throw error
+		}
+
+		return context
 	})
 }

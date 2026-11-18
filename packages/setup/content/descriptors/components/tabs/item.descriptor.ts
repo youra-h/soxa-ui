@@ -5,6 +5,7 @@
  * и добавляет tag, text, closable, слоты строки и крестика + коллекционный плагин (active, order).
  * Имя крестика — шаблон локали с текстом таба: его пишет плагин имён.
  */
+import { CollectionInitialPartPluginDescriptor } from '../../plugins/collection-initial.plugin'
 
 import { defineComponent, defineDescriptor, defineType } from '../../../../protected/define'
 import { TTabsItem } from '@soxa-ui/core'
@@ -57,6 +58,7 @@ export const TabsItemDescriptor = defineDescriptor(() =>
 		},
 
 		plugins: [
+			CollectionInitialPartPluginDescriptor,
 			// Фокус держит строка таба с ролью, а корень — обёртка вокруг неё и
 			// крестика: туда `focused = true` и ставит фокус
 			ActionPluginDescriptor.with({ focusTarget: tabIn }),

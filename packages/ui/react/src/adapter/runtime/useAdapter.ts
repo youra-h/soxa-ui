@@ -13,7 +13,7 @@ import {
 	useReducer,
 	useSyncExternalStore,
 } from 'react'
-import { toInstanceState } from '@soxa-ui/setup'
+import { collectionInitialInputs, collectionInitialState, toInstanceState } from '@soxa-ui/setup'
 import type {
 	IAdapterContext,
 	TExchange,
@@ -71,7 +71,7 @@ function bind(adapter: IAdapterContext): TStore {
 	return {
 		adapter,
 		binding,
-		snapshot: new TStableSnapshot(binding.state),
+		snapshot: new TStableSnapshot(collectionInitialState(adapter, binding.state)),
 		callbacks: new TEventCallbacks(adapter),
 	}
 }
@@ -101,7 +101,7 @@ function useExchange(
 	// Связка пишет только сменившееся с прошлого раза: повтор не откатит то,
 	// что поменяли ядро или код через инстанс
 	useEffect(() => {
-		binding.inputs.full(props)
+		binding.inputs.full(collectionInitialInputs(adapter, props))
 	}, [props, binding])
 
 	// Подписка до первой отрисовки: `ready` из TElementPlugin не потеряется

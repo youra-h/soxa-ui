@@ -12,6 +12,7 @@ import type { TagsProps } from './base.component'
 export function setupTags(getProps: () => TagsProps, mountId: string, receive: TRootReceiver) {
 	const elevator = useElevator()
 	const props = getProps()
+
 	const adapter = createSvelteAdapterContext(TagsDescriptor(), {
 		ctrl: props.ctrl,
 		props,

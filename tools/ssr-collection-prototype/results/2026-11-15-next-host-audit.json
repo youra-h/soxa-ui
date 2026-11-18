@@ -1,0 +1,87 @@
+{
+  "checkedAt": "2026-11-15T13:55:23.169Z",
+  "package": "16.4.3",
+  "source": "npm pack next@16.4.3",
+  "kind": "source inspection; no Next application execution or certified integration",
+  "scope": "RSC/Fizz root ownership and selected external integration surfaces, not exhaustive impossibility",
+  "files": [
+    {
+      "file": "dist/server/app-render/app-render.js",
+      "sha256": "4dd7a7ac609024a3b0f60630a0aa0cfdf49be7e8a6046253fd0ae61ce2fca451",
+      "evidence": [
+        {
+          "line": 2346,
+          "text": "const appElement = /*#__PURE__*/ (0, _jsxruntime.jsx)(App, {"
+        },
+        {
+          "line": 2372,
+          "text": "const { stream: htmlStream, allReady } = await (0, _tracer.getTracer)().trace(_constants1.AppRenderSpan.renderToNodeFizzStream, ()=>_workunitasyncstorageexternal.workUnitAsyncStorage.run(requestStore, _streamops.renderToNodeFizzStream, appElement, fizzOptions, {"
+        },
+        {
+          "line": 470,
+          "text": "const flightStream = _workunitasyncstorageexternal.workUnitAsyncStorage.run(requestStore, _streamops.renderToNodeFlightStream, ctx.componentMod, rscPayload, clientModules, {"
+        }
+      ]
+    },
+    {
+      "file": "dist/server/instrumentation/types.d.ts",
+      "sha256": "148679c6d0f449210a96e7d2e562d589e56fcde87f843a92808b3ff103f1a774",
+      "evidence": [
+        {
+          "line": 14,
+          "text": "register?(): void;"
+        },
+        {
+          "line": 15,
+          "text": "onRequestError?: InstrumentationOnRequestError;"
+        }
+      ]
+    },
+    {
+      "file": "dist/build/adapter/build-complete.d.ts",
+      "sha256": "2c56dc2dc1369d89a4d09bccec5da44fd1c1799aa333ca683adf392d63884010",
+      "evidence": [
+        {
+          "line": 326,
+          "text": "export interface NextAdapter {"
+        },
+        {
+          "line": 335,
+          "text": "modifyConfig?: (config: NextConfigComplete, ctx: {"
+        },
+        {
+          "line": 346,
+          "text": "onBuildComplete?: (ctx: {"
+        }
+      ]
+    },
+    {
+      "file": "dist/server/app-render/server-inserted-html.js",
+      "sha256": "885f1d6972d7de1a210b6cbab2245b07571f0d3a3f3c6d0240086c032670a85b",
+      "evidence": [
+        {
+          "line": 59,
+          "text": "const addInsertedHtml = (handler)=>{"
+        },
+        {
+          "line": 69,
+          "text": "renderServerInsertedHTML () {"
+        }
+      ]
+    },
+    {
+      "file": "dist/server/stream-utils/node-web-streams-helper.js",
+      "sha256": "053dc92e6311437ed245d26a9cb09ae1c7c2a456c657d97050e04453f2115103",
+      "evidence": [
+        {
+          "line": 753,
+          "text": "if (waitForAllReady) {"
+        },
+        {
+          "line": 755,
+          "text": "await renderStream.allReady;"
+        }
+      ]
+    }
+  ]
+}

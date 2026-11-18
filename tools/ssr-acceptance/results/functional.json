@@ -1,0 +1,80 @@
+[
+  {
+    "stage": "core",
+    "exitCode": 0,
+    "seconds": 41.590176799999995,
+    "log": "tools\\ssr-acceptance\\results\\core.log"
+  },
+  {
+    "stage": "setup",
+    "exitCode": 0,
+    "seconds": 31.295769699999997,
+    "log": "tools\\ssr-acceptance\\results\\setup.log"
+  },
+  {
+    "stage": "plugins",
+    "exitCode": 0,
+    "seconds": 52.6548325,
+    "log": "tools\\ssr-acceptance\\results\\plugins.log"
+  },
+  {
+    "stage": "theme-base",
+    "exitCode": 0,
+    "seconds": 10.363417499999999,
+    "log": "tools\\ssr-acceptance\\results\\theme-base.log"
+  },
+  {
+    "stage": "theme-oren",
+    "exitCode": 0,
+    "seconds": 6.8979572,
+    "log": "tools\\ssr-acceptance\\results\\theme-oren.log"
+  },
+  {
+    "stage": "vue",
+    "exitCode": 0,
+    "seconds": 88.2222649,
+    "log": "tools\\ssr-acceptance\\results\\vue.log"
+  },
+  {
+    "stage": "react",
+    "exitCode": 0,
+    "seconds": 67.766633,
+    "log": "tools\\ssr-acceptance\\results\\react.log"
+  },
+  {
+    "stage": "solid",
+    "exitCode": 0,
+    "seconds": 66.8582904,
+    "log": "tools\\ssr-acceptance\\results\\solid.log"
+  },
+  {
+    "stage": "svelte",
+    "exitCode": 0,
+    "seconds": 78.80050489999999,
+    "log": "tools\\ssr-acceptance\\results\\svelte.log"
+  },
+  {
+    "stage": "angular",
+    "exitCode": 0,
+    "seconds": 47.5579433,
+    "log": "tools\\ssr-acceptance\\results\\angular.log"
+  },
+  {
+    "stage": "webc",
+    "exitCode": 0,
+    "seconds": 57.0538277,
+    "log": "tools\\ssr-acceptance\\results\\webc.log"
+  },
+  {
+    "stage": "playground-shared",
+    "exitCode": 0,
+    "seconds": 13.175386099999999,
+    "log": "tools\\ssr-acceptance\\results\\playground-shared.log"
+  },
+  {
+    "stage": "playground-vue",
+    "exitCode": 0,
+    "seconds": 136.7591569,
+    "log": "tools\\ssr-acceptance\\results\\playground-vue.log"
+  }
+]

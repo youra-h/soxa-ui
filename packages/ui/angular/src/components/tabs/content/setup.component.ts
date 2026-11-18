@@ -19,7 +19,6 @@ export function setupTabsContent(
 	props: object,
 ): TBinding<ITabsContent, TTabsContentCollectionFacade> {
 	const adapter = createAngularAdapterContext(TabsContentDescriptor(), { ctrl, props })
-	const owner = useAdapter(adapter)
 
 	const content = createAngularAdapterContext(
 		TabsCollectionContentDescriptor(),
@@ -27,5 +26,7 @@ export function setupTabsContent(
 		{ bundle: adapter.bundle },
 	).use(TTabsContentBindingExtension, { adapter, elevator: AngularElevatorFactory })
 
-	return joinBindings(owner, useCollectionAdapter(content))
+	const facade = useCollectionAdapter(content)
+	const owner = useAdapter(adapter)
+	return joinBindings(owner, facade)
 }

@@ -18,7 +18,13 @@
  */
 
 import { onDestroy, untrack } from 'svelte'
-import { toInstanceState } from '@soxa-ui/setup'
+import { BROWSER } from 'esm-env'
+import {
+	collectionInitialInputs,
+	collectionInitialPrepared,
+	collectionInitialState,
+	toInstanceState,
+} from '@soxa-ui/setup'
 import type { IAdapterContext, IComponentContract, TAdapterState, TExchange } from '@soxa-ui/setup'
 import { SvelteProfile } from '../common'
 import { joinState, type TJoinedState } from './state'
@@ -164,20 +170,25 @@ function useExchange(
 	getProps: () => object,
 ): { exchange: TExchange; state: Readonly<Record<string, unknown>> } {
 	const exchange = adapter.connect(SvelteProfile)
+
+	// Prepared server markup needs no membership or foreign event subscriptions.
+	if (!BROWSER && collectionInitialPrepared(adapter))
+		return { exchange, state: collectionInitialState(adapter, exchange.state).getSnapshot() }
+
 	const values = new TValueStore()
 
 	// 1. Subscribe right away, not in an effect: there are no effects on the
 	// server. The write is untracked: the core changes in the middle of
 	// rendering too
 	onDestroy(
-		exchange.state.subscribe((name, value) => {
+		collectionInitialState(adapter, exchange.state).subscribe((name, value) => {
 			untrack(() => write(values, name, value))
 		}),
 	)
 
 	// 2. The effect reads all props, the binding writes only the changed ones
 	$effect(() => {
-		exchange.inputs.full(getProps())
+		exchange.inputs.full(collectionInitialInputs(adapter, getProps()))
 	})
 
 	// 3. The component's initialisation, on the server too, is its mount: a

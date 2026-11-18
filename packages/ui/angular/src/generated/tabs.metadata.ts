@@ -37,6 +37,7 @@ export const TabsInputNames = [
 	'aria_label',
 	'aria_labelledBy',
 	'aria_describedBy',
+	'initial',
 	'engine',
 	'items',
 	'trackBy',
@@ -118,6 +119,7 @@ export const TabsOutputNames = [
 		'aria_label',
 		'aria_labelledBy',
 		'aria_describedBy',
+		'initial',
 		'engine',
 		'items',
 		'trackBy',
@@ -167,6 +169,7 @@ export abstract class TTabsSurface<TInstance extends IEntity> extends TViewSurfa
 	declare aria_label: TInputValue<typeof descriptor, 'aria_label'>
 	declare aria_labelledBy: TInputValue<typeof descriptor, 'aria_labelledBy'>
 	declare aria_describedBy: TInputValue<typeof descriptor, 'aria_describedBy'>
+	declare initial: TInputValue<typeof descriptor, 'initial'>
 	declare engine: TInputValue<typeof descriptor, 'engine'>
 	declare items: TInputValue<typeof descriptor, 'items'>
 	declare trackBy: TInputValue<typeof descriptor, 'trackBy'>

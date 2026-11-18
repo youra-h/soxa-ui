@@ -1,0 +1,130 @@
+{
+  "commit": "14906545d0380f552ea48f4cc0aa1fbd10256d41",
+  "run": "https://github.com/youra-h/soxa-ui/actions/runs/44277579147",
+  "jobs": [
+    {
+      "name": "Тесты — браузер (chromium)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Установка — webc",
+      "conclusion": "success"
+    },
+    {
+      "name": "Changeset",
+      "conclusion": "success"
+    },
+    {
+      "name": "Тесты — стенд",
+      "conclusion": "success"
+    },
+    {
+      "name": "Тесты — ядро, setup, плагины, тема",
+      "conclusion": "success"
+    },
+    {
+      "name": "Сборка и типы",
+      "conclusion": "success"
+    },
+    {
+      "name": "Тесты — браузер (webkit)",
+      "conclusion": "failure"
+    },
+    {
+      "name": "Линт",
+      "conclusion": "success"
+    },
+    {
+      "name": "Тесты — svelte",
+      "conclusion": "success"
+    },
+    {
+      "name": "Тесты — solid",
+      "conclusion": "success"
+    },
+    {
+      "name": "Тесты — angular",
+      "conclusion": "success"
+    },
+    {
+      "name": "Минимальные версии (solid)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Тесты — vue",
+      "conclusion": "success"
+    },
+    {
+      "name": "Минимальные версии (react)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Тесты — react",
+      "conclusion": "success"
+    },
+    {
+      "name": "Минимальные версии (angular)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Английский",
+      "conclusion": "success"
+    },
+    {
+      "name": "Минимальные версии (vue)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Установка — sveltekit",
+      "conclusion": "success"
+    },
+    {
+      "name": "Минимальные версии (svelte)",
+      "conclusion": "success"
+    },
+    {
+      "name": "Установка — vue",
+      "conclusion": "success"
+    },
+    {
+      "name": "Установка — solid",
+      "conclusion": "success"
+    },
+    {
+      "name": "Установка — svelte",
+      "conclusion": "success"
+    },
+    {
+      "name": "Тесты — webc",
+      "conclusion": "success"
+    },
+    {
+      "name": "Установка — angular-ssr",
+      "conclusion": "success"
+    },
+    {
+      "name": "Установка — react",
+      "conclusion": "success"
+    },
+    {
+      "name": "AI Docs - published 0.3.0",
+      "conclusion": "success"
+    },
+    {
+      "name": "Установка — solid-start",
+      "conclusion": "success"
+    },
+    {
+      "name": "Установка — next",
+      "conclusion": "success"
+    },
+    {
+      "name": "Установка — vue-tailwind",
+      "conclusion": "success"
+    }
+  ],
+  "webKitFailure": {
+    "jobId": 134709526369,
+    "reason": "MiniBrowser could not start: libicudata.so.74 missing, exit 127. No WebKit tests executed."
+  }
+}

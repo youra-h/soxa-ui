@@ -56,6 +56,7 @@
  * its data, even when the owner renders it inside a section — and only from
  * its own collection: submenu items inside a menu group are the submenu's.
  */
+import { TCollectionInitialPartPlugin } from '@soxa-ui/plugins'
 
 import { TItemContext, batchOf, factoryOf, metaOf, plainOf } from '@soxa-ui/core'
 import type { TCollectionEngine, TRemoveEvent } from '@soxa-ui/core'
@@ -67,6 +68,7 @@ import {
 import { ITEM_GROUP_ELEVATOR } from '../item-group/keys'
 import { COLLECTION_MEMBERS_ELEVATOR } from './keys'
 import { collectItemProps } from './item-props'
+import { collectionInitialSourceOf } from './initial'
 import type { ICollectionItemExtensionOptions, TCollectionItemFacade } from './types'
 
 /** The nearest collection's engine, if the item is of it: its factory takes the item as its own. */
@@ -108,7 +110,9 @@ export class TCollectionItemExtension {
 		// The markup group above the item — if it is a group of its collection
 		const link = engine ? elevator(ITEM_GROUP_ELEVATOR).up() : undefined
 		const groupKey = link && link.engine === engine ? link.key : undefined
-		const meta = collectItemProps(context.descriptor.props, props)
+		const initial = collectionInitialSourceOf(elevator)
+		const declared = initial?.ordinal(item) !== undefined
+		const meta = declared ? {} : collectItemProps(context.descriptor.props, props)
 		// The facade gets the item context on assembly: the markup reads it
 		// from the first render
 		const itemContext = engine ? new TItemContext(item, engine.extensions) : undefined
@@ -122,6 +126,7 @@ export class TCollectionItemExtension {
 		}
 
 		context.events.on('attach', () => {
+			context.bundle?.get(TCollectionInitialPartPlugin)?.pluginMount?.accept()
 			plain?.events.on('item:removed', removed)
 
 			// The group key goes only to an item the entry adds to the list: a
@@ -137,7 +142,9 @@ export class TCollectionItemExtension {
 			members?.add(adapter, context)
 
 			// `meta` after the registration: the engine applies it to an item already in it
-			metaOf<object>(engine)?.apply(item, grouped ? { ...meta, group: groupKey } : meta)
+			// Initial data was accepted once by its owner; a part mount must not reseed it.
+			if (!declared)
+				metaOf<object>(engine)?.apply(item, grouped ? { ...meta, group: groupKey } : meta)
 		})
 
 		context.events.on('destroy', () => {

@@ -165,3 +165,18 @@ test('reports every unavailable candidate clearly instead of selecting an unprob
 test('does not select a mirror without any active Ubuntu suites', async () => {
 	await assert.rejects(selectUbuntuMirror([]), /No active Ubuntu suites to probe/)
 })
+
+test('allows an explicit canonical-only fallback after apt package downloads fail', async () => {
+	const requested = []
+	const canonical = CI_UBUNTU_MIRRORS[1]
+	const mirror = await selectUbuntuMirror(['noble', 'noble-security'], {
+		mirrors: [canonical],
+		fetcher: async (url) => {
+			requested.push(url)
+			return { ok: true, body: { cancel: async () => {} } }
+		},
+	})
+	assert.equal(mirror, canonical)
+	assert.equal(requested.length, 2)
+	assert.ok(requested.every((url) => url.startsWith(canonical + '/')))
+})

@@ -25,7 +25,7 @@ export function setupTabs(
 
 	const collectionAdapter = createAngularAdapterContext(
 		TabsCollectionDescriptor(),
-		{ props, options: { owner: adapter.instance, engine } },
+		{ props, options: { owner: adapter.instance, engine: engine } },
 		{ bundle: adapter.bundle },
 	)
 		.use(TCollectionExtension, { elevator: AngularElevatorFactory })

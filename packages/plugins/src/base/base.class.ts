@@ -1,6 +1,7 @@
 import type { IListenable, IPlugin, IPluginContext, TPluginEvents } from './types'
 import { TEvented } from '@soxa-ui/core'
 import type { TEventSink } from '@soxa-ui/core'
+import { TPluginMount } from './mount.class'
 
 export abstract class TBasePlugin<
 	TInstance = any,
@@ -14,8 +15,18 @@ export abstract class TBasePlugin<
 	 * у `TEvented.relay`.
 	 */
 	private _unsubscribes: (() => void)[] = []
+	private _pluginMount: TPluginMount | undefined
+
+	get pluginMount(): TPluginMount | undefined {
+		return this._pluginMount
+	}
 
 	install(ctx: IPluginContext, options?: unknown): void {
+		const mount: unknown =
+			options && typeof options === 'object' ? Reflect.get(options, 'pluginMount') : undefined
+
+		this._pluginMount = mount instanceof TPluginMount ? mount : undefined
+
 		this._sink.emit('install', ctx, options)
 	}
 
@@ -81,7 +92,17 @@ export abstract class TBasePlugin<
 	): void {
 		if (!source) return
 
-		source.on(event, handler)
-		this._unsubscribes.push(() => source.off(event, handler))
+		this._whenAccepted(() => {
+			source.on(event, handler)
+
+			return () => source.off(event, handler)
+		})
+	}
+
+	/** Queue a foreign effect while assembly may still be discarded. */
+	protected _whenAccepted(effect: () => void | (() => void)): void {
+		const release = this._pluginMount ? this._pluginMount.defer(effect) : effect()
+
+		if (release) this._unsubscribes.push(release)
 	}
 }

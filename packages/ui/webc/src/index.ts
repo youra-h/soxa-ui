@@ -160,3 +160,5 @@ export { TAvatarElement, TAvatarGroupElement } from './components/avatar'
 export type { TAvatarElementProps, TAvatarGroupElementProps } from './components/avatar'
 export { TSeparatorElement } from './components/separator'
 export type { TSeparatorElementProps } from './components/separator'
+
+export type { ICollectionInitialSource, ICollectionInitialPanel } from '@soxa-ui/plugins'

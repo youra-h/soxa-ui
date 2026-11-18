@@ -948,18 +948,25 @@ describe('хост Web Components · даты', () => {
 		const panel = find(document.body, ':scope > .so-date-picker__panel')
 
 		expect(find(picker, '.so-date-picker__field').getAttribute('aria-label')).toBe('Дата')
+		// The ready closed panel keeps its reference before the first opening.
 		expect(trigger.getAttribute('aria-controls')).toBe(panel.id)
+		expect(trigger.getAttribute('aria-expanded')).toBe('false')
 		// The calendar comes with the panel's first opening
 		expect(panel.querySelector('.so-date-picker__calendar')).toBeNull()
 		expect(panel.style.display).toBe('none')
 
 		await nextFrame()
+		expect(trigger.getAttribute('aria-controls')).toBe(panel.id)
+		expect(trigger.getAttribute('aria-expanded')).toBe('false')
 		events.length = 0
 		trigger.click()
 		await flush()
 
 		expect(events).toContain('change:open')
 		expect(panel.style.display).toBe('')
+		expect(trigger.getAttribute('aria-controls')).toBe(panel.id)
+		expect(trigger.getAttribute('aria-expanded')).toBe('true')
+		expect(document.getElementById(trigger.getAttribute('aria-controls') ?? '')).toBe(panel)
 		expect(panel.querySelector('.so-date-picker__calendar .so-calendar__grid')).not.toBeNull()
 
 		// The days' plugins get their nodes a frame after the calendar is built
@@ -969,6 +976,8 @@ describe('хост Web Components · даты', () => {
 
 		expect(events).toContain('change:value')
 		expect(panel.style.display).toBe('none')
+		expect(trigger.getAttribute('aria-controls')).toBe(panel.id)
+		expect(trigger.getAttribute('aria-expanded')).toBe('false')
 
 		handle.unmount()
 

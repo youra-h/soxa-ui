@@ -23,8 +23,14 @@ import {
 	COLLECTION_ENGINE_ELEVATOR,
 	ITEM_CONTEXT_ELEVATOR,
 } from '../../../protected/adapter/elevator/keys'
-import { COLLECTION_BUNDLES_ELEVATOR, COLLECTION_MEMBERS_ELEVATOR } from './keys'
+import {
+	COLLECTION_BUNDLES_ELEVATOR,
+	COLLECTION_MEMBERS_ELEVATOR,
+	COLLECTION_INITIAL_ELEVATOR,
+} from './keys'
 import { TCollectionMembers } from './members.class'
+import { collectionPreparedSource } from './preparation.class'
+import { TCollectionInitialExtension } from './initial.extension.class'
 import type { ICollectionExtensionOptions, TCollectionOwner } from './types'
 
 export class TCollectionExtension {
@@ -39,6 +45,13 @@ export class TCollectionExtension {
 		elevator(ITEM_CONTEXT_ELEVATOR).down(engine)
 
 		this._wire(context, elevator, engine)
+
+		// Prepared data is materialized once before native children are assembled.
+		if (!context.get(TCollectionInitialExtension)) {
+			const source = collectionPreparedSource(context.bundle)
+			if (source) context.use(TCollectionInitialExtension, { source, elevator })
+			else elevator(COLLECTION_INITIAL_ELEVATOR).down(null)
+		}
 
 		// The collection comes down with its owner, and its members with it
 		const members = new TCollectionMembers()

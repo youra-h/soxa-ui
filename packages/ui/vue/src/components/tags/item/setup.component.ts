@@ -23,10 +23,7 @@ export default {
 	extends: BaseTagsItem,
 	expose: useExpose(),
 	setup(props: TagsItemProps, { emit }: SetupContext) {
-		const adapter = createVueAdapterContext(TagsItemDescriptor(), {
-			ctrl: props.ctrl,
-			props,
-		})
+		const adapter = createVueAdapterContext(TagsItemDescriptor(), { ctrl: props.ctrl, props })
 
 		const itemAdapter = createVueAdapterContext(
 			TagsCollectionItemDescriptor(),

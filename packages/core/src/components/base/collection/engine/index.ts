@@ -29,6 +29,7 @@ export {
 // Расширения
 export * from './extension'
 export * from './options'
+export * from './transactions'
 
 // Ядро
 export { TCollectionStorageDriver } from './driver.class'

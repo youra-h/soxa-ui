@@ -8,8 +8,14 @@
  */
 
 import { useContext, useEffect, useEffectEvent, useId, useMemo, useReducer, useRef } from 'react'
-import { createAdapterContext } from '@soxa-ui/setup'
+import {
+	createAdapterContext,
+	TCollectionPreparation,
+	TCollectionPreparationLifetime,
+	collectionNeedsPreparation,
+} from '@soxa-ui/setup'
 import type { IAdapterContext, TElevatorFactory } from '@soxa-ui/setup'
+import type { ICollectionTransaction } from '@soxa-ui/core'
 import { ElevatorContext, type TElevatorLayer } from '../elevator/layer'
 import { LocaleContext } from '../locale/context'
 import { TReactElevatorScope } from '../elevator/scope.class'
@@ -66,6 +72,12 @@ function destroyAll(contexts: TAdapterContexts): void {
  */
 class TBuilt<T extends TAdapterContexts> {
 	private _destroyed = false
+	private _receipt?: ICollectionTransaction
+
+	/** Preparation tracks resources; native acceptance alone confirms this attempt. */
+	prepare(preparation: TCollectionPreparation | undefined): void {
+		this._receipt = preparation?.pending(listOf(this.contexts), this.destroy)
+	}
 
 	/**
 	 * @param contexts exactly what the factory returned
@@ -92,13 +104,20 @@ class TBuilt<T extends TAdapterContexts> {
 	 * children before the owner, whose consumer has to hear them enter.
 	 */
 	accept(): void {
+		this._receipt?.commit()
 		drafts.accept(this.held)
+
 		accepting(this.contexts, () => attachAll(this.contexts))
 	}
 
 	readonly destroy = (): void => {
-		destroyAll(this.contexts)
+		if (this._destroyed) return
+
 		this._destroyed = true
+		this._receipt?.cancel()
+		drafts.accept(this.held)
+
+		destroyAll(this.contexts)
 	}
 }
 
@@ -109,17 +128,32 @@ export function useAdapterContext<T extends TAdapterContexts>(
 	const locale = useContext(LocaleContext)
 	const parent = useContext(ElevatorContext)
 	const ref = useRef<TBuilt<T> | null>(null)
+	const preparationLifetime = useRef<TCollectionPreparationLifetime | null>(null)
+
 	// The layer the last effect setup ran with
 	const settled = useRef<TElevatorLayer | null>(null)
 	const [, rerender] = useReducer(nextVersion, 0)
+
 	const assemble = (layer: TElevatorLayer): TBuilt<T> => {
 		const scope = new TReactElevatorScope(layer)
+		let preparation: TCollectionPreparation | undefined
 		const held: object[] = []
+
 		// A retry of a discarded render over the same `ctrl` keeps the discarded one's id
 		let id = mountId
+
 		// A mount id and a locale given explicitly as options stay with whoever
 		// gave them
 		const create: TCreateAdapterContext = (descriptor, options, config) => {
+			if (collectionNeedsPreparation(descriptor, config)) {
+				preparationLifetime.current ??= new TCollectionPreparationLifetime()
+				preparation ??= new TCollectionPreparation(
+					scope.elevator,
+					preparationLifetime.current,
+				)
+				config = { ...config, preparation: config?.preparation ?? preparation }
+			}
+
 			const taken = drafts.take(options)
 
 			held.push(...taken.held)
@@ -127,20 +161,32 @@ export function useAdapterContext<T extends TAdapterContexts>(
 
 			return createAdapterContext(descriptor, { mountId: id, locale, ...options }, config)
 		}
+
 		const built = new TBuilt(factory(create, scope.elevator), scope, held)
 
 		drafts.add(held, built.destroy, id)
 
+		// Register rollback only after all contexts exist, so it can release the whole assembly.
+		try {
+			built.prepare(preparation)
+		} catch (error) {
+			built.destroy()
+
+			throw error
+		}
+
 		return built
 	}
+
 	// The factory of the last render, not of the one the effect saw
 	const rebuild = useEffectEvent(() => assemble(parent))
 
-	if (!ref.current) {
+	if (!ref.current || ref.current.destroyed) {
 		ref.current = assemble(parent)
 	}
 
 	const built = ref.current
+
 	// A stale read layer sets the effect up again with the new one
 	const source = built.scope.isStale(parent) ? parent : settled.current
 

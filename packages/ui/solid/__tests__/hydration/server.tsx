@@ -1,3 +1,4 @@
+import { CollectionInitial } from './pages'
 /**
  * Разметка сервера для гидратации — её рисует сервер той же версии solid-js,
  * что гидратирует браузер.
@@ -91,6 +92,8 @@ function streamOf(page: (props: TStreamedPageProps) => JSX.Element): Promise<str
  */
 export async function renderServerMarkup() {
 	return {
+		'collection-initial': renderToString(() => <CollectionInitial />),
+		'collection-initial-auto': renderToString(() => <CollectionInitial automatic />),
 		// Страница целиком (`renderToString`)
 		alert: renderToString(() => <AlertPage />),
 		'alert-dialog': renderToString(() => <AlertDialogPage />),

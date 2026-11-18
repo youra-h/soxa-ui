@@ -65,6 +65,7 @@
     "check:ai-docs": "node tools/ai-docs/smoke.mjs",
     "check:ai-docs:react": "node tools/ai-docs/react-smoke.mjs",
     "check:ai-docs:angular": "node tools/ai-docs/angular-smoke.mjs",
+    "check:ssr-collection-prototype": "node tools/ssr-collection-prototype/run.mjs",
     "check:ai-docs:svelte": "node tools/ai-docs/svelte-smoke.mjs",
     "check:ai-docs:svelte:development": "node tools/ai-docs/svelte-smoke.mjs --development",
     "check:ai-docs:solid": "node tools/ai-docs/solid-smoke.mjs",

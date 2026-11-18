@@ -388,6 +388,8 @@ On the way there:
 
 ## Documentation
 
+- [SSR collections](docs/ssr-collections.md) — initial Tabs/Tags data, server HTML and hydration.
+
 - [Component API metadata](docs/api/README.md) - generated props, events, slots and framework bindings for documentation websites.
 
 - [docs/architecture.md](docs/architecture.md) — architecture overview: layers, descriptors,

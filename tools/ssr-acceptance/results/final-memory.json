@@ -1,0 +1,36 @@
+{
+  "node": "v24.20.0",
+  "mode": "production",
+  "commit": "22d2116b8a58739c81c286594df8036eef5d1f92",
+  "workingTreeDirty": true,
+  "candidateSha256": null,
+  "adapter": "@soxa-ui/react",
+  "afterExternalRelease": {
+    "bundlesAlive": 0,
+    "sourcesAlive": 0
+  },
+  "distSha256": {
+    "packages/core": "f57ef55ebb5df408ff495ea4114ae9bdf43a081b33c138fbb7d549a75ad6314e",
+    "packages/setup": "3f6a1f3b3623490be2493493208239b2e2549b05d14fc83edae0d270a875dedd",
+    "packages/plugins": "2d95f101a6e9134b1168d9451f5459de445b69cfe951fadf9aaaa6354d23b222",
+    "packages/ui/react": "a0b979354b105206857adf5f078a6d0a43b646dab46a163721a9b72097713b02"
+  },
+  "results": [
+    {
+      "outcome": "success",
+      "enginesHeld": 12,
+      "bundlesObserved": 444,
+      "bundlesAlive": 0,
+      "sourcesObserved": 12,
+      "sourcesAlive": 0
+    },
+    {
+      "outcome": "abort",
+      "enginesHeld": 24,
+      "bundlesObserved": 444,
+      "bundlesAlive": 0,
+      "sourcesObserved": 12,
+      "sourcesAlive": 0
+    }
+  ]
+}

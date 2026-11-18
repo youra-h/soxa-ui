@@ -1,0 +1,11 @@
+results/*
+!results/functional.json
+!results/external-memory.json
+!results/rollback-external-memory.json
+!results/request-owned-memory.json
+!results/ci.json
+!results/integrated-memory.json
+!results/integrated-memory-matrix.json
+!results/integrated-performance.json
+!results/integrated-request-owned-memory.json
+!results/final-memory.json
