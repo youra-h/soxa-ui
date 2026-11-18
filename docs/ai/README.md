@@ -1,10 +1,15 @@
 # Versioned public documentation source
 
 This directory is the library-owned source format for small, versioned AI
-documentation records. The initial release directory is **0.3.0**. The separate
+documentation records. The available release directories are **0.3.0** and **0.4.1**. The separate
 website owns its routes, localization, prose pages, rendering and public
 `llms.txt` endpoints. This format supplies metadata, a minimal shared overview,
-Vue/Nuxt and React/Next.js consumer recipes and generated API records; it does not replace those pages.
+consumer recipes for all six adapters and generated API records; it does not replace those pages.
+
+For 0.4.1 start with [the overview](./0.4.1/overview.md),
+[release changes](./0.4.1/release-changes.md) and
+[validation and limits](./0.4.1/release-validation.md). The original commands
+below demonstrate 0.3.0; the final section explains exact 0.4.1 selection.
 
 The source language is English. This is public consumer documentation, not the
 repository's agent workflow. Never publish private memory, task history,
@@ -308,3 +313,41 @@ For adding a component to the library, use the separate
 0.4.0 source tree, not the installed 0.3.0 API. The 0.3.0 manifest's contributor
 coverage remains pending: the consumer builder must not silently return newer
 source-development instructions as release-specific contributor records.
+
+## Published 0.4.1 corpus
+
+Use `docs/ai/0.4.1/manifest.json` with exact published setup 0.4.1. The release
+revision is `7c1a7886b2c9d17c21ae91cc347d680b0f4ab2cf`; the API digest is
+`368e374f7536177b8909c1de051a6e923757a68ef67b7249fa07b36c4f1c1354`.
+Base and Oren are independently pinned to 0.4.1, Material and Lucide to 0.3.1.
+The 0.3.0 directory and its historical evidence remain unchanged. No 0.4.0
+corpus is implied, and there is no latest/version-range fallback.
+
+The downloader and builder commands above work with version 0.4.1 and the
+corresponding exact npm setup package. MCP reads the resulting corpus through
+the same tools; configure both version directories to serve both releases.
+Documentation delivery remains pinned to its own full commit SHA.
+
+Consumer checks accept the exact corpus through `SOXA_DOCS_VERSION`. For example:
+
+```sh
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:react
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:angular
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:svelte
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:solid
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:webc
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:recipes
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:mcp
+```
+
+In PowerShell set `$env:SOXA_DOCS_VERSION = '0.4.1'` before the npm command.
+Unset the variable to retain the original 0.3.0 default. CI checks both exact
+corpora; strict Svelte published-package checks are added for 0.4.1 only, while
+the separate Svelte development-tarball check retains its existing purpose.
+
+Generated API adds Alert, AlertDialog, Avatar, AvatarGroup and Separator across
+all six adapters. The [release record](./0.4.1/release-changes.md) distinguishes
+API coverage from runnable examples and the remaining React Tabs SSR limit.
+The source contains no new website pages, localization, site dependency update
+or hosted MCP endpoint. Those remain website-owned work.

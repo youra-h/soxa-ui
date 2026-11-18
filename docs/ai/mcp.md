@@ -164,3 +164,13 @@ implementation/documentation revision and received example hashes. Its two
 retained npm locks identify the SDK/server-preparation and consumer installations.
 The protocol session made 81 tool calls; published-package types, production
 build and Chromium interactions passed. Desktop clients remain unverified.
+
+## 0.4.1 corpus
+
+The same transport serves 0.4.1 without a separate server implementation. Fetch
+the exact 0.4.1 documentation source with --include-mcp, build from published
+setup 0.4.1, then pass its output with --corpus. Supply both 0.3.0 and 0.4.1
+corpus directories to offer both versions; callers must still choose exactly.
+Run the SDK/consumer check with SOXA_DOCS_VERSION=0.4.1. It also retrieves the
+five new components through all six adapter boundaries. Client desktop
+integrations and conversational AI authoring remain separate, unverified work.

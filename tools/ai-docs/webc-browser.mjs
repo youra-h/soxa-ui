@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { missingReferences } from './consumer-browser.mjs'
 
 /** Exercise the published browser adapter without aliases to library sources. */
-export async function checkWebc(browser, url) {
+export async function checkWebc(browser, url, { legacy = true } = {}) {
 	const page = await browser.newPage()
 	const diagnostics = []
 	page.on('console', (message) => {
@@ -73,7 +73,7 @@ export async function checkWebc(browser, url) {
 		checks.push('reverse property writes and cancelable before event')
 
 		const ariaObservations = await missingReferences(page)
-		assert.equal(ariaObservations.length, 1)
+		assert.equal(ariaObservations.length, legacy ? 1 : 0)
 		for (const issue of ariaObservations) {
 			assert.equal(issue.attr, 'aria-labelledby')
 			assert.equal(issue.role, 'dialog')

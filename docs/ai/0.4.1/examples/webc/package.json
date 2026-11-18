@@ -1,0 +1,25 @@
+{
+  "name": "soxa-webc-recipes",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@soxa-ui/webc": "0.4.1",
+    "@soxa-ui/setup": "0.4.1",
+    "@soxa-ui/plugins": "0.4.1",
+    "@soxa-ui/theme-oren": "0.4.1",
+    "@soxa-ui/icons-material": "0.3.1"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vite": "8.3.5",
+    "@types/node": "24.19.2"
+  }
+}

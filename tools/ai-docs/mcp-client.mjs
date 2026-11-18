@@ -6,7 +6,7 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js'
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 
 // Executed in a fresh external consumer. All library instructions and code arrive over MCP.
-const [server, corpus] = process.argv.slice(2)
+const [server, corpus, version = '0.3.0'] = process.argv.slice(2)
 const transport = new StdioClientTransport({
 	command: process.execPath,
 	args: [server, '--corpus', corpus],
@@ -19,7 +19,7 @@ transport.stderr?.on('data', (bytes) => {
 })
 const client = new Client({ name: 'soxa-docs-empty-consumer', version: '1.0.0' })
 const transcript = []
-const boundary = { version: '0.3.0', audience: 'consumer', framework: 'vue' }
+const boundary = { version, audience: 'consumer', framework: 'vue' }
 
 async function call(name, args) {
 	const response = await client.callTool({ name, arguments: args })
@@ -53,7 +53,7 @@ try {
 	assert.equal((await client.listTools()).tools.length, 9)
 	await client.ping()
 	const versions = await call('list_versions', {})
-	assert.equal(versions.versions[0].libraryVersion, '0.3.0')
+	assert.equal(versions.versions[0].libraryVersion, version)
 	assert.equal(versions.versions[0].contributorGuides, 'pending')
 	const provenance = versions.versions[0]
 	const resources = await client.listResources()
@@ -65,7 +65,7 @@ try {
 	)
 	assert.equal((await client.listResourceTemplates()).resourceTemplates.length, 1)
 	await client.readResource({
-		uri: 'soxa://docs/0.3.0/consumer/vue/vue-start?offset=0&limit=100',
+		uri: `soxa://docs/${version}/consumer/vue/vue-start?offset=0&limit=100`,
 	})
 	await call('list_components', { ...boundary, limit: 2 })
 	for (const component of ['select', 'date-picker']) {
@@ -73,6 +73,19 @@ try {
 		assert.equal(record.api.component, component)
 		assert.ok(record.api.props.some((p) => p.name === 'value'))
 	}
+	if (version === '0.4.1')
+		for (const framework of ['vue', 'react', 'angular', 'solid', 'svelte', 'webc'])
+			for (const component of [
+				'alert',
+				'alert-dialog',
+				'avatar',
+				'avatar-group',
+				'separator',
+			]) {
+				const record = await read('get_component', { framework, component })
+				assert.equal(record.api.component, component)
+				assert.equal(record.framework, framework)
+			}
 	const installation = await call('get_installation', boundary)
 	assert.ok(installation.items.some((entry) => entry.id === 'vue-installation'))
 	await read('get_document', { id: 'vue-installation' })

@@ -29,7 +29,9 @@ await new Promise((done) => server.listen(0, '127.0.0.1', done))
 const browser = await webkit.launch()
 try {
 	const url = 'http://127.0.0.1:' + server.address().port
-	const result = await checkWebc(browser, url)
+	const result = await checkWebc(browser, url, {
+		legacy: (process.env.SOXA_DOCS_VERSION ?? '0.3.0') === '0.3.0',
+	})
 	const page = await browser.newPage()
 	const errors = []
 	page.on('pageerror', (error) => errors.push(error.message))

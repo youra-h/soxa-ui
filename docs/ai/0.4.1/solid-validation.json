@@ -1,0 +1,552 @@
+{
+  "provenance": "published-0.4.1",
+  "nodeVersion": "v24.20.0",
+  "tools": [
+    {
+      "path": "tools/ai-docs/solid-smoke.mjs",
+      "sha256": "b11409979a3665a2c0d1f9f7ec1688d3d4f4963841f1423a36889694cb329977"
+    },
+    {
+      "path": "tools/ai-docs/consumer-browser.mjs",
+      "sha256": "1e0bcf759c4b36c36bfe90ec01ad6302f7266175452c435e2dd40bdb0cd058c4"
+    },
+    {
+      "path": "tools/ai-docs/corpus.mjs",
+      "sha256": "e0263bdf01c5d509dad397decf5cb9f6e399ecce8d1d05090f72cdc1652003dd"
+    }
+  ],
+  "consumers": [
+    {
+      "name": "solid",
+      "packages": [
+        {
+          "name": "@soxa-ui/core",
+          "version": "0.4.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/core/-/core-0.4.1.tgz",
+          "integrity": "sha512-u9FmaPpjjCxuXqo4OlscHJAXoUHuHRV8zq/2r+lwk/2IWiXvHzCHtoCUsviYjAfZmQXpl/yJIMIXpzGDY70CVw=="
+        },
+        {
+          "name": "@soxa-ui/icons-material",
+          "version": "0.3.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/icons-material/-/icons-material-0.3.1.tgz",
+          "integrity": "sha512-YyNsgvuCPZKLerpO2F/zdzgGdSYT7S1fGpcP/Tu80aG7EZsg7+g1Mt/o/cLYT1h9tV2l3yNaFPWFDDK37pDsIw=="
+        },
+        {
+          "name": "@soxa-ui/plugins",
+          "version": "0.4.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/plugins/-/plugins-0.4.1.tgz",
+          "integrity": "sha512-mmE+3/zYEexEYxs3MlwCGmZTXmQn40mBZCE90/b/1XfsYKVYoaqWFQoBjQMblrW8Zlm6Q3oFLc+f5/3Zq8rqZQ=="
+        },
+        {
+          "name": "@soxa-ui/setup",
+          "version": "0.4.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.4.1.tgz",
+          "integrity": "sha512-hUe7gJhRzwBU/7gC5cNcSlwxOOLCMpOmKGqKgrqZyHn2kgPanyypGAZAef6K2ysVGcMwHdflqMgTTG9kqc90Pw=="
+        },
+        {
+          "name": "@soxa-ui/solid",
+          "version": "0.4.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/solid/-/solid-0.4.1.tgz",
+          "integrity": "sha512-uuAquB3JPUrJAAdeGKXH9zk7l/CovMqGseNs9LnXtkhEkfNV5001z4EqYmKxQo7fJAvXJLq3679hQgAhrH/BcQ=="
+        },
+        {
+          "name": "@soxa-ui/theme-base",
+          "version": "0.4.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/theme-base/-/theme-base-0.4.1.tgz",
+          "integrity": "sha512-4VxLXL5ycLRQa5n50z5x9Nnyk11EX/FCpQ7eKS4CPWFJfCeCpqGFI++tqdJe4roGwkN74CUlCBYOhjNf59t8cw=="
+        },
+        {
+          "name": "@soxa-ui/theme-oren",
+          "version": "0.4.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/theme-oren/-/theme-oren-0.4.1.tgz",
+          "integrity": "sha512-yxci/WJ7ccKFxSIm3f1Ad+oy04cwDnEZj6NJp/uLUGXQSc7w83PPNKD/kRAkxB/imj52VJg+KbyyznETslV1oQ=="
+        }
+      ],
+      "lockSha256": "a2010778121311c48d3f97b15c1bd1935b4386c74755e8f6596d336756048000",
+      "strictTypes": true,
+      "browser": true,
+      "inputs": [
+        {
+          "path": "solid/CtrlExample.tsx",
+          "sha256": "429647005474553b185a6e2070a45a5ff1554d9d6712fbea32cbdcc69b19a2a2"
+        },
+        {
+          "path": "solid/index.html",
+          "sha256": "659fb2dcec6382c9cebda3f92ca6656e12160699cd882081c82e1961df5d6753"
+        },
+        {
+          "path": "solid/main.tsx",
+          "sha256": "05d183e6e6ba556d4f768b3ec244c0a146ff0300712a4b0dde8ebd3eaac69550"
+        },
+        {
+          "path": "solid/package.json",
+          "sha256": "68436612e02b3c0e90fed42bcc9cdec00c632e5d31e51124b61edc1a6a505d62"
+        },
+        {
+          "path": "solid/Recipes.tsx",
+          "sha256": "d4d7fffaa457f2a2bf4df362eeada58e782b2706a76a719b7644ef1e532e535b"
+        },
+        {
+          "path": "solid/setup.ts",
+          "sha256": "ea2ef4f4f1e611ae5dbc2268ddc07cecd15d4e6ff59c0d573959f1ba90582b52"
+        },
+        {
+          "path": "solid/tsconfig.json",
+          "sha256": "71942352e61afc1f654c63ccdca697f8dbf0688c1db8e1b5c4483304d00f1b4b"
+        },
+        {
+          "path": "solid/vite.config.ts",
+          "sha256": "e3cbcccc0210c8670961e09cce31be44a2f9ad6defbd030b20f838de9904d532"
+        }
+      ],
+      "apiSha256": "368e374f7536177b8909c1de051a6e923757a68ef67b7249fa07b36c4f1c1354",
+      "productionBuild": true,
+      "hydratedReferenceGaps": []
+    },
+    {
+      "name": "solidstart",
+      "packages": [
+        {
+          "name": "@soxa-ui/core",
+          "version": "0.4.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/core/-/core-0.4.1.tgz",
+          "integrity": "sha512-u9FmaPpjjCxuXqo4OlscHJAXoUHuHRV8zq/2r+lwk/2IWiXvHzCHtoCUsviYjAfZmQXpl/yJIMIXpzGDY70CVw=="
+        },
+        {
+          "name": "@soxa-ui/icons-material",
+          "version": "0.3.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/icons-material/-/icons-material-0.3.1.tgz",
+          "integrity": "sha512-YyNsgvuCPZKLerpO2F/zdzgGdSYT7S1fGpcP/Tu80aG7EZsg7+g1Mt/o/cLYT1h9tV2l3yNaFPWFDDK37pDsIw=="
+        },
+        {
+          "name": "@soxa-ui/plugins",
+          "version": "0.4.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/plugins/-/plugins-0.4.1.tgz",
+          "integrity": "sha512-mmE+3/zYEexEYxs3MlwCGmZTXmQn40mBZCE90/b/1XfsYKVYoaqWFQoBjQMblrW8Zlm6Q3oFLc+f5/3Zq8rqZQ=="
+        },
+        {
+          "name": "@soxa-ui/setup",
+          "version": "0.4.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.4.1.tgz",
+          "integrity": "sha512-hUe7gJhRzwBU/7gC5cNcSlwxOOLCMpOmKGqKgrqZyHn2kgPanyypGAZAef6K2ysVGcMwHdflqMgTTG9kqc90Pw=="
+        },
+        {
+          "name": "@soxa-ui/solid",
+          "version": "0.4.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/solid/-/solid-0.4.1.tgz",
+          "integrity": "sha512-uuAquB3JPUrJAAdeGKXH9zk7l/CovMqGseNs9LnXtkhEkfNV5001z4EqYmKxQo7fJAvXJLq3679hQgAhrH/BcQ=="
+        },
+        {
+          "name": "@soxa-ui/theme-base",
+          "version": "0.4.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/theme-base/-/theme-base-0.4.1.tgz",
+          "integrity": "sha512-4VxLXL5ycLRQa5n50z5x9Nnyk11EX/FCpQ7eKS4CPWFJfCeCpqGFI++tqdJe4roGwkN74CUlCBYOhjNf59t8cw=="
+        },
+        {
+          "name": "@soxa-ui/theme-oren",
+          "version": "0.4.1",
+          "resolved": "https://registry.npmjs.org/@soxa-ui/theme-oren/-/theme-oren-0.4.1.tgz",
+          "integrity": "sha512-yxci/WJ7ccKFxSIm3f1Ad+oy04cwDnEZj6NJp/uLUGXQSc7w83PPNKD/kRAkxB/imj52VJg+KbyyznETslV1oQ=="
+        }
+      ],
+      "lockSha256": "94697533fbe11d3825acdba23815530ba4e98456d8c7e81d3588c48e3a9f8de3",
+      "strictTypes": true,
+      "browser": true,
+      "inputs": [
+        {
+          "path": "solidstart/package.json",
+          "sha256": "545914c3af2c1a6b49538afacb93e833da28b18f4a03a9fa273d0417f53bbaad"
+        },
+        {
+          "path": "solidstart/tsconfig.json",
+          "sha256": "9650ccef1e713805a7bd55647cac6d94a1bd3b4d61f15767af87d854d84b0458"
+        },
+        {
+          "path": "solidstart/vite.config.ts",
+          "sha256": "13401b2dc5d31c1d3e270aa08ce35497d02c72d5dd0bd626c3a07a7f2ebf0bc3"
+        },
+        {
+          "path": "solidstart/src/app.tsx",
+          "sha256": "8e42ca943bddaebf9bd5d55b555a93a1514c33f9195d4977d6946ef829421add"
+        },
+        {
+          "path": "solidstart/src/CtrlExample.tsx",
+          "sha256": "429647005474553b185a6e2070a45a5ff1554d9d6712fbea32cbdcc69b19a2a2"
+        },
+        {
+          "path": "solidstart/src/entry-client.tsx",
+          "sha256": "df2bef1355f4a61ee517463f20706d2eca8c886f1061c183a8bcb8e971a94a52"
+        },
+        {
+          "path": "solidstart/src/entry-server.tsx",
+          "sha256": "e32871314767c7f60140c3a288e4b8a52d69422375f4dbad3f13f396c3bc2420"
+        },
+        {
+          "path": "solidstart/src/env.d.ts",
+          "sha256": "682e7deb9a0710aae7d8d68fdd3f8beff467d5669c1432c9c85000501121bb42"
+        },
+        {
+          "path": "solidstart/src/Recipes.tsx",
+          "sha256": "d4d7fffaa457f2a2bf4df362eeada58e782b2706a76a719b7644ef1e532e535b"
+        },
+        {
+          "path": "solidstart/src/setup.ts",
+          "sha256": "ea2ef4f4f1e611ae5dbc2268ddc07cecd15d4e6ff59c0d573959f1ba90582b52"
+        },
+        {
+          "path": "solidstart/src/routes/away.tsx",
+          "sha256": "66bf17460a3cfd32e78d202411648f01b2648d2c09ada28d6925ae1d2e0e684a"
+        },
+        {
+          "path": "solidstart/src/routes/index.tsx",
+          "sha256": "33c3b5604b3b16690f11862f9549f6e72347ef98e0d30cbe4b100732d1899c46"
+        }
+      ],
+      "apiSha256": "368e374f7536177b8909c1de051a6e923757a68ef67b7249fa07b36c4f1c1354",
+      "productionBuild": true,
+      "coldSSR": true,
+      "hydratedReferenceGaps": [],
+      "ssrReferenceGaps": []
+    }
+  ],
+  "corpusInputs": [
+    {
+      "id": "api-solid-accordion",
+      "sha256": "0697c4ba8d1abd26e1d5459509d76d9763ff7975e1b21703c510254ac8f60d3d"
+    },
+    {
+      "id": "api-solid-accordion-item",
+      "sha256": "38d2c48591f5f4c90e5c732a3b442ec8f218d0284bb2e96b1ccca29a5fa75713"
+    },
+    {
+      "id": "api-solid-alert",
+      "sha256": "d7fefc92470bf93766daff147b2c549bf4ba0c2380d65997afeb6c03ee25f13d"
+    },
+    {
+      "id": "api-solid-alert-dialog",
+      "sha256": "d6267c1ae86392ccc0d2ffacd42937a84914c7efcac024dde58eea7d52cbe662"
+    },
+    {
+      "id": "api-solid-avatar",
+      "sha256": "2d00bf245f3968adca13c6fa510ceebdb9fbec155dfdd5701d9b9f531e758e32"
+    },
+    {
+      "id": "api-solid-avatar-group",
+      "sha256": "fd80f08c49ebd347e3633dde2ef241defbbc72d3ebb37dedce87de6bb31b3fa5"
+    },
+    {
+      "id": "api-solid-badge",
+      "sha256": "c7b1e44469afbf3eb41d3589cf94a8fb718393dd57d145f187ae07208eb9bebf"
+    },
+    {
+      "id": "api-solid-breadcrumbs",
+      "sha256": "98d79534566356c33cd5792e0fe7b4ecb6dadcd6019bec205dbbf33edfb1b93c"
+    },
+    {
+      "id": "api-solid-breadcrumbs-item",
+      "sha256": "5ff04ef0cefe0eeed88a64f16e3241e830898b0dc14abbe14746bfe1253e3857"
+    },
+    {
+      "id": "api-solid-button",
+      "sha256": "039265058776032fdb0400fd174857c5103da82e9a97b95ad7fd45b59c69535d"
+    },
+    {
+      "id": "api-solid-calendar",
+      "sha256": "1a699dff8b9ba0dd760b2ebc593b448d87bd0b6c0f137e4395e4e14602a22208"
+    },
+    {
+      "id": "api-solid-calendar-item",
+      "sha256": "4c67603bbef7c56b0072cef8dfc805a978060e15064188538ae79d157cff0be1"
+    },
+    {
+      "id": "api-solid-check-box",
+      "sha256": "d8d6073ddb813048f328a8033ae3561b84f243a1c033886c87fdaf98241e9546"
+    },
+    {
+      "id": "api-solid-code-block",
+      "sha256": "cccdda4cea42ffb04b3072f1d701194e698b6cf45cf164eb91c5220e824beee9"
+    },
+    {
+      "id": "api-solid-component-view",
+      "sha256": "bcae2823f3177ecd4537f62c3bdc95bc854a332eb36091c67307a6241c479ff7"
+    },
+    {
+      "id": "api-solid-date-input",
+      "sha256": "4a27c1117778b1aadb6afb24057cc8f97be98cc5d7d1e92c767c0cf2d2d6a531"
+    },
+    {
+      "id": "api-solid-date-picker",
+      "sha256": "38f61e39c342ab77cc471b0a0a77a19896d7cebd7b45a5058ed9994eda8d7b28"
+    },
+    {
+      "id": "api-solid-dialog",
+      "sha256": "dd99403e97001f5e68d1bdc86c2605af3f720751bc2be9bee168ae1514c9e1c7"
+    },
+    {
+      "id": "api-solid-drag-and-drop",
+      "sha256": "f0f1eebda8d8220e4fbcccc6274d94f22d0dbb83a628d4d2136fe20149e915cb"
+    },
+    {
+      "id": "api-solid-drawer",
+      "sha256": "f992bc8b13e923f6af2775e3d7ca5c120763bb1ae5dc357b2734c9cbddd2b488"
+    },
+    {
+      "id": "api-solid-field",
+      "sha256": "03c747c6e28281c9df033491599b4e2329718fffe40c28eca3032f444a49fa0f"
+    },
+    {
+      "id": "api-solid-frame",
+      "sha256": "346ce916ed823cc52c48dcdf5ebaa641185b8289a71339b364ddfb0feaabdc87"
+    },
+    {
+      "id": "api-solid-icon",
+      "sha256": "b1db3b5ad5009d6e39c673f0377955475e89583a9896aa696588d5bdd3decc36"
+    },
+    {
+      "id": "api-solid-input",
+      "sha256": "ab55ebcdaa5303cb86786fcd2e004a6b9866c1e9b410f6d829eed0847c226fe2"
+    },
+    {
+      "id": "api-solid-label",
+      "sha256": "6e1bcdb478478e57cdb15416c2034c4c9a6ed0cd3b0eb41c5e1d30c50cf8c6a8"
+    },
+    {
+      "id": "api-solid-list-box",
+      "sha256": "4ab330256dd76294613738548e1b80d6791fbaba951b64a31ceaf312cf983ae9"
+    },
+    {
+      "id": "api-solid-list-box-group",
+      "sha256": "ec393fe85be4784fc067daa132540ab35f99a2da889c71795d771f01a5177bb5"
+    },
+    {
+      "id": "api-solid-list-box-item",
+      "sha256": "b23aca152ce606ba507a52949c93d404d47383ac52d226adb3cec65125729a8b"
+    },
+    {
+      "id": "api-solid-menu",
+      "sha256": "e5fd47dd3cfca46526eb9b95cd6e7ce8db522155c005ce748738ab712d303cc6"
+    },
+    {
+      "id": "api-solid-menu-checkbox-item",
+      "sha256": "89c9fd254bb5abb5b9837b49e0759adb24d68b2413a055cd93bc2d32c5465de0"
+    },
+    {
+      "id": "api-solid-menu-group",
+      "sha256": "943f84d443baa31ada0b73d0b61922a8e37c6389486eeea8fefdfc0130e45f61"
+    },
+    {
+      "id": "api-solid-menu-item",
+      "sha256": "4005dc364a802b06e6589265350e73feb3fc6182fdc9aad560b7ca227059003f"
+    },
+    {
+      "id": "api-solid-menu-popover-item",
+      "sha256": "ae3f48866cb499e0a54c9627a39aae50a2787da50ba7898a219190a4d178531e"
+    },
+    {
+      "id": "api-solid-menu-radio-group",
+      "sha256": "3730f82335304119ecc9e028981bea61974c76d9f85bacfc0a6f9fe446f3ffd8"
+    },
+    {
+      "id": "api-solid-menu-radio-item",
+      "sha256": "4e7f1eab04c2b522f40836ab8c5be7d30725e59d76c0e507500aa0ac68c5f613"
+    },
+    {
+      "id": "api-solid-menu-separator",
+      "sha256": "23ba4fbdfe826db063b7992fffeb27a9647d40e9d0b25a0878041712e8d97742"
+    },
+    {
+      "id": "api-solid-menu-submenu",
+      "sha256": "f8d338cd4ccee72091316b8df0ff957d96b8e755176d04c4e711f317b66f7905"
+    },
+    {
+      "id": "api-solid-number-input",
+      "sha256": "ade98fa0871911d99731f2e4066f5927c990af04739cb65e68dd111eca378e4a"
+    },
+    {
+      "id": "api-solid-pagination",
+      "sha256": "66127f0b7a4e2e78499af98d8c90afcc77b4603c3b634e58118af2264422fdbe"
+    },
+    {
+      "id": "api-solid-popover",
+      "sha256": "7408e9407b0885d0f0d685909eea469058f6c98e027f3f5a1f56d7763753776a"
+    },
+    {
+      "id": "api-solid-progress-linear",
+      "sha256": "a8cddf458cdd8cf26f2e6ac4c7473fbb7a425746493bb8fa15fecff3df8762d7"
+    },
+    {
+      "id": "api-solid-progress-spinner",
+      "sha256": "26a989680c2c325803da62a37a0b834dc85431ca3fa16d54bd3b8b000d891097"
+    },
+    {
+      "id": "api-solid-radio-group",
+      "sha256": "96b7ce131c9fb133fd14d11dd8b28fe74ed336b0f5817f0a77010abfe1c6a421"
+    },
+    {
+      "id": "api-solid-radio-group-item",
+      "sha256": "bfbf97e2f6fcd7b388a2608459ed363aaaf88ac41020d2177365678f698312b9"
+    },
+    {
+      "id": "api-solid-rating",
+      "sha256": "a17cf674bad789aca30fb11680d812185a2ba142cbf25161dba1b6e6153522bf"
+    },
+    {
+      "id": "api-solid-scroller",
+      "sha256": "f22c7ad962ff979cd96d72a7ec6d68e573f5af8c97729345a37456dcc9b3647e"
+    },
+    {
+      "id": "api-solid-select",
+      "sha256": "5e3d12bfeda4529f48d897310fdc71cd0fb7516c5292d992dd4eb2b146b806ed"
+    },
+    {
+      "id": "api-solid-select-group",
+      "sha256": "dd282848b0aa4b023620fe5f197bcb3f3045d9de69034f7e15432a72c729bacf"
+    },
+    {
+      "id": "api-solid-select-item",
+      "sha256": "fe778f933c2e8e6c19a06c83adf633e258ac85c8772e7a4096ed0d39d1a79899"
+    },
+    {
+      "id": "api-solid-separator",
+      "sha256": "733291dcfa6ae3dc2bb65ab71c8201cc830c30941936fe3969321f67ca9b4dca"
+    },
+    {
+      "id": "api-solid-skeleton",
+      "sha256": "eeec983d8ff827e7cccfe13fcf3a1074b420aa74d7f9df8e00ae97e865be652d"
+    },
+    {
+      "id": "api-solid-slider",
+      "sha256": "8e500b92d34fa26b67deabb51f04caba4a3da311628ad7f21f088b4b3a53d59a"
+    },
+    {
+      "id": "api-solid-switch",
+      "sha256": "08d4672881793c4ae51cc5d0faf3b54a740f96026450678544e7ea23b2bf66ee"
+    },
+    {
+      "id": "api-solid-table",
+      "sha256": "c7781e32dc9dd7fc085d735a082e468ba1a0118eabe980dd43f74fad66b05493"
+    },
+    {
+      "id": "api-solid-table-column",
+      "sha256": "bdc0a16a3f25067f29a30a15d5dfd3f81fb7414ce8430ece0dbea5479cfe4b3c"
+    },
+    {
+      "id": "api-solid-table-row",
+      "sha256": "4756563820ebf95c424bf2f84dc2ec48c16d4a26d0891f184abb83df82dfe05f"
+    },
+    {
+      "id": "api-solid-tabs",
+      "sha256": "68dfbad60cfd29419e4804e4b47b91f6eec811cb8ebc0cadf303e7a2109080c2"
+    },
+    {
+      "id": "api-solid-tabs-content",
+      "sha256": "5a9edcdf67a904bc4f6e6e20ce17b1999f6ae3ec0644dafe1ca82b76bdffff7e"
+    },
+    {
+      "id": "api-solid-tabs-item",
+      "sha256": "234745898882c0b0f7baa6950797869788a4d22cf2140ff5d45f3b128bec0585"
+    },
+    {
+      "id": "api-solid-tags",
+      "sha256": "431540ebae7240552c57fa7957da5280d3d4919572da250af4689fc218ab457e"
+    },
+    {
+      "id": "api-solid-tags-item",
+      "sha256": "15b33f717e9bc33cea9492e220fc7368cabf034151fe702ab74c8c99af2841ef"
+    },
+    {
+      "id": "api-solid-textarea",
+      "sha256": "cdcc53a3a9aa72f1451e5c77270db0ffb3a7b65f8076f7b0d74c598bb90a6eb3"
+    },
+    {
+      "id": "api-solid-toasts",
+      "sha256": "65e5f74859cf1af37a2ea02d89b1a421c925c2a3cc1a175402910e20b8db23fb"
+    },
+    {
+      "id": "api-solid-toggle-button",
+      "sha256": "81279d1b1ae306dd1f13a6281dd7be8e97c0e17c063363da4fa205ec0ae63870"
+    },
+    {
+      "id": "api-solid-toggle-group",
+      "sha256": "49be8baac28dade0f04d1033055bf9a084d6f051302c387679239fe0f02f982b"
+    },
+    {
+      "id": "api-solid-toggle-group-item",
+      "sha256": "addc3c6ea90092618c1343ec9fdfb770d76abd97cfaf8251aa13ead4d17d9c4e"
+    },
+    {
+      "id": "api-solid-tooltip",
+      "sha256": "4279292e24d4eaaf9b2b14f5830f6a18cc897eb2d9f4a742a5ebf187338362f1"
+    },
+    {
+      "id": "api-solid-virtual",
+      "sha256": "ab56e2f7683165f5aa969912f0633da871f13592233b0f1ccb1ef9fdff3363fb"
+    },
+    {
+      "id": "external-plugins",
+      "sha256": "6db8822e34490a3d0c7359f9638590b8d21ec7c04254e45fe8091874722c45f4"
+    },
+    {
+      "id": "icon-replacement",
+      "sha256": "ecd9c4ca5bc496ee583e5e92497d71d15b86b279c8e88f4da7e31fa767b566cf"
+    },
+    {
+      "id": "oren-configuration",
+      "sha256": "7d7889ffc05d9668653d6e4aa511fc816f70be959ec08b6a2f81e7f4a5ac0372"
+    },
+    {
+      "id": "overview",
+      "sha256": "25015412d7591f917dec1f3cf42086db35d8a0c5fbfd8a039991a9e61e681903"
+    },
+    {
+      "id": "programmatic-control",
+      "sha256": "937df403c49b5220d25952dd72bc767aeecd4b7e7e7a9c638d6dd86a22748424"
+    },
+    {
+      "id": "public-recipes-validation",
+      "sha256": "7afae1401a334908104adb58e9e6d0d11cae6f75e95435a67f856f7c5df389c4"
+    },
+    {
+      "id": "release-changes",
+      "sha256": "5e2a6cd4d3ce971d78548229a4b25c630abe90d1713cdc8e2ffb1e9371d3eb44"
+    },
+    {
+      "id": "solid-bindings",
+      "sha256": "d7bc930d1a04ce69ae0c4599a4b79af17dea4c7c8dfefe4524d59c3b72980986"
+    },
+    {
+      "id": "solid-composition",
+      "sha256": "5c97a96db448cb0e1ddefdbdadd2fb984c38481b4beda5a28d40eeada8a147f8"
+    },
+    {
+      "id": "solid-controller",
+      "sha256": "cbc4ca87bc3273e9a5a2d5ac59590bbec99c2bcc936ed64dae5b10eba8072bfc"
+    },
+    {
+      "id": "solid-errors",
+      "sha256": "550638ac22f0c332370ff8070ccd0d8bb4540ceae59541155e893994b1e6997e"
+    },
+    {
+      "id": "solid-installation",
+      "sha256": "41fb2794f886486bc19e4a6036a98f151c47e7e4566e258499a519b68cf52e97"
+    },
+    {
+      "id": "solid-solidstart",
+      "sha256": "b63709980ba5ecfe2bb05b3646c523bb4843306370cc5d1dd45cf49c1af994fc"
+    },
+    {
+      "id": "solid-start",
+      "sha256": "2bab146cba9967ba82214025e32042de81be6e91a86113fc46d532265d261e6a"
+    },
+    {
+      "id": "solid-validation",
+      "sha256": "7591767a9dbaf0f67385c514b79288102e14d089157fa1ae1aaa0199f2bab507"
+    },
+    {
+      "id": "theme-authoring",
+      "sha256": "020871aed07314c8710b9c4faf2d043845b0939f32388aa4406563a6fc34e6be"
+    }
+  ],
+  "validationBaseRevision": "7c1a7886b2c9d17c21ae91cc347d680b0f4ab2cf",
+  "sourceState": "Documentation worktree validation; tool and recipe digests identify the tested bytes. Not an independent AI-authoring evaluation."
+}
