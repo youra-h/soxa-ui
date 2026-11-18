@@ -1,4 +1,5 @@
 import type { TValuePayload } from '../../../../common'
+import type { ICollectionTransactions } from './transactions'
 import type { ICommand, IQueryCommand } from './commands'
 import { TEvented } from '../../../../common/event'
 import { TActionEvent } from '../../../../common/event/action-event'
@@ -232,6 +233,9 @@ export interface IQueryStrategy<TItem> {
  * нужна выборка — `query()`.
  */
 export interface ICollectionStorageDriver<TItem> {
+	/** Existing custom drivers can opt into deferred attempt cleanup. */
+	readonly transactions?: ICollectionTransactions<TItem>
+
 	/** Снимок сырого состава хранилища — копия, не живая ссылка. */
 	valueOf(): TItem[]
 

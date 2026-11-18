@@ -2,9 +2,12 @@
  * Collection input preparation shared by native adapters, before context construction.
  */
 import { TCollectionInitialPartPlugin, TCollectionInitialPlugin } from '@soxa-ui/plugins'
+import { preparationOf, TPreparationExtension } from '@soxa-ui/core'
+import type { ICollectionTransaction } from '@soxa-ui/core'
 import type { IPluginBundle } from '@soxa-ui/plugins'
 import type {
 	IAdapterPreparation,
+	IAdapterContext,
 	IAdapterContextConfig,
 	IAdapterContextOptions,
 	IPreparedAssembly,
@@ -18,6 +21,7 @@ import {
 	createCollectionInitialSource,
 	resolveCollectionInitialItem,
 	resolveCollectionInitialPanel,
+	collectionInitialSourceOf,
 } from './initial'
 import type { TCollectionInitialSource } from './initial-source.class'
 
@@ -67,12 +71,34 @@ export function collectionNeedsPreparation(
 
 export class TCollectionPreparation implements IAdapterPreparation {
 	private _ownerIndex = 0
+	private _source?: TCollectionInitialSource
 
 	constructor(
 		private readonly _elevator: TElevatorFactory,
 		private readonly _lifetime?: TCollectionPreparationLifetime,
 		private readonly _normalize: (props: object) => object = (props) => props,
 	) {}
+
+	/** One receipt owns the whole native assembly, including its shared facades. */
+	pending(
+		contexts: readonly IAdapterContext[],
+		rollback: () => void,
+	): ICollectionTransaction | undefined {
+		const engine = this._source?.engine
+		const context = contexts[0]
+		if (!engine || !context) return
+
+		let preparation = preparationOf(engine)
+		if (!preparation) {
+			engine.use(new TPreparationExtension())
+			preparation = preparationOf(engine)
+		}
+		return preparation?.prepare(context.instance, {
+			owner: context,
+			timeout: 1000,
+			rollback,
+		})
+	}
 
 	prepare<TInstance extends object, TPlugins extends IPluginsContract>(
 		descriptor: IComponentDescriptor<TContextContract<TInstance, TPlugins>>,
@@ -82,6 +108,7 @@ export class TCollectionPreparation implements IAdapterPreparation {
 		// Facades inherit prepared inputs from their component's bundle.
 		if (config.bundle !== undefined) {
 			const source = collectionPreparedSource(config.bundle)
+			if (source) this._source = source
 			return {
 				options: {
 					...options,
@@ -110,7 +137,10 @@ export class TCollectionPreparation implements IAdapterPreparation {
 			return {
 				options: collectionInitialOwnerOptions(descriptor, options, source),
 				complete: (context) => {
-					if (source && context.bundle) sources.set(context.bundle, source)
+					if (source && context.bundle) {
+						sources.set(context.bundle, source)
+						this._source = source
+					}
 				},
 			}
 		}
@@ -126,6 +156,11 @@ export class TCollectionPreparation implements IAdapterPreparation {
 				part.options && Reflect.get(part.options, 'panel') === true
 					? resolveCollectionInitialPanel(descriptor, inputs, this._elevator)
 					: resolveCollectionInitialItem(descriptor, inputs, this._elevator),
+			complete: (context) => {
+				if (context.bundle?.get(TCollectionInitialPartPlugin)?.prepared) {
+					this._source = collectionInitialSourceOf(this._elevator)
+				}
+			},
 		}
 	}
 }

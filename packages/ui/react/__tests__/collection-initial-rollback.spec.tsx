@@ -1,10 +1,35 @@
 import { afterEach, expect, it, vi } from 'vitest'
 import { act, Suspense, use, useLayoutEffect } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
+import { renderToString } from 'react-dom/server'
 import { createEngineTabs } from '@soxa-ui/core'
-import { Example, initial } from '../../packages/ui/react/__tests__/initial-collection.helpers'
+import { Example, initial } from './initial-collection.helpers'
 
 afterEach(() => vi.useRealTimers())
+
+it('hydrates the same server nodes after their speculative server assemblies expired', async () => {
+	vi.useFakeTimers()
+	const container = document.createElement('div')
+	container.innerHTML = renderToString(<Example />)
+	document.body.append(container)
+	const before = [...container.querySelectorAll('[role=tab]')]
+	vi.advanceTimersByTime(1200)
+	const recover = vi.fn()
+	let root: ReturnType<typeof hydrateRoot> | undefined
+	try {
+		await act(async () => {
+			root = hydrateRoot(container, <Example />, { onRecoverableError: recover })
+		})
+		expect([...container.querySelectorAll('[role=tab]')]).toEqual(before)
+		expect(recover).not.toHaveBeenCalled()
+		expect(container.querySelector('[role=tabpanel]')?.textContent).toBe('Panel B')
+		act(() => before[0].dispatchEvent(new MouseEvent('click', { bubbles: true })))
+		expect(container.querySelector('[role=tabpanel]')?.textContent).toBe('Panel A')
+	} finally {
+		act(() => root?.unmount())
+		container.remove()
+	}
+})
 
 it('resumes native Suspense after transaction expiry and keeps the external source models', async () => {
 	vi.useFakeTimers()

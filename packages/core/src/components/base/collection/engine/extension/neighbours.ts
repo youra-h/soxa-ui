@@ -8,6 +8,21 @@ import type { IMetaExtension } from './meta/types'
 import type { IPlainExtension } from './plain/types'
 import type { ISelectionExtension } from './selection/types'
 import type { IExtension } from './types'
+import type { IPreparationExtension } from './preparation/types'
+
+/** Deferred initialization and rollback are optional collection capabilities. */
+function isPreparation<TItem extends object>(
+	extension: IExtension<TItem>,
+): extension is IPreparationExtension<TItem> {
+	return 'prepare' in extension && 'accept' in extension && 'release' in extension
+}
+
+export function preparationOf<TItem extends object>(
+	source: TNeighbours<TItem> | null | undefined,
+): IPreparationExtension<TItem> | undefined {
+	const extension = source?.extensions.preparation
+	return extension && isPreparation(extension) ? extension : undefined
+}
 
 /**
  * Соседи по коллекции — по контракту, а не приведением типа.

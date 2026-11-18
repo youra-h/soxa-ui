@@ -15,6 +15,7 @@ import {
 	collectionNeedsPreparation,
 } from '@soxa-ui/setup'
 import type { IAdapterContext, TElevatorFactory } from '@soxa-ui/setup'
+import type { ICollectionTransaction } from '@soxa-ui/core'
 import { ElevatorContext, type TElevatorLayer } from '../elevator/layer'
 import { LocaleContext } from '../locale/context'
 import { TReactElevatorScope } from '../elevator/scope.class'
@@ -71,6 +72,12 @@ function destroyAll(contexts: TAdapterContexts): void {
  */
 class TBuilt<T extends TAdapterContexts> {
 	private _destroyed = false
+	private _receipt?: ICollectionTransaction
+
+	/** Preparation tracks resources; native acceptance alone confirms this attempt. */
+	prepare(preparation: TCollectionPreparation | undefined): void {
+		this._receipt = preparation?.pending(listOf(this.contexts), this.destroy)
+	}
 
 	/**
 	 * @param contexts exactly what the factory returned
@@ -97,13 +104,18 @@ class TBuilt<T extends TAdapterContexts> {
 	 * children before the owner, whose consumer has to hear them enter.
 	 */
 	accept(): void {
+		this._receipt?.commit()
 		drafts.accept(this.held)
 		accepting(this.contexts, () => attachAll(this.contexts))
 	}
 
 	readonly destroy = (): void => {
-		destroyAll(this.contexts)
+		if (this._destroyed) return
+
 		this._destroyed = true
+		this._receipt?.cancel()
+		drafts.accept(this.held)
+		destroyAll(this.contexts)
 	}
 }
 
@@ -145,13 +157,19 @@ export function useAdapterContext<T extends TAdapterContexts>(
 		const built = new TBuilt(factory(create, scope.elevator), scope, held)
 
 		drafts.add(held, built.destroy, id)
+		try {
+			built.prepare(preparation)
+		} catch (error) {
+			built.destroy()
+			throw error
+		}
 
 		return built
 	}
 	// The factory of the last render, not of the one the effect saw
 	const rebuild = useEffectEvent(() => assemble(parent))
 
-	if (!ref.current) {
+	if (!ref.current || ref.current.destroyed) {
 		ref.current = assemble(parent)
 	}
 

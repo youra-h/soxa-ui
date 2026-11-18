@@ -24,6 +24,7 @@ export * from './group'
 export * from './memory'
 export * from './draw'
 export * from './position-in-set'
+export * from './preparation'
 export {
 	activationOf,
 	batchOf,
@@ -33,5 +34,6 @@ export {
 	groupOf,
 	metaOf,
 	plainOf,
+	preparationOf,
 	selectionOf,
 } from './neighbours'

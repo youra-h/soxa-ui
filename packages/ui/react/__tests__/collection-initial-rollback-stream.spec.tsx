@@ -4,7 +4,7 @@ import { renderToPipeableStream } from 'react-dom/server'
 import { PassThrough } from 'node:stream'
 import { Tabs } from '@soxa-ui/react'
 import { createEngineTabs } from '@soxa-ui/core'
-import { initial } from '../../packages/ui/react/__tests__/initial-collection.helpers'
+import { initial } from './initial-collection.helpers'
 
 afterEach(() => vi.useRealTimers())
 
@@ -51,7 +51,9 @@ it('completes native server streaming when a prepared child resumes after rollba
 			onShellReady: shell,
 			onAllReady: () => stream.pipe(output),
 			onShellError: shell,
-			onError: (error) => errors.push(error),
+			onError: (error) => {
+				errors.push(error)
+			},
 		},
 	)
 	try {

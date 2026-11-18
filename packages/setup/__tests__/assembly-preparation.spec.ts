@@ -98,6 +98,40 @@ describe('prepared collection assembly without component resolvers', () => {
 		return { context, facade, elevator, preparation }
 	}
 
+	it('tracks only prepared assemblies and releases their whole lifetime without deleting data', () => {
+		vi.useFakeTimers()
+		try {
+			const ordinary = owner({})
+			expect(
+				ordinary.preparation.pending([ordinary.context, ordinary.facade], vi.fn()),
+			).toBeUndefined()
+			expect(ordinary.facade.instance.engine.has('preparation')).toBe(false)
+			ordinary.facade.destroy()
+			ordinary.context.destroy()
+
+			const prepared = owner({ initial })
+			const engine = prepared.facade.instance.engine
+			const models = [...engine.extensions.batch.items]
+			const rollback = vi.fn(() => {
+				prepared.facade.destroy()
+				prepared.context.destroy()
+			})
+			const receipt = prepared.preparation.pending(
+				[prepared.context, prepared.facade],
+				rollback,
+			)
+			expect(receipt).toBeDefined()
+			vi.advanceTimersByTime(1001)
+			expect(rollback).toHaveBeenCalledOnce()
+			expect(engine.extensions.batch.items).toHaveLength(models.length)
+			engine.extensions.batch.items.forEach((model, index) =>
+				expect(model).toBe(models[index]),
+			)
+		} finally {
+			vi.useRealTimers()
+		}
+	})
+
 	it('resolves the exact prepared model through ordinary create calls', () => {
 		const prepared = owner({ initial })
 		const engine = prepared.facade.instance.engine
