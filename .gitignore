@@ -38,3 +38,7 @@ test-results/
 # Size entries of the comparison stand: `tools/bench-compare/size.mjs` writes
 # them before every size build.
 tools/bench-compare/size/
+
+# SvelteKit consumer source is not a library build output.
+!docs/ai/*/examples/sveltekit/src/lib/
+!docs/ai/*/examples/sveltekit/src/lib/**

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { execFileSync } from 'node:child_process'
 import { readFileSync, mkdtempSync } from 'node:fs'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
@@ -34,6 +35,16 @@ test('0.4.1 public delivery contains complete recipes and no historical validati
 			return new Response(readFileSync(join(root, path)), { status: 200 })
 		},
 	})
+	const tracked = new Set(
+		execFileSync('git', ['ls-files', '--', 'docs/ai', 'tools/ai-docs'], {
+			cwd: root,
+			encoding: 'utf8',
+		})
+			.trim()
+			.split('\n'),
+	)
+	for (const path of requested)
+		assert.ok(tracked.has(path), 'Public delivery input must be tracked: ' + path)
 	assert.ok(requested.includes('docs/ai/0.4.1/release-changes.md'))
 	assert.ok(requested.includes('docs/ai/0.4.1/examples/sveltekit/src/routes/+page.svelte'))
 	assert.ok(
