@@ -1,4 +1,5 @@
-﻿import assert from 'node:assert/strict'
+import { documentationRelease } from './release.mjs'
+import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { cpSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -8,6 +9,8 @@ import { chromium } from 'playwright'
 import { serve, checkPage, missingReferences } from './consumer-browser.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
+const release = documentationRelease(root)
+const { version, legacy } = release
 const directory =
 	process.env.SOXA_ANGULAR_SMOKE_DIR || mkdtempSync(join(tmpdir(), 'soxa-angular-docs-smoke-'))
 const npmCli = process.env.npm_execpath
@@ -21,7 +24,7 @@ async function eventually(read, expected) {
 	}
 	assert.equal(await read(), expected)
 }
-const source = join(root, 'docs/ai/0.3.0/examples/angular')
+const source = join(root, `docs/ai/${version}/examples/angular`)
 console.log('Angular consumer workspace: ' + directory)
 
 for (const ssr of [false, true]) {
@@ -138,6 +141,10 @@ for (const ssr of [false, true]) {
 
 				// Keep the known 0.3.0 hidden picker defect bounded; all other targets must exist.
 				const broken = await missingReferences(page)
+				if (!legacy) {
+					assert.deepEqual(broken, [])
+					return
+				}
 				assert.equal(broken.length, 1, 'Exact known hidden Calendar label gap')
 				const [gap] = broken
 				assert.equal(gap.attr, 'aria-labelledby')
@@ -149,6 +156,10 @@ for (const ssr of [false, true]) {
 				assert.match(gap.id, /^ng-\d+-picker-0$/)
 			},
 			validateSSRReferences: (broken) => {
+				if (!legacy) {
+					assert.deepEqual(broken, [])
+					return
+				}
 				assert.equal(broken.length, 1, 'Closed Select portal is browser mounted')
 				assert.equal(broken[0].attr, 'aria-controls')
 				assert.equal(broken[0].role, 'combobox')
@@ -165,7 +176,9 @@ for (const ssr of [false, true]) {
 	}
 }
 console.log(
-	'Published 0.3.0 Angular strict ngc/negative guard/production CSR+SSR/browser passed (' +
+	'Published ' +
+		version +
+		' Angular strict ngc/negative guard/production CSR+SSR/browser passed (' +
 		directory +
 		')',
 )

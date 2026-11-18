@@ -1,3 +1,4 @@
+import { documentationRelease } from './release.mjs'
 import assert from 'node:assert/strict'
 import { execFileSync, spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
@@ -14,6 +15,8 @@ if (process.argv.slice(2).some((arg) => arg !== '--webkit'))
 	throw new Error('Only --webkit is supported')
 const withWebkit = process.argv.includes('--webkit')
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
+const release = documentationRelease(root)
+const { version, legacy } = release
 const directory = process.env.SOXA_WEBC_SMOKE_DIR || mkdtempSync(join(tmpdir(), 'soxa-webc-docs-'))
 const cwd = join(directory, 'webc')
 const npmCli = process.env.npm_execpath
@@ -21,7 +24,7 @@ if (!npmCli) throw new Error('Run with npm run check:ai-docs:webc')
 const run = (args) => execFileSync(process.execPath, args, { cwd, stdio: 'inherit' })
 const digest = (file) => createHash('sha256').update(readFileSync(file)).digest('hex')
 const evidence = {
-	provenance: 'published-0.3.0',
+	provenance: 'published-' + version,
 	docsRevision: execFileSync('git', ['rev-parse', 'HEAD'], {
 		cwd: root,
 		encoding: 'utf8',
@@ -41,7 +44,7 @@ const evidence = {
 mkdirSync(directory, { recursive: true })
 console.log('Web Components consumer workspace: ' + directory)
 assert.ok(!readdirSync(directory).length, 'Use an empty smoke output directory')
-cpSync(join(root, 'docs/ai/0.3.0/examples/webc'), cwd, { recursive: true })
+cpSync(join(root, `docs/ai/${version}/examples/webc`), cwd, { recursive: true })
 evidence.inputs = readdirSync(cwd).map((file) => ({
 	path: 'examples/webc/' + file,
 	sha256: digest(join(cwd, file)),
@@ -57,7 +60,7 @@ evidence.packages = Object.entries(lock.packages)
 	.filter(([path]) => path.includes('node_modules/@soxa-ui/'))
 	.map(([path, entry]) => {
 		const name = path.slice(path.lastIndexOf('node_modules/') + 13)
-		assert.equal(entry.version, '0.3.0')
+		assert.equal(entry.version, release.packages[name])
 		assert.ok(entry.resolved.startsWith('https://registry.npmjs.org/'))
 		assert.ok(entry.integrity)
 		assert.equal(
@@ -74,12 +77,12 @@ evidence.packages = Object.entries(lock.packages)
 evidence.lockSha256 = digest(join(cwd, 'package-lock.json'))
 evidence.apiSha256 = digest(join(cwd, 'node_modules/@soxa-ui/setup/dist/api.json'))
 const corpus = buildCorpus({
-	manifestPath: join(root, 'docs/ai/0.3.0/manifest.json'),
+	manifestPath: join(root, `docs/ai/${version}/manifest.json`),
 	packageRoot: join(cwd, 'node_modules/@soxa-ui/setup'),
 	docsRevision: evidence.docsRevision,
 })
 const selected = selectDocuments(corpus, {
-	version: '0.3.0',
+	version,
 	audience: 'consumer',
 	framework: 'webc',
 })
@@ -161,7 +164,7 @@ try {
 	} finally {
 		await upgraded.close()
 	}
-	evidence.browser = await checkWebc(browser, production.url)
+	evidence.browser = await checkWebc(browser, production.url, { legacy })
 } finally {
 	production?.server.kill()
 	await browser.close()
@@ -180,6 +183,8 @@ if (withWebkit) {
 			'--rm',
 			'--init',
 			'--shm-size=1g',
+			'--env',
+			'SOXA_DOCS_VERSION=' + release.version,
 			'--mount',
 			'type=bind,source=' + corePath + ',target=/playwright-core,readonly',
 			'--mount',

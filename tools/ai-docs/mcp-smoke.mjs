@@ -1,3 +1,4 @@
+import { documentationRelease } from './release.mjs'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { cpSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
@@ -8,6 +9,8 @@ import { chromium } from 'playwright'
 import { serve, checkPage } from './consumer-browser.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
+const release = documentationRelease(root)
+const { version } = release
 const directory = mkdtempSync(join(tmpdir(), 'soxa-mcp-consumer-'))
 const npmCli = process.env.npm_execpath
 if (!npmCli) throw new Error('Run with npm run check:ai-docs:mcp')
@@ -24,14 +27,14 @@ writeFileSync(
 	JSON.stringify({
 		private: true,
 		type: 'module',
-		dependencies: { '@soxa-ui/setup': '0.3.0', '@modelcontextprotocol/sdk': '1.32.2' },
+		dependencies: { '@soxa-ui/setup': version, '@modelcontextprotocol/sdk': '1.32.2' },
 	}),
 )
 run(process.execPath, [npmCli, 'install', '--ignore-scripts', '--no-audit', '--no-fund'])
 run(process.execPath, [
 	'source/tools/ai-docs/cli.mjs',
 	'--manifest',
-	'source/docs/ai/0.3.0/manifest.json',
+	`source/docs/ai/${version}/manifest.json`,
 	'--package',
 	'node_modules/@soxa-ui/setup',
 	'--revision',
@@ -44,6 +47,7 @@ run(process.execPath, [
 	'mcp-client.mjs',
 	join(directory, 'source/tools/ai-docs/mcp.mjs'),
 	join(directory, 'corpus'),
+	version,
 ])
 
 const consumer = join(directory, 'consumer')

@@ -1,3 +1,4 @@
+import { documentationRelease } from './release.mjs'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { cpSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
@@ -5,9 +6,11 @@ import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
-import { serve, checkPage } from './consumer-browser.mjs'
+import { serve, checkPage, missingReferences } from './consumer-browser.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
+const release = documentationRelease(root)
+const { version, legacy } = release
 const directory = mkdtempSync(join(tmpdir(), 'soxa-ai-docs-smoke-'))
 const npmCli = process.env.npm_execpath
 if (!npmCli) throw new Error('Run with npm run check:ai-docs')
@@ -17,7 +20,9 @@ const revision = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encodin
 // Copy only the public delivery directories; the consumer has no monorepo or sibling checkout.
 cpSync(join(root, 'docs/ai'), join(directory, 'docs/ai'), { recursive: true })
 cpSync(join(root, 'tools/ai-docs'), join(directory, 'tools/ai-docs'), { recursive: true })
-const manifest = JSON.parse(readFileSync(join(directory, 'docs/ai/0.3.0/manifest.json'), 'utf8'))
+const manifest = JSON.parse(
+	readFileSync(join(directory, `docs/ai/${version}/manifest.json`), 'utf8'),
+)
 writeFileSync(
 	join(directory, 'package.json'),
 	JSON.stringify({
@@ -36,7 +41,7 @@ run(process.execPath, [npmCli, 'install', '--ignore-scripts', '--no-audit', '--n
 run(process.execPath, [
 	'tools/ai-docs/cli.mjs',
 	'--manifest',
-	'docs/ai/0.3.0/manifest.json',
+	`docs/ai/${version}/manifest.json`,
 	'--package',
 	'node_modules/@soxa-ui/setup',
 	'--revision',
@@ -59,8 +64,21 @@ for (const doc of manifest.documents)
 	for (const source of doc.sources)
 		assert.ok(releasePaths.has(source.path), 'Missing release source: ' + source.path)
 const index = JSON.parse(readFileSync(join(directory, 'dist/corpus/index.json'), 'utf8'))
-assert.equal(index.libraryVersion, '0.3.0')
-assert.equal(index.documents.filter((d) => d.topic === 'api' && d.framework === 'vue').length, 63)
+assert.equal(index.libraryVersion, version)
+const installedApi = JSON.parse(
+	readFileSync(join(directory, 'node_modules/@soxa-ui/setup/dist/api.json'), 'utf8'),
+)
+assert.equal(
+	index.documents.filter((d) => d.topic === 'api' && d.framework === 'vue').length,
+	installedApi.components.filter((c) => c.frameworks.vue).length,
+)
+if (!legacy)
+	for (const framework of ['vue', 'react', 'angular', 'solid', 'svelte', 'webc'])
+		for (const component of ['alert', 'alert-dialog', 'avatar', 'avatar-group', 'separator'])
+			assert.ok(
+				index.documents.some((d) => d.id === 'api-' + framework + '-' + component),
+				'New component API: ' + framework + '/' + component,
+			)
 assert.equal(index.coverage.react.guides, 'sample')
 assert.ok(!index.documents.some((d) => d.id === 'api-vue-component'))
 assert.ok(index.documents.some((d) => d.id === 'api-angular-component'))
@@ -72,8 +90,8 @@ for (const doc of index.documents)
 		)
 assert.ok(index.documents.every((d) => !JSON.stringify(d).includes(directory)))
 
-cpSync(join(directory, 'docs/ai/0.3.0/examples/App.vue'), join(directory, 'App.vue'))
-const examples = join(directory, 'docs/ai/0.3.0/examples')
+cpSync(join(directory, `docs/ai/${version}/examples/App.vue`), join(directory, 'App.vue'))
+const examples = join(directory, `docs/ai/${version}/examples`)
 const put = (cwd, file, text) => {
 	mkdirSync(dirname(join(cwd, file)), { recursive: true })
 	writeFileSync(join(cwd, file), text)
@@ -155,6 +173,7 @@ try {
 				await increment.focus()
 				await page.keyboard.press('Enter')
 				await page.getByText('Count: 2', { exact: true }).waitFor()
+				if (!legacy) assert.deepEqual(await missingReferences(page), [])
 			},
 		})
 	} finally {
@@ -187,11 +206,17 @@ try {
 	run(process.execPath, ['node_modules/nuxt/bin/nuxt.mjs', 'build'], nuxt)
 	const production = await serve(nuxt, ['.output/server/index.mjs'])
 	try {
-		await checkPage(browser, production.url, true)
+		await checkPage(browser, production.url, true, {
+			afterInteractions: async (page) => {
+				if (!legacy) assert.deepEqual(await missingReferences(page), [])
+			},
+		})
 	} finally {
 		production.server.kill()
 	}
 } finally {
 	await browser.close()
 }
-console.log('Published 0.3.0: Vue and Nuxt types/build/browser/SSR passed (' + directory + ')')
+console.log(
+	'Published ' + version + ': Vue and Nuxt types/build/browser/SSR passed (' + directory + ')',
+)

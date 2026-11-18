@@ -1,3 +1,4 @@
+import { documentationRelease } from './release.mjs'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { cpSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
@@ -9,6 +10,8 @@ import { serve, checkPage, missingReferences } from './consumer-browser.mjs'
 import { prepareDevelopment, verifyDevelopmentLock, digest } from './svelte-development.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
+const release = documentationRelease(root)
+const { version, legacy } = release
 const directory =
 	process.env.SOXA_SVELTE_SMOKE_DIR || mkdtempSync(join(tmpdir(), 'soxa-svelte-docs-'))
 const npmCli = process.env.npm_execpath
@@ -23,7 +26,7 @@ const artifacts = development
 	: undefined
 const evidence = {
 	schemaVersion: 1,
-	provenance: development ? 'unpublished-development-tarballs' : 'published-0.3.0',
+	provenance: development ? 'unpublished-development-tarballs' : 'published-' + version,
 	docsRevision: revision,
 	nodeVersion: process.version,
 	tools: ['svelte-smoke.mjs', 'svelte-development.mjs', 'consumer-browser.mjs'].map((file) => ({
@@ -36,14 +39,14 @@ const evidence = {
 
 for (const ssr of [false, true]) {
 	const cwd = join(directory, ssr ? 'sveltekit' : 'svelte')
-	cpSync(join(root, 'docs/ai/0.3.0/examples', ssr ? 'sveltekit' : 'svelte'), cwd, {
+	cpSync(join(root, `docs/ai/${version}/examples`, ssr ? 'sveltekit' : 'svelte'), cwd, {
 		recursive: true,
 	})
 	if (ssr)
 		for (const file of ['Recipes.svelte', 'CtrlExample.svelte']) {
 			assert.equal(
 				readFileSync(join(cwd, 'src/lib', file), 'utf8'),
-				readFileSync(join(root, 'docs/ai/0.3.0/examples/svelte', file), 'utf8'),
+				readFileSync(join(root, `docs/ai/${version}/examples/svelte`, file), 'utf8'),
 				'Both consumers use identical recipes',
 			)
 		}
@@ -73,7 +76,7 @@ for (const ssr of [false, true]) {
 				1,
 				packageName,
 			)
-			assert.equal(lock.packages[name].version, '0.3.0')
+			assert.equal(lock.packages[name].version, release.packages[packageName])
 		}
 	if (!development)
 		for (const [name, version] of Object.entries({
@@ -100,7 +103,7 @@ for (const ssr of [false, true]) {
 			[
 				join(directory, 'source/tools/ai-docs/cli.mjs'),
 				'--manifest',
-				join(directory, 'source/docs/ai/0.3.0/manifest.json'),
+				join(directory, `source/docs/ai/${version}/manifest.json`),
 				'--package',
 				join(cwd, 'node_modules/@soxa-ui/setup'),
 				'--revision',
@@ -172,7 +175,7 @@ for (const ssr of [false, true]) {
 				)
 				// Bound the published hidden Calendar label gap; all other targets must exist.
 				const broken = await missingReferences(page)
-				if (development)
+				if (development || !legacy)
 					assert.deepEqual(broken, [], 'Development references after interactions')
 				else {
 					assert.equal(broken.length, 1, 'Exact known hidden Calendar label gap')
@@ -204,7 +207,7 @@ for (const ssr of [false, true]) {
 						.getByRole('button', { name: 'Controller action', exact: true })
 						.click()
 					await page.getByText('Controller clicks: 1', { exact: true }).waitFor()
-					if (development)
+					if (development || !legacy)
 						assert.deepEqual(
 							await missingReferences(page),
 							[],
@@ -213,7 +216,7 @@ for (const ssr of [false, true]) {
 				}
 			},
 			validateSSRReferences: (broken) => {
-				if (development) {
+				if (development || !legacy) {
 					assert.deepEqual(broken, [], 'Development SSR references')
 					return
 				}
@@ -243,7 +246,7 @@ for (const ssr of [false, true]) {
 				assert.match(picker.id, /^.+-panel$/)
 			},
 		})
-		if (development) await checkPopupReferences(browser, production.url)
+		if (development || !legacy) await checkPopupReferences(browser, production.url)
 		evidence.consumers.push({
 			framework: ssr ? 'sveltekit' : 'svelte',
 			lockSha256: digest(join(cwd, 'package-lock.json')),
@@ -256,11 +259,12 @@ for (const ssr of [false, true]) {
 			negativeNumericPropRejected: rejected,
 			production: true,
 			runtime: true,
-			ariaReferences: development
-				? ssr
-					? 'zero dangling in SSR, hydrated, open and closed states'
-					: 'zero dangling in hydrated, open and closed states'
-				: 'exact published exceptions',
+			ariaReferences:
+				development || !legacy
+					? ssr
+						? 'zero dangling in SSR, hydrated, open and closed states'
+						: 'zero dangling in hydrated, open and closed states'
+					: 'exact published exceptions',
 		})
 		console.log((ssr ? 'SvelteKit' : 'Svelte') + ' runtime checks passed')
 	} finally {
@@ -279,7 +283,7 @@ writeFileSync(
 assert.deepEqual(failures, [], 'All strict consumer type checks must pass')
 console.log(
 	'PASS: Svelte and SvelteKit ' +
-		(development ? 'unpublished development tarballs' : 'exact published 0.3.0') +
+		(development ? 'unpublished development tarballs' : 'exact published ' + version) +
 		', templates, production, keyboard, controllers, SSR and navigation (' +
 		directory +
 		')',

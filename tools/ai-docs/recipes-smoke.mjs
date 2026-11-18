@@ -1,3 +1,4 @@
+import { documentationRelease } from './release.mjs'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { cpSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
@@ -11,6 +12,8 @@ import { serve } from './consumer-browser.mjs'
 import { checkRecipes } from './recipes-browser.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
+const release = documentationRelease(root)
+const { version } = release
 const directory =
 	process.env.SOXA_RECIPES_SMOKE_DIR || mkdtempSync(join(tmpdir(), 'soxa-recipes-docs-'))
 mkdirSync(directory, { recursive: true })
@@ -27,14 +30,14 @@ const source = join(directory, 'source')
 // Use the public downloader's allowlist, with local bytes before this docs commit is pushed.
 await fetchSource({
 	revision,
-	version: '0.3.0',
+	version,
 	out: source,
 	fetchFile: async (url) => {
 		const path = url.split('/' + revision + '/')[1]
 		return new Response(readFileSync(join(root, path)), { status: 200 })
 	},
 })
-const example = join(source, 'docs/ai/0.3.0/examples/public-recipes')
+const example = join(source, `docs/ai/${version}/examples/public-recipes`)
 const staging = join(directory, 'theme-build')
 cpSync(example, staging, { recursive: true })
 npm(staging, 'install', '--no-audit', '--no-fund')
@@ -65,7 +68,10 @@ const lock = json(join(cwd, 'package-lock.json'))
 const packages = Object.entries(lock.packages)
 	.filter(([path]) => path.includes('node_modules/@soxa-ui/'))
 	.map(([path, value]) => {
-		assert.equal(value.version, '0.3.0')
+		assert.equal(
+			value.version,
+			release.packages[path.slice(path.lastIndexOf('node_modules/') + 13)],
+		)
 		assert.ok(value.resolved.startsWith('https://registry.npmjs.org/'))
 		assert.ok(value.integrity)
 		const name = path.slice(path.lastIndexOf('node_modules/') + 13)
@@ -81,7 +87,7 @@ const packages = Object.entries(lock.packages)
 		}
 	})
 assert.equal(lock.packages['node_modules/@example/soxa-theme'].link, undefined)
-const manifestPath = join(source, 'docs/ai/0.3.0/manifest.json')
+const manifestPath = join(source, `docs/ai/${version}/manifest.json`)
 const corpus = buildCorpus({
 	manifestPath,
 	packageRoot: join(cwd, 'node_modules/@soxa-ui/setup'),
@@ -96,12 +102,12 @@ const ids = [
 	'public-recipes-validation',
 ]
 for (const framework of ['vue', 'react', 'angular', 'solid', 'svelte', 'webc']) {
-	const selected = selectDocuments(corpus, { version: '0.3.0', audience: 'consumer', framework })
+	const selected = selectDocuments(corpus, { version, audience: 'consumer', framework })
 	for (const id of ids) assert.ok(selected.some((d) => d.id === id))
 }
-const release = json(manifestPath).libraryRevision
+const releaseRevision = json(manifestPath).libraryRevision
 const releasePaths = new Set(
-	execFileSync('git', ['ls-tree', '-r', '--name-only', release], {
+	execFileSync('git', ['ls-tree', '-r', '--name-only', releaseRevision], {
 		cwd: root,
 		encoding: 'utf8',
 		maxBuffer: 8 * 1024 * 1024,
@@ -112,7 +118,7 @@ const releasePaths = new Set(
 for (const doc of json(manifestPath).documents)
 	for (const entry of doc.sources) assert.ok(releasePaths.has(entry.path), entry.path)
 const evidence = {
-	provenance: 'published-0.3.0',
+	provenance: 'published-' + version,
 	docsRevision: revision,
 	node: process.version,
 	apiSha256: hash(join(cwd, 'node_modules/@soxa-ui/setup/dist/api.json')),

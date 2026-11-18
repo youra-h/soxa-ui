@@ -1,3 +1,4 @@
+import { documentationRelease } from './release.mjs'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
@@ -10,6 +11,8 @@ import { serve, checkPage, missingReferences } from './consumer-browser.mjs'
 import { buildCorpus, selectDocuments } from './corpus.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
+const release = documentationRelease(root)
+const { version, legacy } = release
 const directory =
 	process.env.SOXA_SOLID_SMOKE_DIR || mkdtempSync(join(tmpdir(), 'soxa-solid-docs-'))
 const npmCli = process.env.npm_execpath
@@ -17,7 +20,7 @@ if (!npmCli) throw new Error('Run with npm run check:ai-docs:solid')
 const run = (args, cwd) => execFileSync(process.execPath, args, { cwd, stdio: 'inherit' })
 const digest = (path) => createHash('sha256').update(readFileSync(path)).digest('hex')
 const evidence = {
-	provenance: 'published-0.3.0',
+	provenance: 'published-' + version,
 	docsRevision: execFileSync('git', ['rev-parse', 'HEAD'], {
 		cwd: root,
 		encoding: 'utf8',
@@ -34,7 +37,7 @@ console.log('Solid consumer workspace: ' + directory)
 for (const ssr of [false, true]) {
 	const name = ssr ? 'solidstart' : 'solid'
 	const cwd = join(directory, name)
-	cpSync(join(root, 'docs/ai/0.3.0/examples', name), cwd, { recursive: true })
+	cpSync(join(root, `docs/ai/${version}/examples`, name), cwd, { recursive: true })
 	const pkg = JSON.parse(readFileSync(join(cwd, 'package.json'), 'utf8'))
 	run([npmCli, 'install', '--no-audit', '--no-fund'], cwd)
 	execFileSync(process.execPath, [npmCli, 'ls', '--all', '--omit=optional'], {
@@ -52,7 +55,7 @@ for (const ssr of [false, true]) {
 		.filter(([path]) => path.includes('node_modules/@soxa-ui/'))
 		.map(([path, entry]) => {
 			const dependency = path.slice(path.lastIndexOf('node_modules/') + 13)
-			assert.equal(entry.version, '0.3.0')
+			assert.equal(entry.version, release.packages[dependency])
 			assert.ok(entry.resolved.startsWith('https://registry.npmjs.org/'))
 			assert.ok(entry.integrity)
 			assert.equal(
@@ -75,7 +78,9 @@ for (const ssr of [false, true]) {
 		browser: false,
 	}
 	evidence.consumers.push(result)
-	result.inputs = readdirSync(join(root, 'docs/ai/0.3.0/examples', name), { recursive: true })
+	result.inputs = readdirSync(join(root, `docs/ai/${version}/examples`, name), {
+		recursive: true,
+	})
 		.filter((file) => /\.(?:tsx?|json|html)$/.test(file))
 		.map((file) => ({
 			path: name + '/' + file.replaceAll('\\', '/'),
@@ -88,12 +93,12 @@ for (const ssr of [false, true]) {
 			recursive: true,
 		})
 		const corpus = buildCorpus({
-			manifestPath: join(directory, 'source/docs/ai/0.3.0/manifest.json'),
+			manifestPath: join(directory, `source/docs/ai/${version}/manifest.json`),
 			packageRoot: join(cwd, 'node_modules/@soxa-ui/setup'),
 			docsRevision: evidence.docsRevision,
 		})
 		const selected = selectDocuments(corpus, {
-			version: '0.3.0',
+			version,
 			audience: 'consumer',
 			framework: 'solid',
 		})
@@ -188,6 +193,10 @@ for (const ssr of [false, true]) {
 			},
 			validateSSRReferences: (broken) => {
 				result.ssrReferenceGaps = broken
+				if (!legacy) {
+					assert.deepEqual(broken, [])
+					return
+				}
 				assert.equal(broken.length, 2, 'Exact published raw SSR portal gaps')
 				assert.ok(broken.every((entry) => entry.attr === 'aria-controls' && !entry.hidden))
 				assert.equal(
@@ -224,6 +233,10 @@ if (failures.length) throw new Error(failures.join('\n') + '\nEvidence: ' + dire
 console.log('Published Solid recipes passed: ' + directory)
 
 function assertHiddenPickerGap(broken) {
+	if (!legacy) {
+		assert.deepEqual(broken, [])
+		return
+	}
 	assert.equal(broken.length, 1, 'Only the published hidden Calendar label gap remains')
 	const entry = broken[0]
 	assert.equal(entry.attr, 'aria-labelledby')

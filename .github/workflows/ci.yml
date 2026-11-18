@@ -47,8 +47,14 @@ jobs:
           npm run test:theme
 
   ai-docs:
-    name: AI Docs - published 0.3.0
+    name: AI Docs - published ${{ matrix.version }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ['0.3.0', '0.4.1']
+    env:
+      SOXA_DOCS_VERSION: ${{ matrix.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -66,6 +72,8 @@ jobs:
       - run: npm run check:ai-docs:solid
       - run: npm run check:ai-docs:webc
       - run: npm run check:ai-docs:recipes
+      - if: matrix.version == '0.4.1'
+        run: npm run check:ai-docs:svelte
 
   ai-docs-svelte-development:
     name: AI Docs - Svelte development tarballs

@@ -1,4 +1,5 @@
-﻿import assert from 'node:assert/strict'
+import { documentationRelease } from './release.mjs'
+import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
 import { cpSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
@@ -8,6 +9,8 @@ import { chromium } from 'playwright'
 import { serve, checkPage, missingReferences } from './consumer-browser.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
+const release = documentationRelease(root)
+const { version, legacy } = release
 const directory = mkdtempSync(join(tmpdir(), 'soxa-react-docs-smoke-'))
 const npmCli = process.env.npm_execpath
 if (!npmCli) throw new Error('Run with npm run check:ai-docs:react')
@@ -16,11 +19,11 @@ const put = (cwd, file, text) => {
 	mkdirSync(dirname(join(cwd, file)), { recursive: true })
 	writeFileSync(join(cwd, file), text)
 }
-const manifest = JSON.parse(readFileSync(join(root, 'docs/ai/0.3.0/manifest.json'), 'utf8'))
+const manifest = JSON.parse(readFileSync(join(root, `docs/ai/${version}/manifest.json`), 'utf8'))
 const revision = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim()
 cpSync(join(root, 'docs/ai'), join(directory, 'docs/ai'), { recursive: true })
 cpSync(join(root, 'tools/ai-docs'), join(directory, 'tools/ai-docs'), { recursive: true })
-const examples = join(directory, 'docs/ai/0.3.0/examples')
+const examples = join(directory, `docs/ai/${version}/examples`)
 const pins = { react: '19.3.0', 'react-dom': '19.3.0' }
 const types = {
 	typescript: '6.0.2',
@@ -84,7 +87,7 @@ run(
 	[
 		join(directory, 'tools/ai-docs/cli.mjs'),
 		'--manifest',
-		join(directory, 'docs/ai/0.3.0/manifest.json'),
+		join(directory, `docs/ai/${version}/manifest.json`),
 		'--package',
 		join(vite, 'node_modules/@soxa-ui/setup'),
 		'--revision',
@@ -164,6 +167,18 @@ try {
 					} else assert.deepEqual(await checkedReferences(page), [])
 				},
 				validateSSRReferences: (broken) => {
+					if (!legacy) {
+						assert.equal(broken.length, 2)
+						assert.ok(
+							broken.every(
+								(entry) =>
+									entry.role === 'tab' &&
+									entry.attr === 'aria-controls' &&
+									entry.id.endsWith('-panel'),
+							),
+						)
+						return
+					}
 					assert.equal(broken.length, 4, 'Exact known 0.3.0 raw SSR reference gaps')
 					assert.ok(broken.every((entry) => entry.attr === 'aria-controls'))
 					assert.equal(
@@ -227,7 +242,11 @@ try {
 	await browser.close()
 }
 console.log(
-	'Published 0.3.0: React StrictMode and Next types/build/browser/SSR passed (' + directory + ')',
+	'Published ' +
+		version +
+		': React StrictMode and Next types/build/browser/SSR passed (' +
+		directory +
+		')',
 )
 
 async function checkedReferences(page) {
@@ -241,6 +260,10 @@ async function checkedReferences(page) {
 			entry.withinDatePicker &&
 			entry.id.endsWith('-picker-0'),
 	)
-	assert.equal(hiddenPickerLabels.length, 1, 'Exact published hidden Calendar picker label gap')
+	assert.equal(
+		hiddenPickerLabels.length,
+		legacy ? 1 : 0,
+		'Release-specific hidden Calendar picker labels',
+	)
 	return missing.filter((entry) => !hiddenPickerLabels.includes(entry))
 }
