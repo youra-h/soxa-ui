@@ -60,6 +60,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run check:ai-docs
+      - run: npm run check:ai-docs:mcp
       - run: npm run check:ai-docs:react
       - run: npm run check:ai-docs:angular
       - run: npm run check:ai-docs:solid
