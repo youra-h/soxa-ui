@@ -24,7 +24,9 @@ export abstract class TBasePlugin<
 	install(ctx: IPluginContext, options?: unknown): void {
 		const mount: unknown =
 			options && typeof options === 'object' ? Reflect.get(options, 'pluginMount') : undefined
+
 		this._pluginMount = mount instanceof TPluginMount ? mount : undefined
+
 		this._sink.emit('install', ctx, options)
 	}
 
@@ -92,12 +94,15 @@ export abstract class TBasePlugin<
 
 		this._whenAccepted(() => {
 			source.on(event, handler)
+
 			return () => source.off(event, handler)
 		})
 	}
+
 	/** Queue a foreign effect while assembly may still be discarded. */
 	protected _whenAccepted(effect: () => void | (() => void)): void {
 		const release = this._pluginMount ? this._pluginMount.defer(effect) : effect()
+
 		if (release) this._unsubscribes.push(release)
 	}
 }

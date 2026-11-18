@@ -69,6 +69,7 @@ function preparedPluginOptions(
 ): NonNullable<IAdapterContextOptions['pluginOptions']> {
 	const mount = new TPluginMount()
 	const overrides = new Map<import('../../../protected').TPluginCtor, object | undefined>()
+
 	for (const entry of options.pluginOptions ?? []) {
 		if (
 			overrides.has(entry.ctor) ||
@@ -77,8 +78,10 @@ function preparedPluginOptions(
 			throw new Error(
 				'Mount installation options must name each declared plugin at most once.',
 			)
+
 		overrides.set(entry.ctor, entry.options)
 	}
+
 	return descriptor.plugins.map((plugin) =>
 		plugin.with({ ...overrides.get(plugin.ctor), pluginMount: mount }),
 	)
@@ -88,6 +91,7 @@ function preparedPluginOptions(
 function initialPropsView(props: object, overrides: object): object {
 	const read = (key: PropertyKey) =>
 		Reflect.has(overrides, key) ? Reflect.get(overrides, key) : Reflect.get(props, key)
+
 	return new Proxy(
 		{},
 		{
@@ -109,6 +113,7 @@ function initialPropsView(props: object, overrides: object): object {
 	)
 }
 
+/** Consume the captured declaration and defer foreign plugin effects until mount acceptance. */
 export function collectionInitialOwnerOptions<TInstance extends object>(
 	descriptor: Pick<IComponentDescriptor, 'plugins'>,
 	options: IAdapterContextOptions<TInstance>,
@@ -118,6 +123,7 @@ export function collectionInitialOwnerOptions<TInstance extends object>(
 		options.props && Reflect.get(options.props, 'initial') !== undefined
 			? initialPropsView(options.props, { initial: undefined })
 			: options.props
+
 	return source
 		? { ...options, props, pluginOptions: preparedPluginOptions(descriptor, options) }
 		: props === options.props
@@ -162,7 +168,9 @@ export function resolveCollectionInitialItem<TInstance extends object>(
 	const link = source.link(ctrl)
 	const part = descriptor.plugins.find((plugin) => plugin.ctor === TCollectionInitialPartPlugin)
 	const ids = descriptor.plugins.find((plugin) => plugin.ctor === TTabsItemIdsPlugin)
+
 	if (!part) throw new Error('Collection initial part requires its declared input plugin.')
+
 	const pluginOptions = [
 		...(options.pluginOptions ?? []),
 		part.with({ prepared: true, id: declaredId }),
@@ -196,6 +204,7 @@ export function resolveCollectionInitialPanel<TInstance extends object>(
 
 	const panel = source.panel(ordinal)
 	const part = descriptor.plugins.find((plugin) => plugin.ctor === TCollectionInitialPartPlugin)
+
 	if (!part) throw new Error('Collection initial panel requires its declared input plugin.')
 
 	if (
@@ -237,10 +246,12 @@ function initialPartProps(
 			)
 			.map((prop) => prop.name.name),
 	])
+
 	return new Proxy(props, {
 		get(target, key, receiver) {
 			if (key === 'id') return id
 			if (key === 'value' && panel) return panel.value
+
 			return typeof key === 'string' && managed.has(key)
 				? undefined
 				: Reflect.get(target, key, receiver)
@@ -251,6 +262,7 @@ function initialPartProps(
 	})
 }
 
+/** Hide consumed inputs from subsequent exchanges so they cannot overwrite prepared models. */
 export function collectionInitialInputs(
 	context: Pick<import('../../../protected').IAdapterContext, 'descriptor' | 'bundle'>,
 	props: object,
@@ -260,7 +272,9 @@ export function collectionInitialInputs(
 		Reflect.get(props, 'initial') !== undefined
 	)
 		return initialPropsView(props, { initial: undefined })
+
 	const part = context.bundle?.get(TCollectionInitialPartPlugin)
+
 	return part?.prepared
 		? initialPartProps(
 				context.descriptor,
@@ -277,11 +291,13 @@ export function collectionInitialState(
 	state: TCollectionStatePort,
 ): TCollectionStatePort {
 	if (!context.descriptor.props.some((prop) => prop.name.name === 'aria')) return state
+
 	const ids = context.bundle?.get(TTabsItemIdsPlugin)
 	const link = ids?.initial ? ids : context.bundle?.get(TCollectionInitialPartPlugin)?.aria
 	const names =
 		context.bundle?.get(TTabsItemNamesPlugin) ?? context.bundle?.get(TTagsItemNamesPlugin)
 	const outputs = names?.pluginMount ? [names] : []
+
 	return link || outputs.length ? new TCollectionAriaState({ state, link, outputs }) : state
 }
 

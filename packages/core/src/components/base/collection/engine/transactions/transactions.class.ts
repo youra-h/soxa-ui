@@ -105,6 +105,7 @@ export class TCollectionTransactions<TItem> implements ICollectionTransactions<T
 		}
 
 		this._deadline = deadline
+
 		// A request-owned engine must remain collectible before expiry. The driver,
 		// rather than the timer queue, owns its registry and pending attempts.
 		this._timer = setTimeout(

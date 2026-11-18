@@ -31,15 +31,18 @@ const sources = new WeakMap<IPluginBundle, TCollectionInitialSource>()
 export class TCollectionPreparationLifetime {
 	private _sources?: Map<number, TCollectionInitialSource | undefined>
 
+	/** Capture each assembly position once, including the absence of an initial declaration. */
 	get(
 		index: number,
 		props: object,
 		panelDefaultValue?: string | number,
 	): TCollectionInitialSource | undefined {
 		const sources = (this._sources ??= new Map())
+
 		if (!sources.has(index)) {
 			sources.set(index, createCollectionInitialSource(props, panelDefaultValue))
 		}
+
 		return sources.get(index)
 	}
 }
@@ -62,6 +65,7 @@ export function collectionNeedsPreparation(
 			config.bundle?.get(TCollectionInitialPartPlugin)?.prepared,
 		)
 	}
+
 	return descriptor.plugins.some(
 		(plugin) =>
 			plugin.ctor === TCollectionInitialPlugin ||
@@ -69,6 +73,7 @@ export function collectionNeedsPreparation(
 	)
 }
 
+/** Resolves owner, item and panel inputs before assembly; temporary views share one receipt. */
 export class TCollectionPreparation implements IAdapterPreparation {
 	private _ownerIndex = 0
 	private _source?: TCollectionInitialSource
@@ -86,13 +91,17 @@ export class TCollectionPreparation implements IAdapterPreparation {
 	): ICollectionTransaction | undefined {
 		const engine = this._source?.engine
 		const context = contexts[0]
+
 		if (!engine || !context) return
 
 		let preparation = preparationOf(engine)
+
 		if (!preparation) {
 			engine.use(new TPreparationExtension())
 			preparation = preparationOf(engine)
 		}
+
+		// The deadline cleans up abandoned views; it does not delay or complete server rendering.
 		return preparation?.prepare(context.instance, {
 			owner: context,
 			timeout: 1000,
@@ -108,7 +117,9 @@ export class TCollectionPreparation implements IAdapterPreparation {
 		// Facades inherit prepared inputs from their component's bundle.
 		if (config.bundle !== undefined) {
 			const source = collectionPreparedSource(config.bundle)
+
 			if (source) this._source = source
+
 			return {
 				options: {
 					...options,
@@ -124,6 +135,7 @@ export class TCollectionPreparation implements IAdapterPreparation {
 		}
 
 		const owner = descriptor.plugins.find((plugin) => plugin.ctor === TCollectionInitialPlugin)
+
 		if (owner) {
 			const defaultValue: unknown =
 				owner.options && Reflect.get(owner.options, 'panelDefaultValue')
@@ -131,9 +143,11 @@ export class TCollectionPreparation implements IAdapterPreparation {
 				typeof defaultValue === 'string' || typeof defaultValue === 'number'
 					? defaultValue
 					: undefined
+
 			const source = this._lifetime
 				? this._lifetime.get(this._ownerIndex++, options.props ?? {}, panelDefault)
 				: createCollectionInitialSource(options.props ?? {}, panelDefault)
+
 			return {
 				options: collectionInitialOwnerOptions(descriptor, options, source),
 				complete: (context) => {
@@ -148,9 +162,11 @@ export class TCollectionPreparation implements IAdapterPreparation {
 		const part = descriptor.plugins.find(
 			(plugin) => plugin.ctor === TCollectionInitialPartPlugin,
 		)
+
 		if (!part) return { options }
 
 		const inputs = { ...options, props: this._normalize(options.props ?? {}) }
+
 		return {
 			options:
 				part.options && Reflect.get(part.options, 'panel') === true

@@ -100,6 +100,7 @@ function useExchange(
 			state: { ...collectionInitialState(adapter, binding.state).getSnapshot() },
 		}
 	}
+
 	const [state, write, updates] = createShallowState()
 
 	onCleanup(binding.updates.listen(updates))

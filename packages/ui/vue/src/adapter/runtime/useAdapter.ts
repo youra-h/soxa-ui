@@ -113,11 +113,13 @@ export function useAdapterParts(
 	emit?: (event: string, ...args: unknown[]) => void,
 ): Readonly<Record<string, unknown>> {
 	const link = adapter.connect(VueProfile)
+
 	// Prepared membership exists before children. Vue SSR has no unmount cleanup,
 	// so its snapshot must not accept foreign subscriptions or replace an engine owner.
 	if (collectionInitialPrepared(adapter) && inject(ssrContextKey, null) !== null) {
 		return { ...collectionInitialState(adapter, link.state).getSnapshot() }
 	}
+
 	const offs: Array<() => void> = []
 
 	// 1. Core → Vue: one shallow reactive record per context. The subscription

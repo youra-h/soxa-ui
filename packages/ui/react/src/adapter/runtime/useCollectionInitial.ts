@@ -8,7 +8,9 @@ export function useCollectionInitial(
 	panelDefaultValue?: string | number,
 ): TCollectionInitialSource | undefined {
 	const held = useRef<{ source: TCollectionInitialSource | undefined } | null>(null)
+
 	if (!held.current)
 		held.current = { source: createCollectionInitialSource(props, panelDefaultValue) }
+
 	return held.current.source
 }

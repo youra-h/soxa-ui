@@ -107,17 +107,23 @@ export class TTabsContentBindingExtension {
 	getSnapshot(): Readonly<Record<string, unknown>> {
 		return this._snapshot
 	}
+
 	subscribe(listener: () => void): () => void {
 		this._listeners.add(listener)
+
 		return () => this._listeners.delete(listener)
 	}
+
+	/** Publish only this panel mount's relationship, leaving shared collection models untouched. */
 	private _write(link: Readonly<Record<string, unknown>>): void {
 		if (
 			this._snapshot.id === link.id &&
 			this._snapshot['aria-labelledby'] === link['aria-labelledby']
 		)
 			return
+
 		this._snapshot = Object.freeze(link)
+
 		for (const listener of this._listeners) listener()
 	}
 
@@ -142,6 +148,7 @@ export class TTabsContentBindingExtension {
 		const idPlugin = context.bundle?.get(TIdPlugin)
 		const part = context.bundle?.get(TCollectionInitialPartPlugin)
 		const initial = part?.prepared ? collectionInitialSourceOf(elevator) : undefined
+
 		if (initial && part) part.aria = this
 
 		/** The tab bound now. */
@@ -179,6 +186,7 @@ export class TTabsContentBindingExtension {
 		const unlinkTab = (): void => {
 			releaseIds?.()
 			releaseIds = undefined
+
 			if (idPlugin) boundIds?.unbindPanel(idPlugin)
 
 			boundIds = undefined
@@ -203,7 +211,9 @@ export class TTabsContentBindingExtension {
 
 			boundIds = ids
 			ids.bindPanel(idPlugin)
+
 			if (initial) releaseIds = ids.subscribe(linkPanel)
+
 			linkPanel()
 		}
 
@@ -254,10 +264,12 @@ export class TTabsContentBindingExtension {
 			part?.pluginMount?.accept()
 			attached = true
 			members?.add(adapter, context)
+
 			// The tab found on assembly: subscribed now, and what it wrote since
 			// is read after subscribing
 			boundItem?.events.on('change:aria', linkPanel)
 			idPlugin?.events.on('change:id', linkPanel)
+
 			linkPanel()
 			linkTab()
 
@@ -284,6 +296,7 @@ export class TTabsContentBindingExtension {
 				content.aria.remove('id')
 				content.aria.remove('aria-labelledby')
 			}
+
 			this._listeners.clear()
 		})
 	}

@@ -106,6 +106,7 @@ class TBuilt<T extends TAdapterContexts> {
 	accept(): void {
 		this._receipt?.commit()
 		drafts.accept(this.held)
+
 		accepting(this.contexts, () => attachAll(this.contexts))
 	}
 
@@ -115,6 +116,7 @@ class TBuilt<T extends TAdapterContexts> {
 		this._destroyed = true
 		this._receipt?.cancel()
 		drafts.accept(this.held)
+
 		destroyAll(this.contexts)
 	}
 }
@@ -127,15 +129,19 @@ export function useAdapterContext<T extends TAdapterContexts>(
 	const parent = useContext(ElevatorContext)
 	const ref = useRef<TBuilt<T> | null>(null)
 	const preparationLifetime = useRef<TCollectionPreparationLifetime | null>(null)
+
 	// The layer the last effect setup ran with
 	const settled = useRef<TElevatorLayer | null>(null)
 	const [, rerender] = useReducer(nextVersion, 0)
+
 	const assemble = (layer: TElevatorLayer): TBuilt<T> => {
 		const scope = new TReactElevatorScope(layer)
 		let preparation: TCollectionPreparation | undefined
 		const held: object[] = []
+
 		// A retry of a discarded render over the same `ctrl` keeps the discarded one's id
 		let id = mountId
+
 		// A mount id and a locale given explicitly as options stay with whoever
 		// gave them
 		const create: TCreateAdapterContext = (descriptor, options, config) => {
@@ -147,6 +153,7 @@ export function useAdapterContext<T extends TAdapterContexts>(
 				)
 				config = { ...config, preparation: config?.preparation ?? preparation }
 			}
+
 			const taken = drafts.take(options)
 
 			held.push(...taken.held)
@@ -154,18 +161,23 @@ export function useAdapterContext<T extends TAdapterContexts>(
 
 			return createAdapterContext(descriptor, { mountId: id, locale, ...options }, config)
 		}
+
 		const built = new TBuilt(factory(create, scope.elevator), scope, held)
 
 		drafts.add(held, built.destroy, id)
+
+		// Register rollback only after all contexts exist, so it can release the whole assembly.
 		try {
 			built.prepare(preparation)
 		} catch (error) {
 			built.destroy()
+
 			throw error
 		}
 
 		return built
 	}
+
 	// The factory of the last render, not of the one the effect saw
 	const rebuild = useEffectEvent(() => assemble(parent))
 
@@ -174,6 +186,7 @@ export function useAdapterContext<T extends TAdapterContexts>(
 	}
 
 	const built = ref.current
+
 	// A stale read layer sets the effect up again with the new one
 	const source = built.scope.isStale(parent) ? parent : settled.current
 
