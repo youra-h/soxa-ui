@@ -1,5 +1,15 @@
 # @soxa-ui/plugins
 
+## 0.4.1
+
+### Patch Changes
+
+- 480231a: Preserve the anchor's local data-so-theme on teleported Frame panels across all adapters, including Menu, Select, Popover and Tooltip. Follow theme changes and anchor moves while respecting explicit panel themes and contained layout.
+- b17d612: Fix Select and DatePicker aria-controls references when their popup panels are absent during server rendering and hydration.
+- Updated dependencies [859c3c6]
+- Updated dependencies [dd5946d]
+  - @soxa-ui/core@0.4.1
+
 ## 0.4.0
 
 ### Patch Changes

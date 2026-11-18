@@ -1,5 +1,17 @@
 # @soxa-ui/theme-base
 
+## 0.4.1
+
+### Patch Changes
+
+- 480231a: Preserve the anchor's local data-so-theme on teleported Frame panels across all adapters, including Menu, Select, Popover and Tooltip. Follow theme changes and anchor moves while respecting explicit panel themes and contained layout.
+- Updated dependencies [480231a]
+- Updated dependencies [859c3c6]
+- Updated dependencies [dd5946d]
+- Updated dependencies [b17d612]
+  - @soxa-ui/plugins@0.4.1
+  - @soxa-ui/core@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes
