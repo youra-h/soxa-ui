@@ -301,3 +301,11 @@ keyboard, direction, dark schemes, motion attributes and replacement icons.
 See [validation and limits](./0.3.0/public-recipes-validation.md) and the
 [standalone example](./0.3.0/examples/public-recipes/README.md).
 The shared records remain sample; a minimal theme is not a full component theme.
+
+## Library contributor route
+
+For adding a component to the library, use the separate
+[source-pinned contributor guide](../contributing/README.md). Its baseline is the
+0.4.0 source tree, not the installed 0.3.0 API. The 0.3.0 manifest's contributor
+coverage remains pending: the consumer builder must not silently return newer
+source-development instructions as release-specific contributor records.
