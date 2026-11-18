@@ -165,20 +165,16 @@ try {
 				document.querySelectorAll('[role="tab"]')[1]?.getAttribute('aria-selected') ===
 				'true',
 		)
-		const tabsGeometry = await page
-			.locator('.so-tabs__bar')
-			.evaluate((el) => ({
-				size: getComputedStyle(el).getPropertyValue('--so-tabs-active-size'),
-				position: getComputedStyle(el).getPropertyValue('--so-tabs-active-pos'),
-			}))
+		const tabsGeometry = await page.locator('.so-tabs__bar').evaluate((el) => ({
+			size: getComputedStyle(el).getPropertyValue('--so-tabs-active-size'),
+			position: getComputedStyle(el).getPropertyValue('--so-tabs-active-pos'),
+		}))
 		assert.ok(parseFloat(tabsGeometry.size) > 0)
 		const direction = async () =>
-			page
-				.locator('section[aria-label="Direction example"] .so-switch')
-				.evaluate((el) => ({
-					direction: getComputedStyle(el).direction,
-					sign: getComputedStyle(el).getPropertyValue('--so-dir-sign').trim(),
-				}))
+			page.locator('section[aria-label="Direction example"] .so-switch').evaluate((el) => ({
+				direction: getComputedStyle(el).direction,
+				sign: getComputedStyle(el).getPropertyValue('--so-dir-sign').trim(),
+			}))
 		const ltr = await direction()
 		assert.deepEqual(ltr, { direction: 'ltr', sign: '1' })
 		await page.locator('html').evaluate((el) => el.setAttribute('dir', 'rtl'))
