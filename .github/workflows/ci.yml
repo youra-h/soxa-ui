@@ -60,6 +60,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run check:ai-docs
+      - run: npm run check:ai-docs:mcp
       - run: npm run check:ai-docs:react
       - run: npm run check:ai-docs:angular
       - run: npm run check:ai-docs:solid
@@ -177,7 +178,7 @@ jobs:
       # checks, and the specs of the browser's project.
       - name: Тесты
         env:
-          DEBUG: pw:browser
+          DEBUG: pw:browser,vitest:browser:api,vitest:browser:pool,vitest:browser:playwright,vitest:browser:gc
         run: |
           (
             while sleep 5; do
@@ -215,7 +216,7 @@ jobs:
         if: failure()
         run: |
           cat "$RUNNER_TEMP/memory.log"
-          df -h /dev/shm
+          df -h /tmp /dev/shm
           sudo dmesg -T | grep -iE 'oom|killed process|out of memory|segfault|chrom|headless|wpe|minibrowser' || echo 'в журнале ядра — ничего о памяти и браузере'
 
   build:

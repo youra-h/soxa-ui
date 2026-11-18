@@ -267,11 +267,33 @@ test('selective source delivery pins every request and fetches only declared pub
 		),
 	)
 	assert.ok(!requested.some((url) => /AGENTS|memory|test|smoke/.test(url)))
+	assert.ok(!requested.some((url) => /mcp/.test(url)))
 	assert.deepEqual(JSON.parse(readFileSync(join(f.root, 'downloaded/revision.json'), 'utf8')), {
 		schemaVersion: 1,
 		docsRevision: revision,
 		libraryVersion: '0.3.0',
 	})
+})
+
+test('optional MCP delivery adds only runtime files without changing older pinned downloads', async () => {
+	const f = fixture()
+	const { fetchSource } = await import('./fetch.mjs')
+	const requested = []
+	const source = await fetchSource({
+		revision,
+		version: '0.3.0',
+		out: join(f.root, 'mcp-source'),
+		includeMcp: true,
+		fetchFile: async (url) => {
+			requested.push(url)
+			return new Response(
+				url.endsWith('manifest.json') ? JSON.stringify(f.manifest) : 'public content',
+			)
+		},
+	})
+	assert.equal(source.files, 10)
+	assert.equal(requested.filter((url) => /mcp/.test(url)).length, 3)
+	assert.ok(!requested.some((url) => /client|smoke|test/.test(url)))
 })
 
 test('source download rejects missing remote files, unsafe paths and wrong versions before writing', async () => {

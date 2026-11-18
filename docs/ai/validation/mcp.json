@@ -1,0 +1,118 @@
+{
+  "sdk": "1.32.2",
+  "protocol": {
+    "resources": {},
+    "tools": {}
+  },
+  "server": {
+    "name": "soxa-ui-docs",
+    "version": "1.0.0"
+  },
+  "provenance": {
+    "schemaVersion": 1,
+    "libraryVersion": "0.3.0",
+    "libraryRevision": "9ae988633936a03e291e8e414028456fe1039c6b",
+    "docsRevision": "2bbfa149ff6432c1c911020218ec2a279fb94151",
+    "language": "en",
+    "packages": {
+      "@soxa-ui/vue": "0.3.0",
+      "@soxa-ui/setup": "0.3.0",
+      "@soxa-ui/core": "0.3.0",
+      "@soxa-ui/plugins": "0.3.0",
+      "@soxa-ui/theme-base": "0.3.0",
+      "@soxa-ui/theme-oren": "0.3.0",
+      "@soxa-ui/icons-material": "0.3.0",
+      "@soxa-ui/react": "0.3.0",
+      "@soxa-ui/angular": "0.3.0",
+      "@soxa-ui/svelte": "0.3.0",
+      "@soxa-ui/solid": "0.3.0",
+      "@soxa-ui/webc": "0.3.0",
+      "@soxa-ui/icons-lucide": "0.3.0"
+    },
+    "coverage": {
+      "vue": {
+        "api": "generated",
+        "guides": "sample"
+      },
+      "react": {
+        "api": "generated",
+        "guides": "sample"
+      },
+      "angular": {
+        "api": "generated",
+        "guides": "sample"
+      },
+      "solid": {
+        "api": "generated",
+        "guides": "sample"
+      },
+      "svelte": {
+        "api": "generated",
+        "guides": "sample"
+      },
+      "webc": {
+        "api": "generated",
+        "guides": "sample"
+      }
+    },
+    "contributorGuides": "pending",
+    "apiSource": {
+      "package": "@soxa-ui/setup",
+      "version": "0.3.0",
+      "export": "@soxa-ui/setup/api.json",
+      "sha256": "869aa23426237c0b130466cd0de9fa0ff8e960412a99e058de824c9be02104dd",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.3.0.tgz",
+      "integrity": "sha512-byutzJyCBW7oCrqze6Dgr1+2QZ019yAZ0kIAY7+1SWQLFE6kW53RJOpo7LH+FB9jSifY7Os2k92YUf7hVmjaZg=="
+    }
+  },
+  "sources": [
+    {
+      "documentId": "vue-installation",
+      "exampleId": "vue-main",
+      "target": "src/main.ts",
+      "sha256": "5e946a35333d66bd34e3fe0739fdff7041c7c8925f4f829faf84dc3b046b8a49"
+    },
+    {
+      "documentId": "vue-bindings",
+      "exampleId": "recipes",
+      "target": "TravelRecipes.vue",
+      "sha256": "01ffa864b2e86ba7f71f39068f287f45edbf152c74567ba6a8d895bb502f8806"
+    },
+    {
+      "documentId": "vue-controller",
+      "exampleId": "controller",
+      "target": "CtrlExample.vue",
+      "sha256": "d17a7ccee08b07e88e34c66125a4fb8fc2d06fe4de11f4cccd70e195550d615b"
+    }
+  ],
+  "calls": 81,
+  "context": "Fresh scripted SDK client. Reads no corpus/source files; receives library code and instructions only through MCP.",
+  "validation": {
+    "types": "passed",
+    "productionBuild": "passed",
+    "chromium": "passed",
+    "interactions": [
+      "Select keyboard choice/Escape/model",
+      "DatePicker keyboard choice/Escape/model",
+      "Input events",
+      "Checkbox",
+      "Accordion slots",
+      "Controller remount",
+      "Submit",
+      "Unique ids",
+      "No console/page/request errors"
+    ]
+  },
+  "checked": "2026-11-18",
+  "method": "npm run check:ai-docs:mcp",
+  "implementationRevision": "2bbfa149ff6432c1c911020218ec2a279fb94151",
+  "transcript": {
+    "calls": 81,
+    "sha256": "619cfff621ec64d74c0c9d934b1f5421e28edd74182a440caeaceb85ef59ef9c",
+    "retainedBySmoke": "mcp-transcript.json in the printed temporary directory"
+  },
+  "locks": {
+    "sdk": "./mcp-sdk-package-lock.json.txt",
+    "consumer": "./mcp-consumer-package-lock.json.txt"
+  }
+}

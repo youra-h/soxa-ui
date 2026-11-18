@@ -71,10 +71,9 @@ older corpus. Library development can call the same CLI via
 under a `dist/` directory, which Git ignores.
 
 The website can build this at CI time and publish the resulting files under its
-own versioned URLs. Future MCP can use the same index/files. Neither requires a
-new npm documentation export, a running documentation server or a library release.
-This task does not publish an archive, merge a PR, deploy the website or implement
-MCP transport. The source becomes publicly fetchable once its commit is pushed;
+own versioned URLs. The [local read-only MCP server](./mcp.md) reads the same
+index/files. Neither requires a new npm documentation export, a running HTTP
+server or a library release. The source becomes publicly fetchable once its commit is pushed;
 select an owner-reviewed commit for production consumption.
 
 ## Manifest schema 1
