@@ -1,0 +1,208 @@
+{
+  "variant": "before",
+  "framework": "angular",
+  "kind": "tags",
+  "mode": "declarative",
+  "library": "soxa",
+  "n": 1000,
+  "surface": "client",
+  "protocol": "client-v3-isolated-phases",
+  "quality": {
+    "valid": true,
+    "checks": {
+      "count": true,
+      "selected": true,
+      "oneTabStop": true,
+      "panel": true,
+      "reciprocal": true
+    },
+    "focusPolicy": "one explicit collection stop",
+    "items": 1000,
+    "selected": 1,
+    "stops": 1,
+    "panels": 0
+  },
+  "errors": [],
+  "latency": {
+    "samples": [
+      {
+        "domMs": 551.6999999284744,
+        "paintMs": 602
+      },
+      {
+        "domMs": 510.2999999523163,
+        "paintMs": 560.1000000238419
+      },
+      {
+        "domMs": 382.39999997615814,
+        "paintMs": 409.8000000715256
+      },
+      {
+        "domMs": 364.5,
+        "paintMs": 404.39999997615814
+      },
+      {
+        "domMs": 353.5,
+        "paintMs": 380.60000002384186
+      },
+      {
+        "domMs": 364.89999997615814,
+        "paintMs": 404.39999997615814
+      },
+      {
+        "domMs": 428,
+        "paintMs": 467.7000000476837
+      }
+    ],
+    "medianDomMs": 382.39999997615814,
+    "medianPaintMs": 409.8000000715256
+  },
+  "baseline": {
+    "heapUsed": 7040656,
+    "nodes": 15,
+    "listeners": 14
+  },
+  "rounds": [
+    {
+      "cycle": 1,
+      "mounted": {
+        "heapUsed": 35327084,
+        "nodes": 12025,
+        "listeners": 11021
+      },
+      "afterUnmount": {
+        "heapUsed": 7136220,
+        "nodes": 15,
+        "listeners": 14
+      }
+    },
+    {
+      "cycle": 2,
+      "mounted": {
+        "heapUsed": 35414976,
+        "nodes": 12025,
+        "listeners": 11021
+      },
+      "afterUnmount": {
+        "heapUsed": 7157836,
+        "nodes": 15,
+        "listeners": 14
+      }
+    },
+    {
+      "cycle": 3,
+      "mounted": {
+        "heapUsed": 35376480,
+        "nodes": 12025,
+        "listeners": 11021
+      },
+      "afterUnmount": {
+        "heapUsed": 7183404,
+        "nodes": 15,
+        "listeners": 14
+      }
+    },
+    {
+      "cycle": 4,
+      "mounted": {
+        "heapUsed": 35429380,
+        "nodes": 12025,
+        "listeners": 11021
+      },
+      "afterUnmount": {
+        "heapUsed": 7172360,
+        "nodes": 15,
+        "listeners": 14
+      }
+    },
+    {
+      "cycle": 5,
+      "mounted": {
+        "heapUsed": 35421584,
+        "nodes": 12025,
+        "listeners": 11021
+      },
+      "afterUnmount": {
+        "heapUsed": 7196128,
+        "nodes": 15,
+        "listeners": 14
+      }
+    },
+    {
+      "cycle": 6,
+      "mounted": {
+        "heapUsed": 35505800,
+        "nodes": 12025,
+        "listeners": 11021
+      },
+      "afterUnmount": {
+        "heapUsed": 7179300,
+        "nodes": 15,
+        "listeners": 14
+      }
+    },
+    {
+      "cycle": 7,
+      "mounted": {
+        "heapUsed": 35441968,
+        "nodes": 12025,
+        "listeners": 11021
+      },
+      "afterUnmount": {
+        "heapUsed": 7230492,
+        "nodes": 15,
+        "listeners": 14
+      }
+    }
+  ],
+  "settled": {
+    "heapUsed": 7230492,
+    "nodes": 15,
+    "listeners": 14
+  },
+  "browser": "156.0.8078.4",
+  "interaction": {
+    "protocol": "selection-v1-separate-phase",
+    "errors": [],
+    "samples": [
+      {
+        "domUpdateMs": 16.600000023841858,
+        "paintMs": 30.899999976158142,
+        "selected": true
+      },
+      {
+        "domUpdateMs": 17.799999952316284,
+        "paintMs": 32,
+        "selected": true
+      },
+      {
+        "domUpdateMs": 18.600000023841858,
+        "paintMs": 32.199999928474426,
+        "selected": true
+      },
+      {
+        "domUpdateMs": 19.399999976158142,
+        "paintMs": 32.699999928474426,
+        "selected": true
+      },
+      {
+        "domUpdateMs": 18.600000023841858,
+        "paintMs": 32.700000047683716,
+        "selected": true
+      },
+      {
+        "domUpdateMs": 15.100000023841858,
+        "paintMs": 30.199999928474426,
+        "selected": true
+      },
+      {
+        "domUpdateMs": 18,
+        "paintMs": 32.200000047683716,
+        "selected": true
+      }
+    ],
+    "medianDomMs": 18,
+    "medianPaintMs": 32.199999928474426,
+    "method": "Synthetic complete pointer/mouse chain; MutationObserver to selected DOM, then two animation frames. Two warmup changes and seven alternating changes."
+  }
+}

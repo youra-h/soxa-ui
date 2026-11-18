@@ -1,0 +1,24 @@
+{
+  "retrievedAt": "2026-11-18T17:00:01.104Z",
+  "licenseUrl": "https://raw.githubusercontent.com/shadcn-ui/ui/main/LICENSE.md",
+  "files": [
+    {
+      "url": "https://ui.shadcn.com/r/styles/new-york-v4/tabs.json",
+      "registrySha256": "49320e6dcf56570753bb14ed3f5d66acf07d12e183c0e9024466995b25be5b1d",
+      "sourceSha256": "8eaad69422246348afe6eaf4e757df8734580322a58111b9d098a67330eec3a8",
+      "adaptations": "Only local import paths for cn and toggle."
+    },
+    {
+      "url": "https://ui.shadcn.com/r/styles/new-york-v4/toggle.json",
+      "registrySha256": "8c9f96fb87e2aa88961f4ded82fa9867ef0dadbc3e5ec51d16f1ebfa820037ea",
+      "sourceSha256": "699a762371965172c1c3a9b641acc0c88073b3a3ce1f49367652d68820a41005",
+      "adaptations": "Only local import paths for cn and toggle."
+    },
+    {
+      "url": "https://ui.shadcn.com/r/styles/new-york-v4/toggle-group.json",
+      "registrySha256": "7b010cdf719088efdf887e392fbdc9fdd0b76d4f7b3b0e9db319616a90e8cf16",
+      "sourceSha256": "05057da9535c6ba9a2f3583191b91468dfdad414d168bce99ff0aa65ce0dd0bb",
+      "adaptations": "Only local import paths for cn and toggle."
+    }
+  ]
+}

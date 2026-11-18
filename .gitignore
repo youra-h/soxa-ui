@@ -1,4 +1,9 @@
 node_modules/
+tools/bench-collections/.cache/
+tools/bench-collections/results/
+tools/bench-collections/*.html
+tools/bench-collections/angular/before.ts
+tools/bench-collections/angular/after.ts
 dist/
 dist-ssr/
 dist-prof/

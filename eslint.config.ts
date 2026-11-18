@@ -29,6 +29,8 @@ export default defineConfigWithVueTs(
 	// Generated benchmark inputs are immutable experimental evidence, not maintained source.
 	// Their syntax, runtime, console and behavior are checked by the comparison harness.
 	globalIgnores(['benchmarks/ai/inputs/**', 'benchmarks/ai/runs/**']),
+	// Upstream source fixtures keep their published syntax; the benchmark validates their runtime.
+	globalIgnores(['tools/bench-collections/shadcn/**']),
 
 	pluginVue.configs['flat/essential'],
 	vueTsConfigs.recommended,

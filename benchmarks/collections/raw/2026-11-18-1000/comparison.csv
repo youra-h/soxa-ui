@@ -1,0 +1,25 @@
+framework,kind,surface,beforeItemsMs,afterItemsMs,itemsChange,initialMs,initialVsBeforeItems
+Vue,tabs,ssr,166.0,212.3,+27.9%,178.2,+7.4%
+Vue,tabs,client,136.7,140.8,+3.0%,173.2,+26.7%
+Vue,tags,ssr,144.4,157.8,+9.3%,143.8,-0.4%
+Vue,tags,client,95.3,108.5,+13.9%,111.2,+16.7%
+React,tabs,ssr,82.0,88.4,+7.9%,131.3,+60.2%
+React,tabs,client,107.2,90.9,-15.2%,113.4,+5.8%
+React,tags,ssr,58.8,62.8,+6.7%,73.7,+25.2%
+React,tags,client,53.3,79.5,+49.2%,83.7,+57.0%
+Solid,tabs,ssr,163.3,174.1,+6.6%,131.1,-19.8%
+Solid,tabs,client,92.1,99.6,+8.1%,124.9,+35.6%
+Solid,tags,ssr,98.7,99.6,+0.9%,105.1,+6.4%
+Solid,tags,client,66.0,80.6,+22.1%,94.6,+43.3%
+Svelte,tabs,ssr,147.7,165.2,+11.9%,117.6,-20.3%
+Svelte,tabs,client,207.5,222.2,+7.1%,238.2,+14.8%
+Svelte,tags,ssr,96.0,82.8,-13.7%,88.0,-8.3%
+Svelte,tags,client,171.1,144.8,-15.4%,186.4,+8.9%
+Angular,tabs,ssr,478.0,565.5,+18.3%,450.2,-5.8%
+Angular,tabs,client,181.9,202.8,+11.5%,195.3,+7.4%
+Angular,tags,ssr,274.1,307.7,+12.3%,263.8,-3.7%
+Angular,tags,client,93.7,77.6,-17.2%,117.0,+24.9%
+Web Components,tabs,ssr,—,—,—,—,—
+Web Components,tabs,client,216.0,268.4,+24.3%,282.6,+30.8%
+Web Components,tags,ssr,—,—,—,—,—
+Web Components,tags,client,142.5,108.7,-23.7%,139.6,-2.0%

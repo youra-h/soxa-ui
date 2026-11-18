@@ -1,0 +1,110 @@
+{
+  "variant": "after",
+  "framework": "vue",
+  "kind": "tabs",
+  "mode": "data",
+  "renders": 5,
+  "scope": "Separate CPU profiling run; not latency samples.",
+  "top": [
+    [
+      "(garbage collector)",
+      134271
+    ],
+    [
+      "(anonymous)",
+      98654
+    ],
+    [
+      "sourceOf",
+      95331
+    ],
+    [
+      "get",
+      76504
+    ],
+    [
+      "define$1",
+      54352
+    ],
+    [
+      "getOwnPropertyDescriptor",
+      35372
+    ],
+    [
+      "hasOwn",
+      27746
+    ],
+    [
+      "post",
+      25526
+    ],
+    [
+      "createReactiveObject",
+      21441
+    ],
+    [
+      "hasSetupBinding",
+      20119
+    ],
+    [
+      "emit",
+      16680
+    ],
+    [
+      "subscribe",
+      16385
+    ],
+    [
+      "on",
+      15926
+    ],
+    [
+      "read",
+      15355
+    ],
+    [
+      "run",
+      15227
+    ],
+    [
+      "_write",
+      15132
+    ],
+    [
+      "useAdapterParts",
+      14407
+    ],
+    [
+      "use",
+      13839
+    ],
+    [
+      "created",
+      13123
+    ],
+    [
+      "install",
+      12499
+    ],
+    [
+      "_sfc_ssrRender$10",
+      12452
+    ],
+    [
+      "members",
+      12288
+    ],
+    [
+      "findByValue",
+      12146
+    ],
+    [
+      "setFullProps",
+      12112
+    ],
+    [
+      "_get",
+      11731
+    ]
+  ]
+}

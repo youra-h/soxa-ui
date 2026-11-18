@@ -1,0 +1,123 @@
+{
+  "variant": "after",
+  "framework": "solid",
+  "kind": "tabs",
+  "mode": "native",
+  "library": "ark",
+  "n": 1000,
+  "quality": {
+    "valid": true,
+    "checks": {
+      "count": true,
+      "selected": true,
+      "oneTabStop": true,
+      "panel": true,
+      "reciprocal": true
+    },
+    "focusPolicy": "native focus model; client Tab entry checked separately",
+    "items": 1000,
+    "selected": 1,
+    "stops": 1,
+    "panels": 1
+  },
+  "diagnostics": [],
+  "outputBytes": 288175,
+  "latency": {
+    "medianMs": 76.89699999999993,
+    "p95Ms": 81.16039999999998,
+    "samplesMs": [
+      81.16039999999998,
+      76.16239999999993,
+      78.24680000000012,
+      76.53279999999995,
+      76.89699999999993,
+      74.7179000000001,
+      78.50040000000013,
+      77.00520000000006,
+      76.73840000000018
+    ]
+  },
+  "baseline": {
+    "rss": 321929216,
+    "heapTotal": 179671040,
+    "heapUsed": 40707744,
+    "external": 9162441,
+    "arrayBuffers": 940928,
+    "peakRSS": 325922816
+  },
+  "baselineObjects": null,
+  "rounds": [
+    {
+      "requests": 3,
+      "beforeGC": {
+        "rss": 332505088,
+        "heapTotal": 249139200,
+        "heapUsed": 156418712,
+        "external": 9162481,
+        "arrayBuffers": 940928,
+        "peakRSS": 332505088
+      },
+      "afterGC": {
+        "rss": 332623872,
+        "heapTotal": 179933184,
+        "heapUsed": 40701616,
+        "external": 9162481,
+        "arrayBuffers": 940928,
+        "peakRSS": 332623872
+      },
+      "objects": null
+    },
+    {
+      "requests": 6,
+      "beforeGC": {
+        "rss": 331096064,
+        "heapTotal": 249401344,
+        "heapUsed": 156138880,
+        "external": 9162481,
+        "arrayBuffers": 940928,
+        "peakRSS": 334151680
+      },
+      "afterGC": {
+        "rss": 331280384,
+        "heapTotal": 180195328,
+        "heapUsed": 40721952,
+        "external": 9162481,
+        "arrayBuffers": 940928,
+        "peakRSS": 334151680
+      },
+      "objects": null
+    },
+    {
+      "requests": 9,
+      "beforeGC": {
+        "rss": 330555392,
+        "heapTotal": 249139200,
+        "heapUsed": 156118048,
+        "external": 9162481,
+        "arrayBuffers": 940928,
+        "peakRSS": 334151680
+      },
+      "afterGC": {
+        "rss": 330739712,
+        "heapTotal": 179933184,
+        "heapUsed": 40721840,
+        "external": 9162481,
+        "arrayBuffers": 940928,
+        "peakRSS": 334151680
+      },
+      "objects": null
+    }
+  ],
+  "settled": {
+    "memory": {
+      "rss": 330764288,
+      "heapTotal": 47812608,
+      "heapUsed": 40718088,
+      "external": 9162481,
+      "arrayBuffers": 940928,
+      "peakRSS": 334151680
+    },
+    "objects": null
+  },
+  "node": "v24.20.0"
+}

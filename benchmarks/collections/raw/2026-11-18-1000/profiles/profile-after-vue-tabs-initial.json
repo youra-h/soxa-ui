@@ -1,0 +1,110 @@
+{
+  "variant": "after",
+  "framework": "vue",
+  "kind": "tabs",
+  "mode": "initial",
+  "renders": 5,
+  "scope": "Separate CPU profiling run; not latency samples.",
+  "top": [
+    [
+      "get",
+      122576
+    ],
+    [
+      "(anonymous)",
+      101341
+    ],
+    [
+      "(garbage collector)",
+      98306
+    ],
+    [
+      "pick$1",
+      31792
+    ],
+    [
+      "sourceOf",
+      31227
+    ],
+    [
+      "hasOwn",
+      29094
+    ],
+    [
+      "post",
+      25418
+    ],
+    [
+      "TOwnBundle",
+      19107
+    ],
+    [
+      "prepare",
+      19063
+    ],
+    [
+      "getSnapshot",
+      18808
+    ],
+    [
+      "read",
+      18765
+    ],
+    [
+      "getOwnPropertyDescriptor",
+      18509
+    ],
+    [
+      "useAdapterParts",
+      16591
+    ],
+    [
+      "define$1",
+      16241
+    ],
+    [
+      "hasSetupBinding",
+      15581
+    ],
+    [
+      "use",
+      14925
+    ],
+    [
+      "resolveCollectionInitialItem",
+      14267
+    ],
+    [
+      "setFullProps",
+      13787
+    ],
+    [
+      "run",
+      13059
+    ],
+    [
+      "valueOf",
+      12944
+    ],
+    [
+      "initialPartProps",
+      12776
+    ],
+    [
+      "install",
+      12596
+    ],
+    [
+      "created",
+      12282
+    ],
+    [
+      "recordOf",
+      11533
+    ],
+    [
+      "_get",
+      11308
+    ]
+  ]
+}

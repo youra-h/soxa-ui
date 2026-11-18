@@ -1,0 +1,1492 @@
+{
+  "run": "2026-11-18-1000",
+  "exportedAt": "2026-11-18T17:36:27.776Z",
+  "revisions": {
+    "before": {
+      "sha": "c25f134b4d9018d881edbd8952df92352525eede",
+      "files": 3754
+    },
+    "after": {
+      "sha": "4687068d19fa8d5762f86577460a720690f72c82",
+      "files": 3778
+    }
+  },
+  "versions": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "vue": "3.5.44",
+    "solid-js": "1.9.17",
+    "svelte": "5.57.2",
+    "@ark-ui/react": "5.40.0",
+    "@ark-ui/vue": "5.40.0",
+    "@ark-ui/solid": "5.40.0",
+    "@ark-ui/svelte": "5.25.1",
+    "@mui/material": "9.5.0",
+    "@emotion/react": "11.14.0",
+    "@emotion/styled": "11.14.1",
+    "radix-ui": "1.8.1",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "tailwind-merge": "3.7.0",
+    "@angular/core": "22.2.3",
+    "vite": "8.3.4",
+    "typescript": "6.0.3",
+    "playwright": "1.64.1",
+    "@tailwindcss/node": "4.3.3"
+  },
+  "node": "v24.20.0",
+  "browsers": [
+    "156.0.8078.4"
+  ],
+  "host": {
+    "platform": "win32",
+    "release": "10.0.26300",
+    "cpu": "AMD Ryzen 9 9950X3D 16-Core Processor          ",
+    "logicalCPUs": 32,
+    "totalMemoryBytes": 66185269248
+  },
+  "protocol": {
+    "n": 1000,
+    "client": "client-v3-isolated-phases",
+    "ssrWarmups": 3,
+    "ssrSamples": 9,
+    "ssrMemoryRequests": 9,
+    "clientWarmups": 3,
+    "clientSamples": 7,
+    "clientMemoryCycles": 7,
+    "viewport": [
+      1440,
+      900
+    ],
+    "dpr": 1,
+    "timeoutMs": 180000
+  },
+  "coverage": {
+    "expected": 144,
+    "recorded": 144,
+    "notApplicable": [
+      "before-webc-soxa-tabs-declarative-ssr",
+      "after-webc-soxa-tabs-declarative-ssr",
+      "before-webc-soxa-tabs-data-ssr",
+      "after-webc-soxa-tabs-data-ssr",
+      "after-webc-soxa-tabs-initial-ssr",
+      "before-webc-soxa-tags-declarative-ssr",
+      "after-webc-soxa-tags-declarative-ssr",
+      "before-webc-soxa-tags-data-ssr",
+      "after-webc-soxa-tags-data-ssr",
+      "after-webc-soxa-tags-initial-ssr"
+    ],
+    "failedRuns": [
+      {
+        "id": "before-solid-soxa-tabs-declarative-client",
+        "stage": "latency",
+        "timedOut": true
+      },
+      {
+        "id": "after-solid-soxa-tabs-declarative-client",
+        "stage": "latency",
+        "timedOut": true
+      }
+    ],
+    "failedQuality": [
+      {
+        "id": "before-vue-soxa-tabs-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": true,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "after-vue-soxa-tabs-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": true,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "before-vue-soxa-tags-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": true,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "after-vue-soxa-tags-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": true,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "before-react-soxa-tabs-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": false,
+          "oneTabStop": false,
+          "panel": false,
+          "reciprocal": false
+        }
+      },
+      {
+        "id": "after-react-soxa-tabs-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": false,
+          "oneTabStop": false,
+          "panel": false,
+          "reciprocal": false
+        }
+      },
+      {
+        "id": "before-react-soxa-tags-declarative-ssr",
+        "checks": {
+          "count": false,
+          "selected": false,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "after-react-soxa-tags-declarative-ssr",
+        "checks": {
+          "count": false,
+          "selected": false,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "before-solid-soxa-tabs-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": true,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "after-solid-soxa-tabs-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": true,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "before-solid-soxa-tags-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": true,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "after-solid-soxa-tags-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": true,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "before-svelte-soxa-tabs-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": true,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "after-svelte-soxa-tabs-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": true,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "before-svelte-soxa-tags-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": true,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      },
+      {
+        "id": "after-svelte-soxa-tags-declarative-ssr",
+        "checks": {
+          "count": true,
+          "selected": true,
+          "oneTabStop": false,
+          "panel": true,
+          "reciprocal": true
+        }
+      }
+    ],
+    "failedActions": [],
+    "diagnostics": [],
+    "instrumentationWarnings": 50
+  },
+  "locks": [
+    {
+      "file": "package-lock.json",
+      "sha256": "91212da371feec9d77944137b653ec9b37a6cf9773919eaafd1919dad4d72371"
+    },
+    {
+      "file": "tools/bench-collections/package-lock.json",
+      "sha256": "c1ce171e1bbcd2066ba775953425749c38cd82ee37fe9a3a5b1d30862e614fa5"
+    }
+  ],
+  "fixtures": [
+    {
+      "file": "tools/bench-collections/.gitignore",
+      "sha256": "23331844f4150ff32062d82d001694b7d26d0652e1ba99e27ee8ce6e14fc87dd"
+    },
+    {
+      "file": "tools/bench-collections/angular/after.ts",
+      "sha256": "20afa96dd3f9629881b8af169fc3ceb2e54bddd6b6a48ef6c186608e0d061c76"
+    },
+    {
+      "file": "tools/bench-collections/angular/before.ts",
+      "sha256": "d0782ce5ea05f98d0639c0632e79d9afe92435b7de4ba1db13eea4ccc56a9bc3"
+    },
+    {
+      "file": "tools/bench-collections/angular.html",
+      "sha256": "8020fb726f0fbc7f25243b87a6e6ebde21c527fab5e67101281f45272afc80f8"
+    },
+    {
+      "file": "tools/bench-collections/angular.ts",
+      "sha256": "7f43c042ed6eb9ac1e224266fd48584fdccc430aea207d867f00b65775942b4f"
+    },
+    {
+      "file": "tools/bench-collections/browser-run.mjs",
+      "sha256": "f06329acaa7067bbb716d7afb8ac5453aba24578142c0972ff1f5d668c656441"
+    },
+    {
+      "file": "tools/bench-collections/build.mjs",
+      "sha256": "c586b917250729863759cf1961572218f61c9f912913a59da14c55e88653f4a5"
+    },
+    {
+      "file": "tools/bench-collections/client.ts",
+      "sha256": "d33906981e153d190f87982dfbf89ddf12f9b86d7b311c5ee1416df2b48fad9d"
+    },
+    {
+      "file": "tools/bench-collections/config.ts",
+      "sha256": "4ffe500857aab085dc7ed1e300500f22262c3955414ac397d1152ad99f800257"
+    },
+    {
+      "file": "tools/bench-collections/controls.mjs",
+      "sha256": "047ad3af48957bfe410e1d11c7f4ebaa97b835c382124daa097824d185d439bf"
+    },
+    {
+      "file": "tools/bench-collections/data.ts",
+      "sha256": "8d5833f470b8916cff088a9109610e9074bee09ed901224d9c25a7af4446bbaf"
+    },
+    {
+      "file": "tools/bench-collections/Fixture.svelte",
+      "sha256": "e1fc44e308a931d344400a09725fb31123ca63d8734ae9d4c13ac528c1bbdbe0"
+    },
+    {
+      "file": "tools/bench-collections/generate.mjs",
+      "sha256": "ef1d7d840f7c97dd344fd9e93f9835e9fcb8f6229954ae5b92e3ed14c39d7a19"
+    },
+    {
+      "file": "tools/bench-collections/interaction.mjs",
+      "sha256": "652b3b6001a38a3f38f98ee42524942c6f5842602573d57d65225291442e98d5"
+    },
+    {
+      "file": "tools/bench-collections/package-lock.json",
+      "sha256": "c1ce171e1bbcd2066ba775953425749c38cd82ee37fe9a3a5b1d30862e614fa5"
+    },
+    {
+      "file": "tools/bench-collections/package.json",
+      "sha256": "8d70744e88570337dadb4dd92fb1d55868e390d66ace3f88e750c02beca0297e"
+    },
+    {
+      "file": "tools/bench-collections/prepare.mjs",
+      "sha256": "fd1a8c6e2a31ca6a1f220972332a86e26292913497b9322a601751c2295c627e"
+    },
+    {
+      "file": "tools/bench-collections/profile.mjs",
+      "sha256": "2428342d8ca9f58ccb824751e5b7df54f006212c8858acaeba5292610098e58d"
+    },
+    {
+      "file": "tools/bench-collections/publish.mjs",
+      "sha256": "1eaea6e1d194859727ec96ddec8fd1d0ff2dc337afcbf8da262e3a41576ee5fc"
+    },
+    {
+      "file": "tools/bench-collections/quality.mjs",
+      "sha256": "7cd4ecff6f08f9cb14cf28a9a72445b3138323d2d57ec0f9f5a5cc37b49345e9"
+    },
+    {
+      "file": "tools/bench-collections/quality.test.mjs",
+      "sha256": "e12798e2fb15a92a09dfde1c6fc4f59ed58112f33b434588cd0f6dbf5415f30f"
+    },
+    {
+      "file": "tools/bench-collections/react-fixture.tsx",
+      "sha256": "b2e123355fc9f67808ac72086023f036ca35d0ab2463933546cd92dd56c3555a"
+    },
+    {
+      "file": "tools/bench-collections/react.html",
+      "sha256": "338bf9f4ca5812c9829e8d55572496ff16693a468edab674657584a6051cea9f"
+    },
+    {
+      "file": "tools/bench-collections/react.tsx",
+      "sha256": "4beeade900704085dba10cf5215fc7f331ed80917dd454dc5ca8f78ce1e44947"
+    },
+    {
+      "file": "tools/bench-collections/run.mjs",
+      "sha256": "1a4703615a939786a326071784218b45e2a110c0f4842a5eebcaa45b4abca45c"
+    },
+    {
+      "file": "tools/bench-collections/setup.ts",
+      "sha256": "ce7d2a8b8f99e63a9e406f9b0e6d72778d70a9948fd0438467deb1291cbd01b6"
+    },
+    {
+      "file": "tools/bench-collections/shadcn/globals.css",
+      "sha256": "ea05263a72f6a37042cc6d7486204f5fd6cba79135977a5babe4cce848432633"
+    },
+    {
+      "file": "tools/bench-collections/shadcn/LICENSE.md",
+      "sha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f"
+    },
+    {
+      "file": "tools/bench-collections/shadcn/provenance.json",
+      "sha256": "95839d64ac536990333a33f3355b791a66e6205611816d1edbe506349d987745"
+    },
+    {
+      "file": "tools/bench-collections/shadcn/styles.css",
+      "sha256": "cb54127122ddee70f7d41cc5ebfb29274ffe56421a41fbbc7b798d29a10ef20f"
+    },
+    {
+      "file": "tools/bench-collections/shadcn/tabs.tsx",
+      "sha256": "8eaad69422246348afe6eaf4e757df8734580322a58111b9d098a67330eec3a8"
+    },
+    {
+      "file": "tools/bench-collections/shadcn/toggle-group.tsx",
+      "sha256": "05057da9535c6ba9a2f3583191b91468dfdad414d168bce99ff0aa65ce0dd0bb"
+    },
+    {
+      "file": "tools/bench-collections/shadcn/toggle.tsx",
+      "sha256": "699a762371965172c1c3a9b641acc0c88073b3a3ce1f49367652d68820a41005"
+    },
+    {
+      "file": "tools/bench-collections/shadcn-css.mjs",
+      "sha256": "de9b51a9f8359d34a3a0ae0a5af6021ac7796ba10a37d78bf717db22d4e1fd4a"
+    },
+    {
+      "file": "tools/bench-collections/shadcn-utils.ts",
+      "sha256": "fe01fd10b6fc68fb2664764a2dfa87eb693771fdcd991b8e0713db30a12a7079"
+    },
+    {
+      "file": "tools/bench-collections/solid-fixture.tsx",
+      "sha256": "020b6f53b6979c881e1d8f77dfabeed843d3b2d9926418cb173d4614e1ba9ac3"
+    },
+    {
+      "file": "tools/bench-collections/solid.html",
+      "sha256": "eeb16f26afd401591bf0fe9c5b3c674ed02ac7e47c879445e367f7d74b0ba20b"
+    },
+    {
+      "file": "tools/bench-collections/solid.tsx",
+      "sha256": "29e6430cf475e649173c950bd6d6a553feb1a867bcd1c3a2de91f60aee9bbcdd"
+    },
+    {
+      "file": "tools/bench-collections/ssr/angular.ts",
+      "sha256": "1e9718f8b39cbc337aca03c55ea8be2adc95c30ce8393ff62dbb529d523b957d"
+    },
+    {
+      "file": "tools/bench-collections/ssr/react.tsx",
+      "sha256": "063d0b7426059686b7ca885b35f00f82d3911130815a727754de002a95259013"
+    },
+    {
+      "file": "tools/bench-collections/ssr/solid.tsx",
+      "sha256": "8d025aa1981dee161e8dfa7264ea7128da4c3b7efe8d46564290866480cb42f6"
+    },
+    {
+      "file": "tools/bench-collections/ssr/svelte.ts",
+      "sha256": "8699fa26bba90b80b8335e1ad41e3ce65bde92302931416ef128d8d85d3cabd3"
+    },
+    {
+      "file": "tools/bench-collections/ssr/vue.ts",
+      "sha256": "2c2b31315bf435cfa81b5a8ed68eef37775d45c64971084bd1f4918edc7103b6"
+    },
+    {
+      "file": "tools/bench-collections/ssr-worker.mjs",
+      "sha256": "9a2b64eba9ba1d5b23d42fcb55ec9a467a20ac4d37a978f94a43a7ba19bc7ca7"
+    },
+    {
+      "file": "tools/bench-collections/style.css",
+      "sha256": "60f1e21c978cccc541519cdfe85f2dd54e5e975b43876e3a0f70c6b360ba7225"
+    },
+    {
+      "file": "tools/bench-collections/svelte.html",
+      "sha256": "e4440adcb6dbc3f6057bf0c844ca56bbb9c336a052b1529ea1041d8ea84ef991"
+    },
+    {
+      "file": "tools/bench-collections/svelte.ts",
+      "sha256": "90c3c9cd14135a5b2b97f8c04700f3d46bfcbd90c150bb1d16417099c27c941e"
+    },
+    {
+      "file": "tools/bench-collections/vendor-shadcn.mjs",
+      "sha256": "c4a4bb59746a9dabc5f6af7d3f4f468cc2a9a3df6c07eeab4f919e223240d5c8"
+    },
+    {
+      "file": "tools/bench-collections/vue-fixture.ts",
+      "sha256": "e226969e3c2e96aac00326102341a397e28839e59607c4acbfe31fa38d25fe67"
+    },
+    {
+      "file": "tools/bench-collections/vue.html",
+      "sha256": "2f0fdd1f40f7853fb6bec45420970a03704dfce6d2533cfe6a98ead972c9b4bc"
+    },
+    {
+      "file": "tools/bench-collections/vue.ts",
+      "sha256": "590d8bfd7ae3392648853a4be3c8c3da27809048e67895e2ec8ea8e98b1b8e11"
+    },
+    {
+      "file": "tools/bench-collections/webc.html",
+      "sha256": "3afde3e168d3e73356d216890d2a746ee9ad11d3b4c65c67241ff30aff35550d"
+    },
+    {
+      "file": "tools/bench-collections/webc.ts",
+      "sha256": "a5cbf4590f4bc0281006bf2a9a3d4b498aacfc5f4708aaae6e4dc1c6d44f96cb"
+    }
+  ],
+  "builds": [
+    {
+      "file": "dist/after/angular/client/angular.html",
+      "bytes": 272,
+      "sha256": "8db4adb56823d964dd7220dc5240924c2d251525de614e5c34545855b760d1e4"
+    },
+    {
+      "file": "dist/after/angular/client/assets/angular-BiBVhmyT.css",
+      "bytes": 402371,
+      "sha256": "14c18d871b90c3e8970c9f07e9712da11a273ba5502f944ad526003fe2b92839"
+    },
+    {
+      "file": "dist/after/angular/client/assets/angular-Div_FYAJ.js",
+      "bytes": 1429449,
+      "sha256": "2ea85e55ca6b9c61e097c45accf2f452a5a2dae954a3981fbc5974b244bd1bfd"
+    },
+    {
+      "file": "dist/after/angular/server/angular.js",
+      "bytes": 5156941,
+      "sha256": "47b3c765ed80498c2c864de9c0bcc66521393e8ce93848593b6f4fd2e45cf9bf"
+    },
+    {
+      "file": "dist/after/angular/server/assets/xhr2-B2zYeuLZ.js",
+      "bytes": 20734,
+      "sha256": "2f1e4dcee09b20e57a43c6a8b8b089fc95bc8f2ae5299f0f13a35f5a2321a880"
+    },
+    {
+      "file": "dist/after/react/client/assets/react-BK654MQz.js",
+      "bytes": 1218662,
+      "sha256": "56381c712ec88fdf9e3a8f8f09dd141bb77083ec8dac924137b5ccb50c2cc3da"
+    },
+    {
+      "file": "dist/after/react/client/assets/react-CdzZeobo.css",
+      "bytes": 417872,
+      "sha256": "f45cbcb93bbac8e909dddee2087568e7fadd81bdacc14c049e0951ad720ccc34"
+    },
+    {
+      "file": "dist/after/react/client/react.html",
+      "bytes": 268,
+      "sha256": "28b37bbcc3a190079f00dd697bb906b0fe3bc488fb6e149d939a0d884fbbb178"
+    },
+    {
+      "file": "dist/after/react/server/react.js",
+      "bytes": 3957323,
+      "sha256": "afd4537386a4a5fec9521e0211b5a2f416ada114022f74cab58e9a6d5f49c8a3"
+    },
+    {
+      "file": "dist/after/solid/client/assets/solid-BiBVhmyT.css",
+      "bytes": 402371,
+      "sha256": "14c18d871b90c3e8970c9f07e9712da11a273ba5502f944ad526003fe2b92839"
+    },
+    {
+      "file": "dist/after/solid/client/assets/solid-iUMYJUsD.js",
+      "bytes": 837862,
+      "sha256": "3cf80975e67faf319e8f23b5570a3cc3968ef4669d51ba4ca60f345daca3ff3e"
+    },
+    {
+      "file": "dist/after/solid/client/solid.html",
+      "bytes": 268,
+      "sha256": "9d8424ca1b60ae37a65a0dfd8342c5e259946917c242927816e38b993ff62e93"
+    },
+    {
+      "file": "dist/after/solid/server/solid.js",
+      "bytes": 3069489,
+      "sha256": "a76429c9161f0cdf61c9f084ed8ae0add5c42586f05c73f493b4b83a8ff77d37"
+    },
+    {
+      "file": "dist/after/svelte/client/assets/svelte-B0TBUB2O.js",
+      "bytes": 879304,
+      "sha256": "a0e76f351da6740c7e1a52a21748794d95a0cdf63e66c4f1bfeb2ae4685b0b1d"
+    },
+    {
+      "file": "dist/after/svelte/client/assets/svelte-BiBVhmyT.css",
+      "bytes": 402371,
+      "sha256": "14c18d871b90c3e8970c9f07e9712da11a273ba5502f944ad526003fe2b92839"
+    },
+    {
+      "file": "dist/after/svelte/client/svelte.html",
+      "bytes": 270,
+      "sha256": "4d61eae43a86c27b005ef0db7180c35560f996cb2d4e6a7353dd29a7e04e2e78"
+    },
+    {
+      "file": "dist/after/svelte/server/svelte.js",
+      "bytes": 3035451,
+      "sha256": "4a7a62d45869ad8b3c772257b846eaa902a56d3cdc2db9cfc8fd3d3b7aa94771"
+    },
+    {
+      "file": "dist/after/vue/client/assets/vue-BiBVhmyT.css",
+      "bytes": 402371,
+      "sha256": "14c18d871b90c3e8970c9f07e9712da11a273ba5502f944ad526003fe2b92839"
+    },
+    {
+      "file": "dist/after/vue/client/assets/vue-DXIo2Umu.js",
+      "bytes": 925453,
+      "sha256": "c9fefc2b31f75562dce935ef7e347334d4cd5e3d538ae248a31f44dc73494b57"
+    },
+    {
+      "file": "dist/after/vue/client/vue.html",
+      "bytes": 264,
+      "sha256": "7c7c09fb75136c6a47f63ec4c2af36b51affee41ea042cbaf97312b733947797"
+    },
+    {
+      "file": "dist/after/vue/server/vue.js",
+      "bytes": 4610185,
+      "sha256": "5490af817cbb028e22e8977e722d54faa9879964ca1caf874a3b51c0d1630829"
+    },
+    {
+      "file": "dist/after/webc/client/assets/webc-BiBVhmyT.css",
+      "bytes": 402371,
+      "sha256": "14c18d871b90c3e8970c9f07e9712da11a273ba5502f944ad526003fe2b92839"
+    },
+    {
+      "file": "dist/after/webc/client/assets/webc-CmPWXotc.js",
+      "bytes": 859745,
+      "sha256": "363bba7bc6f843b3fb81db81dd4f8d7805e1e9aad32e240e09158e7f648f1923"
+    },
+    {
+      "file": "dist/after/webc/client/webc.html",
+      "bytes": 266,
+      "sha256": "ebff5806917dc2c9e99fae9553c722f624ad4fd08d7d95671a393830265dd6f8"
+    },
+    {
+      "file": "dist/before/angular/client/angular.html",
+      "bytes": 272,
+      "sha256": "2a8a03d2866af198b4289e629a0a5431ab78950b7b8841d27e30c9369ca46535"
+    },
+    {
+      "file": "dist/before/angular/client/assets/angular-BiBVhmyT.css",
+      "bytes": 402371,
+      "sha256": "14c18d871b90c3e8970c9f07e9712da11a273ba5502f944ad526003fe2b92839"
+    },
+    {
+      "file": "dist/before/angular/client/assets/angular-K1VVeo5L.js",
+      "bytes": 1410366,
+      "sha256": "bf7a1d056a88d87a1bf50d6d511f3a6ff420341783fe0aa8af5696c596fe7b18"
+    },
+    {
+      "file": "dist/before/angular/server/angular.js",
+      "bytes": 5123946,
+      "sha256": "48f8ba10dc271e16aba3022a49c758c0988ac68247f8ff35883827dfc3b89c0c"
+    },
+    {
+      "file": "dist/before/angular/server/assets/xhr2-B2zYeuLZ.js",
+      "bytes": 20734,
+      "sha256": "2f1e4dcee09b20e57a43c6a8b8b089fc95bc8f2ae5299f0f13a35f5a2321a880"
+    },
+    {
+      "file": "dist/before/react/client/assets/react-CdzZeobo.css",
+      "bytes": 417872,
+      "sha256": "f45cbcb93bbac8e909dddee2087568e7fadd81bdacc14c049e0951ad720ccc34"
+    },
+    {
+      "file": "dist/before/react/client/assets/react-gQeY7mXA.js",
+      "bytes": 1200195,
+      "sha256": "3c9c9198d169b48e064cfa3a10bfec6f78fffe6e25cc5a86cb2227948e5f1da7"
+    },
+    {
+      "file": "dist/before/react/client/react.html",
+      "bytes": 268,
+      "sha256": "9f80fe6a9c545dca82b32ccbf769217c3a5871f9b2100340f097a03dd17d5ffb"
+    },
+    {
+      "file": "dist/before/react/server/react.js",
+      "bytes": 3925345,
+      "sha256": "605ed8e5a46c9317afd0a07129ee64f410ddb9cc7c3ddd0ed0f266ba06ee2e3c"
+    },
+    {
+      "file": "dist/before/solid/client/assets/solid-BiBVhmyT.css",
+      "bytes": 402371,
+      "sha256": "14c18d871b90c3e8970c9f07e9712da11a273ba5502f944ad526003fe2b92839"
+    },
+    {
+      "file": "dist/before/solid/client/assets/solid-DvpP938w.js",
+      "bytes": 819794,
+      "sha256": "ab740b2b62dc7839ee1af549bde88257a711f3fb869179c4669a0e9d5395c74c"
+    },
+    {
+      "file": "dist/before/solid/client/solid.html",
+      "bytes": 268,
+      "sha256": "61c78a427ae9bf480ba4793af8b623836b8b940d7975ee628a6c4097f0fa3b57"
+    },
+    {
+      "file": "dist/before/solid/server/solid.js",
+      "bytes": 3038171,
+      "sha256": "9b15c4adcf7a407fb27afee1f006a92fdaa48be916492f0328ea75b867caf638"
+    },
+    {
+      "file": "dist/before/svelte/client/assets/svelte-BiBVhmyT.css",
+      "bytes": 402371,
+      "sha256": "14c18d871b90c3e8970c9f07e9712da11a273ba5502f944ad526003fe2b92839"
+    },
+    {
+      "file": "dist/before/svelte/client/assets/svelte-CsSZ0JTU.js",
+      "bytes": 861251,
+      "sha256": "827404626626bd0ec7c325645afaec77d6c113b1dd86e5f6554b8bf8f0d2f19a"
+    },
+    {
+      "file": "dist/before/svelte/client/svelte.html",
+      "bytes": 270,
+      "sha256": "b531e67173612f4e60701d7ed45a35f5e08509adb05f662008c3d3b6338389b8"
+    },
+    {
+      "file": "dist/before/svelte/server/svelte.js",
+      "bytes": 3004147,
+      "sha256": "be7d5b645d002efc9d12f57c54883f6edcf68baca767cf99277db071d0f45224"
+    },
+    {
+      "file": "dist/before/vue/client/assets/vue-BiBVhmyT.css",
+      "bytes": 402371,
+      "sha256": "14c18d871b90c3e8970c9f07e9712da11a273ba5502f944ad526003fe2b92839"
+    },
+    {
+      "file": "dist/before/vue/client/assets/vue-CsJnCbje.js",
+      "bytes": 906841,
+      "sha256": "f04d6e49e8ecbdcbe5f872f0dc0114cd389997d7c275c9471aaabf6e594f7100"
+    },
+    {
+      "file": "dist/before/vue/client/vue.html",
+      "bytes": 264,
+      "sha256": "c34f52f15d2c502cf64cf1556263efe99710abac4df7519a9764981260d58088"
+    },
+    {
+      "file": "dist/before/vue/server/vue.js",
+      "bytes": 4578103,
+      "sha256": "b0e99854d3d79949fc66953427ca235c9e30d2492402789756373f85e0138215"
+    },
+    {
+      "file": "dist/before/webc/client/assets/webc-BiBVhmyT.css",
+      "bytes": 402371,
+      "sha256": "14c18d871b90c3e8970c9f07e9712da11a273ba5502f944ad526003fe2b92839"
+    },
+    {
+      "file": "dist/before/webc/client/assets/webc-DDdhPhop.js",
+      "bytes": 841517,
+      "sha256": "4be9ff40d8c55a44dd6476afa056de773db5727d636aa02457e4109defcf303a"
+    },
+    {
+      "file": "dist/before/webc/client/webc.html",
+      "bytes": 266,
+      "sha256": "6845ae89fab147d2a5cc713f97756f1dcbc1041b8d4f4558fad6b26acdd77ddf"
+    }
+  ],
+  "results": [
+    {
+      "id": "before-vue-soxa-tabs-declarative-client",
+      "file": "before-vue-soxa-tabs-declarative-client.json",
+      "sha256": "dcaef0d24b7a55ffe33c471b4c2a868292330ddfc58dfd487e366688d416df85"
+    },
+    {
+      "id": "after-vue-soxa-tabs-declarative-client",
+      "file": "after-vue-soxa-tabs-declarative-client.json",
+      "sha256": "1a81790a2a28ad86d5045498e11b6f0d24d66b43a78c833b5b1a18098fc63fdc"
+    },
+    {
+      "id": "before-vue-soxa-tabs-data-client",
+      "file": "before-vue-soxa-tabs-data-client.json",
+      "sha256": "6ba2176d33bfcad9e062075942b7083ffeef47c66887d46ee846dde2808fb623"
+    },
+    {
+      "id": "after-vue-soxa-tabs-data-client",
+      "file": "after-vue-soxa-tabs-data-client.json",
+      "sha256": "afb344f81487a888498764b82aa04a6964c312f4bf4910445496bbae3db19368"
+    },
+    {
+      "id": "after-vue-soxa-tabs-initial-client",
+      "file": "after-vue-soxa-tabs-initial-client.json",
+      "sha256": "e37f3a12be1f0fe093b878f55e1da22b090e9fb30d90458c5501cc18271c5ef3"
+    },
+    {
+      "id": "after-vue-ark-tabs-native-client",
+      "file": "after-vue-ark-tabs-native-client.json",
+      "sha256": "0cd103cf1d909de4cb6b44eff17043a174e0d1dd00be4b4375e58a355837eb44"
+    },
+    {
+      "id": "before-vue-soxa-tabs-declarative-ssr",
+      "file": "before-vue-soxa-tabs-declarative-ssr.json",
+      "sha256": "576f5759a5932e4cddbd7b9d7868a120d09895c453124a4ba63f59cd1c32b97c"
+    },
+    {
+      "id": "after-vue-soxa-tabs-declarative-ssr",
+      "file": "after-vue-soxa-tabs-declarative-ssr.json",
+      "sha256": "f517de99688939768694ea1dcda4e6ac13007706ef6e3436c46565be6ccaf52b"
+    },
+    {
+      "id": "before-vue-soxa-tabs-data-ssr",
+      "file": "before-vue-soxa-tabs-data-ssr.json",
+      "sha256": "2a7aae0fedcb908aac13fd0cf2f0658cb664727f245b93a1ce73ea97d18ca366"
+    },
+    {
+      "id": "after-vue-soxa-tabs-data-ssr",
+      "file": "after-vue-soxa-tabs-data-ssr.json",
+      "sha256": "da39152791327f79cfdadf20a474b2f38d0cf613d85cbdffa16276d6a8a7cf2b"
+    },
+    {
+      "id": "after-vue-soxa-tabs-initial-ssr",
+      "file": "after-vue-soxa-tabs-initial-ssr.json",
+      "sha256": "773c294c0c5ee43dc4c0bfb6c2253d90aa52b7f6b72026a635e3b7941bf4cadd"
+    },
+    {
+      "id": "after-vue-ark-tabs-native-ssr",
+      "file": "after-vue-ark-tabs-native-ssr.json",
+      "sha256": "a824b729f5c7918f612290651398f3fe557ff336a6c9cbea157af879f78f2988"
+    },
+    {
+      "id": "before-vue-soxa-tags-declarative-client",
+      "file": "before-vue-soxa-tags-declarative-client.json",
+      "sha256": "079924ddda1d6b22a0df03969052638f8e8b56aab8148a5ab3dc00f699d94b17"
+    },
+    {
+      "id": "after-vue-soxa-tags-declarative-client",
+      "file": "after-vue-soxa-tags-declarative-client.json",
+      "sha256": "a554efea72d24bccf0dfcb538df113e261c8b2c518e218578e06f012c9d1cd24"
+    },
+    {
+      "id": "before-vue-soxa-tags-data-client",
+      "file": "before-vue-soxa-tags-data-client.json",
+      "sha256": "d1652fead1b6e53ad9ec76454ee0a52c7c709f25152c24d760ff94ed00214b9f"
+    },
+    {
+      "id": "after-vue-soxa-tags-data-client",
+      "file": "after-vue-soxa-tags-data-client.json",
+      "sha256": "dbb653df7c2333eb8653835cd63d4dd53a8f826d52fb20c976e1f16dde85cd28"
+    },
+    {
+      "id": "after-vue-soxa-tags-initial-client",
+      "file": "after-vue-soxa-tags-initial-client.json",
+      "sha256": "12ed9c8ef27de0ae7c1b3fb82f86bb266cb7ffb737314aee3d6a42b48442a739"
+    },
+    {
+      "id": "after-vue-ark-tags-native-client",
+      "file": "after-vue-ark-tags-native-client.json",
+      "sha256": "cbfe0191deb927d045b4632f97f6bea6a541582b6ab84b6b61b662ab8882571f"
+    },
+    {
+      "id": "before-vue-soxa-tags-declarative-ssr",
+      "file": "before-vue-soxa-tags-declarative-ssr.json",
+      "sha256": "2cbdeff4966dec5b337b3e162c92dfb471abf89cec558baaa82685737e12f09e"
+    },
+    {
+      "id": "after-vue-soxa-tags-declarative-ssr",
+      "file": "after-vue-soxa-tags-declarative-ssr.json",
+      "sha256": "4d139e0b6ea7f30be50f404924e1ae6f0c4644ec76789c47639b0c76c1c20deb"
+    },
+    {
+      "id": "before-vue-soxa-tags-data-ssr",
+      "file": "before-vue-soxa-tags-data-ssr.json",
+      "sha256": "c77f0893ed335812f504fc637d20fa0b50ab87b96bc39b8ddcda0679a23d016c"
+    },
+    {
+      "id": "after-vue-soxa-tags-data-ssr",
+      "file": "after-vue-soxa-tags-data-ssr.json",
+      "sha256": "20f8228854dac66a8916a99ecb63b968cc3341ad83834a2e194cc941d2b5b694"
+    },
+    {
+      "id": "after-vue-soxa-tags-initial-ssr",
+      "file": "after-vue-soxa-tags-initial-ssr.json",
+      "sha256": "bf4622318aa15a283bbf72f6a48dc533f18bf6b4ccd33eba7b1e0a897eb4fd3a"
+    },
+    {
+      "id": "after-vue-ark-tags-native-ssr",
+      "file": "after-vue-ark-tags-native-ssr.json",
+      "sha256": "e51962c28b419b6c2c7ae80731f5f5fc4a2b47970ce099fe01a43d8352a2bb6e"
+    },
+    {
+      "id": "before-react-soxa-tabs-declarative-client",
+      "file": "before-react-soxa-tabs-declarative-client.json",
+      "sha256": "24984062184e9e3d0b6e668c6c5fd32065e8dbdcc3975ffefe68aee345afe6e7"
+    },
+    {
+      "id": "after-react-soxa-tabs-declarative-client",
+      "file": "after-react-soxa-tabs-declarative-client.json",
+      "sha256": "78637ac1b72295b57082d30d967cac9cd004f20bd5d3dd45266ff8cfb9f42e08"
+    },
+    {
+      "id": "before-react-soxa-tabs-data-client",
+      "file": "before-react-soxa-tabs-data-client.json",
+      "sha256": "fc287605981e97f71666824af5e3f517cf770c19ef8d84807d260183fd7dc939"
+    },
+    {
+      "id": "after-react-soxa-tabs-data-client",
+      "file": "after-react-soxa-tabs-data-client.json",
+      "sha256": "649d8d8db5fdc12a24926df1ba7f60bd1bada5474f17d525728e261641b47966"
+    },
+    {
+      "id": "after-react-soxa-tabs-initial-client",
+      "file": "after-react-soxa-tabs-initial-client.json",
+      "sha256": "9ee5092cbd5621618da2a25377e0e91fcaa18da2bc2e01c96ba08d01a4061430"
+    },
+    {
+      "id": "after-react-ark-tabs-native-client",
+      "file": "after-react-ark-tabs-native-client.json",
+      "sha256": "983d15dde6ac12caafb2413d618292af31ac1aa8a800ec881a80564826beb6c4"
+    },
+    {
+      "id": "after-react-shadcn-tabs-native-client",
+      "file": "after-react-shadcn-tabs-native-client.json",
+      "sha256": "9e16a3d39a2d52052920158d211fd20d240d889e2d5f17736c52bca760964af0"
+    },
+    {
+      "id": "after-react-mui-tabs-native-client",
+      "file": "after-react-mui-tabs-native-client.json",
+      "sha256": "a261c9e8db1c11e0fe2566d784bbf8d2ca2d179cdf1045319b6d8fffe3b395d4"
+    },
+    {
+      "id": "before-react-soxa-tabs-declarative-ssr",
+      "file": "before-react-soxa-tabs-declarative-ssr.json",
+      "sha256": "be5e27ab30594ded5670f97e40b5f2647561e02c04017a5d71154cc490bca4c7"
+    },
+    {
+      "id": "after-react-soxa-tabs-declarative-ssr",
+      "file": "after-react-soxa-tabs-declarative-ssr.json",
+      "sha256": "9b9634335e7496a29b8f55551a19086909d2e1a2408bd889052ae10e3651da1a"
+    },
+    {
+      "id": "before-react-soxa-tabs-data-ssr",
+      "file": "before-react-soxa-tabs-data-ssr.json",
+      "sha256": "b64587180fe476fdfd22be8a5f3d0294969c135435021726f385b283d87e5612"
+    },
+    {
+      "id": "after-react-soxa-tabs-data-ssr",
+      "file": "after-react-soxa-tabs-data-ssr.json",
+      "sha256": "85ec918b5362bc73118bb20d7d6c608b7818fe28f179b56c57e115f7891828b3"
+    },
+    {
+      "id": "after-react-soxa-tabs-initial-ssr",
+      "file": "after-react-soxa-tabs-initial-ssr.json",
+      "sha256": "177c44c85e515db567cff5df52d04e75fc35e871c6527945f3f085df38fe70ac"
+    },
+    {
+      "id": "after-react-ark-tabs-native-ssr",
+      "file": "after-react-ark-tabs-native-ssr.json",
+      "sha256": "fbdb7337f80155b9b5249b85e401b42cbb049d30a54da1cfd39e1ad89b89447d"
+    },
+    {
+      "id": "after-react-shadcn-tabs-native-ssr",
+      "file": "after-react-shadcn-tabs-native-ssr.json",
+      "sha256": "a50da97c4041c944e763010f5339a842059df53423505eceff24e4ce91d0d46e"
+    },
+    {
+      "id": "after-react-mui-tabs-native-ssr",
+      "file": "after-react-mui-tabs-native-ssr.json",
+      "sha256": "fd0f34f078795b92a0e78ec3cb414a16b1a84d8e9352cb1cacae1b0b6a10690b"
+    },
+    {
+      "id": "before-react-soxa-tags-declarative-client",
+      "file": "before-react-soxa-tags-declarative-client.json",
+      "sha256": "dd2570ad68d1e5e0080619f4640f2d116b6358bb255493dabe45128956bb1b9a"
+    },
+    {
+      "id": "after-react-soxa-tags-declarative-client",
+      "file": "after-react-soxa-tags-declarative-client.json",
+      "sha256": "390de60e6463be7a4b69c529edb375e8f5172075a0d6f0776c746c3dd26052b6"
+    },
+    {
+      "id": "before-react-soxa-tags-data-client",
+      "file": "before-react-soxa-tags-data-client.json",
+      "sha256": "0305c84d54e846c8feed8b9fb422a2938142ec3dfebd69b1a272ab9c1207fcd2"
+    },
+    {
+      "id": "after-react-soxa-tags-data-client",
+      "file": "after-react-soxa-tags-data-client.json",
+      "sha256": "cd09bcc23413e7a406cd346a7f3d6e6c26abdd800543cf102f1104e4e769e6ab"
+    },
+    {
+      "id": "after-react-soxa-tags-initial-client",
+      "file": "after-react-soxa-tags-initial-client.json",
+      "sha256": "2eb98b933b8c42fc1932b692b321c6cfd6064581791debb63865eeee94225767"
+    },
+    {
+      "id": "after-react-ark-tags-native-client",
+      "file": "after-react-ark-tags-native-client.json",
+      "sha256": "6c17516915b2670f3b82892b6a18ad8f25062221a2690a1838ca19459caac5ee"
+    },
+    {
+      "id": "after-react-shadcn-tags-native-client",
+      "file": "after-react-shadcn-tags-native-client.json",
+      "sha256": "98993e3073515216196ad7964942d3d26f0ad727778444c83e9e6b69467fe154"
+    },
+    {
+      "id": "after-react-mui-tags-native-client",
+      "file": "after-react-mui-tags-native-client.json",
+      "sha256": "febbf5bf6d808b99921726d0088434ee5d50847338a18305ba4ad920912f9b3a"
+    },
+    {
+      "id": "before-react-soxa-tags-declarative-ssr",
+      "file": "before-react-soxa-tags-declarative-ssr.json",
+      "sha256": "7f9703acf02105be6eda4c6c0fc4e147ed59c900a5da06000ed90c61dc37d3b4"
+    },
+    {
+      "id": "after-react-soxa-tags-declarative-ssr",
+      "file": "after-react-soxa-tags-declarative-ssr.json",
+      "sha256": "4c81c7e1b898fd74e155639cb063401952ea9f72d3db449e0b1338614109746d"
+    },
+    {
+      "id": "before-react-soxa-tags-data-ssr",
+      "file": "before-react-soxa-tags-data-ssr.json",
+      "sha256": "e11f27899dcf498700d57abcc743d72fdf00ca5dc8e02d1df4530b800a084f7c"
+    },
+    {
+      "id": "after-react-soxa-tags-data-ssr",
+      "file": "after-react-soxa-tags-data-ssr.json",
+      "sha256": "aabcadd43b35ba3c895fa7bf16be6c826a1b09ce2ddddba7220d56ee4836e596"
+    },
+    {
+      "id": "after-react-soxa-tags-initial-ssr",
+      "file": "after-react-soxa-tags-initial-ssr.json",
+      "sha256": "d160403d4cae846093b6d93ec3f0a0a803434ed1568485f4a9a16d38a948bbec"
+    },
+    {
+      "id": "after-react-ark-tags-native-ssr",
+      "file": "after-react-ark-tags-native-ssr.json",
+      "sha256": "50292e78bf301e36aa9203ccc6f5b74057da503b857b4ca1d8c3529d6e05a890"
+    },
+    {
+      "id": "after-react-shadcn-tags-native-ssr",
+      "file": "after-react-shadcn-tags-native-ssr.json",
+      "sha256": "198d111b15fffac8e578c5486d9a1828193abc539c3108537b506a235464784d"
+    },
+    {
+      "id": "after-react-mui-tags-native-ssr",
+      "file": "after-react-mui-tags-native-ssr.json",
+      "sha256": "39623705471ec95ba5ff254612af6f76a7bfb7c10e619162fa6bc5810b3cb2e1"
+    },
+    {
+      "id": "before-solid-soxa-tabs-declarative-client",
+      "file": "before-solid-soxa-tabs-declarative-client.json",
+      "sha256": "8ebd33f9bcd6bd7b559e45224a52a959696171c3def4abab7629abd78d8c1bde"
+    },
+    {
+      "id": "after-solid-soxa-tabs-declarative-client",
+      "file": "after-solid-soxa-tabs-declarative-client.json",
+      "sha256": "66ae5375152a06a4980627874265718dcaccce8ef906dc26a363ed8e4eda9756"
+    },
+    {
+      "id": "before-solid-soxa-tabs-data-client",
+      "file": "before-solid-soxa-tabs-data-client.json",
+      "sha256": "9b177cd91de110a90c35b90e5a93fbb1ce7eb8d3d86d710adc0b6760968be8cc"
+    },
+    {
+      "id": "after-solid-soxa-tabs-data-client",
+      "file": "after-solid-soxa-tabs-data-client.json",
+      "sha256": "35513c869c3a4be429d220965a1be16af9f16aa1a768cb630a97a3ff341f9b9e"
+    },
+    {
+      "id": "after-solid-soxa-tabs-initial-client",
+      "file": "after-solid-soxa-tabs-initial-client.json",
+      "sha256": "2c207a715a17a709394108ae5b6ec528f3fbc3fe7bcf098d1d35e9e02be20e80"
+    },
+    {
+      "id": "after-solid-ark-tabs-native-client",
+      "file": "after-solid-ark-tabs-native-client.json",
+      "sha256": "70601fdb1cba2cfac94e8eb73124ebbf7612a40e3ee184f1363e083303bf24aa"
+    },
+    {
+      "id": "before-solid-soxa-tabs-declarative-ssr",
+      "file": "before-solid-soxa-tabs-declarative-ssr.json",
+      "sha256": "e49c7bb788dbd88876b6b318b9bfad034984ceaf8d9feefe503b82b437617e18"
+    },
+    {
+      "id": "after-solid-soxa-tabs-declarative-ssr",
+      "file": "after-solid-soxa-tabs-declarative-ssr.json",
+      "sha256": "8dca1bbe688f048e4edb68405f32d8e03baa149c487319568cec7b5f99f3a9fc"
+    },
+    {
+      "id": "before-solid-soxa-tabs-data-ssr",
+      "file": "before-solid-soxa-tabs-data-ssr.json",
+      "sha256": "8c05307580aa8d49be098cb743820ff36c45fc120aa59b11ba8ff142f0d94ad8"
+    },
+    {
+      "id": "after-solid-soxa-tabs-data-ssr",
+      "file": "after-solid-soxa-tabs-data-ssr.json",
+      "sha256": "0a74c86f6f08188e4a924df92d00206fcb63ecf3763f528641aa95407d28b56b"
+    },
+    {
+      "id": "after-solid-soxa-tabs-initial-ssr",
+      "file": "after-solid-soxa-tabs-initial-ssr.json",
+      "sha256": "518d1d88e230fcdc4b5dfc3a133ece71f99cac6e160d2ab82ac7205992dfabe2"
+    },
+    {
+      "id": "after-solid-ark-tabs-native-ssr",
+      "file": "after-solid-ark-tabs-native-ssr.json",
+      "sha256": "420e9fb52145366331b082590f171f1ab62a5f8c73e5365f330ba327699771c2"
+    },
+    {
+      "id": "before-solid-soxa-tags-declarative-client",
+      "file": "before-solid-soxa-tags-declarative-client.json",
+      "sha256": "96c90a6f7b41becc0e02225976b4ab36fa903a4e57f6ac69b423d28cb7868bdd"
+    },
+    {
+      "id": "after-solid-soxa-tags-declarative-client",
+      "file": "after-solid-soxa-tags-declarative-client.json",
+      "sha256": "e9de6f2c69c437dbfeb90d704bd2ae045cad5872b98f6bf0d76761311778754c"
+    },
+    {
+      "id": "before-solid-soxa-tags-data-client",
+      "file": "before-solid-soxa-tags-data-client.json",
+      "sha256": "db8971961efb6bc5db875e09e0e9ea038132075fd6637329aea7752b7cda3923"
+    },
+    {
+      "id": "after-solid-soxa-tags-data-client",
+      "file": "after-solid-soxa-tags-data-client.json",
+      "sha256": "16179a61f5bbe6d8e0b31f52a1a4b8fa3784d009207090eb3a97eb3c04fd4b69"
+    },
+    {
+      "id": "after-solid-soxa-tags-initial-client",
+      "file": "after-solid-soxa-tags-initial-client.json",
+      "sha256": "497695dc51c2f657ef3a606284926a1591adee3a85e6ca0f4ee2799aed15ae36"
+    },
+    {
+      "id": "after-solid-ark-tags-native-client",
+      "file": "after-solid-ark-tags-native-client.json",
+      "sha256": "7ebe68e9834b02a0fc5aa03a126293934761ae8899d2256cc52d00f51c1aeb07"
+    },
+    {
+      "id": "before-solid-soxa-tags-declarative-ssr",
+      "file": "before-solid-soxa-tags-declarative-ssr.json",
+      "sha256": "ae1728119643e9c7d153000ef4044e98d7a307b70a7da63a0745d92fb4a9a109"
+    },
+    {
+      "id": "after-solid-soxa-tags-declarative-ssr",
+      "file": "after-solid-soxa-tags-declarative-ssr.json",
+      "sha256": "99639a102afd9cb0ecb7e98b90b0d789856961fdc62e7bf02f22c1b9c348aa50"
+    },
+    {
+      "id": "before-solid-soxa-tags-data-ssr",
+      "file": "before-solid-soxa-tags-data-ssr.json",
+      "sha256": "972183b6d833d054739a09b65b25f861484af17dd40f6e8486d228997c888603"
+    },
+    {
+      "id": "after-solid-soxa-tags-data-ssr",
+      "file": "after-solid-soxa-tags-data-ssr.json",
+      "sha256": "eaffa06c5a3861968b379ffd85d6fc483be0ac819b8c7ca7b1fbd2f6b86553cb"
+    },
+    {
+      "id": "after-solid-soxa-tags-initial-ssr",
+      "file": "after-solid-soxa-tags-initial-ssr.json",
+      "sha256": "ff28ca7dcc6dd82cbfb68e50cb6b809663b9612ba073c9885fa0820359b264b4"
+    },
+    {
+      "id": "after-solid-ark-tags-native-ssr",
+      "file": "after-solid-ark-tags-native-ssr.json",
+      "sha256": "13568063acbb55947ae8eed26b39a8aa92fb0266e06d1b7f21d63aadd27d1c24"
+    },
+    {
+      "id": "before-svelte-soxa-tabs-declarative-client",
+      "file": "before-svelte-soxa-tabs-declarative-client.json",
+      "sha256": "336fae7532d1e234ad4c0f7131b405ec54e87bb7ab67c4de5c42944f7e0990ec"
+    },
+    {
+      "id": "after-svelte-soxa-tabs-declarative-client",
+      "file": "after-svelte-soxa-tabs-declarative-client.json",
+      "sha256": "6f4faf980c654457e257d139043c7765bd60530aa0f08ea2efb6e4d9ad20ba73"
+    },
+    {
+      "id": "before-svelte-soxa-tabs-data-client",
+      "file": "before-svelte-soxa-tabs-data-client.json",
+      "sha256": "73c4f0523b94f89550b7591b2d8d79f476db11187bfd0f0bff863c8038cfffc8"
+    },
+    {
+      "id": "after-svelte-soxa-tabs-data-client",
+      "file": "after-svelte-soxa-tabs-data-client.json",
+      "sha256": "3b544698d791aaafe84f744e8c34bef15bf6d79a36cfbee4df50347dd04eab2a"
+    },
+    {
+      "id": "after-svelte-soxa-tabs-initial-client",
+      "file": "after-svelte-soxa-tabs-initial-client.json",
+      "sha256": "7ea61a2a77ae75ef30bd570f73aee5650c65057121caf4fe5c951a77db7946a0"
+    },
+    {
+      "id": "after-svelte-ark-tabs-native-client",
+      "file": "after-svelte-ark-tabs-native-client.json",
+      "sha256": "cd5d721986bd099d17e417d084550ec6d135ea0c999fa85c4be5292b19cbdc22"
+    },
+    {
+      "id": "before-svelte-soxa-tabs-declarative-ssr",
+      "file": "before-svelte-soxa-tabs-declarative-ssr.json",
+      "sha256": "107427d01d404d031dca396b3d397a4c8a3a6cbce20afd22bb7145bf06c87891"
+    },
+    {
+      "id": "after-svelte-soxa-tabs-declarative-ssr",
+      "file": "after-svelte-soxa-tabs-declarative-ssr.json",
+      "sha256": "59877fb51b3700d2693c8fd4951a1dd60f5c37782c2106f8abefb064d0186ad0"
+    },
+    {
+      "id": "before-svelte-soxa-tabs-data-ssr",
+      "file": "before-svelte-soxa-tabs-data-ssr.json",
+      "sha256": "f62fa31ddf6388abdd876e462c60eae9cdb09d322c9cd821bf6e755e0e9777bc"
+    },
+    {
+      "id": "after-svelte-soxa-tabs-data-ssr",
+      "file": "after-svelte-soxa-tabs-data-ssr.json",
+      "sha256": "99c2f3fc95b6b38160fe1b40c39d226770e949fec5e4d8d53367f177201bc1f2"
+    },
+    {
+      "id": "after-svelte-soxa-tabs-initial-ssr",
+      "file": "after-svelte-soxa-tabs-initial-ssr.json",
+      "sha256": "bfe19eedea0c54bafbf8f861903677923f651391ac3bda6e6e587fd11eb6330d"
+    },
+    {
+      "id": "after-svelte-ark-tabs-native-ssr",
+      "file": "after-svelte-ark-tabs-native-ssr.json",
+      "sha256": "d077f510eb21d4df35821192a437d3a6ce8289b447c458dbb474344ccc63d586"
+    },
+    {
+      "id": "before-svelte-soxa-tags-declarative-client",
+      "file": "before-svelte-soxa-tags-declarative-client.json",
+      "sha256": "c178ca111392ce12c89db24988178ef5baf0d8dd618fc1f04b32c7f5864b5119"
+    },
+    {
+      "id": "after-svelte-soxa-tags-declarative-client",
+      "file": "after-svelte-soxa-tags-declarative-client.json",
+      "sha256": "c529e76d7e28aa4db8ad2efd382a194dc5ba128e15530657202905bd1facead6"
+    },
+    {
+      "id": "before-svelte-soxa-tags-data-client",
+      "file": "before-svelte-soxa-tags-data-client.json",
+      "sha256": "a1bfe231765999fd97790e1262230c4de1389fb8a5ac187f3f4ba28985765a91"
+    },
+    {
+      "id": "after-svelte-soxa-tags-data-client",
+      "file": "after-svelte-soxa-tags-data-client.json",
+      "sha256": "8bbe8d2ccec67eee7c94a5e1684a69e0d91d66455cb4905678fbef44c7cba1f7"
+    },
+    {
+      "id": "after-svelte-soxa-tags-initial-client",
+      "file": "after-svelte-soxa-tags-initial-client.json",
+      "sha256": "e63d3c7e01539a744fb6dc406e0aa7e7549ebd06c8cc5fb510ae28b637b6ce10"
+    },
+    {
+      "id": "after-svelte-ark-tags-native-client",
+      "file": "after-svelte-ark-tags-native-client.json",
+      "sha256": "f1ec21eb8c5c8bb8fc5c10a421f8cc4b2dbad878e2e8e67ca2805a4d0c0aef83"
+    },
+    {
+      "id": "before-svelte-soxa-tags-declarative-ssr",
+      "file": "before-svelte-soxa-tags-declarative-ssr.json",
+      "sha256": "2e0ec8a133c39d9657cc980789402128b935171d642d8bae39ecbc5ac48bd3eb"
+    },
+    {
+      "id": "after-svelte-soxa-tags-declarative-ssr",
+      "file": "after-svelte-soxa-tags-declarative-ssr.json",
+      "sha256": "54062dc2f72d980ad29491a617795dc08b5f69b1d7b8836593d373c0523b51b0"
+    },
+    {
+      "id": "before-svelte-soxa-tags-data-ssr",
+      "file": "before-svelte-soxa-tags-data-ssr.json",
+      "sha256": "311cb630bcccb959df7f76b66a4deec6bece308719da3da8eca0839e8de6ee12"
+    },
+    {
+      "id": "after-svelte-soxa-tags-data-ssr",
+      "file": "after-svelte-soxa-tags-data-ssr.json",
+      "sha256": "6b6bd366fcc4cdc78452f21b7e5f2a54bcfade233eb8578b933b80f29d0698be"
+    },
+    {
+      "id": "after-svelte-soxa-tags-initial-ssr",
+      "file": "after-svelte-soxa-tags-initial-ssr.json",
+      "sha256": "9e51ba897c0536853cbfed9be740fee713fe11737759b05209875bab1c027052"
+    },
+    {
+      "id": "after-svelte-ark-tags-native-ssr",
+      "file": "after-svelte-ark-tags-native-ssr.json",
+      "sha256": "4796fc6230a95bbf91be9bae3e6fa3c063698cf921d5e6cfc7641336ff1b7045"
+    },
+    {
+      "id": "before-angular-soxa-tabs-declarative-client",
+      "file": "before-angular-soxa-tabs-declarative-client.json",
+      "sha256": "388cce6e4f61a32695088251bba77d0bf1f8edb0db2317da66144753ad37464f"
+    },
+    {
+      "id": "after-angular-soxa-tabs-declarative-client",
+      "file": "after-angular-soxa-tabs-declarative-client.json",
+      "sha256": "cfa2b23b65dcdab56fb72c9a74857a0bfe0ab9807cb8c744c6fe6fda4f4694a4"
+    },
+    {
+      "id": "before-angular-soxa-tabs-data-client",
+      "file": "before-angular-soxa-tabs-data-client.json",
+      "sha256": "408dcfd1268b7ca960a92d5e8926bbaded6f8b4a4ce6aec2f9cebf011356eab1"
+    },
+    {
+      "id": "after-angular-soxa-tabs-data-client",
+      "file": "after-angular-soxa-tabs-data-client.json",
+      "sha256": "f3606fbcc520ca7c8f8842d3989c82a8922378921f7f08830b6cd49042da86c5"
+    },
+    {
+      "id": "after-angular-soxa-tabs-initial-client",
+      "file": "after-angular-soxa-tabs-initial-client.json",
+      "sha256": "f6a542b49f87e9ab6428d76da60ce862516a19798e5dd57727348068a626adb3"
+    },
+    {
+      "id": "before-angular-soxa-tabs-declarative-ssr",
+      "file": "before-angular-soxa-tabs-declarative-ssr.json",
+      "sha256": "e382a0e0c017b168501ffefa371bff534ab2628d17c194d5bcb137c78620d85f"
+    },
+    {
+      "id": "after-angular-soxa-tabs-declarative-ssr",
+      "file": "after-angular-soxa-tabs-declarative-ssr.json",
+      "sha256": "3174156a419bc318b3936387b381dabbbfd4b06c36f36ded93057abf08b18415"
+    },
+    {
+      "id": "before-angular-soxa-tabs-data-ssr",
+      "file": "before-angular-soxa-tabs-data-ssr.json",
+      "sha256": "3c87f39fe8b42bcdba9817b17de0641912235914c0b7b2b4a0b12ae7a913cb02"
+    },
+    {
+      "id": "after-angular-soxa-tabs-data-ssr",
+      "file": "after-angular-soxa-tabs-data-ssr.json",
+      "sha256": "4aa2d188d867a45aff9d0a225060430a2e804baca9147885ab0ab8269ad25f94"
+    },
+    {
+      "id": "after-angular-soxa-tabs-initial-ssr",
+      "file": "after-angular-soxa-tabs-initial-ssr.json",
+      "sha256": "1a4033a0129b0eeacf1ecd204ec5bc2d7be8b8cac9e78fb354a75def3bea63e8"
+    },
+    {
+      "id": "before-angular-soxa-tags-declarative-client",
+      "file": "before-angular-soxa-tags-declarative-client.json",
+      "sha256": "ef96759d789b0c7d8d711770b0361c7fce247d1d6dc51b86514ef39aca4d8cdd"
+    },
+    {
+      "id": "after-angular-soxa-tags-declarative-client",
+      "file": "after-angular-soxa-tags-declarative-client.json",
+      "sha256": "2754e2a99d447b9de4fc193703897adef6adb0ee05abf8055646cabee397ce46"
+    },
+    {
+      "id": "before-angular-soxa-tags-data-client",
+      "file": "before-angular-soxa-tags-data-client.json",
+      "sha256": "76bff9b1667e26fc71bd7837bd435a7e4ee77c9b4c3f09eb8ca72be9a7394ce9"
+    },
+    {
+      "id": "after-angular-soxa-tags-data-client",
+      "file": "after-angular-soxa-tags-data-client.json",
+      "sha256": "78d7abe5b4da6afe519b8dd7ff11dc55510ec257d46d79f394bdf2c3a8945bae"
+    },
+    {
+      "id": "after-angular-soxa-tags-initial-client",
+      "file": "after-angular-soxa-tags-initial-client.json",
+      "sha256": "30a879a2c71841c1adffbcf03bee8c0471f8c64cf7e0d9127450d122c270cbb0"
+    },
+    {
+      "id": "before-angular-soxa-tags-declarative-ssr",
+      "file": "before-angular-soxa-tags-declarative-ssr.json",
+      "sha256": "b2f7c05a946e1d26f9a6b43e7b17b1e987b4ce06570ebdce78a40da8292e267f"
+    },
+    {
+      "id": "after-angular-soxa-tags-declarative-ssr",
+      "file": "after-angular-soxa-tags-declarative-ssr.json",
+      "sha256": "fa38d8e1d85867ce5ae3277fbfd9ecba4f7092959ea59d0d18d8cc6ee3680402"
+    },
+    {
+      "id": "before-angular-soxa-tags-data-ssr",
+      "file": "before-angular-soxa-tags-data-ssr.json",
+      "sha256": "9885090818a7b3808acfc34a001d55d9a84e308f9b00a67412b11016c8f6a33a"
+    },
+    {
+      "id": "after-angular-soxa-tags-data-ssr",
+      "file": "after-angular-soxa-tags-data-ssr.json",
+      "sha256": "d498322191f00db195f56570eb3cbfa7df541265b2048f08acf586e7cee87486"
+    },
+    {
+      "id": "after-angular-soxa-tags-initial-ssr",
+      "file": "after-angular-soxa-tags-initial-ssr.json",
+      "sha256": "184666ace29a35f5f25e1da660e6762c9f5ca45e89c54d97724cfdd5f3fde693"
+    },
+    {
+      "id": "before-webc-soxa-tabs-declarative-client",
+      "file": "before-webc-soxa-tabs-declarative-client.json",
+      "sha256": "979951454fa78547648d5f595196bfac7eb68157744d2d59481fb286cdf2419d"
+    },
+    {
+      "id": "after-webc-soxa-tabs-declarative-client",
+      "file": "after-webc-soxa-tabs-declarative-client.json",
+      "sha256": "c81b5bcf4c78890d92c89a8e49f92c4414b01a4ab0541e0cb2b03f28175480d6"
+    },
+    {
+      "id": "before-webc-soxa-tabs-data-client",
+      "file": "before-webc-soxa-tabs-data-client.json",
+      "sha256": "2b773e7b9fb5dddcd7c7b0d058425572c94fa0270e626093f9547c961baab5d0"
+    },
+    {
+      "id": "after-webc-soxa-tabs-data-client",
+      "file": "after-webc-soxa-tabs-data-client.json",
+      "sha256": "11a5d397b80726188316a21d5812e4d5858b5ff0e4b68ca909238cf4f09471b9"
+    },
+    {
+      "id": "after-webc-soxa-tabs-initial-client",
+      "file": "after-webc-soxa-tabs-initial-client.json",
+      "sha256": "3ec5eb0c125137d3e714babe69689c4592b056a4d7c911669d8fbf039c126560"
+    },
+    {
+      "id": "before-webc-soxa-tabs-declarative-ssr",
+      "file": "before-webc-soxa-tabs-declarative-ssr.json",
+      "sha256": "5c83b03d144e5b9bdafd8bf70aafec2aa53a167303a7583dd585db57b0b90a27"
+    },
+    {
+      "id": "after-webc-soxa-tabs-declarative-ssr",
+      "file": "after-webc-soxa-tabs-declarative-ssr.json",
+      "sha256": "3cae77e83875ca05e59439aac0258a377865a68d498d75169f9d6e8a0f95ba85"
+    },
+    {
+      "id": "before-webc-soxa-tabs-data-ssr",
+      "file": "before-webc-soxa-tabs-data-ssr.json",
+      "sha256": "90709743fb62abe2196adf077392db25f35856a53df8e5b3150b23617e125b3b"
+    },
+    {
+      "id": "after-webc-soxa-tabs-data-ssr",
+      "file": "after-webc-soxa-tabs-data-ssr.json",
+      "sha256": "740a9e951ca52ad4fbba025e94b5af8b2011029313c9ce0785438c3c4d3af2d0"
+    },
+    {
+      "id": "after-webc-soxa-tabs-initial-ssr",
+      "file": "after-webc-soxa-tabs-initial-ssr.json",
+      "sha256": "0f2b87138cadbeb8635586c144c2f55964300548db45d31f3d42a0588d28171b"
+    },
+    {
+      "id": "before-webc-soxa-tags-declarative-client",
+      "file": "before-webc-soxa-tags-declarative-client.json",
+      "sha256": "5688f413c3338e6b39db2f703207e2445bda422e1cb3a02af1705658653df2a6"
+    },
+    {
+      "id": "after-webc-soxa-tags-declarative-client",
+      "file": "after-webc-soxa-tags-declarative-client.json",
+      "sha256": "fc4820fb30882784689946b92941081d489911b09de91b8a36474e90ccf6206c"
+    },
+    {
+      "id": "before-webc-soxa-tags-data-client",
+      "file": "before-webc-soxa-tags-data-client.json",
+      "sha256": "a47c689767970c63a6361d59abf6b6275cc5773380313bc2a73540ef75e4d1c0"
+    },
+    {
+      "id": "after-webc-soxa-tags-data-client",
+      "file": "after-webc-soxa-tags-data-client.json",
+      "sha256": "e821e910edbde9aa7fafc4fc47543fd178700d579c21819bbe426fc74da7230c"
+    },
+    {
+      "id": "after-webc-soxa-tags-initial-client",
+      "file": "after-webc-soxa-tags-initial-client.json",
+      "sha256": "f78abf47415b113e3005f81be05e018521c4f5dc20f556f55ea70634d0a94c17"
+    },
+    {
+      "id": "before-webc-soxa-tags-declarative-ssr",
+      "file": "before-webc-soxa-tags-declarative-ssr.json",
+      "sha256": "3e535df0c21515d959f7f2f3b6b25475c2cd3d5e1b61e11f2ff8710811f78794"
+    },
+    {
+      "id": "after-webc-soxa-tags-declarative-ssr",
+      "file": "after-webc-soxa-tags-declarative-ssr.json",
+      "sha256": "59c49c3f8408ad7d8013fca310f83ecd44ae9c688e7b11760bff80202d03cc5c"
+    },
+    {
+      "id": "before-webc-soxa-tags-data-ssr",
+      "file": "before-webc-soxa-tags-data-ssr.json",
+      "sha256": "e451d8f63d27b0bb1e2216eccbb4460d1826572bbc2bddc9efb0e9ef7203c664"
+    },
+    {
+      "id": "after-webc-soxa-tags-data-ssr",
+      "file": "after-webc-soxa-tags-data-ssr.json",
+      "sha256": "81c4de1fffa6466a5bc82a26825bc3a581d5cd42b2cf4f0edf1c3281acf619d4"
+    },
+    {
+      "id": "after-webc-soxa-tags-initial-ssr",
+      "file": "after-webc-soxa-tags-initial-ssr.json",
+      "sha256": "97d6e6b0db312dbc98b8e4f3d25603ed9e9a4de40c26e1c8088731be16d91f40"
+    }
+  ],
+  "profiles": [
+    {
+      "summary": "profiles/profile-after-react-tabs-data.json",
+      "trace": "profiles/profile-after-react-tabs-data.cpuprofile",
+      "sha256": "17fac916ae351f7ee3573fc96876e8641b31b99a5d3010a9498573e3814d35de"
+    },
+    {
+      "summary": "profiles/profile-after-react-tabs-initial.json",
+      "trace": "profiles/profile-after-react-tabs-initial.cpuprofile",
+      "sha256": "26d01f5cdfcab2771e2750f4be4b36931a85ba4d16c24bd4b1fd578f65e62997"
+    },
+    {
+      "summary": "profiles/profile-after-react-tags-data.json",
+      "trace": "profiles/profile-after-react-tags-data.cpuprofile",
+      "sha256": "6ccdc7e31a4b081e5c93b6b3a3004afcdf00db7123461087b123f001210a61b7"
+    },
+    {
+      "summary": "profiles/profile-after-react-tags-initial.json",
+      "trace": "profiles/profile-after-react-tags-initial.cpuprofile",
+      "sha256": "5567daeb60585ac7b2bcc679a789dc2dd0763576f90259b1381f09456c9fd8a7"
+    },
+    {
+      "summary": "profiles/profile-after-vue-tabs-data.json",
+      "trace": "profiles/profile-after-vue-tabs-data.cpuprofile",
+      "sha256": "250cba8ee1d647eb4fab340dc820771051b3446249c19524a0b12f708b6408ee"
+    },
+    {
+      "summary": "profiles/profile-after-vue-tabs-initial.json",
+      "trace": "profiles/profile-after-vue-tabs-initial.cpuprofile",
+      "sha256": "6939115040141628b06950bac2db825e49a62a5896be2abfb26ac09b5d7fa435"
+    },
+    {
+      "summary": "profiles/profile-before-react-tabs-data.json",
+      "trace": "profiles/profile-before-react-tabs-data.cpuprofile",
+      "sha256": "3fefe14308b5ad49197ae2bb7f0f05bcda3d3f56d7b631e4a3ca0ecd0713e223"
+    },
+    {
+      "summary": "profiles/profile-before-react-tags-data.json",
+      "trace": "profiles/profile-before-react-tags-data.cpuprofile",
+      "sha256": "0e40bd9f8a832fdd10255f42eded032bcb807f6fec73503433c61d87fbfeaf72"
+    },
+    {
+      "summary": "profiles/profile-before-vue-tabs-data.json",
+      "trace": "profiles/profile-before-vue-tabs-data.cpuprofile",
+      "sha256": "adbcef3d2d41b2632329e457a93691516643c806b028d1b1f140ebbf9285cfa7"
+    }
+  ]
+}

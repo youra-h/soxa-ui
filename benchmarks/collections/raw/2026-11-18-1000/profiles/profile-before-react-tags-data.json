@@ -1,0 +1,110 @@
+{
+  "variant": "before",
+  "framework": "react",
+  "kind": "tags",
+  "mode": "data",
+  "renders": 5,
+  "scope": "Separate CPU profiling run; not latency samples.",
+  "top": [
+    [
+      "(garbage collector)",
+      43864
+    ],
+    [
+      "(anonymous)",
+      19324
+    ],
+    [
+      "post",
+      17757
+    ],
+    [
+      "read",
+      11187
+    ],
+    [
+      "getSnapshot",
+      10196
+    ],
+    [
+      "useAdapterContext",
+      8374
+    ],
+    [
+      "useExchange",
+      7307
+    ],
+    [
+      "indexOfName",
+      5979
+    ],
+    [
+      "use",
+      5918
+    ],
+    [
+      "on",
+      5342
+    ],
+    [
+      "run",
+      5019
+    ],
+    [
+      "_refresh",
+      4943
+    ],
+    [
+      "emit",
+      4733
+    ],
+    [
+      "add",
+      4573
+    ],
+    [
+      "toRootProps",
+      4547
+    ],
+    [
+      "TComponentView",
+      4436
+    ],
+    [
+      "members",
+      3896
+    ],
+    [
+      "toAriaProps",
+      3872
+    ],
+    [
+      "TInputPort",
+      3867
+    ],
+    [
+      "renderNode",
+      3813
+    ],
+    [
+      "of",
+      3792
+    ],
+    [
+      "TagsItem",
+      3581
+    ],
+    [
+      "_get",
+      3486
+    ],
+    [
+      "useAdapter",
+      3432
+    ],
+    [
+      "pick$1",
+      3318
+    ]
+  ]
+}
