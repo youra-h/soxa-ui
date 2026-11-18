@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "result": "passed",
+  "checkedAt": "2026-11-18T07:28:38.721Z",
+  "checks": [
+    {
+      "directory": "consumer",
+      "command": "npm run build:theme",
+      "exitCode": 0,
+      "log": "logs/consumer-build-theme.txt",
+      "logSha256": "f5caafcd849fa0bd9ff62aa5d05eefa8e188019e9a33e32192bc66afe43e14df"
+    },
+    {
+      "directory": "consumer",
+      "command": "npm run check",
+      "exitCode": 0,
+      "log": "logs/consumer-check.txt",
+      "logSha256": "40341379ae0d07c1ddde4ca0ba5916e5b94fdb591d72079fdebb7c98612f3a64"
+    },
+    {
+      "directory": "consumer",
+      "command": "npm run build",
+      "exitCode": 0,
+      "log": "logs/consumer-build.txt",
+      "logSha256": "99de4cbf689ebf162ff81376cc77729f2c6f6c2a5ca3ad1078e9c18051bd92f6"
+    },
+    {
+      "directory": "packed-consumer",
+      "command": "npm run check",
+      "exitCode": 0,
+      "log": "logs/packed-consumer-check.txt",
+      "logSha256": "40341379ae0d07c1ddde4ca0ba5916e5b94fdb591d72079fdebb7c98612f3a64"
+    },
+    {
+      "directory": "packed-consumer",
+      "command": "npm run build",
+      "exitCode": 0,
+      "log": "logs/packed-consumer-build.txt",
+      "logSha256": "bab5c049a4bdf40ad639f66b3dacbe6edd34b0af45da668a64cb6150357dbaf6"
+    },
+    {
+      "directory": ".",
+      "command": "node verify.mjs",
+      "exitCode": 0,
+      "log": "logs/chromium.txt",
+      "logSha256": "1bb43d9b576ddd926fa52c1db8bc26ae5e2213539e1d220c25f3a17bbb81c361"
+    }
+  ],
+  "sourceHashes": {
+    "consumer/App.vue": "e307df2c7d4112b50f57e64fefe5a5e66907f7c5286a0f363d5d0ab6a0386425",
+    "consumer/AuditButton.vue": "9b74d638a5b442b0b8d159d1086fc2124fb5764a11241ae8493605c15a51da25",
+    "consumer/configure.ts": "1eb477bc800a01b4c4980986c4d468e9708a99dfb152912a1175965d24439a5d",
+    "consumer/custom-types.ts": "60c16a938b1cec38323ee43e97ec05b9a73d05e865bae786db7a67949238454f",
+    "consumer/custom.html": "21e9251bd00cf4952f5904f0717d417551af15ca076fa58a9cd55901df46f91f",
+    "consumer/custom.ts": "670732dfbf0055cc85ea64e3699f7005536ba8a8bec9dfde64d6f422815cbc99",
+    "consumer/index.html": "e0d00e321378853df05fc703a9b385e6cc194dcebc21e42194193c952eb443bc",
+    "consumer/inspect-contracts.mjs": "6af021dde898e04fc16c82be41e3ab1bc3bdc1214dd8438125f3ae55c8b095f1",
+    "consumer/main.ts": "1dcd1856a4b87fc990320967fe06e5bf9178bc564f05a493e683498c7a26b2a5",
+    "consumer/package-lock.json": "71eaba6430b20d46c3d3cc40753071d34f62ed313dd48a3ab00058dcc4c40f69",
+    "consumer/package.json": "f041fc3dcaaa06af758458017a014d8c077582dd3a71f28792b0cdf763969587",
+    "consumer/page.css": "c8b968c1b9df3cb5f13933e155962c5d500e0e616095ffc45060c40818f72397",
+    "consumer/plugin-types.ts": "97e675b7afc9ac0baaadce18dfc0065859f09368ab30a950482e2cb9a8fa8d9e",
+    "consumer/README.md": "61fe3730dc41faf672cb1764980342525cdb8ad03f40c845dc75bc8a29f74fa5",
+    "consumer/text-audit.ts": "a4c2c2612f6be95fcb03f4388ded1432b934c1ca6452bad2113d2ff4111ccd87",
+    "consumer/theme/index.css": "da6835aaf5dd28b6d8054396ed023e6dab602b1d9dc20359a30a15b6eee625a6",
+    "consumer/theme/index.d.ts": "61d025aaa2864e0fefc0d105da8d253d887b8faef52bd4a08896471e1d884a44",
+    "consumer/theme/package.json": "81eabd2e60462a0a3bd93d2e88571c42a0ce6de5466eca874bad02cf0c64eb5a",
+    "consumer/theme/setup.ts": "eae165d823c75a127f1227d706ee0652c7776e9c543d595ee1c457515474f01f",
+    "consumer/theme/tsconfig.json": "558a60d410f3a350422113f39bc12845f883179cbeb8e5cf7d5bffb41b432d1e",
+    "consumer/theme/vite.config.ts": "1f1b9f94801e6cdc0974459f7678de181a9911492a5bcc1d2a86b9b441b42339",
+    "consumer/tsconfig.custom.json": "87e5071c9eb129e923621816bdaf52013b99380049ea69fa3edb577995e0fc48",
+    "consumer/tsconfig.json": "806358a3748df7957a48d74ae3278e67b333807efebfb6a5a87e54c0e8366327",
+    "consumer/vite.config.ts": "46bae51f800a645c1c77314e63f5236c50aa15c85a573c21021d6bbdcb3ac1da",
+    "packed-consumer/App.vue": "e307df2c7d4112b50f57e64fefe5a5e66907f7c5286a0f363d5d0ab6a0386425",
+    "packed-consumer/AuditButton.vue": "9b74d638a5b442b0b8d159d1086fc2124fb5764a11241ae8493605c15a51da25",
+    "packed-consumer/configure.ts": "1eb477bc800a01b4c4980986c4d468e9708a99dfb152912a1175965d24439a5d",
+    "packed-consumer/custom-types.ts": "60c16a938b1cec38323ee43e97ec05b9a73d05e865bae786db7a67949238454f",
+    "packed-consumer/custom.html": "21e9251bd00cf4952f5904f0717d417551af15ca076fa58a9cd55901df46f91f",
+    "packed-consumer/custom.ts": "670732dfbf0055cc85ea64e3699f7005536ba8a8bec9dfde64d6f422815cbc99",
+    "packed-consumer/index.html": "e0d00e321378853df05fc703a9b385e6cc194dcebc21e42194193c952eb443bc",
+    "packed-consumer/inspect-contracts.mjs": "6af021dde898e04fc16c82be41e3ab1bc3bdc1214dd8438125f3ae55c8b095f1",
+    "packed-consumer/main.ts": "1dcd1856a4b87fc990320967fe06e5bf9178bc564f05a493e683498c7a26b2a5",
+    "packed-consumer/package-lock.json": "e9e98e21cab303ab9222666ac7a62b21f323ff5a2db5a7a63834286c56efb399",
+    "packed-consumer/package.json": "3dcf4c4a2ba3782fc08075ea15824d7d4d3c313ab916935fdca76ef60faed3b7",
+    "packed-consumer/page.css": "c8b968c1b9df3cb5f13933e155962c5d500e0e616095ffc45060c40818f72397",
+    "packed-consumer/plugin-types.ts": "97e675b7afc9ac0baaadce18dfc0065859f09368ab30a950482e2cb9a8fa8d9e",
+    "packed-consumer/text-audit.ts": "a4c2c2612f6be95fcb03f4388ded1432b934c1ca6452bad2113d2ff4111ccd87",
+    "packed-consumer/tsconfig.custom.json": "87e5071c9eb129e923621816bdaf52013b99380049ea69fa3edb577995e0fc48",
+    "packed-consumer/tsconfig.json": "806358a3748df7957a48d74ae3278e67b333807efebfb6a5a87e54c0e8366327",
+    "packed-consumer/vite.config.ts": "46bae51f800a645c1c77314e63f5236c50aa15c85a573c21021d6bbdcb3ac1da"
+  },
+  "verifierSha256": "93159ae6eceb370ef0413b50545d7ecf3ac48071da51021a325de913f37497e9",
+  "limits": [
+    "Chromium only; no WebKit, Firefox, mobile, SSR or other adapters checked.",
+    "Custom theme demonstration covers Button and horizontal Tabs; other controls only retain Base mechanics.",
+    "No full component theme, accessibility contrast, forced-colors or overlay/gesture audit."
+  ]
+}
