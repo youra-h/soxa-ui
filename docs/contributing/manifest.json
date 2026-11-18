@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "audience": "contributor",
+  "sourceRevision": "f0a55f79e07c1655398db49f39ecdaaf5d387173",
+  "componentPackageVersion": "0.4.0",
+  "consumerCorpus": false,
+  "validationScope": "structural-source-walkthrough",
+  "modules": [
+    "README.md",
+    "model.md",
+    "collections.md",
+    "adapters.md",
+    "themes.md",
+    "quality.md",
+    "button-walkthrough.md",
+    "validation.md"
+  ],
+  "example": {
+    "component": "button",
+    "adapters": [
+      {
+        "framework": "vue",
+        "view": "packages/ui/vue/src/components/button/Button.vue",
+        "setup": "packages/ui/vue/src/components/button/setup.component.ts",
+        "componentExport": "packages/ui/vue/src/components/button/index.ts",
+        "rootExport": "packages/ui/vue/src/index.ts",
+        "test": "packages/ui/vue/__tests__/button.spec.ts"
+      },
+      {
+        "framework": "react",
+        "view": "packages/ui/react/src/components/button/Button.tsx",
+        "setup": "packages/ui/react/src/components/button/setup.component.ts",
+        "componentExport": "packages/ui/react/src/components/button/index.ts",
+        "rootExport": "packages/ui/react/src/index.ts",
+        "test": "packages/ui/react/__tests__/button.spec.tsx"
+      },
+      {
+        "framework": "angular",
+        "view": "packages/ui/angular/src/components/button/button.component.ts",
+        "setup": "packages/ui/angular/src/components/button/setup.component.ts",
+        "componentExport": "packages/ui/angular/src/components/button/index.ts",
+        "rootExport": "packages/ui/angular/src/index.ts",
+        "test": "packages/ui/angular/__tests__/button.spec.ts"
+      },
+      {
+        "framework": "solid",
+        "view": "packages/ui/solid/src/components/button/Button.tsx",
+        "setup": "packages/ui/solid/src/components/button/setup.component.ts",
+        "componentExport": "packages/ui/solid/src/components/button/index.ts",
+        "rootExport": "packages/ui/solid/src/index.ts",
+        "test": "packages/ui/solid/__tests__/button.spec.tsx"
+      },
+      {
+        "framework": "svelte",
+        "view": "packages/ui/svelte/src/components/button/Button.svelte",
+        "setup": "packages/ui/svelte/src/components/button/setup.component.ts",
+        "componentExport": "packages/ui/svelte/src/components/button/index.ts",
+        "rootExport": "packages/ui/svelte/src/index.ts",
+        "test": "packages/ui/svelte/__tests__/button.spec.ts"
+      },
+      {
+        "framework": "webc",
+        "view": "packages/ui/webc/src/components/button/Button.element.ts",
+        "setup": "packages/ui/webc/src/components/button/setup.component.ts",
+        "componentExport": "packages/ui/webc/src/components/button/index.ts",
+        "rootExport": "packages/ui/webc/src/index.ts",
+        "test": "packages/ui/webc/__tests__/button.spec.ts"
+      }
+    ]
+  },
+  "witnesses": [
+    {
+      "path": "packages/core/src/components/custom/button/types.ts",
+      "sha256": "4ff45d31c10e161dc2fecf89fe3b09e42f3e06bf4f740ab89a28f77dcb87e837"
+    },
+    {
+      "path": "packages/core/src/components/custom/button/button.class.ts",
+      "sha256": "2ef114033801ecbb544d9e71f280363d6566848fdc90091a28cfc221a4f89c3f"
+    },
+    {
+      "path": "packages/core/src/components/custom/button/index.ts",
+      "sha256": "02011dafa4441c8507e6488eb8b70674ae00ee7952be2f8ea12d86c77a5b2584"
+    },
+    {
+      "path": "packages/core/src/components/custom/index.ts",
+      "sha256": "1cb31907b58418b8091a42a9c987915ff94e3628b3db82ac727c06f1dd09da03"
+    },
+    {
+      "path": "packages/setup/content/descriptors/components/button.descriptor.ts",
+      "sha256": "6230b67ed63c40058dee1e2fe70a549609a8fd9f836ebfe1129f07914d85b007"
+    },
+    {
+      "path": "packages/setup/content/descriptors/components/index.ts",
+      "sha256": "c2b385ca27e4f8dcd4eb8e49c026db8a0c320fc238c0fab3b88e1ab117ac414f"
+    },
+    {
+      "path": "packages/ui/angular/src/components/button/manifest.ts",
+      "sha256": "c28ed62dbed4913d189ae270b13c8088a881bde2c5d58bee08ddef9418eb77e7"
+    },
+    {
+      "path": "packages/ui/angular/src/generated/button.metadata.ts",
+      "sha256": "d22a1a4aa6323aeea9e4d76b57cf99ec3b6889ffcf9fe6fc1c289be901b78a3b"
+    },
+    {
+      "path": "packages/themes/base/src/components/button.css",
+      "sha256": "c0f49350154c86cbc79143a8f45e9218f1425be4b88a6e7b5d17ff276dad479f"
+    },
+    {
+      "path": "packages/themes/base/src/index.css",
+      "sha256": "42fc3f3bef067602a7c19e2e02a908820ff4fd8301490bb619f25f6019357cf3"
+    },
+    {
+      "path": "packages/themes/base/theme-contract.json",
+      "sha256": "2720c6c0598832c42e05a925ebe8c359298681c537ef13b1aca5267be6eb8bf9"
+    },
+    {
+      "path": "packages/themes/base/theme-variables.json",
+      "sha256": "acad273699e8e7ee7562c1b790f59ba9b940ba82b0ba307ad1a68531bce1dae0"
+    },
+    {
+      "path": "packages/themes/oren/src/components/button/_button.scss",
+      "sha256": "bf6388ea6817ba74b9dd3fe78d5b262bfb3706d4ce2e2760b5bb9dcf60152667"
+    },
+    {
+      "path": "packages/themes/oren/src/index.scss",
+      "sha256": "581c05bc2ee2cdbb2692029f732fdfca166cee83093f859ddfeacdae0d079685"
+    },
+    {
+      "path": "packages/themes/oren/index.d.ts",
+      "sha256": "10f8f957c406935664bf9be8317dd915b50a03a240e3a67950fe6dc6cd54c0da"
+    },
+    {
+      "path": "packages/core/__tests__/button.spec.ts",
+      "sha256": "d4684148c64fff120597dd43740631815559c15506dc3245875fc209a269187c"
+    },
+    {
+      "path": "tools/public-api/exports.json",
+      "sha256": "9dc43958fe5c72327dc9b0b313d738ee0c979ca537293bf6fb6e3d60846e09af"
+    },
+    {
+      "path": "docs/api/generated/contract.json",
+      "sha256": "c1f54cb977d9df9db619d3daa269328cd5c81932eb4abf5cccfc5796aaf892dd"
+    },
+    {
+      "path": "tools/api-docs/discover.ts",
+      "sha256": "39f360e8f410eaba6a70ac4425ffb821bb3df86e1e6a2acfe891260408d972d5"
+    },
+    {
+      "path": "packages/playground/shared/src/registry.ts",
+      "sha256": "c06c2f58125b462d3578bcf70825ece046b26c8e18ade4771c6fcacb164292f0"
+    },
+    {
+      "path": "packages/ui/webc/package.json",
+      "sha256": "9de5ab7ea395a0abe869bbb42bb1b991005ef8ee83998fb6b1e5288fcca566c4"
+    },
+    {
+      "path": ".changeset/config.json",
+      "sha256": "cd2abbfb1443e223b2ff27d48c84aff5c34b4e7878534c609a3834e9c6d5e9da"
+    },
+    {
+      "path": "packages/ui/vue/src/components/button/Button.vue",
+      "sha256": "1d92cbf747cc66c46373c3d626c338e692b838f2051e4dc5338bff73a34186af"
+    },
+    {
+      "path": "packages/ui/vue/src/components/button/setup.component.ts",
+      "sha256": "83e473447a07230ba9c07c240e2bee75feeebbae31951e47db9c10a279e4688f"
+    },
+    {
+      "path": "packages/ui/vue/src/components/button/index.ts",
+      "sha256": "8731753d867bf4975eeb6f48ec1330043394d394d73b213f8924782534e7b2f1"
+    },
+    {
+      "path": "packages/ui/vue/src/index.ts",
+      "sha256": "6c60b50d43585f8d84add394d0d24fe3b23dd12d574ab0cde976c4da414a6846"
+    },
+    {
+      "path": "packages/ui/vue/__tests__/button.spec.ts",
+      "sha256": "752b563a474ac1abe5e2bf4fede3b843818eff6686e75172caf3b5af01d7bcec"
+    },
+    {
+      "path": "packages/ui/react/src/components/button/Button.tsx",
+      "sha256": "b96a0a952374dfd5bffbaf30158c3249dbb038f4d32de0c85f3bdeed4c979668"
+    },
+    {
+      "path": "packages/ui/react/src/components/button/setup.component.ts",
+      "sha256": "3315ac485581a87530e45ed2bb34cb794ff7b79d72adae092c88ff3c9209cbcd"
+    },
+    {
+      "path": "packages/ui/react/src/components/button/index.ts",
+      "sha256": "6d5c960c2413bd1be0921f064e6dc4c7e476b6936d6f49e52021fe54d1002d92"
+    },
+    {
+      "path": "packages/ui/react/src/index.ts",
+      "sha256": "003e4b40b79489864c3c0743e160c5ddee3e985ad11417371703f27808b32eeb"
+    },
+    {
+      "path": "packages/ui/react/__tests__/button.spec.tsx",
+      "sha256": "6fc161e6500941dfacc6ab759904a98cb908695f28ebf2d22fb89383126d622d"
+    },
+    {
+      "path": "packages/ui/angular/src/components/button/button.component.ts",
+      "sha256": "34cce2c69366248cce698ccdb766e6722281e589aa855a6236c458d0b35963e3"
+    },
+    {
+      "path": "packages/ui/angular/src/components/button/setup.component.ts",
+      "sha256": "50bd09418a299ef94286e76e63fae30c2a9d464e1bf2b866a6c77575268c96b9"
+    },
+    {
+      "path": "packages/ui/angular/src/components/button/index.ts",
+      "sha256": "f66de169fb5219e7e41e44478a83968927f4e1cd174eb4056222e71207a6700c"
+    },
+    {
+      "path": "packages/ui/angular/src/index.ts",
+      "sha256": "6a9076d54b1d1e2fdae2685d86970c2a90233eaa34863ce6a0dd3aa66e26637e"
+    },
+    {
+      "path": "packages/ui/angular/__tests__/button.spec.ts",
+      "sha256": "a4b7fff7cc3efcdf54823ba5f4cef53d5e77f2c37181343db272985c9f4a83fe"
+    },
+    {
+      "path": "packages/ui/solid/src/components/button/Button.tsx",
+      "sha256": "b9424b390ffced4749ec739d9e32a92b0d89b028038ba803826d3fe9db18667d"
+    },
+    {
+      "path": "packages/ui/solid/src/components/button/setup.component.ts",
+      "sha256": "1f9ce3fe63dd47c0a47e81b1c1bc11e89069816176a563db5a473a8c97068521"
+    },
+    {
+      "path": "packages/ui/solid/src/components/button/index.ts",
+      "sha256": "5786e99473f048c8f289b95c0a2affefb320463cd22d38f633dc41f7d02ba063"
+    },
+    {
+      "path": "packages/ui/solid/src/index.ts",
+      "sha256": "369430ab6e0a76b4029bf8d43aa671305662f24679b2a19f8a1446dbe264e8d3"
+    },
+    {
+      "path": "packages/ui/solid/__tests__/button.spec.tsx",
+      "sha256": "72da1d0c92068e2150a0c4eb2eec0d910c4f9236ace0ec5a638e855c1c4e356d"
+    },
+    {
+      "path": "packages/ui/svelte/src/components/button/Button.svelte",
+      "sha256": "3ca8dd1cbb4a19c06b3a88b58ed28b255476bde0d843f3ffae98591a44fdbd47"
+    },
+    {
+      "path": "packages/ui/svelte/src/components/button/setup.component.ts",
+      "sha256": "d8b78885b816abf73adff5376e814023af049311cc9cc58b4edcd4275561bc71"
+    },
+    {
+      "path": "packages/ui/svelte/src/components/button/index.ts",
+      "sha256": "a9a39c6e6e1fd8ec030d23f826fca96b6d570cba2d181c12ff51cac7ad55b4a9"
+    },
+    {
+      "path": "packages/ui/svelte/src/index.ts",
+      "sha256": "ccfe8a9ea4cc7e2ba7d5bf8cc9c52e0d8c7b629cbc96c3343aef9ceac8170a9f"
+    },
+    {
+      "path": "packages/ui/svelte/__tests__/button.spec.ts",
+      "sha256": "5e18128df9f3e9a4a83117af2af6548a0b755ade0c9f1a4bb92b8d4a5a216255"
+    },
+    {
+      "path": "packages/ui/webc/src/components/button/Button.element.ts",
+      "sha256": "a76ce5320b0f791c791ee39f65a31a6d921850ac4d07d7d1538cb35ff78ff006"
+    },
+    {
+      "path": "packages/ui/webc/src/components/button/setup.component.ts",
+      "sha256": "74fd54694e1e22a5951f45e4acf3e08d346f2b69a346d703368caefbc820a799"
+    },
+    {
+      "path": "packages/ui/webc/src/components/button/index.ts",
+      "sha256": "d53ffd42e9656cb9754cd886abb37f089c9000c1ba398c39b3383d68404bca51"
+    },
+    {
+      "path": "packages/ui/webc/src/index.ts",
+      "sha256": "9b2f29a88db348252855c5be3de94a4acdc368c4982ab26e79fc36db6c5144be"
+    },
+    {
+      "path": "packages/ui/webc/__tests__/button.spec.ts",
+      "sha256": "b3b8ca8f789a745b5c9559e2e9b1ddad357cea8d262b9c3659aa53c00b59dc50"
+    }
+  ]
+}

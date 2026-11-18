@@ -1,11 +1,12 @@
 # Collection Components Reference
 
 How collection-based components (Tabs, Accordion, ListBox, Select, Tags) differ from
-plain components. Wired **only for Vue** — see `SKILL.md` → «Collection components».
+plain components. Collections exist in all six adapters. This reference details
+Vue wiring; start with the [contributor route](../../../../docs/contributing/collections.md)
+for other adapters and the pinned source baseline.
 
-Layers, facade hierarchy, driver access, naming and ARIA rules are covered in `AGENTS.md`
-→ «Коллекции: слои и расширения (критично)» — read that section first, this file only adds
-the file layout and the Vue wiring on top of it, using Tabs as the worked example.
+Read [collection rules](../../../../docs/agents/collections.md) and the root AGENTS.md
+first. This file adds the folder layout and detailed Vue wiring using Tabs.
 
 ## Folder layout
 
