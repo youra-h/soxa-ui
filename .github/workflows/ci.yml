@@ -173,7 +173,10 @@ jobs:
       - name: Системные зависимости браузера
         run: |
           sudo --preserve-env=GITHUB_ACTIONS,RUNNER_OS "$(command -v node)" tools/ci/ubuntu-mirror.mjs
-          npx playwright install-deps ${{ matrix.browser }}
+          if ! npx playwright install-deps ${{ matrix.browser }}; then
+            sudo --preserve-env=GITHUB_ACTIONS,RUNNER_OS "$(command -v node)" tools/ci/ubuntu-mirror.mjs --canonical
+            npx playwright install-deps ${{ matrix.browser }}
+          fi
 
       # A dropped connection to a tab (`VITEST_BROWSER_CONNECTION_CLOSED`)
       # doesn't name its cause: whether the OOM killer took the process, the
@@ -470,7 +473,10 @@ jobs:
       - name: Системные зависимости Chromium
         run: |
           sudo --preserve-env=GITHUB_ACTIONS,RUNNER_OS "$(command -v node)" tools/ci/ubuntu-mirror.mjs
-          npx playwright install-deps chromium
+          if ! npx playwright install-deps chromium; then
+            sudo --preserve-env=GITHUB_ACTIONS,RUNNER_OS "$(command -v node)" tools/ci/ubuntu-mirror.mjs --canonical
+            npx playwright install-deps chromium
+          fi
 
       # The run packs what the build left in dist.
       - name: Сборка пакетов

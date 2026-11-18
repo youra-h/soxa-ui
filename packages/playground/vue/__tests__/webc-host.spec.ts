@@ -948,8 +948,8 @@ describe('хост Web Components · даты', () => {
 		const panel = find(document.body, ':scope > .so-date-picker__panel')
 
 		expect(find(picker, '.so-date-picker__field').getAttribute('aria-label')).toBe('Дата')
-		// The queued panel binding supplies the reference before its first ready frame.
-		expect(trigger.getAttribute('aria-controls')).toBeNull()
+		// The ready closed panel keeps its reference before the first opening.
+		expect(trigger.getAttribute('aria-controls')).toBe(panel.id)
 		expect(trigger.getAttribute('aria-expanded')).toBe('false')
 		// The calendar comes with the panel's first opening
 		expect(panel.querySelector('.so-date-picker__calendar')).toBeNull()

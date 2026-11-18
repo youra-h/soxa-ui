@@ -43,7 +43,10 @@ jobs:
       - name: Системные зависимости браузеров
         run: |
           sudo --preserve-env=GITHUB_ACTIONS,RUNNER_OS "$(command -v node)" tools/ci/ubuntu-mirror.mjs
-          npx playwright install-deps chromium webkit
+          if ! npx playwright install-deps chromium webkit; then
+            sudo --preserve-env=GITHUB_ACTIONS,RUNNER_OS "$(command -v node)" tools/ci/ubuntu-mirror.mjs --canonical
+            npx playwright install-deps chromium webkit
+          fi
       - run: npx playwright install chromium webkit
       - run: npm run build:css --workspace=@soxa-ui/theme-oren
       - name: Auditor and negative controls

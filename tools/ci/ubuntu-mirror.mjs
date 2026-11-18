@@ -86,7 +86,7 @@ export async function selectUbuntuMirror(
 	)
 }
 
-async function configureRunnerSources() {
+async function configureRunnerSources(mirrors = CI_UBUNTU_MIRRORS) {
 	if (
 		process.platform !== 'linux' ||
 		process.env.GITHUB_ACTIONS !== 'true' ||
@@ -111,7 +111,7 @@ async function configureRunnerSources() {
 		return
 	}
 
-	const mirror = await selectUbuntuMirror(suites)
+	const mirror = await selectUbuntuMirror(suites, { mirrors })
 	for (const { file, before } of sources) {
 		const after = ciUbuntuSources(before, mirror)
 		if (before === after) continue
@@ -121,5 +121,12 @@ async function configureRunnerSources() {
 	}
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url))
-	await configureRunnerSources()
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+	// Apt may fail after the metadata probe succeeded; allow one explicit archive fallback.
+	const options = process.argv.slice(2)
+	if (options.some((option) => option !== '--canonical'))
+		throw new Error('Unknown Ubuntu mirror option')
+	await configureRunnerSources(
+		options.includes('--canonical') ? [CI_UBUNTU_MIRRORS[1]] : CI_UBUNTU_MIRRORS,
+	)
+}
