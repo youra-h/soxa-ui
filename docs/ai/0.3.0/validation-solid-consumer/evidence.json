@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "docsRevision": "7ccbde9db519476a26a8e40839cf2e3eddbe8d7c",
+  "node": "v24.20.0",
+  "checks": [
+    {
+      "name": "strict types and negative prop guard",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "name": "production build",
+      "result": "PASS",
+      "exitCode": 0
+    },
+    {
+      "name": "cold no-JavaScript SSR first home request",
+      "result": "PASS"
+    },
+    {
+      "name": "initial hydration and selected text",
+      "result": "PASS"
+    },
+    {
+      "name": "visible label focuses Input and typed callback payload",
+      "result": "PASS"
+    },
+    {
+      "name": "checkbox Space",
+      "result": "PASS"
+    },
+    {
+      "name": "Select keyboard End Enter Escape",
+      "result": "PASS"
+    },
+    {
+      "name": "calendar ArrowRight Enter Escape",
+      "result": "PASS"
+    },
+    {
+      "name": "reverse prop updates and form submit",
+      "result": "PASS"
+    },
+    {
+      "name": "Accordion live header preserves focus",
+      "result": "PASS"
+    },
+    {
+      "name": "controller root ref and three remounts",
+      "result": "PASS"
+    },
+    {
+      "name": "client route disposal and return",
+      "result": "PASS"
+    },
+    {
+      "name": "unique IDs and rendered Oren icons",
+      "result": "PASS"
+    },
+    {
+      "name": "two independent no-JavaScript SSR requests after mutations",
+      "result": "PASS"
+    },
+    {
+      "name": "bounded documented ARIA gaps",
+      "result": "PASS"
+    },
+    {
+      "name": "unfiltered browser diagnostics",
+      "result": "PASS"
+    }
+  ],
+  "limitations": [
+    {
+      "phase": "cold-SSR",
+      "missingTargets": [
+        {
+          "attr": "aria-controls",
+          "id": "000000010000000000030-list",
+          "role": "combobox",
+          "label": "Workshop session",
+          "class": "",
+          "hidden": false
+        },
+        {
+          "attr": "aria-controls",
+          "id": "000000010000000000040-panel",
+          "role": null,
+          "label": "Choose date",
+          "class": "so-button so-button--size-normal so-date-picker__trigger ",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "phase": "hydrated-calendar-closed",
+      "missingTargets": [
+        {
+          "attr": "aria-labelledby",
+          "id": "cl-6-picker-0",
+          "role": "dialog",
+          "label": null,
+          "class": "so-frame so-popover__panel",
+          "hidden": true
+        }
+      ]
+    },
+    {
+      "phase": "SSR-0",
+      "missingTargets": [
+        {
+          "attr": "aria-controls",
+          "id": "000000010000000000030-list",
+          "role": "combobox",
+          "label": "Workshop session",
+          "class": "",
+          "hidden": false
+        },
+        {
+          "attr": "aria-controls",
+          "id": "000000010000000000040-panel",
+          "role": null,
+          "label": "Choose date",
+          "class": "so-button so-button--size-normal so-date-picker__trigger ",
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "phase": "SSR-1",
+      "missingTargets": [
+        {
+          "attr": "aria-controls",
+          "id": "000000010000000000030-list",
+          "role": "combobox",
+          "label": "Workshop session",
+          "class": "",
+          "hidden": false
+        },
+        {
+          "attr": "aria-controls",
+          "id": "000000010000000000040-panel",
+          "role": null,
+          "label": "Choose date",
+          "class": "so-button so-button--size-normal so-date-picker__trigger ",
+          "hidden": false
+        }
+      ]
+    }
+  ],
+  "diagnostics": [],
+  "authoredCorrections": [
+    "Initial extraction attempted mkdir with empty parent; generated files were correct.",
+    "PowerShell JSON BOM removed.",
+    "Verifier corrected Select textContent to inputValue and explicit gridcell role to native td locator."
+  ],
+  "inputFiles": {
+    "documents/solid-start.json": "3691f280ce909123daf3d5406592616ad0baaf7dd25c2046d489ed737dee6b80",
+    "documents/api-solid-select.json": "986573b2a43535ad5bd4e0f992d21c19d712863c85b0194197fdb72b2d91d575",
+    "documents/api-solid-date-picker.json": "8f445c9b25f2afbf6e23e908315876c3d7da2719423859c10954936f8fcc1f66",
+    "documents/api-solid-check-box.json": "9ae9cb85fe38a9f8da1ee5f81fd6551fbabeb97e1843cd865db4be7448cbf923",
+    "documents/solid-bindings.json": "8ddc6fe0aa3f70f93fa8a7e45be335de3cf21123f832ac1ad93aff9f2ad05630",
+    "documents/api-solid-accordion-item.json": "b0b4529c60c9bb249fefff340c439f0b185c2eb4aebc800800ceb7c470268403",
+    "documents/solid-installation.json": "9fd9185643919e8621ccd938734e5bf0fb69e928a1069d45066180d5f2f38709",
+    "documents/solid-controller.json": "a563d7f827ab83814cc927d8b72a734a7546e7697d877be084a711d2da289fad",
+    "documents/solid-errors.json": "f79cb3a61bf78eef6bf0400cb0dbe5f1d6ad8a71d3ba6967ff94eeb13e24d637",
+    "documents/overview.json": "8ce4f9f98a095da9a122cb65a586086435a2a9f5da08493be5423c094ddef920",
+    "documents/solid-validation.json": "65572db6a7184ae1a8b8ceb33127ccba1bfebafff5d531f514c72016122b2cb0",
+    "documents/api-solid-input.json": "4f58f00d46a47ca8cdc625947cbff268d993d253ddaa5326b7871f5a8450133f",
+    "documents/solid-composition.json": "93863751d37a9459b63e8a04be584ae8ed7c6f735e6bf125879ce7a138b73d0a",
+    "documents/solid-solidstart.json": "987a9f088a1b07de6f54ffe1a08d973c441ef4c22981c01cc257322acd810a4e",
+    "index.json": "92b4a2f8cf86f8c2da80cd57818bdda0e4d27d899ce9c2eeb9c3cd7af499adb8",
+    "documents/api-solid-button.json": "458fb235887dafa6db9b0cdf462aeeaa8e0dd6f831e42985220ddc349b5e2618"
+  },
+  "documentationFindings": [
+    {
+      "originalDocsRevision": "e5a005fc2b428963e6974a58bf3366bedbfc3723",
+      "observation": "Cold first HTTP response had empty app async boundary; preserved original-cold-ssr.txt. Subsequent request rendered the form.",
+      "resolution": "Corrected public app.tsx adds Router root Suspense. Cold no-JS now passes.",
+      "fixedDocsRevision": "7ccbde9db519476a26a8e40839cf2e3eddbe8d7c"
+    }
+  ],
+  "npmLs": {
+    "exitCode": 0,
+    "problems": []
+  },
+  "chromium": "156.0.8078.4",
+  "lifecycle": [
+    "mount",
+    {
+      "kind": "cleanup",
+      "finalCount": 1
+    },
+    "mount",
+    {
+      "kind": "cleanup",
+      "finalCount": 1
+    },
+    "mount",
+    {
+      "kind": "cleanup",
+      "finalCount": 1
+    },
+    "mount",
+    {
+      "kind": "cleanup",
+      "finalCount": 0
+    },
+    "mount"
+  ],
+  "rendering": {
+    "ids": [
+      "app",
+      "cl-56-month",
+      "cl-56-day",
+      "cl-56-year",
+      "cl-63-header",
+      "cl-63-content",
+      "cl-51-list",
+      "cl-55-panel"
+    ],
+    "svgs": 3,
+    "theme": true
+  },
+  "packages": {
+    "@solidjs/router": "0.16.1",
+    "@solidjs/start": "2.2.3",
+    "@soxa-ui/core": "0.3.0",
+    "@soxa-ui/icons-material": "0.3.0",
+    "@soxa-ui/plugins": "0.3.0",
+    "@soxa-ui/setup": "0.3.0",
+    "@soxa-ui/solid": "0.3.0",
+    "@soxa-ui/theme-oren": "0.3.0",
+    "nitro": "3.0.261103-rc",
+    "solid-js": "1.9.17",
+    "@types/node": "24.19.2",
+    "playwright": "1.64.1",
+    "typescript": "6.0.3",
+    "vite": "8.3.5",
+    "vite-plugin-solid": "2.11.16"
+  },
+  "lockSha256": "88dc9171dd468df24e7d28e88461bb457b45e6c052635f7fba609cc8e27a9a1a",
+  "publishedSoxa": [
+    {
+      "path": "node_modules/@soxa-ui/core",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/core/-/core-0.3.0.tgz",
+      "integrity": "sha512-ghErTeKN4O0KQes4xXUQvCZFpdpI/O70HB/0YISVqwTZYRhDtFXNLu9LgbMo85sl6AB41CnUmDOHjjtvLMsbMQ=="
+    },
+    {
+      "path": "node_modules/@soxa-ui/icons-material",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/icons-material/-/icons-material-0.3.0.tgz",
+      "integrity": "sha512-1KPSA8uq3WRloanjSJdtsdtGuqcZdCzbmWOlSx0Ev60vDvri4rm3sUSc/ONHEHl0T8aya8IzVA+YhZYGLIqe0A=="
+    },
+    {
+      "path": "node_modules/@soxa-ui/plugins",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/plugins/-/plugins-0.3.0.tgz",
+      "integrity": "sha512-FT4UEZyCiLm0+35jdk8ZwBLwTDk6kF6PwGMJYREyM09cVbT2UD0AaVnGkV22JnhUmOHJ7ow8EOioak+KLjy2mg=="
+    },
+    {
+      "path": "node_modules/@soxa-ui/setup",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.3.0.tgz",
+      "integrity": "sha512-byutzJyCBW7oCrqze6Dgr1+2QZ019yAZ0kIAY7+1SWQLFE6kW53RJOpo7LH+FB9jSifY7Os2k92YUf7hVmjaZg=="
+    },
+    {
+      "path": "node_modules/@soxa-ui/solid",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/solid/-/solid-0.3.0.tgz",
+      "integrity": "sha512-U7k0MK39p4ANx5M8G5BfXVCOX6RmsDJAoN7ZeXFU/X+eRkKjvm22M2ImhFiURc46drc27ftgOVeScvTwb7n45g=="
+    },
+    {
+      "path": "node_modules/@soxa-ui/theme-base",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/theme-base/-/theme-base-0.3.0.tgz",
+      "integrity": "sha512-BulGjcSLIa40RM0tp1Anxhyoebtznv3KfpprbL/xpBh23MeColR2iZ5u009IRSv5o6gujZNAGgv+tQVkSgseOA=="
+    },
+    {
+      "path": "node_modules/@soxa-ui/theme-oren",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/theme-oren/-/theme-oren-0.3.0.tgz",
+      "integrity": "sha512-GNPQMg40uacSwgtcWP0HKj9v08RLJnuKPSRR+17L7OXNATtE1LqqAFUPNT+ij5FPzFumtczclz0BXRt5v9IOVQ=="
+    }
+  ],
+  "sourceHashes": {
+    "cold-ssr.txt": "8ac53cef39eb6d0ed1fdd2b8382f90d587c9fba74428c93414f5db4e87816594",
+    "input-hashes.json": "bd758a1ae49425f8a54254f9df0db4e2e64a70c571f5bbab2193ed6d126a6b4f",
+    "original-browser-evidence.json": "c36635949bf8b3a01c2da054bf8e89743bda7c54beee607237ccb92802ca89d4",
+    "original-cold-ssr.txt": "e04665304978282e106f52252ad9a2bcb27e2ae937cf52da8c00a0b01ac6ec00",
+    "original-input-hashes.json": "cec13c26f0f779e8f767ef95f466557048fb31634e9f5671916167c5219e129d",
+    "package.json": "fef479434b5016e95838c363a961fdac29e94e9de0f9795863e0feda675fb5d0",
+    "README.md": "165c6a3c235ca71bbf2ce6cd3b0502fb6e33aaa9ac267b2b9df3f1f2e3038a5b",
+    "src/app.tsx": "8e42ca943bddaebf9bd5d55b555a93a1514c33f9195d4977d6946ef829421add",
+    "src/entry-client.tsx": "df2bef1355f4a61ee517463f20706d2eca8c886f1061c183a8bcb8e971a94a52",
+    "src/entry-server.tsx": "e32871314767c7f60140c3a288e4b8a52d69422375f4dbad3f13f396c3bc2420",
+    "src/env.d.ts": "682e7deb9a0710aae7d8d68fdd3f8beff467d5669c1432c9c85000501121bb42",
+    "src/routes/away.tsx": "bb1796665d2fca8955281adf3b29c2e1c68ebb83495db281da6065a1640c0534",
+    "src/routes/index.tsx": "5a50b8670a2f05c5709923edae8ef42b551f412f8d4670eb88a4fcabeb606bea",
+    "src/setup.ts": "ea2ef4f4f1e611ae5dbc2268ddc07cecd15d4e6ff59c0d573959f1ba90582b52",
+    "tsconfig.json": "9650ccef1e713805a7bd55647cac6d94a1bd3b4d61f15767af87d854d84b0458",
+    "verifier.mjs": "71a8b719f1a0d034a96eb98bf400e68bcccd1a297e525e5321fc796aa6104db9",
+    "vite.config.ts": "13401b2dc5d31c1d3e270aa08ce35497d02c72d5dd0bd626c3a07a7f2ebf0bc3"
+  }
+}

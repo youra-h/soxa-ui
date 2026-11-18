@@ -47,8 +47,14 @@ jobs:
           npm run test:theme
 
   ai-docs:
-    name: AI Docs - published 0.3.0
+    name: AI Docs - published ${{ matrix.version }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version: ['0.3.0', '0.4.1']
+    env:
+      SOXA_DOCS_VERSION: ${{ matrix.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -60,8 +66,30 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run check:ai-docs
+      - run: npm run check:ai-docs:mcp
       - run: npm run check:ai-docs:react
       - run: npm run check:ai-docs:angular
+      - run: npm run check:ai-docs:solid
+      - run: npm run check:ai-docs:webc
+      - run: npm run check:ai-docs:recipes
+      - if: matrix.version == '0.4.1'
+        run: npm run check:ai-docs:svelte
+
+  ai-docs-svelte-development:
+    name: AI Docs - Svelte development tarballs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - run: npm run check:ai-docs:svelte:development -- --skip-build
 
   # The matrix key isn't `adapter`: under that name the guard of tools/min-peers
   # (`workspace.spec.ts`) reads the matrix of lower bounds.
@@ -109,7 +137,8 @@ jobs:
   # runner's pages, and the run took twice as long as either of them alone.
   layout:
     name: Тесты — браузер (${{ matrix.browser }})
-    runs-on: ubuntu-latest
+    # Keep WebKit and its system libraries on the same supported Ubuntu ABI.
+    runs-on: ubuntu-24.04
     strategy:
       # A red browser doesn't stop the other one.
       fail-fast: false
@@ -135,7 +164,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ matrix.browser }}-${{ hashFiles('package-lock.json') }}
+          key: playwright-${{ runner.os }}-ubuntu24-${{ runner.arch }}-${{ matrix.browser }}-${{ hashFiles('package-lock.json') }}
 
       - name: Установка браузера
         if: steps.playwright-cache.outputs.cache-hit != 'true'
@@ -157,7 +186,7 @@ jobs:
       # checks, and the specs of the browser's project.
       - name: Тесты
         env:
-          DEBUG: pw:browser
+          DEBUG: pw:browser,vitest:browser:api,vitest:browser:pool,vitest:browser:playwright,vitest:browser:gc
         run: |
           (
             while sleep 5; do
@@ -195,7 +224,7 @@ jobs:
         if: failure()
         run: |
           cat "$RUNNER_TEMP/memory.log"
-          df -h /dev/shm
+          df -h /tmp /dev/shm
           sudo dmesg -T | grep -iE 'oom|killed process|out of memory|segfault|chrom|headless|wpe|minibrowser' || echo 'в журнале ядра — ничего о памяти и браузере'
 
   build:

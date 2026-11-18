@@ -141,6 +141,9 @@ process.stdout.write(
 			node: process.version,
 			mode: process.env.NODE_ENV,
 			commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+			workingTreeDirty: Boolean(
+				execFileSync('git', ['status', '--porcelain'], { encoding: 'utf8' }).trim(),
+			),
 			candidateSha256: process.env.SSR_REACT_MODULE
 				? createHash('sha256')
 						.update(
@@ -151,10 +154,9 @@ process.stdout.write(
 			adapter: process.env.SSR_REACT_MODULE || '@soxa-ui/react',
 			afterExternalRelease,
 			distSha256: Object.fromEntries(
-				['packages/setup', 'packages/plugins', 'packages/ui/react'].map((path) => [
-					path,
-					distHash(path),
-				]),
+				['packages/core', 'packages/setup', 'packages/plugins', 'packages/ui/react'].map(
+					(path) => [path, distHash(path)],
+				),
 			),
 			results,
 		},

@@ -141,3 +141,4 @@ export {
 	CollectionInitialPluginDescriptor,
 	CollectionInitialPartPluginDescriptor,
 } from './collection-initial.plugin'
+export { FrameThemePluginDescriptor } from './frame-theme.plugin'

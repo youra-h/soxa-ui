@@ -13,7 +13,7 @@ render it in Vue, React, Angular, Svelte, Solid and Web Components.**
 [![npm](https://img.shields.io/npm/v/@soxa-ui/core?label=npm)](https://www.npmjs.com/org/soxa-ui)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-> **Status:** Stable `0.4.0` is the current release under npm `latest`.
+> **Status:** Stable `0.4.1` is the current release under npm `latest`.
 > Alert, AlertDialog, Avatar and Separator are included across all six adapters.
 > Every released component in [the component table](#components) is available in all six adapters:
 > Vue, React, Angular, Svelte, Solid and Web Components. The public API has been frozen since the first beta;
@@ -96,7 +96,7 @@ dependency on that same version. A theme and an icon pack have versions of their
 the range of library versions they work with, which npm checks on install. Then plug in the theme
 and the icons at the application entry point, as shown below.
 
-Components and both supplied themes are available at `0.4.0`. Both icon packs are at `0.3.1`, with
+Components and both supplied themes are available at `0.4.1`. Both icon packs are at `0.3.1`, with
 their existing icons and compatibility with the stable component release. npm checks each pack's declared library compatibility when installing it.
 
 ## Compatibility and support
@@ -387,6 +387,8 @@ On the way there:
 - more themes and icon packs on the same contracts.
 
 ## Documentation
+
+- [SSR collections](docs/ssr-collections.md) — initial Tabs/Tags data, server HTML and hydration.
 
 - [Component API metadata](docs/api/README.md) - generated props, events, slots and framework bindings for documentation websites.
 

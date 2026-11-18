@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
 import { stripVTControlCharacters } from 'node:util'
 
-export async function serve(cwd, args) {
+export async function serve(cwd, args, { probe = true } = {}) {
 	const server = spawn(process.execPath, args, {
 		cwd,
 		env: { ...process.env, PORT: '0', HOST: '127.0.0.1' },
@@ -22,7 +22,7 @@ export async function serve(cwd, args) {
 			const url = stripVTControlCharacters(output).match(/http:\/\/127\.0\.0\.1:\d+/)?.[0]
 			if (url) {
 				try {
-					if ((await fetch(url)).ok) return { server, url }
+					if (!probe || (await fetch(url)).ok) return { server, url }
 				} catch {}
 			}
 			if (server.exitCode !== null) throw new Error('Server exited: ' + output)

@@ -1,5 +1,18 @@
 # @soxa-ui/theme-oren
 
+## 0.4.1
+
+### Patch Changes
+
+- cf38e45: Preserve the local panel surface when an anchored overlay carries an explicit Oren light scheme, so sticky Table headers match the panel background.
+- Updated dependencies [480231a]
+- Updated dependencies [859c3c6]
+- Updated dependencies [dd5946d]
+- Updated dependencies [b17d612]
+  - @soxa-ui/setup@0.4.1
+  - @soxa-ui/theme-base@0.4.1
+  - @soxa-ui/core@0.4.1
+
 ## 0.4.0
 
 ### Minor Changes

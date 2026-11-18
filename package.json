@@ -60,11 +60,17 @@
     "release:prepare": "node tools/release-plan/cli.mjs prepare",
     "test:release-plan": "vitest run --root tools/release-plan",
     "build:ai-docs": "node tools/ai-docs/cli.mjs",
-    "test:ai-docs": "node --test tools/ai-docs/corpus.test.mjs",
+    "test:ai-docs": "node --test tools/ai-docs/corpus.test.mjs tools/ai-docs/mcp.test.mjs tools/ai-docs/release.test.mjs",
+    "check:ai-docs:mcp": "node tools/ai-docs/mcp-smoke.mjs",
     "check:ai-docs": "node tools/ai-docs/smoke.mjs",
     "check:ai-docs:react": "node tools/ai-docs/react-smoke.mjs",
     "check:ai-docs:angular": "node tools/ai-docs/angular-smoke.mjs",
-    "check:ssr-collection-prototype": "node tools/ssr-collection-prototype/run.mjs"
+    "check:ssr-collection-prototype": "node tools/ssr-collection-prototype/run.mjs",
+    "check:ai-docs:svelte": "node tools/ai-docs/svelte-smoke.mjs",
+    "check:ai-docs:svelte:development": "node tools/ai-docs/svelte-smoke.mjs --development",
+    "check:ai-docs:solid": "node tools/ai-docs/solid-smoke.mjs",
+    "check:ai-docs:webc": "node tools/ai-docs/webc-smoke.mjs",
+    "check:ai-docs:recipes": "node tools/ai-docs/recipes-smoke.mjs"
   },
   "devDependencies": {
     "@changesets/apply-release-plan": "^8.1.1",

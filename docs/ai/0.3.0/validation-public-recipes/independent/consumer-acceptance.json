@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "publicInputs": {
+    "docsRevision": "8e71e5e03f837a532dcab015abc48826319c783f",
+    "version": "0.3.0",
+    "hashes": {
+      "fetch.mjs": "cd5b9f66b9188f41343bc4b918c404c2771e77da039681ed3f884a652abe3331",
+      "source/revision.json": "e84bc39ab2186b52f588c4d785d6565fd6ceda41c5b5433e564247bc6c1bb4e9",
+      "source/docs/ai/0.3.0/manifest.json": "94d68223415ab60a9eff6184319e4a21d98db19e788141080fec785113fca972",
+      "consumer/node_modules/@soxa-ui/setup/dist/api.json": "869aa23426237c0b130466cd0de9fa0ff8e960412a99e058de824c9be02104dd"
+    },
+    "records": [
+      {
+        "id": "oren-configuration",
+        "sha256": "ed82e6e37fd5ef19423696f5725998eb956fb06d481617f274a3d4c9c63ad4ce",
+        "file": "documents/oren-configuration.json",
+        "recordSha256": "eae187c4aedaa0fc16378345a354f38e45e4314496ae74eb9d2fdae128ff3ead"
+      },
+      {
+        "id": "theme-authoring",
+        "sha256": "3daef806dd8f50504d52ab695d001d04515b5a2456a2f24e36b336f3eaed5fc7",
+        "file": "documents/theme-authoring.json",
+        "recordSha256": "79aab4391b61c8d6386af88019f57ffae820e687d60334683ab5cb29f8e1c361"
+      },
+      {
+        "id": "icon-replacement",
+        "sha256": "25a77fa67908ff4218fa1633eb3ca5c3ab32536a017eca4af6eb4b1e44c82352",
+        "file": "documents/icon-replacement.json",
+        "recordSha256": "718414f33a19643a9d17c2f5c4ca28fd0f96ac308f0faf38e8d211e11c848623"
+      },
+      {
+        "id": "programmatic-control",
+        "sha256": "a0bd278426fbee0054927543ca235e062fb1004c98f18681918671a87cc492e5",
+        "file": "documents/programmatic-control.json",
+        "recordSha256": "74869cc0bfd6b5eee6619353c7e265c21a2ddf70879db303059a0e0be4b23fb4"
+      },
+      {
+        "id": "external-plugins",
+        "sha256": "f93c4dc405722518ed87492a593f660256aac36565d938d61b2ad0c4626facdf",
+        "file": "documents/external-plugins.json",
+        "recordSha256": "e66e4055aa412bb7fa0f3320ba345e1aba487fad83721d4fcb5a4f0752577df6"
+      },
+      {
+        "id": "vue-start",
+        "sha256": "4cf4ba3c2c804cfcae31bd00f7d7cdc5b2d38ab40607b00b80ef167d81dac330",
+        "file": "documents/vue-start.json",
+        "recordSha256": "170bd7e22e1160e1ef2f5d7425e42bade7cef48107ca05e03cc19ba25e8432b5"
+      },
+      {
+        "id": "vue-controller",
+        "sha256": "5db82ac9925a7a40460ea42e48f2a696deba1aa47ad93a7ebe36003e1a4ffbde",
+        "file": "documents/vue-controller.json",
+        "recordSha256": "0474ba76c0eac973669dfe1c6100948ce8beb94811e1d169ac3b3328e8e4021b"
+      },
+      {
+        "id": "api-vue-button",
+        "sha256": "3815e89d397cd6420e3fdd896a6b6b9f572fcc58ab62c2bd6918a238823ba180",
+        "file": "documents/api-vue-button.json",
+        "recordSha256": "ffa3edb7459537378c5fdceef0460d0ae7d249a0a92f6607f95c9e5d04be3b9a"
+      },
+      {
+        "id": "api-vue-tabs",
+        "sha256": "724c08687190f2a00775a7f20ea806ded8236c22af9d377be375b46528ff1a0c",
+        "file": "documents/api-vue-tabs.json",
+        "recordSha256": "79f2b9ac9f7fef4f3308995e716b1d5b9118e428d7df8938737a4d0a29f98087"
+      }
+    ],
+    "corpusIndexSha256": "3d0f11de4a078bdddfd8e7057028201284efe5711e82474d448ddd0420c7b76e",
+    "publicExampleHashes": {
+      "source/docs/ai/0.3.0/examples/public-recipes/App.vue": "93f454b7811e99ebfdc1084c7124c6390cc9ae0ddbd2511971d3b9b7a8623047",
+      "source/docs/ai/0.3.0/examples/public-recipes/AuditButton.vue": "9b74d638a5b442b0b8d159d1086fc2124fb5764a11241ae8493605c15a51da25",
+      "source/docs/ai/0.3.0/examples/public-recipes/configure.ts": "1eb477bc800a01b4c4980986c4d468e9708a99dfb152912a1175965d24439a5d",
+      "source/docs/ai/0.3.0/examples/public-recipes/custom-types.ts": "60c16a938b1cec38323ee43e97ec05b9a73d05e865bae786db7a67949238454f",
+      "source/docs/ai/0.3.0/examples/public-recipes/custom.html": "21e9251bd00cf4952f5904f0717d417551af15ca076fa58a9cd55901df46f91f",
+      "source/docs/ai/0.3.0/examples/public-recipes/custom.ts": "670732dfbf0055cc85ea64e3699f7005536ba8a8bec9dfde64d6f422815cbc99",
+      "source/docs/ai/0.3.0/examples/public-recipes/index.html": "e0d00e321378853df05fc703a9b385e6cc194dcebc21e42194193c952eb443bc",
+      "source/docs/ai/0.3.0/examples/public-recipes/inspect-contracts.mjs": "6af021dde898e04fc16c82be41e3ab1bc3bdc1214dd8438125f3ae55c8b095f1",
+      "source/docs/ai/0.3.0/examples/public-recipes/main.ts": "1dcd1856a4b87fc990320967fe06e5bf9178bc564f05a493e683498c7a26b2a5",
+      "source/docs/ai/0.3.0/examples/public-recipes/package.json": "f041fc3dcaaa06af758458017a014d8c077582dd3a71f28792b0cdf763969587",
+      "source/docs/ai/0.3.0/examples/public-recipes/page.css": "c8b968c1b9df3cb5f13933e155962c5d500e0e616095ffc45060c40818f72397",
+      "source/docs/ai/0.3.0/examples/public-recipes/plugin-types.ts": "97e675b7afc9ac0baaadce18dfc0065859f09368ab30a950482e2cb9a8fa8d9e",
+      "source/docs/ai/0.3.0/examples/public-recipes/README.md": "61fe3730dc41faf672cb1764980342525cdb8ad03f40c845dc75bc8a29f74fa5",
+      "source/docs/ai/0.3.0/examples/public-recipes/text-audit.ts": "a4c2c2612f6be95fcb03f4388ded1432b934c1ca6452bad2113d2ff4111ccd87",
+      "source/docs/ai/0.3.0/examples/public-recipes/theme/index.css": "da6835aaf5dd28b6d8054396ed023e6dab602b1d9dc20359a30a15b6eee625a6",
+      "source/docs/ai/0.3.0/examples/public-recipes/theme/index.d.ts": "61d025aaa2864e0fefc0d105da8d253d887b8faef52bd4a08896471e1d884a44",
+      "source/docs/ai/0.3.0/examples/public-recipes/theme/package.json": "81eabd2e60462a0a3bd93d2e88571c42a0ce6de5466eca874bad02cf0c64eb5a",
+      "source/docs/ai/0.3.0/examples/public-recipes/theme/setup.ts": "eae165d823c75a127f1227d706ee0652c7776e9c543d595ee1c457515474f01f",
+      "source/docs/ai/0.3.0/examples/public-recipes/theme/tsconfig.json": "558a60d410f3a350422113f39bc12845f883179cbeb8e5cf7d5bffb41b432d1e",
+      "source/docs/ai/0.3.0/examples/public-recipes/theme/vite.config.ts": "1f1b9f94801e6cdc0974459f7678de181a9911492a5bcc1d2a86b9b441b42339",
+      "source/docs/ai/0.3.0/examples/public-recipes/tsconfig.custom.json": "87e5071c9eb129e923621816bdaf52013b99380049ea69fa3edb577995e0fc48",
+      "source/docs/ai/0.3.0/examples/public-recipes/tsconfig.json": "806358a3748df7957a48d74ae3278e67b333807efebfb6a5a87e54c0e8366327",
+      "source/docs/ai/0.3.0/examples/public-recipes/vite.config.ts": "46bae51f800a645c1c77314e63f5236c50aa15c85a573c21021d6bbdcb3ac1da"
+    },
+    "consumerChange": "App.vue uses Queue report, Report queued and Report changed instead of the public Save/Saved/External labels."
+  },
+  "node": "v24.20.0",
+  "browser": "156.0.8078.4",
+  "pages": [
+    {
+      "path": "/",
+      "theme": "oren",
+      "scenario": "Queue report",
+      "keyboard": [
+        "Enter activates retained controller",
+        "Space activates after remount",
+        "ArrowRight and Space select second tab"
+      ],
+      "pluginProps": ["screen", "updated", "audit default after omitted key"],
+      "pluginEvent": ["Vue surface audit:record", "controller envelope audit:record"],
+      "cleanup": {
+        "remounts": 3,
+        "duplicateNotifications": 0,
+        "retiredPluginsStopReceiving": true,
+        "mutationsWhileHidden": 6,
+        "retainedController": true
+      },
+      "notifications": 6,
+      "ltr": {
+        "direction": "ltr",
+        "sign": "1"
+      },
+      "rtl": {
+        "direction": "rtl",
+        "sign": "-1"
+      },
+      "tabsGeometry": {
+        "size": "72px",
+        "position": "65px"
+      },
+      "mirroredTabOrder": true,
+      "closeIconReplacement": true,
+      "motionModes": ["reduce", "full", "system"],
+      "consoleErrors": []
+    },
+    {
+      "path": "/custom.html",
+      "theme": "studio",
+      "scenario": "Queue report",
+      "keyboard": [
+        "Enter activates retained controller",
+        "Space activates after remount",
+        "ArrowRight and Space select second tab"
+      ],
+      "pluginProps": ["screen", "updated", "audit default after omitted key"],
+      "pluginEvent": ["Vue surface audit:record", "controller envelope audit:record"],
+      "cleanup": {
+        "remounts": 3,
+        "duplicateNotifications": 0,
+        "retiredPluginsStopReceiving": true,
+        "mutationsWhileHidden": 6,
+        "retainedController": true
+      },
+      "notifications": 6,
+      "ltr": {
+        "direction": "ltr",
+        "sign": "1"
+      },
+      "rtl": {
+        "direction": "rtl",
+        "sign": "-1"
+      },
+      "tabsGeometry": {
+        "size": "72px",
+        "position": "65px"
+      },
+      "mirroredTabOrder": true,
+      "closeIconReplacement": true,
+      "motionModes": ["reduce", "full", "system"],
+      "consoleErrors": []
+    }
+  ],
+  "packageChecks": {
+    "packages": [
+      {
+        "name": "@soxa-ui/core",
+        "version": "0.3.0",
+        "resolved": "https://registry.npmjs.org/@soxa-ui/core/-/core-0.3.0.tgz",
+        "integrity": "sha512-ghErTeKN4O0KQes4xXUQvCZFpdpI/O70HB/0YISVqwTZYRhDtFXNLu9LgbMo85sl6AB41CnUmDOHjjtvLMsbMQ=="
+      },
+      {
+        "name": "@soxa-ui/icons-lucide",
+        "version": "0.3.0",
+        "resolved": "https://registry.npmjs.org/@soxa-ui/icons-lucide/-/icons-lucide-0.3.0.tgz",
+        "integrity": "sha512-JS6bSVEo8EcLMXjkOobTPROEzrtvVHRnEj2fau/sfkvCfqFvuW/1gaWPW0OS3GolTmmmNaV7stDFNVUozS6GCA=="
+      },
+      {
+        "name": "@soxa-ui/icons-material",
+        "version": "0.3.0",
+        "resolved": "https://registry.npmjs.org/@soxa-ui/icons-material/-/icons-material-0.3.0.tgz",
+        "integrity": "sha512-1KPSA8uq3WRloanjSJdtsdtGuqcZdCzbmWOlSx0Ev60vDvri4rm3sUSc/ONHEHl0T8aya8IzVA+YhZYGLIqe0A=="
+      },
+      {
+        "name": "@soxa-ui/plugins",
+        "version": "0.3.0",
+        "resolved": "https://registry.npmjs.org/@soxa-ui/plugins/-/plugins-0.3.0.tgz",
+        "integrity": "sha512-FT4UEZyCiLm0+35jdk8ZwBLwTDk6kF6PwGMJYREyM09cVbT2UD0AaVnGkV22JnhUmOHJ7ow8EOioak+KLjy2mg=="
+      },
+      {
+        "name": "@soxa-ui/setup",
+        "version": "0.3.0",
+        "resolved": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.3.0.tgz",
+        "integrity": "sha512-byutzJyCBW7oCrqze6Dgr1+2QZ019yAZ0kIAY7+1SWQLFE6kW53RJOpo7LH+FB9jSifY7Os2k92YUf7hVmjaZg=="
+      },
+      {
+        "name": "@soxa-ui/theme-base",
+        "version": "0.3.0",
+        "resolved": "https://registry.npmjs.org/@soxa-ui/theme-base/-/theme-base-0.3.0.tgz",
+        "integrity": "sha512-BulGjcSLIa40RM0tp1Anxhyoebtznv3KfpprbL/xpBh23MeColR2iZ5u009IRSv5o6gujZNAGgv+tQVkSgseOA=="
+      },
+      {
+        "name": "@soxa-ui/theme-oren",
+        "version": "0.3.0",
+        "resolved": "https://registry.npmjs.org/@soxa-ui/theme-oren/-/theme-oren-0.3.0.tgz",
+        "integrity": "sha512-GNPQMg40uacSwgtcWP0HKj9v08RLJnuKPSRR+17L7OXNATtE1LqqAFUPNT+ij5FPzFumtczclz0BXRt5v9IOVQ=="
+      },
+      {
+        "name": "@soxa-ui/vue",
+        "version": "0.3.0",
+        "resolved": "https://registry.npmjs.org/@soxa-ui/vue/-/vue-0.3.0.tgz",
+        "integrity": "sha512-EhM0gcbgclCQFieMBk6kGlNXH6SNM41yXq0DZ/qwWwbMSgQTD6WALReq8utngOLt3JKx3MIeA0TAbRLR+he1Tw=="
+      }
+    ],
+    "noWorkspaces": true,
+    "noLibraryAliases": true,
+    "theme": {
+      "version": "1.0.0",
+      "resolved": "file:../example-soxa-theme-1.0.0.tgz",
+      "integrity": "sha512-Nh5BNp1d4uKy5XYXkHSTT5Qr4kpmqOYcjYxHr0yFUE0FmdkoFaXyoX8+DQ0tXGlSl2Rm6mJkgNgLGTA5gqqEKQ==",
+      "dependencies": {
+        "@soxa-ui/theme-base": "0.3.0"
+      },
+      "peerDependencies": {
+        "@soxa-ui/core": "^0.3.0",
+        "@soxa-ui/setup": "^0.3.0"
+      }
+    },
+    "lockSha256": "e9e98e21cab303ab9222666ac7a62b21f323ff5a2db5a7a63834286c56efb399",
+    "originalLockSha256": "71eaba6430b20d46c3d3cc40753071d34f62ed313dd48a3ab00058dcc4c40f69",
+    "themeTarballSha256": "bb69b84e4cde903d024716aede27b79c8167f58db84add3fe5db22d3c4371ba5"
+  },
+  "result": "passed"
+}

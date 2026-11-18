@@ -1,0 +1,31 @@
+{
+  "name": "soxa-solidstart-recipes",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "vite build",
+    "start": "node .output/server/index.mjs"
+  },
+  "dependencies": {
+    "@soxa-ui/core": "0.4.1",
+    "@soxa-ui/setup": "0.4.1",
+    "@soxa-ui/solid": "0.4.1",
+    "@soxa-ui/theme-oren": "0.4.1",
+    "@soxa-ui/icons-material": "0.3.1",
+    "solid-js": "1.9.17",
+    "@solidjs/start": "2.2.3",
+    "@solidjs/router": "0.16.1",
+    "nitro": "3.0.261103-rc",
+    "@soxa-ui/plugins": "0.4.1"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vite": "8.3.5",
+    "vite-plugin-solid": "2.11.16",
+    "@types/node": "24.19.2"
+  }
+}

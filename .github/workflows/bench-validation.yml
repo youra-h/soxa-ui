@@ -28,7 +28,8 @@ on:
 jobs:
   tools:
     name: Инструменты и исследовательские наблюдения Soxa
-    runs-on: ubuntu-latest
+    # Match the browser suite's supported system libraries and mirror policy.
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +40,11 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium webkit
+      - name: Системные зависимости браузеров
+        run: |
+          sudo --preserve-env=GITHUB_ACTIONS,RUNNER_OS "$(command -v node)" tools/ci/ubuntu-mirror.mjs
+          npx playwright install-deps chromium webkit
+      - run: npx playwright install chromium webkit
       - run: npm run build:css --workspace=@soxa-ui/theme-oren
       - name: Auditor and negative controls
         run: npm run test:bench-validation && npm run test:bench-ai

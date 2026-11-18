@@ -7,7 +7,7 @@ const versionPattern = /^\d+\.\d+\.\d+(?:-[a-zA-Z0-9.-]+)?$/
 function relativePath(path) {
 	if (
 		typeof path !== 'string' ||
-		!/^[a-zA-Z0-9_./-]+$/.test(path) ||
+		!/^[a-zA-Z0-9_./+-]+$/.test(path) ||
 		path.startsWith('/') ||
 		path.split('/').some((part) => !part || part === '.' || part === '..')
 	)
@@ -16,7 +16,14 @@ function relativePath(path) {
 }
 
 /** Fetch only public documentation files from one immutable repository revision. */
-export async function fetchSource({ revision, version, out, fetchFile = fetch }) {
+export async function fetchSource({
+	revision,
+	version,
+	out,
+	includeMcp = false,
+	fetchFile = fetch,
+}) {
+	if (typeof includeMcp !== 'boolean') throw new Error('includeMcp must be a boolean')
 	if (!commit.test(revision) || !versionPattern.test(version))
 		throw new Error('Choose an exact version and full documentation commit SHA')
 	const directory = resolve(out)
@@ -41,6 +48,9 @@ export async function fetchSource({ revision, version, out, fetchFile = fetch })
 	)
 		throw new Error('Downloaded manifest schema/version mismatch')
 	const paths = new Set(['tools/ai-docs/cli.mjs', 'tools/ai-docs/corpus.mjs'])
+	if (includeMcp)
+		for (const file of ['mcp.mjs', 'mcp-catalog.mjs', 'mcp-tools.mjs'])
+			paths.add(`tools/ai-docs/${file}`)
 	for (const doc of manifest.documents) {
 		paths.add(`docs/ai/${version}/${relativePath(doc.path)}`)
 		if (!Array.isArray(doc.examples)) throw new Error('Missing example metadata')
@@ -69,24 +79,30 @@ export async function fetchSource({ revision, version, out, fetchFile = fetch })
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
 	const args = process.argv.slice(2)
 	const options = {}
-	for (let i = 0; i < args.length; i += 2) {
+	for (let i = 0; i < args.length; i++) {
+		if (args[i] === '--include-mcp' && !options[args[i]]) {
+			options[args[i]] = true
+			continue
+		}
 		if (
 			!['--revision', '--version', '--out'].includes(args[i]) ||
 			!args[i + 1] ||
 			options[args[i]]
 		)
 			throw new Error(
-				'Usage: fetch.mjs --revision <docs-SHA> --version <library-version> --out <empty-dir>',
+				'Usage: fetch.mjs --revision <docs-SHA> --version <library-version> --out <empty-dir> [--include-mcp]',
 			)
 		options[args[i]] = args[i + 1]
+		i++
 	}
-	if (Object.keys(options).length !== 3)
+	if (!options['--revision'] || !options['--version'] || !options['--out'])
 		throw new Error('Revision, version and output are required')
 	console.log(
 		await fetchSource({
 			revision: options['--revision'],
 			version: options['--version'],
 			out: options['--out'],
+			includeMcp: options['--include-mcp'] ?? false,
 		}),
 	)
 }

@@ -976,10 +976,12 @@ describe('ореол', () => {
 		await commands.mouseDown()
 
 		try {
-			await userEvent.hover(document.body, { position: under(0.3) })
+			await userEvent.hover(document.body, { position: under(0.2) })
 			await expect.poll(() => thumb.dataset.dragging).toBe('true')
 
-			// WebKit can update the thumb's pseudo-classes after the drag state.
+			// Continue the gesture after capture starts so WebKit hit-tests the
+			// pointer off the thumb before its native pseudo-classes are read.
+			await userEvent.hover(document.body, { position: under(0.3) })
 			await expect.poll(() => thumb.matches(':hover, :active')).toBe(false)
 
 			await settled(thumb)

@@ -1,10 +1,15 @@
 # Versioned public documentation source
 
 This directory is the library-owned source format for small, versioned AI
-documentation records. The initial release directory is **0.3.0**. The separate
+documentation records. The available release directories are **0.3.0** and **0.4.1**. The separate
 website owns its routes, localization, prose pages, rendering and public
 `llms.txt` endpoints. This format supplies metadata, a minimal shared overview,
-Vue/Nuxt and React/Next.js consumer recipes and generated API records; it does not replace those pages.
+consumer recipes for all six adapters and generated API records; it does not replace those pages.
+
+For 0.4.1 start with [the overview](./0.4.1/overview.md),
+[release changes](./0.4.1/release-changes.md) and
+[validation and limits](./0.4.1/release-validation.md). The original commands
+below demonstrate 0.3.0; the final section explains exact 0.4.1 selection.
 
 The source language is English. This is public consumer documentation, not the
 repository's agent workflow. Never publish private memory, task history,
@@ -71,10 +76,9 @@ older corpus. Library development can call the same CLI via
 under a `dist/` directory, which Git ignores.
 
 The website can build this at CI time and publish the resulting files under its
-own versioned URLs. Future MCP can use the same index/files. Neither requires a
-new npm documentation export, a running documentation server or a library release.
-This task does not publish an archive, merge a PR, deploy the website or implement
-MCP transport. The source becomes publicly fetchable once its commit is pushed;
+own versioned URLs. The [local read-only MCP server](./mcp.md) reads the same
+index/files. Neither requires a new npm documentation export, a running HTTP
+server or a library release. The source becomes publicly fetchable once its commit is pushed;
 select an owner-reviewed commit for production consumption.
 
 ## Manifest schema 1
@@ -176,9 +180,9 @@ Chromium (`npx playwright install chromium`). CI runs both. It does not build
 or install the current library checkout.
 
 The initial matrix is deliberate: 63 of 65 published components have Vue exports and generated API;
-the retained headless Button, Vue/Nuxt and React/Next recipes are checked. Remaining
-framework guides, general extension/theme-authoring and contributor instructions
-remain pending. API presence alone is not evidence of runnable recipes.
+the retained headless Button, Vue/Nuxt and React/Next recipes are checked. Other
+framework guides retain their own coverage; shared extension/theme-authoring recipes
+are now sample, and contributor instructions remain pending. API presence alone is not evidence of runnable recipes.
 
 Start Vue/Nuxt consumption with [vue-start](./0.3.0/vue-start.md). The separate
 records cover installation, bindings/events, composition/slots, ctrl/lifecycle,
@@ -208,3 +212,142 @@ Run `npm run check:ai-docs:angular` for exact published 0.3.0 standalone CSR
 and Angular SSR recipes: strict ngc/AOT, negative template guard, production
 build, model/events, Forms, scoped slots, keyboard, controller teardown and hydration.
 Coverage remains sample. See [Angular validation](./0.3.0/angular-validation.md).
+
+Svelte/SvelteKit consumption starts with [svelte-start](./0.3.0/svelte-start.md).
+Run `npm run check:ai-docs:svelte` for exact published consumers. This diagnostic
+currently fails strict declarations (published Teleport TS2440); it is deliberately
+not added to the shared CI job until the owner resolves the release blocker.
+Runtime coverage is sample, not full typed readiness. See
+[Svelte validation](./0.3.0/svelte-validation.md) for the tested limits.
+
+Svelte record navigation: [installation](./0.3.0/svelte-installation.md),
+[bindings](./0.3.0/svelte-bindings.md), [composition](./0.3.0/svelte-composition.md),
+[controller](./0.3.0/svelte-controller.md), [SvelteKit](./0.3.0/svelte-sveltekit.md),
+and [errors](./0.3.0/svelte-errors.md). Generated API is reached by related record IDs.
+
+### Svelte development validation
+
+The published 0.3.0 diagnostic remains separate and intentionally exits nonzero
+on its immutable Teleport TS2440 declarations. Fixes in the development branch
+do not change those npm bytes or the 0.3.0 corpus/API pins.
+
+Run `npm run check:ai-docs:svelte:development` to build the current checkout,
+pack its full Soxa dependency closure and install it into new temporary Svelte
+and SvelteKit consumers. After an explicit `npm run build`, use
+`npm run check:ai-docs:svelte:development -- --skip-build`. The command verifies
+that package sources match the fetched `origin/main`, checks npm peers, each
+tarball's integrity and exact version, unique package copies, the installed
+development API digest, strict positive and negative templates, production,
+keyboard/controllers and universal SSR/hydration/navigation. Every ARIA reference
+must resolve in SSR and hydrated/open/closed states; published exceptions are
+never accepted in this mode. CI runs this development check after building.
+
+Its evidence.json records the exact source revision, package versions and origins,
+tarball/API/input/lock digests and consumer outcomes. These artifacts retain the
+workspace's current version numbers; they are unpublished development builds,
+not evidence that npm 0.3.0 or npm latest contains the fixes. The development API
+is recorded for auditing and never fed into the published corpus builder.
+See [separate development evidence](./validation/svelte-development.md).
+A future fixed published release requires its own exact-version corpus and
+independent published-package validation before strict readiness can be claimed.
+
+Solid/SolidStart consumption starts with [solid-start](./0.3.0/solid-start.md).
+Use [installation](./0.3.0/solid-installation.md), [bindings](./0.3.0/solid-bindings.md),
+[composition](./0.3.0/solid-composition.md), [controllers](./0.3.0/solid-controller.md),
+[SolidStart](./0.3.0/solid-solidstart.md) and [release limits](./0.3.0/solid-errors.md).
+Run `npm run check:ai-docs:solid` for strict published 0.3.0 types, production,
+keyboard/model/callbacks, scoped slots, root refs, teardown and universal SSR.
+The smoke uses no workspace library sources and keeps strict declaration checking.
+It retains corpus/input/lock hashes and exact bounded ARIA observations, without
+turning those observations into an assertion of complete ARIA validity.
+See [Solid validation](./0.3.0/solid-validation.md). Framework coverage is sample.
+
+The [independent SolidStart consumer](./0.3.0/validation-solid-consumer/README.md)
+retains a different workshop application, its exact lock and a portable verifier.
+It found the initial cold-route Suspense omission; corrected-public-corpus
+validation and a fresh replay passed all 16 checks. The original evidence and
+raw first-response snapshot are preserved separately.
+
+Web Components consumers start with [webc-start](./0.3.0/webc-start.md).
+The eight sample records cover [registration](./0.3.0/webc-installation.md),
+[properties/events](./0.3.0/webc-bindings.md), [compound slots](./0.3.0/webc-composition.md),
+[connection/cleanup](./0.3.0/webc-lifecycle.md), [browser/server HTML boundaries](./0.3.0/webc-environment.md),
+[release limits](./0.3.0/webc-errors.md) and [validation](./0.3.0/webc-validation.md).
+Run `npm run check:ai-docs:webc` to install exact registry packages in a new
+external Vite consumer, check strict/negative types and production, exercise
+Chromium keyboard/form/events/layer teardown, and distinguish raw server-authored
+HTML from client upgrade. Append `-- --webkit` to run the same recipe and
+HTML upgrade in WebKit using the matching Playwright Linux image through Docker.
+This is not framework SSR or a test of the Safari application.
+The single hidden Calendar label gap and Vite chunk-size warning are retained
+explicitly. Evidence includes corpus/input/API/tool/lock hashes and npm origins.
+Set `SOXA_WEBC_SMOKE_DIR` to an empty output directory to retain a known location.
+
+The [independent Web Components consumer](./0.3.0/validation-webc-consumer/README.md)
+retains a different workshop signup, exact lock, corpus hashes and portable verifier.
+Its 13 Chromium checks and strict/negative types passed; a replay of the formatted
+retained source is recorded separately.
+
+## Shared theme and extension recipes
+
+The 0.3.0 shared consumer records cover [Oren configuration](./0.3.0/oren-configuration.md),
+[theme authoring on Base](./0.3.0/theme-authoring.md), [icon replacement](./0.3.0/icon-replacement.md),
+[programmatic control](./0.3.0/programmatic-control.md) and [external plugins](./0.3.0/external-plugins.md).
+They are returned for each adapter alongside its own installation/controller recipes.
+Framework coverage is unchanged: the additional runnable integration uses Vue.
+
+Run npm run check:ai-docs:recipes for exact published-package verification. It
+uses only the manifest downloader's public file list, packs a minimal theme in
+an npm workspace, then installs the pack into a new non-workspace consumer.
+Strict types, custom-theme negative probes, production build and Chromium cover
+controller ownership, external plugin prop/event transport and teardown,
+keyboard, direction, dark schemes, motion attributes and replacement icons.
+See [validation and limits](./0.3.0/public-recipes-validation.md) and the
+[standalone example](./0.3.0/examples/public-recipes/README.md).
+The shared records remain sample; a minimal theme is not a full component theme.
+
+## Library contributor route
+
+For adding a component to the library, use the separate
+[source-pinned contributor guide](../contributing/README.md). Its baseline is the
+0.4.0 source tree, not the installed 0.3.0 API. The 0.3.0 manifest's contributor
+coverage remains pending: the consumer builder must not silently return newer
+source-development instructions as release-specific contributor records.
+
+## Published 0.4.1 corpus
+
+Use `docs/ai/0.4.1/manifest.json` with exact published setup 0.4.1. The release
+revision is `7c1a7886b2c9d17c21ae91cc347d680b0f4ab2cf`; the API digest is
+`368e374f7536177b8909c1de051a6e923757a68ef67b7249fa07b36c4f1c1354`.
+Base and Oren are independently pinned to 0.4.1, Material and Lucide to 0.3.1.
+The 0.3.0 directory and its historical evidence remain unchanged. No 0.4.0
+corpus is implied, and there is no latest/version-range fallback.
+
+The downloader and builder commands above work with version 0.4.1 and the
+corresponding exact npm setup package. MCP reads the resulting corpus through
+the same tools; configure both version directories to serve both releases.
+Documentation delivery remains pinned to its own full commit SHA.
+
+Consumer checks accept the exact corpus through `SOXA_DOCS_VERSION`. For example:
+
+```sh
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:react
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:angular
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:svelte
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:solid
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:webc
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:recipes
+SOXA_DOCS_VERSION=0.4.1 npm run check:ai-docs:mcp
+```
+
+In PowerShell set `$env:SOXA_DOCS_VERSION = '0.4.1'` before the npm command.
+Unset the variable to retain the original 0.3.0 default. CI checks both exact
+corpora; strict Svelte published-package checks are added for 0.4.1 only, while
+the separate Svelte development-tarball check retains its existing purpose.
+
+Generated API adds Alert, AlertDialog, Avatar, AvatarGroup and Separator across
+all six adapters. The [release record](./0.4.1/release-changes.md) distinguishes
+API coverage from runnable examples and the remaining React Tabs SSR limit.
+The source contains no new website pages, localization, site dependency update
+or hosted MCP endpoint. Those remain website-owned work.

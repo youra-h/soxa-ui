@@ -1,0 +1,45 @@
+@import '@soxa-ui/theme-base';
+
+@layer studio {
+	:root,
+	[data-so-theme='studio'] {
+		--so-studio-fill: #dbeafe;
+		--so-studio-ink: #172554;
+		--so-place-surface: #fff;
+		--so-panel-surface: #fff;
+	}
+	[data-so-theme='studio-dark'] {
+		color-scheme: dark;
+		--so-studio-fill: #172554;
+		--so-studio-ink: #dbeafe;
+		--so-place-surface: #111827;
+		--so-panel-surface: #111827;
+	}
+	.so-button {
+		color: var(--so-studio-ink);
+		background: var(--so-studio-fill);
+		border-radius: 0.5rem;
+	}
+	.so-button--view-soft {
+		border: 1px solid currentColor;
+	}
+	.so-button--variant-studio {
+		font-weight: 600;
+	}
+	.so-button:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+	.so-tabs-item[data-selected='true'] > .so-button {
+		background: var(--so-studio-fill);
+	}
+	.so-tabs__bar::after {
+		content: '';
+		position: absolute;
+		inset-block-end: 0;
+		inset-inline-start: var(--so-tabs-active-pos, 0px);
+		width: var(--so-tabs-active-size, 0px);
+		height: 2px;
+		background: var(--so-studio-ink);
+	}
+}

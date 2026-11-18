@@ -16,6 +16,9 @@ function fixture() {
 	manifest.documents = manifest.documents.slice(0, 2)
 	manifest.coverage.react.guides = 'pending'
 	manifest.coverage.angular.guides = 'pending'
+	manifest.coverage.svelte.guides = 'pending'
+	manifest.coverage.solid.guides = 'pending'
+	manifest.coverage.webc.guides = 'pending'
 	manifest.documents[0].related = ['vue-button']
 	const source = {
 		revision: manifest.libraryRevision,
@@ -264,11 +267,33 @@ test('selective source delivery pins every request and fetches only declared pub
 		),
 	)
 	assert.ok(!requested.some((url) => /AGENTS|memory|test|smoke/.test(url)))
+	assert.ok(!requested.some((url) => /mcp/.test(url)))
 	assert.deepEqual(JSON.parse(readFileSync(join(f.root, 'downloaded/revision.json'), 'utf8')), {
 		schemaVersion: 1,
 		docsRevision: revision,
 		libraryVersion: '0.3.0',
 	})
+})
+
+test('optional MCP delivery adds only runtime files without changing older pinned downloads', async () => {
+	const f = fixture()
+	const { fetchSource } = await import('./fetch.mjs')
+	const requested = []
+	const source = await fetchSource({
+		revision,
+		version: '0.3.0',
+		out: join(f.root, 'mcp-source'),
+		includeMcp: true,
+		fetchFile: async (url) => {
+			requested.push(url)
+			return new Response(
+				url.endsWith('manifest.json') ? JSON.stringify(f.manifest) : 'public content',
+			)
+		},
+	})
+	assert.equal(source.files, 10)
+	assert.equal(requested.filter((url) => /mcp/.test(url)).length, 3)
+	assert.ok(!requested.some((url) => /client|smoke|test/.test(url)))
 })
 
 test('source download rejects missing remote files, unsafe paths and wrong versions before writing', async () => {
@@ -492,4 +517,243 @@ test('Angular SSR selection excludes other framework recipes and keeps shared re
 	assert.ok(selected.some((doc) => doc.framework === 'all'))
 	assert.ok(selected.every((doc) => doc.framework === 'angular' || doc.framework === 'all'))
 	assert.ok(!selected.some((doc) => /vue|react/.test(doc.framework)))
+})
+
+test('SvelteKit plus-prefixed routes are selectively delivered without accepting traversal', async () => {
+	const { fetchSource } = await import('./fetch.mjs')
+	const manifest = JSON.parse(
+		readFileSync(new URL('../../docs/ai/0.3.0/manifest.json', import.meta.url), 'utf8'),
+	)
+	const requests = []
+	const out = mkdtempSync(join(tmpdir(), 'soxa-svelte-delivery-'))
+	await fetchSource({
+		revision,
+		version: '0.3.0',
+		out,
+		fetchFile: async (url) => {
+			const file = url.split('/' + revision + '/')[1]
+			requests.push(file)
+			return {
+				ok: true,
+				text: async () => readFileSync(new URL('../../' + file, import.meta.url), 'utf8'),
+			}
+		},
+	})
+	assert.ok(requests.includes('docs/ai/0.3.0/examples/sveltekit/src/routes/+page.svelte'))
+	assert.ok(requests.includes('docs/ai/0.3.0/examples/sveltekit/src/routes/+layout.svelte'))
+	assert.ok(requests.includes('docs/ai/0.3.0/examples/sveltekit/src/routes/away/+page.svelte'))
+	assert.equal(manifest.coverage.svelte.guides, 'sample')
+	for (const unsafe of [
+		'examples/../secret',
+		'examples/%2e%2e/secret',
+		'examples/+page.svelte?query',
+		'examples/+page.svelte#hash',
+	]) {
+		const bad = structuredClone(manifest)
+		bad.documents.find((d) => d.id === 'svelte-installation').examples[0].path = unsafe
+		await assert.rejects(
+			() =>
+				fetchSource({
+					revision,
+					version: '0.3.0',
+					out: mkdtempSync(join(tmpdir(), 'soxa-svelte-rejected-')),
+					fetchFile: async () => ({ ok: true, text: async () => JSON.stringify(bad) }),
+				}),
+			/Invalid documentation file path/,
+		)
+	}
+})
+
+test('development tarballs identify committed PR sources and reject uncommitted packages', async () => {
+	const { committedLibraryRevision } = await import('./svelte-development.mjs')
+	const root = mkdtempSync(join(tmpdir(), 'soxa-development-revision-'))
+	const git = (...args) =>
+		execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: 'pipe' }).trim()
+	git('init', '--initial-branch=main')
+	mkdirSync(join(root, 'packages'))
+	const source = join(root, 'packages/source.txt')
+	writeFileSync(source, 'main')
+	git('add', '.')
+	const commit = () =>
+		git('-c', 'user.name=Test', '-c', 'user.email=test@example.com', 'commit', '-m', 'fixture')
+	commit()
+	git('update-ref', 'refs/remotes/origin/main', 'HEAD')
+	git('switch', '-c', 'fix/local-theme')
+	writeFileSync(source, 'PR fix')
+	git('add', '.')
+	commit()
+
+	assert.notEqual(git('rev-parse', 'HEAD'), git('rev-parse', 'origin/main'))
+	assert.equal(committedLibraryRevision(root), git('rev-parse', 'HEAD'))
+
+	writeFileSync(source, 'dirty')
+	assert.throws(() => committedLibraryRevision(root))
+	git('add', '.')
+	assert.throws(() => committedLibraryRevision(root))
+	commit()
+	writeFileSync(join(root, 'packages/untracked.txt'), 'untracked')
+	assert.throws(() => committedLibraryRevision(root), /No untracked library sources/)
+})
+
+test('Solid consumer files are delivered as complete standalone projects', async () => {
+	const { fetchSource } = await import('./fetch.mjs')
+	const out = mkdtempSync(join(tmpdir(), 'soxa-solid-delivery-'))
+	const requests = []
+	await fetchSource({
+		revision,
+		version: '0.3.0',
+		out,
+		fetchFile: async (url) => {
+			const file = url.split('/' + revision + '/')[1]
+			requests.push(file)
+			return {
+				ok: true,
+				text: async () => readFileSync(new URL('../../' + file, import.meta.url), 'utf8'),
+			}
+		},
+	})
+	const manifest = JSON.parse(readFileSync(join(out, 'docs/ai/0.3.0/manifest.json'), 'utf8'))
+	assert.equal(manifest.coverage.solid.guides, 'sample')
+	assert.equal(manifest.packages['@soxa-ui/solid'], '0.3.0')
+	for (const file of [
+		'solid/package.json',
+		'solid/Recipes.tsx',
+		'solidstart/src/routes/away.tsx',
+		'solidstart/src/entry-server.tsx',
+	]) {
+		assert.ok(requests.includes('docs/ai/0.3.0/examples/' + file))
+	}
+	const records = manifest.documents.filter((doc) => doc.framework === 'solid')
+	assert.equal(records.length, 8)
+	assert.ok(records.every((doc) => doc.audience === 'consumer'))
+	assert.equal(
+		readFileSync(join(out, 'docs/ai/0.3.0/examples/solid/Recipes.tsx'), 'utf8'),
+		readFileSync(join(out, 'docs/ai/0.3.0/examples/solidstart/src/Recipes.tsx'), 'utf8'),
+	)
+})
+
+test('Web Components consumers are selectively delivered with complete browser-only inputs', async () => {
+	const { fetchSource } = await import('./fetch.mjs')
+	const out = mkdtempSync(join(tmpdir(), 'soxa-webc-delivery-'))
+	const requested = []
+	await fetchSource({
+		revision,
+		version: '0.3.0',
+		out,
+		fetchFile: async (url) => {
+			const file = url.split('/' + revision + '/')[1]
+			requested.push(file)
+			return {
+				ok: true,
+				text: async () => readFileSync(new URL('../../' + file, import.meta.url), 'utf8'),
+			}
+		},
+	})
+	const manifest = JSON.parse(readFileSync(join(out, 'docs/ai/0.3.0/manifest.json'), 'utf8'))
+	assert.equal(manifest.coverage.webc.guides, 'sample')
+	assert.equal(manifest.packages['@soxa-ui/webc'], '0.3.0')
+	const records = manifest.documents.filter((doc) => doc.framework === 'webc')
+	assert.equal(records.length, 8)
+	assert.ok(records.every((doc) => doc.audience === 'consumer'))
+	for (const file of [
+		'package.json',
+		'tsconfig.json',
+		'main.ts',
+		'setup.ts',
+		'index.html',
+		'upgrade.html',
+		'upgrade.ts',
+		'vite.config.ts',
+	]) {
+		assert.ok(requested.includes('docs/ai/0.3.0/examples/webc/' + file), file)
+	}
+	const f = fixture()
+	f.manifest.coverage.webc.guides = 'sample'
+	f.manifest.documents.push({
+		...f.manifest.documents[0],
+		id: 'webc-fixture',
+		framework: 'webc',
+		path: 'webc.md',
+		related: [],
+	})
+	writeFileSync(join(f.root, 'webc.md'), '# Browser application')
+	const selected = selectDocuments(f.build(), {
+		version: '0.3.0',
+		audience: 'consumer',
+		framework: 'webc',
+	})
+	assert.ok(selected.some((doc) => doc.framework === 'all'))
+	assert.ok(selected.some((doc) => doc.id === 'webc-fixture'))
+	assert.ok(selected.every((doc) => ['all', 'webc'].includes(doc.framework)))
+})
+
+test('shared theme and extension recipes deliver every standalone input and stay consumer-scoped', async () => {
+	const { fetchSource } = await import('./fetch.mjs')
+	const out = mkdtempSync(join(tmpdir(), 'soxa-recipes-delivery-'))
+	await fetchSource({
+		revision,
+		version: '0.3.0',
+		out,
+		fetchFile: async (url) => {
+			const path = url.split('/' + revision + '/')[1]
+			return {
+				ok: true,
+				text: async () => readFileSync(new URL('../../' + path, import.meta.url), 'utf8'),
+			}
+		},
+	})
+	const manifest = JSON.parse(readFileSync(join(out, 'docs/ai/0.3.0/manifest.json'), 'utf8'))
+	const ids = [
+		'oren-configuration',
+		'theme-authoring',
+		'icon-replacement',
+		'programmatic-control',
+		'external-plugins',
+		'public-recipes-validation',
+	]
+	const shared = manifest.documents.filter((doc) => ids.includes(doc.id))
+	assert.equal(shared.length, 6)
+	assert.ok(
+		shared.every(
+			(doc) =>
+				doc.framework === 'all' && doc.audience === 'consumer' && doc.status === 'sample',
+		),
+	)
+	const exampleRoot = new URL('../../docs/ai/0.3.0/examples/public-recipes/', import.meta.url)
+	const { readdirSync } = await import('node:fs')
+	const declared = new Set(shared.flatMap((doc) => doc.examples.map((entry) => entry.path)))
+	for (const entry of readdirSync(exampleRoot, { recursive: true, withFileTypes: true })) {
+		if (!entry.isFile()) continue
+		const { relative } = await import('node:path')
+		const path =
+			'examples/public-recipes/' +
+			relative(fileURLToPath(exampleRoot), join(entry.parentPath, entry.name)).replaceAll(
+				'\\',
+				'/',
+			)
+		assert.ok(declared.has(path), 'Missing downloadable input: ' + path)
+		assert.ok(existsSync(join(out, 'docs/ai/0.3.0', path)))
+	}
+	const f = fixture()
+	for (const doc of shared) {
+		f.manifest.documents.push({ ...doc, related: [] })
+		writeFileSync(join(f.root, doc.path), readFileSync(join(out, 'docs/ai/0.3.0', doc.path)))
+		for (const example of doc.examples) {
+			mkdirSync(dirname(join(f.root, example.path)), { recursive: true })
+			writeFileSync(
+				join(f.root, example.path),
+				readFileSync(join(out, 'docs/ai/0.3.0', example.path)),
+			)
+		}
+	}
+	const corpus = f.build()
+	for (const framework of ['vue', 'react', 'angular', 'svelte', 'solid', 'webc']) {
+		const selected = selectDocuments(corpus, {
+			version: '0.3.0',
+			audience: 'consumer',
+			framework,
+		})
+		for (const id of ids) assert.ok(selected.some((doc) => doc.id === id))
+	}
+	assert.equal(manifest.packages['@soxa-ui/icons-lucide'], '0.3.0')
 })

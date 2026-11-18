@@ -49544,6 +49544,20 @@
         "webc": { "props": {}, "events": {}, "models": {}, "slots": {} }
       }
     },
+    "FrameThemePluginDescriptor": {
+      "source": "packages/setup/content/descriptors/plugins/frame-theme.plugin.ts",
+      "props": [],
+      "events": [],
+      "slots": [],
+      "frameworks": {
+        "vue": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "react": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "angular": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "solid": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "svelte": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "webc": { "props": {}, "events": {}, "models": {}, "slots": {} }
+      }
+    },
     "HideOutsidePluginDescriptor": {
       "source": "packages/setup/content/descriptors/plugins/hide-outside.plugin.ts",
       "props": [

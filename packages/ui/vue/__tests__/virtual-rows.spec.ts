@@ -72,6 +72,11 @@ async function scrollThrough(engine: TWindowed, content: () => VNode): Promise<n
 	// the document lets it go — a browser keeps no such node
 	document.querySelector('body')
 
+	// jsdom's MutationObserver disconnect dereferences its WeakRefs. V8 keeps
+	// those nodes alive until the current job ends, even after disconnection.
+	// Collect in the next task; actual retained rows must still be exactly zero.
+	await new Promise<void>((resolve) => setTimeout(resolve))
+
 	return alive
 }
 

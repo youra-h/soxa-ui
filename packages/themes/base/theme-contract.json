@@ -3766,6 +3766,14 @@
       "presence": "TDataset serializes false as \"false\"; null/undefined removes the attribute. See scope for the bound DOM node."
     },
     {
+      "name": "data-so-theme",
+      "sources": ["packages/plugins/src/custom/frame/theme/theme.plugin.ts"],
+      "description": "Mirrors the nearest anchor theme onto a teleported Frame panel while preserving an explicit panel theme.",
+      "scope": "Anchored Frame panel root; contained panels retain natural CSS inheritance",
+      "values": "Theme-defined scheme name",
+      "presence": "Present when the anchor has a theme boundary, or explicitly set by the application"
+    },
+    {
       "name": "data-so-toasts-announcer",
       "sources": ["packages/plugins/src/custom/toasts/announce/announce.plugin.ts"],
       "description": "Identifies the persistent text-only toast announcement region.",
@@ -4019,8 +4027,8 @@
   "globals": [
     {
       "name": "data-so-theme",
-      "description": "Theme/application-owned color scheme marker. The library does not set it.",
-      "scope": "Document root or themed subtree supported by the selected theme",
+      "description": "Theme/application-owned color scheme marker, mirrored from the anchor onto teleported Frame panels.",
+      "scope": "Document root, themed subtree, or anchored Frame panel",
       "values": "Theme-defined scheme name; absence selects the default scheme",
       "source": "packages/themes/oren/README.md"
     }

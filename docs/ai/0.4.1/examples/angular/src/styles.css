@@ -1,0 +1,15 @@
+@import '@soxa-ui/theme-oren/button.css';
+@import '@soxa-ui/theme-oren/input.css';
+@import '@soxa-ui/theme-oren/check-box.css';
+@import '@soxa-ui/theme-oren/label.css';
+@import '@soxa-ui/theme-oren/select.css';
+@import '@soxa-ui/theme-oren/date-picker.css';
+@import '@soxa-ui/theme-oren/accordion.css';
+body {
+	padding: 2rem;
+}
+main {
+	max-width: 40rem;
+	display: grid;
+	gap: 1rem;
+}
