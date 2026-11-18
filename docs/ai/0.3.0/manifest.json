@@ -60,7 +60,12 @@
         "angular-start",
         "svelte-start",
         "solid-start",
-        "webc-start"
+        "webc-start",
+        "oren-configuration",
+        "theme-authoring",
+        "icon-replacement",
+        "programmatic-control",
+        "external-plugins"
       ],
       "examples": [],
       "links": []
@@ -1634,6 +1639,321 @@
         }
       ],
       "links": []
+    },
+    {
+      "id": "oren-configuration",
+      "title": "Configure Oren, schemes, direction and motion",
+      "path": "oren-configuration.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "theming",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/themes/oren/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/plugins/README.md"
+        }
+      ],
+      "related": [
+        "theme-authoring",
+        "icon-replacement",
+        "programmatic-control",
+        "external-plugins",
+        "public-recipes-validation"
+      ],
+      "examples": [
+        {
+          "id": "public-recipe-main-ts",
+          "path": "examples/public-recipes/main.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-index-html",
+          "path": "examples/public-recipes/index.html",
+          "language": "html"
+        },
+        {
+          "id": "public-recipe-page-css",
+          "path": "examples/public-recipes/page.css",
+          "language": "css"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "theme-authoring",
+      "title": "Build a theme on Base",
+      "path": "theme-authoring.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "themes",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/themes/base/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/themes/base/theme-contract.json"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/themes/base/theme-variables.json"
+        }
+      ],
+      "related": [
+        "oren-configuration",
+        "icon-replacement",
+        "programmatic-control",
+        "external-plugins",
+        "public-recipes-validation"
+      ],
+      "examples": [
+        {
+          "id": "public-recipe-theme-package-json",
+          "path": "examples/public-recipes/theme/package.json",
+          "language": "json"
+        },
+        {
+          "id": "public-recipe-theme-index-css",
+          "path": "examples/public-recipes/theme/index.css",
+          "language": "css"
+        },
+        {
+          "id": "public-recipe-theme-index-d-ts",
+          "path": "examples/public-recipes/theme/index.d.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-theme-setup-ts",
+          "path": "examples/public-recipes/theme/setup.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-theme-tsconfig-json",
+          "path": "examples/public-recipes/theme/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "public-recipe-theme-vite-config-ts",
+          "path": "examples/public-recipes/theme/vite.config.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-custom-ts",
+          "path": "examples/public-recipes/custom.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-custom-html",
+          "path": "examples/public-recipes/custom.html",
+          "language": "html"
+        },
+        {
+          "id": "public-recipe-custom-types-ts",
+          "path": "examples/public-recipes/custom-types.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-tsconfig-custom-json",
+          "path": "examples/public-recipes/tsconfig.custom.json",
+          "language": "json"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "icon-replacement",
+      "title": "Replace icon roles",
+      "path": "icon-replacement.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "icons",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/setup/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/setup/content/icons/roles.ts"
+        }
+      ],
+      "related": [
+        "oren-configuration",
+        "theme-authoring",
+        "programmatic-control",
+        "external-plugins",
+        "public-recipes-validation"
+      ],
+      "examples": [
+        {
+          "id": "public-recipe-configure-ts",
+          "path": "examples/public-recipes/configure.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-inspect-contracts-mjs",
+          "path": "examples/public-recipes/inspect-contracts.mjs",
+          "language": "javascript"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "programmatic-control",
+      "title": "Programmatic control and ownership",
+      "path": "programmatic-control.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "controllers",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/core/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/plugins/README.md"
+        }
+      ],
+      "related": [
+        "oren-configuration",
+        "theme-authoring",
+        "icon-replacement",
+        "external-plugins",
+        "public-recipes-validation",
+        "vue-controller",
+        "react-controller",
+        "angular-controller",
+        "svelte-controller",
+        "solid-controller",
+        "webc-lifecycle"
+      ],
+      "examples": [
+        {
+          "id": "public-recipe-app-vue",
+          "path": "examples/public-recipes/App.vue",
+          "language": "vue"
+        },
+        {
+          "id": "public-recipe-auditbutton-vue",
+          "path": "examples/public-recipes/AuditButton.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "external-plugins",
+      "title": "Add application behavior with public plugins",
+      "path": "external-plugins.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "extensions",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/setup/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/plugins/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "docs/api/README.md"
+        }
+      ],
+      "related": [
+        "oren-configuration",
+        "theme-authoring",
+        "icon-replacement",
+        "programmatic-control",
+        "public-recipes-validation",
+        "api-vue-button",
+        "api-react-button",
+        "api-angular-button",
+        "api-svelte-button",
+        "api-solid-button",
+        "api-webc-button"
+      ],
+      "examples": [
+        {
+          "id": "public-recipe-text-audit-ts",
+          "path": "examples/public-recipes/text-audit.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-plugin-types-ts",
+          "path": "examples/public-recipes/plugin-types.ts",
+          "language": "typescript"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "public-recipes-validation",
+      "title": "Published theme and extension validation",
+      "path": "public-recipes-validation.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "validation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/themes/base/README.md"
+        },
+        {
+          "revision": "9ae988633936a03e291e8e414028456fe1039c6b",
+          "path": "packages/setup/README.md"
+        }
+      ],
+      "related": [
+        "oren-configuration",
+        "theme-authoring",
+        "icon-replacement",
+        "programmatic-control",
+        "external-plugins"
+      ],
+      "examples": [
+        {
+          "id": "public-recipe-package-json",
+          "path": "examples/public-recipes/package.json",
+          "language": "json"
+        },
+        {
+          "id": "public-recipe-tsconfig-json",
+          "path": "examples/public-recipes/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "public-recipe-vite-config-ts",
+          "path": "examples/public-recipes/vite.config.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-readme-md",
+          "path": "examples/public-recipes/README.md",
+          "language": "markdown"
+        }
+      ],
+      "links": []
     }
   ],
   "packages": {
@@ -1648,7 +1968,8 @@
     "@soxa-ui/angular": "0.3.0",
     "@soxa-ui/svelte": "0.3.0",
     "@soxa-ui/solid": "0.3.0",
-    "@soxa-ui/webc": "0.3.0"
+    "@soxa-ui/webc": "0.3.0",
+    "@soxa-ui/icons-lucide": "0.3.0"
   },
   "contributorGuides": "pending"
 }

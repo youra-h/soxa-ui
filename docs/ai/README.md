@@ -176,9 +176,9 @@ Chromium (`npx playwright install chromium`). CI runs both. It does not build
 or install the current library checkout.
 
 The initial matrix is deliberate: 63 of 65 published components have Vue exports and generated API;
-the retained headless Button, Vue/Nuxt and React/Next recipes are checked. Remaining
-framework guides, general extension/theme-authoring and contributor instructions
-remain pending. API presence alone is not evidence of runnable recipes.
+the retained headless Button, Vue/Nuxt and React/Next recipes are checked. Other
+framework guides retain their own coverage; shared extension/theme-authoring recipes
+are now sample, and contributor instructions remain pending. API presence alone is not evidence of runnable recipes.
 
 Start Vue/Nuxt consumption with [vue-start](./0.3.0/vue-start.md). The separate
 records cover installation, bindings/events, composition/slots, ctrl/lifecycle,
@@ -283,3 +283,21 @@ The [independent Web Components consumer](./0.3.0/validation-webc-consumer/READM
 retains a different workshop signup, exact lock, corpus hashes and portable verifier.
 Its 13 Chromium checks and strict/negative types passed; a replay of the formatted
 retained source is recorded separately.
+
+## Shared theme and extension recipes
+
+The 0.3.0 shared consumer records cover [Oren configuration](./0.3.0/oren-configuration.md),
+[theme authoring on Base](./0.3.0/theme-authoring.md), [icon replacement](./0.3.0/icon-replacement.md),
+[programmatic control](./0.3.0/programmatic-control.md) and [external plugins](./0.3.0/external-plugins.md).
+They are returned for each adapter alongside its own installation/controller recipes.
+Framework coverage is unchanged: the additional runnable integration uses Vue.
+
+Run npm run check:ai-docs:recipes for exact published-package verification. It
+uses only the manifest downloader's public file list, packs a minimal theme in
+an npm workspace, then installs the pack into a new non-workspace consumer.
+Strict types, custom-theme negative probes, production build and Chromium cover
+controller ownership, external plugin prop/event transport and teardown,
+keyboard, direction, dark schemes, motion attributes and replacement icons.
+See [validation and limits](./0.3.0/public-recipes-validation.md) and the
+[standalone example](./0.3.0/examples/public-recipes/README.md).
+The shared records remain sample; a minimal theme is not a full component theme.

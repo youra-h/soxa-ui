@@ -67,7 +67,8 @@
     "check:ai-docs:svelte": "node tools/ai-docs/svelte-smoke.mjs",
     "check:ai-docs:svelte:development": "node tools/ai-docs/svelte-smoke.mjs --development",
     "check:ai-docs:solid": "node tools/ai-docs/solid-smoke.mjs",
-    "check:ai-docs:webc": "node tools/ai-docs/webc-smoke.mjs"
+    "check:ai-docs:webc": "node tools/ai-docs/webc-smoke.mjs",
+    "check:ai-docs:recipes": "node tools/ai-docs/recipes-smoke.mjs"
   },
   "devDependencies": {
     "@changesets/apply-release-plan": "^8.1.1",

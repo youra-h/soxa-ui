@@ -664,3 +664,74 @@ test('Web Components consumers are selectively delivered with complete browser-o
 	assert.ok(selected.some((doc) => doc.id === 'webc-fixture'))
 	assert.ok(selected.every((doc) => ['all', 'webc'].includes(doc.framework)))
 })
+
+test('shared theme and extension recipes deliver every standalone input and stay consumer-scoped', async () => {
+	const { fetchSource } = await import('./fetch.mjs')
+	const out = mkdtempSync(join(tmpdir(), 'soxa-recipes-delivery-'))
+	await fetchSource({
+		revision,
+		version: '0.3.0',
+		out,
+		fetchFile: async (url) => {
+			const path = url.split('/' + revision + '/')[1]
+			return {
+				ok: true,
+				text: async () => readFileSync(new URL('../../' + path, import.meta.url), 'utf8'),
+			}
+		},
+	})
+	const manifest = JSON.parse(readFileSync(join(out, 'docs/ai/0.3.0/manifest.json'), 'utf8'))
+	const ids = [
+		'oren-configuration',
+		'theme-authoring',
+		'icon-replacement',
+		'programmatic-control',
+		'external-plugins',
+		'public-recipes-validation',
+	]
+	const shared = manifest.documents.filter((doc) => ids.includes(doc.id))
+	assert.equal(shared.length, 6)
+	assert.ok(
+		shared.every(
+			(doc) =>
+				doc.framework === 'all' && doc.audience === 'consumer' && doc.status === 'sample',
+		),
+	)
+	const exampleRoot = new URL('../../docs/ai/0.3.0/examples/public-recipes/', import.meta.url)
+	const { readdirSync } = await import('node:fs')
+	const declared = new Set(shared.flatMap((doc) => doc.examples.map((entry) => entry.path)))
+	for (const entry of readdirSync(exampleRoot, { recursive: true, withFileTypes: true })) {
+		if (!entry.isFile()) continue
+		const { relative } = await import('node:path')
+		const path =
+			'examples/public-recipes/' +
+			relative(fileURLToPath(exampleRoot), join(entry.parentPath, entry.name)).replaceAll(
+				'\\',
+				'/',
+			)
+		assert.ok(declared.has(path), 'Missing downloadable input: ' + path)
+		assert.ok(existsSync(join(out, 'docs/ai/0.3.0', path)))
+	}
+	const f = fixture()
+	for (const doc of shared) {
+		f.manifest.documents.push({ ...doc, related: [] })
+		writeFileSync(join(f.root, doc.path), readFileSync(join(out, 'docs/ai/0.3.0', doc.path)))
+		for (const example of doc.examples) {
+			mkdirSync(dirname(join(f.root, example.path)), { recursive: true })
+			writeFileSync(
+				join(f.root, example.path),
+				readFileSync(join(out, 'docs/ai/0.3.0', example.path)),
+			)
+		}
+	}
+	const corpus = f.build()
+	for (const framework of ['vue', 'react', 'angular', 'svelte', 'solid', 'webc']) {
+		const selected = selectDocuments(corpus, {
+			version: '0.3.0',
+			audience: 'consumer',
+			framework,
+		})
+		for (const id of ids) assert.ok(selected.some((doc) => doc.id === id))
+	}
+	assert.equal(manifest.packages['@soxa-ui/icons-lucide'], '0.3.0')
+})
