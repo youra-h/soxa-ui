@@ -158,3 +158,9 @@ package locks. These files allow replay and inspection. This is a real protocol
 client session and deterministic consumer construction, not an interactive AI
 authoring evaluation. Validation of each adapter's other recipes remains in
 its existing separate smoke; the MCP smoke rebuilds only the Vue consumer.
+
+The [2026-11-18 validation record](./validation/mcp.json) pins the tested
+implementation/documentation revision and received example hashes. Its two
+retained npm locks identify the SDK/server-preparation and consumer installations.
+The protocol session made 81 tool calls; published-package types, production
+build and Chromium interactions passed. Desktop clients remain unverified.
