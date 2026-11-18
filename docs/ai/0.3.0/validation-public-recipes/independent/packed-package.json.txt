@@ -1,0 +1,29 @@
+{
+  "name": "report-queue-public-consumer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "vue-tsc --noEmit && tsc -p tsconfig.custom.json",
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@soxa-ui/vue": "0.3.0",
+    "@soxa-ui/core": "0.3.0",
+    "@soxa-ui/setup": "0.3.0",
+    "@soxa-ui/plugins": "0.3.0",
+    "@soxa-ui/theme-base": "0.3.0",
+    "@soxa-ui/theme-oren": "0.3.0",
+    "@soxa-ui/icons-material": "0.3.0",
+    "@soxa-ui/icons-lucide": "0.3.0",
+    "vue": "3.5.32",
+    "@example/soxa-theme": "file:../example-soxa-theme-1.0.0.tgz"
+  },
+  "devDependencies": {
+    "typescript": "6.0.2",
+    "vue-tsc": "3.2.6",
+    "vite": "8.2.2",
+    "@vitejs/plugin-vue": "6.0.8",
+    "@types/node": "24.19.2"
+  }
+}

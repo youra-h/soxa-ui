@@ -1,0 +1,9 @@
+{
+  "App.vue": "e307df2c7d4112b50f57e64fefe5a5e66907f7c5286a0f363d5d0ab6a0386425",
+  "consumer-package-lock.json.txt": "71eaba6430b20d46c3d3cc40753071d34f62ed313dd48a3ab00058dcc4c40f69",
+  "consumer-package.json.txt": "f041fc3dcaaa06af758458017a014d8c077582dd3a71f28792b0cdf763969587",
+  "original-verify.mjs.txt": "93159ae6eceb370ef0413b50545d7ecf3ac48071da51021a325de913f37497e9",
+  "packed-package-lock.json.txt": "e9e98e21cab303ab9222666ac7a62b21f323ff5a2db5a7a63834286c56efb399",
+  "packed-package.json.txt": "3dcf4c4a2ba3782fc08075ea15824d7d4d3c313ab916935fdca76ef60faed3b7",
+  "verify.mjs": "62f537379847be8d8703ba60647207a2f935d3d6b2cbd457a42c6c44b9c50541"
+}
