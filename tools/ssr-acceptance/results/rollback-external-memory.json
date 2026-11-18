@@ -1,0 +1,34 @@
+{
+  "node": "v24.20.0",
+  "mode": "production",
+  "commit": "14906545d0380f552ea48f4cc0aa1fbd10256d41",
+  "candidateSha256": "911af3767518165a3492d2e8777c899566bbd428eb1a9cce1062e0f1c577ed90",
+  "adapter": "./results/rollback-adapter/index.js",
+  "afterExternalRelease": {
+    "bundlesAlive": 0,
+    "sourcesAlive": 0
+  },
+  "distSha256": {
+    "packages/setup": "0ff84d0e0c25ae37f9a65eaa48b552931d0b5663b92ec03db83e52b02ec133f2",
+    "packages/plugins": "464b228c2bc9151c3f75ac87c80e10ded69529c16e468fb5957329f1c63e627b",
+    "packages/ui/react": "592c74ebfc3d351a951274e8b472c8aea59176eff7bea995be4915c128b86275"
+  },
+  "results": [
+    {
+      "outcome": "success",
+      "enginesHeld": 12,
+      "bundlesObserved": 444,
+      "bundlesAlive": 0,
+      "sourcesObserved": 12,
+      "sourcesAlive": 0
+    },
+    {
+      "outcome": "abort",
+      "enginesHeld": 24,
+      "bundlesObserved": 444,
+      "bundlesAlive": 0,
+      "sourcesObserved": 12,
+      "sourcesAlive": 0
+    }
+  ]
+}
