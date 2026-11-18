@@ -1,5 +1,19 @@
 # @soxa-ui/svelte
 
+## 0.4.1
+
+### Patch Changes
+
+- 4fb02ff: Fix conflicting Teleport declarations so strict Svelte consumers can type-check the published package without skipLibCheck.
+- b17d612: Fix Select and DatePicker aria-controls references when their popup panels are absent during server rendering and hydration.
+- Updated dependencies [480231a]
+- Updated dependencies [859c3c6]
+- Updated dependencies [dd5946d]
+- Updated dependencies [b17d612]
+  - @soxa-ui/plugins@0.4.1
+  - @soxa-ui/setup@0.4.1
+  - @soxa-ui/core@0.4.1
+
 ## 0.4.0
 
 ### Patch Changes

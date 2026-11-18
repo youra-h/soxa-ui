@@ -1,5 +1,19 @@
 # @soxa-ui/vue
 
+## 0.4.1
+
+### Patch Changes
+
+- 8b9487f: Refresh data and ARIA attributes after Vue hydration so statically generated Calendar pages mark the current day in the configured time zone without replacing server-rendered nodes.
+- b17d612: Fix Select and DatePicker aria-controls references when their popup panels are absent during server rendering and hydration.
+- Updated dependencies [480231a]
+- Updated dependencies [859c3c6]
+- Updated dependencies [dd5946d]
+- Updated dependencies [b17d612]
+  - @soxa-ui/plugins@0.4.1
+  - @soxa-ui/setup@0.4.1
+  - @soxa-ui/core@0.4.1
+
 ## 0.4.0
 
 ### Patch Changes

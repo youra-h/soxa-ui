@@ -1,5 +1,12 @@
 # @soxa-ui/core
 
+## 0.4.1
+
+### Patch Changes
+
+- 859c3c6: Normalize DateInput literal spaces across Intl implementations to prevent SSR hydration mismatches.
+- dd5946d: Fix dangling Calendar month picker labels before lazy content is mounted, including inside DatePicker.
+
 ## 0.4.0
 
 ### Minor Changes

@@ -1,5 +1,19 @@
 # @soxa-ui/webc
 
+## 0.4.1
+
+### Patch Changes
+
+- a0e548f: Process large Web Components connection queues reliably while preserving FIFO order and error recovery.
+- b17d612: Fix Select and DatePicker aria-controls references when their popup panels are absent during server rendering and hydration.
+- Updated dependencies [480231a]
+- Updated dependencies [859c3c6]
+- Updated dependencies [dd5946d]
+- Updated dependencies [b17d612]
+  - @soxa-ui/plugins@0.4.1
+  - @soxa-ui/setup@0.4.1
+  - @soxa-ui/core@0.4.1
+
 ## 0.4.0
 
 ### Patch Changes
