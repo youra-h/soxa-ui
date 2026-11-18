@@ -1,0 +1,258 @@
+{
+  "provenance": "published-0.3.0",
+  "docsRevision": "8e71e5e03f837a532dcab015abc48826319c783f",
+  "node": "v24.20.0",
+  "apiSha256": "869aa23426237c0b130466cd0de9fa0ff8e960412a99e058de824c9be02104dd",
+  "exampleInputHashes": [
+    {
+      "path": "examples/public-recipes/text-audit.ts",
+      "sha256": "a4c2c2612f6be95fcb03f4388ded1432b934c1ca6452bad2113d2ff4111ccd87"
+    },
+    {
+      "path": "examples/public-recipes/plugin-types.ts",
+      "sha256": "97e675b7afc9ac0baaadce18dfc0065859f09368ab30a950482e2cb9a8fa8d9e"
+    },
+    {
+      "path": "examples/public-recipes/configure.ts",
+      "sha256": "1eb477bc800a01b4c4980986c4d468e9708a99dfb152912a1175965d24439a5d"
+    },
+    {
+      "path": "examples/public-recipes/inspect-contracts.mjs",
+      "sha256": "6af021dde898e04fc16c82be41e3ab1bc3bdc1214dd8438125f3ae55c8b095f1"
+    },
+    {
+      "path": "examples/public-recipes/main.ts",
+      "sha256": "1dcd1856a4b87fc990320967fe06e5bf9178bc564f05a493e683498c7a26b2a5"
+    },
+    {
+      "path": "examples/public-recipes/index.html",
+      "sha256": "e0d00e321378853df05fc703a9b385e6cc194dcebc21e42194193c952eb443bc"
+    },
+    {
+      "path": "examples/public-recipes/page.css",
+      "sha256": "c8b968c1b9df3cb5f13933e155962c5d500e0e616095ffc45060c40818f72397"
+    },
+    {
+      "path": "examples/public-recipes/App.vue",
+      "sha256": "93f454b7811e99ebfdc1084c7124c6390cc9ae0ddbd2511971d3b9b7a8623047"
+    },
+    {
+      "path": "examples/public-recipes/AuditButton.vue",
+      "sha256": "9b74d638a5b442b0b8d159d1086fc2124fb5764a11241ae8493605c15a51da25"
+    },
+    {
+      "path": "examples/public-recipes/package.json",
+      "sha256": "f041fc3dcaaa06af758458017a014d8c077582dd3a71f28792b0cdf763969587"
+    },
+    {
+      "path": "examples/public-recipes/tsconfig.json",
+      "sha256": "806358a3748df7957a48d74ae3278e67b333807efebfb6a5a87e54c0e8366327"
+    },
+    {
+      "path": "examples/public-recipes/vite.config.ts",
+      "sha256": "46bae51f800a645c1c77314e63f5236c50aa15c85a573c21021d6bbdcb3ac1da"
+    },
+    {
+      "path": "examples/public-recipes/README.md",
+      "sha256": "61fe3730dc41faf672cb1764980342525cdb8ad03f40c845dc75bc8a29f74fa5"
+    },
+    {
+      "path": "examples/public-recipes/theme/package.json",
+      "sha256": "81eabd2e60462a0a3bd93d2e88571c42a0ce6de5466eca874bad02cf0c64eb5a"
+    },
+    {
+      "path": "examples/public-recipes/theme/index.css",
+      "sha256": "da6835aaf5dd28b6d8054396ed023e6dab602b1d9dc20359a30a15b6eee625a6"
+    },
+    {
+      "path": "examples/public-recipes/theme/index.d.ts",
+      "sha256": "61d025aaa2864e0fefc0d105da8d253d887b8faef52bd4a08896471e1d884a44"
+    },
+    {
+      "path": "examples/public-recipes/theme/setup.ts",
+      "sha256": "eae165d823c75a127f1227d706ee0652c7776e9c543d595ee1c457515474f01f"
+    },
+    {
+      "path": "examples/public-recipes/theme/tsconfig.json",
+      "sha256": "558a60d410f3a350422113f39bc12845f883179cbeb8e5cf7d5bffb41b432d1e"
+    },
+    {
+      "path": "examples/public-recipes/theme/vite.config.ts",
+      "sha256": "1f1b9f94801e6cdc0974459f7678de181a9911492a5bcc1d2a86b9b441b42339"
+    },
+    {
+      "path": "examples/public-recipes/custom.ts",
+      "sha256": "670732dfbf0055cc85ea64e3699f7005536ba8a8bec9dfde64d6f422815cbc99"
+    },
+    {
+      "path": "examples/public-recipes/custom.html",
+      "sha256": "21e9251bd00cf4952f5904f0717d417551af15ca076fa58a9cd55901df46f91f"
+    },
+    {
+      "path": "examples/public-recipes/custom-types.ts",
+      "sha256": "60c16a938b1cec38323ee43e97ec05b9a73d05e865bae786db7a67949238454f"
+    },
+    {
+      "path": "examples/public-recipes/tsconfig.custom.json",
+      "sha256": "87e5071c9eb129e923621816bdaf52013b99380049ea69fa3edb577995e0fc48"
+    }
+  ],
+  "inputHashes": [
+    {
+      "id": "oren-configuration",
+      "sha256": "ed82e6e37fd5ef19423696f5725998eb956fb06d481617f274a3d4c9c63ad4ce"
+    },
+    {
+      "id": "theme-authoring",
+      "sha256": "3daef806dd8f50504d52ab695d001d04515b5a2456a2f24e36b336f3eaed5fc7"
+    },
+    {
+      "id": "icon-replacement",
+      "sha256": "25a77fa67908ff4218fa1633eb3ca5c3ab32536a017eca4af6eb4b1e44c82352"
+    },
+    {
+      "id": "programmatic-control",
+      "sha256": "a0bd278426fbee0054927543ca235e062fb1004c98f18681918671a87cc492e5"
+    },
+    {
+      "id": "external-plugins",
+      "sha256": "f93c4dc405722518ed87492a593f660256aac36565d938d61b2ad0c4626facdf"
+    },
+    {
+      "id": "public-recipes-validation",
+      "sha256": "4ee52e21a3a4eb912e4d13e767e0fea4995a9593bc83ef20fdb449fc6763dfe9"
+    }
+  ],
+  "manifestSha256": "94d68223415ab60a9eff6184319e4a21d98db19e788141080fec785113fca972",
+  "packages": [
+    {
+      "name": "@soxa-ui/core",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/core/-/core-0.3.0.tgz",
+      "integrity": "sha512-ghErTeKN4O0KQes4xXUQvCZFpdpI/O70HB/0YISVqwTZYRhDtFXNLu9LgbMo85sl6AB41CnUmDOHjjtvLMsbMQ=="
+    },
+    {
+      "name": "@soxa-ui/icons-lucide",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/icons-lucide/-/icons-lucide-0.3.0.tgz",
+      "integrity": "sha512-JS6bSVEo8EcLMXjkOobTPROEzrtvVHRnEj2fau/sfkvCfqFvuW/1gaWPW0OS3GolTmmmNaV7stDFNVUozS6GCA=="
+    },
+    {
+      "name": "@soxa-ui/icons-material",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/icons-material/-/icons-material-0.3.0.tgz",
+      "integrity": "sha512-1KPSA8uq3WRloanjSJdtsdtGuqcZdCzbmWOlSx0Ev60vDvri4rm3sUSc/ONHEHl0T8aya8IzVA+YhZYGLIqe0A=="
+    },
+    {
+      "name": "@soxa-ui/plugins",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/plugins/-/plugins-0.3.0.tgz",
+      "integrity": "sha512-FT4UEZyCiLm0+35jdk8ZwBLwTDk6kF6PwGMJYREyM09cVbT2UD0AaVnGkV22JnhUmOHJ7ow8EOioak+KLjy2mg=="
+    },
+    {
+      "name": "@soxa-ui/setup",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.3.0.tgz",
+      "integrity": "sha512-byutzJyCBW7oCrqze6Dgr1+2QZ019yAZ0kIAY7+1SWQLFE6kW53RJOpo7LH+FB9jSifY7Os2k92YUf7hVmjaZg=="
+    },
+    {
+      "name": "@soxa-ui/theme-base",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/theme-base/-/theme-base-0.3.0.tgz",
+      "integrity": "sha512-BulGjcSLIa40RM0tp1Anxhyoebtznv3KfpprbL/xpBh23MeColR2iZ5u009IRSv5o6gujZNAGgv+tQVkSgseOA=="
+    },
+    {
+      "name": "@soxa-ui/theme-oren",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/theme-oren/-/theme-oren-0.3.0.tgz",
+      "integrity": "sha512-GNPQMg40uacSwgtcWP0HKj9v08RLJnuKPSRR+17L7OXNATtE1LqqAFUPNT+ij5FPzFumtczclz0BXRt5v9IOVQ=="
+    },
+    {
+      "name": "@soxa-ui/vue",
+      "version": "0.3.0",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/vue/-/vue-0.3.0.tgz",
+      "integrity": "sha512-EhM0gcbgclCQFieMBk6kGlNXH6SNM41yXq0DZ/qwWwbMSgQTD6WALReq8utngOLt3JKx3MIeA0TAbRLR+he1Tw=="
+    }
+  ],
+  "lockSha256": "29b3e54dbbe553b6e0a6f3f5deab478ce81c5337d5bc29cfd159e62b182af863",
+  "themeTarballSha256": "bb69b84e4cde903d024716aede27b79c8167f58db84add3fe5db22d3c4371ba5",
+  "strictTypes": true,
+  "customThemeNegativeTypes": true,
+  "productionBuild": true,
+  "npmPeers": true,
+  "sourceIsolation": "Only manifest documents/examples and public builder files copied; npm packages; packed custom theme; no Soxa workspace aliases",
+  "inventorySha256": "083639093379d108b0d6c3bb222390e2094086197ab3b8542a35b8dcc213f930",
+  "tools": [
+    {
+      "path": "tools/ai-docs/recipes-smoke.mjs",
+      "sha256": "388ff93612463f8c4ca71976a60a6874e3f5cfc86ea56049d4c01cf2cb2b904a"
+    },
+    {
+      "path": "tools/ai-docs/recipes-browser.mjs",
+      "sha256": "aa3e59a3450059926e10560f412575cc66dc592b33feec716f9eb7cfb8acf9f6"
+    },
+    {
+      "path": "tools/ai-docs/consumer-browser.mjs",
+      "sha256": "1e0bcf759c4b36c36bfe90ec01ad6302f7266175452c435e2dd40bdb0cd058c4"
+    },
+    {
+      "path": "tools/ai-docs/corpus.mjs",
+      "sha256": "e0263bdf01c5d509dad397decf5cb9f6e399ecce8d1d05090f72cdc1652003dd"
+    },
+    {
+      "path": "tools/ai-docs/fetch.mjs",
+      "sha256": "cd5b9f66b9188f41343bc4b918c404c2771e77da039681ed3f884a652abe3331"
+    }
+  ],
+  "browser": "156.0.8078.4",
+  "oren": {
+    "controllerAndPlugin": true,
+    "propUpdateAndReset": true,
+    "mountCycles": 3,
+    "stalePluginUnsubscribed": true,
+    "keyboard": ["Enter", "Space", "Tabs arrows"],
+    "rtl": [
+      {
+        "direction": "ltr",
+        "keyboard": true
+      },
+      {
+        "direction": "rtl",
+        "keyboard": true
+      }
+    ],
+    "darkScheme": true,
+    "motionModes": ["reduce", "full", "system-with-reduced-preference"],
+    "geometry": {
+      "size": "49px",
+      "mark": "49px"
+    },
+    "iconBody": "<g fill=\"none\" stroke=\"var(--so-icon-color, currentColor)\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 6 6 18\"></path><path d=\"m6 6 12 12\"></path></g>",
+    "diagnostics": []
+  },
+  "custom": {
+    "controllerAndPlugin": true,
+    "propUpdateAndReset": true,
+    "mountCycles": 3,
+    "stalePluginUnsubscribed": true,
+    "keyboard": ["Enter", "Space", "Tabs arrows"],
+    "rtl": [
+      {
+        "direction": "ltr",
+        "keyboard": true
+      },
+      {
+        "direction": "rtl",
+        "keyboard": true
+      }
+    ],
+    "darkScheme": true,
+    "motionModes": ["reduce", "full", "system-with-reduced-preference"],
+    "geometry": {
+      "size": "49px",
+      "mark": "49px"
+    },
+    "iconBody": "<g fill=\"none\" stroke=\"var(--so-icon-color, currentColor)\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 6 6 18\"></path><path d=\"m6 6 12 12\"></path></g>",
+    "diagnostics": []
+  }
+}
