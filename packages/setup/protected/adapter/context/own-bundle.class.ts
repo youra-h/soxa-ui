@@ -79,6 +79,7 @@ export class TOwnBundle implements IBundleTenancy {
 
 		const options = new Map<TPluginCtor, object>()
 
+		// Validate all mount overrides before installing any descriptor plugin.
 		for (const entry of mount.pluginOptions ?? []) {
 			if (!ownPluginsOf(_descriptor).has(entry.ctor) || options.has(entry.ctor)) {
 				throw new Error(

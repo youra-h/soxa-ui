@@ -44,6 +44,7 @@ function copy(value: unknown, ancestors: Set<object> = new Set()): unknown {
 
 	try {
 		if (Array.isArray(value)) return Object.freeze(value.map((entry) => copy(entry, ancestors)))
+
 		return Object.freeze(
 			Object.fromEntries(
 				Object.entries(value).map(([key, entry]) => [key, copy(entry, ancestors)]),
@@ -57,6 +58,7 @@ function copy(value: unknown, ancestors: Set<object> = new Set()): unknown {
 /** Compare captured plain data by content; cloning must not change external metadata identity. */
 function sameData(actual: unknown, expected: unknown): boolean {
 	if (Object.is(actual, expected)) return true
+
 	if (Array.isArray(expected)) {
 		return (
 			Array.isArray(actual) &&
@@ -64,8 +66,11 @@ function sameData(actual: unknown, expected: unknown): boolean {
 			expected.every((entry, index) => sameData(actual[index], entry))
 		)
 	}
+
 	if (!isPlain(expected) || !isPlain(actual)) return false
+
 	const keys = Object.keys(expected)
+
 	return (
 		Object.keys(actual).length === keys.length &&
 		keys.every((key) => Object.hasOwn(actual, key) && sameData(actual[key], expected[key]))
@@ -92,6 +97,7 @@ function idOf(source: Readonly<Record<string, unknown>>): string | undefined {
 	return id
 }
 
+/** Validate the captured declaration completely before materialization can mutate an engine. */
 function sourceOf(value: unknown): ICollectionInitialSource {
 	const snapshot = copy(value)
 
@@ -194,6 +200,7 @@ export class TCollectionInitialSource {
 		return this._items
 	}
 
+	/** Create owned models once, or validate external ones, then prepare both ends of every link. */
 	materialize(engine: TCollectionEngine<any, any>, mount: TCollectionInitialMount): void {
 		if (this._engine) {
 			if (this._engine !== engine) {
@@ -202,6 +209,7 @@ export class TCollectionInitialSource {
 
 			return
 		}
+
 		if (this._external && this._external !== engine) {
 			throw new Error('Collection initial source must retain its external engine.')
 		}
@@ -226,6 +234,7 @@ export class TCollectionInitialSource {
 		}
 
 		const firstByValue = new Map<unknown, number>()
+
 		const links = this.source.items.map((source, ordinal) => {
 			const value: unknown = Reflect.get(items[ordinal], 'value')
 
@@ -250,12 +259,14 @@ export class TCollectionInitialSource {
 
 		this._engine = engine
 		this._items = Object.freeze([...items])
+
 		items.forEach((item, index) => {
 			this._links.set(item, Object.freeze(links[index]))
 			this._ordinals.set(item, index)
 		})
 	}
 
+	/** Resolve a declaration position without recreating data removed from the live engine. */
 	item<T extends object>(ordinal: unknown, ctor: new (...args: any[]) => T, ctrl?: T): T {
 		const item = this.items[ordinalOf(ordinal, this.items.length)]
 
@@ -290,6 +301,7 @@ export class TCollectionInitialSource {
 		return this._ordinals.get(item)
 	}
 
+	/** Match the panel against current membership while retaining the item's prepared IDs. */
 	panelLink(ordinal: unknown): ICollectionInitialLink | undefined {
 		const panel = this.panel(ordinal)
 		const item = batchOf<object>(this._engine)?.items.find(
@@ -303,6 +315,7 @@ export class TCollectionInitialSource {
 		return panel.value ?? this._panelDefaultValue
 	}
 
+	/** External models and metadata are checked, never rewritten to fit the declaration. */
 	private _validateExternal(engine: TCollectionEngine<any, any>): void {
 		const batch = batchOf<object>(engine)
 		const factory = factoryOf<object>(engine)

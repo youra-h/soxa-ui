@@ -20,6 +20,7 @@ export class TCollectionInitialExtension {
 			}
 
 			source.materialize(context.instance.engine, context.bundle)
+
 			context.events.on('attach', () =>
 				context.bundle?.get(TCollectionInitialPlugin)?.pluginMount?.accept(),
 			)

@@ -148,11 +148,14 @@ function useExchange<C extends IComponentContract>(
 	adapter: IAdapterContext<C>,
 ): TExchange<TAdapterState<C>> {
 	const binding = adapter.connect(AngularProfile)
+
 	// The signal itself is the state: a `computed` over it only forwarded the snapshot
 	const state = signal(toInstanceState<C>(NO_SNAPSHOT))
 	const port = collectionInitialState(adapter, binding.state)
+
 	const serverInitial =
 		collectionInitialPrepared(adapter) && !isPlatformBrowser(inject(PLATFORM_ID))
+
 	const unsubscribe = serverInitial
 		? () => {}
 		: port.subscribe(() => state.set(toInstanceState<C>(port.getSnapshot())))

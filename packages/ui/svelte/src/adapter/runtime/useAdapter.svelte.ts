@@ -170,9 +170,11 @@ function useExchange(
 	getProps: () => object,
 ): { exchange: TExchange; state: Readonly<Record<string, unknown>> } {
 	const exchange = adapter.connect(SvelteProfile)
+
 	// Prepared server markup needs no membership or foreign event subscriptions.
 	if (!BROWSER && collectionInitialPrepared(adapter))
 		return { exchange, state: collectionInitialState(adapter, exchange.state).getSnapshot() }
+
 	const values = new TValueStore()
 
 	// 1. Subscribe right away, not in an effect: there are no effects on the

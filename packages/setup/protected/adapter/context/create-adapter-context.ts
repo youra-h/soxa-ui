@@ -137,9 +137,12 @@ export function createAdapterContext<TInstance extends object, TPlugins extends 
 		try {
 			prepared?.complete?.(context)
 		} catch (error) {
+			// A failed completion must release the plugins and state already assembled above.
 			context.destroy()
+
 			throw error
 		}
+
 		return context
 	})
 }

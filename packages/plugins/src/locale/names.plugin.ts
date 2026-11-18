@@ -35,6 +35,7 @@ export abstract class TNamesPlugin<
 	}
 	subscribe(listener: () => void): () => void {
 		this._listeners.add(listener)
+
 		return () => this._listeners.delete(listener)
 	}
 
@@ -46,20 +47,26 @@ export abstract class TNamesPlugin<
 	): void {
 		if (!this.pluginMount) {
 			target.add('aria-label', label)
+
 			return
 		}
+
 		if (this._snapshot[field]?.['aria-label'] === label) return
+
 		this._snapshot = Object.freeze({
 			...this._snapshot,
 			[field]: Object.freeze({ 'aria-label': label }),
 		})
+
 		for (const listener of this._listeners) listener()
 	}
 
 	override destroy(): void {
 		this._listeners.clear()
+
 		super.destroy()
 	}
+
 	override install(ctx: IPluginContext, options?: unknown): void {
 		super.install(ctx, options)
 
@@ -72,6 +79,8 @@ export abstract class TNamesPlugin<
 		name()
 		this._listenTo(ctx.locale.events, 'change', name)
 		this._watch(owner, name, ctx)
+
+		// The shared model may have changed while this mount was waiting for acceptance.
 		if (this.pluginMount) this._whenAccepted(name)
 	}
 
