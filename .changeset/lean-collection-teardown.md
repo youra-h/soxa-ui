@@ -16,5 +16,4 @@ Faster Tabs and Tags on large collections, especially declarative items: mountin
 - Activation and selection update `data-selected` only on the items whose state changed.
 - The active tab indicator is measured at most once a frame. Unmounting 1000 declarative tabs in Solid took over 20 seconds and now takes about 0.2 seconds.
 - Angular detaches every binding when the application starts tearing down, so server requests no longer pay for items leaving their collection one by one. Angular, Solid, Svelte and Web Components stop listening to the state on `detach`.
-- A Tabs panel waits only for its own value and its own tab instead of listening to every tab of the collection.
-- Prepared (`initial`) mounts keep less per item: one acceptance gate per bundle, no deferred subscriptions after acceptance, document links built on first use and overlaid ARIA merged per field. Ordinary mounts allocate nothing for them.
+- Prepared (`initial`) mounts share one acceptance gate per bundle instead of copying every plugin definition per item.

@@ -24,32 +24,32 @@
   "diagnostics": [
     {
       "level": "error",
-      "message": "(node:32636) ExperimentalWarning: v8.queryObjects() is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)"
+      "message": "(node:13940) ExperimentalWarning: v8.queryObjects() is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)"
     }
   ],
   "outputBytes": 407597,
   "latency": {
-    "medianMs": 105.53939999999989,
-    "p95Ms": 108.67949999999973,
+    "medianMs": 103.125,
+    "p95Ms": 105.65980000000013,
     "samplesMs": [
-      107.00970000000007,
-      102.30390000000011,
-      105.7201,
-      102.61640000000011,
-      106.21280000000002,
-      105.53939999999989,
-      104.17730000000006,
-      102.0347999999999,
-      108.67949999999973
+      105.65980000000013,
+      100.44710000000009,
+      104.44669999999996,
+      102.52269999999999,
+      103.00020000000018,
+      105.51229999999987,
+      103.125,
+      102.52629999999999,
+      103.55740000000014
     ]
   },
   "baseline": {
-    "rss": 367529984,
+    "rss": 366587904,
     "heapTotal": 182816768,
-    "heapUsed": 43399784,
+    "heapUsed": 43399640,
     "external": 9163667,
     "arrayBuffers": 940928,
-    "peakRSS": 372031488
+    "peakRSS": 369414144
   },
   "baselineObjects": {
     "component": 90,
@@ -59,20 +59,20 @@
     {
       "requests": 3,
       "beforeGC": {
-        "rss": 369438720,
-        "heapTotal": 283402240,
-        "heapUsed": 186110992,
+        "rss": 360013824,
+        "heapTotal": 289296384,
+        "heapUsed": 181453720,
         "external": 9158604,
         "arrayBuffers": 941292,
-        "peakRSS": 391290880
+        "peakRSS": 389906432
       },
       "afterGC": {
-        "rss": 372314112,
-        "heapTotal": 176971776,
-        "heapUsed": 40235840,
+        "rss": 359714816,
+        "heapTotal": 176312320,
+        "heapUsed": 40168968,
         "external": 9158604,
         "arrayBuffers": 941292,
-        "peakRSS": 391290880
+        "peakRSS": 389906432
       },
       "objects": {
         "component": 90,
@@ -82,20 +82,20 @@
     {
       "requests": 6,
       "beforeGC": {
-        "rss": 366170112,
-        "heapTotal": 279732224,
-        "heapUsed": 183027152,
+        "rss": 367235072,
+        "heapTotal": 280780800,
+        "heapUsed": 181265848,
         "external": 9158604,
         "arrayBuffers": 941292,
-        "peakRSS": 394186752
+        "peakRSS": 389906432
       },
       "afterGC": {
-        "rss": 366485504,
-        "heapTotal": 176971776,
-        "heapUsed": 39442208,
+        "rss": 367529984,
+        "heapTotal": 176185344,
+        "heapUsed": 39449112,
         "external": 9158604,
         "arrayBuffers": 941292,
-        "peakRSS": 394186752
+        "peakRSS": 389906432
       },
       "objects": {
         "component": 90,
@@ -105,20 +105,20 @@
     {
       "requests": 9,
       "beforeGC": {
-        "rss": 371699712,
-        "heapTotal": 285036544,
-        "heapUsed": 174483408,
+        "rss": 367931392,
+        "heapTotal": 281628672,
+        "heapUsed": 176335808,
         "external": 9158604,
         "arrayBuffers": 941292,
-        "peakRSS": 394186752
+        "peakRSS": 389906432
       },
       "afterGC": {
-        "rss": 371658752,
-        "heapTotal": 176508928,
-        "heapUsed": 37410632,
+        "rss": 368058368,
+        "heapTotal": 175198208,
+        "heapUsed": 37445000,
         "external": 9158604,
         "arrayBuffers": 941292,
-        "peakRSS": 394186752
+        "peakRSS": 389906432
       },
       "objects": {
         "component": 90,
@@ -128,12 +128,12 @@
   ],
   "settled": {
     "memory": {
-      "rss": 144400384,
+      "rss": 138702848,
       "heapTotal": 40456192,
-      "heapUsed": 37215224,
+      "heapUsed": 37219520,
       "external": 9158604,
       "arrayBuffers": 941292,
-      "peakRSS": 394186752
+      "peakRSS": 389906432
     },
     "objects": {
       "component": 90,

@@ -6,7 +6,7 @@
   ],
   "revisions": {
     "main": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
-    "head": "1bb1543260f475b2bce568279549361c81f26533"
+    "head": "2dfeb99c436cf211461153621f06c2879a9fe669"
   },
   "protocol": {
     "ssr": "ssr-worker.mjs: 3 warmups, 9 timed renders, 3 memory rounds",
@@ -21,7 +21,7 @@
     "cores": 32,
     "memoryGiB": 62
   },
-  "notes": "Neighbours were not re-run. The SSR heap columns are peaks before GC and are not used for conclusions; retained models and bundles after GC are compared instead.",
+  "notes": "Neighbours were not re-run. SSR heap peaks before GC are not used for conclusions; retained models and bundles after GC are compared instead.",
   "files": [
     "head-angular-soxa-tabs-data-client.json",
     "head-angular-soxa-tabs-data-ssr.json",

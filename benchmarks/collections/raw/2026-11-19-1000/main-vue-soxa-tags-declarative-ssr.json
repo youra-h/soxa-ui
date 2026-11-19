@@ -24,32 +24,32 @@
   "diagnostics": [
     {
       "level": "error",
-      "message": "(node:71704) ExperimentalWarning: v8.queryObjects() is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)"
+      "message": "(node:45568) ExperimentalWarning: v8.queryObjects() is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)"
     }
   ],
   "outputBytes": 391956,
   "latency": {
-    "medianMs": 766.2117999999996,
-    "p95Ms": 1022.2755999999999,
+    "medianMs": 995.5738000000001,
+    "p95Ms": 1052.198800000001,
     "samplesMs": [
-      746.5032999999999,
-      766.2117999999996,
-      993.3128999999999,
-      1022.2755999999999,
-      740.5253000000002,
-      751.5517,
-      741.4521000000004,
-      813.8101000000006,
-      915.3837000000003
+      1010.9659000000001,
+      947.1021999999994,
+      995.5738000000001,
+      969.7119000000002,
+      1052.198800000001,
+      890.2504000000008,
+      1022.7424999999985,
+      927.7343000000001,
+      1049.9506999999994
     ]
   },
   "baseline": {
-    "rss": 378134528,
-    "heapTotal": 184635392,
-    "heapUsed": 41035032,
+    "rss": 401838080,
+    "heapTotal": 194727936,
+    "heapUsed": 41494304,
     "external": 12182336,
     "arrayBuffers": 965078,
-    "peakRSS": 381202432
+    "peakRSS": 405663744
   },
   "baselineObjects": {
     "component": 120,
@@ -59,20 +59,20 @@
     {
       "requests": 3,
       "beforeGC": {
-        "rss": 343969792,
-        "heapTotal": 256204800,
-        "heapUsed": 176502136,
+        "rss": 344043520,
+        "heapTotal": 255807488,
+        "heapUsed": 128177528,
         "external": 12182836,
         "arrayBuffers": 965538,
-        "peakRSS": 399941632
+        "peakRSS": 424808448
       },
       "afterGC": {
-        "rss": 345227264,
-        "heapTotal": 176115712,
-        "heapUsed": 40529864,
+        "rss": 345653248,
+        "heapTotal": 176640000,
+        "heapUsed": 40529744,
         "external": 12182836,
         "arrayBuffers": 965538,
-        "peakRSS": 399941632
+        "peakRSS": 424808448
       },
       "objects": {
         "component": 120,
@@ -82,20 +82,20 @@
     {
       "requests": 6,
       "beforeGC": {
-        "rss": 343568384,
+        "rss": 344809472,
         "heapTotal": 255807488,
-        "heapUsed": 181029688,
+        "heapUsed": 127698032,
         "external": 12182836,
         "arrayBuffers": 965538,
-        "peakRSS": 399941632
+        "peakRSS": 424808448
       },
       "afterGC": {
-        "rss": 344993792,
+        "rss": 345350144,
         "heapTotal": 176640000,
-        "heapUsed": 40519032,
+        "heapUsed": 40519856,
         "external": 12182836,
         "arrayBuffers": 965538,
-        "peakRSS": 399941632
+        "peakRSS": 424808448
       },
       "objects": {
         "component": 120,
@@ -105,20 +105,20 @@
     {
       "requests": 9,
       "beforeGC": {
-        "rss": 344297472,
-        "heapTotal": 256069632,
-        "heapUsed": 135201168,
+        "rss": 345206784,
+        "heapTotal": 255807488,
+        "heapUsed": 133654656,
         "external": 12182836,
         "arrayBuffers": 965538,
-        "peakRSS": 399941632
+        "peakRSS": 424808448
       },
       "afterGC": {
-        "rss": 345096192,
-        "heapTotal": 176640000,
-        "heapUsed": 40552072,
+        "rss": 345886720,
+        "heapTotal": 176377856,
+        "heapUsed": 40553968,
         "external": 12182836,
         "arrayBuffers": 965538,
-        "peakRSS": 399941632
+        "peakRSS": 424808448
       },
       "objects": {
         "component": 120,
@@ -128,12 +128,12 @@
   ],
   "settled": {
     "memory": {
-      "rss": 147365888,
-      "heapTotal": 42160128,
-      "heapUsed": 40254136,
+      "rss": 148316160,
+      "heapTotal": 42422272,
+      "heapUsed": 40254176,
       "external": 12182836,
       "arrayBuffers": 965538,
-      "peakRSS": 399941632
+      "peakRSS": 424808448
     },
     "objects": {
       "component": 120,

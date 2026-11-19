@@ -24,32 +24,32 @@
   "diagnostics": [
     {
       "level": "error",
-      "message": "(node:52552) ExperimentalWarning: v8.queryObjects() is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)"
+      "message": "(node:72500) ExperimentalWarning: v8.queryObjects() is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)"
     }
   ],
   "outputBytes": 460454,
   "latency": {
-    "medianMs": 999.3555000000001,
-    "p95Ms": 1056.0012000000006,
+    "medianMs": 986.9426999999996,
+    "p95Ms": 1031.6542000000009,
     "samplesMs": [
-      999.3555000000001,
-      952.3521000000001,
-      896.7478000000001,
-      967.1511999999993,
-      1056.0012000000006,
-      1047.1181000000015,
-      1049.6792999999998,
-      1033.9186000000009,
-      935.6618000000017
+      997.7136000000005,
+      1006.3229999999994,
+      997.5242999999991,
+      972.6882000000005,
+      939.4019000000008,
+      961.5691000000006,
+      986.9426999999996,
+      985.7321000000011,
+      1031.6542000000009
     ]
   },
   "baseline": {
-    "rss": 378654720,
-    "heapTotal": 183455744,
-    "heapUsed": 41250856,
+    "rss": 382365696,
+    "heapTotal": 183980032,
+    "heapUsed": 41249344,
     "external": 12182336,
     "arrayBuffers": 965078,
-    "peakRSS": 382054400
+    "peakRSS": 385765376
   },
   "baselineObjects": {
     "component": 120,
@@ -59,20 +59,20 @@
     {
       "requests": 3,
       "beforeGC": {
-        "rss": 364601344,
-        "heapTotal": 275468288,
-        "heapUsed": 175710760,
+        "rss": 364589056,
+        "heapTotal": 275730432,
+        "heapUsed": 172948176,
         "external": 12182836,
         "arrayBuffers": 965538,
-        "peakRSS": 400601088
+        "peakRSS": 404815872
       },
       "afterGC": {
-        "rss": 365756416,
-        "heapTotal": 177950720,
-        "heapUsed": 40669832,
+        "rss": 365920256,
+        "heapTotal": 177426432,
+        "heapUsed": 40674744,
         "external": 12182836,
         "arrayBuffers": 965538,
-        "peakRSS": 400601088
+        "peakRSS": 404815872
       },
       "objects": {
         "component": 120,
@@ -82,20 +82,20 @@
     {
       "requests": 6,
       "beforeGC": {
-        "rss": 364826624,
+        "rss": 364601344,
         "heapTotal": 275206144,
-        "heapUsed": 167950760,
+        "heapUsed": 170839648,
         "external": 12182836,
         "arrayBuffers": 965538,
-        "peakRSS": 400601088
+        "peakRSS": 404815872
       },
       "afterGC": {
-        "rss": 366202880,
+        "rss": 365916160,
         "heapTotal": 177426432,
-        "heapUsed": 40637376,
+        "heapUsed": 40641928,
         "external": 12182836,
         "arrayBuffers": 965538,
-        "peakRSS": 400601088
+        "peakRSS": 404815872
       },
       "objects": {
         "component": 120,
@@ -105,20 +105,20 @@
     {
       "requests": 9,
       "beforeGC": {
-        "rss": 365207552,
+        "rss": 365109248,
         "heapTotal": 274944000,
-        "heapUsed": 194587104,
+        "heapUsed": 195108056,
         "external": 12182836,
         "arrayBuffers": 965538,
-        "peakRSS": 400601088
+        "peakRSS": 404815872
       },
       "afterGC": {
-        "rss": 366485504,
-        "heapTotal": 177426432,
-        "heapUsed": 40666680,
+        "rss": 366321664,
+        "heapTotal": 176902144,
+        "heapUsed": 40667728,
         "external": 12182836,
         "arrayBuffers": 965538,
-        "peakRSS": 400601088
+        "peakRSS": 404815872
       },
       "objects": {
         "component": 120,
@@ -128,12 +128,12 @@
   ],
   "settled": {
     "memory": {
-      "rss": 129204224,
-      "heapTotal": 42684416,
-      "heapUsed": 40350808,
+      "rss": 147116032,
+      "heapTotal": 42422272,
+      "heapUsed": 40351616,
       "external": 12182836,
       "arrayBuffers": 965538,
-      "peakRSS": 400601088
+      "peakRSS": 404815872
     },
     "objects": {
       "component": 120,
