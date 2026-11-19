@@ -7,36 +7,36 @@
  * siblings still listen: every departure moved the order and the activity of
  * the rest, and on the server every request ended with that quadratic
  * cascade. `ApplicationRef` calls its `onDestroy` listeners before destroying
- * its views, so there every binding of the application stops at once.
+ * its views, so there every context of the application is detached at once.
  */
 
 import { ApplicationRef, inject } from '@angular/core'
+import type { IAdapterContext } from '@soxa-ui/setup'
 
-/** Live teardown callbacks per application: one listener on it, not one per component. */
-const teardowns = new WeakMap<ApplicationRef, Set<() => void>>()
+type TDetachable = Pick<IAdapterContext, 'detach'>
 
-/** Run `teardown` when the application starts coming down; the returned call forgets it. */
-export function onAppTeardown(teardown: () => void): () => void {
+/** Live contexts per application: one listener on it, a set entry per context. */
+const applications = new WeakMap<ApplicationRef, Set<TDetachable>>()
+
+/** The contexts the current application detaches when it starts coming down. */
+export function appTeardown(): Set<TDetachable> {
 	const app = inject(ApplicationRef)
-	const registered = teardowns.get(app) ?? listen(app)
 
-	registered.add(teardown)
-
-	return () => registered.delete(teardown)
+	return applications.get(app) ?? listen(app)
 }
 
-function listen(app: ApplicationRef): Set<() => void> {
-	const registered = new Set<() => void>()
+function listen(app: ApplicationRef): Set<TDetachable> {
+	const contexts = new Set<TDetachable>()
 
-	teardowns.set(app, registered)
+	applications.set(app, contexts)
 
 	app.onDestroy(() => {
-		teardowns.delete(app)
+		applications.delete(app)
 
-		for (const each of registered) each()
+		for (const context of contexts) context.detach()
 
-		registered.clear()
+		contexts.clear()
 	})
 
-	return registered
+	return contexts
 }

@@ -1547,8 +1547,8 @@ describe('Select · гидратация', () => {
  * The server destroys every application right after its render, children
  * first: markup tabs left the collection one by one while the others still
  * listened, and each departure moved the order and the activity of the rest.
- * The application's teardown detaches every binding before any view goes
- * (`onAppTeardown`), so the consumer hears nothing of it and no state is
+ * The application's teardown detaches every context before any view goes
+ * (`appTeardown`), so the consumer hears nothing of it and no state is
  * refreshed for it.
  */
 describe('Tabs · снятие приложения сервера', () => {

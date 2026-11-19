@@ -184,9 +184,6 @@ function useExchange(
 		untrack(() => write(values, name, value))
 	})
 
-	// The state stops with the consumer, on `detach`: the owner detaches its
-	// items before they leave one by one, and the rest would refresh for nothing
-	adapter.events.on('detach', release)
 	onDestroy(release)
 
 	// 2. The effect reads all props, the binding writes only the changed ones
@@ -229,8 +226,13 @@ function useExchange(
 	// unbinding). A collection item is also detached by its collection, before
 	// the siblings go one by one (`TCollectionMembers`). The nodes are removed
 	// before any effect, so the blur of a removed node still reaches the
-	// consumer
-	adapter.events.on('detach', stop)
+	// consumer. The state stops with it: the rest would refresh for nothing
+	// while the siblings leave. One listener for both: a second turns the
+	// event's handler into a set
+	adapter.events.on('detach', () => {
+		stop()
+		release()
+	})
 	$effect.pre(() => () => adapter.detach())
 
 	// 6. One effect that tracks nothing: its teardown destroys the adapter

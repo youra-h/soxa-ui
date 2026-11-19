@@ -105,11 +105,8 @@ function useExchange(
 
 	onCleanup(binding.updates.listen(updates))
 
-	// The state stops with the consumer, on `detach`: the owner detaches its
-	// items before they leave one by one, and the rest would refresh for nothing
 	const release = collectionInitialState(adapter, binding.state).subscribe(write)
 
-	adapter.events.on('detach', release)
 	onCleanup(release)
 
 	createEffect(() => binding.inputs.full(collectionInitialInputs(adapter, props)))
@@ -129,8 +126,13 @@ function useExchange(
 
 	// The consumer stops on `detach`, which comes from the teardown's first
 	// moment (`detachFirst`) or, for a collection item, from its collection
-	// before the siblings go one by one (`TCollectionMembers`)
-	adapter.events.on('detach', stop)
+	// before the siblings go one by one (`TCollectionMembers`). The state stops
+	// with it: the rest would refresh for nothing while the siblings leave. One
+	// listener for both: a second turns the event's handler into a set
+	adapter.events.on('detach', () => {
+		stop()
+		release()
+	})
 	onCleanup(stop)
 	detachFirst(adapter)
 

@@ -28,7 +28,7 @@ import {
 	collectionInitialState,
 	toInstanceState,
 } from '@soxa-ui/setup'
-import { onAppTeardown } from './app-teardown'
+import { appTeardown } from './app-teardown'
 import type {
 	DescriptorAllEvents,
 	DescriptorComponentProps,
@@ -163,13 +163,21 @@ function useExchange<C extends IComponentContract>(
 
 	if (serverInitial) state.set(toInstanceState<C>(port.getSnapshot()))
 
-	// The state stops with the consumer: after `detach` the component only
-	// comes down, and its siblings leaving a collection one by one would
-	// refresh it for nothing. The application's teardown detaches every
-	// binding before any view goes (`onAppTeardown`)
-	adapter.events.on('detach', unsubscribe)
+	let stopEvents: (() => void) | undefined
 
-	const forget = onAppTeardown(() => adapter.detach())
+	// The consumer and the state stop on `detach`: after it the component
+	// only comes down, and its siblings leaving a collection one by one would
+	// refresh it for nothing. One listener for both: a second turns the
+	// event's handler into a set. The application's teardown detaches every
+	// context before any view goes (`appTeardown`)
+	adapter.events.on('detach', () => {
+		stopEvents?.()
+		unsubscribe()
+	})
+
+	const teardown = appTeardown()
+
+	teardown.add(adapter)
 
 	// `ngOnInit` creates the binding, on the server too: the hooks run in
 	// template order, and markup items enter the collection in DOM order
@@ -201,7 +209,7 @@ function useExchange<C extends IComponentContract>(
 				outputOf(exportName)?.emit(payloadOf(args)),
 			)
 
-			adapter.events.on('detach', stop)
+			stopEvents = stop
 
 			return stop
 		},
@@ -211,7 +219,7 @@ function useExchange<C extends IComponentContract>(
 		},
 
 		destroy(): void {
-			forget()
+			teardown.delete(adapter)
 			unsubscribe()
 			adapter.destroy()
 		},
