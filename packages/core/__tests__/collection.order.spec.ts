@@ -226,7 +226,7 @@ describe('TOrderExtension', () => {
 		expect(read).toEqual([1])
 	})
 
-	it('освобождённый адаптер элемента больше не уведомляется', () => {
+	it('освобождённый адаптер элемента порядок больше не читает', () => {
 		const col = createCollection()
 		const a: Item = { id: 1, name: 'a' }
 		const b: Item = { id: 2, name: 'b' }
@@ -235,12 +235,15 @@ describe('TOrderExtension', () => {
 		col.extensions.plain.push(b)
 
 		const context = new TItemContextRegistry(col.getCore()).get(b)
-		const adapter = context.adapters.order
-		const sync = vi.spyOn(adapter, 'sync')
+
+		// The adapter is created on first access and reads its starting order then
+		expect(context.adapters.order.order).toBe(1)
+
+		const read = vi.spyOn(col.extensions.order, 'getItemOrder')
 
 		context.release()
 		col.extensions.plain.remove(a)
 
-		expect(sync).not.toHaveBeenCalled()
+		expect(read).not.toHaveBeenCalled()
 	})
 })

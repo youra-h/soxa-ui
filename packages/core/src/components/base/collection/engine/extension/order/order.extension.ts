@@ -19,8 +19,8 @@ import { TBaseOwnerItemExtension } from '../base-owner-item-extension.class'
  *
  * Positions are memoized per storage revision: every item read its order on
  * each change, and copying the storage for each `indexOf` made one mount of N
- * items cost N² copies. Item adapters hear the change only when their own
- * position moved — appending an item moves no one else.
+ * items cost N² copies. An item adapter reports the change only when its own
+ * position moved (`TOrderItemExtension`).
  *
  * @template TItem — the collection's item type (a user may extend it)
  */
@@ -34,7 +34,6 @@ export class TOrderExtension<TItem extends object = any>
 
 	private _positions: Map<TItem, number> | undefined
 	private _revision = -1
-	private readonly _adapters = new Set<IOrderItemExtension<TItem>>()
 
 	constructor(options?: IBaseOwnerItemExtensionOptions<TItem, IOrderItemExtension<TItem>>) {
 		super(TOrderItemExtension, options)
@@ -56,20 +55,7 @@ export class TOrderExtension<TItem extends object = any>
 
 			this._orderChanged = false
 			this.events.emit('change:order')
-
-			// A copy: a listener may release adapters while they are notified
-			for (const adapter of [...this._adapters]) adapter.sync()
 		})
-	}
-
-	/** @inheritdoc IExtensionItems.createItem */
-	override createItem(owner: TItem): IOrderItemExtension<TItem> {
-		const adapter = super.createItem(owner)
-
-		this._adapters.add(adapter)
-		adapter.events.on('destroy', () => this._adapters.delete(adapter))
-
-		return adapter
 	}
 
 	/** @inheritdoc IOrderExtension.getItemOrder */

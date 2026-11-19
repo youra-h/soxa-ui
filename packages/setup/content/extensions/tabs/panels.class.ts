@@ -9,7 +9,8 @@
  * once, and only the panels of that `value` or that tab are woken.
  *
  * One per bundle registry — the owner's mount — or per engine for an owner
- * without one. The subscriptions live while some panel is watching.
+ * without one. The subscriptions live while some panel is watching. A key
+ * usually has one panel, so the waiting panels are kept in plain arrays.
  */
 
 import type { ITabsItem, TInsertEvent, TTabsCollection } from '@soxa-ui/core'
@@ -20,8 +21,8 @@ type TWake = () => void
 const instances = new WeakMap<object, TTabsPanels>()
 
 export class TTabsPanels {
-	private readonly _byValue = new Map<unknown, Set<TWake>>()
-	private readonly _byTab = new Map<object, Set<TWake>>()
+	private readonly _byValue = new Map<unknown, TWake[]>()
+	private readonly _byTab = new Map<object, TWake[]>()
 	private _watchers = 0
 
 	private constructor(
@@ -43,29 +44,42 @@ export class TTabsPanels {
 	}
 
 	/** Wake when a tab with this `value` enters the collection. */
-	watchValue(value: unknown, wake: TWake): () => void {
-		return this._watch(this._byValue, value, wake)
+	watchValue(value: unknown, wake: TWake): void {
+		this._add(this._byValue, value, wake)
+	}
+
+	unwatchValue(value: unknown, wake: TWake): void {
+		this._remove(this._byValue, value, wake)
 	}
 
 	/** Wake when this tab's bundle enters the registry. */
-	watchTab(tab: ITabsItem, wake: TWake): () => void {
-		return this._watch(this._byTab, tab, wake)
+	watchTab(tab: ITabsItem, wake: TWake): void {
+		this._add(this._byTab, tab, wake)
 	}
 
-	private _watch<K>(map: Map<K, Set<TWake>>, key: K, wake: TWake): () => void {
-		const wakes = map.get(key) ?? new Set<TWake>()
+	unwatchTab(tab: ITabsItem, wake: TWake): void {
+		this._remove(this._byTab, tab, wake)
+	}
 
-		map.set(key, wakes)
-		wakes.add(wake)
+	private _add<K>(map: Map<K, TWake[]>, key: K, wake: TWake): void {
+		const wakes = map.get(key)
+
+		if (wakes) wakes.push(wake)
+		else map.set(key, [wake])
 
 		if (this._watchers++ === 0) this._listen()
+	}
 
-		return () => {
-			if (!wakes.delete(wake)) return
+	private _remove<K>(map: Map<K, TWake[]>, key: K, wake: TWake): void {
+		const wakes = map.get(key)
+		const index = wakes ? wakes.indexOf(wake) : -1
 
-			if (wakes.size === 0 && map.get(key) === wakes) map.delete(key)
-			if (--this._watchers === 0) this._unlisten()
-		}
+		if (!wakes || index === -1) return
+
+		if (wakes.length === 1) map.delete(key)
+		else wakes.splice(index, 1)
+
+		if (--this._watchers === 0) this._unlisten()
 	}
 
 	private _listen(): void {
@@ -89,7 +103,7 @@ export class TTabsPanels {
 	}
 
 	/** A copy: a woken panel may rebind and change the watchers. */
-	private _wake(wakes: Set<TWake> | undefined): void {
+	private _wake(wakes: readonly TWake[] | undefined): void {
 		if (wakes) for (const wake of [...wakes]) wake()
 	}
 }

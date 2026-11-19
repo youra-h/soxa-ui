@@ -14,7 +14,4 @@ export interface IOrderItemExtension<TItem extends object = any> extends IItemEx
 > {
 	/** The item's index, read from the order extension on every access. */
 	readonly order: number
-
-	/** Called by the owner after an order change: emits `change:order` only if this position moved. */
-	sync(): void
 }

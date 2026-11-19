@@ -150,9 +150,10 @@ export class TTabsContentBindingExtension {
 		/** The context is accepted: subscribing to foreign buses is allowed. */
 		let attached = false
 		let releaseIds: (() => void) | undefined
-		/** Watching for the panel's value to enter, and for its tab's bundle. */
-		let stopValue: (() => void) | undefined
-		let stopTab: (() => void) | undefined
+		/** The value the panel waits for to enter, and the tab whose bundle it waits for. */
+		let watchingValue = false
+		let watchedValue: unknown
+		let watchedTab: ITabsItem | undefined
 
 		/**
 		 * The panel's side: the application's `id`, else the one the tab wrote,
@@ -224,8 +225,9 @@ export class TTabsContentBindingExtension {
 		const unbind = (): void => {
 			if (attached) boundItem?.events.off('change:aria', linkPanel)
 
-			stopTab?.()
-			stopTab = undefined
+			if (watchedTab) panels.unwatchTab(watchedTab, linkTab)
+
+			watchedTab = undefined
 
 			unlinkTab()
 
@@ -257,15 +259,27 @@ export class TTabsContentBindingExtension {
 		/** The tab's own bus and its bundle's registrations: only for an accepted panel. */
 		const watchTab = (item: ITabsItem): void => {
 			item.events.on('change:aria', linkPanel)
-			stopTab = panels.watchTab(item, linkTab)
+			panels.watchTab(item, linkTab)
+
+			watchedTab = item
 		}
 
 		/** A new value: watch for its tab and bind to the one there now. */
 		const watchValue = (): void => {
-			stopValue?.()
-			stopValue = panels.watchValue(content.value, resolve)
+			unwatchValue()
+			panels.watchValue(content.value, resolve)
+
+			watchingValue = true
+			watchedValue = content.value
 
 			resolve()
+		}
+
+		const unwatchValue = (): void => {
+			if (watchingValue) panels.unwatchValue(watchedValue, resolve)
+
+			watchingValue = false
+			watchedValue = undefined
 		}
 
 		const resolve = (): void => {
@@ -297,8 +311,7 @@ export class TTabsContentBindingExtension {
 		})
 
 		context.events.on('destroy', () => {
-			stopValue?.()
-			stopValue = undefined
+			unwatchValue()
 
 			content.events.off('change:value', watchValue)
 			idPlugin?.events.off('change:id', linkPanel)
