@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/svelte",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Адаптер Svelte: компоненты на headless-моделях ядра",
   "keywords": [
     "soxa",
@@ -43,9 +43,9 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "dependencies": {
-    "@soxa-ui/core": "0.4.1",
-    "@soxa-ui/plugins": "0.4.1",
-    "@soxa-ui/setup": "0.4.1",
+    "@soxa-ui/core": "0.4.2",
+    "@soxa-ui/plugins": "0.4.2",
+    "@soxa-ui/setup": "0.4.2",
     "esm-env": "^1.2.2"
   },
   "peerDependencies": {

@@ -11,9 +11,9 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@soxa-ui/core": "0.4.1",
-    "@soxa-ui/plugins": "0.4.1",
-    "@soxa-ui/setup": "0.4.1"
+    "@soxa-ui/core": "0.4.2",
+    "@soxa-ui/plugins": "0.4.2",
+    "@soxa-ui/setup": "0.4.2"
   },
   "devDependencies": {
     "@soxa-ui/theme-oren": "0.4.1"
