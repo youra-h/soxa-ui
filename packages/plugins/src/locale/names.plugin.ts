@@ -1,9 +1,6 @@
-import { TBasePlugin, TMountSnapshot } from '../base'
-import type { IMountSnapshotPort, IPluginContext, TPluginEvents } from '../base'
+import { TBasePlugin } from '../base'
+import type { IPluginContext, TPluginEvents } from '../base'
 import type { TTranslations } from './types'
-
-/** Attribute records of a component's parts, by the part's field (`closeAria`). */
-type TPartNames = Readonly<Record<string, Readonly<Record<string, unknown>>>>
 
 /**
  * TNamesPlugin — база плагинов имён (неймспейс `names`): строки локали в
@@ -28,12 +25,18 @@ export abstract class TNamesPlugin<
 	TOwner extends object,
 	TEvents extends TPluginEvents = TPluginEvents,
 > extends TBasePlugin<TOwner, TEvents> {
-	/** Names of a prepared mount, by part field; an ordinary mount writes the model. */
-	private _names: TMountSnapshot<TPartNames> | undefined
+	private _snapshot: Readonly<Record<string, Readonly<Record<string, unknown>>>> = Object.freeze(
+		{},
+	)
+	private readonly _listeners = new Set<() => void>()
 
-	/** The prepared mount's names, merged into its state by the adapter; none for an ordinary one. */
-	get names(): IMountSnapshotPort<TPartNames> | undefined {
-		return this._names
+	getSnapshot(): Readonly<Record<string, Readonly<Record<string, unknown>>>> {
+		return this._snapshot
+	}
+	subscribe(listener: () => void): () => void {
+		this._listeners.add(listener)
+
+		return () => this._listeners.delete(listener)
 	}
 
 	/** Prepared mounts name their own DOM without changing a shared data model. */
@@ -48,18 +51,18 @@ export abstract class TNamesPlugin<
 			return
 		}
 
-		const names = (this._names ??= new TMountSnapshot<TPartNames>(Object.freeze({})))
-		const current = names.getSnapshot()
+		if (this._snapshot[field]?.['aria-label'] === label) return
 
-		if (current[field]?.['aria-label'] === label) return
+		this._snapshot = Object.freeze({
+			...this._snapshot,
+			[field]: Object.freeze({ 'aria-label': label }),
+		})
 
-		names.publish(
-			Object.freeze({ ...current, [field]: Object.freeze({ 'aria-label': label }) }),
-		)
+		for (const listener of this._listeners) listener()
 	}
 
 	override destroy(): void {
-		this._names?.clear()
+		this._listeners.clear()
 
 		super.destroy()
 	}

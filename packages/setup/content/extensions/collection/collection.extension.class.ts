@@ -46,12 +46,9 @@ export class TCollectionExtension {
 
 		this._wire(context, elevator, engine)
 
-		// Prepared data is materialized once, before native children are assembled.
-		// An owner installed with its own source keeps it; any other lowers none,
-		// so that a prepared collection above does not reach its subtree
+		// Prepared data is materialized once before native children are assembled.
 		if (!context.get(TCollectionInitialExtension)) {
 			const source = collectionPreparedSource(context.bundle)
-
 			if (source) context.use(TCollectionInitialExtension, { source, elevator })
 			else elevator(COLLECTION_INITIAL_ELEVATOR).down(null)
 		}

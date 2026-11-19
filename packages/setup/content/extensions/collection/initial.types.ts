@@ -29,6 +29,3 @@ export interface ICollectionInitialExtensionOptions {
 	source?: TCollectionInitialSource
 	elevator: TElevatorFactory
 }
-
-/** Applied to a prepared part's props only: Vue tells explicit props from generated defaults. */
-export type TInitialPropsNormalizer = (props: object) => object

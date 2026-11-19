@@ -154,10 +154,10 @@ describe('accepted plugin mount', () => {
 		const b = new TPluginBundle(item, 'b', new TLocaleSource(ruRU), second).use(
 			TTabsItemNamesPlugin,
 		)
-		const namesA = a.get(TTabsItemNamesPlugin)?.names
-		const namesB = b.get(TTabsItemNamesPlugin)?.names
+		const namesA = a.get(TTabsItemNamesPlugin)
+		const namesB = b.get(TTabsItemNamesPlugin)
 
-		if (!namesA || !namesB) throw new Error('Expected prepared names')
+		if (!namesA || !namesB) throw new Error('Expected installed plugins')
 
 		expect(namesA.getSnapshot().closeAria?.['aria-label']).toBe('Close Account')
 		expect(namesB.getSnapshot().closeAria?.['aria-label']).not.toBe('Close Account')
@@ -182,15 +182,5 @@ describe('accepted plugin mount', () => {
 		stop()
 		a.destroy()
 		b.destroy()
-	})
-
-	it('allocates no mount-local names for an ordinary mount', () => {
-		const item = new TTabsItem({ text: 'Account' })
-		const bundle = new TPluginBundle(item).use(TTabsItemNamesPlugin)
-
-		expect(bundle.get(TTabsItemNamesPlugin)?.names).toBeUndefined()
-		expect(item.closeAria.get('aria-label')).toBe('Close Account')
-
-		bundle.destroy()
 	})
 })

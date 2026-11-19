@@ -5,7 +5,6 @@ import { TCollectionInitialPartPlugin, TCollectionInitialPlugin } from '@soxa-ui
 import { preparationOf, TPreparationExtension } from '@soxa-ui/core'
 import type { ICollectionTransaction } from '@soxa-ui/core'
 import type { IPluginBundle } from '@soxa-ui/plugins'
-
 import type {
 	IAdapterPreparation,
 	IAdapterContext,
@@ -17,17 +16,15 @@ import type {
 import type { IComponentDescriptor, IPluginsContract } from '../../../protected/define'
 import type { TElevatorFactory } from '../../../protected/adapter/elevator'
 import {
+	collectionInitialInputs,
 	collectionInitialOwnerOptions,
-	collectionInitialSourceOf,
 	createCollectionInitialSource,
 	resolveCollectionInitialItem,
 	resolveCollectionInitialPanel,
+	collectionInitialSourceOf,
 } from './initial'
-import type { TInitialPropsNormalizer } from './initial.types'
-import { collectionInitialInputs } from './initial-inputs'
 import type { TCollectionInitialSource } from './initial-source.class'
 
-/** The prepared source of an owner, by the owner's bundle: its facade shares that bundle. */
 const sources = new WeakMap<IPluginBundle, TCollectionInitialSource>()
 
 /** Sources survive native reassembly, but are never shared across native mounts. */
@@ -76,13 +73,6 @@ export function collectionNeedsPreparation(
 	)
 }
 
-/** The panel lookup default an owner descriptor declares on its initial plugin. */
-function panelDefaultOf(options: object | undefined): string | number | undefined {
-	const value: unknown = options && Reflect.get(options, 'panelDefaultValue')
-
-	return typeof value === 'string' || typeof value === 'number' ? value : undefined
-}
-
 /** Resolves owner, item and panel inputs before assembly; temporary views share one receipt. */
 export class TCollectionPreparation implements IAdapterPreparation {
 	private _ownerIndex = 0
@@ -91,13 +81,10 @@ export class TCollectionPreparation implements IAdapterPreparation {
 	constructor(
 		private readonly _elevator: TElevatorFactory,
 		private readonly _lifetime?: TCollectionPreparationLifetime,
-		private readonly _normalize?: TInitialPropsNormalizer,
+		private readonly _normalize: (props: object) => object = (props) => props,
 	) {}
 
-	/**
-	 * One receipt owns the whole native assembly, including its shared facades.
-	 * Only an assembly that met a prepared source gets one.
-	 */
+	/** One receipt owns the whole native assembly, including its shared facades. */
 	pending(
 		contexts: readonly IAdapterContext[],
 		rollback: () => void,
@@ -118,12 +105,50 @@ export class TCollectionPreparation implements IAdapterPreparation {
 		options: IAdapterContextOptions<TInstance>,
 		config: IAdapterContextConfig,
 	): IPreparedAssembly<TInstance, TPlugins> {
-		if (config.bundle !== undefined)
-			return this._prepareFacade(descriptor, options, config.bundle)
+		// Facades inherit prepared inputs from their component's bundle.
+		if (config.bundle !== undefined) {
+			const source = collectionPreparedSource(config.bundle)
+
+			if (source) this._source = source
+
+			return {
+				options: {
+					...options,
+					props: collectionInitialInputs(
+						{ descriptor, bundle: config.bundle },
+						options.props ?? {},
+					),
+					...(source?.engine
+						? { options: { ...options.options, engine: source.engine } }
+						: {}),
+				},
+			}
+		}
 
 		const owner = descriptor.plugins.find((plugin) => plugin.ctor === TCollectionInitialPlugin)
 
-		if (owner) return this._prepareOwner(options, panelDefaultOf(owner.options))
+		if (owner) {
+			const defaultValue: unknown =
+				owner.options && Reflect.get(owner.options, 'panelDefaultValue')
+			const panelDefault =
+				typeof defaultValue === 'string' || typeof defaultValue === 'number'
+					? defaultValue
+					: undefined
+
+			const source = this._lifetime
+				? this._lifetime.get(this._ownerIndex++, options.props ?? {}, panelDefault)
+				: createCollectionInitialSource(options.props ?? {}, panelDefault)
+
+			return {
+				options: collectionInitialOwnerOptions(options, source),
+				complete: (context) => {
+					if (source && context.bundle) {
+						sources.set(context.bundle, source)
+						this._source = source
+					}
+				},
+			}
+		}
 
 		const part = descriptor.plugins.find(
 			(plugin) => plugin.ctor === TCollectionInitialPartPlugin,
@@ -131,61 +156,17 @@ export class TCollectionPreparation implements IAdapterPreparation {
 
 		if (!part) return { options }
 
-		const resolve =
-			part.options && Reflect.get(part.options, 'panel') === true
-				? resolveCollectionInitialPanel
-				: resolveCollectionInitialItem
-		const resolved = resolve(descriptor, options, this._elevator, this._normalize)
-
-		// An unprepared part keeps its options: nothing to record for the receipt
-		if (resolved === options) return { options }
+		const inputs = { ...options, props: this._normalize(options.props ?? {}) }
 
 		return {
-			options: resolved,
-			complete: () => {
-				this._source = collectionInitialSourceOf(this._elevator)
-			},
-		}
-	}
-
-	/** Facades inherit prepared inputs and the engine from their component's bundle. */
-	private _prepareFacade<TInstance extends object, TPlugins extends IPluginsContract>(
-		descriptor: IComponentDescriptor<TContextContract<TInstance, TPlugins>>,
-		options: IAdapterContextOptions<TInstance>,
-		bundle: IPluginBundle | null,
-	): IPreparedAssembly<TInstance, TPlugins> {
-		const source = collectionPreparedSource(bundle)
-
-		if (source) this._source = source
-
-		return {
-			options: {
-				...options,
-				props: collectionInitialInputs({ descriptor, bundle }, options.props ?? {}),
-				...(source?.engine
-					? { options: { ...options.options, engine: source.engine } }
-					: {}),
-			},
-		}
-	}
-
-	/** Capture the owner's declaration once per native mount position. */
-	private _prepareOwner<TInstance extends object, TPlugins extends IPluginsContract>(
-		options: IAdapterContextOptions<TInstance>,
-		panelDefault: string | number | undefined,
-	): IPreparedAssembly<TInstance, TPlugins> {
-		const props = options.props ?? {}
-		const source = this._lifetime
-			? this._lifetime.get(this._ownerIndex++, props, panelDefault)
-			: createCollectionInitialSource(props, panelDefault)
-
-		return {
-			options: collectionInitialOwnerOptions(options, source),
+			options:
+				part.options && Reflect.get(part.options, 'panel') === true
+					? resolveCollectionInitialPanel(descriptor, inputs, this._elevator)
+					: resolveCollectionInitialItem(descriptor, inputs, this._elevator),
 			complete: (context) => {
-				if (!source || !context.bundle) return
-
-				sources.set(context.bundle, source)
-				this._source = source
+				if (context.bundle?.get(TCollectionInitialPartPlugin)?.prepared) {
+					this._source = collectionInitialSourceOf(this._elevator)
+				}
 			},
 		}
 	}

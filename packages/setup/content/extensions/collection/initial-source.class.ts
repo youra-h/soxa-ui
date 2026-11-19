@@ -172,12 +172,8 @@ export class TCollectionInitialSource {
 	readonly source: ICollectionInitialSource
 	private _engine: TCollectionEngine<any, any> | undefined
 	private _items: readonly object[] | undefined
-	/** Links are built on first read: a server render reads only the mounted items'. */
 	private readonly _links = new Map<object, ICollectionInitialLink>()
 	private readonly _ordinals = new Map<object, number>()
-	/** Declared panel ids by the ordinal of the first item with the panel's value. */
-	private readonly _panelIds = new Map<number, string>()
-	private _mount: TCollectionInitialMount | undefined
 	private readonly _external: TCollectionEngine<any, any> | undefined
 	private readonly _panelDefaultValue: string | number | undefined
 
@@ -237,33 +233,37 @@ export class TCollectionInitialSource {
 			throw new Error('Collection initial source did not materialize its declared items.')
 		}
 
-		const panels = this.source.panels
+		const firstByValue = new Map<unknown, number>()
+
+		const links = this.source.items.map((source, ordinal) => {
+			const value: unknown = Reflect.get(items[ordinal], 'value')
+
+			if (!firstByValue.has(value)) firstByValue.set(value, ordinal)
+
+			return {
+				tabId: idOf(source) ?? mount.createId(`initial-tab-${ordinal}`),
+				panelId: mount.createId(`initial-panel-${ordinal}`),
+				tabFallbackId: mount.createId(`initial-tab-${ordinal}`),
+				panelFallbackId: mount.createId(`initial-panel-${ordinal}`),
+			}
+		})
 
 		// Value only finds a pair; every item retains its distinct ordinal and model.
-		if (panels) {
-			const firstByValue = new Map<unknown, number>()
+		for (const panel of this.source.panels ?? []) {
+			const ordinal = firstByValue.get(this._panelValue(panel))
 
-			items.forEach((item, ordinal) => {
-				const value: unknown = Reflect.get(item, 'value')
-
-				if (!firstByValue.has(value)) firstByValue.set(value, ordinal)
-			})
-
-			for (const panel of panels) {
-				const ordinal = firstByValue.get(this._panelValue(panel))
-
-				// The later declaration wins, as it did when links were built eagerly
-				if (ordinal === undefined) continue
-				if (panel.id !== undefined) this._panelIds.set(ordinal, panel.id)
-				else this._panelIds.delete(ordinal)
+			if (ordinal !== undefined) {
+				links[ordinal].panelId = panel.id ?? mount.createId(`initial-panel-${ordinal}`)
 			}
 		}
 
 		this._engine = engine
-		this._mount = mount
 		this._items = Object.freeze([...items])
 
-		items.forEach((item, index) => this._ordinals.set(item, index))
+		items.forEach((item, index) => {
+			this._links.set(item, Object.freeze(links[index]))
+			this._ordinals.set(item, index)
+		})
 	}
 
 	/** Resolve a declaration position without recreating data removed from the live engine. */
@@ -293,30 +293,8 @@ export class TCollectionInitialSource {
 		return panels[ordinalOf(ordinal, panels.length)]
 	}
 
-	/** Both ends of an item's document link, prepared before either part renders. */
 	link(item: object): ICollectionInitialLink | undefined {
-		const cached = this._links.get(item)
-		const ordinal = this._ordinals.get(item)
-
-		if (cached || ordinal === undefined || !this._mount) return cached
-
-		const tabFallbackId = this._mount.createId(`initial-tab-${ordinal}`)
-		const panelFallbackId = this._mount.createId(`initial-panel-${ordinal}`)
-		const link: ICollectionInitialLink = Object.freeze({
-			tabId: this.declaredId(ordinal) ?? tabFallbackId,
-			panelId: this._panelIds.get(ordinal) ?? panelFallbackId,
-			tabFallbackId,
-			panelFallbackId,
-		})
-
-		this._links.set(item, link)
-
-		return link
-	}
-
-	/** The `id` the declaration gave the item at this ordinal. */
-	declaredId(ordinal: unknown): string | undefined {
-		return idOf(this.source.items[ordinalOf(ordinal, this.source.items.length)])
+		return this._links.get(item)
 	}
 
 	ordinal(item: object): number | undefined {
