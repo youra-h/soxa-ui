@@ -1,18 +1,6 @@
 import { collectionInitialSourceOf } from '@soxa-ui/setup'
 import { VueElevatorFactory } from '../elevator'
-import { createCollectionInitialSource } from '@soxa-ui/setup'
 import { getCurrentInstance, toRaw } from 'vue'
-
-export function useCollectionInitial(props: object, panelDefaultValue?: string | number) {
-	return createCollectionInitialSource(
-		{
-			...props,
-			initial: toRaw(Reflect.get(props, 'initial')),
-			engine: toRaw(Reflect.get(props, 'engine')),
-		},
-		panelDefaultValue,
-	)
-}
 
 /** Vue's generated Boolean defaults are not explicitly supplied model inputs. */
 export function initialAssemblyProps<T extends object>(props: T): T {

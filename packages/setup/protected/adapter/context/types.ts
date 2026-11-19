@@ -3,7 +3,7 @@
  */
 
 import type { TEvented } from '@soxa-ui/core'
-import type { ILocaleSource, IPluginBundle } from '@soxa-ui/plugins'
+import type { ILocaleSource, IPluginBundle, TPluginMount } from '@soxa-ui/plugins'
 import type {
 	IComponentContract,
 	IComponentDescriptor,
@@ -107,10 +107,19 @@ export interface IAdapterContextOptions<TInstance extends object = object> {
 	 * not its own (`config.bundle`) the locale is of whoever assembled it.
 	 */
 	locale?: ILocaleSource
+	/**
+	 * The acceptance gate of a prepared mount, shared by all plugins of the own
+	 * bundle: they defer foreign subscriptions until the framework accepts the
+	 * mount. An ordinary mount has none and subscribes at once.
+	 */
+	pluginMount?: TPluginMount
 }
 
-/** What the own bundle takes from the mount: the mount id and the subtree's locale. */
-export type TBundleMount = Pick<IAdapterContextOptions, 'mountId' | 'locale' | 'pluginOptions'>
+/** What the own bundle takes from the mount: the mount id, the subtree's locale and the plugin inputs. */
+export type TBundleMount = Pick<
+	IAdapterContextOptions,
+	'mountId' | 'locale' | 'pluginOptions' | 'pluginMount'
+>
 
 export interface IAdapterContextConfig {
 	/** Native runtime supplies a shared preparation policy before construction. */

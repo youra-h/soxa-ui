@@ -2,10 +2,19 @@ import { execFileSync } from 'node:child_process'
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 export const revisions = { before: 'c25f134b4', after: '4687068d19fa8d5762f86577460a720690f72c82' }
+// Extra variants: --revisions=name=ref,... ; the ref WORKTREE copies the current working tree.
+const extra = process.argv
+	.find((a) => a.startsWith('--revisions='))
+	?.split('=')
+	.slice(1)
+	.join('=')
+const selected = extra
+	? Object.fromEntries(extra.split(',').map((pair) => pair.split('=')))
+	: revisions
 const root = resolve(import.meta.dirname, '../..')
 export function prepare() {
 	const manifests = {}
-	for (const [variant, ref] of Object.entries(revisions)) {
+	for (const [variant, ref] of Object.entries(selected)) {
 		const directory = resolve(import.meta.dirname, '.cache', variant)
 		mkdirSync(directory, { recursive: true })
 		const paths = [
@@ -21,15 +30,25 @@ export function prepare() {
 				(fw) => `packages/ui/${fw}/src`,
 			),
 		]
-		const sha = execFileSync('git', ['rev-parse', ref], { cwd: root, encoding: 'utf8' }).trim()
-		// Build input cache only: no checkout, Git metadata or extra worktree.
-		const archive = execFileSync('git', ['archive', sha, ...paths], {
+		const worktree = ref === 'WORKTREE'
+		const sha = execFileSync('git', ['rev-parse', worktree ? 'HEAD' : ref], {
 			cwd: root,
-			maxBuffer: 40 * 1024 * 1024,
-		})
-		execFileSync('tar', ['-xf', '-', '-C', directory], { input: archive })
+			encoding: 'utf8',
+		}).trim()
+		// Build input cache only: no checkout, Git metadata or extra worktree.
+		const archive = worktree
+			? execFileSync('tar', ['-cf', '-', ...paths], {
+					cwd: root,
+					maxBuffer: 80 * 1024 * 1024,
+				})
+			: execFileSync('git', ['archive', sha, ...paths], {
+					cwd: root,
+					maxBuffer: 40 * 1024 * 1024,
+				})
+		// Relative extraction: GNU tar in Git Bash reads a drive letter in -C as a remote host.
+		execFileSync('tar', ['-xf', '-'], { cwd: directory, input: archive })
 		manifests[variant] = {
-			sha,
+			sha: worktree ? sha + '+worktree' : sha,
 			files: execFileSync('git', ['ls-tree', '-r', '--name-only', sha, ...paths], {
 				cwd: root,
 				encoding: 'utf8',

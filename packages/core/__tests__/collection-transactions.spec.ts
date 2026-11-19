@@ -36,26 +36,15 @@ function engineKit() {
 }
 
 describe('driver-owned collection transactions', () => {
-	it('confirms the existing item without replaying initialization', () => {
-		const { preparation, plain, batch } = engineKit()
-		const item = { id: 1 }
-		const initialize = vi.fn(() => plain.push(item))
-		const rollback = vi.fn(() => plain.remove(item))
-		const transaction = preparation.prepare(item, {
-			owner: {},
-			timeout: 20,
-			initialize,
-			rollback,
-		})
-
-		expect(batch.items).toEqual([item])
+	it('confirms an attempt once and releases its timer', () => {
+		const { preparation } = engineKit()
+		const rollback = vi.fn()
+		const transaction = preparation.prepare({ timeout: 20, rollback })
 
 		transaction.commit()
 		transaction.commit()
 		vi.advanceTimersByTime(100)
 
-		expect(batch.items[0]).toBe(item)
-		expect(initialize).toHaveBeenCalledOnce()
 		expect(rollback).not.toHaveBeenCalled()
 		expect(vi.getTimerCount()).toBe(0)
 	})
@@ -63,16 +52,14 @@ describe('driver-owned collection transactions', () => {
 	it('forgets a rolled-back receipt before its cleanup reenters the registry', () => {
 		const { preparation, plain, batch } = engineKit()
 		const item = { id: 1 }
+
+		plain.push(item)
+
 		const rollback = vi.fn(() => {
 			transaction.cancel()
 			plain.remove(item)
 		})
-		const transaction = preparation.prepare(item, {
-			owner: {},
-			timeout: 20,
-			initialize: () => plain.push(item),
-			rollback,
-		})
+		const transaction = preparation.prepare({ timeout: 20, rollback })
 
 		transaction.rollback()
 		transaction.rollback()
@@ -86,15 +73,7 @@ describe('driver-owned collection transactions', () => {
 	it('cancels a receipt without destroying resources already released by its owner', () => {
 		const { preparation } = engineKit()
 		const rollback = vi.fn()
-		const transaction = preparation.prepare(
-			{ id: 1 },
-			{
-				owner: {},
-				timeout: 20,
-				initialize: vi.fn(),
-				rollback,
-			},
-		)
+		const transaction = preparation.prepare({ timeout: 20, rollback })
 
 		transaction.cancel()
 		vi.advanceTimersByTime(100)
@@ -104,126 +83,50 @@ describe('driver-owned collection transactions', () => {
 	})
 
 	it('expires attempts independently, including a new earlier deadline', () => {
-		const { preparation, plain, batch } = engineKit()
-		const slow = { id: 1 },
-			fast = { id: 2 }
+		const { preparation } = engineKit()
+		const slow = vi.fn()
+		const fast = vi.fn()
 
-		preparation.prepare(slow, {
-			owner: {},
-			timeout: 100,
-			initialize: () => plain.push(slow),
-			rollback: () => plain.remove(slow),
-		})
-		preparation.prepare(fast, {
-			owner: {},
+		preparation.prepare({ timeout: 100, rollback: slow })
+		preparation.prepare({ timeout: 10, rollback: fast })
+
+		vi.advanceTimersByTime(11)
+
+		expect(fast).toHaveBeenCalledOnce()
+		expect(slow).not.toHaveBeenCalled()
+
+		vi.advanceTimersByTime(100)
+
+		expect(slow).toHaveBeenCalledOnce()
+		expect(vi.getTimerCount()).toBe(0)
+	})
+
+	it('schedules an attempt begun by an expiring rollback after the sweep', () => {
+		const { preparation } = engineKit()
+		const later = vi.fn()
+
+		preparation.prepare({
 			timeout: 10,
-			initialize: () => plain.push(fast),
-			rollback: () => plain.remove(fast),
+			rollback: () => preparation.prepare({ timeout: 10, rollback: later }),
 		})
 
 		vi.advanceTimersByTime(11)
 
-		expect(batch.items).toEqual([slow])
+		expect(later).not.toHaveBeenCalled()
+		expect(vi.getTimerCount()).toBe(1)
 
-		vi.advanceTimersByTime(100)
+		vi.advanceTimersByTime(11)
 
-		expect(batch.items).toEqual([])
-		expect(vi.getTimerCount()).toBe(0)
-	})
-
-	it('rolls back only the released owners unconfirmed attempts', () => {
-		const { preparation, plain, batch } = engineKit()
-		const left = {},
-			right = {}
-		const a = { id: 1 },
-			b = { id: 2 }
-
-		preparation.prepare(a, {
-			owner: left,
-			timeout: 20,
-			initialize: () => plain.push(a),
-			rollback: () => plain.remove(a),
-		})
-		const accepted = preparation.prepare(b, {
-			owner: right,
-			timeout: 20,
-			initialize: () => plain.push(b),
-			rollback: () => plain.remove(b),
-		})
-
-		preparation.release(left)
-		accepted.commit()
-		vi.advanceTimersByTime(100)
-
-		expect(batch.items).toEqual([b])
-	})
-
-	it('defers new initialization while an owner of the engine is accepted', () => {
-		const { preparation, plain, batch } = engineKit()
-		const owner = {}
-		const item = { id: 1 }
-		const initialize = vi.fn(() => plain.push(item))
-
-		preparation.accept(owner)
-
-		const transaction = preparation.prepare(item, {
-			owner: {},
-			timeout: 20,
-			initialize,
-			rollback: () => plain.remove(item),
-		})
-
-		expect(initialize).not.toHaveBeenCalled()
-		expect(batch.items).toEqual([])
-
-		// The normal acceptance path still performs the deferred registration.
-		plain.push(item)
-		transaction.commit()
-		vi.advanceTimersByTime(100)
-
-		expect(batch.items).toEqual([item])
-	})
-
-	it('releases partial initialization when its callback throws', () => {
-		const { preparation, plain, batch } = engineKit()
-		const item = { id: 1 }
-		const rollback = vi.fn(() => plain.remove(item))
-
-		expect(() =>
-			preparation.prepare(item, {
-				owner: {},
-				timeout: 20,
-				initialize: () => {
-					plain.push(item)
-
-					throw new Error('Initialization failed')
-				},
-				rollback,
-			}),
-		).toThrow('Initialization failed')
-
-		expect(batch.items).toEqual([])
-		expect(rollback).toHaveBeenCalledOnce()
+		expect(later).toHaveBeenCalledOnce()
 		expect(vi.getTimerCount()).toBe(0)
 	})
 
 	it.each([-1, NaN, Infinity])('rejects timeout %s before acquiring resources', (timeout) => {
 		const { preparation } = engineKit()
-		const initialize = vi.fn()
 
-		expect(() =>
-			preparation.prepare(
-				{ id: 1 },
-				{
-					owner: {},
-					timeout,
-					initialize,
-					rollback: vi.fn(),
-				},
-			),
-		).toThrow('finite and non-negative')
-
-		expect(initialize).not.toHaveBeenCalled()
+		expect(() => preparation.prepare({ timeout, rollback: vi.fn() })).toThrow(
+			'finite and non-negative',
+		)
 		expect(vi.getTimerCount()).toBe(0)
 	})
 

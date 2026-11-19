@@ -10,17 +10,19 @@ import type { ISelectionExtension } from './selection/types'
 import type { IExtension } from './types'
 import type { IPreparationExtension } from './preparation/types'
 
-/** Deferred initialization and rollback are optional collection capabilities. */
+/** Pending acceptance of prepared assemblies is an optional collection capability. */
 function isPreparation<TItem extends object>(
 	extension: IExtension<TItem>,
 ): extension is IPreparationExtension<TItem> {
-	return 'prepare' in extension && 'accept' in extension && 'release' in extension
+	return 'prepare' in extension
 }
 
+/** Pending acceptance of prepared assemblies, if an adapter installed it. */
 export function preparationOf<TItem extends object>(
 	source: TNeighbours<TItem> | null | undefined,
 ): IPreparationExtension<TItem> | undefined {
 	const extension = source?.extensions.preparation
+
 	return extension && isPreparation(extension) ? extension : undefined
 }
 

@@ -1542,3 +1542,46 @@ describe('Select · гидратация', () => {
 		expect(tagTexts(document, '.multiple')).toEqual(['Первый', 'Третий', 'Второй'])
 	})
 })
+
+/**
+ * The server destroys every application right after its render, children
+ * first: markup tabs left the collection one by one while the others still
+ * listened, and each departure moved the order and the activity of the rest.
+ * The application's teardown detaches every context before any view goes
+ * (`appTeardown`), so the consumer hears nothing of it and no state is
+ * refreshed for it.
+ */
+describe('Tabs · снятие приложения сервера', () => {
+	it('элементы разметки уходят молча: связки отключены до снятия видов', async () => {
+		const heard: string[] = []
+
+		@Component({
+			selector: 'app-root',
+			standalone: true,
+			imports: [TTabsComponent, TTabsItemComponent],
+			template: `
+				<div so-tabs aria_label="Разделы">
+					@for (item of items; track item.value) {
+						<div
+							so-tabs-item
+							[value]="item.value"
+							[text]="item.text"
+							(soChangeOrder)="heard.push(item.value + ' order')"
+							(soChangeActive)="heard.push(item.value + ' active')"
+						></div>
+					}
+				</div>
+			`,
+		})
+		class Page {
+			readonly items = ITEMS
+			readonly heard = heard
+		}
+
+		// The render resolves after its platform came down: the teardown is in it
+		await renderOnServer(Page)
+
+		// Appending moved no tab, and the teardown is not news to the consumer
+		expect(heard).toEqual([])
+	})
+})

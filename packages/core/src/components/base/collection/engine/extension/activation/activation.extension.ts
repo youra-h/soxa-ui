@@ -44,7 +44,12 @@ export class TActivationExtension<TItem extends object = any>
 		// Всем — на смену активного, добавленному — только ему, как у
 		// `TSelectionExtension`: проход по всем на каждый `item:added` пачки
 		// сделал бы наполнение квадратичным
-		this.events.on('change:activation', () => this._syncDataset())
+		// Only the two items whose activity changed: a pass over all on every
+		// change made removing tabs one by one quadratic
+		this.events.on('change:activation', (item, previous) => {
+			if (previous) this._writeDataset(previous)
+			if (item) this._writeDataset(item)
+		})
 		ctx.driver.events.on('item:added', (e) => this._writeDataset(e.item as TItem))
 		this._syncDataset()
 
@@ -187,17 +192,19 @@ export class TActivationExtension<TItem extends object = any>
 	 */
 	findActivatable(predicate?: (item: TItem) => boolean, fromItem?: TItem): TItem | undefined {
 		const check = predicate ?? (() => true)
-		const fromIndex = fromItem !== undefined ? this._ctx.driver.valueOf().indexOf(fromItem) : -1
+		// One snapshot: `valueOf()` copies the storage on every call
+		const items = this._ctx.driver.valueOf()
+		const fromIndex = fromItem !== undefined ? items.indexOf(fromItem) : -1
 
 		// Сначала вперёд: fromIndex+1, fromIndex+2, ...
-		for (let i = fromIndex + 1; i < this._ctx.driver.valueOf().length; i++) {
-			const item = this._ctx.driver.valueOf()[i]
+		for (let i = fromIndex + 1; i < items.length; i++) {
+			const item = items[i]
 			if (item && check(item)) return item
 		}
 
 		// Затем назад: fromIndex-1, fromIndex-2, ...
 		for (let i = fromIndex - 1; i >= 0; i--) {
-			const item = this._ctx.driver.valueOf()[i]
+			const item = items[i]
 			if (item && check(item)) return item
 		}
 

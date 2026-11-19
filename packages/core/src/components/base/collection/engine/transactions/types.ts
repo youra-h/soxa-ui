@@ -1,5 +1,5 @@
 /**
- * Pending collection operations keep one item reference until confirmation or rollback.
+ * Pending acceptance of one assembly, released by confirmation or rollback.
  */
 export interface ICollectionTransaction {
 	/** Confirm the operation and release its rollback resources. */
@@ -13,9 +13,6 @@ export interface ICollectionTransaction {
 }
 
 export interface ICollectionTransactionOptions {
-	/** An opaque owner token; releasing it must not affect another owner's attempts. */
-	owner: object
-
 	/** Time allowed for confirmation, in milliseconds. */
 	timeout: number
 
@@ -23,15 +20,11 @@ export interface ICollectionTransactionOptions {
 	rollback(): void
 }
 
-export interface ICollectionTransactions<TItem> {
-	begin(item: TItem, options: ICollectionTransactionOptions): ICollectionTransaction
-
-	rollbackOwner(owner: object): void
+export interface ICollectionTransactions {
+	begin(options: ICollectionTransactionOptions): ICollectionTransaction
 }
 
-export type TPendingTransaction<TItem> = {
-	item: TItem
-	owner: object
+export type TPendingTransaction = {
 	deadline: number
 	rollback: () => void
 }

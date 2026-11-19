@@ -72,11 +72,13 @@ export class TSelectionExtension<TItem extends object = any>
 	install(ctx: IExtensionContext<TItem>): void {
 		super.install(ctx)
 
-		// Всем — на смену выбора, добавленному — только ему: пачка шлёт
-		// `item:added` на каждый элемент разом в конце, и проход по всем на
-		// каждый из них сделал бы наполнение квадратичным. Выбор остальных
-		// элементов запись состава не меняет — прохода на `change:items` нет
-		this.events.on('change:selection', () => this._syncDataset())
+		// Changed items on a selection change, the added one on its entry: a
+		// batch sends `item:added` for every item at once at its end, and a pass
+		// over all on each made filling quadratic. A write of the list does not
+		// change the selection of the other items, so `change:items` has no pass
+		this.events.on('change:selection', (_items, changed) => {
+			for (const item of changed) this._writeDataset(item)
+		})
 		ctx.driver.events.on('item:added', (e) => this._writeDataset(e.item as TItem))
 		this._syncDataset()
 

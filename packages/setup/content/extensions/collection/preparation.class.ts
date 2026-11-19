@@ -94,19 +94,10 @@ export class TCollectionPreparation implements IAdapterPreparation {
 
 		if (!engine || !context) return
 
-		let preparation = preparationOf(engine)
-
-		if (!preparation) {
-			engine.use(new TPreparationExtension())
-			preparation = preparationOf(engine)
-		}
+		if (!preparationOf(engine)) engine.use(new TPreparationExtension())
 
 		// The deadline cleans up abandoned views; it does not delay or complete server rendering.
-		return preparation?.prepare(context.instance, {
-			owner: context,
-			timeout: 1000,
-			rollback,
-		})
+		return preparationOf(engine)?.prepare({ timeout: 1000, rollback })
 	}
 
 	prepare<TInstance extends object, TPlugins extends IPluginsContract>(
@@ -149,7 +140,7 @@ export class TCollectionPreparation implements IAdapterPreparation {
 				: createCollectionInitialSource(options.props ?? {}, panelDefault)
 
 			return {
-				options: collectionInitialOwnerOptions(descriptor, options, source),
+				options: collectionInitialOwnerOptions(options, source),
 				complete: (context) => {
 					if (source && context.bundle) {
 						sources.set(context.bundle, source)
@@ -179,4 +170,19 @@ export class TCollectionPreparation implements IAdapterPreparation {
 			},
 		}
 	}
+}
+
+/**
+ * The assembly config with the shared collection preparation, when the
+ * descriptor takes part in one. Every adapter wires it here, so an unrelated
+ * component keeps its config object untouched.
+ */
+export function collectionPreparationConfig(
+	descriptor: IComponentDescriptor,
+	config: IAdapterContextConfig | undefined,
+	create: () => TCollectionPreparation,
+): IAdapterContextConfig | undefined {
+	if (config?.preparation || !collectionNeedsPreparation(descriptor, config)) return config
+
+	return { ...config, preparation: create() }
 }

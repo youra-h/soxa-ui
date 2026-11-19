@@ -26,6 +26,11 @@ import type { TActiveTabOffset, TTabsActiveTabPluginEvents } from './types'
  * снимает собранный корень после `renderToString`, — а узла там нет, как нет и
  * `requestAnimationFrame`. Без узла мерить нечего (`_computeOffset` отдаёт
  * `null`), и кадр не планируется: место активного таба померит `ready`.
+ *
+ * Activity is measured at once, but at most once a frame: reading `offset*`
+ * forces a layout of the whole row when it is dirty, and a collection torn
+ * down one tab at a time moves the activity through every tab. Later requests
+ * of the same frame wait for it and are measured there once.
  */
 export class TTabsActiveTabPlugin extends TBasePlugin<ITabs, TTabsActiveTabPluginEvents> {
 	private _element: Element | null = null
@@ -34,6 +39,10 @@ export class TTabsActiveTabPlugin extends TBasePlugin<ITabs, TTabsActiveTabPlugi
 	private _engine: TTabsCollection | null = null
 	/** Last published measurement, retained by reference for the next notification. */
 	private _offset: TActiveTabOffset | null = null
+	/** The frame after a measurement: requests until then wait for it. */
+	private _frame: number | undefined
+	/** A request came while the frame was pending. */
+	private _stale = false
 
 	override install(ctx: IPluginContext, options?: unknown): void {
 		super.install(ctx, options)
@@ -47,6 +56,7 @@ export class TTabsActiveTabPlugin extends TBasePlugin<ITabs, TTabsActiveTabPlugi
 		})
 
 		ctx.get(TElementPlugin)?.events.on('removed', () => {
+			this._cancelFrame()
 			this._element = null
 			this._offset = null
 		})
@@ -58,20 +68,21 @@ export class TTabsActiveTabPlugin extends TBasePlugin<ITabs, TTabsActiveTabPlugi
 		ctx.get(TCollectionBundlesPlugin)?.events.on('engine:bound', (engine: TTabsCollection) => {
 			this._engine = engine
 
-			const emit = () => this._emitOffset()
-			const emitNextFrame = () => this._emitOffsetNextFrame()
+			const measure = () => this._measure()
+			const measureNextFrame = () => this._measureNextFrame()
 
-			this._listenTo(engine.extensions.activation.events, 'item:activated', emit)
-			this._listenTo(engine.extensions.activation.events, 'item:deactivated', emit)
+			this._listenTo(engine.extensions.activation.events, 'item:activated', measure)
+			this._listenTo(engine.extensions.activation.events, 'item:deactivated', measure)
 
-			this._listenTo(engine.extensions.plain.events, 'item:removed', emitNextFrame)
-			this._listenTo(engine.extensions.plain.events, 'item:moved', emitNextFrame)
+			this._listenTo(engine.extensions.plain.events, 'item:removed', measureNextFrame)
+			this._listenTo(engine.extensions.plain.events, 'item:moved', measureNextFrame)
 		})
 
 		this._listenTo(this._tabs?.events, 'change:view', () => this._emitOffset())
 	}
 
 	override destroy(): void {
+		this._cancelFrame()
 		this._element = null
 		this._offset = null
 		this._tabs = null
@@ -91,13 +102,48 @@ export class TTabsActiveTabPlugin extends TBasePlugin<ITabs, TTabsActiveTabPlugi
 		this.events.emit('change:active-tab', { newValue: this._offset, oldValue })
 	}
 
+	/** Measure now, unless this frame was measured already: then once in it. */
+	private _measure(): void {
+		if (this._frame !== undefined) {
+			this._stale = true
+
+			return
+		}
+
+		this._emitOffset()
+		this._scheduleFrame()
+	}
+
 	/**
-	 * Пересчитать offset кадром позже — пока у плагина есть узел корня: разметка
-	 * после удаления или перемещения таба ещё не перерисована. Без узла повод
-	 * ничего не планирует: место активного таба померит `ready`.
+	 * Measure in the next frame, while the plugin has the root's node: the
+	 * markup after a removed or moved tab is not redrawn yet. Without the node
+	 * nothing is planned: `ready` measures the active tab's place.
 	 */
-	private _emitOffsetNextFrame(): void {
-		if (this._element) requestAnimationFrame(() => this._emitOffset())
+	private _measureNextFrame(): void {
+		if (!this._element) return
+
+		this._stale = true
+		this._scheduleFrame()
+	}
+
+	private _scheduleFrame(): void {
+		if (!this._element || this._frame !== undefined) return
+
+		this._frame = requestAnimationFrame(() => {
+			this._frame = undefined
+
+			if (!this._stale) return
+
+			this._stale = false
+			this._emitOffset()
+		})
+	}
+
+	private _cancelFrame(): void {
+		if (this._frame !== undefined) cancelAnimationFrame(this._frame)
+
+		this._frame = undefined
+		this._stale = false
 	}
 
 	private _computeOffset(): TActiveTabOffset | null {

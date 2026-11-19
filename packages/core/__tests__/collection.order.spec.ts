@@ -1,5 +1,11 @@
 import { describe, it, expect, vi } from 'vitest'
-import { TCollectionEngine, TPlainExtension, TBatchExtension, TOrderExtension } from '@soxa-ui/core'
+import {
+	TCollectionEngine,
+	TPlainExtension,
+	TBatchExtension,
+	TOrderExtension,
+	TItemContextRegistry,
+} from '@soxa-ui/core'
 
 type Item = { id: number; name: string }
 
@@ -172,5 +178,72 @@ describe('TOrderExtension', () => {
 		col.extensions.plain.move(a, 0)
 
 		expect(col.extensions.order.getItemOrder(a)).toBe(0)
+	})
+
+	it('элемент слышит change:order, только когда сдвинулся он сам', () => {
+		const col = createCollection()
+		const registry = new TItemContextRegistry(col.getCore())
+		const a: Item = { id: 1, name: 'a' }
+		const b: Item = { id: 2, name: 'b' }
+
+		col.extensions.plain.push(a)
+		col.extensions.plain.push(b)
+
+		const onA = vi.fn()
+		const onB = vi.fn()
+
+		registry.get(a).adapters.order.events.on('change:order', onA)
+		registry.get(b).adapters.order.events.on('change:order', onB)
+
+		// Appending moves no one: a mount of N items is not N² notifications
+		col.extensions.plain.push({ id: 3, name: 'c' })
+
+		expect(onA).not.toHaveBeenCalled()
+		expect(onB).not.toHaveBeenCalled()
+
+		col.extensions.plain.remove(a)
+
+		expect(onB).toHaveBeenCalledOnce()
+		expect(registry.get(b).adapters.order.order).toBe(0)
+	})
+
+	it('порядок, прочитанный посреди batch, — уже новый', () => {
+		const col = createCollection()
+		const a: Item = { id: 1, name: 'a' }
+		const b: Item = { id: 2, name: 'b' }
+		const read: number[] = []
+
+		col.extensions.plain.push(a)
+		col.extensions.plain.push(b)
+
+		expect(col.extensions.order.getItemOrder(a)).toBe(0)
+
+		col.batch(() => {
+			col.extensions.plain.move(a, 1)
+			read.push(col.extensions.order.getItemOrder(a))
+		})
+
+		expect(read).toEqual([1])
+	})
+
+	it('освобождённый адаптер элемента порядок больше не читает', () => {
+		const col = createCollection()
+		const a: Item = { id: 1, name: 'a' }
+		const b: Item = { id: 2, name: 'b' }
+
+		col.extensions.plain.push(a)
+		col.extensions.plain.push(b)
+
+		const context = new TItemContextRegistry(col.getCore()).get(b)
+
+		// The adapter is created on first access and reads its starting order then
+		expect(context.adapters.order.order).toBe(1)
+
+		const read = vi.spyOn(col.extensions.order, 'getItemOrder')
+
+		context.release()
+		col.extensions.plain.remove(a)
+
+		expect(read).not.toHaveBeenCalled()
 	})
 })

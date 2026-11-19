@@ -62,31 +62,6 @@ function rejectConflictingProps(props: object, names: readonly string[] = []): v
 	}
 }
 
-/** Create one acceptance gate for this bundle's already-declared plugins. */
-function preparedPluginOptions(
-	descriptor: Pick<IComponentDescriptor, 'plugins'>,
-	options: IAdapterContextOptions,
-): NonNullable<IAdapterContextOptions['pluginOptions']> {
-	const mount = new TPluginMount()
-	const overrides = new Map<import('../../../protected').TPluginCtor, object | undefined>()
-
-	for (const entry of options.pluginOptions ?? []) {
-		if (
-			overrides.has(entry.ctor) ||
-			!descriptor.plugins.some((plugin) => plugin.ctor === entry.ctor)
-		)
-			throw new Error(
-				'Mount installation options must name each declared plugin at most once.',
-			)
-
-		overrides.set(entry.ctor, entry.options)
-	}
-
-	return descriptor.plugins.map((plugin) =>
-		plugin.with({ ...overrides.get(plugin.ctor), pluginMount: mount }),
-	)
-}
-
 /** Overlay consumed/prepared inputs without evaluating native child or slot getters. */
 function initialPropsView(props: object, overrides: object): object {
 	const read = (key: PropertyKey) =>
@@ -113,9 +88,8 @@ function initialPropsView(props: object, overrides: object): object {
 	)
 }
 
-/** Consume the captured declaration and defer foreign plugin effects until mount acceptance. */
+/** Consume the captured declaration; a prepared owner gates foreign plugin effects until acceptance. */
 export function collectionInitialOwnerOptions<TInstance extends object>(
-	descriptor: Pick<IComponentDescriptor, 'plugins'>,
 	options: IAdapterContextOptions<TInstance>,
 	source?: TCollectionInitialSource,
 ): IAdapterContextOptions<TInstance> {
@@ -125,7 +99,7 @@ export function collectionInitialOwnerOptions<TInstance extends object>(
 			: options.props
 
 	return source
-		? { ...options, props, pluginOptions: preparedPluginOptions(descriptor, options) }
+		? { ...options, props, pluginMount: new TPluginMount() }
 		: props === options.props
 			? options
 			: { ...options, props }
@@ -171,17 +145,16 @@ export function resolveCollectionInitialItem<TInstance extends object>(
 
 	if (!part) throw new Error('Collection initial part requires its declared input plugin.')
 
-	const pluginOptions = [
-		...(options.pluginOptions ?? []),
-		part.with({ prepared: true, id: declaredId }),
-		...(ids && link ? [ids.with({ initial: link })] : []),
-	]
-
 	return {
 		...options,
 		ctrl,
 		props: initialPartProps(descriptor, props, declaredId),
-		pluginOptions: preparedPluginOptions(descriptor, { ...options, pluginOptions }),
+		pluginMount: new TPluginMount(),
+		pluginOptions: [
+			...(options.pluginOptions ?? []),
+			part.with({ prepared: true, id: declaredId }),
+			...(ids && link ? [ids.with({ initial: link })] : []),
+		],
 	}
 }
 
@@ -218,13 +191,11 @@ export function resolveCollectionInitialPanel<TInstance extends object>(
 	return {
 		...options,
 		props: initialPropsView(props, panel),
-		pluginOptions: preparedPluginOptions(descriptor, {
-			...options,
-			pluginOptions: [
-				...(options.pluginOptions ?? []),
-				part.with({ prepared: true, panel: true, ...panel }),
-			],
-		}),
+		pluginMount: new TPluginMount(),
+		pluginOptions: [
+			...(options.pluginOptions ?? []),
+			part.with({ prepared: true, panel: true, ...panel }),
+		],
 	}
 }
 

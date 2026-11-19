@@ -14,6 +14,7 @@ export {
 	TCollectionPreparationLifetime,
 	collectionPreparedSource,
 	collectionNeedsPreparation,
+	collectionPreparationConfig,
 } from './preparation.class'
 export { TCollectionInitialExtension } from './initial.extension.class'
 export {

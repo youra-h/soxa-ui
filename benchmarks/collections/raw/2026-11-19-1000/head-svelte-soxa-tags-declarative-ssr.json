@@ -1,0 +1,144 @@
+{
+  "variant": "head",
+  "framework": "svelte",
+  "kind": "tags",
+  "mode": "declarative",
+  "library": "soxa",
+  "n": 1000,
+  "surface": "ssr",
+  "quality": {
+    "valid": false,
+    "checks": {
+      "count": true,
+      "selected": true,
+      "oneTabStop": false,
+      "panel": true,
+      "reciprocal": true
+    },
+    "focusPolicy": "one explicit collection stop",
+    "items": 1000,
+    "selected": 1,
+    "stops": 2,
+    "panels": 0
+  },
+  "diagnostics": [
+    {
+      "level": "error",
+      "message": "(node:52924) ExperimentalWarning: v8.queryObjects() is an experimental feature and might change at any time\n(Use `node --trace-warnings ...` to show where the warning was created)"
+    }
+  ],
+  "outputBytes": 492966,
+  "latency": {
+    "medianMs": 170.4922999999999,
+    "p95Ms": 185.69450000000006,
+    "samplesMs": [
+      180.2192,
+      170.4922999999999,
+      165.8041999999998,
+      174.81550000000016,
+      184.95020000000022,
+      168.6003999999998,
+      165.68830000000025,
+      163.60110000000032,
+      185.69450000000006
+    ]
+  },
+  "baseline": {
+    "rss": 369586176,
+    "heapTotal": 182292480,
+    "heapUsed": 43069104,
+    "external": 9117239,
+    "arrayBuffers": 940928,
+    "peakRSS": 373477376
+  },
+  "baselineObjects": {
+    "component": 90,
+    "bundle": 0
+  },
+  "rounds": [
+    {
+      "requests": 3,
+      "beforeGC": {
+        "rss": 339988480,
+        "heapTotal": 254693376,
+        "heapUsed": 133950304,
+        "external": 9112176,
+        "arrayBuffers": 941292,
+        "peakRSS": 393768960
+      },
+      "afterGC": {
+        "rss": 339988480,
+        "heapTotal": 177098752,
+        "heapUsed": 39794184,
+        "external": 9112176,
+        "arrayBuffers": 941292,
+        "peakRSS": 393768960
+      },
+      "objects": {
+        "component": 90,
+        "bundle": 0
+      }
+    },
+    {
+      "requests": 6,
+      "beforeGC": {
+        "rss": 335892480,
+        "heapTotal": 250236928,
+        "heapUsed": 127981880,
+        "external": 9112176,
+        "arrayBuffers": 941292,
+        "peakRSS": 393768960
+      },
+      "afterGC": {
+        "rss": 335892480,
+        "heapTotal": 176836608,
+        "heapUsed": 39008544,
+        "external": 9112176,
+        "arrayBuffers": 941292,
+        "peakRSS": 393768960
+      },
+      "objects": {
+        "component": 90,
+        "bundle": 0
+      }
+    },
+    {
+      "requests": 9,
+      "beforeGC": {
+        "rss": 338644992,
+        "heapTotal": 225394688,
+        "heapUsed": 134031104,
+        "external": 9112176,
+        "arrayBuffers": 941292,
+        "peakRSS": 393768960
+      },
+      "afterGC": {
+        "rss": 338644992,
+        "heapTotal": 175587328,
+        "heapUsed": 36938528,
+        "external": 9112176,
+        "arrayBuffers": 941292,
+        "peakRSS": 393768960
+      },
+      "objects": {
+        "component": 90,
+        "bundle": 0
+      }
+    }
+  ],
+  "settled": {
+    "memory": {
+      "rss": 138588160,
+      "heapTotal": 40058880,
+      "heapUsed": 36815024,
+      "external": 9112176,
+      "arrayBuffers": 941292,
+      "peakRSS": 393768960
+    },
+    "objects": {
+      "component": 90,
+      "bundle": 0
+    }
+  },
+  "node": "v24.20.0"
+}

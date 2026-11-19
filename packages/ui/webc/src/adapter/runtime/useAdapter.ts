@@ -133,8 +133,13 @@ function useExchange<C extends IComponentContract>(
 
 	// The consumer stops on `detach`, which comes from `disconnectedCallback`
 	// or, for a collection item, from its collection before the siblings go
-	// one by one (`TCollectionMembers`)
-	adapter.events.on('detach', unbindEvents)
+	// one by one (`TCollectionMembers`). The state stops with it: the rest
+	// would refresh for nothing while the siblings leave. One listener for
+	// both: a second turns the event's handler into a set
+	adapter.events.on('detach', () => {
+		unbindEvents()
+		unsubscribe()
+	})
 
 	return {
 		state: toInstanceState<C>(state),

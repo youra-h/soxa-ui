@@ -180,11 +180,11 @@ function useExchange(
 	// 1. Subscribe right away, not in an effect: there are no effects on the
 	// server. The write is untracked: the core changes in the middle of
 	// rendering too
-	onDestroy(
-		collectionInitialState(adapter, exchange.state).subscribe((name, value) => {
-			untrack(() => write(values, name, value))
-		}),
-	)
+	const release = collectionInitialState(adapter, exchange.state).subscribe((name, value) => {
+		untrack(() => write(values, name, value))
+	})
+
+	onDestroy(release)
 
 	// 2. The effect reads all props, the binding writes only the changed ones
 	$effect(() => {
@@ -226,8 +226,13 @@ function useExchange(
 	// unbinding). A collection item is also detached by its collection, before
 	// the siblings go one by one (`TCollectionMembers`). The nodes are removed
 	// before any effect, so the blur of a removed node still reaches the
-	// consumer
-	adapter.events.on('detach', stop)
+	// consumer. The state stops with it: the rest would refresh for nothing
+	// while the siblings leave. One listener for both: a second turns the
+	// event's handler into a set
+	adapter.events.on('detach', () => {
+		stop()
+		release()
+	})
 	$effect.pre(() => () => adapter.detach())
 
 	// 6. One effect that tracks nothing: its teardown destroys the adapter

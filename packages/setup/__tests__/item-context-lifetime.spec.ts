@@ -466,7 +466,9 @@ describe('сторож: элемент коллекции освобождает
 		)
 	})
 
-	it('шпионы видят подписки item-адаптеров: у ListBox — выбор, порядок и список', () => {
+	// The order adapter has no subscription: the order extension notifies the adapters it
+	// created and forgets each one on its `destroy` (core, collection.order.spec.ts)
+	it('шпионы видят подписки item-адаптеров: у ListBox — выбор и список', () => {
 		const kit = required(COLLECTIONS.ListBoxCollectionItemDescriptor, 'ListBox')
 		const { engine, elevator } = kit.list(SOURCES)
 		const spies = spyEngine(engine)
@@ -474,11 +476,7 @@ describe('сторож: элемент коллекции освобождает
 		kit.item(elevator, { ctrl: firstOf(engine) }).unmount()
 
 		expect(subscribed(spies)).toEqual(
-			expect.arrayContaining([
-				'selection: change:selection',
-				'order: change:order',
-				'list: change:view',
-			]),
+			expect.arrayContaining(['selection: change:selection', 'list: change:view']),
 		)
 	})
 
