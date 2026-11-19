@@ -1,0 +1,53 @@
+{
+  "variant": "main",
+  "framework": "solid",
+  "kind": "tabs",
+  "mode": "declarative",
+  "library": "soxa",
+  "n": 1000,
+  "surface": "client",
+  "protocol": "client-v3-isolated-phases",
+  "stage": "latency",
+  "timedOut": true,
+  "elapsedMs": 180010,
+  "error": "page.evaluate: Target page, context or browser has been closed\n    at browserCase (D:\\projects\\soxa-a\\tools\\bench-collections\\browser-run.mjs:49:15)\n    at async file:///D:/projects/soxa-a/tools/bench-collections/run.mjs:133:4",
+  "errors": [],
+  "partialLatency": [
+    {
+      "domMs": 672.8999999761581,
+      "paintMs": 803.3999999761581
+    },
+    {
+      "domMs": 401.39999997615814,
+      "paintMs": 473
+    },
+    {
+      "domMs": 408.7000000476837,
+      "paintMs": 509.10000002384186
+    },
+    {
+      "domMs": 611.0999999046326,
+      "paintMs": 741.1999999284744
+    },
+    {
+      "domMs": 555.3999999761581,
+      "paintMs": 670.8999999761581
+    }
+  ],
+  "rounds": [],
+  "quality": {
+    "valid": true,
+    "checks": {
+      "count": true,
+      "selected": true,
+      "oneTabStop": true,
+      "panel": true,
+      "reciprocal": true
+    },
+    "focusPolicy": "one explicit collection stop",
+    "items": 1000,
+    "selected": 1,
+    "stops": 1,
+    "panels": 1
+  }
+}

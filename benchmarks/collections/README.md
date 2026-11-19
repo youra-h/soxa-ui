@@ -6,7 +6,8 @@
 
 Итог с объяснением изменения механизма — [report.md](report.md). Журналы:
 [Vue](vue.md), [React](react.md), [Solid](solid.md), [Svelte](svelte.md),
-[Angular](angular.md), [Web Components](webc.md). Исходники стенда —
+[Angular](angular.md), [Web Components](webc.md). Оптимизация 19.11.2026 —
+[2026-11-19-1000.md](2026-11-19-1000.md). Исходники стенда —
 [tools/bench-collections](../../tools/bench-collections).
 
 ## Что сравниваем
@@ -130,6 +131,20 @@ node tools/bench-collections/publish.mjs --run=my-run
 ```
 
 Нужны Node 24+, установленный Chromium Playwright и обе исходные Git-ревизии.
+
+Две свои ревизии вместо `before`/`after` задаёт `--revisions` у `prepare.mjs`
+(`WORKTREE` — текущее дерево), имена вариантов те же у `build.mjs` и `run.mjs`.
+Сравнение двух вариантов одного запуска — `compare.mjs`, быстрая медиана SSR
+для итераций (не замер) — `quick.mjs`:
+
+```powershell
+node tools/bench-collections/prepare.mjs --prepare --revisions=main=<sha>,head=WORKTREE
+node tools/bench-collections/build.mjs --variant=main,head
+node tools/bench-collections/run.mjs --n=1000 --run=my-run --variant=main,head --libs=soxa
+node tools/bench-collections/compare.mjs my-run main head
+node --expose-gc tools/bench-collections/quick.mjs head angular tabs declarative
+```
+
 Экспорт создаёт новый raw-каталог и дописывает журналы. Существующий опубликованный
 запуск не перезаписывается; для повторения используется новое имя `--run`.
 

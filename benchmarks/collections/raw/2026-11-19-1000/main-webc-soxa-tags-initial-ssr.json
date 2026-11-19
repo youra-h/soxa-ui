@@ -1,0 +1,11 @@
+{
+  "variant": "main",
+  "framework": "webc",
+  "kind": "tags",
+  "mode": "initial",
+  "library": "soxa",
+  "n": 1000,
+  "surface": "ssr",
+  "status": "not-applicable",
+  "reason": "No supported Web Components server renderer in Soxa."
+}

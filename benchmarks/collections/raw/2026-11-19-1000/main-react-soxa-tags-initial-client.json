@@ -1,0 +1,164 @@
+{
+  "variant": "main",
+  "framework": "react",
+  "kind": "tags",
+  "mode": "initial",
+  "library": "soxa",
+  "n": 1000,
+  "surface": "client",
+  "protocol": "client-v3-isolated-phases",
+  "quality": {
+    "valid": true,
+    "checks": {
+      "count": true,
+      "selected": true,
+      "oneTabStop": true,
+      "panel": true,
+      "reciprocal": true
+    },
+    "focusPolicy": "one explicit collection stop",
+    "items": 1000,
+    "selected": 1,
+    "stops": 1,
+    "panels": 0
+  },
+  "errors": [],
+  "latency": {
+    "samples": [
+      {
+        "domMs": 82.60000002384186,
+        "paintMs": 128.30000007152557
+      },
+      {
+        "domMs": 79.60000002384186,
+        "paintMs": 122.19999992847443
+      },
+      {
+        "domMs": 76.70000004768372,
+        "paintMs": 106.60000002384186
+      },
+      {
+        "domMs": 78.39999997615814,
+        "paintMs": 108.20000004768372
+      },
+      {
+        "domMs": 75.30000007152557,
+        "paintMs": 104.80000007152557
+      },
+      {
+        "domMs": 75.70000004768372,
+        "paintMs": 115.40000009536743
+      },
+      {
+        "domMs": 74.09999990463257,
+        "paintMs": 103.09999990463257
+      }
+    ],
+    "medianDomMs": 76.70000004768372,
+    "medianPaintMs": 108.20000004768372
+  },
+  "baseline": {
+    "heapUsed": 5424048,
+    "nodes": 16,
+    "listeners": 159
+  },
+  "rounds": [
+    {
+      "cycle": 1,
+      "mounted": {
+        "heapUsed": 29096148,
+        "nodes": 4017,
+        "listeners": 10166
+      },
+      "afterUnmount": {
+        "heapUsed": 5466700,
+        "nodes": 16,
+        "listeners": 159
+      }
+    },
+    {
+      "cycle": 2,
+      "mounted": {
+        "heapUsed": 29103628,
+        "nodes": 4017,
+        "listeners": 10166
+      },
+      "afterUnmount": {
+        "heapUsed": 5470780,
+        "nodes": 16,
+        "listeners": 159
+      }
+    },
+    {
+      "cycle": 3,
+      "mounted": {
+        "heapUsed": 29101028,
+        "nodes": 4017,
+        "listeners": 10166
+      },
+      "afterUnmount": {
+        "heapUsed": 5482552,
+        "nodes": 16,
+        "listeners": 159
+      }
+    },
+    {
+      "cycle": 4,
+      "mounted": {
+        "heapUsed": 29119832,
+        "nodes": 4017,
+        "listeners": 10166
+      },
+      "afterUnmount": {
+        "heapUsed": 5480920,
+        "nodes": 16,
+        "listeners": 159
+      }
+    },
+    {
+      "cycle": 5,
+      "mounted": {
+        "heapUsed": 29127980,
+        "nodes": 4017,
+        "listeners": 10166
+      },
+      "afterUnmount": {
+        "heapUsed": 5486544,
+        "nodes": 16,
+        "listeners": 159
+      }
+    },
+    {
+      "cycle": 6,
+      "mounted": {
+        "heapUsed": 29130852,
+        "nodes": 4017,
+        "listeners": 10166
+      },
+      "afterUnmount": {
+        "heapUsed": 5487012,
+        "nodes": 16,
+        "listeners": 159
+      }
+    },
+    {
+      "cycle": 7,
+      "mounted": {
+        "heapUsed": 29127392,
+        "nodes": 4017,
+        "listeners": 10166
+      },
+      "afterUnmount": {
+        "heapUsed": 5499324,
+        "nodes": 16,
+        "listeners": 159
+      }
+    }
+  ],
+  "settled": {
+    "heapUsed": 5499324,
+    "nodes": 16,
+    "listeners": 159
+  },
+  "browser": "156.0.8078.4"
+}
