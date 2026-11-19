@@ -15,9 +15,8 @@ export abstract class TBasePlugin<
 	 * у `TEvented.relay`.
 	 */
 	private _unsubscribes: (() => void)[] = []
+	/** Cleared on `destroy()`: a deferred effect of a destroyed plugin must not start. */
 	private _pluginMount: TPluginMount | undefined
-	/** A deferred effect of a destroyed plugin must not start at acceptance. */
-	private _destroyed = false
 
 	/** The acceptance gate of a prepared mount (`IPluginContext.pluginMount`). */
 	get pluginMount(): TPluginMount | undefined {
@@ -40,7 +39,7 @@ export abstract class TBasePlugin<
 	 * очищается, поэтому повторный вызов отписываться уже не будет.
 	 */
 	destroy(): void {
-		this._destroyed = true
+		this._pluginMount = undefined
 
 		for (const unsubscribe of this._unsubscribes) unsubscribe()
 
@@ -97,7 +96,7 @@ export abstract class TBasePlugin<
 		// A prepared mount subscribes once accepted; the deferred call takes the direct path then
 		if (this._pluginMount && !this._pluginMount.accepted) {
 			this._pluginMount.defer(() => {
-				if (!this._destroyed) this._listenTo(source, event, handler)
+				if (this._pluginMount) this._listenTo(source, event, handler)
 			})
 
 			return
@@ -114,7 +113,7 @@ export abstract class TBasePlugin<
 	protected _whenAccepted(effect: () => void | (() => void)): void {
 		if (this._pluginMount && !this._pluginMount.accepted) {
 			this._pluginMount.defer(() => {
-				if (!this._destroyed) this._whenAccepted(effect)
+				if (this._pluginMount) this._whenAccepted(effect)
 			})
 
 			return
