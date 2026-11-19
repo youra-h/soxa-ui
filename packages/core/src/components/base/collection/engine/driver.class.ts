@@ -10,11 +10,11 @@ import { TCollectionTransactions } from './transactions/transactions.class'
 import type { ICollectionTransactions } from './transactions'
 
 export class TCollectionStorageDriver<T> implements ICollectionStorageDriver<T> {
-	private _transactions?: TCollectionTransactions<T>
+	private _transactions?: TCollectionTransactions
 
 	/** Pending attempts are allocated only when an adapter needs deferred acceptance. */
-	get transactions(): ICollectionTransactions<T> {
-		return (this._transactions ??= new TCollectionTransactions<T>())
+	get transactions(): ICollectionTransactions {
+		return (this._transactions ??= new TCollectionTransactions())
 	}
 
 	private _storage: IStorage<T> // Хранилище элементов коллекции
@@ -27,10 +27,17 @@ export class TCollectionStorageDriver<T> implements ICollectionStorageDriver<T> 
 	/** Сколько команд записи применяется сейчас — с вложенными, из хуков. */
 	private _applying = 0
 
+	private _revision = 0
+
 	public readonly events = new TEvented<TCollectionStorageDriverEvents<T>>()
 
 	constructor(storage: IStorage<T>) {
 		this._storage = storage
+	}
+
+	/** @inheritdoc ICollectionStorageDriver.revision */
+	public get revision(): number {
+		return this._revision
 	}
 
 	/**
@@ -166,7 +173,10 @@ export class TCollectionStorageDriver<T> implements ICollectionStorageDriver<T> 
 		} finally {
 			this._applying--
 
-			if (command.changed) this._queryStrategy.stale()
+			if (command.changed) {
+				this._revision++
+				this._queryStrategy.stale()
+			}
 		}
 	}
 }

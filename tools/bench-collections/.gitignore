@@ -3,5 +3,4 @@ node_modules/
 dist/
 results/
 *.html
-angular/before.ts
-angular/after.ts
+angular/

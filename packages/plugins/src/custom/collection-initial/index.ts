@@ -1,5 +1,5 @@
 import { TBasePlugin } from '../../base'
-import type { IPluginContext } from '../../base'
+import type { IMountSnapshotPort, IPluginContext } from '../../base'
 
 /** Serializable owner declaration, retained once by the native mount. */
 export interface ICollectionInitialSource {
@@ -10,6 +10,14 @@ export interface ICollectionInitialSource {
 export interface ICollectionInitialPanel {
 	readonly value?: string | number
 	readonly id?: string
+}
+
+/** Installation input of a part: the descriptor's `panel` and a prepared mount's declaration. */
+export interface ICollectionInitialPartOptions {
+	readonly prepared?: boolean
+	readonly panel?: boolean
+	readonly id?: string
+	readonly value?: string | number
 }
 
 /** Descriptor carriers consume initial input without exposing it as DOM or core state. */
@@ -26,17 +34,10 @@ export class TCollectionInitialPartPlugin extends TBasePlugin {
 	declaredId: string | undefined
 	declaredValue: string | number | undefined
 	panel = false
-	aria:
-		| {
-				getSnapshot(): Readonly<Record<string, unknown>>
-				subscribe(listener: () => void): () => void
-		  }
-		| undefined
+	/** A prepared panel's link to its tab, merged into the panel's state by the adapter. */
+	aria: IMountSnapshotPort | undefined
 
-	override install(
-		ctx: IPluginContext,
-		options: { prepared?: boolean; id?: string; value?: string | number; panel?: boolean } = {},
-	): void {
+	override install(ctx: IPluginContext, options: ICollectionInitialPartOptions = {}): void {
 		super.install(ctx, options)
 
 		this.prepared = options.prepared === true

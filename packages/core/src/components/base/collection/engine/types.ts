@@ -234,10 +234,17 @@ export interface IQueryStrategy<TItem> {
  */
 export interface ICollectionStorageDriver<TItem> {
 	/** Existing custom drivers can opt into deferred attempt cleanup. */
-	readonly transactions?: ICollectionTransactions<TItem>
+	readonly transactions?: ICollectionTransactions
 
 	/** Снимок сырого состава хранилища — копия, не живая ссылка. */
 	valueOf(): TItem[]
+
+	/**
+	 * Grows with every write that changed the storage, as soon as it is applied,
+	 * even inside `batch()` before its notifications. A reader memoizing a
+	 * derivation of the raw storage compares it instead of waiting for events.
+	 */
+	readonly revision: number
 
 	readonly events: TEvented<TCollectionStorageDriverEvents<TItem>>
 

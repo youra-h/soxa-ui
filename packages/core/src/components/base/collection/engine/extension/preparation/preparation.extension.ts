@@ -1,11 +1,13 @@
 import type { TNoEvents } from '../../../../../../common'
 import type { ICollectionTransaction, ICollectionTransactions } from '../../transactions'
 import { TBaseExtension } from '../base-extension.class'
-import type { IPreparationExtension, IPreparationOptions } from './types'
+import type { IPreparationExtension } from './types'
+import type { ICollectionTransactionOptions } from '../../transactions'
 
 /**
- * Collection policy for initial preparation. The driver owns pending item
- * references, expiry and rollback; this extension decides when initialization is allowed.
+ * The collection's gateway to the driver's pending attempts for prepared
+ * assemblies: only an extension reaches the driver. The driver owns the
+ * attempts, their expiry and rollback.
  */
 export class TPreparationExtension<TItem extends object>
 	extends TBaseExtension<TItem, TNoEvents>
@@ -13,36 +15,11 @@ export class TPreparationExtension<TItem extends object>
 {
 	public readonly name = 'preparation' as const
 
-	private readonly _owners = new Set<object>()
-
-	public accept(owner: object): void {
-		this._owners.add(owner)
+	public prepare(options: ICollectionTransactionOptions): ICollectionTransaction {
+		return this._transactions.begin(options)
 	}
 
-	public release(owner: object): void {
-		this._owners.delete(owner)
-
-		this._transactions.rollbackOwner(owner)
-	}
-
-	/** Initialize once, keeping the same item for commit and full cleanup for rollback. */
-	public prepare(item: TItem, options: IPreparationOptions): ICollectionTransaction {
-		const transaction = this._transactions.begin(item, options)
-
-		try {
-			if (!this._owners.size) {
-				options.initialize?.()
-			}
-		} catch (error) {
-			transaction.rollback()
-
-			throw error
-		}
-
-		return transaction
-	}
-
-	private get _transactions(): ICollectionTransactions<TItem> {
+	private get _transactions(): ICollectionTransactions {
 		const transactions = this._ctx.driver.transactions
 
 		if (!transactions) {

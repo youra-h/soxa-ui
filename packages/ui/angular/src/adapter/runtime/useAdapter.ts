@@ -28,6 +28,7 @@ import {
 	collectionInitialState,
 	toInstanceState,
 } from '@soxa-ui/setup'
+import { onAppTeardown } from './app-teardown'
 import type {
 	DescriptorAllEvents,
 	DescriptorComponentProps,
@@ -162,6 +163,14 @@ function useExchange<C extends IComponentContract>(
 
 	if (serverInitial) state.set(toInstanceState<C>(port.getSnapshot()))
 
+	// The state stops with the consumer: after `detach` the component only
+	// comes down, and its siblings leaving a collection one by one would
+	// refresh it for nothing. The application's teardown detaches every
+	// binding before any view goes (`onAppTeardown`)
+	adapter.events.on('detach', unsubscribe)
+
+	const forget = onAppTeardown(() => adapter.detach())
+
 	// `ngOnInit` creates the binding, on the server too: the hooks run in
 	// template order, and markup items enter the collection in DOM order
 	// Prepared SSR reads a snapshot without taking ownership of an external engine.
@@ -202,6 +211,7 @@ function useExchange<C extends IComponentContract>(
 		},
 
 		destroy(): void {
+			forget()
 			unsubscribe()
 			adapter.destroy()
 		},

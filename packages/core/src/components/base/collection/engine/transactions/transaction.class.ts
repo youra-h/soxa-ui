@@ -4,8 +4,8 @@ import type { ICollectionTransaction } from './types'
 /**
  * One attempt's receipt. Finishing it releases its link to the driver registry.
  */
-export class TCollectionTransaction<TItem> implements ICollectionTransaction {
-	constructor(private _registry: TCollectionTransactions<TItem> | undefined) {}
+export class TCollectionTransaction implements ICollectionTransaction {
+	constructor(private _registry: TCollectionTransactions | undefined) {}
 
 	public commit(): void {
 		this._registry?.commit(this)

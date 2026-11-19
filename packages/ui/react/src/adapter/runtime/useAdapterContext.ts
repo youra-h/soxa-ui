@@ -12,7 +12,7 @@ import {
 	createAdapterContext,
 	TCollectionPreparation,
 	TCollectionPreparationLifetime,
-	collectionNeedsPreparation,
+	collectionPreparationConfig,
 } from '@soxa-ui/setup'
 import type { IAdapterContext, TElevatorFactory } from '@soxa-ui/setup'
 import type { ICollectionTransaction } from '@soxa-ui/core'
@@ -145,14 +145,15 @@ export function useAdapterContext<T extends TAdapterContexts>(
 		// A mount id and a locale given explicitly as options stay with whoever
 		// gave them
 		const create: TCreateAdapterContext = (descriptor, options, config) => {
-			if (collectionNeedsPreparation(descriptor, config)) {
+			// One preparation per assembly pass: its receipt covers every context of it
+			config = collectionPreparationConfig(descriptor, config, () => {
 				preparationLifetime.current ??= new TCollectionPreparationLifetime()
-				preparation ??= new TCollectionPreparation(
+
+				return (preparation ??= new TCollectionPreparation(
 					scope.elevator,
 					preparationLifetime.current,
-				)
-				config = { ...config, preparation: config?.preparation ?? preparation }
-			}
+				))
+			})
 
 			const taken = drafts.take(options)
 

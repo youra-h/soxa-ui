@@ -1,5 +1,6 @@
 import type { TEvented } from '@soxa-ui/core'
 import type { ILocaleSource } from '../locale/types'
+import type { TPluginMount } from './mount.class'
 
 /**
  * Контекст, передаваемый плагину при установке.
@@ -14,6 +15,8 @@ export interface IPluginContext {
 	createId(part: string): string
 	/** Локаль поддерева — та же, что у набора (`IPluginBundle.locale`). */
 	readonly locale: ILocaleSource
+	/** The bundle's acceptance gate: only a prepared mount has one (`TPluginMount`). */
+	readonly pluginMount?: TPluginMount
 }
 
 export type TPluginEvents = {

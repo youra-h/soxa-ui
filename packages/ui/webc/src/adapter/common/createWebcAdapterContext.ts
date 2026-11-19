@@ -2,7 +2,7 @@ import {
 	createAdapterContext,
 	TCollectionPreparation,
 	TCollectionPreparationLifetime,
-	collectionNeedsPreparation,
+	collectionPreparationConfig,
 } from '@soxa-ui/setup'
 import type {
 	IAdapterContext,
@@ -32,23 +32,25 @@ export function createWebcAdapterContext<
 	options: IAdapterContextOptions<TInstance>,
 	config?: IAdapterContextConfig,
 ): IAdapterContext<TContextContract<TInstance, TPlugins>> {
-	if (collectionNeedsPreparation(descriptor, config)) {
-		let lifetime = preparationLifetimes.get(host)
-		if (!lifetime) {
-			lifetime = new TCollectionPreparationLifetime()
-			preparationLifetimes.set(host, lifetime)
-		}
-		config = {
-			...config,
-			preparation:
-				config?.preparation ??
-				new TCollectionPreparation(createWebcElevator(host), lifetime),
-		}
-	}
-
 	return createAdapterContext(
 		descriptor,
 		{ ...options, locale: options.locale ?? nearestLocale(host) },
-		config,
+		collectionPreparationConfig(
+			descriptor,
+			config,
+			() => new TCollectionPreparation(createWebcElevator(host), lifetimeOf(host)),
+		),
 	)
+}
+
+/** A host keeps its sources across reconnection and moves: the element is the native mount. */
+function lifetimeOf(host: Element): TCollectionPreparationLifetime {
+	let lifetime = preparationLifetimes.get(host)
+
+	if (!lifetime) {
+		lifetime = new TCollectionPreparationLifetime()
+		preparationLifetimes.set(host, lifetime)
+	}
+
+	return lifetime
 }

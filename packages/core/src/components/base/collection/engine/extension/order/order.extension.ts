@@ -19,6 +19,11 @@ import { TBaseOwnerItemExtension } from '../base-owner-item-extension.class'
  * весь `batch`. Флаг сбрасывается сразу после эмита, чтобы не протечь в
  * следующий, не связанный с порядком `change:items`.
  *
+ * Positions are memoized per storage revision: every item read its order on
+ * each change, and copying the storage for each `indexOf` made one mount of N
+ * items cost N² copies. Item adapters hear the change only when their own
+ * position moved — appending an item moves no one else.
+ *
  * @template TItem — тип элемента коллекции (пользователь может расширить)
  */
 export class TOrderExtension<TItem extends object = any>
@@ -28,6 +33,10 @@ export class TOrderExtension<TItem extends object = any>
 	readonly name = 'order' as const
 
 	private _orderChanged = false
+
+	private _positions: Map<TItem, number> | undefined
+	private _revision = -1
+	private readonly _adapters = new Set<IOrderItemExtension<TItem>>()
 
 	constructor(options?: IBaseOwnerItemExtensionOptions<TItem, IOrderItemExtension<TItem>>) {
 		super(TOrderItemExtension, options)
@@ -49,13 +58,40 @@ export class TOrderExtension<TItem extends object = any>
 
 			this._orderChanged = false
 			this.events.emit('change:order')
+
+			// A copy: a listener may release adapters while they are notified
+			for (const adapter of [...this._adapters]) adapter.sync()
 		})
+	}
+
+	/** @inheritdoc IExtensionItems.createItem */
+	override createItem(owner: TItem): IOrderItemExtension<TItem> {
+		const adapter = super.createItem(owner)
+
+		this._adapters.add(adapter)
+		adapter.events.on('destroy', () => this._adapters.delete(adapter))
+
+		return adapter
 	}
 
 	/**
 	 * Возвращает актуальный индекс элемента в коллекции.
 	 */
 	getItemOrder(item: TItem): number {
-		return this._ctx.driver.valueOf().indexOf(item)
+		const { driver } = this._ctx
+
+		if (!this._positions || this._revision !== driver.revision) {
+			const positions = new Map<TItem, number>()
+
+			// The first occurrence wins, as `indexOf` did
+			driver.valueOf().forEach((entry, index) => {
+				if (!positions.has(entry)) positions.set(entry, index)
+			})
+
+			this._positions = positions
+			this._revision = driver.revision
+		}
+
+		return this._positions.get(item) ?? -1
 	}
 }

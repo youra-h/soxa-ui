@@ -104,7 +104,13 @@ function useExchange(
 	const [state, write, updates] = createShallowState()
 
 	onCleanup(binding.updates.listen(updates))
-	onCleanup(collectionInitialState(adapter, binding.state).subscribe(write))
+
+	// The state stops with the consumer, on `detach`: the owner detaches its
+	// items before they leave one by one, and the rest would refresh for nothing
+	const release = collectionInitialState(adapter, binding.state).subscribe(write)
+
+	adapter.events.on('detach', release)
+	onCleanup(release)
 
 	createEffect(() => binding.inputs.full(collectionInitialInputs(adapter, props)))
 

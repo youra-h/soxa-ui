@@ -9,8 +9,8 @@ export type TOrderEvents = {
 export interface IOrderExtension<TItem extends object = any>
 	extends IExtension<TItem, TOrderEvents>, IExtensionItems<TItem, IOrderItemExtension<TItem>> {
 	/**
-	 * Возвращает актуальный индекс элемента в коллекции.
-	 * Вычисляется через indexOf — не кэшируется.
+	 * Returns the item's current index in the raw storage, -1 when it is absent.
+	 * Positions are memoized for one storage revision.
 	 */
 	getItemOrder(item: TItem): number
 

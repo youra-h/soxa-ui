@@ -69,14 +69,23 @@ import type {
 	TTabsCollection,
 	TTabsCollectionExtensions,
 } from '@soxa-ui/core'
-import { TCollectionInitialPartPlugin, TIdPlugin, TTabsItemIdsPlugin } from '@soxa-ui/plugins'
+import {
+	TCollectionInitialPartPlugin,
+	TIdPlugin,
+	TMountSnapshot,
+	TTabsItemIdsPlugin,
+} from '@soxa-ui/plugins'
 import type { TCollectionBundlesPlugin } from '@soxa-ui/plugins'
 import type { TInstanceContext } from '../../../protected/adapter/context'
 import { ITEM_CONTEXT_ELEVATOR } from '../../../protected/adapter/elevator/keys'
 import type { TCollectionItemFacade } from '../collection'
 import { collectionInitialSourceOf } from '../collection/initial'
 import { COLLECTION_BUNDLES_ELEVATOR, COLLECTION_MEMBERS_ELEVATOR } from '../collection/keys'
+import { TTabsPanels } from './panels.class'
 import type { ITabsContentBindingOptions } from './types'
+
+/** A prepared panel before it found its tab. */
+const NO_LINK: Readonly<Record<string, unknown>> = Object.freeze({})
 
 /** A Tabs engine: the tabs extension is in it. Any other collection's engine is foreign to a panel. */
 function isTabsEngine(engine: TCollectionEngine<any, any> | undefined): engine is TTabsCollection {
@@ -101,32 +110,6 @@ function findByValue(engine: TTabsCollection, value: unknown): ITabsItem | undef
 }
 
 export class TTabsContentBindingExtension {
-	private _snapshot: Readonly<Record<string, unknown>> = Object.freeze({})
-	private readonly _listeners = new Set<() => void>()
-
-	getSnapshot(): Readonly<Record<string, unknown>> {
-		return this._snapshot
-	}
-
-	subscribe(listener: () => void): () => void {
-		this._listeners.add(listener)
-
-		return () => this._listeners.delete(listener)
-	}
-
-	/** Publish only this panel mount's relationship, leaving shared collection models untouched. */
-	private _write(link: Readonly<Record<string, unknown>>): void {
-		if (
-			this._snapshot.id === link.id &&
-			this._snapshot['aria-labelledby'] === link['aria-labelledby']
-		)
-			return
-
-		this._snapshot = Object.freeze(link)
-
-		for (const listener of this._listeners) listener()
-	}
-
 	constructor(
 		context: TInstanceContext<TCollectionItemFacade>,
 		options: ITabsContentBindingOptions,
@@ -144,12 +127,19 @@ export class TTabsContentBindingExtension {
 		const bundles = registryOf(elevator(COLLECTION_BUNDLES_ELEVATOR).up(), engine)
 		/** The collection's members, lowered beside the engine as the registry is. */
 		const members = elevator(COLLECTION_MEMBERS_ELEVATOR).up()
+		/** Wakes the panel only for its own value and its own tab. */
+		const panels = TTabsPanels.of(engine, bundles)
 		/** The `id` the application gave the panel. */
 		const idPlugin = context.bundle?.get(TIdPlugin)
 		const part = context.bundle?.get(TCollectionInitialPartPlugin)
 		const initial = part?.prepared ? collectionInitialSourceOf(elevator) : undefined
+		/**
+		 * A prepared panel's side of the link, kept beside the mount: the
+		 * shared models stay untouched until the framework accepts it.
+		 */
+		const link = initial ? new TMountSnapshot(NO_LINK) : undefined
 
-		if (initial && part) part.aria = this
+		if (part && link) part.aria = link
 
 		/** The tab bound now. */
 		let boundItem: ITabsItem | undefined
@@ -160,26 +150,35 @@ export class TTabsContentBindingExtension {
 		/** The context is accepted: subscribing to foreign buses is allowed. */
 		let attached = false
 		let releaseIds: (() => void) | undefined
+		/** Watching for the panel's value to enter, and for its tab's bundle. */
+		let stopValue: (() => void) | undefined
+		let stopTab: (() => void) | undefined
 
 		/**
 		 * The panel's side: the application's `id`, else the one the tab wrote,
 		 * and the link to the tab. Without a tab only the own `id` stays.
 		 */
 		const linkPanel = (): void => {
-			const prepared = boundItem ? initial?.link(boundItem) : undefined
-			const tab = boundIds?.getSnapshot()
-			const id =
-				idPlugin?.id ??
-				(initial
-					? (tab?.['aria-controls'] ?? prepared?.panelId)
-					: boundItem?.aria.get('aria-controls'))
-			const labelledby = initial ? (tab?.id ?? prepared?.tabId) : boundItem?.aria.get('id')
-
-			if (initial) this._write({ id, 'aria-labelledby': labelledby })
-			else {
+			if (!link) {
 				content.aria.add('id', idPlugin?.id ?? boundItem?.aria.get('aria-controls'))
 				content.aria.add('aria-labelledby', boundItem?.aria.get('id'))
+
+				return
 			}
+
+			const prepared = boundItem ? initial?.link(boundItem) : undefined
+			// A prepared tab keeps its link beside its mount, an ordinary one in its model
+			const tab = boundIds?.link?.getSnapshot()
+			const tabId = boundIds && !tab ? boundItem?.aria.get('id') : tab?.id
+			const controls =
+				boundIds && !tab ? boundItem?.aria.get('aria-controls') : tab?.['aria-controls']
+			const id = idPlugin?.id ?? controls ?? prepared?.panelId
+			const labelledby = tabId ?? prepared?.tabId
+			const current = link.getSnapshot()
+
+			if (current.id === id && current['aria-labelledby'] === labelledby) return
+
+			link.publish(Object.freeze({ id, 'aria-labelledby': labelledby }))
 		}
 
 		/** The tab's `aria-controls` no longer follows this panel: back to the formula. */
@@ -212,7 +211,7 @@ export class TTabsContentBindingExtension {
 			boundIds = ids
 			ids.bindPanel(idPlugin)
 
-			if (initial) releaseIds = ids.subscribe(linkPanel)
+			releaseIds = link ? ids.link?.subscribe(linkPanel) : undefined
 
 			linkPanel()
 		}
@@ -224,6 +223,9 @@ export class TTabsContentBindingExtension {
 		 */
 		const unbind = (): void => {
 			if (attached) boundItem?.events.off('change:aria', linkPanel)
+
+			stopTab?.()
+			stopTab = undefined
 
 			unlinkTab()
 
@@ -242,7 +244,7 @@ export class TTabsContentBindingExtension {
 				boundContext = new TItemContext(item, extensions)
 				boundItem = item
 
-				if (attached) item.events.on('change:aria', linkPanel)
+				if (attached) watchTab(item)
 			}
 
 			linkPanel()
@@ -250,6 +252,20 @@ export class TTabsContentBindingExtension {
 
 			// Last: the facade reports the activity change once the binding is in place
 			if (boundContext) context.instance.setContext(boundContext)
+		}
+
+		/** The tab's own bus and its bundle's registrations: only for an accepted panel. */
+		const watchTab = (item: ITabsItem): void => {
+			item.events.on('change:aria', linkPanel)
+			stopTab = panels.watchTab(item, linkTab)
+		}
+
+		/** A new value: watch for its tab and bind to the one there now. */
+		const watchValue = (): void => {
+			stopValue?.()
+			stopValue = panels.watchValue(content.value, resolve)
+
+			resolve()
 		}
 
 		const resolve = (): void => {
@@ -267,37 +283,36 @@ export class TTabsContentBindingExtension {
 
 			// The tab found on assembly: subscribed now, and what it wrote since
 			// is read after subscribing
-			boundItem?.events.on('change:aria', linkPanel)
+			if (boundItem) watchTab(boundItem)
+
 			idPlugin?.events.on('change:id', linkPanel)
 
 			linkPanel()
 			linkTab()
 
-			resolve()
-
 			// The panel may mount before its tab, and the tab's bundle may enter
 			// the registry after the panel or again
-			engine.extensions.plain.events.on('item:added', resolve)
-			bundles?.events.on('bundle:registered', linkTab)
-			content.events.on('change:value', resolve)
+			watchValue()
+			content.events.on('change:value', watchValue)
 		})
 
 		context.events.on('destroy', () => {
-			engine.extensions.plain.events.off('item:added', resolve)
-			bundles?.events.off('bundle:registered', linkTab)
-			content.events.off('change:value', resolve)
+			stopValue?.()
+			stopValue = undefined
+
+			content.events.off('change:value', watchValue)
 			idPlugin?.events.off('change:id', linkPanel)
 
 			members?.delete(adapter, context)
 			unbind()
 			attached = false
 
-			if (!initial) {
+			if (link) {
+				link.clear()
+			} else {
 				content.aria.remove('id')
 				content.aria.remove('aria-labelledby')
 			}
-
-			this._listeners.clear()
 		})
 	}
 }

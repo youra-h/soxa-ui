@@ -10,15 +10,14 @@ import type {
  * Driver-owned pending operations. Storage stays on its normal command path;
  * rollback releases an attempt through the callback supplied by its creator.
  */
-export class TCollectionTransactions<TItem> implements ICollectionTransactions<TItem> {
-	private readonly _pending = new Map<TCollectionTransaction<TItem>, TPendingTransaction<TItem>>()
+export class TCollectionTransactions implements ICollectionTransactions {
+	private readonly _pending = new Map<TCollectionTransaction, TPendingTransaction>()
 	private _timer: ReturnType<typeof setTimeout> | undefined
 	private _deadline = Infinity
-	private _sweeping = 0
+	/** Expiry is running: rollbacks it makes reschedule once, after it. */
+	private _sweeping = false
 
-	public begin(item: TItem, options: ICollectionTransactionOptions): ICollectionTransaction {
-		const { owner, timeout, rollback } = options
-
+	public begin({ timeout, rollback }: ICollectionTransactionOptions): ICollectionTransaction {
 		if (!Number.isFinite(timeout) || timeout < 0) {
 			throw new Error('Collection transaction timeout must be finite and non-negative')
 		}
@@ -26,48 +25,30 @@ export class TCollectionTransactions<TItem> implements ICollectionTransactions<T
 		const transaction = new TCollectionTransaction(this)
 		const deadline = Date.now() + timeout
 
-		this._pending.set(transaction, { item, owner, deadline, rollback })
+		this._pending.set(transaction, { deadline, rollback })
 
 		this._schedule(deadline)
 
 		return transaction
 	}
 
-	public commit(transaction: TCollectionTransaction<TItem>): void {
+	public commit(transaction: TCollectionTransaction): void {
 		this._take(transaction)
 	}
 
-	public cancel(transaction: TCollectionTransaction<TItem>): void {
+	public cancel(transaction: TCollectionTransaction): void {
 		this._take(transaction)
 	}
 
-	public rollback(transaction: TCollectionTransaction<TItem>): void {
-		// Forget first: cleanup may cancel this receipt or release another owner.
+	public rollback(transaction: TCollectionTransaction): void {
+		// Forget first: cleanup may cancel this receipt or release another one.
 		const pending = this._take(transaction)
 
 		pending?.rollback()
 	}
 
-	/** Release only this owner's unconfirmed attempts, including reentrant cleanup. */
-	public rollbackOwner(owner: object): void {
-		this._sweeping++
-
-		try {
-			for (const [transaction, pending] of [...this._pending]) {
-				if (pending.owner === owner) {
-					this.rollback(transaction)
-				}
-			}
-		} finally {
-			this._sweeping--
-			this._schedule()
-		}
-	}
-
 	/** Remove ownership before running callbacks; a completed receipt must retain nothing. */
-	private _take(
-		transaction: TCollectionTransaction<TItem>,
-	): TPendingTransaction<TItem> | undefined {
+	private _take(transaction: TCollectionTransaction): TPendingTransaction | undefined {
 		const pending = this._pending.get(transaction)
 
 		this._pending.delete(transaction)
@@ -127,13 +108,13 @@ export class TCollectionTransactions<TItem> implements ICollectionTransactions<T
 		}
 	}
 
-	private static _expirePending<TItem>(registry: WeakRef<TCollectionTransactions<TItem>>): void {
+	private static _expirePending(registry: WeakRef<TCollectionTransactions>): void {
 		registry.deref()?._expire()
 	}
 
-	private readonly _expire = (): void => {
+	private _expire(): void {
 		this._timer = undefined
-		this._sweeping++
+		this._sweeping = true
 
 		const now = Date.now()
 
@@ -144,7 +125,7 @@ export class TCollectionTransactions<TItem> implements ICollectionTransactions<T
 				}
 			}
 		} finally {
-			this._sweeping--
+			this._sweeping = false
 			this._schedule()
 		}
 	}

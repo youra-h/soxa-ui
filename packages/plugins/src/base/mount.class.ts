@@ -1,45 +1,33 @@
-/** Foreign subscriptions begin only when the native framework accepts this mount. */
+/**
+ * The acceptance gate of one prepared mount, shared by all plugins of its bundle.
+ *
+ * A prepared assembly may be discarded before the framework accepts it (a
+ * React render under Suspense), so its plugins defer subscriptions to foreign
+ * buses until then. The gate keeps only the queue: accepted, it drops the
+ * queue and later effects run at once, so an accepted mount retains nothing
+ * beyond an ordinary one.
+ */
 export class TPluginMount {
-	private _accepted = false
-	private readonly _pending = new Set<() => void>()
+	private _pending: (() => void)[] | undefined = []
 
-	/** Queue an effect until acceptance; the returned release also cancels an unstarted effect. */
-	defer(effect: () => void | (() => void)): () => void {
-		let pending = true
-		let cleanup: (() => void) | undefined
-
-		const start = (): void => {
-			if (!pending) return
-
-			pending = false
-			this._pending.delete(start)
-
-			cleanup = effect() ?? undefined
-		}
-
-		if (this._accepted) start()
-		else this._pending.add(start)
-
-		return () => {
-			pending = false
-			this._pending.delete(start)
-
-			cleanup?.()
-			cleanup = undefined
-		}
+	get accepted(): boolean {
+		return this._pending === undefined
 	}
 
-	/** Start queued effects once; effects registered afterwards may run immediately. */
+	/** Run `effect` at acceptance, or now when the mount is already accepted. */
+	defer(effect: () => void): void {
+		if (this._pending) this._pending.push(effect)
+		else effect()
+	}
+
+	/** Start the queued effects once, in the order they were deferred. */
 	accept(): void {
-		if (this._accepted) return
+		const pending = this._pending
 
-		this._accepted = true
+		if (!pending) return
 
-		for (const start of this._pending) start()
+		this._pending = undefined
+
+		for (const effect of pending) effect()
 	}
-}
-
-/** Common installation input; it carries no component or collection state. */
-export interface IPluginMountOptions {
-	readonly pluginMount?: TPluginMount
 }

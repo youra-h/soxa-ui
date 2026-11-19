@@ -21,9 +21,9 @@ export class TCollectionInitialExtension {
 
 			source.materialize(context.instance.engine, context.bundle)
 
-			context.events.on('attach', () =>
-				context.bundle?.get(TCollectionInitialPlugin)?.pluginMount?.accept(),
-			)
+			const pluginMount = context.bundle.get(TCollectionInitialPlugin)?.pluginMount
+
+			context.events.on('attach', () => pluginMount?.accept())
 		}
 
 		elevator(COLLECTION_INITIAL_ELEVATOR).down(source ?? null)

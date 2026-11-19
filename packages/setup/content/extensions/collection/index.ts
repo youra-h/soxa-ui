@@ -14,18 +14,18 @@ export {
 	TCollectionPreparationLifetime,
 	collectionPreparedSource,
 	collectionNeedsPreparation,
+	collectionPreparationConfig,
 } from './preparation.class'
 export { TCollectionInitialExtension } from './initial.extension.class'
 export {
 	createCollectionInitialSource,
 	collectionInitialOwnerOptions,
-	collectionInitialInputs,
-	collectionInitialPrepared,
-	collectionInitialState,
 	collectionInitialSourceOf,
 	resolveCollectionInitialItem,
 	resolveCollectionInitialPanel,
 } from './initial'
+export { collectionInitialInputs } from './initial-inputs'
+export { collectionInitialPrepared, collectionInitialState } from './initial-state'
 export type {
 	ICollectionInitialSource,
 	ICollectionInitialPanel,
@@ -33,11 +33,8 @@ export type {
 	ICollectionInitialOptions,
 	ICollectionInitialExtensionOptions,
 	TCollectionInitialMount,
+	TInitialPropsNormalizer,
 } from './initial.types'
 
 export { TCollectionAriaState } from './aria-state.class'
-export type {
-	ICollectionAriaLink,
-	ICollectionAriaStateOptions,
-	TCollectionStatePort,
-} from './aria-state.types'
+export type { ICollectionAriaStateOptions, TCollectionStatePort } from './aria-state.types'

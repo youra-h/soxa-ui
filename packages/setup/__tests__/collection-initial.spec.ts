@@ -613,7 +613,7 @@ it('consumes a frozen initial prop without evaluating native child getters', () 
 		},
 	})
 	const source = createCollectionInitialSource(props)
-	const options = collectionInitialOwnerOptions(TabsDescriptor(), { props }, source)
+	const options = collectionInitialOwnerOptions({ props }, source)
 	expect(children).not.toHaveBeenCalled()
 	expect(Reflect.get(options.props ?? {}, 'initial')).toBeUndefined()
 	expect(Reflect.get(options.props ?? {}, 'children')).toBe('lazy children')

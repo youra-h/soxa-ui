@@ -1,7 +1,7 @@
 import {
 	createAdapterContext,
 	TCollectionPreparation,
-	collectionNeedsPreparation,
+	collectionPreparationConfig,
 } from '@soxa-ui/setup'
 import { useElevator } from '../elevator'
 import type {
@@ -35,11 +35,10 @@ export function createSvelteAdapterContext<
 	return createAdapterContext(
 		descriptor,
 		{ ...options, locale: options.locale ?? nearestLocale() },
-		collectionNeedsPreparation(descriptor, config)
-			? {
-					...config,
-					preparation: config?.preparation ?? new TCollectionPreparation(useElevator()),
-				}
-			: config,
+		collectionPreparationConfig(
+			descriptor,
+			config,
+			() => new TCollectionPreparation(useElevator()),
+		),
 	)
 }

@@ -180,11 +180,14 @@ function useExchange(
 	// 1. Subscribe right away, not in an effect: there are no effects on the
 	// server. The write is untracked: the core changes in the middle of
 	// rendering too
-	onDestroy(
-		collectionInitialState(adapter, exchange.state).subscribe((name, value) => {
-			untrack(() => write(values, name, value))
-		}),
-	)
+	const release = collectionInitialState(adapter, exchange.state).subscribe((name, value) => {
+		untrack(() => write(values, name, value))
+	})
+
+	// The state stops with the consumer, on `detach`: the owner detaches its
+	// items before they leave one by one, and the rest would refresh for nothing
+	adapter.events.on('detach', release)
+	onDestroy(release)
 
 	// 2. The effect reads all props, the binding writes only the changed ones
 	$effect(() => {

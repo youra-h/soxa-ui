@@ -1,7 +1,7 @@
 import {
 	createAdapterContext,
 	TCollectionPreparation,
-	collectionNeedsPreparation,
+	collectionPreparationConfig,
 } from '@soxa-ui/setup'
 import { AngularElevatorFactory } from '../elevator'
 import { nearestLocale } from '../locale/context'
@@ -18,11 +18,12 @@ export const createAngularAdapterContext: typeof createAdapterContext = (
 	options,
 	config,
 ) => {
-	if (collectionNeedsPreparation(descriptor, config))
-		config = {
-			...config,
-			preparation: config?.preparation ?? new TCollectionPreparation(AngularElevatorFactory),
-		}
+	config = collectionPreparationConfig(
+		descriptor,
+		config,
+		() => new TCollectionPreparation(AngularElevatorFactory),
+	)
+
 	// Чужой набор (фасад коллекции): id и локаль у того, кто его собрал, —
 	// номер сборки на фасад не тратится, и номера сервера и браузера сходятся
 	if (config?.bundle !== undefined) return createAdapterContext(descriptor, options, config)

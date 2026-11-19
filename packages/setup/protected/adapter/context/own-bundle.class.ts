@@ -75,7 +75,7 @@ export class TOwnBundle implements IBundleTenancy {
 		private readonly _context: IBundleContext,
 		mount: TBundleMount = {},
 	) {
-		const bundle = new TPluginBundle(_instance, mount.mountId, mount.locale)
+		const bundle = new TPluginBundle(_instance, mount.mountId, mount.locale, mount.pluginMount)
 
 		const options = new Map<TPluginCtor, object>()
 

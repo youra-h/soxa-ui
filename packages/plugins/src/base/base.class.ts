@@ -1,7 +1,7 @@
 import type { IListenable, IPlugin, IPluginContext, TPluginEvents } from './types'
 import { TEvented } from '@soxa-ui/core'
 import type { TEventSink } from '@soxa-ui/core'
-import { TPluginMount } from './mount.class'
+import type { TPluginMount } from './mount.class'
 
 export abstract class TBasePlugin<
 	TInstance = any,
@@ -16,16 +16,16 @@ export abstract class TBasePlugin<
 	 */
 	private _unsubscribes: (() => void)[] = []
 	private _pluginMount: TPluginMount | undefined
+	/** A deferred effect of a destroyed plugin must not start at acceptance. */
+	private _destroyed = false
 
+	/** The acceptance gate of a prepared mount (`IPluginContext.pluginMount`). */
 	get pluginMount(): TPluginMount | undefined {
 		return this._pluginMount
 	}
 
 	install(ctx: IPluginContext, options?: unknown): void {
-		const mount: unknown =
-			options && typeof options === 'object' ? Reflect.get(options, 'pluginMount') : undefined
-
-		this._pluginMount = mount instanceof TPluginMount ? mount : undefined
+		this._pluginMount = ctx.pluginMount
 
 		this._sink.emit('install', ctx, options)
 	}
@@ -40,6 +40,8 @@ export abstract class TBasePlugin<
 	 * очищается, поэтому повторный вызов отписываться уже не будет.
 	 */
 	destroy(): void {
+		this._destroyed = true
+
 		for (const unsubscribe of this._unsubscribes) unsubscribe()
 
 		this._unsubscribes = []
@@ -92,16 +94,33 @@ export abstract class TBasePlugin<
 	): void {
 		if (!source) return
 
-		this._whenAccepted(() => {
-			source.on(event, handler)
+		// A prepared mount subscribes once accepted; the deferred call takes the direct path then
+		if (this._pluginMount && !this._pluginMount.accepted) {
+			this._pluginMount.defer(() => {
+				if (!this._destroyed) this._listenTo(source, event, handler)
+			})
 
-			return () => source.off(event, handler)
-		})
+			return
+		}
+
+		source.on(event, handler)
+		this._unsubscribes.push(() => source.off(event, handler))
 	}
 
-	/** Queue a foreign effect while assembly may still be discarded. */
+	/**
+	 * Run a foreign effect now, or at acceptance of a prepared mount, whose
+	 * assembly may still be discarded. The returned release runs on `destroy()`.
+	 */
 	protected _whenAccepted(effect: () => void | (() => void)): void {
-		const release = this._pluginMount ? this._pluginMount.defer(effect) : effect()
+		if (this._pluginMount && !this._pluginMount.accepted) {
+			this._pluginMount.defer(() => {
+				if (!this._destroyed) this._whenAccepted(effect)
+			})
+
+			return
+		}
+
+		const release = effect()
 
 		if (release) this._unsubscribes.push(release)
 	}

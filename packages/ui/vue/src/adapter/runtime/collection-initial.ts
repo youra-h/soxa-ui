@@ -1,33 +1,20 @@
-import { collectionInitialSourceOf } from '@soxa-ui/setup'
-import { VueElevatorFactory } from '../elevator'
-import { createCollectionInitialSource } from '@soxa-ui/setup'
 import { getCurrentInstance, toRaw } from 'vue'
 
-export function useCollectionInitial(props: object, panelDefaultValue?: string | number) {
-	return createCollectionInitialSource(
-		{
-			...props,
-			initial: toRaw(Reflect.get(props, 'initial')),
-			engine: toRaw(Reflect.get(props, 'engine')),
-		},
-		panelDefaultValue,
-	)
-}
-
-/** Vue's generated Boolean defaults are not explicitly supplied model inputs. */
+/**
+ * A prepared part's props as the consumer wrote them: Vue fills every declared
+ * Boolean with a generated `false`, and those defaults are not inputs that
+ * conflict with the declared source. Applied by the shared preparation only to
+ * a part it resolves as prepared.
+ */
 export function initialAssemblyProps<T extends object>(props: T): T {
-	const source = collectionInitialSourceOf(VueElevatorFactory)
-	const ctrl: unknown = toRaw(Reflect.get(props, 'ctrl'))
-	if (
-		Reflect.get(props, 'initial') === undefined &&
-		(typeof ctrl !== 'object' || ctrl === null || source?.ordinal(ctrl) === undefined)
-	)
-		return props
 	const raw = getCurrentInstance()?.vnode.props ?? {}
+
 	return new Proxy(props, {
 		get(target, key, receiver) {
 			if (typeof key !== 'string') return Reflect.get(target, key, receiver)
+
 			const kebab = key.replace(/[A-Z]/g, (letter) => '-' + letter.toLowerCase())
+
 			return Object.hasOwn(raw, key) || Object.hasOwn(raw, kebab)
 				? toRaw(Reflect.get(target, key, receiver))
 				: undefined

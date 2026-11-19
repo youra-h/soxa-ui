@@ -7,7 +7,7 @@ for (const fw of ['vue', 'react', 'solid', 'svelte', 'angular', 'webc'])
 		`<!doctype html><html data-so-theme="oren"><head><meta charset="utf-8"></head><body><div id="root"></div><script type="module" src="./${fw}.${['react', 'solid'].includes(fw) ? 'tsx' : 'ts'}"></script></body></html>`,
 	)
 mkdirSync(resolve(root, 'angular'), { recursive: true })
-for (const variant of ['before', 'after']) {
+for (const variant of ['before', 'after', 'main', 'head']) {
 	const tabs = (
 		mode,
 	) => `<div so-tabs aria_label="Items" ${mode === 'initial' ? '[initial]="spec.source"' : mode === 'data' ? '[items]="spec.items"' : ''}>
@@ -16,7 +16,7 @@ ${mode === 'declarative' ? '@for(item of spec.items;track item.value;let i=$inde
 	const tags = (mode) =>
 		`<div so-tags mode="single" aria_label="Items" ${mode === 'initial' ? '[initial]="spec.source"' : mode === 'data' ? '[items]="spec.items"' : ''}>${mode === 'declarative' ? '@for(item of spec.items;track item.value;let i=$index){<div so-tags-item [value]="item.value" [text]="item.text" [selected]="i===1"></div>}' : ''}</div>`
 	const branches = (fn) =>
-		`${variant === 'after' ? `@if(spec.mode==='initial'){${fn('initial')}}@else if` : '@if'}(spec.mode==='data'){${fn('data')}}@else{${fn('declarative')}}`
+		`${variant !== 'before' ? `@if(spec.mode==='initial'){${fn('initial')}}@else if` : '@if'}(spec.mode==='data'){${fn('data')}}@else{${fn('declarative')}}`
 	writeFileSync(
 		resolve(root, `angular/${variant}.ts`),
 		`import {Component,inject,InjectionToken,ChangeDetectionStrategy} from '@angular/core'

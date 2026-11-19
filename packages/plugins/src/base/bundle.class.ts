@@ -3,6 +3,7 @@ import { enUS } from '../locale/locales/en'
 import { TLocaleSource } from '../locale/source.class'
 import type { ILocaleSource } from '../locale/types'
 import type { IPlugin, IPluginBundle, IPluginConstructor, TPluginBundleEvents } from './types'
+import type { TPluginMount } from './mount.class'
 
 /** Наборов без id монтирования от адаптера: номер такого монтирования в процессе. */
 let unnamedMounts = 0
@@ -20,10 +21,15 @@ export class TPluginBundle implements IPluginBundle {
 
 	readonly locale: ILocaleSource
 
+	/**
+	 * @param pluginMount the acceptance gate of a prepared mount: its plugins
+	 * defer foreign subscriptions until the framework accepts the mount
+	 */
 	constructor(
 		private readonly _instance: object,
 		mountId?: string,
 		locale?: ILocaleSource,
+		private readonly _pluginMount?: TPluginMount,
 	) {
 		this._mountId = mountId || `so-${++unnamedMounts}`
 		// Без провайдера — своя английская: источник у набора свой, а не общий
@@ -62,6 +68,7 @@ export class TPluginBundle implements IPluginBundle {
 				getInstance: this.getInstance.bind(this),
 				createId: this.createId.bind(this),
 				locale: this.locale,
+				pluginMount: this._pluginMount,
 			},
 			options,
 		)

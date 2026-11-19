@@ -10,7 +10,7 @@ function recordOf(value: unknown): Readonly<Record<string, unknown>> {
 		: {}
 }
 
-const EMPTY = Object.freeze({})
+const EMPTY: Readonly<Record<string, unknown>> = Object.freeze({})
 
 /** The core owns state; these overlays belong to one DOM mount and never write a shared model. */
 export class TCollectionAriaState {
@@ -28,34 +28,25 @@ export class TCollectionAriaState {
 		const link = this._options.link?.getSnapshot() ?? EMPTY
 		const outputs = (this._options.outputs ?? []).map((output) => output.getSnapshot())
 
-		// Subscribers must see the same object while all source snapshots are unchanged.
+		// Subscribers must see the same object while all source snapshots are unchanged
 		if (
 			this._snapshot &&
 			this._base === base &&
 			this._link === link &&
 			outputs.every((output, index) => output === this._outputs[index])
-		)
+		) {
 			return this._snapshot
+		}
 
 		const snapshot = { ...base }
 
-		// Cache each overlay separately so changing one field does not invalidate the others.
-		const combine = (name: string, patch: unknown): void => {
-			const cached = this._fields.get(name)
+		if (this._options.link) snapshot.aria = this._combine('aria', base.aria, link)
 
-			if (cached && cached.base === base[name] && cached.link === patch)
-				snapshot[name] = cached.value
-			else {
-				const value = Object.freeze({ ...recordOf(base[name]), ...recordOf(patch) })
-				this._fields.set(name, { base: base[name], link: patch, value })
-				snapshot[name] = value
+		for (const output of outputs) {
+			for (const [name, value] of Object.entries(output)) {
+				snapshot[name] = this._combine(name, base[name], value)
 			}
 		}
-
-		if (this._options.link) combine('aria', link)
-
-		for (const output of outputs)
-			for (const [name, value] of Object.entries(output)) combine(name, value)
 
 		this._base = base
 		this._link = link
@@ -65,29 +56,47 @@ export class TCollectionAriaState {
 		return this._snapshot
 	}
 
-	/** Forward source changes through the merged view and release every subscription together. */
+	/**
+	 * Forward source changes through the merged view and release every
+	 * subscription together. A field without an overlay passes as the
+	 * exchange gave it: no merged snapshot is rebuilt for it.
+	 */
 	subscribe(listener: TStateListener): () => void {
-		const releases = (this._options.outputs ?? []).map((output) =>
-			output.subscribe(() => {
-				const snapshot = this.getSnapshot()
+		const { state, link, outputs = [] } = this._options
+		const merged = (name: string): void => listener(name, this.getSnapshot()[name])
+		const overlaid = (name: string): boolean =>
+			(name === 'aria' && link !== undefined) ||
+			outputs.some((output) => Object.hasOwn(output.getSnapshot(), name))
 
-				for (const name of Object.keys(output.getSnapshot())) listener(name, snapshot[name])
+		const releases = outputs.map((output) =>
+			output.subscribe(() => {
+				for (const name of Object.keys(output.getSnapshot())) merged(name)
 			}),
 		)
 
-		if (this._options.link)
-			releases.push(
-				this._options.link.subscribe(() => listener('aria', this.getSnapshot().aria)),
-			)
+		if (link) releases.push(link.subscribe(() => merged('aria')))
 
 		releases.push(
-			this._options.state.subscribe((name) => {
-				listener(name, this.getSnapshot()[name])
-			}),
+			state.subscribe((name, value) =>
+				overlaid(name) ? merged(name) : listener(name, value),
+			),
 		)
 
 		return () => {
 			for (const release of releases) release()
 		}
+	}
+
+	/** Cache each overlaid field separately so changing one does not invalidate the others. */
+	private _combine(name: string, base: unknown, patch: unknown): unknown {
+		const cached = this._fields.get(name)
+
+		if (cached && cached.base === base && cached.link === patch) return cached.value
+
+		const value = Object.freeze({ ...recordOf(base), ...recordOf(patch) })
+
+		this._fields.set(name, { base, link: patch, value })
+
+		return value
 	}
 }
