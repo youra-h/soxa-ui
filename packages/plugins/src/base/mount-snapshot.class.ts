@@ -1,3 +1,5 @@
+type TListener = () => void
+
 /** A read-only port to a mount-local record: what the merged state of a prepared mount reads. */
 export interface IMountSnapshotPort<T extends object = Readonly<Record<string, unknown>>> {
 	getSnapshot(): T
@@ -18,7 +20,8 @@ export interface IMountSnapshotPort<T extends object = Readonly<Record<string, u
 export class TMountSnapshot<
 	T extends object = Readonly<Record<string, unknown>>,
 > implements IMountSnapshotPort<T> {
-	private _listeners: Set<() => void> | undefined
+	/** A mount's record is read by one merged state: a single listener is kept as is. */
+	private _listeners: TListener | readonly TListener[] | undefined
 
 	constructor(private _snapshot: T) {}
 
@@ -26,23 +29,43 @@ export class TMountSnapshot<
 		return this._snapshot
 	}
 
-	subscribe(listener: () => void): () => void {
-		const listeners = (this._listeners ??= new Set())
+	subscribe(listener: TListener): () => void {
+		const current = this._listeners
 
-		listeners.add(listener)
+		this._listeners =
+			current === undefined
+				? listener
+				: typeof current === 'function'
+					? [current, listener]
+					: [...current, listener]
 
-		return () => listeners.delete(listener)
+		return () => this._unsubscribe(listener)
 	}
 
 	/** Replace the record; the caller decides whether it changed. */
 	publish(snapshot: T): void {
 		this._snapshot = snapshot
 
-		for (const listener of this._listeners ?? []) listener()
+		const listeners = this._listeners
+
+		if (typeof listeners === 'function') listeners()
+		else if (listeners) for (const listener of listeners) listener()
 	}
 
 	/** The mount ended: nobody reads it any more. */
 	clear(): void {
 		this._listeners = undefined
+	}
+
+	private _unsubscribe(listener: TListener): void {
+		const current = this._listeners
+
+		if (current === listener) {
+			this._listeners = undefined
+		} else if (Array.isArray(current)) {
+			const rest = current.filter((each) => each !== listener)
+
+			this._listeners = rest.length === 1 ? rest[0] : rest
+		}
 	}
 }

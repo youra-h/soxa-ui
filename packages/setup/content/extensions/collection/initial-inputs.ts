@@ -68,25 +68,30 @@ export function initialPropsView(props: object, overrides: object): object {
 /**
  * The handler behind a prepared part's props. It is the same for every props
  * object of the mount, so a framework passing new props on each render
- * allocates only the proxy.
+ * allocates only the proxy. A class, not an object of closures: a mount keeps
+ * one small object instead of two functions and their scope.
  */
-function partHandler(
-	managed: ReadonlySet<string>,
-	id: string | undefined,
-	panel: { value: string | number | undefined } | undefined,
-): ProxyHandler<object> {
-	return {
-		get(target, key, receiver) {
-			if (key === 'id') return id
-			if (key === 'value' && panel) return panel.value
+class TPartPropsHandler implements ProxyHandler<object> {
+	constructor(
+		private readonly _managed: ReadonlySet<string>,
+		private readonly _id: string | undefined,
+		private readonly _panel: boolean,
+		private readonly _value: string | number | undefined,
+	) {}
 
-			return typeof key === 'string' && managed.has(key)
-				? undefined
-				: Reflect.get(target, key, receiver)
-		},
-		has(target, key) {
-			return !(typeof key === 'string' && managed.has(key)) && Reflect.has(target, key)
-		},
+	get(target: object, key: PropertyKey, receiver: unknown): unknown {
+		if (key === 'id') return this._id
+		if (key === 'value' && this._panel) return this._value
+
+		return this._hides(key) ? undefined : Reflect.get(target, key, receiver)
+	}
+
+	has(target: object, key: PropertyKey): boolean {
+		return !this._hides(key) && Reflect.has(target, key)
+	}
+
+	private _hides(key: PropertyKey): boolean {
+		return typeof key === 'string' && this._managed.has(key)
 	}
 }
 
@@ -107,10 +112,11 @@ function handlerOf(descriptor: TPartDescriptor, part: TCollectionInitialPartPlug
 	let handler = mounts.get(part)
 
 	if (!handler) {
-		handler = partHandler(
+		handler = new TPartPropsHandler(
 			partInputNames(descriptor),
 			part.declaredId,
-			part.panel ? { value: part.declaredValue } : undefined,
+			part.panel,
+			part.declaredValue,
 		)
 		mounts.set(part, handler)
 	}
@@ -119,13 +125,8 @@ function handlerOf(descriptor: TPartDescriptor, part: TCollectionInitialPartPlug
 }
 
 /** Prepared data owns model inputs; native runtimes keep plugin and attribute inputs live. */
-export function partProps(
-	descriptor: TPartDescriptor,
-	props: object,
-	id?: string,
-	panel?: { value: string | number | undefined },
-): object {
-	return new Proxy(props, partHandler(partInputNames(descriptor), id, panel))
+export function partProps(descriptor: TPartDescriptor, props: object, id?: string): object {
+	return new Proxy(props, new TPartPropsHandler(partInputNames(descriptor), id, false, undefined))
 }
 
 /** Hide consumed inputs from later exchanges so they cannot overwrite prepared models. */
