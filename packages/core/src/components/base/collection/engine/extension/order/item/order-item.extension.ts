@@ -9,7 +9,7 @@ import { TBaseItemExtension } from '../../base-item-extension.class'
  * number it gave out, so the item's `change:order` sounds only when its own
  * position moved.
  *
- * @template TItem — тип элемента (пользователь может расширить)
+ * @template TItem — the item type (a user may extend it)
  */
 export class TOrderItemExtension<TItem extends object = any>
 	extends TBaseItemExtension<TItem, TOrderExtension<TItem>, TOrderItemEventsExtension>

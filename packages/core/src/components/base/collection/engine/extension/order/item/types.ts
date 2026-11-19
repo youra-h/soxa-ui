@@ -1,19 +1,18 @@
 import type { IItemExtension, TBaseItemEventsExtension } from '../../types'
 
-/** События item-адаптера порядка. */
+/** Events of the order item adapter. */
 export type TOrderItemEventsExtension = TBaseItemEventsExtension & {
 	'change:order': () => void
 }
 
 /**
- * Контракт item-адаптера порядка.
- * Предоставляет readonly order — индекс элемента в коллекции.
+ * Contract of the order item adapter: the item's index in its collection.
  */
 export interface IOrderItemExtension<TItem extends object = any> extends IItemExtension<
 	TItem,
 	TOrderItemEventsExtension
 > {
-	/** Порядковый номер элемента. Вычисляется на лету у расширения порядка. */
+	/** The item's index, read from the order extension on every access. */
 	readonly order: number
 
 	/** Called by the owner after an order change: emits `change:order` only if this position moved. */

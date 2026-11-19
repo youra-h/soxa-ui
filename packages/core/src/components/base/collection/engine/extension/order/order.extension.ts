@@ -5,26 +5,24 @@ import { TOrderItemExtension } from './item'
 import { TBaseOwnerItemExtension } from '../base-owner-item-extension.class'
 
 /**
- * TOrderExtension — расширение-наблюдатель за порядком элементов в коллекции.
+ * TOrderExtension — observes the order of the collection's items.
  *
- * Драйвер не знает о порядке (движок не заводит понятий под конкретное
- * расширение), поэтому факт «последовательность элементов сменилась»
- * расширение выводит само из `item:added`/`item:removed`/`item:moved`: любое
- * из них поднимает внутренний флаг. Обновление свойств элемента этих событий
- * не даёт, поэтому обновление порядок не трогает.
+ * The driver knows nothing of order (the engine introduces no notions for a
+ * particular extension), so the extension derives "the sequence changed" from
+ * `item:added`/`item:removed`/`item:moved`: any of them raises a flag. An
+ * item's property update sends none of them and leaves the order alone.
  *
- * Эмит откладывается до ближайшего `change:items`: в батче item-событий на
- * одну операцию может прийти несколько (вставка + удаление, две перестановки
- * и т. п.), а `change:items` драйвер шлёт ровно один раз на команду или на
- * весь `batch`. Флаг сбрасывается сразу после эмита, чтобы не протечь в
- * следующий, не связанный с порядком `change:items`.
+ * The emit waits for the next `change:items`: one operation may send several
+ * item events (an insert and a removal, two moves), while the driver sends
+ * `change:items` exactly once per command or per `batch`. The flag is reset
+ * right after the emit, so it does not leak into an unrelated `change:items`.
  *
  * Positions are memoized per storage revision: every item read its order on
  * each change, and copying the storage for each `indexOf` made one mount of N
  * items cost N² copies. Item adapters hear the change only when their own
  * position moved — appending an item moves no one else.
  *
- * @template TItem — тип элемента коллекции (пользователь может расширить)
+ * @template TItem — the collection's item type (a user may extend it)
  */
 export class TOrderExtension<TItem extends object = any>
 	extends TBaseOwnerItemExtension<TItem, IOrderItemExtension<TItem>, TOrderEvents>
@@ -74,9 +72,7 @@ export class TOrderExtension<TItem extends object = any>
 		return adapter
 	}
 
-	/**
-	 * Возвращает актуальный индекс элемента в коллекции.
-	 */
+	/** @inheritdoc IOrderExtension.getItemOrder */
 	getItemOrder(item: TItem): number {
 		const { driver } = this._ctx
 
