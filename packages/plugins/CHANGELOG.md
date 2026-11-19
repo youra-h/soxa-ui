@@ -1,5 +1,13 @@
 # @soxa-ui/plugins
 
+## 0.4.2
+
+### Patch Changes
+
+- 1d1d17a: Add explicit initial collection sources for consistent server-rendered membership and tab-panel accessibility links across adapters.
+- Updated dependencies [22d2116]
+  - @soxa-ui/core@0.4.2
+
 ## 0.4.1
 
 ### Patch Changes

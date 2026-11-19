@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/webc",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Адаптер Web Components: Custom Elements на headless-моделях ядра",
   "keywords": [
     "soxa",
@@ -226,9 +226,9 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@soxa-ui/core": "0.4.1",
-    "@soxa-ui/plugins": "0.4.1",
-    "@soxa-ui/setup": "0.4.1",
+    "@soxa-ui/core": "0.4.2",
+    "@soxa-ui/plugins": "0.4.2",
+    "@soxa-ui/setup": "0.4.2",
     "@ungap/custom-elements": "^1.3.0"
   },
   "devDependencies": {

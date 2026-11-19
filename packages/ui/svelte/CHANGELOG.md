@@ -1,5 +1,18 @@
 # @soxa-ui/svelte
 
+## 0.4.2
+
+### Patch Changes
+
+- 1d1d17a: Add explicit initial collection sources for consistent server-rendered membership and tab-panel accessibility links across adapters.
+- 1490654: Centralize prepared collection assembly before model construction across adapters.
+- Updated dependencies [1d1d17a]
+- Updated dependencies [22d2116]
+- Updated dependencies [1490654]
+  - @soxa-ui/setup@0.4.2
+  - @soxa-ui/plugins@0.4.2
+  - @soxa-ui/core@0.4.2
+
 ## 0.4.1
 
 ### Patch Changes

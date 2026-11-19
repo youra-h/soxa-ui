@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/react",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Адаптер React: компоненты на headless-моделях ядра",
   "keywords": [
     "soxa",
@@ -41,9 +41,9 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@soxa-ui/core": "0.4.1",
-    "@soxa-ui/plugins": "0.4.1",
-    "@soxa-ui/setup": "0.4.1"
+    "@soxa-ui/core": "0.4.2",
+    "@soxa-ui/plugins": "0.4.2",
+    "@soxa-ui/setup": "0.4.2"
   },
   "peerDependencies": {
     "react": "^19.3.0",
