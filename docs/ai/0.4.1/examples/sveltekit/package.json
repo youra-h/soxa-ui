@@ -10,6 +10,7 @@
   "dependencies": {
     "@soxa-ui/core": "0.4.1",
     "@soxa-ui/setup": "0.4.1",
+    "@soxa-ui/plugins": "0.4.1",
     "@soxa-ui/svelte": "0.4.1",
     "@soxa-ui/theme-oren": "0.4.1",
     "@soxa-ui/icons-material": "0.3.1"

@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { execFileSync } from 'node:child_process'
-import { readFileSync, mkdtempSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync, mkdtempSync } from 'node:fs'
 import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 import { fileURLToPath } from 'node:url'
 import { documentationRelease } from './release.mjs'
 import { fetchSource } from './fetch.mjs'
+import { libraryClosure, libraryNamesOf } from '../install-smoke/install-smoke.ts'
 
 const root = fileURLToPath(new URL('../../', import.meta.url))
 test('release selection separates exact package pins and rejects absent or floating corpora', () => {
@@ -65,5 +66,56 @@ test('0.4.1 public delivery contains complete recipes and no historical validati
 					.find((d) => d.id === 'release-changes')
 					.related.includes('api-' + framework + '-' + component),
 			)
+	}
+})
+
+test('every consumer example pins each Soxa peer of its tree to the corpus release', () => {
+	const read = (file) => JSON.parse(readFileSync(file, 'utf8'))
+	const manifests = new Map(
+		execFileSync(
+			'git',
+			['ls-files', '--', 'packages/*/package.json', 'packages/*/*/package.json'],
+			{
+				cwd: root,
+				encoding: 'utf8',
+			},
+		)
+			.trim()
+			.split('\n')
+			.map((file) => read(join(root, file)))
+			.filter((manifest) => manifest.name?.startsWith('@soxa-ui/') && !manifest.private)
+			.map((manifest) => [manifest.name, manifest]),
+	)
+	const versions = readdirSync(join(root, 'docs/ai')).filter((name) =>
+		/^\d+\.\d+\.\d+$/.test(name),
+	)
+	assert.ok(versions.includes('0.4.1'))
+
+	for (const version of versions) {
+		const { packages } = documentationRelease(root, version)
+		const examples = join(root, 'docs/ai', version, 'examples')
+		for (const example of readdirSync(examples)) {
+			const file = join(examples, example, 'package.json')
+			if (!existsSync(file)) continue
+			const recipe = read(file)
+			const direct = libraryNamesOf(recipe)
+			const label = version + '/' + example
+			for (const name of direct)
+				assert.equal(
+					{ ...recipe.dependencies, ...recipe.devDependencies }[name],
+					packages[name],
+					label + ': ' + name,
+				)
+
+			// npm resolves a peer by its range at the top of the tree and takes the newest
+			// release, so a peer missing from the example drifts once a patch is published.
+			const peers = libraryClosure(direct, manifests).flatMap((name) =>
+				Object.keys(manifests.get(name).peerDependencies ?? {}).filter((peer) =>
+					peer.startsWith('@soxa-ui/'),
+				),
+			)
+			for (const peer of new Set(peers))
+				assert.ok(direct.includes(peer), label + ' pins peer ' + peer)
+		}
 	}
 })
