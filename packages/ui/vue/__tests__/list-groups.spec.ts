@@ -496,3 +496,43 @@ describe('Select · группы разметки', () => {
 		expect(visited).toEqual(['Вода', 'Яблоко', 'Груша'])
 	})
 })
+
+/**
+ * A markup group whose options the filter left out hides with its label, as
+ * the owner draws no section for such a group from data (issue #905).
+ */
+describe('Select · группа разметки под отбором', () => {
+	it('группа без показанных опций скрыта вместе с подписью, снятый отбор её возвращает', async () => {
+		const engine = createEngineSelect()
+
+		await render(() =>
+			h(Select, { engine, editable: true, editableMode: 'filter' }, () => [
+				h(Select.Group, { label: 'Фрукты' }, () => [
+					h(Select.Item, { value: 'apple', text: 'Яблоко' }),
+					h(Select.Item, { value: 'pear', text: 'Груша' }),
+				]),
+				h(Select.Group, { label: 'Овощи' }, () => [
+					h(Select.Item, { value: 'carrot', text: 'Морковь' }),
+				]),
+			]),
+		)
+
+		const groups = () => [...document.querySelectorAll<HTMLElement>('.so-select-group')]
+		const shown = () =>
+			groups()
+				.filter((group) => group.style.display !== 'none')
+				.map((group) => group.querySelector('.so-select-group__label')?.textContent)
+
+		expect(shown()).toEqual(['Фрукты', 'Овощи'])
+
+		engine.extensions.filter.query = 'груш'
+		await nextTick()
+
+		expect(shown()).toEqual(['Фрукты'])
+
+		engine.extensions.filter.clear()
+		await nextTick()
+
+		expect(shown()).toEqual(['Фрукты', 'Овощи'])
+	})
+})

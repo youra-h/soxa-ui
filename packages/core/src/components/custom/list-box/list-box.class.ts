@@ -161,8 +161,10 @@ export class TListBox
 	}
 
 	/**
-	 * Рисовать ли разделитель между соседними секциями группировки. Рисует его
-	 * разметка, по секциям нарисованного (`drawnSections` фасада).
+	 * Whether to draw a separator between neighbouring sections of the
+	 * grouping. The markup draws it by the drawn sections (`drawnSections` of
+	 * the facade), so only for items from data: groups written in markup
+	 * (`ListBox.Group`) get no separator.
 	 */
 	get groupSeparators(): boolean {
 		return this._groupSeparators
