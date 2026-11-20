@@ -42,7 +42,9 @@
  * - **assembly** — the first binding, writing only the panel's own: its
  *   facade and its `aria`. A data tab is already in the collection and the tab
  *   list renders before the panels, so the panel is bound from the first
- *   render, the server's included;
+ *   render, the server's included. A prepared panel (an initial source) puts
+ *   its prepared link into its mount's patch instead of its `aria` until
+ *   acceptance (`TPluginMount`);
  * - **entry** (`attach`) — binding again, the tab's side, and the
  *   subscriptions: the engine's `item:added`, the registry's
  *   `bundle:registered`, the panel's `change:value`, its `TIdPlugin`'s
@@ -101,32 +103,6 @@ function findByValue(engine: TTabsCollection, value: unknown): ITabsItem | undef
 }
 
 export class TTabsContentBindingExtension {
-	private _snapshot: Readonly<Record<string, unknown>> = Object.freeze({})
-	private readonly _listeners = new Set<() => void>()
-
-	getSnapshot(): Readonly<Record<string, unknown>> {
-		return this._snapshot
-	}
-
-	subscribe(listener: () => void): () => void {
-		this._listeners.add(listener)
-
-		return () => this._listeners.delete(listener)
-	}
-
-	/** Publish only this panel mount's relationship, leaving shared collection models untouched. */
-	private _write(link: Readonly<Record<string, unknown>>): void {
-		if (
-			this._snapshot.id === link.id &&
-			this._snapshot['aria-labelledby'] === link['aria-labelledby']
-		)
-			return
-
-		this._snapshot = Object.freeze(link)
-
-		for (const listener of this._listeners) listener()
-	}
-
 	constructor(
 		context: TInstanceContext<TCollectionItemFacade>,
 		options: ITabsContentBindingOptions,
@@ -148,8 +124,8 @@ export class TTabsContentBindingExtension {
 		const idPlugin = context.bundle?.get(TIdPlugin)
 		const part = context.bundle?.get(TCollectionInitialPartPlugin)
 		const initial = part?.prepared ? collectionInitialSourceOf(elevator) : undefined
-
-		if (initial && part) part.aria = this
+		/** A prepared panel's gate: until acceptance the panel renders its prepared link. */
+		const mount = initial ? part?.pluginMount : undefined
 
 		/** The tab bound now. */
 		let boundItem: ITabsItem | undefined
@@ -159,34 +135,29 @@ export class TTabsContentBindingExtension {
 		let boundIds: TTabsItemIdsPlugin | undefined
 		/** The context is accepted: subscribing to foreign buses is allowed. */
 		let attached = false
-		let releaseIds: (() => void) | undefined
 
 		/**
 		 * The panel's side: the application's `id`, else the one the tab wrote,
 		 * and the link to the tab. Without a tab only the own `id` stays.
 		 */
 		const linkPanel = (): void => {
-			const prepared = boundItem ? initial?.link(boundItem) : undefined
-			const tab = boundIds?.getSnapshot()
-			const id =
-				idPlugin?.id ??
-				(initial
-					? (tab?.['aria-controls'] ?? prepared?.panelId)
-					: boundItem?.aria.get('aria-controls'))
-			const labelledby = initial ? (tab?.id ?? prepared?.tabId) : boundItem?.aria.get('id')
+			if (mount && !mount.accepted) {
+				const prepared = boundItem ? initial?.link(boundItem) : undefined
 
-			if (initial) this._write({ id, 'aria-labelledby': labelledby })
-			else {
-				content.aria.add('id', idPlugin?.id ?? boundItem?.aria.get('aria-controls'))
-				content.aria.add('aria-labelledby', boundItem?.aria.get('id'))
+				mount.patch('aria', {
+					id: idPlugin?.id ?? prepared?.panelId,
+					'aria-labelledby': prepared?.tabId,
+				})
+
+				return
 			}
+
+			content.aria.add('id', idPlugin?.id ?? boundItem?.aria.get('aria-controls'))
+			content.aria.add('aria-labelledby', boundItem?.aria.get('id'))
 		}
 
 		/** The tab's `aria-controls` no longer follows this panel: back to the formula. */
 		const unlinkTab = (): void => {
-			releaseIds?.()
-			releaseIds = undefined
-
 			if (idPlugin) boundIds?.unbindPanel(idPlugin)
 
 			boundIds = undefined
@@ -211,10 +182,6 @@ export class TTabsContentBindingExtension {
 
 			boundIds = ids
 			ids.bindPanel(idPlugin)
-
-			if (initial) releaseIds = ids.subscribe(linkPanel)
-
-			linkPanel()
 		}
 
 		/**
@@ -292,12 +259,11 @@ export class TTabsContentBindingExtension {
 			unbind()
 			attached = false
 
-			if (!initial) {
+			// A prepared panel discarded before acceptance never wrote the model
+			if (!mount || mount.accepted) {
 				content.aria.remove('id')
 				content.aria.remove('aria-labelledby')
 			}
-
-			this._listeners.clear()
 		})
 	}
 }

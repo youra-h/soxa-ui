@@ -105,7 +105,7 @@ function useExchange(
 
 	onCleanup(binding.updates.listen(updates))
 
-	const release = collectionInitialState(adapter, binding.state).subscribe(write)
+	const release = binding.state.subscribe(write)
 
 	onCleanup(release)
 

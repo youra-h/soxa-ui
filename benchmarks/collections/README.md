@@ -7,7 +7,9 @@
 Итог с объяснением изменения механизма — [report.md](report.md). Журналы:
 [Vue](vue.md), [React](react.md), [Solid](solid.md), [Svelte](svelte.md),
 [Angular](angular.md), [Web Components](webc.md). Оптимизация 19.11.2026 —
-[2026-11-19-1000.md](2026-11-19-1000.md). Исходники стенда —
+[2026-11-19-1000.md](2026-11-19-1000.md), оверлеи `initial` только до
+принятия 20.11.2026 — [2026-11-20-initial-overlays.md](2026-11-20-initial-overlays.md).
+Исходники стенда —
 [tools/bench-collections](../../tools/bench-collections).
 
 ## Что сравниваем

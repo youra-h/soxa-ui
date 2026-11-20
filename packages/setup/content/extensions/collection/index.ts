@@ -37,8 +37,4 @@ export type {
 } from './initial.types'
 
 export { TCollectionAriaState } from './aria-state.class'
-export type {
-	ICollectionAriaLink,
-	ICollectionAriaStateOptions,
-	TCollectionStatePort,
-} from './aria-state.types'
+export type { TCollectionStatePort } from './aria-state.types'

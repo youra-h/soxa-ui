@@ -26,12 +26,6 @@ export class TCollectionInitialPartPlugin extends TBasePlugin {
 	declaredId: string | undefined
 	declaredValue: string | number | undefined
 	panel = false
-	aria:
-		| {
-				getSnapshot(): Readonly<Record<string, unknown>>
-				subscribe(listener: () => void): () => void
-		  }
-		| undefined
 
 	override install(
 		ctx: IPluginContext,

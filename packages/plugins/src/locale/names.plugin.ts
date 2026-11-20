@@ -25,46 +25,16 @@ export abstract class TNamesPlugin<
 	TOwner extends object,
 	TEvents extends TPluginEvents = TPluginEvents,
 > extends TBasePlugin<TOwner, TEvents> {
-	private _snapshot: Readonly<Record<string, Readonly<Record<string, unknown>>>> = Object.freeze(
-		{},
-	)
-	private readonly _listeners = new Set<() => void>()
-
-	getSnapshot(): Readonly<Record<string, Readonly<Record<string, unknown>>>> {
-		return this._snapshot
-	}
-	subscribe(listener: () => void): () => void {
-		this._listeners.add(listener)
-
-		return () => this._listeners.delete(listener)
-	}
-
-	/** Prepared mounts name their own DOM without changing a shared data model. */
+	/** Until acceptance a prepared mount names its own markup and leaves the shared model alone. */
 	protected _setName(
 		field: string,
 		target: { add(name: 'aria-label', value: string): unknown },
 		label: string,
 	): void {
-		if (!this.pluginMount) {
-			target.add('aria-label', label)
+		const mount = this.pluginMount
 
-			return
-		}
-
-		if (this._snapshot[field]?.['aria-label'] === label) return
-
-		this._snapshot = Object.freeze({
-			...this._snapshot,
-			[field]: Object.freeze({ 'aria-label': label }),
-		})
-
-		for (const listener of this._listeners) listener()
-	}
-
-	override destroy(): void {
-		this._listeners.clear()
-
-		super.destroy()
+		if (mount && !mount.accepted) mount.patch(field, { 'aria-label': label })
+		else target.add('aria-label', label)
 	}
 
 	override install(ctx: IPluginContext, options?: unknown): void {
@@ -80,7 +50,7 @@ export abstract class TNamesPlugin<
 		this._listenTo(ctx.locale.events, 'change', name)
 		this._watch(owner, name, ctx)
 
-		// The shared model may have changed while this mount was waiting for acceptance.
+		// Accepted, a prepared mount moves its names from the patch into the model
 		if (this.pluginMount) this._whenAccepted(name)
 	}
 

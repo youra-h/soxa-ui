@@ -143,7 +143,27 @@ describe('accepted plugin mount', () => {
 		bundle.destroy()
 	})
 
-	it('computes mount-local close names without mutating a shared item before or after acceptance', () => {
+	it('merges patches by field and drops them before the deferred effects run', () => {
+		const mount = new TPluginMount()
+		const seen: unknown[] = []
+
+		mount.patch('aria', { id: 'tab' })
+		mount.patch('aria', { 'aria-controls': 'panel' })
+		mount.patch('closeAria', { 'aria-label': 'Close' })
+		mount.defer(() => seen.push(mount.patches))
+
+		expect(mount.patches).toEqual({
+			aria: { id: 'tab', 'aria-controls': 'panel' },
+			closeAria: { 'aria-label': 'Close' },
+		})
+
+		mount.accept()
+
+		expect(seen).toEqual([{}])
+		expect(() => mount.patch('aria', { id: 'late' })).toThrow()
+	})
+
+	it('names a prepared mount in its patch and moves the names into the model on acceptance', () => {
 		const item = new TTabsItem({ text: 'Account' })
 		const before = item.closeAria.toObject()
 		const first = new TPluginMount()
@@ -154,32 +174,26 @@ describe('accepted plugin mount', () => {
 		const b = new TPluginBundle(item, 'b', new TLocaleSource(ruRU), second).use(
 			TTabsItemNamesPlugin,
 		)
-		const namesA = a.get(TTabsItemNamesPlugin)
-		const namesB = b.get(TTabsItemNamesPlugin)
 
-		if (!namesA || !namesB) throw new Error('Expected installed plugins')
-
-		expect(namesA.getSnapshot().closeAria?.['aria-label']).toBe('Close Account')
-		expect(namesB.getSnapshot().closeAria?.['aria-label']).not.toBe('Close Account')
+		expect(first.patches.closeAria?.['aria-label']).toBe('Close Account')
+		expect(second.patches.closeAria?.['aria-label']).not.toBe('Close Account')
 		expect(item.closeAria.toObject()).toEqual(before)
 
 		first.accept()
 
-		const changed = vi.fn()
-		const stop = namesA.subscribe(changed)
+		expect(item.closeAria.get('aria-label')).toBe('Close Account')
 
 		item.text = 'Privacy'
 
-		expect(namesA.getSnapshot().closeAria?.['aria-label']).toBe('Close Privacy')
-		expect(namesB.getSnapshot().closeAria?.['aria-label']).not.toContain('Privacy')
+		expect(item.closeAria.get('aria-label')).toBe('Close Privacy')
+		// A mount waiting for acceptance does not follow the shared item yet
+		expect(second.patches.closeAria?.['aria-label']).not.toContain('Privacy')
 
 		second.accept()
 
-		expect(namesB.getSnapshot().closeAria?.['aria-label']).toContain('Privacy')
-		expect(item.closeAria.toObject()).toEqual(before)
-		expect(changed).toHaveBeenCalledOnce()
+		expect(item.closeAria.get('aria-label')).toContain('Privacy')
+		expect(item.closeAria.get('aria-label')).not.toBe('Close Privacy')
 
-		stop()
 		a.destroy()
 		b.destroy()
 	})

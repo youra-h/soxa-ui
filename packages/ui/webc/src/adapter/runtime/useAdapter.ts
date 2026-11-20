@@ -7,7 +7,7 @@
  */
 
 import { TActionEvent } from '@soxa-ui/core'
-import { collectionInitialInputs, collectionInitialState, toInstanceState } from '@soxa-ui/setup'
+import { collectionInitialInputs, toInstanceState } from '@soxa-ui/setup'
 import type {
 	IAdapterContext,
 	IComponentContract,
@@ -115,7 +115,7 @@ function useExchange<C extends IComponentContract>(
 	const state: Record<string, unknown> = {}
 
 	// The subscription hands over every property's value at once: that fills the state
-	const unsubscribe = collectionInitialState(adapter, binding.state).subscribe((name, value) => {
+	const unsubscribe = binding.state.subscribe((name, value) => {
 		state[name] = value
 		onUpdate(name, value)
 	})

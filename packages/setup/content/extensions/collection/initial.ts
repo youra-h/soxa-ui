@@ -5,8 +5,6 @@ import { TCollectionAriaState } from './aria-state.class'
 import type { TCollectionStatePort } from './aria-state.types'
 import {
 	TPluginMount,
-	TTabsItemNamesPlugin,
-	TTagsItemNamesPlugin,
 	TTabsItemIdsPlugin,
 	TCollectionInitialPartPlugin,
 	TCollectionInitialPlugin,
@@ -256,20 +254,18 @@ export function collectionInitialInputs(
 		: props
 }
 
-/** All adapters read the same single derived ARIA port; no adapter merges relationships. */
+/**
+ * The state a part renders before its mount is accepted: on the server and in a
+ * React render before commit. Other client adapters accept before the first
+ * render and read the exchange state directly.
+ */
 export function collectionInitialState(
 	context: import('../../../protected').IAdapterContext,
 	state: TCollectionStatePort,
 ): TCollectionStatePort {
-	if (!context.descriptor.props.some((prop) => prop.name.name === 'aria')) return state
+	const mount = context.bundle?.get(TCollectionInitialPartPlugin)?.pluginMount
 
-	const ids = context.bundle?.get(TTabsItemIdsPlugin)
-	const link = ids?.initial ? ids : context.bundle?.get(TCollectionInitialPartPlugin)?.aria
-	const names =
-		context.bundle?.get(TTabsItemNamesPlugin) ?? context.bundle?.get(TTagsItemNamesPlugin)
-	const outputs = names?.pluginMount ? [names] : []
-
-	return link || outputs.length ? new TCollectionAriaState({ state, link, outputs }) : state
+	return mount && !mount.accepted ? new TCollectionAriaState(state, mount) : state
 }
 
 /** Prepared assembly can render its full source before the native mount accepts it. */
