@@ -34,7 +34,7 @@
     },
     {
       "path": "examples/webc/package.json",
-      "sha256": "86c89737952818e1ab15a778de106258ddd0fde3dbd04396c98847ea404d22c0"
+      "sha256": "4fc80bf3b75585cc473f77eb678beb751858683f59f6c3ea52cd70425e8c0526"
     },
     {
       "path": "examples/webc/setup.ts",
@@ -102,7 +102,7 @@
       "integrity": "sha512-iMFY88Sh50CDe4uqnWdAYFvIHdW45zuKGtVWQjA3+Ehc+b5JPI6Tg120TB5xJ7gmxuIAo362zMbg4Ifh7k7w3w=="
     }
   ],
-  "lockSha256": "465197e9b6d6fe038727df7da476f6196277b8e954d6e2bb70ba573469f7d25c",
+  "lockSha256": "8f6268fc97a445a218daf387f42243fb682e7eb587075d8528d0a6a76d970d45",
   "apiSha256": "368e374f7536177b8909c1de051a6e923757a68ef67b7249fa07b36c4f1c1354",
   "corpusInputs": [
     {

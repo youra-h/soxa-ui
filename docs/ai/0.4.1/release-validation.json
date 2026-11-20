@@ -469,7 +469,7 @@
       "locks": [
         {
           "path": "svelte/package-lock.json",
-          "sha256": "3665c547af2ffdb2c87a7578b64b7ecf1dcd567d5513175f0225ad49054c6014",
+          "sha256": "04155ab62689e088f0e4da743b37d65e6ffc77288477a1f9bb1981b87373f50b",
           "packages": [
             {
               "name": "@soxa-ui/core",
@@ -517,7 +517,7 @@
         },
         {
           "path": "sveltekit/package-lock.json",
-          "sha256": "b0d2c031a6f17edbe5d9aabc29b911e67e2879a017422e1a7ce53af0716df95c",
+          "sha256": "a2f962c65fe4afc4eead08a623160aace0efd88221ebf4b6fc917182f6629f1d",
           "packages": [
             {
               "name": "@soxa-ui/core",
@@ -675,7 +675,7 @@
       "locks": [
         {
           "path": "webc/package-lock.json",
-          "sha256": "465197e9b6d6fe038727df7da476f6196277b8e954d6e2bb70ba573469f7d25c",
+          "sha256": "8f6268fc97a445a218daf387f42243fb682e7eb587075d8528d0a6a76d970d45",
           "packages": [
             {
               "name": "@soxa-ui/core",
@@ -1293,7 +1293,7 @@
     },
     {
       "path": "examples/svelte/package.json",
-      "sha256": "eaf2f7c14aaa0e47f00399fdb25986366ce0390866fb19f0791332e42ea0abf6"
+      "sha256": "3eb63e52356038002cbc3392cb0e5c2389a165c824c4677e59ddab2d38fdc663"
     },
     {
       "path": "examples/svelte/Recipes.svelte",
@@ -1313,7 +1313,7 @@
     },
     {
       "path": "examples/sveltekit/package.json",
-      "sha256": "44ed292c242225f4e956405b9b3d7debb3bfa183a913eaf03c795de8c5b548ab"
+      "sha256": "cd4dd357aa651f051d8984b33ea0e6801c68d968f82c2933defab1df7041f99c"
     },
     {
       "path": "examples/sveltekit/src/app.html",
@@ -1365,7 +1365,7 @@
     },
     {
       "path": "examples/webc/package.json",
-      "sha256": "86c89737952818e1ab15a778de106258ddd0fde3dbd04396c98847ea404d22c0"
+      "sha256": "4fc80bf3b75585cc473f77eb678beb751858683f59f6c3ea52cd70425e8c0526"
     },
     {
       "path": "examples/webc/setup.ts",
