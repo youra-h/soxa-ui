@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-20",
+  "n": 1000,
+  "libraries": [
+    "soxa"
+  ],
+  "revisions": {
+    "main": "19a140903a109cbb119aea8f0521aa4bafda3d18",
+    "head": "dd6ea64a6ccdc001bc353d71d5186ce9e0ab2fc4"
+  },
+  "protocol": {
+    "client": "client-v3-isolated-phases"
+  },
+  "environment": {
+    "node": "v24.20.0",
+    "playwright": "1.64.1",
+    "os": "Windows 11 Pro",
+    "cpu": "AMD Ryzen 9 9950X3D 16-Core Processor",
+    "cores": 32,
+    "memoryGiB": 62
+  },
+  "notes": "Client only, items (data) and initial paths. Task 1an4hvw6qem: prepared ARIA overlays only until acceptance. main is origin/main at preparation (PR #907 on top of a4cd5de02, Select markup groups); head is the task working tree on a4cd5de02, committed unchanged as dd6ea64a6.",
+  "files": [
+    "head-angular-soxa-tabs-data-client.json",
+    "head-angular-soxa-tabs-initial-client.json",
+    "head-angular-soxa-tags-data-client.json",
+    "head-angular-soxa-tags-initial-client.json",
+    "head-react-soxa-tabs-data-client.json",
+    "head-react-soxa-tabs-initial-client.json",
+    "head-react-soxa-tags-data-client.json",
+    "head-react-soxa-tags-initial-client.json",
+    "head-solid-soxa-tabs-data-client.json",
+    "head-solid-soxa-tabs-initial-client.json",
+    "head-solid-soxa-tags-data-client.json",
+    "head-solid-soxa-tags-initial-client.json",
+    "head-svelte-soxa-tabs-data-client.json",
+    "head-svelte-soxa-tabs-initial-client.json",
+    "head-svelte-soxa-tags-data-client.json",
+    "head-svelte-soxa-tags-initial-client.json",
+    "head-vue-soxa-tabs-data-client.json",
+    "head-vue-soxa-tabs-initial-client.json",
+    "head-vue-soxa-tags-data-client.json",
+    "head-vue-soxa-tags-initial-client.json",
+    "head-webc-soxa-tabs-data-client.json",
+    "head-webc-soxa-tabs-initial-client.json",
+    "head-webc-soxa-tags-data-client.json",
+    "head-webc-soxa-tags-initial-client.json",
+    "main-angular-soxa-tabs-data-client.json",
+    "main-angular-soxa-tabs-initial-client.json",
+    "main-angular-soxa-tags-data-client.json",
+    "main-angular-soxa-tags-initial-client.json",
+    "main-react-soxa-tabs-data-client.json",
+    "main-react-soxa-tabs-initial-client.json",
+    "main-react-soxa-tags-data-client.json",
+    "main-react-soxa-tags-initial-client.json",
+    "main-solid-soxa-tabs-data-client.json",
+    "main-solid-soxa-tabs-initial-client.json",
+    "main-solid-soxa-tags-data-client.json",
+    "main-solid-soxa-tags-initial-client.json",
+    "main-svelte-soxa-tabs-data-client.json",
+    "main-svelte-soxa-tabs-initial-client.json",
+    "main-svelte-soxa-tags-data-client.json",
+    "main-svelte-soxa-tags-initial-client.json",
+    "main-vue-soxa-tabs-data-client.json",
+    "main-vue-soxa-tabs-initial-client.json",
+    "main-vue-soxa-tags-data-client.json",
+    "main-vue-soxa-tags-initial-client.json",
+    "main-webc-soxa-tabs-data-client.json",
+    "main-webc-soxa-tabs-initial-client.json",
+    "main-webc-soxa-tags-data-client.json",
+    "main-webc-soxa-tags-initial-client.json"
+  ]
+}

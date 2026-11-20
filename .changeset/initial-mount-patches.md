@@ -8,7 +8,7 @@
 '@soxa-ui/webc': patch
 ---
 
-Prepared (`initial`) Tabs and Tags keep their mount-local ARIA only until the framework accepts the mount, then write tab links and close button names into the item models as an ordinary mount does. On the client, Vue, Solid, Svelte, Angular and Web Components read the state directly, and 1000 prepared tabs no longer hold about 2 MiB more than the `items` path.
+Prepared (`initial`) Tabs and Tags keep their mount-local ARIA only until the framework accepts the mount, then write tab links and close button names into the item models as an ordinary mount does. On the client, Vue, Solid, Svelte, Angular and Web Components read the state directly: 1000 prepared tabs now hold 0.3–0.4 MiB more than the `items` path instead of 1.2–1.9 MiB (React: 1.1 MiB instead of 1.6 MiB). Every component with localized button names also stops keeping an unused listener set per mount.
 
 Breaking for code that wires prepared mounts by hand (components, props, events, classes and `data-*` are unchanged):
 
