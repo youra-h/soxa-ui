@@ -152,16 +152,16 @@ function useExchange<C extends IComponentContract>(
 
 	// The signal itself is the state: a `computed` over it only forwarded the snapshot
 	const state = signal(toInstanceState<C>(NO_SNAPSHOT))
-	const port = collectionInitialState(adapter, binding.state)
 
 	const serverInitial =
 		collectionInitialPrepared(adapter) && !isPlatformBrowser(inject(PLATFORM_ID))
 
 	const unsubscribe = serverInitial
 		? () => {}
-		: port.subscribe(() => state.set(toInstanceState<C>(port.getSnapshot())))
+		: binding.state.subscribe(() => state.set(toInstanceState<C>(binding.state.getSnapshot())))
 
-	if (serverInitial) state.set(toInstanceState<C>(port.getSnapshot()))
+	if (serverInitial)
+		state.set(toInstanceState<C>(collectionInitialState(adapter, binding.state).getSnapshot()))
 
 	let stopEvents: (() => void) | undefined
 

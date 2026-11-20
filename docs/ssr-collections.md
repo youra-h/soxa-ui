@@ -90,7 +90,9 @@ and keyboard navigation use the collection engine thereafter.
   changes use the normal collection API; changing `initial` does not reset
   user selection or recreate removed items.
 - An external `engine` must already contain the matching models and metadata.
-  Rendering and abandoning a prepared view preserves those models. Each
+  Rendering and abandoning a prepared view preserves those models; an
+  accepted view writes its tab links and button names into them, as an
+  ordinary mount does. Each
   server request must still have the application ownership and isolation it
   normally requires.
 

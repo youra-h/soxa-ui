@@ -12,3 +12,4 @@ export { TBasePlugin } from './base.class'
 export { TPluginBundle } from './bundle.class'
 
 export { TPluginMount } from './mount.class'
+export type { TMountPatches } from './mount.class'

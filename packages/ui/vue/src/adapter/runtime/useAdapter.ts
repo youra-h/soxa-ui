@@ -150,7 +150,7 @@ export function useAdapterParts(
 	const state = shallowReactive(record)
 
 	offs.push(
-		collectionInitialState(adapter, link.state).subscribe((name, value) => {
+		link.state.subscribe((name, value) => {
 			if (Object.hasOwn(record, name)) state[name] = value
 			else define(record, name, value)
 		}),

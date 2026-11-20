@@ -180,7 +180,7 @@ function useExchange(
 	// 1. Subscribe right away, not in an effect: there are no effects on the
 	// server. The write is untracked: the core changes in the middle of
 	// rendering too
-	const release = collectionInitialState(adapter, exchange.state).subscribe((name, value) => {
+	const release = exchange.state.subscribe((name, value) => {
 		untrack(() => write(values, name, value))
 	})
 

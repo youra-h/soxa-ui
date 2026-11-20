@@ -15,7 +15,16 @@ export interface ITabsItemIdsOptions {
 	readonly initial?: ITabsInitialLink
 }
 
-/** Owns the tab-panel link. Prepared mounts derive ARIA without writing the shared data model. */
+/**
+ * The tab side of the tab-panel link: the tab's `id` and `aria-controls`, the
+ * panel's `id`. The panel binding (`TTabsContentBindingExtension`) reads both
+ * back from the tab, so the halves cannot diverge.
+ *
+ * An `id` the application gave either side (its `TIdPlugin`) wins over the
+ * mount formula; an accepted panel hands its plugin over (`bindPanel`).
+ * A prepared mount takes its ids from the initial source and, until accepted,
+ * renders the link from its patch: the shared item may serve other requests.
+ */
 export class TTabsItemIdsPlugin extends TBasePlugin<ITabsItem> {
 	private _tab: ITabsItem | null = null
 	private _formula = ''
@@ -23,20 +32,12 @@ export class TTabsItemIdsPlugin extends TBasePlugin<ITabsItem> {
 	private _tabId = ''
 	private _idPlugin: TIdPlugin | undefined
 	private _panel: TIdPlugin | undefined
-	private _initial = false
-	private readonly _listeners = new Set<() => void>()
-	private _snapshot: Readonly<Record<string, unknown>> = Object.freeze({})
 
-	get initial(): boolean {
-		return this._initial
-	}
-
-	/** Publish predeclared links before rendering, then follow the mounted tab's ID changes. */
+	/** Written on install, synchronously: the link is in the first and the server render. */
 	override install(ctx: IPluginContext, options: ITabsItemIdsOptions = {}): void {
 		super.install(ctx, options)
 
 		this._tab = ctx.getInstance<ITabsItem>()
-		this._initial = options.initial !== undefined
 		this._idPlugin = ctx.get(TIdPlugin)
 
 		this._tabId =
@@ -44,25 +45,12 @@ export class TTabsItemIdsPlugin extends TBasePlugin<ITabsItem> {
 		this._formula = options.initial?.panelId ?? ctx.createId('panel')
 		this._fallbackPanelId = options.initial?.panelFallbackId ?? this._formula
 
-		// Prepared links are mount-local; ordinary mounts keep writing the model's ARIA.
-		if (options.initial)
-			this._snapshot = Object.freeze({
-				id: options.initial.tabId,
-				'aria-controls': options.initial.panelId,
-			})
-		else this._write()
+		this._write()
+
+		// Accepted, a prepared mount moves its link from the patch into the model
+		if (this.pluginMount) this._whenAccepted(this._write)
 
 		this._idPlugin?.events.on('change:id', this._write)
-	}
-
-	getSnapshot(): Readonly<Record<string, unknown>> {
-		return this._snapshot
-	}
-
-	subscribe(listener: () => void): () => void {
-		this._listeners.add(listener)
-
-		return () => this._listeners.delete(listener)
 	}
 
 	/** Only accepted panels may bind; the last accepted panel replaces the previous one. */
@@ -95,7 +83,6 @@ export class TTabsItemIdsPlugin extends TBasePlugin<ITabsItem> {
 		this._panel = undefined
 		this._idPlugin = undefined
 		this._tab = null
-		this._listeners.clear()
 
 		super.destroy()
 	}
@@ -103,16 +90,15 @@ export class TTabsItemIdsPlugin extends TBasePlugin<ITabsItem> {
 	private readonly _write = (): void => {
 		const id = this._idPlugin?.id ?? this._tabId
 		const controls = this._panel?.id ?? this._formula
+		const mount = this.pluginMount
 
-		if (!this._initial) {
-			this._tab?.aria.add('id', id)
-			this._tab?.aria.add('aria-controls', controls)
+		if (mount && !mount.accepted) {
+			mount.patch('aria', { id, 'aria-controls': controls })
+
+			return
 		}
 
-		if (this._snapshot.id === id && this._snapshot['aria-controls'] === controls) return
-
-		this._snapshot = Object.freeze({ id, 'aria-controls': controls })
-
-		for (const listener of this._listeners) listener()
+		this._tab?.aria.add('id', id)
+		this._tab?.aria.add('aria-controls', controls)
 	}
 }

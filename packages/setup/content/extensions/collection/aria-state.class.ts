@@ -1,8 +1,9 @@
 /**
- * One standard mount snapshot with read-only document relationships and localized part names.
+ * The state a prepared mount renders before acceptance.
  */
+import type { TPluginMount } from '@soxa-ui/plugins'
 import type { TStateListener, TStateSnapshot } from '../../../protected/adapter/exchange'
-import type { ICollectionAriaStateOptions } from './aria-state.types'
+import type { TCollectionStatePort } from './aria-state.types'
 
 function recordOf(value: unknown): Readonly<Record<string, unknown>> {
 	return typeof value === 'object' && value !== null
@@ -10,84 +11,59 @@ function recordOf(value: unknown): Readonly<Record<string, unknown>> {
 		: {}
 }
 
-const EMPTY = Object.freeze({})
-
-/** The core owns state; these overlays belong to one DOM mount and never write a shared model. */
+/**
+ * The shared model with the mount's patches over it (`TPluginMount.patches`).
+ * Only the server render and a React render before commit need it: once the
+ * mount is accepted, the patches are gone and the model is read as it is.
+ *
+ * A component and its collection facade share one bundle and so one mount:
+ * a patch applies only to a field this state has, or the facade's state would
+ * carry the patch alone over the component's whole field.
+ */
 export class TCollectionAriaState {
-	private _base: TStateSnapshot | undefined
-	private _link: Readonly<Record<string, unknown>> | undefined
-	private _outputs: readonly Readonly<Record<string, unknown>>[] = []
-	private _snapshot: TStateSnapshot | undefined
-	private readonly _fields = new Map<string, { base: unknown; link: unknown; value: unknown }>()
+	constructor(
+		private readonly _state: TCollectionStatePort,
+		private readonly _mount: TPluginMount,
+	) {}
 
-	constructor(private readonly _options: ICollectionAriaStateOptions) {}
-
-	/** Merge mount-local outputs while preserving snapshot and unchanged field identities. */
 	getSnapshot(): TStateSnapshot {
-		const base = this._options.state.getSnapshot()
-		const link = this._options.link?.getSnapshot() ?? EMPTY
-		const outputs = (this._options.outputs ?? []).map((output) => output.getSnapshot())
+		const base = this._state.getSnapshot()
+		const patches = this._patched(base)
 
-		// Subscribers must see the same object while all source snapshots are unchanged.
-		if (
-			this._snapshot &&
-			this._base === base &&
-			this._link === link &&
-			outputs.every((output, index) => output === this._outputs[index])
-		)
-			return this._snapshot
+		if (patches.length === 0) return base
 
 		const snapshot = { ...base }
 
-		// Cache each overlay separately so changing one field does not invalidate the others.
-		const combine = (name: string, patch: unknown): void => {
-			const cached = this._fields.get(name)
-
-			if (cached && cached.base === base[name] && cached.link === patch)
-				snapshot[name] = cached.value
-			else {
-				const value = Object.freeze({ ...recordOf(base[name]), ...recordOf(patch) })
-				this._fields.set(name, { base: base[name], link: patch, value })
-				snapshot[name] = value
-			}
+		for (const name of patches) {
+			snapshot[name] = Object.freeze({
+				...recordOf(base[name]),
+				...this._mount.patches[name],
+			})
 		}
 
-		if (this._options.link) combine('aria', link)
-
-		for (const output of outputs)
-			for (const [name, value] of Object.entries(output)) combine(name, value)
-
-		this._base = base
-		this._link = link
-		this._outputs = outputs
-		this._snapshot = Object.freeze(snapshot)
-
-		return this._snapshot
+		return Object.freeze(snapshot)
 	}
 
-	/** Forward source changes through the merged view and release every subscription together. */
 	subscribe(listener: TStateListener): () => void {
-		const releases = (this._options.outputs ?? []).map((output) =>
-			output.subscribe(() => {
-				const snapshot = this.getSnapshot()
+		const patched = this._patched(this._state.getSnapshot())
+		let active = true
 
-				for (const name of Object.keys(output.getSnapshot())) listener(name, snapshot[name])
-			}),
-		)
+		// Acceptance drops the patches, and a value the model already held sends no event of its own
+		this._mount.defer(() => {
+			if (!active) return
 
-		if (this._options.link)
-			releases.push(
-				this._options.link.subscribe(() => listener('aria', this.getSnapshot().aria)),
-			)
+			for (const name of patched) listener(name, this._state.getSnapshot()[name])
+		})
 
-		releases.push(
-			this._options.state.subscribe((name) => {
-				listener(name, this.getSnapshot()[name])
-			}),
-		)
+		const release = this._state.subscribe((name) => listener(name, this.getSnapshot()[name]))
 
 		return () => {
-			for (const release of releases) release()
+			active = false
+			release()
 		}
+	}
+
+	private _patched(base: TStateSnapshot): string[] {
+		return Object.keys(this._mount.patches).filter((name) => Object.hasOwn(base, name))
 	}
 }
