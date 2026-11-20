@@ -92,8 +92,10 @@ export interface IListProps {
 	/** Где показывать отметку выбранного элемента */
 	indicator?: TListIndicator
 	/**
-	 * Рисовать ли разделитель между соседними секциями группировки — группами
-	 * из данных и элементами без группы. По умолчанию — нет
+	 * Whether to draw a separator between neighbouring sections of the
+	 * grouping — groups from data and items without a group. Groups written in
+	 * markup (`ListBox.Group`, `Select.Group`) get no separator. Defaults to
+	 * `false`
 	 */
 	groupSeparators?: boolean
 }
@@ -118,8 +120,10 @@ export interface IList {
 	/** Где показывать отметку выбранного элемента */
 	indicator: TListIndicator
 	/**
-	 * Рисовать ли разделитель между соседними секциями группировки. Рисует его
-	 * разметка списка: разделитель — не данные коллекции, а её рисунок
+	 * Whether to draw a separator between neighbouring sections of the
+	 * grouping. The list markup draws it — a separator is not data of the
+	 * collection but its drawing — and only for sections the owner draws from
+	 * data: groups written in markup get none
 	 */
 	groupSeparators: boolean
 }

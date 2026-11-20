@@ -24,7 +24,7 @@ export const LIST_PROPS = {
 		type: String,
 		triggers: ['change:indicator'],
 	},
-	/** Рисовать ли разделитель между соседними секциями группировки */
+	/** Whether to draw a separator between sections of the grouping from data */
 	groupSeparators: {
 		type: Boolean,
 		triggers: ['change:groupSeparators'],

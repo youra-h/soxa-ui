@@ -16,7 +16,7 @@
  */
 
 import { describe, it, expect, vi } from 'vitest'
-import { TListBox, TMenu, TMenuSubmenu, createEngineListBox } from '@soxa-ui/core'
+import { TListBox, TMenu, TMenuSubmenu, TSelect, createEngineListBox } from '@soxa-ui/core'
 import type {
 	IListBoxItem,
 	TGroupSection,
@@ -36,6 +36,11 @@ import {
 	MenuItemDescriptor,
 	MenuSubmenuCollectionDescriptor,
 	MenuSubmenuDescriptor,
+	SelectCollectionDescriptor,
+	SelectCollectionItemDescriptor,
+	SelectDescriptor,
+	SelectGroupDescriptor,
+	SelectItemDescriptor,
 	TabsCollectionDescriptor,
 	TabsDescriptor,
 } from '../content/descriptors'
@@ -349,5 +354,97 @@ describe('ключ — только из своей коллекции', () => {
 
 		expect(loose.values.get(ITEM_GROUP_ELEVATOR)).toBeNull()
 		expect(inTabs.values.get(ITEM_GROUP_ELEVATOR)).toBeNull()
+	})
+})
+
+/**
+ * Select's filter leaves options out of the shown ones; a markup group with
+ * none of its options shown hides with its label (issue #905).
+ */
+describe('группа разметки без показанных элементов скрыта', () => {
+	function mountSelect(layer: TElevatorLayer) {
+		const own = createAdapterContext(SelectDescriptor(), { ctrl: new TSelect() })
+		const facade = createAdapterContext(
+			SelectCollectionDescriptor(),
+			{ options: { owner: own.instance } },
+			{ bundle: own.bundle },
+		).use(TCollectionExtension, { elevator: elevatorOf(layer) })
+
+		accept([own, facade])
+
+		return facade.instance.extensions
+	}
+
+	function mountSelectGroup(layer: TElevatorLayer, props: object) {
+		const group = createAdapterContext(SelectGroupDescriptor(), { props }).use(
+			TItemGroupExtension,
+			{ elevator: elevatorOf(layer) },
+		)
+
+		accept([group])
+
+		return group.instance
+	}
+
+	function mountOption(layer: TElevatorLayer, props: object): void {
+		const own = createAdapterContext(SelectItemDescriptor(), { props })
+		const item = createAdapterContext(
+			SelectCollectionItemDescriptor(),
+			{ props },
+			{ bundle: own.bundle },
+		).use(TCollectionItemExtension, { adapter: own, elevator: elevatorOf(layer) })
+
+		accept([item, own])
+	}
+
+	function cities() {
+		const selectLayer = childOf()
+		const extensions = mountSelect(selectLayer)
+		const europeLayer = childOf(selectLayer)
+		const europe = mountSelectGroup(europeLayer, { label: 'Europe' })
+
+		mountOption(childOf(europeLayer), { value: 'berlin', text: 'Berlin' })
+		mountOption(childOf(europeLayer), { value: 'paris', text: 'Paris' })
+
+		const asiaLayer = childOf(selectLayer)
+		const asia = mountSelectGroup(asiaLayer, { label: 'Asia' })
+
+		mountOption(childOf(asiaLayer), { value: 'seoul', text: 'Seoul' })
+
+		const emptyLayer = childOf(selectLayer)
+		const empty = mountSelectGroup(emptyLayer, { label: 'Africa' })
+
+		return { extensions, europe, asia, empty }
+	}
+
+	it('отбор, убравший все элементы группы, прячет её; снятый — возвращает', () => {
+		const { extensions, europe, asia } = cities()
+
+		expect([europe.visible, asia.visible]).toEqual([true, true])
+
+		extensions.filter.query = 'par'
+
+		expect([europe.visible, asia.visible]).toEqual([true, false])
+
+		extensions.filter.clear()
+
+		expect([europe.visible, asia.visible]).toEqual([true, true])
+	})
+
+	it('группа без элементов остаётся как есть', () => {
+		const { extensions, empty } = cities()
+
+		extensions.filter.query = 'par'
+
+		expect(empty.visible).toBe(true)
+	})
+
+	it('без смены показа группы её `visible` решает потребитель', () => {
+		const { extensions, europe } = cities()
+
+		europe.visible = false
+		extensions.filter.query = 'par'
+
+		expect(europe.visible).toBe(false)
 	})
 })

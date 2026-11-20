@@ -30,8 +30,14 @@
  *   unlabelled first (benchmarks/parity/README.md). An accepted item has an
  *   accepted group above it, so the early entry registers no thrown-away
  *   group;
- * - **removal** (the context's `destroy`) — the unsubscription and the
+ * - **removal** (the context's `destroy`) — the unsubscriptions and the
  *   registration removed.
+ *
+ * A group whose items are all left out of the shown ones (Select's filter)
+ * hides with its label: the owner draws no section for such a group from data
+ * either. Only a group that has items hides — an empty one, or one whose items
+ * have not joined yet, stays as it is. The group writes `visible` only when
+ * its shown state flips, so the consumer's own `visible` stands otherwise.
  *
  * No collection above or it has no grouping — the group lowers an empty
  * link: the items need no key, and a group link from above does not reach
@@ -43,7 +49,7 @@
  *   adapter.use(TItemGroupExtension, { elevator: VueElevatorFactory })
  */
 
-import { groupOf } from '@soxa-ui/core'
+import { batchOf, groupOf, metaOf } from '@soxa-ui/core'
 import type { TInstanceContext } from '../../../protected/adapter/context'
 import { ITEM_CONTEXT_ELEVATOR } from '../../../protected/adapter/elevator/keys'
 import { ITEM_GROUP_ELEVATOR } from './keys'
@@ -63,14 +69,34 @@ export class TItemGroupExtension {
 
 		const group = context.instance
 		const key = `item-group:${group.uid}`
+		const batch = batchOf<object>(engine)
+		const meta = metaOf<object>(engine)
 		/** Снятие последней регистрации: новая подпись регистрируется поверх прежней. */
 		let release: (() => void) | undefined
 
 		/** Whether the group has entered the grouping — see «entry» above. */
 		let entered = false
 
+		/** The shown state the group applied last; a group renders shown. */
+		let shown = true
+
 		const register = (): void => {
 			release = grouping.register({ key, label: group.label })
+		}
+
+		const isMember = (item: object): boolean => meta?.get(item)?.group === key
+
+		// The grouping recounts its sections on the same `change:shown`, before
+		// this: it is installed with the engine
+		const syncShown = (): void => {
+			const next =
+				grouping.sections.some((section) => section.group?.key === key) ||
+				!(batch?.items.some(isMember) ?? false)
+
+			if (next === shown) return
+
+			shown = next
+			group.visible = next
 		}
 
 		const enter = (): void => {
@@ -79,6 +105,8 @@ export class TItemGroupExtension {
 			entered = true
 			register()
 			group.events.on('change:label', register)
+			batch?.events.on('change:shown', syncShown)
+			syncShown()
 		}
 
 		link.down({ key, engine, enter })
@@ -88,6 +116,7 @@ export class TItemGroupExtension {
 		context.events.on('destroy', () => {
 			entered = false
 			group.events.off('change:label', register)
+			batch?.events.off('change:shown', syncShown)
 			release?.()
 			release = undefined
 		})

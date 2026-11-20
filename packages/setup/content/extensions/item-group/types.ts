@@ -22,14 +22,16 @@ export interface IItemGroupLink {
 }
 
 /**
- * Инстанс, к которому подключается расширение: часть группы — `Menu.Group`,
- * `Menu.RadioGroup`, `ListBox.Group`, `Select.Group`. Ключ в группировке —
- * от экземпляра (`uid`), подпись — с событием её смены: карта событий у форм
- * разная, а смена подписи есть у всех.
+ * The instance the extension attaches to: a group part — `Menu.Group`,
+ * `Menu.RadioGroup`, `ListBox.Group`, `Select.Group`. The key in the grouping
+ * comes from the instance (`uid`), the label — with the event of its change:
+ * the event maps of the forms differ, but every one has the label change.
+ * `visible` — the group hides when none of its items is shown.
  */
 export type TItemGroupPart = {
 	readonly uid: number
 	readonly label: string
+	visible: boolean
 	readonly events: IListenable<Pick<TItemGroupEvents, 'change:label'>>
 }
 

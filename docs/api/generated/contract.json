@@ -19680,7 +19680,7 @@
           "type": "boolean | undefined",
           "declaredType": "boolean",
           "required": false,
-          "description": "Рисовать ли разделитель между соседними секциями группировки — группами\nиз данных и элементами без группы. По умолчанию — нет",
+          "description": "Whether to draw a separator between neighbouring sections of the\ngrouping — groups from data and items without a group. Groups written in\nmarkup (`ListBox.Group`, `Select.Group`) get no separator. Defaults to\n`false`",
           "hasDefault": true,
           "default": "false"
         },
@@ -34151,7 +34151,7 @@
           "type": "boolean | undefined",
           "declaredType": "boolean",
           "required": false,
-          "description": "Рисовать ли разделитель между соседними секциями группировки — группами\nиз данных и элементами без группы. По умолчанию — нет",
+          "description": "Whether to draw a separator between neighbouring sections of the\ngrouping — groups from data and items without a group. Groups written in\nmarkup (`ListBox.Group`, `Select.Group`) get no separator. Defaults to\n`false`",
           "hasDefault": true,
           "default": "false"
         },
