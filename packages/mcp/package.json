@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/mcp",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Read-only Soxa UI documentation MCP with bundled versioned API and recipes",
   "keywords": [
     "soxa",

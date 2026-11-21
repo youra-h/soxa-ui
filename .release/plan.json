@@ -1,60 +1,12 @@
 {
   "schemaVersion": 1,
-  "scope": "components",
+  "scope": "mcp",
   "packages": [
     {
-      "name": "@soxa-ui/setup",
-      "version": "0.4.2",
-      "previousVersion": "0.4.1",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/plugins",
-      "version": "0.4.2",
-      "previousVersion": "0.4.1",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/react",
-      "version": "0.4.2",
-      "previousVersion": "0.4.1",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/vue",
-      "version": "0.4.2",
-      "previousVersion": "0.4.1",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/svelte",
-      "version": "0.4.2",
-      "previousVersion": "0.4.1",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/solid",
-      "version": "0.4.2",
-      "previousVersion": "0.4.1",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/angular",
-      "version": "0.4.2",
-      "previousVersion": "0.4.1",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/webc",
-      "version": "0.4.2",
-      "previousVersion": "0.4.1",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/core",
-      "version": "0.4.2",
-      "previousVersion": "0.4.1",
-      "scope": "components"
+      "name": "@soxa-ui/mcp",
+      "version": "0.0.1",
+      "previousVersion": "0.0.0",
+      "scope": "mcp"
     }
   ]
 }
