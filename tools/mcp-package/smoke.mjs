@@ -59,7 +59,10 @@ if (!registry) {
 put('package.json', {
 	private: true,
 	type: 'module',
-	dependencies: { '@soxa-ui/mcp': spec, '@modelcontextprotocol/sdk': '1.32.2' },
+	dependencies: {
+		'@soxa-ui/mcp': registry ? manifest.version : spec,
+		'@modelcontextprotocol/sdk': '1.32.2',
+	},
 })
 console.log(npm(['install', '--ignore-scripts', '--no-audit', '--no-fund']))
 const installed = join(directory, 'node_modules/@soxa-ui/mcp')
