@@ -1767,6 +1767,7 @@
     {
       "name": "so-list-box__separator",
       "sources": [
+        "packages/core/src/components/custom/list-box/separator/separator.class.ts",
         "packages/ui/angular/src/components/list-box/list-box.component.html",
         "packages/ui/react/src/components/list-box/ListBox.tsx",
         "packages/ui/solid/src/components/list-box/ListBox.tsx",
@@ -2490,6 +2491,7 @@
     {
       "name": "so-select__separator",
       "sources": [
+        "packages/core/src/components/custom/select/separator/separator.class.ts",
         "packages/ui/angular/src/components/select/select.component.html",
         "packages/ui/react/src/components/select/Select.tsx",
         "packages/ui/solid/src/components/select/Select.tsx",
