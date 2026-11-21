@@ -114,6 +114,13 @@
 	cursor: default;
 }
 
+/* Resolve the scaled spacing unit on each consuming node to preserve local settings. */
+.so-input__leading,
+.so-input__trailing,
+.so-input input {
+	--so-input-space: calc(var(--so-spacing, 0.25rem) * var(--so-input-spacing-factor, 1));
+}
+
 /* Высота слота — строка поля, а не процент от него: у поля Select с тегами
  * высота авто. */
 .so-input__leading,
@@ -121,25 +128,16 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: var(
-		--so-input-slot-spacing,
-		calc(var(--so-spacing, 0.25rem) * var(--so-input-spacing-factor, 1))
-	);
+	gap: var(--so-input-slot-spacing, var(--so-input-space));
 	height: var(--so-input-slot-row);
 }
 
 .so-input__leading {
-	padding-inline-start: var(
-		--so-input-slot-padding,
-		calc(var(--so-spacing, 0.25rem) * var(--so-input-spacing-factor, 1))
-	);
+	padding-inline-start: var(--so-input-slot-padding, var(--so-input-space));
 }
 
 .so-input__trailing {
-	padding-inline-end: var(
-		--so-input-slot-padding,
-		calc(var(--so-spacing, 0.25rem) * var(--so-input-spacing-factor, 1))
-	);
+	padding-inline-end: var(--so-input-slot-padding, var(--so-input-space));
 }
 
 /* Кнопка очистки — первой в слоте у конца, квадрат со стороной в строку
@@ -155,15 +153,13 @@
 }
 
 .so-input--size-sm {
+	--so-input-spacing-factor: var(--so-input-spacing-scale, var(--so-field-scale-sm, 1));
 	--so-input-height: var(--so-input-height-sm);
 }
 
 .so-input--size-sm input {
 	font-size: var(--so-input-font-size-sm);
-	text-indent: var(
-		--so-input-indent-sm,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-input-spacing-factor, 1))
-	);
+	text-indent: var(--so-input-indent-sm, calc(var(--so-input-space) * 2));
 }
 
 .so-input--size-normal {
@@ -171,68 +167,43 @@
 }
 
 .so-input--size-normal input {
-	text-indent: var(
-		--so-input-indent-normal,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-input-spacing-factor, 1))
-	);
+	text-indent: var(--so-input-indent-normal, calc(var(--so-input-space) * 2));
 }
 
 .so-input--size-lg {
+	--so-input-spacing-factor: var(--so-input-spacing-scale, var(--so-field-scale-lg, 1));
 	--so-input-height: var(--so-input-height-lg);
 }
 
 .so-input--size-lg input {
 	font-size: var(--so-input-font-size-lg);
-	text-indent: var(
-		--so-input-indent-lg,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-input-spacing-factor, 1))
-	);
+	text-indent: var(--so-input-indent-lg, calc(var(--so-input-space) * 2));
 }
 
 .so-input--size-xl {
+	--so-input-spacing-factor: var(--so-input-spacing-scale, var(--so-field-scale-xl, 1));
 	--so-input-height: var(--so-input-height-xl);
 }
 
 .so-input--size-xl input {
 	font-size: var(--so-input-font-size-xl);
-	text-indent: var(
-		--so-input-indent-xl,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-input-spacing-factor, 1))
-	);
+	text-indent: var(--so-input-indent-xl, calc(var(--so-input-space) * 2));
 }
 
 .so-input--size-2xl {
+	--so-input-spacing-factor: var(--so-input-spacing-scale, var(--so-field-scale-2xl, 1));
 	--so-input-height: var(--so-input-height-2xl);
 }
 
 .so-input--size-2xl input {
 	font-size: var(--so-input-font-size-2xl);
-	text-indent: var(
-		--so-input-indent-2xl,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-input-spacing-factor, 1))
-	);
+	text-indent: var(--so-input-indent-2xl, calc(var(--so-input-space) * 2));
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-input--size-sm {
-	--so-input-spacing-factor: var(--so-input-spacing-scale, var(--so-field-scale-sm, 1));
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-input),
 .so-input--size-normal {
 	--so-input-spacing-factor: var(--so-input-spacing-scale, var(--so-field-scale-normal, 1));
-}
-
-.so-input--size-lg {
-	--so-input-spacing-factor: var(--so-input-spacing-scale, var(--so-field-scale-lg, 1));
-}
-
-.so-input--size-xl {
-	--so-input-spacing-factor: var(--so-input-spacing-scale, var(--so-field-scale-xl, 1));
-}
-
-.so-input--size-2xl {
-	--so-input-spacing-factor: var(--so-input-spacing-scale, var(--so-field-scale-2xl, 1));
 }
 
 /* A larger spacing scale can leave less room than the icon size scale. */

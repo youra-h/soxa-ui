@@ -27,21 +27,25 @@
 }
 
 .so-avatar--size-sm {
+	--so-avatar-spacing-factor: var(--so-avatar-spacing-scale, var(--so-surface-scale-sm, 1));
 	--so-avatar-size: var(--so-avatar-size-sm);
 	--so-avatar-font-size: var(--so-avatar-font-size-sm);
 }
 
 .so-avatar--size-lg {
+	--so-avatar-spacing-factor: var(--so-avatar-spacing-scale, var(--so-surface-scale-lg, 1));
 	--so-avatar-size: var(--so-avatar-size-lg);
 	--so-avatar-font-size: var(--so-avatar-font-size-lg);
 }
 
 .so-avatar--size-xl {
+	--so-avatar-spacing-factor: var(--so-avatar-spacing-scale, var(--so-surface-scale-xl, 1));
 	--so-avatar-size: var(--so-avatar-size-xl);
 	--so-avatar-font-size: var(--so-avatar-font-size-xl);
 }
 
 .so-avatar--size-2xl {
+	--so-avatar-spacing-factor: var(--so-avatar-spacing-scale, var(--so-surface-scale-2xl, 1));
 	--so-avatar-size: var(--so-avatar-size-2xl);
 	--so-avatar-font-size: var(--so-avatar-font-size-2xl);
 }
@@ -74,24 +78,8 @@
 	display: none;
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-avatar--size-sm {
-	--so-avatar-spacing-factor: var(--so-avatar-spacing-scale, var(--so-surface-scale-sm, 1));
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-avatar),
 .so-avatar--size-normal {
 	--so-avatar-spacing-factor: var(--so-avatar-spacing-scale, var(--so-surface-scale-normal, 1));
-}
-
-.so-avatar--size-lg {
-	--so-avatar-spacing-factor: var(--so-avatar-spacing-scale, var(--so-surface-scale-lg, 1));
-}
-
-.so-avatar--size-xl {
-	--so-avatar-spacing-factor: var(--so-avatar-spacing-scale, var(--so-surface-scale-xl, 1));
-}
-
-.so-avatar--size-2xl {
-	--so-avatar-spacing-factor: var(--so-avatar-spacing-scale, var(--so-surface-scale-2xl, 1));
 }

@@ -1303,3 +1303,8 @@ fixed-default spacing entries describe geometry roles; the current formulas and 
 migration are documented in README.md and theme-variables.json. Fonts, heights and
 minimum pointer targets keep their separate scales. Component-owned computed variables
 needed by a visual theme must be named in `theme-reads`.
+
+Repeated spacing formulas can share an internal `--so-<component>-space` value.
+Resolve it on each consuming node, including slots and nested components, so
+local spacing settings still apply there. Keep it out of the public theme
+contract; themes continue to read the existing geometry variables.

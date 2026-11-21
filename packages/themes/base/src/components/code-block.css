@@ -160,51 +160,39 @@
 	margin-block: 0;
 }
 .so-code-block--size-sm {
-	--so-code-block-header-height: var(--so-code-block-header-height-sm);
-}
-.so-code-block--size-lg {
-	--so-code-block-header-height: var(--so-code-block-header-height-lg);
-}
-.so-code-block--size-xl {
-	--so-code-block-header-height: var(--so-code-block-header-height-xl);
-}
-.so-code-block--size-2xl {
-	--so-code-block-header-height: var(--so-code-block-header-height-2xl);
-}
-
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-code-block--size-sm {
 	--so-code-block-spacing-factor: var(
 		--so-code-block-spacing-scale,
 		var(--so-surface-scale-sm, 1)
 	);
+	--so-code-block-header-height: var(--so-code-block-header-height-sm);
 }
-
-:where(.so-code-block),
-.so-code-block--size-normal {
-	--so-code-block-spacing-factor: var(
-		--so-code-block-spacing-scale,
-		var(--so-surface-scale-normal, 1)
-	);
-}
-
 .so-code-block--size-lg {
 	--so-code-block-spacing-factor: var(
 		--so-code-block-spacing-scale,
 		var(--so-surface-scale-lg, 1)
 	);
+	--so-code-block-header-height: var(--so-code-block-header-height-lg);
 }
-
 .so-code-block--size-xl {
 	--so-code-block-spacing-factor: var(
 		--so-code-block-spacing-scale,
 		var(--so-surface-scale-xl, 1)
 	);
+	--so-code-block-header-height: var(--so-code-block-header-height-xl);
 }
-
 .so-code-block--size-2xl {
 	--so-code-block-spacing-factor: var(
 		--so-code-block-spacing-scale,
 		var(--so-surface-scale-2xl, 1)
+	);
+	--so-code-block-header-height: var(--so-code-block-header-height-2xl);
+}
+
+/* Use the normal family scale when the size modifier is absent. */
+:where(.so-code-block),
+.so-code-block--size-normal {
+	--so-code-block-spacing-factor: var(
+		--so-code-block-spacing-scale,
+		var(--so-surface-scale-normal, 1)
 	);
 }

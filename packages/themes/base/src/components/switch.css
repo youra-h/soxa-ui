@@ -48,6 +48,7 @@
 }
 
 .so-switch--size-sm {
+	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-sm, 1));
 	--so-switch-width: var(--so-switch-width-sm);
 	--so-switch-height: var(--so-switch-height-sm);
 }
@@ -58,16 +59,19 @@
 }
 
 .so-switch--size-lg {
+	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-lg, 1));
 	--so-switch-width: var(--so-switch-width-lg);
 	--so-switch-height: var(--so-switch-height-lg);
 }
 
 .so-switch--size-xl {
+	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-xl, 1));
 	--so-switch-width: var(--so-switch-width-xl);
 	--so-switch-height: var(--so-switch-height-xl);
 }
 
 .so-switch--size-2xl {
+	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-2xl, 1));
 	--so-switch-width: var(--so-switch-width-2xl);
 	--so-switch-height: var(--so-switch-height-2xl);
 }
@@ -141,24 +145,8 @@
 	z-index: 20;
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-switch--size-sm {
-	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-sm, 1));
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-switch),
 .so-switch--size-normal {
 	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-normal, 1));
-}
-
-.so-switch--size-lg {
-	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-lg, 1));
-}
-
-.so-switch--size-xl {
-	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-xl, 1));
-}
-
-.so-switch--size-2xl {
-	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-2xl, 1));
 }

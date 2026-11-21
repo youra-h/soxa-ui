@@ -51,6 +51,16 @@
 	--so-disabled-opacity: 1;
 }
 
+/* Resolve the scaled spacing unit on each consuming node to preserve local settings. */
+.so-number-input > .so-number-input__input,
+.so-number-input__leading,
+.so-number-input__trailing,
+.so-number-input__stepper {
+	--so-number-input-space: calc(
+		var(--so-spacing, 0.25rem) * var(--so-number-input-spacing-factor, 1)
+	);
+}
+
 /* Отступ числа — полями поровну с обеих сторон, а не `text-indent`, как у
  * Input: отступ строки стоит у начала по направлению самого ввода, а число
  * стоит у начала поля (ниже). Когда направления разные — число справа налево
@@ -59,10 +69,7 @@
  * ввода — во всю высоту поля. Кегль — вводу, а не корню: слоты — разметка
  * потребителя. */
 .so-number-input > .so-number-input__input {
-	padding-inline: var(
-		--so-input-indent-normal,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-number-input-spacing-factor, 1))
-	);
+	padding-inline: var(--so-input-indent-normal, calc(var(--so-number-input-space) * 2));
 	line-height: var(--so-number-input-height);
 }
 
@@ -98,25 +105,16 @@
 	flex-shrink: 0;
 	align-items: center;
 	justify-content: center;
-	gap: var(
-		--so-input-slot-spacing,
-		calc(var(--so-spacing, 0.25rem) * var(--so-number-input-spacing-factor, 1))
-	);
+	gap: var(--so-input-slot-spacing, var(--so-number-input-space));
 	height: var(--so-number-input-slot-row);
 }
 
 .so-number-input__leading {
-	padding-inline-start: var(
-		--so-input-slot-padding,
-		calc(var(--so-spacing, 0.25rem) * var(--so-number-input-spacing-factor, 1))
-	);
+	padding-inline-start: var(--so-input-slot-padding, var(--so-number-input-space));
 }
 
 .so-number-input__trailing {
-	padding-inline-end: var(
-		--so-input-slot-padding,
-		calc(var(--so-spacing, 0.25rem) * var(--so-number-input-spacing-factor, 1))
-	);
+	padding-inline-end: var(--so-input-slot-padding, var(--so-number-input-space));
 }
 
 /* Кнопки шага — одна пара, а не ещё две кнопки в ряду со слотом: от очистки
@@ -126,10 +124,7 @@
  * то же, что у слота. В RTL ряд зеркален сам — флекс поля идёт по его
  * направлению, — и «больше» стоит у левого края. */
 .so-number-input__stepper {
-	padding-inline: var(
-		--so-input-slot-padding,
-		calc(var(--so-spacing, 0.25rem) * var(--so-number-input-spacing-factor, 1))
-	);
+	padding-inline: var(--so-input-slot-padding, var(--so-number-input-space));
 }
 
 /* Кнопки — квадраты в строку слота, как очистка Input: рядом, а не столбцом
@@ -154,15 +149,16 @@
 }
 
 .so-number-input--size-sm {
+	--so-number-input-spacing-factor: var(
+		--so-number-input-spacing-scale,
+		var(--so-field-scale-sm, 1)
+	);
 	--so-number-input-height: var(--so-input-height-sm);
 }
 
 .so-number-input--size-sm > .so-number-input__input {
 	font-size: var(--so-input-font-size-sm);
-	padding-inline: var(
-		--so-input-indent-sm,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-number-input-spacing-factor, 1))
-	);
+	padding-inline: var(--so-input-indent-sm, calc(var(--so-number-input-space) * 2));
 }
 
 .so-number-input--size-normal {
@@ -170,62 +166,7 @@
 }
 
 .so-number-input--size-normal > .so-number-input__input {
-	padding-inline: var(
-		--so-input-indent-normal,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-number-input-spacing-factor, 1))
-	);
-}
-
-.so-number-input--size-lg {
-	--so-number-input-height: var(--so-input-height-lg);
-}
-
-.so-number-input--size-lg > .so-number-input__input {
-	font-size: var(--so-input-font-size-lg);
-	padding-inline: var(
-		--so-input-indent-lg,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-number-input-spacing-factor, 1))
-	);
-}
-
-.so-number-input--size-xl {
-	--so-number-input-height: var(--so-input-height-xl);
-}
-
-.so-number-input--size-xl > .so-number-input__input {
-	font-size: var(--so-input-font-size-xl);
-	padding-inline: var(
-		--so-input-indent-xl,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-number-input-spacing-factor, 1))
-	);
-}
-
-.so-number-input--size-2xl {
-	--so-number-input-height: var(--so-input-height-2xl);
-}
-
-.so-number-input--size-2xl > .so-number-input__input {
-	font-size: var(--so-input-font-size-2xl);
-	padding-inline: var(
-		--so-input-indent-2xl,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-number-input-spacing-factor, 1))
-	);
-}
-
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-number-input--size-sm {
-	--so-number-input-spacing-factor: var(
-		--so-number-input-spacing-scale,
-		var(--so-field-scale-sm, 1)
-	);
-}
-
-:where(.so-number-input),
-.so-number-input--size-normal {
-	--so-number-input-spacing-factor: var(
-		--so-number-input-spacing-scale,
-		var(--so-field-scale-normal, 1)
-	);
+	padding-inline: var(--so-input-indent-normal, calc(var(--so-number-input-space) * 2));
 }
 
 .so-number-input--size-lg {
@@ -233,6 +174,12 @@
 		--so-number-input-spacing-scale,
 		var(--so-field-scale-lg, 1)
 	);
+	--so-number-input-height: var(--so-input-height-lg);
+}
+
+.so-number-input--size-lg > .so-number-input__input {
+	font-size: var(--so-input-font-size-lg);
+	padding-inline: var(--so-input-indent-lg, calc(var(--so-number-input-space) * 2));
 }
 
 .so-number-input--size-xl {
@@ -240,12 +187,33 @@
 		--so-number-input-spacing-scale,
 		var(--so-field-scale-xl, 1)
 	);
+	--so-number-input-height: var(--so-input-height-xl);
+}
+
+.so-number-input--size-xl > .so-number-input__input {
+	font-size: var(--so-input-font-size-xl);
+	padding-inline: var(--so-input-indent-xl, calc(var(--so-number-input-space) * 2));
 }
 
 .so-number-input--size-2xl {
 	--so-number-input-spacing-factor: var(
 		--so-number-input-spacing-scale,
 		var(--so-field-scale-2xl, 1)
+	);
+	--so-number-input-height: var(--so-input-height-2xl);
+}
+
+.so-number-input--size-2xl > .so-number-input__input {
+	font-size: var(--so-input-font-size-2xl);
+	padding-inline: var(--so-input-indent-2xl, calc(var(--so-number-input-space) * 2));
+}
+
+/* Use the normal family scale when the size modifier is absent. */
+:where(.so-number-input),
+.so-number-input--size-normal {
+	--so-number-input-spacing-factor: var(
+		--so-number-input-spacing-scale,
+		var(--so-field-scale-normal, 1)
 	);
 }
 

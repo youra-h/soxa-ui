@@ -1,6 +1,6 @@
 ﻿import { describe, it, expect } from 'vitest'
 import { defineComponent, h, nextTick } from 'vue'
-import { Input, DateInput, Alert, Toasts } from '@soxa-ui/vue'
+import { Input, DateInput, NumberInput, Button, Tags, Alert, Toasts } from '@soxa-ui/vue'
 import { createEngineToasts } from '@soxa-ui/core'
 import { render } from './render'
 import '@soxa-ui/theme-oren'
@@ -148,5 +148,101 @@ describe('shared radius and spacing settings', () => {
 		)
 		expect(style(root, '.so-alert').padding).toBe('5px 10px 15px 20px')
 		expect(style(root, '.so-alert__content').marginBlockStart).toBe('7px')
+	})
+
+	it.each([
+		{
+			name: 'Input',
+			prefix: 'input',
+			field: () =>
+				h(Input, { size: 'lg', aria_label: 'Input' }, { leading: () => [mark(), mark()] }),
+		},
+		{
+			name: 'DateInput',
+			prefix: 'date-input',
+			field: () =>
+				h(
+					DateInput,
+					{ size: 'lg', aria_label: 'Date' },
+					{ leading: () => [mark(), mark()] },
+				),
+		},
+		{
+			name: 'NumberInput',
+			prefix: 'number-input',
+			field: () =>
+				h(
+					NumberInput,
+					{ size: 'lg', aria_label: 'Number' },
+					{ leading: () => [mark(), mark()] },
+				),
+		},
+	])('keeps $name spacing overrides on individual slot nodes', ({ prefix, field }) => {
+		const root = render(
+			defineComponent({
+				render: () =>
+					h('div', { style: '--so-spacing:8px;--so-field-scale-lg:2' }, [field()]),
+			}),
+		)
+		const selector = '.so-' + prefix + '__leading'
+		const slot = element(root, selector)
+		expect(style(root, selector).gap).toBe('16px')
+
+		slot.style.setProperty('--so-spacing', '3px')
+		slot.style.setProperty('--so-' + prefix + '-spacing-factor', '4')
+		expect(style(root, selector).gap).toBe('12px')
+		expect(style(root, selector).paddingInlineStart).toBe('12px')
+
+		slot.style.setProperty('--so-input-slot-spacing', '0px')
+		slot.style.setProperty('--so-input-slot-padding', '5px')
+		expect(style(root, selector).gap).toBe('0px')
+		expect(style(root, selector).paddingInlineStart).toBe('5px')
+	})
+
+	it('recomputes a nested Button spacing unit and keeps exact length overrides', () => {
+		const root = render(
+			defineComponent({
+				render: () =>
+					h(
+						'div',
+						{
+							class: 'so-button so-button--size-2xl',
+							style: '--so-spacing:8px;--so-control-scale-2xl:3;--so-control-scale-sm:.5',
+						},
+						[
+							h(Button, {
+								size: 'sm',
+								text: 'Nested',
+								style: '--so-button-gap-sm:0px',
+							}),
+						],
+					),
+			}),
+		)
+		expect(style(root, '.so-button .so-button').paddingInlineStart).toBe('10px')
+		expect(style(root, '.so-button .so-button').gap).toBe('0px')
+	})
+
+	it('keeps Tags spacing overrides on the text row and close button', () => {
+		const root = render(
+			defineComponent({
+				render: () =>
+					h(Tags, {
+						size: 'lg',
+						closable: true,
+						items: [{ value: 'one', text: 'One' }],
+						style: '--so-spacing:8px;--so-collection-scale-lg:2',
+					}),
+			}),
+		)
+		const row = element(root, '.so-tags-item > .so-button')
+		const close = element(root, '.so-tags-item__close')
+		for (const node of [row, close]) {
+			node.style.setProperty('--so-spacing', '3px')
+			node.style.setProperty('--so-tags-spacing-factor', '4')
+		}
+		expect(getComputedStyle(row).paddingInlineStart).toBe('18px')
+		expect(getComputedStyle(row).gap).toBe('12px')
+		expect(getComputedStyle(close).paddingInlineStart).toBe('6px')
 	})
 })

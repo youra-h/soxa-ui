@@ -110,15 +110,19 @@
 	--so-slider-length: 10rem;
 }
 
+/* Resolve the scaled spacing unit on each consuming node to preserve local settings. */
+.so-slider,
+.so-slider__tooltip,
+.so-slider--orientation-horizontal.so-slider--tooltip-always {
+	--so-slider-space: calc(var(--so-spacing, 0.25rem) * var(--so-slider-spacing-factor, 1));
+}
+
 /* Размер без модификатора — `normal`: ядро пишет `--size-*` всегда, но блок и
  * без него обязан выглядеть умолчанием. */
 .so-slider {
 	--so-slider-thumb-size: var(--so-slider-thumb-size-normal);
 	--so-slider-rail-size: var(--so-slider-rail-size-normal);
-	--so-slider-gap: var(
-		--so-slider-gap-normal,
-		calc(var(--so-spacing, 0.25rem) * var(--so-slider-spacing-factor, 1))
-	);
+	--so-slider-gap: var(--so-slider-gap-normal, var(--so-slider-space));
 	--so-slider-tick-size: calc(var(--so-slider-rail-size) / 2 + 1px);
 	--so-slider-halo-size: calc(var(--so-slider-thumb-size) / 3);
 	position: relative;
@@ -279,14 +283,8 @@
 .so-slider__tooltip {
 	position: absolute;
 	box-sizing: border-box;
-	padding: var(
-			--so-tooltip-padding-block,
-			calc(var(--so-spacing, 0.25rem) * var(--so-slider-spacing-factor, 1))
-		)
-		var(
-			--so-tooltip-padding-inline,
-			calc(var(--so-spacing, 0.25rem) * 2 * var(--so-slider-spacing-factor, 1))
-		);
+	padding: var(--so-tooltip-padding-block, var(--so-slider-space))
+		var(--so-tooltip-padding-inline, calc(var(--so-slider-space) * 2));
 	line-height: var(--so-tooltip-line);
 	white-space: nowrap;
 }
@@ -324,10 +322,7 @@
 .so-slider--orientation-horizontal.so-slider--tooltip-always {
 	padding-block-start: calc(
 		var(--so-slider-halo-size) + var(--so-slider-gap) + var(--so-tooltip-line) + 2 *
-			var(
-				--so-tooltip-padding-block,
-				calc(var(--so-spacing, 0.25rem) * var(--so-slider-spacing-factor, 1))
-			)
+			var(--so-tooltip-padding-block, var(--so-slider-space))
 	);
 }
 
@@ -409,12 +404,10 @@
 }
 
 .so-slider--size-sm {
+	--so-slider-spacing-factor: var(--so-slider-spacing-scale, var(--so-control-scale-sm, 1));
 	--so-slider-thumb-size: var(--so-slider-thumb-size-sm);
 	--so-slider-rail-size: var(--so-slider-rail-size-sm);
-	--so-slider-gap: var(
-		--so-slider-gap-sm,
-		calc(var(--so-spacing, 0.25rem) * var(--so-slider-spacing-factor, 1))
-	);
+	--so-slider-gap: var(--so-slider-gap-sm, var(--so-slider-space));
 }
 
 .so-slider--size-sm .so-slider__mark-label {
@@ -425,10 +418,7 @@
 .so-slider--size-normal {
 	--so-slider-thumb-size: var(--so-slider-thumb-size-normal);
 	--so-slider-rail-size: var(--so-slider-rail-size-normal);
-	--so-slider-gap: var(
-		--so-slider-gap-normal,
-		calc(var(--so-spacing, 0.25rem) * var(--so-slider-spacing-factor, 1))
-	);
+	--so-slider-gap: var(--so-slider-gap-normal, var(--so-slider-space));
 }
 
 .so-slider--size-normal .so-slider__mark-label {
@@ -437,12 +427,10 @@
 }
 
 .so-slider--size-lg {
+	--so-slider-spacing-factor: var(--so-slider-spacing-scale, var(--so-control-scale-lg, 1));
 	--so-slider-thumb-size: var(--so-slider-thumb-size-lg);
 	--so-slider-rail-size: var(--so-slider-rail-size-lg);
-	--so-slider-gap: var(
-		--so-slider-gap-lg,
-		calc(var(--so-spacing, 0.25rem) * var(--so-slider-spacing-factor, 1))
-	);
+	--so-slider-gap: var(--so-slider-gap-lg, var(--so-slider-space));
 }
 
 .so-slider--size-lg .so-slider__mark-label {
@@ -451,12 +439,10 @@
 }
 
 .so-slider--size-xl {
+	--so-slider-spacing-factor: var(--so-slider-spacing-scale, var(--so-control-scale-xl, 1));
 	--so-slider-thumb-size: var(--so-slider-thumb-size-xl);
 	--so-slider-rail-size: var(--so-slider-rail-size-xl);
-	--so-slider-gap: var(
-		--so-slider-gap-xl,
-		calc(var(--so-spacing, 0.25rem) * var(--so-slider-spacing-factor, 1))
-	);
+	--so-slider-gap: var(--so-slider-gap-xl, var(--so-slider-space));
 }
 
 .so-slider--size-xl .so-slider__mark-label {
@@ -465,12 +451,10 @@
 }
 
 .so-slider--size-2xl {
+	--so-slider-spacing-factor: var(--so-slider-spacing-scale, var(--so-control-scale-2xl, 1));
 	--so-slider-thumb-size: var(--so-slider-thumb-size-2xl);
 	--so-slider-rail-size: var(--so-slider-rail-size-2xl);
-	--so-slider-gap: var(
-		--so-slider-gap-2xl,
-		calc(var(--so-spacing, 0.25rem) * var(--so-slider-spacing-factor, 1))
-	);
+	--so-slider-gap: var(--so-slider-gap-2xl, var(--so-slider-space));
 }
 
 .so-slider--size-2xl .so-slider__mark-label {
@@ -509,24 +493,8 @@
 	flex: 1 1 auto;
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-slider--size-sm {
-	--so-slider-spacing-factor: var(--so-slider-spacing-scale, var(--so-control-scale-sm, 1));
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-slider),
 .so-slider--size-normal {
 	--so-slider-spacing-factor: var(--so-slider-spacing-scale, var(--so-control-scale-normal, 1));
-}
-
-.so-slider--size-lg {
-	--so-slider-spacing-factor: var(--so-slider-spacing-scale, var(--so-control-scale-lg, 1));
-}
-
-.so-slider--size-xl {
-	--so-slider-spacing-factor: var(--so-slider-spacing-scale, var(--so-control-scale-xl, 1));
-}
-
-.so-slider--size-2xl {
-	--so-slider-spacing-factor: var(--so-slider-spacing-scale, var(--so-control-scale-2xl, 1));
 }

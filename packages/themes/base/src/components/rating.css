@@ -121,6 +121,7 @@
 }
 
 .so-rating--size-sm {
+	--so-rating-spacing-factor: var(--so-rating-spacing-scale, var(--so-control-scale-sm, 1));
 	--so-rating-star-size: var(--so-rating-star-size-sm);
 }
 
@@ -129,35 +130,22 @@
 }
 
 .so-rating--size-lg {
+	--so-rating-spacing-factor: var(--so-rating-spacing-scale, var(--so-control-scale-lg, 1));
 	--so-rating-star-size: var(--so-rating-star-size-lg);
 }
 
 .so-rating--size-xl {
+	--so-rating-spacing-factor: var(--so-rating-spacing-scale, var(--so-control-scale-xl, 1));
 	--so-rating-star-size: var(--so-rating-star-size-xl);
 }
 
 .so-rating--size-2xl {
+	--so-rating-spacing-factor: var(--so-rating-spacing-scale, var(--so-control-scale-2xl, 1));
 	--so-rating-star-size: var(--so-rating-star-size-2xl);
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-rating--size-sm {
-	--so-rating-spacing-factor: var(--so-rating-spacing-scale, var(--so-control-scale-sm, 1));
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-rating),
 .so-rating--size-normal {
 	--so-rating-spacing-factor: var(--so-rating-spacing-scale, var(--so-control-scale-normal, 1));
-}
-
-.so-rating--size-lg {
-	--so-rating-spacing-factor: var(--so-rating-spacing-scale, var(--so-control-scale-lg, 1));
-}
-
-.so-rating--size-xl {
-	--so-rating-spacing-factor: var(--so-rating-spacing-scale, var(--so-control-scale-xl, 1));
-}
-
-.so-rating--size-2xl {
-	--so-rating-spacing-factor: var(--so-rating-spacing-scale, var(--so-control-scale-2xl, 1));
 }

@@ -41,6 +41,7 @@
 }
 
 .so-badge--size-sm {
+	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-sm, 1));
 	--so-badge-height: var(--so-badge-height-sm);
 	--so-badge-font-size: var(--so-badge-font-size-sm);
 	--so-badge-padding: var(
@@ -51,6 +52,7 @@
 }
 
 .so-badge--size-lg {
+	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-lg, 1));
 	--so-badge-height: var(--so-badge-height-lg);
 	--so-badge-font-size: var(--so-badge-font-size-lg);
 	--so-badge-padding: var(
@@ -61,6 +63,7 @@
 }
 
 .so-badge--size-xl {
+	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-xl, 1));
 	--so-badge-height: var(--so-badge-height-xl);
 	--so-badge-font-size: var(--so-badge-font-size-xl);
 	--so-badge-padding: var(
@@ -71,6 +74,7 @@
 }
 
 .so-badge--size-2xl {
+	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-2xl, 1));
 	--so-badge-height: var(--so-badge-height-2xl);
 	--so-badge-font-size: var(--so-badge-font-size-2xl);
 	--so-badge-padding: var(
@@ -120,24 +124,8 @@
 	translate: calc(50% * var(--so-dir-sign)) -50%;
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-badge--size-sm {
-	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-sm, 1));
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-badge),
 .so-badge--size-normal {
 	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-normal, 1));
-}
-
-.so-badge--size-lg {
-	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-lg, 1));
-}
-
-.so-badge--size-xl {
-	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-xl, 1));
-}
-
-.so-badge--size-2xl {
-	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-2xl, 1));
 }

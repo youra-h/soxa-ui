@@ -181,6 +181,7 @@
 }
 
 .so-table--size-sm {
+	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-sm, 1));
 	--so-table-button: var(--so-button-height-sm);
 	--so-table-button-inline: var(
 		--so-button-padding-sm,
@@ -203,6 +204,7 @@
 }
 
 .so-table--size-lg {
+	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-lg, 1));
 	--so-table-button: var(--so-button-height-lg);
 	--so-table-button-inline: var(
 		--so-button-padding-lg,
@@ -214,6 +216,7 @@
 }
 
 .so-table--size-xl {
+	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-xl, 1));
 	--so-table-button: var(--so-button-height-xl);
 	--so-table-button-inline: var(
 		--so-button-padding-xl,
@@ -225,6 +228,7 @@
 }
 
 .so-table--size-2xl {
+	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-2xl, 1));
 	--so-table-button: var(--so-button-height-2xl);
 	--so-table-button-inline: var(
 		--so-button-padding-2xl,
@@ -1536,24 +1540,8 @@
 	);
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-table--size-sm {
-	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-sm, 1));
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-table),
 .so-table--size-normal {
 	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-normal, 1));
-}
-
-.so-table--size-lg {
-	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-lg, 1));
-}
-
-.so-table--size-xl {
-	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-xl, 1));
-}
-
-.so-table--size-2xl {
-	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-2xl, 1));
 }
