@@ -26,13 +26,25 @@
 }
 
 .so-field {
-	--so-field-gap: var(--so-caption-gap-normal);
-	--so-field-stack: var(--so-caption-stack-normal);
+	--so-field-gap: var(
+		--so-caption-gap-normal,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-field-spacing-factor, 1))
+	);
+	--so-field-stack: var(
+		--so-caption-stack-normal,
+		calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1))
+	);
 }
 
 .so-field--size-sm {
-	--so-field-gap: var(--so-caption-gap-sm);
-	--so-field-stack: var(--so-caption-stack-sm);
+	--so-field-gap: var(
+		--so-caption-gap-sm,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-field-spacing-factor, 1))
+	);
+	--so-field-stack: var(
+		--so-caption-stack-sm,
+		calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1))
+	);
 }
 
 .so-field--size-sm > .so-field__label,
@@ -54,8 +66,14 @@
 }
 
 .so-field--size-normal {
-	--so-field-gap: var(--so-caption-gap-normal);
-	--so-field-stack: var(--so-caption-stack-normal);
+	--so-field-gap: var(
+		--so-caption-gap-normal,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-field-spacing-factor, 1))
+	);
+	--so-field-stack: var(
+		--so-caption-stack-normal,
+		calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1))
+	);
 }
 
 .so-field--size-normal > .so-field__helper,
@@ -65,8 +83,14 @@
 }
 
 .so-field--size-lg {
-	--so-field-gap: var(--so-caption-gap-lg);
-	--so-field-stack: var(--so-caption-stack-lg);
+	--so-field-gap: var(
+		--so-caption-gap-lg,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-field-spacing-factor, 1))
+	);
+	--so-field-stack: var(
+		--so-caption-stack-lg,
+		calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1))
+	);
 }
 
 .so-field--size-lg > .so-field__label,
@@ -86,8 +110,14 @@
 }
 
 .so-field--size-xl {
-	--so-field-gap: var(--so-caption-gap-xl);
-	--so-field-stack: var(--so-caption-stack-xl);
+	--so-field-gap: var(
+		--so-caption-gap-xl,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-field-spacing-factor, 1))
+	);
+	--so-field-stack: var(
+		--so-caption-stack-xl,
+		calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1))
+	);
 }
 
 .so-field--size-xl > .so-field__label,
@@ -107,8 +137,14 @@
 }
 
 .so-field--size-2xl {
-	--so-field-gap: var(--so-caption-gap-2xl);
-	--so-field-stack: var(--so-caption-stack-2xl);
+	--so-field-gap: var(
+		--so-caption-gap-2xl,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-field-spacing-factor, 1))
+	);
+	--so-field-stack: var(
+		--so-caption-stack-2xl,
+		calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1))
+	);
 }
 
 .so-field--size-2xl > .so-field__label,
@@ -437,4 +473,26 @@
  * и по ней он встал бы в свою нижнюю границу. */
 .so-field__control > .so-slider--orientation-horizontal {
 	flex: 1 1 auto;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-field--size-sm {
+	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-sm, 1));
+}
+
+:where(.so-field),
+.so-field--size-normal {
+	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-normal, 1));
+}
+
+.so-field--size-lg {
+	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-lg, 1));
+}
+
+.so-field--size-xl {
+	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-xl, 1));
+}
+
+.so-field--size-2xl {
+	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-2xl, 1));
 }

@@ -53,11 +53,11 @@
  * тема. */
 
 :root {
-	--so-modal-padding: 1.25rem;
-	--so-modal-gap: 0.5rem;
+	--so-modal-padding: initial;
+	--so-modal-gap: initial;
 	--so-modal-title-line: 1.75rem;
-	--so-modal-footer-gap: 0.5rem;
-	--so-modal-button-gap: 0.25rem;
+	--so-modal-footer-gap: initial;
+	--so-modal-button-gap: initial;
 }
 
 .so-dialog__backdrop,
@@ -79,7 +79,15 @@
 .so-drawer__title,
 .so-alert-dialog__title {
 	grid-area: title;
-	padding: var(--so-modal-padding) var(--so-modal-padding) 0;
+	padding: var(
+			--so-modal-padding,
+			calc(var(--so-spacing, 0.25rem) * 5 * var(--so-modal-spacing-factor, 1))
+		)
+		var(
+			--so-modal-padding,
+			calc(var(--so-spacing, 0.25rem) * 5 * var(--so-modal-spacing-factor, 1))
+		)
+		0;
 	line-height: var(--so-modal-title-line);
 	overflow-wrap: break-word;
 }
@@ -95,7 +103,14 @@
 .so-alert-dialog__body {
 	grid-area: body;
 	min-height: 0;
-	padding: var(--so-modal-gap) var(--so-modal-padding);
+	padding: var(
+			--so-modal-gap,
+			calc(var(--so-spacing, 0.25rem) * 2 * var(--so-modal-spacing-factor, 1))
+		)
+		var(
+			--so-modal-padding,
+			calc(var(--so-spacing, 0.25rem) * 5 * var(--so-modal-spacing-factor, 1))
+		);
 	overflow-y: auto;
 	overscroll-behavior: contain;
 	overflow-wrap: break-word;
@@ -106,7 +121,13 @@
 	.so-drawer__body > .so-table__viewport,
 	.so-alert-dialog__body > .so-table__viewport
 ) {
-	--so-table-head-offset: calc(-1 * var(--so-modal-gap));
+	--so-table-head-offset: calc(
+		-1 *
+			var(
+				--so-modal-gap,
+				calc(var(--so-spacing, 0.25rem) * 2 * var(--so-modal-spacing-factor, 1))
+			)
+	);
 }
 
 /* Подвал — ряд действий в конце строки, в RTL он сам встаёт слева. */
@@ -118,8 +139,25 @@
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: flex-end;
-	gap: var(--so-modal-footer-gap);
-	padding: calc(var(--so-modal-gap) * 1.5) var(--so-modal-padding) var(--so-modal-padding);
+	gap: var(
+		--so-modal-footer-gap,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-modal-spacing-factor, 1))
+	);
+	padding: calc(
+			var(
+					--so-modal-gap,
+					calc(var(--so-spacing, 0.25rem) * 2 * var(--so-modal-spacing-factor, 1))
+				) *
+				1.5
+		)
+		var(
+			--so-modal-padding,
+			calc(var(--so-spacing, 0.25rem) * 5 * var(--so-modal-spacing-factor, 1))
+		)
+		var(
+			--so-modal-padding,
+			calc(var(--so-spacing, 0.25rem) * 5 * var(--so-modal-spacing-factor, 1))
+		);
 }
 
 .so-dialog__footer:empty,
@@ -135,7 +173,10 @@
 .so-drawer:not(:has(> .so-drawer__title:not(:empty), > .so-drawer__close)) > .so-drawer__body,
 .so-alert-dialog:not(:has(> .so-alert-dialog__title:not(:empty), > .so-alert-dialog__close))
 	> .so-alert-dialog__body {
-	padding-block-start: var(--so-modal-padding);
+	padding-block-start: var(
+		--so-modal-padding,
+		calc(var(--so-spacing, 0.25rem) * 5 * var(--so-modal-spacing-factor, 1))
+	);
 }
 
 :where(
@@ -151,14 +192,23 @@
 		> .so-alert-dialog__body
 		> .so-table__viewport
 ) {
-	--so-table-head-offset: calc(-1 * var(--so-modal-padding));
+	--so-table-head-offset: calc(
+		-1 *
+			var(
+				--so-modal-padding,
+				calc(var(--so-spacing, 0.25rem) * 5 * var(--so-modal-spacing-factor, 1))
+			)
+	);
 }
 
 /* Подвала нет — тело кончается у нижнего края панели полным отступом. */
 .so-dialog:has(> .so-dialog__footer:empty) > .so-dialog__body,
 .so-drawer:has(> .so-drawer__footer:empty) > .so-drawer__body,
 .so-alert-dialog:has(> .so-alert-dialog__footer:empty) > .so-alert-dialog__body {
-	padding-block-end: var(--so-modal-padding);
+	padding-block-end: var(
+		--so-modal-padding,
+		calc(var(--so-spacing, 0.25rem) * 5 * var(--so-modal-spacing-factor, 1))
+	);
 }
 
 .so-dialog__maximize,
@@ -170,16 +220,29 @@
 	aspect-ratio: 1;
 	padding-inline: 0;
 	margin-block-start: calc(
-		var(--so-modal-padding) + (var(--so-modal-title-line) - var(--so-button-height-normal)) / 2
+		var(
+				--so-modal-padding,
+				calc(var(--so-spacing, 0.25rem) * 5 * var(--so-modal-spacing-factor, 1))
+			) +
+			(var(--so-modal-title-line) - var(--so-button-height-normal)) / 2
 	);
-	margin-inline-end: var(--so-modal-button-gap);
+	margin-inline-end: var(
+		--so-modal-button-gap,
+		calc(var(--so-spacing, 0.25rem) * 1 * var(--so-modal-spacing-factor, 1))
+	);
 }
 
 .so-dialog__maximize:last-child,
 .so-dialog__close:last-child,
 .so-drawer__close:last-child,
 .so-alert-dialog__close:last-child {
-	margin-inline-end: calc(var(--so-modal-padding) - var(--so-button-height-normal) / 4);
+	margin-inline-end: calc(
+		var(
+				--so-modal-padding,
+				calc(var(--so-spacing, 0.25rem) * 5 * var(--so-modal-spacing-factor, 1))
+			) -
+			var(--so-button-height-normal) / 4
+	);
 }
 
 /* Значок — по центру квадрата. Иконка блочная (`icon.css`), и выравнивание

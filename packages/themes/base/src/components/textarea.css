@@ -38,7 +38,10 @@
  * обязан выглядеть умолчанием. */
 .so-textarea {
 	--so-textarea-row: var(--so-input-height-normal);
-	--so-textarea-indent: var(--so-input-indent-normal);
+	--so-textarea-indent: var(
+		--so-input-indent-normal,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-textarea-spacing-factor, 1))
+	);
 	position: relative;
 	display: inline-flex;
 	flex-direction: column;
@@ -106,7 +109,10 @@
 
 .so-textarea--size-sm {
 	--so-textarea-row: var(--so-input-height-sm);
-	--so-textarea-indent: var(--so-input-indent-sm);
+	--so-textarea-indent: var(
+		--so-input-indent-sm,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-textarea-spacing-factor, 1))
+	);
 }
 
 .so-textarea--size-sm > textarea {
@@ -121,7 +127,10 @@
 
 .so-textarea--size-normal {
 	--so-textarea-row: var(--so-input-height-normal);
-	--so-textarea-indent: var(--so-input-indent-normal);
+	--so-textarea-indent: var(
+		--so-input-indent-normal,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-textarea-spacing-factor, 1))
+	);
 }
 
 .so-textarea--size-normal > textarea {
@@ -135,7 +144,10 @@
 
 .so-textarea--size-lg {
 	--so-textarea-row: var(--so-input-height-lg);
-	--so-textarea-indent: var(--so-input-indent-lg);
+	--so-textarea-indent: var(
+		--so-input-indent-lg,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-textarea-spacing-factor, 1))
+	);
 }
 
 .so-textarea--size-lg > textarea {
@@ -150,7 +162,10 @@
 
 .so-textarea--size-xl {
 	--so-textarea-row: var(--so-input-height-xl);
-	--so-textarea-indent: var(--so-input-indent-xl);
+	--so-textarea-indent: var(
+		--so-input-indent-xl,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-textarea-spacing-factor, 1))
+	);
 }
 
 .so-textarea--size-xl > textarea {
@@ -165,7 +180,10 @@
 
 .so-textarea--size-2xl {
 	--so-textarea-row: var(--so-input-height-2xl);
-	--so-textarea-indent: var(--so-input-indent-2xl);
+	--so-textarea-indent: var(
+		--so-input-indent-2xl,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-textarea-spacing-factor, 1))
+	);
 }
 
 .so-textarea--size-2xl > textarea {
@@ -176,4 +194,26 @@
 .so-textarea--size-2xl > .so-textarea__counter {
 	font-size: var(--so-caption-note-font-size-2xl);
 	line-height: var(--so-caption-note-line-height-2xl);
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-textarea--size-sm {
+	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-sm, 1));
+}
+
+:where(.so-textarea),
+.so-textarea--size-normal {
+	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-normal, 1));
+}
+
+.so-textarea--size-lg {
+	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-lg, 1));
+}
+
+.so-textarea--size-xl {
+	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-xl, 1));
+}
+
+.so-textarea--size-2xl {
+	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-2xl, 1));
 }

@@ -71,7 +71,7 @@
  * тема. */
 
 :root {
-	--so-date-picker-padding: 0.5rem;
+	--so-date-picker-padding: initial;
 }
 
 .so-date-picker {
@@ -97,7 +97,7 @@
 	--so-date-picker-height: var(--so-input-height-normal);
 	--so-date-picker-slot-row: calc(
 		var(--so-date-picker-height) - 2 * var(--so-date-picker-border, 0px) - 2 *
-			var(--so-input-slot-gap)
+			var(--so-input-slot-gap, calc(3px * var(--so-date-picker-spacing-factor, 1)))
 	);
 	--so-date-picker-button: var(--so-date-picker-slot-row);
 	position: relative;
@@ -182,11 +182,17 @@
 }
 
 .so-date-picker--mode-range > .so-date-picker__clear {
-	margin-inline-end: var(--so-input-slot-spacing);
+	margin-inline-end: var(
+		--so-input-slot-spacing,
+		calc(var(--so-spacing, 0.25rem) * var(--so-date-picker-spacing-factor, 1))
+	);
 }
 
 .so-date-picker--mode-range > .so-date-picker__trigger {
-	margin-inline-end: var(--so-input-slot-padding);
+	margin-inline-end: var(
+		--so-input-slot-padding,
+		calc(var(--so-spacing, 0.25rem) * var(--so-date-picker-spacing-factor, 1))
+	);
 }
 
 .so-date-picker__panel {
@@ -199,10 +205,56 @@
 
 .so-date-picker__content {
 	min-height: 0;
-	padding: var(--so-date-picker-padding);
+	padding: var(
+		--so-date-picker-padding,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-date-picker-spacing-factor, 1))
+	);
 	overflow-y: auto;
 }
 
 .so-date-picker__content > .so-date-picker__calendar {
 	width: max-content;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-date-picker--size-sm {
+	--so-date-picker-spacing-factor: var(
+		--so-date-picker-spacing-scale,
+		var(--so-field-scale-sm, 1)
+	);
+}
+
+:where(.so-date-picker),
+.so-date-picker--size-normal {
+	--so-date-picker-spacing-factor: var(
+		--so-date-picker-spacing-scale,
+		var(--so-field-scale-normal, 1)
+	);
+}
+
+.so-date-picker--size-lg {
+	--so-date-picker-spacing-factor: var(
+		--so-date-picker-spacing-scale,
+		var(--so-field-scale-lg, 1)
+	);
+}
+
+.so-date-picker--size-xl {
+	--so-date-picker-spacing-factor: var(
+		--so-date-picker-spacing-scale,
+		var(--so-field-scale-xl, 1)
+	);
+}
+
+.so-date-picker--size-2xl {
+	--so-date-picker-spacing-factor: var(
+		--so-date-picker-spacing-scale,
+		var(--so-field-scale-2xl, 1)
+	);
+}
+
+.so-date-picker__clear .so-icon,
+.so-date-picker__trigger .so-icon {
+	max-inline-size: var(--so-date-picker-button);
+	max-block-size: var(--so-date-picker-button);
 }

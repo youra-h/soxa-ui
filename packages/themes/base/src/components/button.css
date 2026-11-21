@@ -21,17 +21,17 @@
 	--so-button-height-xl: 2.5rem;
 	--so-button-height-2xl: 2.75rem;
 
-	--so-button-padding-sm: 0.375rem;
-	--so-button-padding-normal: 0.625rem;
-	--so-button-padding-lg: 0.75rem;
-	--so-button-padding-xl: 0.875rem;
-	--so-button-padding-2xl: 1rem;
+	--so-button-padding-sm: initial;
+	--so-button-padding-normal: initial;
+	--so-button-padding-lg: initial;
+	--so-button-padding-xl: initial;
+	--so-button-padding-2xl: initial;
 
-	--so-button-gap-sm: 0.25rem;
-	--so-button-gap-normal: 0.375rem;
-	--so-button-gap-lg: 0.5rem;
-	--so-button-gap-xl: 0.625rem;
-	--so-button-gap-2xl: 0.75rem;
+	--so-button-gap-sm: initial;
+	--so-button-gap-normal: initial;
+	--so-button-gap-lg: initial;
+	--so-button-gap-xl: initial;
+	--so-button-gap-2xl: initial;
 
 	/* The font of a Button counts from the font of the place, which `normal`
 	 * takes as is: `sm` is 2px smaller, `lg`, `xl` and `2xl` 2px, 4px and 8px
@@ -102,38 +102,90 @@
 
 .so-button--size-sm {
 	height: var(--so-button-height-sm);
-	padding-inline: var(--so-button-padding-sm);
-	gap: var(--so-button-gap-sm);
+	padding-inline: var(
+		--so-button-padding-sm,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-button-spacing-factor, 1))
+	);
+	gap: var(
+		--so-button-gap-sm,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-button-spacing-factor, 1))
+	);
 	font-size: var(--so-button-font-size-sm);
 	line-height: var(--so-button-line-height-sm);
 }
 
 .so-button--size-normal {
 	height: var(--so-button-height-normal);
-	padding-inline: var(--so-button-padding-normal);
-	gap: var(--so-button-gap-normal);
+	padding-inline: var(
+		--so-button-padding-normal,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-button-spacing-factor, 1))
+	);
+	gap: var(
+		--so-button-gap-normal,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-button-spacing-factor, 1))
+	);
 }
 
 .so-button--size-lg {
 	height: var(--so-button-height-lg);
-	padding-inline: var(--so-button-padding-lg);
-	gap: var(--so-button-gap-lg);
+	padding-inline: var(
+		--so-button-padding-lg,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-button-spacing-factor, 1))
+	);
+	gap: var(
+		--so-button-gap-lg,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-button-spacing-factor, 1))
+	);
 	font-size: var(--so-button-font-size-lg);
 	line-height: var(--so-button-line-height-lg);
 }
 
 .so-button--size-xl {
 	height: var(--so-button-height-xl);
-	padding-inline: var(--so-button-padding-xl);
-	gap: var(--so-button-gap-xl);
+	padding-inline: var(
+		--so-button-padding-xl,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-button-spacing-factor, 1))
+	);
+	gap: var(
+		--so-button-gap-xl,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-button-spacing-factor, 1))
+	);
 	font-size: var(--so-button-font-size-xl);
 	line-height: var(--so-button-line-height-xl);
 }
 
 .so-button--size-2xl {
 	height: var(--so-button-height-2xl);
-	padding-inline: var(--so-button-padding-2xl);
-	gap: var(--so-button-gap-2xl);
+	padding-inline: var(
+		--so-button-padding-2xl,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-button-spacing-factor, 1))
+	);
+	gap: var(
+		--so-button-gap-2xl,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-button-spacing-factor, 1))
+	);
 	font-size: var(--so-button-font-size-2xl);
 	line-height: var(--so-button-line-height-2xl);
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-button--size-sm {
+	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-sm, 1));
+}
+
+:where(.so-button),
+.so-button--size-normal {
+	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-normal, 1));
+}
+
+.so-button--size-lg {
+	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-lg, 1));
+}
+
+.so-button--size-xl {
+	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-xl, 1));
+}
+
+.so-button--size-2xl {
+	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-2xl, 1));
 }

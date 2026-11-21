@@ -93,7 +93,7 @@ describe('страница — только общий слой тем', () => {
 		const root = getComputedStyle(document.documentElement)
 
 		expect(root.getPropertyValue('--so-input-height-normal')).not.toBe('')
-		expect(root.getPropertyValue('--so-tabs-gap')).not.toBe('')
+		expect(root.getPropertyValue('--so-tabs-gap')).toBe('')
 		expect(root.getPropertyValue('--so-component-text')).toBe('')
 		expect(root.getPropertyValue('--so-neutral-500')).toBe('')
 	})

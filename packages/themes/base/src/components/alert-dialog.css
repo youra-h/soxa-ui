@@ -17,3 +17,44 @@
 	max-width: calc(100% - 2 * var(--so-alert-dialog-offset));
 	max-height: calc(100% - 2 * var(--so-alert-dialog-offset));
 }
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-alert-dialog--size-sm {
+	--so-alert-dialog-spacing-factor: var(
+		--so-alert-dialog-spacing-scale,
+		var(--so-surface-scale-sm, 1)
+	);
+}
+
+:where(.so-alert-dialog),
+.so-alert-dialog--size-normal {
+	--so-alert-dialog-spacing-factor: var(
+		--so-alert-dialog-spacing-scale,
+		var(--so-surface-scale-normal, 1)
+	);
+}
+
+.so-alert-dialog--size-lg {
+	--so-alert-dialog-spacing-factor: var(
+		--so-alert-dialog-spacing-scale,
+		var(--so-surface-scale-lg, 1)
+	);
+}
+
+.so-alert-dialog--size-xl {
+	--so-alert-dialog-spacing-factor: var(
+		--so-alert-dialog-spacing-scale,
+		var(--so-surface-scale-xl, 1)
+	);
+}
+
+.so-alert-dialog--size-2xl {
+	--so-alert-dialog-spacing-factor: var(
+		--so-alert-dialog-spacing-scale,
+		var(--so-surface-scale-2xl, 1)
+	);
+}
+
+.so-alert-dialog {
+	--so-modal-spacing-factor: var(--so-alert-dialog-spacing-factor);
+}

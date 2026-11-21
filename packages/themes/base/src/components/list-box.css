@@ -59,20 +59,26 @@
  * отметки — рисует тема. */
 
 :root {
-	--so-list-box-gap: 0.25rem;
-	--so-list-box-padding: 0.25rem;
+	--so-list-box-gap: initial;
+	--so-list-box-padding: initial;
 	--so-list-box-min-width: 10rem;
 	--so-list-box-max-width: 20rem;
-	--so-list-box-group-label-padding: 0.25rem;
+	--so-list-box-group-label-padding: initial;
 }
 
 .so-list-box {
 	display: flex;
 	flex-direction: column;
-	gap: var(--so-list-box-gap);
+	gap: var(
+		--so-list-box-gap,
+		calc(var(--so-spacing, 0.25rem) * var(--so-list-box-spacing-factor, 1))
+	);
 	min-width: var(--so-list-box-min-width);
 	max-width: var(--so-list-box-max-width);
-	padding: var(--so-list-box-padding);
+	padding: var(
+		--so-list-box-padding,
+		calc(var(--so-spacing, 0.25rem) * var(--so-list-box-spacing-factor, 1))
+	);
 }
 
 /* Выключенный список гаснет корнем целиком — рамкой, шапкой, строками и
@@ -95,14 +101,23 @@
 .so-list-box__list {
 	display: flex;
 	flex-direction: column;
-	gap: var(--so-list-box-gap);
+	gap: var(
+		--so-list-box-gap,
+		calc(var(--so-spacing, 0.25rem) * var(--so-list-box-spacing-factor, 1))
+	);
 	min-height: 0;
 	overflow-y: auto;
 }
 
 .so-list-box__filler {
 	flex-shrink: 0;
-	margin-block-end: calc(-1 * var(--so-list-box-gap));
+	margin-block-end: calc(
+		-1 *
+			var(
+				--so-list-box-gap,
+				calc(var(--so-spacing, 0.25rem) * var(--so-list-box-spacing-factor, 1))
+			)
+	);
 	block-size: var(--so-filler-height, 0);
 }
 
@@ -110,11 +125,17 @@
 	display: flex;
 	flex-shrink: 0;
 	flex-direction: column;
-	gap: var(--so-list-box-gap);
+	gap: var(
+		--so-list-box-gap,
+		calc(var(--so-spacing, 0.25rem) * var(--so-list-box-spacing-factor, 1))
+	);
 }
 
 .so-list-box-group__label {
-	padding-block: var(--so-list-box-group-label-padding);
+	padding-block: var(
+		--so-list-box-group-label-padding,
+		calc(var(--so-spacing, 0.25rem) * var(--so-list-box-spacing-factor, 1))
+	);
 }
 
 /* Секции без разделителя — `groupSeparators` выключен, у ListBox это
@@ -124,7 +145,13 @@
  * разделителем (`group.css`). */
 :is(.so-list-box-group, .so-list-box-item) + .so-list-box-group,
 .so-list-box-group + .so-list-box-item {
-	margin-block-start: calc(var(--so-list-box-gap) + var(--so-group-separator-width, 0px));
+	margin-block-start: calc(
+		var(
+				--so-list-box-gap,
+				calc(var(--so-spacing, 0.25rem) * var(--so-list-box-spacing-factor, 1))
+			) +
+			var(--so-group-separator-width, 0px)
+	);
 }
 
 .so-list-box-item {
@@ -162,4 +189,41 @@
 .so-list-box-item[data-content-fit='wrap'] > .so-button > .so-button__text {
 	white-space: normal;
 	overflow: visible;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-list-box--size-sm {
+	--so-list-box-spacing-factor: var(
+		--so-list-box-spacing-scale,
+		var(--so-collection-scale-sm, 1)
+	);
+}
+
+:where(.so-list-box),
+.so-list-box--size-normal {
+	--so-list-box-spacing-factor: var(
+		--so-list-box-spacing-scale,
+		var(--so-collection-scale-normal, 1)
+	);
+}
+
+.so-list-box--size-lg {
+	--so-list-box-spacing-factor: var(
+		--so-list-box-spacing-scale,
+		var(--so-collection-scale-lg, 1)
+	);
+}
+
+.so-list-box--size-xl {
+	--so-list-box-spacing-factor: var(
+		--so-list-box-spacing-scale,
+		var(--so-collection-scale-xl, 1)
+	);
+}
+
+.so-list-box--size-2xl {
+	--so-list-box-spacing-factor: var(
+		--so-list-box-spacing-scale,
+		var(--so-collection-scale-2xl, 1)
+	);
 }

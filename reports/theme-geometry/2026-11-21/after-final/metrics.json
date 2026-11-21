@@ -1,0 +1,631 @@
+{
+  "cssSha256": "3c765e5630cd4f1b42db1d53512da09bfc7be1dcf2f78ddfedb465de6bba910e",
+  "errors": [],
+  "metrics": [
+    {
+      "size": "sm",
+      "parts": [
+        {
+          "class": "so-input so-input--size-sm",
+          "radius": "6px",
+          "gap": "normal",
+          "padding": "0px",
+          "width": 294.390625,
+          "height": 28
+        },
+        {
+          "class": "so-input__leading",
+          "radius": "0px",
+          "gap": "3px",
+          "padding": "0px 0px 0px 3px",
+          "width": 38,
+          "height": 21.5
+        },
+        {
+          "class": "so-button so-button--size-sm so-input__clear",
+          "radius": "6px",
+          "gap": "4.5px",
+          "padding": "0px",
+          "width": 21.5,
+          "height": 21.5
+        },
+        {
+          "class": "so-date-input so-date-input--size-sm",
+          "radius": "6px",
+          "gap": "normal",
+          "padding": "0px",
+          "width": 294.390625,
+          "height": 28
+        },
+        {
+          "class": "so-button so-button--size-sm so-date-input__clear",
+          "radius": "6px",
+          "gap": "4.5px",
+          "padding": "0px",
+          "width": 21.5,
+          "height": 21.5
+        },
+        {
+          "class": "so-button so-button--size-sm so-number-input__clear",
+          "radius": "6px",
+          "gap": "4.5px",
+          "padding": "0px",
+          "width": 21.5,
+          "height": 21.5
+        },
+        {
+          "class": "so-button so-button--size-sm so-number-input__decrement",
+          "radius": "6px",
+          "gap": "4.5px",
+          "padding": "0px",
+          "width": 21.5,
+          "height": 21.5
+        },
+        {
+          "class": "so-button so-button--size-sm so-number-input__increment",
+          "radius": "6px",
+          "gap": "4.5px",
+          "padding": "0px",
+          "width": 21.5,
+          "height": 21.5
+        },
+        {
+          "class": "so-button so-button--size-sm",
+          "radius": "6px",
+          "gap": "4.5px",
+          "padding": "0px 7.5px",
+          "width": 294.390625,
+          "height": 28
+        },
+        {
+          "class": "so-list-box so-list-box--size-sm",
+          "radius": "6px",
+          "gap": "3.5px",
+          "padding": "3.5px",
+          "width": 294.390625,
+          "height": 68.5
+        },
+        {
+          "class": "so-button so-button--size-sm",
+          "radius": "6px",
+          "gap": "4.5px",
+          "padding": "0px 7.5px",
+          "width": 285.390625,
+          "height": 28
+        },
+        {
+          "class": "so-button so-button--size-sm",
+          "radius": "6px",
+          "gap": "4.5px",
+          "padding": "0px 7.5px",
+          "width": 285.390625,
+          "height": 28
+        },
+        {
+          "class": "so-alert so-alert--size-sm",
+          "radius": "7.99998px",
+          "gap": "normal 10.5px",
+          "padding": "14px",
+          "width": 294.390625,
+          "height": 75.25
+        },
+        {
+          "class": "so-button so-button--size-normal so-alert__close",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 28,
+          "height": 28
+        },
+        {
+          "class": "so-button so-button--size-normal so-toasts-item__close",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 32,
+          "height": 32
+        }
+      ]
+    },
+    {
+      "size": "normal",
+      "parts": [
+        {
+          "class": "so-input so-input--size-normal",
+          "radius": "6px",
+          "gap": "normal",
+          "padding": "0px",
+          "width": 294.40625,
+          "height": 32
+        },
+        {
+          "class": "so-input__leading",
+          "radius": "0px",
+          "gap": "4px",
+          "padding": "0px 0px 0px 4px",
+          "width": 40,
+          "height": 24
+        },
+        {
+          "class": "so-button so-button--size-normal so-input__clear",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 24,
+          "height": 24
+        },
+        {
+          "class": "so-date-input so-date-input--size-normal",
+          "radius": "6px",
+          "gap": "normal",
+          "padding": "0px",
+          "width": 294.40625,
+          "height": 32
+        },
+        {
+          "class": "so-button so-button--size-normal so-date-input__clear",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 24,
+          "height": 24
+        },
+        {
+          "class": "so-button so-button--size-normal so-number-input__clear",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 24,
+          "height": 24
+        },
+        {
+          "class": "so-button so-button--size-normal so-number-input__decrement",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 24,
+          "height": 24
+        },
+        {
+          "class": "so-button so-button--size-normal so-number-input__increment",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 24,
+          "height": 24
+        },
+        {
+          "class": "so-button so-button--size-normal",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px 10px",
+          "width": 294.40625,
+          "height": 32
+        },
+        {
+          "class": "so-list-box so-list-box--size-normal",
+          "radius": "6px",
+          "gap": "4px",
+          "padding": "4px",
+          "width": 294.40625,
+          "height": 78
+        },
+        {
+          "class": "so-button so-button--size-normal",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px 10px",
+          "width": 284.40625,
+          "height": 32
+        },
+        {
+          "class": "so-button so-button--size-normal",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px 10px",
+          "width": 284.40625,
+          "height": 32
+        },
+        {
+          "class": "so-alert so-alert--size-normal",
+          "radius": "7.99998px",
+          "gap": "normal 12px",
+          "padding": "16px",
+          "width": 294.40625,
+          "height": 88
+        },
+        {
+          "class": "so-button so-button--size-normal so-alert__close",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 28,
+          "height": 28
+        },
+        {
+          "class": "so-button so-button--size-normal so-toasts-item__close",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 32,
+          "height": 32
+        }
+      ]
+    },
+    {
+      "size": "lg",
+      "parts": [
+        {
+          "class": "so-input so-input--size-lg",
+          "radius": "6px",
+          "gap": "normal",
+          "padding": "0px",
+          "width": 294.390625,
+          "height": 36
+        },
+        {
+          "class": "so-input__leading",
+          "radius": "0px",
+          "gap": "5px",
+          "padding": "0px 0px 0px 5px",
+          "width": 42,
+          "height": 26.5
+        },
+        {
+          "class": "so-button so-button--size-lg so-input__clear",
+          "radius": "6px",
+          "gap": "7.5px",
+          "padding": "0px",
+          "width": 26.5,
+          "height": 26.5
+        },
+        {
+          "class": "so-date-input so-date-input--size-lg",
+          "radius": "6px",
+          "gap": "normal",
+          "padding": "0px",
+          "width": 294.390625,
+          "height": 36
+        },
+        {
+          "class": "so-button so-button--size-lg so-date-input__clear",
+          "radius": "6px",
+          "gap": "7.5px",
+          "padding": "0px",
+          "width": 26.5,
+          "height": 26.5
+        },
+        {
+          "class": "so-button so-button--size-lg so-number-input__clear",
+          "radius": "6px",
+          "gap": "7.5px",
+          "padding": "0px",
+          "width": 26.5,
+          "height": 26.5
+        },
+        {
+          "class": "so-button so-button--size-lg so-number-input__decrement",
+          "radius": "6px",
+          "gap": "7.5px",
+          "padding": "0px",
+          "width": 26.5,
+          "height": 26.5
+        },
+        {
+          "class": "so-button so-button--size-lg so-number-input__increment",
+          "radius": "6px",
+          "gap": "7.5px",
+          "padding": "0px",
+          "width": 26.5,
+          "height": 26.5
+        },
+        {
+          "class": "so-button so-button--size-lg",
+          "radius": "6px",
+          "gap": "7.5px",
+          "padding": "0px 12.5px",
+          "width": 294.390625,
+          "height": 36
+        },
+        {
+          "class": "so-list-box so-list-box--size-lg",
+          "radius": "6px",
+          "gap": "4.5px",
+          "padding": "4.5px",
+          "width": 294.390625,
+          "height": 87.5
+        },
+        {
+          "class": "so-button so-button--size-lg",
+          "radius": "6px",
+          "gap": "7.5px",
+          "padding": "0px 12.5px",
+          "width": 283.390625,
+          "height": 36
+        },
+        {
+          "class": "so-button so-button--size-lg",
+          "radius": "6px",
+          "gap": "7.5px",
+          "padding": "0px 12.5px",
+          "width": 283.390625,
+          "height": 36
+        },
+        {
+          "class": "so-alert so-alert--size-lg",
+          "radius": "7.99998px",
+          "gap": "normal 13.5px",
+          "padding": "18px",
+          "width": 294.390625,
+          "height": 128.75
+        },
+        {
+          "class": "so-button so-button--size-normal so-alert__close",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 28,
+          "height": 28
+        },
+        {
+          "class": "so-button so-button--size-normal so-toasts-item__close",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 32,
+          "height": 32
+        }
+      ]
+    },
+    {
+      "size": "xl",
+      "parts": [
+        {
+          "class": "so-input so-input--size-xl",
+          "radius": "6px",
+          "gap": "normal",
+          "padding": "0px",
+          "width": 294.40625,
+          "height": 40
+        },
+        {
+          "class": "so-input__leading",
+          "radius": "0px",
+          "gap": "6px",
+          "padding": "0px 0px 0px 6px",
+          "width": 44,
+          "height": 29
+        },
+        {
+          "class": "so-button so-button--size-xl so-input__clear",
+          "radius": "6px",
+          "gap": "9px",
+          "padding": "0px",
+          "width": 29,
+          "height": 29
+        },
+        {
+          "class": "so-date-input so-date-input--size-xl",
+          "radius": "6px",
+          "gap": "normal",
+          "padding": "0px",
+          "width": 294.40625,
+          "height": 40
+        },
+        {
+          "class": "so-button so-button--size-xl so-date-input__clear",
+          "radius": "6px",
+          "gap": "9px",
+          "padding": "0px",
+          "width": 29,
+          "height": 29
+        },
+        {
+          "class": "so-button so-button--size-xl so-number-input__clear",
+          "radius": "6px",
+          "gap": "9px",
+          "padding": "0px",
+          "width": 29,
+          "height": 29
+        },
+        {
+          "class": "so-button so-button--size-xl so-number-input__decrement",
+          "radius": "6px",
+          "gap": "9px",
+          "padding": "0px",
+          "width": 29,
+          "height": 29
+        },
+        {
+          "class": "so-button so-button--size-xl so-number-input__increment",
+          "radius": "6px",
+          "gap": "9px",
+          "padding": "0px",
+          "width": 29,
+          "height": 29
+        },
+        {
+          "class": "so-button so-button--size-xl",
+          "radius": "6px",
+          "gap": "9px",
+          "padding": "0px 15px",
+          "width": 294.40625,
+          "height": 40
+        },
+        {
+          "class": "so-list-box so-list-box--size-xl",
+          "radius": "6px",
+          "gap": "5px",
+          "padding": "5px",
+          "width": 294.40625,
+          "height": 97
+        },
+        {
+          "class": "so-button so-button--size-xl",
+          "radius": "6px",
+          "gap": "9px",
+          "padding": "0px 15px",
+          "width": 282.40625,
+          "height": 40
+        },
+        {
+          "class": "so-button so-button--size-xl",
+          "radius": "6px",
+          "gap": "9px",
+          "padding": "0px 15px",
+          "width": 282.40625,
+          "height": 40
+        },
+        {
+          "class": "so-alert so-alert--size-xl",
+          "radius": "7.99998px",
+          "gap": "normal 15px",
+          "padding": "20px",
+          "width": 294.40625,
+          "height": 133.5
+        },
+        {
+          "class": "so-button so-button--size-normal so-alert__close",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 28,
+          "height": 28
+        },
+        {
+          "class": "so-button so-button--size-normal so-toasts-item__close",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 32,
+          "height": 32
+        }
+      ]
+    },
+    {
+      "size": "2xl",
+      "parts": [
+        {
+          "class": "so-input so-input--size-2xl",
+          "radius": "6px",
+          "gap": "normal",
+          "padding": "0px",
+          "width": 294.390625,
+          "height": 44
+        },
+        {
+          "class": "so-input__leading",
+          "radius": "0px",
+          "gap": "7px",
+          "padding": "0px 0px 0px 7px",
+          "width": 46,
+          "height": 31.5
+        },
+        {
+          "class": "so-button so-button--size-2xl so-input__clear",
+          "radius": "6px",
+          "gap": "10.5px",
+          "padding": "0px",
+          "width": 31.5,
+          "height": 31.5
+        },
+        {
+          "class": "so-date-input so-date-input--size-2xl",
+          "radius": "6px",
+          "gap": "normal",
+          "padding": "0px",
+          "width": 294.390625,
+          "height": 44
+        },
+        {
+          "class": "so-button so-button--size-2xl so-date-input__clear",
+          "radius": "6px",
+          "gap": "10.5px",
+          "padding": "0px",
+          "width": 31.5,
+          "height": 31.5
+        },
+        {
+          "class": "so-button so-button--size-2xl so-number-input__clear",
+          "radius": "6px",
+          "gap": "10.5px",
+          "padding": "0px",
+          "width": 31.5,
+          "height": 31.5
+        },
+        {
+          "class": "so-button so-button--size-2xl so-number-input__decrement",
+          "radius": "6px",
+          "gap": "10.5px",
+          "padding": "0px",
+          "width": 31.5,
+          "height": 31.5
+        },
+        {
+          "class": "so-button so-button--size-2xl so-number-input__increment",
+          "radius": "6px",
+          "gap": "10.5px",
+          "padding": "0px",
+          "width": 31.5,
+          "height": 31.5
+        },
+        {
+          "class": "so-button so-button--size-2xl",
+          "radius": "6px",
+          "gap": "10.5px",
+          "padding": "0px 17.5px",
+          "width": 294.390625,
+          "height": 44
+        },
+        {
+          "class": "so-list-box so-list-box--size-2xl",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "6px",
+          "width": 294.390625,
+          "height": 108
+        },
+        {
+          "class": "so-button so-button--size-2xl",
+          "radius": "6px",
+          "gap": "10.5px",
+          "padding": "0px 17.5px",
+          "width": 280.390625,
+          "height": 44
+        },
+        {
+          "class": "so-button so-button--size-2xl",
+          "radius": "6px",
+          "gap": "10.5px",
+          "padding": "0px 17.5px",
+          "width": 280.390625,
+          "height": 44
+        },
+        {
+          "class": "so-alert so-alert--size-2xl",
+          "radius": "7.99998px",
+          "gap": "normal 18px",
+          "padding": "24px",
+          "width": 294.390625,
+          "height": 155
+        },
+        {
+          "class": "so-button so-button--size-normal so-alert__close",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 28,
+          "height": 28
+        },
+        {
+          "class": "so-button so-button--size-normal so-toasts-item__close",
+          "radius": "6px",
+          "gap": "6px",
+          "padding": "0px",
+          "width": 32,
+          "height": 32
+        }
+      ]
+    }
+  ]
+}

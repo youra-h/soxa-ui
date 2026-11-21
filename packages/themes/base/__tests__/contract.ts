@@ -4,14 +4,10 @@ import { join, resolve } from 'node:path'
 import { writtenVariables } from './behaviour'
 
 /**
- * Контракт общего слоя тем с темой — `theme-variables.json`
- * (`packages/themes/base/AGENTS.md`, «Контракт: переменные темы»). Его читают
- * свои сторожа базы (`base-css.spec.ts`) и сторож любой темы
- * (`theme-reads.spec.ts`).
- *
- * Разделов два: `base-reads` — что читает база (тема задаёт или вправе
- * переопределить, либо пишет библиотека), `theme-reads` — что тема вправе
- * читать сверх этого, но не задаёт (пишут база и код).
+ * Public variables shared by base and visual themes. Base reads and optional
+ * geometry defaults belong to base-reads. Theme-reads contains values written
+ * by base or code, plus optional visual settings that a theme can supply.
+ * The base CSS and compiled-theme guards consume the same two sections.
  */
 
 const BASE = resolve(import.meta.dirname, '..')
@@ -55,7 +51,7 @@ export const CONTRACT = readContract()
 /** Что читает база и не объявляет сама, и её умолчания для темы. */
 export const BASE_READS: readonly string[] = Object.keys(CONTRACT.baseReads)
 
-/** Что тема вправе читать сверх этого: пишут база и код, тема не задаёт. */
+/** Additional public reads, including optional visual settings declared by base. */
 export const THEME_READS: readonly string[] = Object.keys(CONTRACT.themeReads)
 
 /**

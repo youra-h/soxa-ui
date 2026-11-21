@@ -57,23 +57,41 @@ $backdrop-easing: linear;
 	@include modal.surface;
 
 	&--placement-start {
-		border-start-end-radius: var(--radius-lg);
-		border-end-end-radius: var(--radius-lg);
+		border-start-end-radius: var(
+			--so-drawer-radius,
+			calc(var(--so-radius) * 1.3333333333333333)
+		);
+		border-end-end-radius: var(--so-drawer-radius, calc(var(--so-radius) * 1.3333333333333333));
 	}
 
 	&--placement-end {
-		border-start-start-radius: var(--radius-lg);
-		border-end-start-radius: var(--radius-lg);
+		border-start-start-radius: var(
+			--so-drawer-radius,
+			calc(var(--so-radius) * 1.3333333333333333)
+		);
+		border-end-start-radius: var(
+			--so-drawer-radius,
+			calc(var(--so-radius) * 1.3333333333333333)
+		);
 	}
 
 	&--placement-top {
-		border-end-start-radius: var(--radius-lg);
-		border-end-end-radius: var(--radius-lg);
+		border-end-start-radius: var(
+			--so-drawer-radius,
+			calc(var(--so-radius) * 1.3333333333333333)
+		);
+		border-end-end-radius: var(--so-drawer-radius, calc(var(--so-radius) * 1.3333333333333333));
 	}
 
 	&--placement-bottom {
-		border-start-start-radius: var(--radius-lg);
-		border-start-end-radius: var(--radius-lg);
+		border-start-start-radius: var(
+			--so-drawer-radius,
+			calc(var(--so-radius) * 1.3333333333333333)
+		);
+		border-start-end-radius: var(
+			--so-drawer-radius,
+			calc(var(--so-radius) * 1.3333333333333333)
+		);
 	}
 }
 

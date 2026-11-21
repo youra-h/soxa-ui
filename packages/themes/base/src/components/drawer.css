@@ -36,7 +36,7 @@
 :root {
 	--so-drawer-width: 20rem;
 	--so-drawer-height: auto;
-	--so-drawer-gap: 3rem;
+	--so-drawer-gap: initial;
 }
 
 .so-drawer__backdrop[data-contained='true'] {
@@ -61,7 +61,13 @@
 .so-drawer--placement-end {
 	inset-block: 0;
 	width: var(--so-drawer-width);
-	max-width: calc(100% - var(--so-drawer-gap));
+	max-width: calc(
+		100% -
+			var(
+				--so-drawer-gap,
+				calc(var(--so-spacing, 0.25rem) * 12 * var(--so-drawer-spacing-factor, 1))
+			)
+	);
 	translate: var(--so-swipe-offset) 0;
 }
 
@@ -69,7 +75,13 @@
 .so-drawer--placement-bottom {
 	inset-inline: 0;
 	height: var(--so-drawer-height);
-	max-height: calc(100% - var(--so-drawer-gap));
+	max-height: calc(
+		100% -
+			var(
+				--so-drawer-gap,
+				calc(var(--so-spacing, 0.25rem) * 12 * var(--so-drawer-spacing-factor, 1))
+			)
+	);
 	translate: 0 var(--so-swipe-offset);
 }
 
@@ -168,4 +180,30 @@
 .so-drawer--placement-start:has(> .so-drawer__handle)
 	> :is(.so-drawer__title, .so-drawer__body, .so-drawer__footer) {
 	padding-inline-end: 0;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-drawer--size-sm {
+	--so-drawer-spacing-factor: var(--so-drawer-spacing-scale, var(--so-surface-scale-sm, 1));
+}
+
+:where(.so-drawer),
+.so-drawer--size-normal {
+	--so-drawer-spacing-factor: var(--so-drawer-spacing-scale, var(--so-surface-scale-normal, 1));
+}
+
+.so-drawer--size-lg {
+	--so-drawer-spacing-factor: var(--so-drawer-spacing-scale, var(--so-surface-scale-lg, 1));
+}
+
+.so-drawer--size-xl {
+	--so-drawer-spacing-factor: var(--so-drawer-spacing-scale, var(--so-surface-scale-xl, 1));
+}
+
+.so-drawer--size-2xl {
+	--so-drawer-spacing-factor: var(--so-drawer-spacing-scale, var(--so-surface-scale-2xl, 1));
+}
+
+.so-drawer {
+	--so-modal-spacing-factor: var(--so-drawer-spacing-factor);
 }

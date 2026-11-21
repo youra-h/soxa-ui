@@ -18,7 +18,7 @@
 .so-breadcrumbs__link {
 	@apply text-so-neutral-800;
 	text-decoration: none;
-	border-radius: 0.125rem;
+	border-radius: var(--so-breadcrumbs-radius, calc(var(--so-radius) * 0.3333333333333333));
 }
 .so-breadcrumbs__link[href] {
 	color: var(--so-tone-800);

@@ -592,3 +592,40 @@
 	overflow: hidden;
 	overflow-wrap: normal;
 }
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-calendar--size-sm {
+	--so-calendar-spacing-factor: var(
+		--so-calendar-spacing-scale,
+		var(--so-collection-scale-sm, 1)
+	);
+}
+
+:where(.so-calendar),
+.so-calendar--size-normal {
+	--so-calendar-spacing-factor: var(
+		--so-calendar-spacing-scale,
+		var(--so-collection-scale-normal, 1)
+	);
+}
+
+.so-calendar--size-lg {
+	--so-calendar-spacing-factor: var(
+		--so-calendar-spacing-scale,
+		var(--so-collection-scale-lg, 1)
+	);
+}
+
+.so-calendar--size-xl {
+	--so-calendar-spacing-factor: var(
+		--so-calendar-spacing-scale,
+		var(--so-collection-scale-xl, 1)
+	);
+}
+
+.so-calendar--size-2xl {
+	--so-calendar-spacing-factor: var(
+		--so-calendar-spacing-scale,
+		var(--so-collection-scale-2xl, 1)
+	);
+}

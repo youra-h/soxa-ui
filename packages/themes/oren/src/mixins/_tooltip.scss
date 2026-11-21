@@ -25,7 +25,7 @@
 // подсказку, которая видна всегда, — поэтому кегль здесь без интерлиньяжа
 // утилиты, иначе строка разошлась бы с этим местом.
 @mixin plate-look {
-	@apply rounded-md;
+	border-radius: var(--so-tooltip-radius, var(--so-radius));
 	@apply bg-so-neutral-800 text-so-neutral-50;
 	@apply outline outline-transparent;
 	font-size: var(--text-sm);

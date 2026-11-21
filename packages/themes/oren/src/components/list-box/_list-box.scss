@@ -12,7 +12,8 @@
 // Состояние (`data-disabled`, `data-content-fit`, `data-indicator`) ядро
 // отдаёт на корень, а роль, имя и остановку Tab — узлу списка.
 .so-list-box {
-	@apply rounded-md border;
+	border-radius: var(--so-list-box-radius, var(--so-radius));
+	@apply border;
 	@apply bg-transparent;
 	@apply text-so-component;
 	// Обычное объявление, не `@apply border-s-…` — почему, см. input/_mixins.scss

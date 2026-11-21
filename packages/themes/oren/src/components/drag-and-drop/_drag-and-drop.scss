@@ -5,7 +5,8 @@
 // тема, и он здесь весь, с местом.
 .so-drag-and-drop {
 	&__item {
-		@apply relative rounded-lg;
+		border-radius: var(--so-drag-and-drop-radius, calc(var(--so-radius) * 1.3333333333333333));
+		@apply relative;
 		@apply isolate;
 		@apply shadow-sm;
 		@apply #{'!opacity-70'};
@@ -14,7 +15,10 @@
 			content: '';
 			@apply absolute inset-0;
 			@apply pointer-events-none;
-			@apply rounded-lg;
+			border-radius: var(
+				--so-drag-and-drop-radius,
+				calc(var(--so-radius) * 1.3333333333333333)
+			);
 			@apply opacity-20;
 			@apply bg-so-neutral-50;
 

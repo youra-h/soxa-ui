@@ -23,10 +23,10 @@
  * кольцо фокуса и подсказка у края ряда `scroll` в поле — рисует тема. */
 
 :root {
-	--so-tags-gap: 0.375rem;
-	--so-tags-field-gap: 0.25rem;
+	--so-tags-gap: initial;
+	--so-tags-field-gap: initial;
 	--so-tags-bleed: 0.25rem;
-	--so-tags-close-padding: 0.125rem;
+	--so-tags-close-padding: initial;
 
 	--so-tags-item-height-sm: 1.5rem;
 	--so-tags-item-height-normal: 1.75rem;
@@ -51,17 +51,17 @@
 	--so-tags-item-font-size-2xl: calc(1em + 0.25rem);
 	--so-tags-item-line-height-2xl: calc(1.75 / 1.25);
 
-	--so-tags-item-padding-sm: 0.375rem;
-	--so-tags-item-padding-normal: 0.375rem;
-	--so-tags-item-padding-lg: 0.5rem;
-	--so-tags-item-padding-xl: 0.625rem;
-	--so-tags-item-padding-2xl: 0.75rem;
+	--so-tags-item-padding-sm: initial;
+	--so-tags-item-padding-normal: initial;
+	--so-tags-item-padding-lg: initial;
+	--so-tags-item-padding-xl: initial;
+	--so-tags-item-padding-2xl: initial;
 
-	--so-tags-item-gap-sm: 0.25rem;
-	--so-tags-item-gap-normal: 0.25rem;
-	--so-tags-item-gap-lg: 0.375rem;
-	--so-tags-item-gap-xl: 0.375rem;
-	--so-tags-item-gap-2xl: 0.5rem;
+	--so-tags-item-gap-sm: initial;
+	--so-tags-item-gap-normal: initial;
+	--so-tags-item-gap-lg: initial;
+	--so-tags-item-gap-xl: initial;
+	--so-tags-item-gap-2xl: initial;
 }
 
 /* Зазор — переменной, а не числом на месте: своя раскладка в слоте `default`
@@ -71,7 +71,10 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: var(--so-tags-gap);
+	gap: var(
+		--so-tags-gap,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 /* Выключенный набор гаснет корнем целиком — ряд с тегами и содержимым слота
@@ -143,7 +146,13 @@
  * поля, которая ниже пилюли. */
 .so-tags-item > :not(.so-tags-item__close) {
 	height: 100%;
-	padding-block: calc((var(--so-tags-item-height) - 1em) / 2 - var(--so-tags-close-padding));
+	padding-block: calc(
+		(var(--so-tags-item-height) - 1em) / 2 -
+			var(
+				--so-tags-close-padding,
+				calc(var(--so-spacing, 0.25rem) * 0.5 * var(--so-tags-spacing-factor, 1))
+			)
+	);
 }
 
 /* Значок крестика — в кегль строки на любой ступени, а не по шкале иконок
@@ -154,8 +163,17 @@
 	flex-shrink: 0;
 	align-self: stretch;
 	height: auto;
-	padding-inline: var(--so-tags-close-padding);
-	margin-block: calc((var(--so-tags-item-height) - 1em) / 2 - var(--so-tags-close-padding));
+	padding-inline: var(
+		--so-tags-close-padding,
+		calc(var(--so-spacing, 0.25rem) * 0.5 * var(--so-tags-spacing-factor, 1))
+	);
+	margin-block: calc(
+		(var(--so-tags-item-height) - 1em) / 2 -
+			var(
+				--so-tags-close-padding,
+				calc(var(--so-spacing, 0.25rem) * 0.5 * var(--so-tags-spacing-factor, 1))
+			)
+	);
 }
 
 .so-tags-item > .so-tags-item__close .so-icon {
@@ -177,7 +195,7 @@
 .so-tags-item > .so-tags-item__close::before {
 	content: '';
 	position: absolute;
-	inset-inline: calc(50% - var(--so-target-size) / 2);
+	inset-inline: min(0px, calc(50% - var(--so-target-size) / 2));
 	inset-block: calc(50% - min(var(--so-target-size), var(--so-tags-item-height)) / 2);
 }
 
@@ -196,16 +214,28 @@
 }
 
 .so-tags-item--size-sm > :not(.so-tags-item__close) {
-	gap: var(--so-tags-item-gap-sm);
-	padding-inline: var(--so-tags-item-padding-sm);
+	gap: var(
+		--so-tags-item-gap-sm,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
+	);
+	padding-inline: var(
+		--so-tags-item-padding-sm,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-sm > :has(+ .so-tags-item__close) {
-	padding-inline-end: var(--so-tags-item-gap-sm);
+	padding-inline-end: var(
+		--so-tags-item-gap-sm,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-sm > .so-tags-item__close {
-	margin-inline-end: var(--so-tags-item-padding-sm);
+	margin-inline-end: var(
+		--so-tags-item-padding-sm,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-normal {
@@ -218,16 +248,28 @@
 }
 
 .so-tags-item--size-normal > :not(.so-tags-item__close) {
-	gap: var(--so-tags-item-gap-normal);
-	padding-inline: var(--so-tags-item-padding-normal);
+	gap: var(
+		--so-tags-item-gap-normal,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
+	);
+	padding-inline: var(
+		--so-tags-item-padding-normal,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-normal > :has(+ .so-tags-item__close) {
-	padding-inline-end: var(--so-tags-item-gap-normal);
+	padding-inline-end: var(
+		--so-tags-item-gap-normal,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-normal > .so-tags-item__close {
-	margin-inline-end: var(--so-tags-item-padding-normal);
+	margin-inline-end: var(
+		--so-tags-item-padding-normal,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-lg {
@@ -240,16 +282,28 @@
 }
 
 .so-tags-item--size-lg > :not(.so-tags-item__close) {
-	gap: var(--so-tags-item-gap-lg);
-	padding-inline: var(--so-tags-item-padding-lg);
+	gap: var(
+		--so-tags-item-gap-lg,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
+	);
+	padding-inline: var(
+		--so-tags-item-padding-lg,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-lg > :has(+ .so-tags-item__close) {
-	padding-inline-end: var(--so-tags-item-gap-lg);
+	padding-inline-end: var(
+		--so-tags-item-gap-lg,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-lg > .so-tags-item__close {
-	margin-inline-end: var(--so-tags-item-padding-lg);
+	margin-inline-end: var(
+		--so-tags-item-padding-lg,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-xl {
@@ -262,16 +316,28 @@
 }
 
 .so-tags-item--size-xl > :not(.so-tags-item__close) {
-	gap: var(--so-tags-item-gap-xl);
-	padding-inline: var(--so-tags-item-padding-xl);
+	gap: var(
+		--so-tags-item-gap-xl,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
+	);
+	padding-inline: var(
+		--so-tags-item-padding-xl,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-xl > :has(+ .so-tags-item__close) {
-	padding-inline-end: var(--so-tags-item-gap-xl);
+	padding-inline-end: var(
+		--so-tags-item-gap-xl,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-xl > .so-tags-item__close {
-	margin-inline-end: var(--so-tags-item-padding-xl);
+	margin-inline-end: var(
+		--so-tags-item-padding-xl,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-2xl {
@@ -284,16 +350,28 @@
 }
 
 .so-tags-item--size-2xl > :not(.so-tags-item__close) {
-	gap: var(--so-tags-item-gap-2xl);
-	padding-inline: var(--so-tags-item-padding-2xl);
+	gap: var(
+		--so-tags-item-gap-2xl,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
+	);
+	padding-inline: var(
+		--so-tags-item-padding-2xl,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-2xl > :has(+ .so-tags-item__close) {
-	padding-inline-end: var(--so-tags-item-gap-2xl);
+	padding-inline-end: var(
+		--so-tags-item-gap-2xl,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 .so-tags-item--size-2xl > .so-tags-item__close {
-	margin-inline-end: var(--so-tags-item-padding-2xl);
+	margin-inline-end: var(
+		--so-tags-item-padding-2xl,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
+	);
 }
 
 /* Выключенный тег гаснет целиком, с крестиком, и нажатий не ловит
@@ -327,7 +405,10 @@
  * ширину, которой не хватает вводу. */
 .so-input__leading > .so-tags,
 .so-input__trailing > .so-tags {
-	--so-tags-gap: var(--so-tags-field-gap);
+	--so-tags-gap: var(
+		--so-tags-field-gap,
+		calc(var(--so-spacing, 0.25rem) * var(--so-input-spacing-factor, 1))
+	);
 	min-width: 0;
 }
 
@@ -357,7 +438,7 @@
  * Без подсказки отступа нет, и тег встаёт вплотную к краю. */
 .so-input__leading > .so-tags[data-overflow='scroll'],
 .so-input__trailing > .so-tags[data-overflow='scroll'] {
-	--so-tags-bleed: var(--so-input-slot-gap);
+	--so-tags-bleed: var(--so-input-slot-gap, calc(3px * var(--so-input-spacing-factor, 1)));
 	margin-block-end: calc(-1 * var(--so-tags-bleed));
 	padding-inline: 0;
 	scroll-padding-inline: var(--so-tags-fade, 0px);
@@ -368,4 +449,26 @@
 .so-input__leading > .so-tags[data-overflow='scroll']::-webkit-scrollbar,
 .so-input__trailing > .so-tags[data-overflow='scroll']::-webkit-scrollbar {
 	display: none;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-tags--size-sm {
+	--so-tags-spacing-factor: var(--so-tags-spacing-scale, var(--so-collection-scale-sm, 1));
+}
+
+:where(.so-tags),
+.so-tags--size-normal {
+	--so-tags-spacing-factor: var(--so-tags-spacing-scale, var(--so-collection-scale-normal, 1));
+}
+
+.so-tags--size-lg {
+	--so-tags-spacing-factor: var(--so-tags-spacing-scale, var(--so-collection-scale-lg, 1));
+}
+
+.so-tags--size-xl {
+	--so-tags-spacing-factor: var(--so-tags-spacing-scale, var(--so-collection-scale-xl, 1));
+}
+
+.so-tags--size-2xl {
+	--so-tags-spacing-factor: var(--so-tags-spacing-scale, var(--so-collection-scale-2xl, 1));
 }

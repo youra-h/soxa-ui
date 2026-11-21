@@ -140,8 +140,8 @@
 	--so-table-line-height-2xl: calc(1.75 / 1.25);
 
 	--so-table-column-min-width: 10em;
-	--so-table-sort-gap: 0.25rem;
-	--so-table-sort-padding: 0.125rem;
+	--so-table-sort-gap: initial;
+	--so-table-sort-padding: initial;
 	--so-table-resizer-width: 14px;
 }
 
@@ -164,7 +164,10 @@
  * reach over the table's neighbours on the page. */
 .so-table {
 	--so-table-button: var(--so-button-height-normal);
-	--so-table-button-inline: var(--so-button-padding-normal);
+	--so-table-button-inline: var(
+		--so-button-padding-normal,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-table-spacing-factor, 1))
+	);
 	--so-table-check: var(--so-check-box-size-normal);
 	--so-table-row: calc(var(--so-table-button) + 2 * var(--so-table-bleed));
 	--so-table-head-row: calc(var(--so-table-row) - var(--so-table-head-trim));
@@ -179,7 +182,10 @@
 
 .so-table--size-sm {
 	--so-table-button: var(--so-button-height-sm);
-	--so-table-button-inline: var(--so-button-padding-sm);
+	--so-table-button-inline: var(
+		--so-button-padding-sm,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-table-spacing-factor, 1))
+	);
 	--so-table-check: var(--so-check-box-size-sm);
 	font-size: var(--so-table-font-size-sm);
 	line-height: var(--so-table-line-height-sm);
@@ -187,7 +193,10 @@
 
 .so-table--size-normal {
 	--so-table-button: var(--so-button-height-normal);
-	--so-table-button-inline: var(--so-button-padding-normal);
+	--so-table-button-inline: var(
+		--so-button-padding-normal,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-table-spacing-factor, 1))
+	);
 	--so-table-check: var(--so-check-box-size-normal);
 	font-size: var(--so-table-font-size-normal);
 	line-height: var(--so-table-line-height-normal);
@@ -195,7 +204,10 @@
 
 .so-table--size-lg {
 	--so-table-button: var(--so-button-height-lg);
-	--so-table-button-inline: var(--so-button-padding-lg);
+	--so-table-button-inline: var(
+		--so-button-padding-lg,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-table-spacing-factor, 1))
+	);
 	--so-table-check: var(--so-check-box-size-lg);
 	font-size: var(--so-table-font-size-lg);
 	line-height: var(--so-table-line-height-lg);
@@ -203,7 +215,10 @@
 
 .so-table--size-xl {
 	--so-table-button: var(--so-button-height-xl);
-	--so-table-button-inline: var(--so-button-padding-xl);
+	--so-table-button-inline: var(
+		--so-button-padding-xl,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-table-spacing-factor, 1))
+	);
 	--so-table-check: var(--so-check-box-size-xl);
 	font-size: var(--so-table-font-size-xl);
 	line-height: var(--so-table-line-height-xl);
@@ -211,7 +226,10 @@
 
 .so-table--size-2xl {
 	--so-table-button: var(--so-button-height-2xl);
-	--so-table-button-inline: var(--so-button-padding-2xl);
+	--so-table-button-inline: var(
+		--so-button-padding-2xl,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-table-spacing-factor, 1))
+	);
 	--so-table-check: var(--so-check-box-size-2xl);
 	font-size: var(--so-table-font-size-2xl);
 	line-height: var(--so-table-line-height-2xl);
@@ -375,7 +393,10 @@
 .so-table-column__content {
 	display: flex;
 	align-items: center;
-	gap: var(--so-table-sort-gap);
+	gap: var(
+		--so-table-sort-gap,
+		calc(var(--so-spacing, 0.25rem) * var(--so-table-spacing-factor, 1))
+	);
 }
 
 .so-table-column__text {
@@ -417,7 +438,10 @@
 .so-table-column > .so-table-column__content > .so-table-column__sort {
 	flex-shrink: 0;
 	height: auto;
-	padding: var(--so-table-sort-padding);
+	padding: var(
+		--so-table-sort-padding,
+		calc(var(--so-spacing, 0.25rem) * 0.5 * var(--so-table-spacing-factor, 1))
+	);
 	font: inherit;
 }
 
@@ -1510,4 +1534,26 @@
 		max(0px, var(--so-table-head-offset, 0px)) +
 			var(--so-table-head-height, var(--so-table-head-row)) + var(--so-table-bleed)
 	);
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-table--size-sm {
+	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-sm, 1));
+}
+
+:where(.so-table),
+.so-table--size-normal {
+	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-normal, 1));
+}
+
+.so-table--size-lg {
+	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-lg, 1));
+}
+
+.so-table--size-xl {
+	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-xl, 1));
+}
+
+.so-table--size-2xl {
+	--so-table-spacing-factor: var(--so-table-spacing-scale, var(--so-collection-scale-2xl, 1));
 }

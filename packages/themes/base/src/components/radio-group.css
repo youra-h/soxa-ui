@@ -34,33 +34,48 @@
 
 .so-radio-group-item--size-sm {
 	--so-radio-control-size: var(--so-check-box-size-sm);
-	gap: var(--so-caption-gap-sm);
+	gap: var(
+		--so-caption-gap-sm,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-radio-group-spacing-factor, 1))
+	);
 	font-size: var(--so-caption-font-size-sm);
 	line-height: var(--so-caption-line-height-sm);
 }
 
 .so-radio-group-item--size-normal {
 	--so-radio-control-size: var(--so-check-box-size-normal);
-	gap: var(--so-caption-gap-normal);
+	gap: var(
+		--so-caption-gap-normal,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-radio-group-spacing-factor, 1))
+	);
 }
 
 .so-radio-group-item--size-lg {
 	--so-radio-control-size: var(--so-check-box-size-lg);
-	gap: var(--so-caption-gap-lg);
+	gap: var(
+		--so-caption-gap-lg,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-radio-group-spacing-factor, 1))
+	);
 	font-size: var(--so-caption-font-size-lg);
 	line-height: var(--so-caption-line-height-lg);
 }
 
 .so-radio-group-item--size-xl {
 	--so-radio-control-size: var(--so-check-box-size-xl);
-	gap: var(--so-caption-gap-xl);
+	gap: var(
+		--so-caption-gap-xl,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-radio-group-spacing-factor, 1))
+	);
 	font-size: var(--so-caption-font-size-xl);
 	line-height: var(--so-caption-line-height-xl);
 }
 
 .so-radio-group-item--size-2xl {
 	--so-radio-control-size: var(--so-check-box-size-2xl);
-	gap: var(--so-caption-gap-2xl);
+	gap: var(
+		--so-caption-gap-2xl,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-radio-group-spacing-factor, 1))
+	);
 	font-size: var(--so-caption-font-size-2xl);
 	line-height: var(--so-caption-line-height-2xl);
 }
@@ -127,4 +142,41 @@
 
 .so-radio-group-item[data-disabled='true'] > * {
 	--so-disabled-opacity: 1;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-radio-group--size-sm {
+	--so-radio-group-spacing-factor: var(
+		--so-radio-group-spacing-scale,
+		var(--so-control-scale-sm, 1)
+	);
+}
+
+:where(.so-radio-group),
+.so-radio-group--size-normal {
+	--so-radio-group-spacing-factor: var(
+		--so-radio-group-spacing-scale,
+		var(--so-control-scale-normal, 1)
+	);
+}
+
+.so-radio-group--size-lg {
+	--so-radio-group-spacing-factor: var(
+		--so-radio-group-spacing-scale,
+		var(--so-control-scale-lg, 1)
+	);
+}
+
+.so-radio-group--size-xl {
+	--so-radio-group-spacing-factor: var(
+		--so-radio-group-spacing-scale,
+		var(--so-control-scale-xl, 1)
+	);
+}
+
+.so-radio-group--size-2xl {
+	--so-radio-group-spacing-factor: var(
+		--so-radio-group-spacing-scale,
+		var(--so-control-scale-2xl, 1)
+	);
 }

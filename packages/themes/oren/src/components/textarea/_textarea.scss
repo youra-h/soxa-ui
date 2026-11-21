@@ -30,7 +30,9 @@ $disabled: ':has(> textarea:disabled)';
 	// края поля не выходит за скруглённый угол.
 	> textarea {
 		@apply outline-none;
-		border-radius: calc(var(--radius-md) - var(--so-textarea-border));
+		border-radius: calc(
+			var(--so-textarea-radius, var(--so-radius)) - var(--so-textarea-border)
+		);
 
 		&::placeholder {
 			@apply text-so-component-placeholder;

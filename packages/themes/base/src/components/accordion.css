@@ -22,15 +22,18 @@
  * переходом (движение) — рисует тема. */
 
 :root {
-	--so-accordion-gap: 0.25rem;
-	--so-accordion-header-padding: 0.5rem;
-	--so-accordion-content-padding: 0.5rem;
+	--so-accordion-gap: initial;
+	--so-accordion-header-padding: initial;
+	--so-accordion-content-padding: initial;
 }
 
 .so-accordion {
 	display: flex;
 	flex-direction: column;
-	gap: var(--so-accordion-gap);
+	gap: var(
+		--so-accordion-gap,
+		calc(var(--so-spacing, 0.25rem) * var(--so-accordion-spacing-factor, 1))
+	);
 }
 
 .so-accordion-item {
@@ -47,7 +50,10 @@
 .so-accordion-item__header {
 	justify-content: flex-start;
 	width: 100%;
-	padding-block: var(--so-accordion-header-padding);
+	padding-block: var(
+		--so-accordion-header-padding,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-accordion-spacing-factor, 1))
+	);
 }
 
 .so-accordion-item__header > .so-button__text {
@@ -92,5 +98,45 @@
 }
 
 .so-accordion-item[data-selected='true'] > .so-accordion-item__body > .so-accordion-item__content {
-	padding-block: var(--so-accordion-content-padding);
+	padding-block: var(
+		--so-accordion-content-padding,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-accordion-spacing-factor, 1))
+	);
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-accordion--size-sm {
+	--so-accordion-spacing-factor: var(
+		--so-accordion-spacing-scale,
+		var(--so-collection-scale-sm, 1)
+	);
+}
+
+:where(.so-accordion),
+.so-accordion--size-normal {
+	--so-accordion-spacing-factor: var(
+		--so-accordion-spacing-scale,
+		var(--so-collection-scale-normal, 1)
+	);
+}
+
+.so-accordion--size-lg {
+	--so-accordion-spacing-factor: var(
+		--so-accordion-spacing-scale,
+		var(--so-collection-scale-lg, 1)
+	);
+}
+
+.so-accordion--size-xl {
+	--so-accordion-spacing-factor: var(
+		--so-accordion-spacing-scale,
+		var(--so-collection-scale-xl, 1)
+	);
+}
+
+.so-accordion--size-2xl {
+	--so-accordion-spacing-factor: var(
+		--so-accordion-spacing-scale,
+		var(--so-collection-scale-2xl, 1)
+	);
 }

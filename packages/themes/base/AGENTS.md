@@ -1287,3 +1287,19 @@ Playwright, наведение на подпись полю отдаёт сам,
 прежнее правило суммы ширин и прежний курсор жеста — условия у корня по
 заголовкам — роняют его. Что признаков на покое нет, сторожат ядро, разметка
 и браузер — см. раздел oren «Тесты».
+
+## Shared geometry settings
+
+Optional radius, spacing-unit and family-scale settings live in `src/settings.css` and
+remain `initial` in base. This is the guaranteed-invalid custom-property value, which
+allows a consuming `var()` fallback; an empty token list would suppress the fallback.
+Radius settings belong to `theme-reads` and are the exception to the earlier rule that
+root defaults only belong to `base-reads`: they have no visual value in base.
+
+Spacing override variables are optional final lengths. Resolve their fallback formulas
+on the component, using the spacing unit and its selected family multiplier, so subtree
+settings remain effective. Do not put derived formulas on the document root. The earlier
+fixed-default spacing entries describe geometry roles; the current formulas and the
+migration are documented in README.md and theme-variables.json. Fonts, heights and
+minimum pointer targets keep their separate scales. Component-owned computed variables
+needed by a visual theme must be named in `theme-reads`.

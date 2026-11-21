@@ -24,7 +24,7 @@
 }
 
 .so-avatar--shape-rounded {
-	@apply rounded-md;
+	border-radius: var(--so-avatar-radius, var(--so-radius));
 }
 
 .so-avatar--shape-rect {

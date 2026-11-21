@@ -1,6 +1,6 @@
 /* A group of buttons, laid out on one axis. The buttons keep the Button scale. */
 :root {
-	--so-toggle-group-gap: 0.25rem;
+	--so-toggle-group-gap: initial;
 	--so-toggle-group-bleed: 0.25rem;
 }
 
@@ -9,7 +9,10 @@
 	min-inline-size: 0;
 	max-inline-size: 100%;
 	align-items: center;
-	gap: var(--so-toggle-group-gap);
+	gap: var(
+		--so-toggle-group-gap,
+		calc(var(--so-spacing, 0.25rem) * var(--so-toggle-group-spacing-factor, 1))
+	);
 }
 
 /* Keep every action reachable without widening the page. Padding preserves
@@ -27,4 +30,48 @@
 .so-toggle-group--orientation-vertical {
 	flex-direction: column;
 	align-items: stretch;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-toggle-group--size-sm {
+	--so-toggle-group-spacing-factor: var(
+		--so-toggle-group-spacing-scale,
+		var(--so-control-scale-sm, 1)
+	);
+}
+
+:where(.so-toggle-group),
+.so-toggle-group--size-normal {
+	--so-toggle-group-spacing-factor: var(
+		--so-toggle-group-spacing-scale,
+		var(--so-control-scale-normal, 1)
+	);
+}
+
+.so-toggle-group--size-lg {
+	--so-toggle-group-spacing-factor: var(
+		--so-toggle-group-spacing-scale,
+		var(--so-control-scale-lg, 1)
+	);
+}
+
+.so-toggle-group--size-xl {
+	--so-toggle-group-spacing-factor: var(
+		--so-toggle-group-spacing-scale,
+		var(--so-control-scale-xl, 1)
+	);
+}
+
+.so-toggle-group--size-2xl {
+	--so-toggle-group-spacing-factor: var(
+		--so-toggle-group-spacing-scale,
+		var(--so-control-scale-2xl, 1)
+	);
+}
+
+.so-toggle-group {
+	--so-toggle-group-gap-value: var(
+		--so-toggle-group-gap,
+		calc(var(--so-spacing, 0.25rem) * var(--so-toggle-group-spacing-factor, 1))
+	);
 }

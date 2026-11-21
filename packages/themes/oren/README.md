@@ -180,3 +180,39 @@ body {
 
 Breadcrumbs provides an ordered navigation trail with native links, localized accessible names
 and an overflow menu. See the [API and examples](../../../docs/api/breadcrumbs.md).
+
+## Shared geometry
+
+Set these variables after importing the theme, on the document or a component subtree:
+
+```css
+:root {
+  --so-radius: 0.5rem;
+  --so-spacing: 0.25rem;
+  --so-field-scale-2xl: 1.75;
+  --so-message-scale-2xl: 1.5;
+}
+.my-input {
+  --so-input-radius: 2px;
+  --so-input-spacing-scale: 1.25;
+  --so-input-slot-spacing: 6px; /* Exact final length, unaffected by the multiplier. */
+}
+```
+
+A component radius override wins over the shared radius. Oren's shared radius is 0.375rem;
+large panels and message cards keep their 4/3 proportion, while circular shapes stay round.
+Input and DateInput share the field scale; Alert and Toasts share the message scale.
+
+| Family                       | sm    | normal | lg    | xl   | 2xl  |
+| ---------------------------- | ----- | ------ | ----- | ---- | ---- |
+| field, control               | 0.75  | 1      | 1.25  | 1.5  | 1.75 |
+| collection, message, surface | 0.875 | 1      | 1.125 | 1.25 | 1.5  |
+
+The families remain independently configurable. Multipliers affect spacing, with exact
+local length overrides taking priority. Fonts, control heights and pointer-target minima
+retain their size scales. See the [base theme migration notes](../base/README.md#shared-radius-and-spacing-settings)
+when a custom theme directly reads the old fixed-default spacing variables.
+
+The message spacing reference comes from Toasts: normal Alert and Toasts use 14px block
+padding, 16px inline padding and a 2px title-to-description gap at the default root size.
+Alert keeps its own text-size scale; component-specific exact overrides still take priority.

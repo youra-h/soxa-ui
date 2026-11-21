@@ -16,7 +16,8 @@
 	}
 
 	&__container {
-		@apply rounded-md border;
+		border-radius: var(--so-check-box-radius, var(--so-radius));
+		@apply border;
 		@apply bg-so-component-surface;
 		@apply transition-colors duration-150;
 	}

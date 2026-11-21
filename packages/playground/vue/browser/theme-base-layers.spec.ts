@@ -96,7 +96,7 @@ describe('страница — только общий слой тем', () => {
 		const root = getComputedStyle(document.documentElement)
 
 		expect(root.getPropertyValue('--so-popover-max-width')).not.toBe('')
-		expect(root.getPropertyValue('--so-modal-padding')).not.toBe('')
+		expect(root.getPropertyValue('--so-modal-padding')).toBe('')
 		expect(root.getPropertyValue('--so-component-surface')).toBe('')
 		expect(root.getPropertyValue('--so-neutral-500')).toBe('')
 	})

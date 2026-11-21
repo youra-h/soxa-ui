@@ -446,8 +446,10 @@ describe('зона нажатия крестика', () => {
 		const row = rowOf(item)
 		const pill = box(item)
 		const { x, y } = center(close)
-		const left = x - MIN_TARGET / 2
-		const right = x + MIN_TARGET / 2
+		// The visible close button may be wider than its minimum pointer target.
+		const targetWidth = Math.max(MIN_TARGET, box(close).width)
+		const left = x - targetWidth / 2
+		const right = x + targetWidth / 2
 		const top = Math.max(y - MIN_TARGET / 2, pill.top)
 		const bottom = Math.min(y + MIN_TARGET / 2, pill.bottom)
 		const corners = {

@@ -31,7 +31,7 @@
 	--so-number-input-height: var(--so-input-height-normal);
 	--so-number-input-slot-row: calc(
 		var(--so-number-input-height) - 2 * var(--so-number-input-border, 0px) - 2 *
-			var(--so-input-slot-gap)
+			var(--so-input-slot-gap, calc(3px * var(--so-number-input-spacing-factor, 1)))
 	);
 	position: relative;
 	display: inline-flex;
@@ -59,7 +59,10 @@
  * ввода — во всю высоту поля. Кегль — вводу, а не корню: слоты — разметка
  * потребителя. */
 .so-number-input > .so-number-input__input {
-	padding-inline: var(--so-input-indent-normal);
+	padding-inline: var(
+		--so-input-indent-normal,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-number-input-spacing-factor, 1))
+	);
 	line-height: var(--so-number-input-height);
 }
 
@@ -95,16 +98,25 @@
 	flex-shrink: 0;
 	align-items: center;
 	justify-content: center;
-	gap: var(--so-input-slot-spacing);
+	gap: var(
+		--so-input-slot-spacing,
+		calc(var(--so-spacing, 0.25rem) * var(--so-number-input-spacing-factor, 1))
+	);
 	height: var(--so-number-input-slot-row);
 }
 
 .so-number-input__leading {
-	padding-inline-start: var(--so-input-slot-padding);
+	padding-inline-start: var(
+		--so-input-slot-padding,
+		calc(var(--so-spacing, 0.25rem) * var(--so-number-input-spacing-factor, 1))
+	);
 }
 
 .so-number-input__trailing {
-	padding-inline-end: var(--so-input-slot-padding);
+	padding-inline-end: var(
+		--so-input-slot-padding,
+		calc(var(--so-spacing, 0.25rem) * var(--so-number-input-spacing-factor, 1))
+	);
 }
 
 /* Кнопки шага — одна пара, а не ещё две кнопки в ряду со слотом: от очистки
@@ -114,7 +126,10 @@
  * то же, что у слота. В RTL ряд зеркален сам — флекс поля идёт по его
  * направлению, — и «больше» стоит у левого края. */
 .so-number-input__stepper {
-	padding-inline: var(--so-input-slot-padding);
+	padding-inline: var(
+		--so-input-slot-padding,
+		calc(var(--so-spacing, 0.25rem) * var(--so-number-input-spacing-factor, 1))
+	);
 }
 
 /* Кнопки — квадраты в строку слота, как очистка Input: рядом, а не столбцом
@@ -144,7 +159,10 @@
 
 .so-number-input--size-sm > .so-number-input__input {
 	font-size: var(--so-input-font-size-sm);
-	padding-inline: var(--so-input-indent-sm);
+	padding-inline: var(
+		--so-input-indent-sm,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-number-input-spacing-factor, 1))
+	);
 }
 
 .so-number-input--size-normal {
@@ -152,7 +170,10 @@
 }
 
 .so-number-input--size-normal > .so-number-input__input {
-	padding-inline: var(--so-input-indent-normal);
+	padding-inline: var(
+		--so-input-indent-normal,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-number-input-spacing-factor, 1))
+	);
 }
 
 .so-number-input--size-lg {
@@ -161,7 +182,10 @@
 
 .so-number-input--size-lg > .so-number-input__input {
 	font-size: var(--so-input-font-size-lg);
-	padding-inline: var(--so-input-indent-lg);
+	padding-inline: var(
+		--so-input-indent-lg,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-number-input-spacing-factor, 1))
+	);
 }
 
 .so-number-input--size-xl {
@@ -170,7 +194,10 @@
 
 .so-number-input--size-xl > .so-number-input__input {
 	font-size: var(--so-input-font-size-xl);
-	padding-inline: var(--so-input-indent-xl);
+	padding-inline: var(
+		--so-input-indent-xl,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-number-input-spacing-factor, 1))
+	);
 }
 
 .so-number-input--size-2xl {
@@ -179,5 +206,52 @@
 
 .so-number-input--size-2xl > .so-number-input__input {
 	font-size: var(--so-input-font-size-2xl);
-	padding-inline: var(--so-input-indent-2xl);
+	padding-inline: var(
+		--so-input-indent-2xl,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-number-input-spacing-factor, 1))
+	);
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-number-input--size-sm {
+	--so-number-input-spacing-factor: var(
+		--so-number-input-spacing-scale,
+		var(--so-field-scale-sm, 1)
+	);
+}
+
+:where(.so-number-input),
+.so-number-input--size-normal {
+	--so-number-input-spacing-factor: var(
+		--so-number-input-spacing-scale,
+		var(--so-field-scale-normal, 1)
+	);
+}
+
+.so-number-input--size-lg {
+	--so-number-input-spacing-factor: var(
+		--so-number-input-spacing-scale,
+		var(--so-field-scale-lg, 1)
+	);
+}
+
+.so-number-input--size-xl {
+	--so-number-input-spacing-factor: var(
+		--so-number-input-spacing-scale,
+		var(--so-field-scale-xl, 1)
+	);
+}
+
+.so-number-input--size-2xl {
+	--so-number-input-spacing-factor: var(
+		--so-number-input-spacing-scale,
+		var(--so-field-scale-2xl, 1)
+	);
+}
+
+.so-number-input__clear .so-icon,
+.so-number-input__decrement .so-icon,
+.so-number-input__increment .so-icon {
+	max-inline-size: var(--so-number-input-slot-row);
+	max-block-size: var(--so-number-input-slot-row);
 }

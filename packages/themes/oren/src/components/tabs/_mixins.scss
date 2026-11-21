@@ -49,7 +49,8 @@ $move-easing: ease;
 // обёртки. Подмены цветов (`forced-color-adjust`) здесь нет: системный цвет
 // браузер и так оставляет, а у обёртки подмену унаследовал бы текст таба.
 @mixin tabs-contained-card {
-	@apply rounded-md bg-so-component-surface shadow-sm;
+	border-radius: var(--so-tabs-radius, var(--so-radius));
+	@apply bg-so-component-surface shadow-sm;
 
 	@media (forced-colors: active) {
 		outline: 1px solid Highlight;

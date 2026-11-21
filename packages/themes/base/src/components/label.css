@@ -25,8 +25,14 @@
  * подписи: в строке формы рядом с чужим текстом подпись встаёт с ним на одну
  * линию. */
 .so-label {
-	--so-label-gap: var(--so-caption-gap-normal);
-	--so-label-stack: var(--so-caption-stack-normal);
+	--so-label-gap: var(
+		--so-caption-gap-normal,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-label-spacing-factor, 1))
+	);
+	--so-label-stack: var(
+		--so-caption-stack-normal,
+		calc(var(--so-spacing, 0.25rem) * var(--so-label-spacing-factor, 1))
+	);
 	display: inline-flex;
 	align-items: baseline;
 	gap: var(--so-label-gap);
@@ -36,8 +42,14 @@
 }
 
 .so-label--size-sm {
-	--so-label-gap: var(--so-caption-gap-sm);
-	--so-label-stack: var(--so-caption-stack-sm);
+	--so-label-gap: var(
+		--so-caption-gap-sm,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-label-spacing-factor, 1))
+	);
+	--so-label-stack: var(
+		--so-caption-stack-sm,
+		calc(var(--so-spacing, 0.25rem) * var(--so-label-spacing-factor, 1))
+	);
 }
 
 .so-label--size-sm > .so-label__text,
@@ -47,13 +59,25 @@
 }
 
 .so-label--size-normal {
-	--so-label-gap: var(--so-caption-gap-normal);
-	--so-label-stack: var(--so-caption-stack-normal);
+	--so-label-gap: var(
+		--so-caption-gap-normal,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-label-spacing-factor, 1))
+	);
+	--so-label-stack: var(
+		--so-caption-stack-normal,
+		calc(var(--so-spacing, 0.25rem) * var(--so-label-spacing-factor, 1))
+	);
 }
 
 .so-label--size-lg {
-	--so-label-gap: var(--so-caption-gap-lg);
-	--so-label-stack: var(--so-caption-stack-lg);
+	--so-label-gap: var(
+		--so-caption-gap-lg,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-label-spacing-factor, 1))
+	);
+	--so-label-stack: var(
+		--so-caption-stack-lg,
+		calc(var(--so-spacing, 0.25rem) * var(--so-label-spacing-factor, 1))
+	);
 }
 
 .so-label--size-lg > .so-label__text,
@@ -63,8 +87,14 @@
 }
 
 .so-label--size-xl {
-	--so-label-gap: var(--so-caption-gap-xl);
-	--so-label-stack: var(--so-caption-stack-xl);
+	--so-label-gap: var(
+		--so-caption-gap-xl,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-label-spacing-factor, 1))
+	);
+	--so-label-stack: var(
+		--so-caption-stack-xl,
+		calc(var(--so-spacing, 0.25rem) * var(--so-label-spacing-factor, 1))
+	);
 }
 
 .so-label--size-xl > .so-label__text,
@@ -74,8 +104,14 @@
 }
 
 .so-label--size-2xl {
-	--so-label-gap: var(--so-caption-gap-2xl);
-	--so-label-stack: var(--so-caption-stack-2xl);
+	--so-label-gap: var(
+		--so-caption-gap-2xl,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-label-spacing-factor, 1))
+	);
+	--so-label-stack: var(
+		--so-caption-stack-2xl,
+		calc(var(--so-spacing, 0.25rem) * var(--so-label-spacing-factor, 1))
+	);
 }
 
 .so-label--size-2xl > .so-label__text,
@@ -157,4 +193,26 @@
  */
 .so-label:has(> .so-label__control > [data-readonly='true']) {
 	cursor: default;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-label--size-sm {
+	--so-label-spacing-factor: var(--so-label-spacing-scale, var(--so-field-scale-sm, 1));
+}
+
+:where(.so-label),
+.so-label--size-normal {
+	--so-label-spacing-factor: var(--so-label-spacing-scale, var(--so-field-scale-normal, 1));
+}
+
+.so-label--size-lg {
+	--so-label-spacing-factor: var(--so-label-spacing-scale, var(--so-field-scale-lg, 1));
+}
+
+.so-label--size-xl {
+	--so-label-spacing-factor: var(--so-label-spacing-scale, var(--so-field-scale-xl, 1));
+}
+
+.so-label--size-2xl {
+	--so-label-spacing-factor: var(--so-label-spacing-scale, var(--so-field-scale-2xl, 1));
 }

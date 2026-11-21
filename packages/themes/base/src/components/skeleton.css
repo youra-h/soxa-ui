@@ -31,3 +31,28 @@
 	inset: 0;
 	z-index: 10;
 }
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-skeleton--size-sm {
+	--so-skeleton-spacing-factor: var(--so-skeleton-spacing-scale, var(--so-surface-scale-sm, 1));
+}
+
+:where(.so-skeleton),
+.so-skeleton--size-normal {
+	--so-skeleton-spacing-factor: var(
+		--so-skeleton-spacing-scale,
+		var(--so-surface-scale-normal, 1)
+	);
+}
+
+.so-skeleton--size-lg {
+	--so-skeleton-spacing-factor: var(--so-skeleton-spacing-scale, var(--so-surface-scale-lg, 1));
+}
+
+.so-skeleton--size-xl {
+	--so-skeleton-spacing-factor: var(--so-skeleton-spacing-scale, var(--so-surface-scale-xl, 1));
+}
+
+.so-skeleton--size-2xl {
+	--so-skeleton-spacing-factor: var(--so-skeleton-spacing-scale, var(--so-surface-scale-2xl, 1));
+}

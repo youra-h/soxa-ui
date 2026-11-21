@@ -86,7 +86,8 @@ $disabled: "[data-disabled='true']";
 // Часть даты. Своя подсветка под фокусом — скруглённая, высотой в строку слота
 // (интерлиньяж ряда), с полями от текста (общий слой тем).
 .so-date-input__segment {
-	@apply rounded-sm outline-none;
+	border-radius: var(--so-date-input-segment-radius, calc(var(--so-radius) * 0.6666666666666666));
+	@apply outline-none;
 
 	// Подсказка пустой части — приглушённый текст темы (ступень 500), а не
 	// прозрачность подсказки Input. Это формат даты, а не пример значения:

@@ -36,7 +36,7 @@
 // панели пункта, которую привязка ставит сбоку.
 .so-menu__panel,
 .so-menu-item__panel {
-	@apply rounded-md;
+	border-radius: var(--so-menu-radius, var(--so-radius));
 	@apply text-so-component shadow-md;
 	@apply ring-1 ring-so-neutral-300;
 	@apply outline outline-transparent;

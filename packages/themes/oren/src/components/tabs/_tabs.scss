@@ -117,7 +117,7 @@ $line: ':where(.so-tabs:not(.so-tabs--view-contained, .so-tabs--view-outline))';
 	// у списка, между слотом и списком — у ряда, число одно.
 	> .so-tabs__bar {
 		@apply gap-1.5;
-		@apply rounded-md;
+		border-radius: var(--so-tabs-radius, var(--so-radius));
 		padding: $inset;
 	}
 
@@ -129,7 +129,8 @@ $line: ':where(.so-tabs:not(.so-tabs--view-contained, .so-tabs--view-outline))';
 	// у каждой обёртки: фон таба, с которого ушла статичная карточка, гаснет
 	// переходом и до конца держит углы.
 	> .so-tabs__bar > .so-tabs__list > .so-tabs-item {
-		@apply rounded-md transition-colors duration-200;
+		border-radius: var(--so-tabs-radius, var(--so-radius));
+		@apply transition-colors duration-200;
 	}
 
 	&:not(.so-tabs:where([data-ready-animation='true']))
@@ -215,7 +216,9 @@ $line: ':where(.so-tabs:not(.so-tabs--view-contained, .so-tabs--view-outline))';
 		@apply gap-1.5;
 
 		> .so-tabs-item {
-			@apply relative border rounded-t-md rounded-b-none;
+			border-start-start-radius: var(--so-tabs-radius, var(--so-radius));
+			border-start-end-radius: var(--so-tabs-radius, var(--so-radius));
+			@apply relative border rounded-b-none;
 			@apply bg-transparent;
 			@apply border-b-0;
 
@@ -261,7 +264,9 @@ $line: ':where(.so-tabs:not(.so-tabs--view-contained, .so-tabs--view-outline))';
 		}
 
 		> .so-tabs__bar > .so-tabs__list > .so-tabs-item {
-			@apply rounded-t-md rounded-b-none border-b-0;
+			border-start-start-radius: var(--so-tabs-radius, var(--so-radius));
+			border-start-end-radius: var(--so-tabs-radius, var(--so-radius));
+			@apply rounded-b-none border-b-0;
 		}
 	}
 
@@ -288,7 +293,9 @@ $line: ':where(.so-tabs:not(.so-tabs--view-contained, .so-tabs--view-outline))';
 		}
 
 		> .so-tabs__bar > .so-tabs__list > .so-tabs-item {
-			@apply rounded-s-md rounded-e-none border-e-0 border-b;
+			border-start-start-radius: var(--so-tabs-radius, var(--so-radius));
+			border-end-start-radius: var(--so-tabs-radius, var(--so-radius));
+			@apply rounded-e-none border-e-0 border-b;
 		}
 
 		&.so-tabs--position-end {
@@ -300,7 +307,9 @@ $line: ':where(.so-tabs:not(.so-tabs--view-contained, .so-tabs--view-outline))';
 			}
 
 			> .so-tabs__bar > .so-tabs__list > .so-tabs-item {
-				@apply rounded-e-md rounded-s-none border-s-0 border-e;
+				border-start-end-radius: var(--so-tabs-radius, var(--so-radius));
+				border-end-end-radius: var(--so-tabs-radius, var(--so-radius));
+				@apply rounded-s-none border-s-0 border-e;
 			}
 		}
 	}
@@ -367,7 +376,8 @@ $line: ':where(.so-tabs:not(.so-tabs--view-contained, .so-tabs--view-outline))';
 	// нижние скругления.
 	&::after {
 		content: '';
-		@apply absolute inset-0 rounded-md pointer-events-none;
+		border-radius: var(--so-tabs-radius, var(--so-radius));
+		@apply absolute inset-0 pointer-events-none;
 		@apply outline-transparent transition-colors duration-200;
 	}
 

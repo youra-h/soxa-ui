@@ -52,7 +52,10 @@
  * без него обязан выглядеть умолчанием. */
 .so-pagination {
 	--so-pagination-cell: var(--so-button-height-normal);
-	--so-pagination-gap: var(--so-button-gap-normal);
+	--so-pagination-gap: var(
+		--so-button-gap-normal,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-pagination-spacing-factor, 1))
+	);
 	display: flex;
 	align-items: center;
 	gap: var(--so-pagination-gap);
@@ -62,7 +65,10 @@
 
 .so-pagination--size-sm {
 	--so-pagination-cell: var(--so-button-height-sm);
-	--so-pagination-gap: var(--so-button-gap-sm);
+	--so-pagination-gap: var(
+		--so-button-gap-sm,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-pagination-spacing-factor, 1))
+	);
 }
 
 .so-pagination--size-sm > .so-pagination__list > .so-pagination__ellipsis {
@@ -72,12 +78,18 @@
 
 .so-pagination--size-normal {
 	--so-pagination-cell: var(--so-button-height-normal);
-	--so-pagination-gap: var(--so-button-gap-normal);
+	--so-pagination-gap: var(
+		--so-button-gap-normal,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-pagination-spacing-factor, 1))
+	);
 }
 
 .so-pagination--size-lg {
 	--so-pagination-cell: var(--so-button-height-lg);
-	--so-pagination-gap: var(--so-button-gap-lg);
+	--so-pagination-gap: var(
+		--so-button-gap-lg,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-pagination-spacing-factor, 1))
+	);
 }
 
 .so-pagination--size-lg > .so-pagination__list > .so-pagination__ellipsis {
@@ -87,7 +99,10 @@
 
 .so-pagination--size-xl {
 	--so-pagination-cell: var(--so-button-height-xl);
-	--so-pagination-gap: var(--so-button-gap-xl);
+	--so-pagination-gap: var(
+		--so-button-gap-xl,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-pagination-spacing-factor, 1))
+	);
 }
 
 .so-pagination--size-xl > .so-pagination__list > .so-pagination__ellipsis {
@@ -97,7 +112,10 @@
 
 .so-pagination--size-2xl {
 	--so-pagination-cell: var(--so-button-height-2xl);
-	--so-pagination-gap: var(--so-button-gap-2xl);
+	--so-pagination-gap: var(
+		--so-button-gap-2xl,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-pagination-spacing-factor, 1))
+	);
 }
 
 .so-pagination--size-2xl > .so-pagination__list > .so-pagination__ellipsis {
@@ -161,4 +179,41 @@
 
 .so-pagination[data-disabled='true'] > * {
 	--so-disabled-opacity: 1;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-pagination--size-sm {
+	--so-pagination-spacing-factor: var(
+		--so-pagination-spacing-scale,
+		var(--so-control-scale-sm, 1)
+	);
+}
+
+:where(.so-pagination),
+.so-pagination--size-normal {
+	--so-pagination-spacing-factor: var(
+		--so-pagination-spacing-scale,
+		var(--so-control-scale-normal, 1)
+	);
+}
+
+.so-pagination--size-lg {
+	--so-pagination-spacing-factor: var(
+		--so-pagination-spacing-scale,
+		var(--so-control-scale-lg, 1)
+	);
+}
+
+.so-pagination--size-xl {
+	--so-pagination-spacing-factor: var(
+		--so-pagination-spacing-scale,
+		var(--so-control-scale-xl, 1)
+	);
+}
+
+.so-pagination--size-2xl {
+	--so-pagination-spacing-factor: var(
+		--so-pagination-spacing-scale,
+		var(--so-control-scale-2xl, 1)
+	);
 }
