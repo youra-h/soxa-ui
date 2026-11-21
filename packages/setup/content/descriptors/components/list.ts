@@ -24,7 +24,7 @@ export const LIST_PROPS = {
 		type: String,
 		triggers: ['change:indicator'],
 	},
-	/** Whether to draw a separator between sections of the grouping from data */
+	/** Separate data sections; use ListBox.Separator or Select.Separator for markup groups. */
 	groupSeparators: {
 		type: Boolean,
 		triggers: ['change:groupSeparators'],

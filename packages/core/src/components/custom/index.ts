@@ -13,7 +13,7 @@ export * from './number-input'
 export * from './textarea'
 export * from './tabs'
 export * from './accordion'
-// Только контракты: класса в этой папке нет — общее у ListBox и Select
+// Shared list contracts and the behavior-free base of manual separators.
 export * from './list'
 export * from './list-box'
 export * from './tags'

@@ -589,10 +589,8 @@ export class TSelect<
 	}
 
 	/**
-	 * Whether to draw a separator between neighbouring sections of the
-	 * grouping in the panel list. The markup draws it by the drawn sections
-	 * (`drawnSections` of the facade), so only for options from data: groups
-	 * written in markup (`Select.Group`) get no separator.
+	 * Draw separators between sections generated from data. For markup groups,
+	 * place Select.Separator explicitly; groupSeparators does not control it.
 	 */
 	get groupSeparators(): boolean {
 		return this._groupSeparators

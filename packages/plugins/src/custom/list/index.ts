@@ -9,3 +9,4 @@ export * from './option-ids'
 // (`focusTarget` плагина действия). Одноимённый охранник расширения ListBox в
 // `@soxa-ui/core` различают алиасом в импорте.
 export { listOf, rowIn } from './row'
+export * from './separator'

@@ -10,6 +10,7 @@ import type { ISelect, TSelectCollectionFacade } from '@soxa-ui/core'
 import { ElementBase, defineElement } from '../../adapter'
 import type { TElementClassOf, TElementType } from '../../adapter'
 import { TSelectGroupElement } from './group'
+import { TSelectSeparatorElement } from './separator'
 import { TSelectItemElement } from './item'
 import { selectTemplate } from './select.template'
 import { setupSelect } from './setup.component'
@@ -28,6 +29,7 @@ export const TSelectElement: TElementClassOf<
 })
 
 defineElement('so-select', TSelectElement, 'div')
+defineElement('so-select-separator', TSelectSeparatorElement, 'div')
 defineElement('so-select-group', TSelectGroupElement, 'div')
 defineElement('so-select-item', TSelectItemElement, 'div')
 

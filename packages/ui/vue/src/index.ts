@@ -222,3 +222,9 @@ export type { SeparatorProps } from './components/separator'
 export type { AlertDialogProps } from './components/alert-dialog/base.component'
 
 export type { ICollectionInitialSource, ICollectionInitialPanel } from '@soxa-ui/plugins'
+
+export { SelectSeparator } from './components/select/separator'
+export type { SelectSeparatorProps } from './components/select/separator'
+
+export { ListBoxSeparator } from './components/list-box/separator'
+export type { ListBoxSeparatorProps } from './components/list-box/separator'

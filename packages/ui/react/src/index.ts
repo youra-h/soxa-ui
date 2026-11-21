@@ -258,3 +258,12 @@ export { Separator } from './components/separator'
 export type { SeparatorProps, SeparatorEventProps } from './components/separator'
 
 export type { ICollectionInitialSource, ICollectionInitialPanel } from '@soxa-ui/plugins'
+
+export { SelectSeparator } from './components/select/separator'
+export type { SelectSeparatorProps, SelectSeparatorEventProps } from './components/select/separator'
+
+export { ListBoxSeparator } from './components/list-box/separator'
+export type {
+	ListBoxSeparatorProps,
+	ListBoxSeparatorEventProps,
+} from './components/list-box/separator'

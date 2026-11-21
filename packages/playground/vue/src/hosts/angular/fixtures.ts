@@ -12,6 +12,14 @@ import {
 	TIconComponent,
 	TInputComponent,
 	TLabelComponent,
+	TListBoxComponent,
+	TListBoxGroupComponent,
+	TListBoxItemComponent,
+	TListBoxSeparatorComponent,
+	TSelectComponent,
+	TSelectGroupComponent,
+	TSelectItemComponent,
+	TSelectSeparatorComponent,
 	TNumberInputComponent,
 	TRadioGroupComponent,
 	TRadioGroupItemComponent,
@@ -362,7 +370,65 @@ class AlertDialogFooter implements TFixture {
 	readonly subjects = viewChildren(TAlertDialogComponent)
 }
 
+@Component({
+	selector: 'pg-select-separators',
+	imports: [
+		TSelectComponent,
+		TSelectGroupComponent,
+		TSelectItemComponent,
+		TSelectSeparatorComponent,
+		CopyDirective,
+	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: { style: 'display: contents' },
+	template: `<ng-template pg-copy
+		><div so-select [ctrl]="ctrl()" [open]="true">
+			<div so-select-group label="First">
+				<div so-select-item value="a" text="Apple"></div>
+			</div>
+			<div so-select-separator></div>
+			<div so-select-group label="Second">
+				<div so-select-item value="b" text="Banana"></div>
+			</div></div
+	></ng-template>`,
+})
+class SelectSeparators implements TFixture {
+	readonly ctrl = input<TSelectComponent['ctrl']>()
+	readonly copy = viewChild.required(CopyDirective)
+	readonly subjects = viewChildren(TSelectComponent)
+}
+
+@Component({
+	selector: 'pg-list-box-separators',
+	imports: [
+		TListBoxComponent,
+		TListBoxGroupComponent,
+		TListBoxItemComponent,
+		TListBoxSeparatorComponent,
+		CopyDirective,
+	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: { style: 'display: contents' },
+	template: `<ng-template pg-copy
+		><div so-list-box [ctrl]="ctrl()">
+			<div so-list-box-group label="First">
+				<div so-list-box-item value="a" text="Apple"></div>
+			</div>
+			<div so-list-box-separator></div>
+			<div so-list-box-group label="Second">
+				<div so-list-box-item value="b" text="Banana"></div>
+			</div></div
+	></ng-template>`,
+})
+class ListBoxSeparators implements TFixture {
+	readonly ctrl = input<TListBoxComponent['ctrl']>()
+	readonly copy = viewChild.required(CopyDirective)
+	readonly subjects = viewChildren(TListBoxComponent)
+}
+
 export const FIXTURES: Record<string, Type<TFixture>> = {
+	'select-separators': SelectSeparators,
+	'list-box-separators': ListBoxSeparators,
 	'alert-dialog-footer': AlertDialogFooter,
 	'avatar-fallback': AvatarFallback,
 	'badge-anchor': BadgeAnchor,

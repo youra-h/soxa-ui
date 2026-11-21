@@ -10,6 +10,8 @@ import {
 	Icon,
 	Input,
 	Label,
+	ListBox,
+	Select,
 	NumberInput,
 	RadioGroup,
 	Switch,
@@ -34,6 +36,28 @@ const CHECK = roleIcon('check')
 const ARROW_RIGHT = roleIcon('arrowRight')
 
 export const FIXTURES: Record<string, TPreview> = {
+	'select-separators': (bind) => (
+		<Select {...bind} open>
+			<Select.Group label="First">
+				<Select.Item value="a" text="Apple" />
+			</Select.Group>
+			<Select.Separator />
+			<Select.Group label="Second">
+				<Select.Item value="b" text="Banana" />
+			</Select.Group>
+		</Select>
+	),
+	'list-box-separators': (bind) => (
+		<ListBox {...bind}>
+			<ListBox.Group label="First">
+				<ListBox.Item value="a" text="Apple" />
+			</ListBox.Group>
+			<ListBox.Separator />
+			<ListBox.Group label="Second">
+				<ListBox.Item value="b" text="Banana" />
+			</ListBox.Group>
+		</ListBox>
+	),
 	'alert-dialog-footer': (bind) => (
 		<AlertDialog
 			{...bind}

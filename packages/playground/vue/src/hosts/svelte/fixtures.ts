@@ -1,3 +1,5 @@
+import ListBoxSeparators from './ListBoxSeparators.svelte'
+import SelectSeparators from './SelectSeparators.svelte'
 import AlertDialogFooter from './AlertDialogFooter.svelte'
 import AvatarFallback from './AvatarFallback.svelte'
 import BadgeAnchor from './BadgeAnchor.svelte'
@@ -24,6 +26,8 @@ import type { TPreview } from './previews'
  * именами.
  */
 export const FIXTURES: Record<string, TPreview> = {
+	'list-box-separators': ListBoxSeparators,
+	'select-separators': SelectSeparators,
 	'alert-dialog-footer': AlertDialogFooter,
 	'badge-anchor': BadgeAnchor,
 	'avatar-fallback': AvatarFallback,

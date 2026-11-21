@@ -2,9 +2,15 @@ import { withParts } from '@soxa-ui/setup'
 import { Select as SelectComponent } from './Select'
 import { SelectItem } from './item'
 import { SelectGroup } from './group'
+import { SelectSeparator } from './separator'
 
 export * from './base.component'
 export * from './item'
 export * from './group'
 
-export const Select = withParts(SelectComponent, { Item: SelectItem, Group: SelectGroup })
+export const Select = withParts(SelectComponent, {
+	Item: SelectItem,
+	Group: SelectGroup,
+	Separator: SelectSeparator,
+})
+export * from './separator'
