@@ -15,8 +15,7 @@ remain pending. Read the reported provenance and validation records for limits.
 
 After publication, launch with npx -y @soxa-ui/mcp@<published-mcp-version>.
 The executable name is soxa-mcp. The placeholder is the MCP package version,
-not a UI version. This source manifest starts at 0.0.0; the initial patch
-changeset proposes 0.0.1 through the normal release preparation process.
+not a UI version. Use an exact MCP version actually available from npm.
 
 VS Code .vscode/mcp.json:
 

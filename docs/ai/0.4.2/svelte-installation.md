@@ -9,7 +9,7 @@ building, so SvelteKit can resolve its generated $app/tsconfig after installatio
 Keep both package.json and sveltekit-config.json when downloading the example.
 
 Core/setup/plugins/adapters use exact 0.4.2. This recipe independently selects
-Oren 0.4.2 and Material icons 0.3.1; compatible peer ranges were verified in the
+Oren 0.4.1 and Material icons 0.3.1; compatible peer ranges were verified in the
 installed lock. Do not replace these with latest. The package files record the
 checked Svelte, Kit, Vite, TypeScript and svelte-check versions.
 

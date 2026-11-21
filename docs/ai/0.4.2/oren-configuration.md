@@ -1,4 +1,4 @@
-# Configure Oren for 0.4.2
+# Configure Oren 0.4.1 for Soxa 0.4.2
 
 Install the adapter and the packages your application imports directly. This
 recipe pins Oren, Base, setup, core, plugins and icon packs independently to

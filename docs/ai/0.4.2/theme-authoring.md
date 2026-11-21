@@ -1,4 +1,4 @@
-# Build a theme on Base 0.4.2
+# Build a theme on Base 0.4.1 for Soxa 0.4.2
 
 A theme supplies CSS, type augmentation and a behavior object. The attached
 `@example/soxa-theme` is a small Button/horizontal-Tabs demonstration, not a

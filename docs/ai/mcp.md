@@ -188,5 +188,6 @@ the exact 0.4.1 documentation source with --include-mcp, build from published
 setup 0.4.1, then pass its output with --corpus. Supply both 0.3.0 and 0.4.1
 corpus directories to offer both versions; callers must still choose exactly.
 Run the SDK/consumer check with SOXA_DOCS_VERSION=0.4.1. It also retrieves the
-five new components through all six adapter boundaries. Client desktop
-integrations and conversational AI authoring remain separate, unverified work.
+five new components through all six adapter boundaries. This historical source
+check did not cover desktop integration. The later packaged VS Code check is
+recorded in the 0.4.2 validation; conversational AI authoring remains unverified.

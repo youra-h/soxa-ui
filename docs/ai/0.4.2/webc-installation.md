@@ -5,7 +5,7 @@ to a new directory outside any Soxa workspace. With Node 24+, run npm install,
 npm run check and npm run build; npm run dev serves development. Keep the lock.
 The checked stack is TypeScript 6.0.3 and Vite 8.3.5; these are tested versions,
 not a minimum-support claim. Component packages and themes are pinned to 0.4.2; icons use 0.3.1.
-Oren and Material are independently pinned here to 0.4.2 and 0.3.1.
+Oren and Material are independently pinned here to 0.4.1 and 0.3.1.
 
 The example imports the root of @soxa-ui/webc, registering all elements. For a
 smaller graph use public entries such as @soxa-ui/webc/button,

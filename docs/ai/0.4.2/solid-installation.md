@@ -9,7 +9,7 @@ build; for Vite run npm run dev. Keep the generated package lock.
 The recipes pin Solid 1.9.17, Vite 8.3.5, vite-plugin-solid 2.11.16 and TypeScript
 6.0.3. SolidStart additionally pins @solidjs/start 2.2.3, @solidjs/router 0.16.1 and
 Nitro 3.0.261103-rc. These are tested combinations, not minimum support claims.
-Component packages and the independent Base/Oren themes are pinned to 0.4.2;
+Component packages are pinned to 0.4.2; independent Base/Oren themes use 0.4.1;
 Material icons are independently pinned to 0.3.1. Core is direct because CtrlExample imports TButton.
 
 The Solid compiler must process Soxa's JSX source selected by its solid export
