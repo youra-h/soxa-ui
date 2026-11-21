@@ -90,3 +90,5 @@ export { TAvatarComponent, TAvatarGroupComponent } from './components/avatar'
 export { TSeparatorComponent } from './components/separator'
 
 export type { ICollectionInitialSource, ICollectionInitialPanel } from '@soxa-ui/plugins'
+export { TSelectSeparatorComponent } from './components/select/separator'
+export { TListBoxSeparatorComponent } from './components/list-box/separator'

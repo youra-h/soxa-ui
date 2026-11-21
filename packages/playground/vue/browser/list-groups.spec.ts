@@ -27,7 +27,7 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { render, cleanup } from './render'
 import { userEvent } from 'vitest/browser'
-import { defineComponent, h, nextTick } from 'vue'
+import { defineComponent, h, nextTick, type Component } from 'vue'
 import type { TComponentSize } from '@soxa-ui/core'
 import type { DescriptorSlots, MenuDescriptor } from '@soxa-ui/setup'
 import { COMPONENT_SIZES } from '@soxa-ui/playground-shared'
@@ -667,5 +667,146 @@ describe('Menu', () => {
 		await open({ groupSeparators: false })
 
 		expectSameLayout(layoutOf(list(), 'so-menu'), separated)
+	})
+})
+
+describe('manual separators', () => {
+	it.each(['ListBox', 'Select'] as const)(
+		'%s uses the existing data line geometry',
+		async (kind) => {
+			const component: Component = kind === 'Select' ? Select : ListBox
+			const Group: Component = kind === 'Select' ? Select.Group : ListBox.Group
+			const Item: Component = kind === 'Select' ? Select.Item : ListBox.Item
+			const Separator: Component = kind === 'Select' ? Select.Separator : ListBox.Separator
+			const block = kind === 'Select' ? 'so-select' : 'so-list-box'
+			const items = [
+				{ value: 'a', text: 'Apple', _: { group: 'first' } },
+				{ value: 'b', text: 'Banana', _: { group: 'second' } },
+			]
+			const groups = [
+				{ key: 'first', label: 'First' },
+				{ key: 'second', label: 'Second' },
+			]
+
+			render(
+				defineComponent({
+					render: () =>
+						h('div', { style: 'padding:40px;width:320px' }, [
+							h(component, {
+								items,
+								groups,
+								groupSeparators: true,
+								open: true,
+							}),
+						]),
+				}),
+			)
+			await nextTick()
+			await frames(4)
+
+			const dataList = find('.' + block + '__list')
+			const dataLine = find('.' + block + '__separator', dataList)
+			const dataBox = dataLine.getBoundingClientRect()
+			const expected = {
+				width: dataBox.width,
+				height: dataBox.height,
+				offset: dataBox.top - dataList.getBoundingClientRect().top,
+				border: getComputedStyle(dataLine).borderTopWidth,
+			}
+
+			cleanup()
+			render(
+				defineComponent({
+					render: () =>
+						h('div', { style: 'padding:40px;width:320px' }, [
+							h(component, { open: true }, () => [
+								h(Group, { label: 'First' }, () =>
+									h(Item, { value: 'a', text: 'Apple' }),
+								),
+								h(Separator),
+								h(Group, { label: 'Second' }, () =>
+									h(Item, { value: 'b', text: 'Banana' }),
+								),
+							]),
+						]),
+				}),
+			)
+			await nextTick()
+			await frames(4)
+
+			const list = find('.' + block + '__list')
+			const line = find('.' + block + '__separator', list)
+			const box = line.getBoundingClientRect()
+
+			expect(getComputedStyle(line).display).not.toBe('none')
+			expect(box.width).toBeGreaterThan(0)
+			expect(Math.abs(box.width - expected.width)).toBeLessThan(EPSILON)
+			expect(Math.abs(box.height - expected.height)).toBeLessThan(EPSILON)
+			expect(
+				Math.abs(box.top - list.getBoundingClientRect().top - expected.offset),
+			).toBeLessThan(EPSILON)
+			expect(getComputedStyle(line).borderTopWidth).toBe(expected.border)
+		},
+	)
+
+	it('filtering a middle group leaves one line; filtering to one group leaves none', async () => {
+		const { createEngineSelect } = await import('@soxa-ui/core')
+		const engine = createEngineSelect()
+
+		render(
+			defineComponent({
+				render: () =>
+					h('div', { style: 'padding:40px;width:320px' }, [
+						h(
+							Select,
+							{ engine, open: true, editable: true, editableMode: 'filter' },
+							() => [
+								h(Select.Group, { label: 'First' }, () =>
+									h(Select.Item, { value: 'a', text: 'Keep Apple' }),
+								),
+								h(Select.Separator),
+								h(Select.Group, { label: 'Second' }, () =>
+									h(Select.Item, { value: 'b', text: 'Banana' }),
+								),
+								h(Select.Separator),
+								h(Select.Group, { label: 'Third' }, () =>
+									h(Select.Item, { value: 'c', text: 'Keep Cherry' }),
+								),
+							],
+						),
+					]),
+			}),
+		)
+		await nextTick()
+		await frames(4)
+
+		const lines = () =>
+			findAll('.so-select__separator').filter(
+				(node) => getComputedStyle(node).display !== 'none',
+			)
+
+		expect(lines()).toHaveLength(2)
+
+		engine.extensions.filter.query = 'Keep'
+		await nextTick()
+		await frames(3)
+
+		expect(lines()).toHaveLength(1)
+		const line = lines()[0].getBoundingClientRect()
+		const first = findAll('.so-select-group')[0].getBoundingClientRect()
+		const last = findAll('.so-select-group')[2].getBoundingClientRect()
+
+		expect(line.top).toBeGreaterThanOrEqual(first.bottom - EPSILON)
+		expect(last.top).toBeGreaterThan(line.bottom)
+
+		engine.extensions.filter.query = 'Cherry'
+		await nextTick()
+		await frames(3)
+		expect(lines()).toHaveLength(0)
+
+		engine.extensions.filter.clear()
+		await nextTick()
+		await frames(3)
+		expect(lines()).toHaveLength(2)
 	})
 })

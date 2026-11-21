@@ -5,3 +5,4 @@ export {
 	ListBoxCollectionDescriptor,
 	ListBoxCollectionItemDescriptor,
 } from './collection.descriptor'
+export { ListBoxSeparatorDescriptor } from './separator.descriptor'

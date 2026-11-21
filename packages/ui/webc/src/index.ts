@@ -162,3 +162,11 @@ export { TSeparatorElement } from './components/separator'
 export type { TSeparatorElementProps } from './components/separator'
 
 export type { ICollectionInitialSource, ICollectionInitialPanel } from '@soxa-ui/plugins'
+export {
+	TSelectSeparatorElement,
+	type TSelectSeparatorElementProps,
+} from './components/select/separator'
+export {
+	TListBoxSeparatorElement,
+	type TListBoxSeparatorElementProps,
+} from './components/list-box/separator'

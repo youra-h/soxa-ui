@@ -15,6 +15,81 @@ import type { TPreview } from './previews'
  * (`slotScope: false`).
  */
 export const FIXTURES: Record<string, TPreview> = {
+	'list-box-separators': {
+		tag: 'div',
+		is: 'so-list-box',
+		slots: {
+			default: [
+				{
+					tag: 'div',
+					is: 'so-list-box-group',
+					props: { label: 'First' },
+					slots: {
+						default: [
+							{
+								tag: 'div',
+								is: 'so-list-box-item',
+								props: { value: 'a', text: 'Apple' },
+							},
+						],
+					},
+				},
+				{ tag: 'div', is: 'so-list-box-separator' },
+				{
+					tag: 'div',
+					is: 'so-list-box-group',
+					props: { label: 'Second' },
+					slots: {
+						default: [
+							{
+								tag: 'div',
+								is: 'so-list-box-item',
+								props: { value: 'b', text: 'Banana' },
+							},
+						],
+					},
+				},
+			],
+		},
+	},
+	'select-separators': {
+		tag: 'div',
+		is: 'so-select',
+		props: { open: true },
+		slots: {
+			default: [
+				{
+					tag: 'div',
+					is: 'so-select-group',
+					props: { label: 'First' },
+					slots: {
+						default: [
+							{
+								tag: 'div',
+								is: 'so-select-item',
+								props: { value: 'a', text: 'Apple' },
+							},
+						],
+					},
+				},
+				{ tag: 'div', is: 'so-select-separator' },
+				{
+					tag: 'div',
+					is: 'so-select-group',
+					props: { label: 'Second' },
+					slots: {
+						default: [
+							{
+								tag: 'div',
+								is: 'so-select-item',
+								props: { value: 'b', text: 'Banana' },
+							},
+						],
+					},
+				},
+			],
+		},
+	},
 	'alert-dialog-footer': {
 		tag: 'div',
 		is: 'so-alert-dialog',

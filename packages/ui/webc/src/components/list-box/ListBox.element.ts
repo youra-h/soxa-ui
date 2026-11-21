@@ -10,6 +10,7 @@ import { ElementBase, defineElement } from '../../adapter'
 import type { TElementClassOf, TElementType } from '../../adapter'
 import { TListBoxItemElement } from './item'
 import { TListBoxGroupElement } from './group'
+import { TListBoxSeparatorElement } from './separator'
 import { listBoxTemplate } from './list-box.template'
 import { setupListBox } from './setup.component'
 
@@ -27,6 +28,7 @@ export const TListBoxElement: TElementClassOf<
 })
 
 defineElement('so-list-box', TListBoxElement, 'div')
+defineElement('so-list-box-separator', TListBoxSeparatorElement, 'div')
 defineElement('so-list-box-group', TListBoxGroupElement, 'div')
 defineElement('so-list-box-item', TListBoxItemElement, 'div')
 

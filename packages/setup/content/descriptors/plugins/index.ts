@@ -142,3 +142,4 @@ export {
 	CollectionInitialPartPluginDescriptor,
 } from './collection-initial.plugin'
 export { FrameThemePluginDescriptor } from './frame-theme.plugin'
+export { ListSeparatorPluginDescriptor } from './list-separator.plugin'

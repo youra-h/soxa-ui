@@ -131,6 +131,48 @@ export function describeSmoke(framework: string): void {
 	 * (`tools/bench-pages`) ставит десятки компонентов на страницу. У копий
 	 * пропсы общие, у каждой свой экземпляр, а снятие уносит все.
 	 */
+
+	describe('manual separator fixtures', () => {
+		for (const component of ['list-box', 'select']) {
+			it.each(drawing(component))(
+				'%s: ' + component + ' fixture draws a silent manual line',
+				async (framework) => {
+					const node = document.body.appendChild(document.createElement('div'))
+					const mounted = hostOf(framework).mount(node, {
+						component,
+						fixture: component + '-separators',
+						props: {},
+					})
+
+					try {
+						await nextFrame()
+						await nextFrame()
+						await nextFrame()
+
+						const block = component === 'select' ? 'so-select' : 'so-list-box'
+						const input = node.querySelector('input[role="combobox"]')
+						const list =
+							component === 'select'
+								? document.getElementById(
+										input?.getAttribute('aria-controls') ?? '',
+									)
+								: node.querySelector('.so-list-box__list')
+						const line = list?.querySelector('.' + block + '__separator')
+
+						expect(line?.getAttribute('aria-hidden')).toBe('true')
+						expect(line?.hasAttribute('role')).toBe(false)
+						expect(line && getComputedStyle(line).display).not.toBe('none')
+						expect(list?.querySelectorAll('[role="option"]')).toHaveLength(2)
+						expect(firstLines()).toEqual([])
+					} finally {
+						mounted.unmount()
+						node.remove()
+					}
+				},
+			)
+		}
+	})
+
 	describe('копии превью', () => {
 		it.each(drawing('button', 'list-box'))(
 			'%s: count рисует копии рядом, снятие уносит все',

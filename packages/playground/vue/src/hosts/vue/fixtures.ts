@@ -10,6 +10,8 @@ import {
 	Icon,
 	Input,
 	Label,
+	ListBox,
+	Select,
 	NumberInput,
 	RadioGroup,
 	Switch,
@@ -41,6 +43,26 @@ const ARROW_RIGHT = roleIcon('arrowRight')
  * `__tests__/scenarios.spec.ts`).
  */
 export const FIXTURES: Record<string, TPreview> = {
+	'select-separators': (bind) =>
+		h(Select, { ...bind, open: true }, () => [
+			h(Select.Group, { label: 'First' }, () =>
+				h(Select.Item, { value: 'a', text: 'Apple' }),
+			),
+			h(Select.Separator),
+			h(Select.Group, { label: 'Second' }, () =>
+				h(Select.Item, { value: 'b', text: 'Banana' }),
+			),
+		]),
+	'list-box-separators': (bind) =>
+		h(ListBox, { ...bind }, () => [
+			h(ListBox.Group, { label: 'First' }, () =>
+				h(ListBox.Item, { value: 'a', text: 'Apple' }),
+			),
+			h(ListBox.Separator),
+			h(ListBox.Group, { label: 'Second' }, () =>
+				h(ListBox.Item, { value: 'b', text: 'Banana' }),
+			),
+		]),
 	'alert-dialog-footer': (bind) =>
 		h(AlertDialog, bind, {
 			title: () => 'Custom question',

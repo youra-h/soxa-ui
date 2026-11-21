@@ -161,10 +161,8 @@ export class TListBox
 	}
 
 	/**
-	 * Whether to draw a separator between neighbouring sections of the
-	 * grouping. The markup draws it by the drawn sections (`drawnSections` of
-	 * the facade), so only for items from data: groups written in markup
-	 * (`ListBox.Group`) get no separator.
+	 * Draw separators between sections generated from data. For markup groups,
+	 * place ListBox.Separator explicitly; groupSeparators does not control it.
 	 */
 	get groupSeparators(): boolean {
 		return this._groupSeparators
