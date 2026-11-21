@@ -739,3 +739,22 @@ Oren без Tailwind; приоритет utilities, сброс обычного 
 манифест проекта, lock и строки вывода — на фикстурах, а таблица проектов
 прогона сверена с папками `projects/` и матрицей CI, каждый адаптер ставит
 хотя бы один проект, библиотека в проекте — под заглушкой `"*"`.
+
+## Independent documentation MCP
+
+`@soxa-ui/mcp` is an independent Node executable and JSON-data workspace, outside
+the component fixed group. `release:plan -- mcp` selects only its changesets;
+`release:prepare -- mcp` requires the normal separate release authorization.
+The native ESM build copies the shared MCP runtime and builds verified JSON
+corpora from exact published setup tarballs; it has no TypeScript declaration
+pass or runtime dependency on UI packages. The root build includes it, and
+prepack validates the generated corpus without downloading. Node built-ins
+are engine-provided only for a package declaring both a Node engine and bin;
+UI runtime packages still reject them.
+
+The first scoped publication uses the existing GitHub Actions workflow and
+SOXA_NPM_TOKEN with rights to create the new public package in @soxa-ui. Check
+org rights, granular-token package/scope restrictions and CI-compatible 2FA
+settings before approving publication; never send a token in chat. The release
+gate continues to block every unpublished package outside the approved plan.
+Merge and publication are separate from implementation and local tarball checks.

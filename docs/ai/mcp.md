@@ -9,11 +9,25 @@ Build the corpus from the exact published setup API first, as described in the
 
 ## Delivery and installation
 
-The server is delivered with the public documentation tools at an immutable
-documentation commit, separately from the library version. There is no new npm
-package, npm release, `npx` executable or independent documentation database.
-`serverInfo.version` is the transport implementation version; each answer carries
-the selected corpus's `libraryVersion` and `docsRevision` independently.
+The standalone npm package is **@soxa-ui/mcp**, with executable **soxa-mcp**.
+Its release is independent of the UI library and documentation revisions. The
+package bundles 0.3.0, 0.4.1 and 0.4.2 corpora; startup needs no checkout,
+absolute corpus path or network after npm installation. The initial source
+version 0.0.0 is a preparation placeholder; it is not a published version.
+The patch changeset proposes the first 0.0.1 release through the normal pipeline.
+Read the [package guide](../../packages/mcp/README.md) for client configuration,
+Node requirements and the static JSON exports for website builds. Use the
+actual npm package version after publication, never a library version by inference.
+
+Packaged serverInfo.version reports the MCP package version; source-only
+transport reports its implementation version. Answers carry the selected
+libraryVersion and docsRevision separately. Neither means complete guide coverage.
+
+### Historical source delivery
+
+The source route below remains available for pinned documentation commits.
+It requires a separately prepared corpus. Consumers of the npm package use
+the package's default corpora instead.
 
 Requirements: Node 22.12+ and an already built schema-1 corpus. In the source
 guide's downloader command, add `--include-mcp` to fetch the three server modules:

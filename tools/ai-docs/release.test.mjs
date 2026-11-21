@@ -21,6 +21,23 @@ test('release selection separates exact package pins and rejects absent or float
 		assert.throws(() => documentationRelease(root, version))
 })
 
+test('0.4.2 selects published API while retaining independent theme and icon versions', () => {
+	const release = documentationRelease(root, '0.4.2')
+	assert.equal(
+		release.manifest.api.sha256,
+		'85aa9b20e93d9a1ed045f866d70e310505df536b337d7b73a9974d3492861e13',
+	)
+	assert.equal(release.packages['@soxa-ui/react'], '0.4.2')
+	assert.equal(release.packages['@soxa-ui/theme-oren'], '0.4.1')
+	assert.equal(release.packages['@soxa-ui/icons-material'], '0.3.1')
+	assert.ok(release.manifest.documents.every((doc) => doc.status === 'sample'))
+	assert.ok(
+		release.manifest.documents.every((doc) =>
+			doc.sources.every((source) => source.revision === release.manifest.libraryRevision),
+		),
+	)
+})
+
 test('0.4.1 public delivery contains complete recipes and no historical validation apps', async () => {
 	const revision = 'a'.repeat(40)
 	const requested = []
