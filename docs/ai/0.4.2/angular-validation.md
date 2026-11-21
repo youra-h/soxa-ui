@@ -1,6 +1,6 @@
-# Angular CSR / SSR 0.4.2 validation
+# angular 0.4.2 validation
 
-This release uses the exact published packages in the corpus provenance.
-The recipes were carried forward from 0.4.1; that release's test evidence does
-not validate 0.4.2. Read release-validation for the current recorded checks.
-Guide coverage remains sample. Contributor guides remain pending.
+Strict type/template checks, production builds, Chromium interactions and
+applicable SSR checks passed with the exact published packages. Read
+release-validation for retained input hashes, build observations and scope.
+Guide coverage remains sample; this is not a full accessibility audit.

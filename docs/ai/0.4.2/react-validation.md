@@ -1,6 +1,6 @@
 # React / Next.js 0.4.2 validation
 
-This release uses the exact published packages in the corpus provenance.
-The recipes were carried forward from 0.4.1; that release's test evidence does
-not validate 0.4.2. Read release-validation for the current recorded checks.
-Guide coverage remains sample. Contributor guides remain pending.
+Strict types, production builds, Chromium and bounded SSR checks passed with
+the exact published packages. Active Tabs content remains absent in raw SSR;
+two raw panel references and one inactive hydrated reference are the only
+accepted gaps. Read release-validation for input hashes and scope.
