@@ -70,6 +70,18 @@ const cs = (id, names, type = 'patch') => ({
 const namesOf = (release) => release.manifest.packages.map((pkg) => pkg.name).sort()
 
 describe('independent release plans', () => {
+	it('releases MCP independently and preserves component changesets', () => {
+		const input = fixture()
+		input.packages.packages.push({
+			dir: '/workspace/packages/mcp',
+			packageJson: { name: '@soxa-ui/mcp', version: '0.0.0' },
+		})
+		input.changesets = [cs('mcp-docs', ['mcp']), cs('component', ['vue'])]
+		const release = planRelease(input, 'mcp')
+		expect(namesOf(release)).toEqual(['@soxa-ui/mcp'])
+		expect(release.manifest.packages[0].scope).toBe('mcp')
+		expect(namesOf(planRelease(input, 'components'))).not.toContain('@soxa-ui/mcp')
+	})
 	it('releases only the component fixed group for a component fix', () => {
 		const input = fixture()
 		input.changesets = [cs('component', ['vue']), cs('later-icons', ['icons-material'])]

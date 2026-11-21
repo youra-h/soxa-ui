@@ -9,7 +9,7 @@ import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js'
 const [server, corpus, version = '0.3.0'] = process.argv.slice(2)
 const transport = new StdioClientTransport({
 	command: process.execPath,
-	args: [server, '--corpus', corpus],
+	args: corpus === '--bundled' ? [server] : [server, '--corpus', corpus],
 	stderr: 'pipe',
 	cwd: process.cwd(),
 })
@@ -53,14 +53,16 @@ try {
 	assert.equal((await client.listTools()).tools.length, 9)
 	await client.ping()
 	const versions = await call('list_versions', {})
-	assert.equal(versions.versions[0].libraryVersion, version)
-	assert.equal(versions.versions[0].contributorGuides, 'pending')
-	const provenance = versions.versions[0]
+	const selected = versions.versions.find((v) => v.libraryVersion === version)
+	assert.ok(selected)
+	assert.equal(selected.contributorGuides, 'pending')
+	const provenance = selected
 	const resources = await client.listResources()
 	assert.equal(resources.resources[0].uri, 'soxa://versions')
 	assert.equal(
-		JSON.parse((await client.readResource({ uri: 'soxa://versions' })).contents[0].text)
-			.versions[0].docsRevision,
+		JSON.parse(
+			(await client.readResource({ uri: 'soxa://versions' })).contents[0].text,
+		).versions.find((v) => v.libraryVersion === version).docsRevision,
 		provenance.docsRevision,
 	)
 	assert.equal((await client.listResourceTemplates()).resourceTemplates.length, 1)
@@ -73,7 +75,7 @@ try {
 		assert.equal(record.api.component, component)
 		assert.ok(record.api.props.some((p) => p.name === 'value'))
 	}
-	if (version === '0.4.1')
+	if (version !== '0.3.0')
 		for (const framework of ['vue', 'react', 'angular', 'solid', 'svelte', 'webc'])
 			for (const component of [
 				'alert',

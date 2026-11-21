@@ -351,3 +351,10 @@ all six adapters. The [release record](./0.4.1/release-changes.md) distinguishes
 API coverage from runnable examples and the remaining React Tabs SSR limit.
 The source contains no new website pages, localization, site dependency update
 or hosted MCP endpoint. Those remain website-owned work.
+
+## Standalone MCP package
+
+The @soxa-ui/mcp workspace bundles exact 0.3.0, 0.4.1 and 0.4.2 JSON corpora.
+See the [package guide](../../packages/mcp/README.md) for installation after
+publication, client configuration and JSON exports for site builds. MCP
+publication uses an independent mcp release scope and requires owner approval.

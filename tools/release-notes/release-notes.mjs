@@ -12,6 +12,7 @@
 import { execFileSync } from 'node:child_process'
 import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { SCOPES, scopeOfPackage } from '../release-plan/scopes.mjs'
 
 /** More items than this, and the notes link to the changelogs instead. */
 export const INLINE_LIMIT = 15
@@ -255,18 +256,11 @@ export function withChangelogs(root, published) {
 	})
 }
 
-/** Separate release histories for components, themes and icons. */
+/** Separate release histories for components, themes, icons and documentation MCP. */
 export function releaseGroups(packages, shared) {
 	const groups = new Map()
 	for (const pkg of packages) {
-		const scope = shared.has(pkg.name)
-			? 'components'
-			: pkg.dir?.startsWith('packages/themes/')
-				? 'themes'
-				: pkg.dir?.startsWith('packages/icons/')
-					? 'icons'
-					: undefined
-		if (!scope) throw new Error('Unknown release scope: ' + pkg.name)
+		const scope = scopeOfPackage(pkg, shared)
 		const group = groups.get(scope) ?? []
 		group.push(pkg)
 		groups.set(scope, group)
@@ -287,7 +281,7 @@ export function publicationTag(packages) {
 export function packagesOfPlan(plan, packages, shared) {
 	if (
 		plan?.schemaVersion !== 1 ||
-		!['components', 'themes', 'icons', 'all'].includes(plan.scope) ||
+		![...SCOPES, 'all'].includes(plan.scope) ||
 		!Array.isArray(plan.packages) ||
 		!plan.packages.length
 	)
@@ -301,13 +295,7 @@ export function packagesOfPlan(plan, packages, shared) {
 		const pkg = known.get(entry.name)
 		if (!pkg || pkg.version !== entry.version || seen.has(entry.name))
 			throw new Error('Approved release does not match checkout: ' + entry.name)
-		const scope = shared.has(pkg.name)
-			? 'components'
-			: pkg.dir.startsWith('packages/themes/')
-				? 'themes'
-				: pkg.dir.startsWith('packages/icons/')
-					? 'icons'
-					: undefined
+		const scope = scopeOfPackage(pkg, shared)
 		if (scope !== entry.scope || (plan.scope !== 'all' && plan.scope !== scope))
 			throw new Error('Package is outside the approved release scope: ' + entry.name)
 		seen.add(entry.name)

@@ -1,0 +1,43 @@
+{
+  "name": "@soxa-ui/mcp",
+  "version": "0.0.0",
+  "description": "Read-only Soxa UI documentation MCP with bundled versioned API and recipes",
+  "keywords": [
+    "soxa",
+    "mcp",
+    "documentation"
+  ],
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youra-h/soxa-ui.git",
+    "directory": "packages/mcp"
+  },
+  "homepage": "https://soxa-ui.com",
+  "bugs": {
+    "url": "https://github.com/youra-h/soxa-ui/issues"
+  },
+  "engines": {
+    "node": "^22.12.0 || ^24 || >=26"
+  },
+  "bin": {
+    "soxa-mcp": "./dist/cli.mjs"
+  },
+  "exports": {
+    "./catalog.json": "./dist/catalog.json",
+    "./corpora/*": "./dist/corpora/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "node ../../tools/mcp-package/build.mjs",
+    "prepack": "node ../../tools/mcp-package/check.mjs"
+  }
+}

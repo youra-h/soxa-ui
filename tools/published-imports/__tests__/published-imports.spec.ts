@@ -86,6 +86,30 @@ describe('имя из спецификатора объявлено в мани�
 		expect(undeclared('dist/index.js', text)).toEqual([specifier])
 	})
 
+	it('accepts engine-provided built-ins only for a declared Node executable', () => {
+		const cli = {
+			...MANIFEST,
+			engines: { node: '>=22.12.0' },
+			bin: { sample: './dist/cli.mjs' },
+		}
+		const files = [
+			{
+				path: 'dist/cli.mjs',
+				text: "import 'node:fs'; import 'node:made-up'; import 'missing'",
+			},
+		]
+		expect(findUndeclaredImports(cli, files).map((v) => v.specifier)).toEqual([
+			'node:made-up',
+			'missing',
+		])
+		expect(
+			findUndeclaredImports({ ...MANIFEST, engines: cli.engines }, files).map(
+				(v) => v.specifier,
+			),
+		).toContain('node:fs')
+		expect(findMissingEntries(cli, [])).toContain('dist/cli.mjs')
+	})
+
 	it('спецификатор, повторённый в файле, — одно нарушение', () => {
 		const text =
 			"import { a } from 'pkg'\nimport type { B } from 'pkg'\nexport { c } from 'pkg'"

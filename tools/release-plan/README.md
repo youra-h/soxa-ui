@@ -41,3 +41,10 @@ ranges admit the component beta. The approved manifest records the beta channel;
 publication uses npm's beta tag and GitHub prereleases, leaving latest unchanged.
 Changesets archives the release notes for later stable graduation without adding
 a repository-wide pre.json. A later stable release still requires an owner request.
+
+## Independent documentation MCP
+
+Use the mcp scope for @soxa-ui/mcp, outside the component fixed group.
+The [build and publication rules](../../docs/agents/build.md#independent-documentation-mcp)
+cover the native Node build, first scoped publication and required npm rights.
+The same release authorization, exact-plan gate and owner merge rules apply.

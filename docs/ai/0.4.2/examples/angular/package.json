@@ -1,0 +1,38 @@
+{
+  "name": "soxa-angular-recipes",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "ngc -p tsconfig.app.json --noEmit",
+    "build": "ng build",
+    "start": "node dist/app/server/server.mjs"
+  },
+  "dependencies": {
+    "@angular/common": "22.2.5",
+    "@angular/compiler": "22.2.5",
+    "@angular/core": "22.2.5",
+    "@angular/forms": "22.2.5",
+    "@angular/platform-browser": "22.2.5",
+    "@angular/platform-server": "22.2.5",
+    "@angular/compiler-cli": "22.2.5",
+    "@angular/build": "22.2.5",
+    "@angular/cli": "22.2.5",
+    "@angular/ssr": "22.2.5",
+    "@angular/router": "22.2.5",
+    "@soxa-ui/angular": "0.4.2",
+    "@soxa-ui/core": "0.4.2",
+    "@soxa-ui/setup": "0.4.2",
+    "@soxa-ui/plugins": "0.4.2",
+    "@soxa-ui/theme-base": "0.4.1",
+    "@soxa-ui/theme-oren": "0.4.1",
+    "@soxa-ui/icons-material": "0.3.1",
+    "rxjs": "7.8.2",
+    "tslib": "2.8.1",
+    "express": "5.1.0"
+  },
+  "devDependencies": {
+    "typescript": "6.0.2",
+    "@types/node": "24.10.0",
+    "@types/express": "5.0.3"
+  }
+}
