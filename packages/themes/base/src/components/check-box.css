@@ -119,3 +119,31 @@
 	width: var(--so-icon-size-2xl);
 	height: var(--so-icon-size-2xl);
 }
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-check-box--size-sm {
+	--so-check-box-spacing-factor: var(--so-check-box-spacing-scale, var(--so-control-scale-sm, 1));
+}
+
+:where(.so-check-box),
+.so-check-box--size-normal {
+	--so-check-box-spacing-factor: var(
+		--so-check-box-spacing-scale,
+		var(--so-control-scale-normal, 1)
+	);
+}
+
+.so-check-box--size-lg {
+	--so-check-box-spacing-factor: var(--so-check-box-spacing-scale, var(--so-control-scale-lg, 1));
+}
+
+.so-check-box--size-xl {
+	--so-check-box-spacing-factor: var(--so-check-box-spacing-scale, var(--so-control-scale-xl, 1));
+}
+
+.so-check-box--size-2xl {
+	--so-check-box-spacing-factor: var(
+		--so-check-box-spacing-scale,
+		var(--so-control-scale-2xl, 1)
+	);
+}

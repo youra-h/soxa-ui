@@ -1,17 +1,25 @@
 /* Geometry stays independent of the theme's colors and visual variants. */
 :root {
-	--so-alert-padding: 1rem;
-	--so-alert-gap: 0.75rem;
+	--so-alert-padding: initial;
+	--so-alert-gap: initial;
 	--so-alert-icon-size: 1.25em;
 	--so-alert-close-size: var(--so-button-height-sm);
+	--so-alert-body-gap: initial;
 }
 
 .so-alert {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr);
 	align-items: start;
-	column-gap: var(--so-alert-gap);
-	padding: var(--so-alert-padding);
+	column-gap: var(
+		--so-alert-gap,
+		calc(var(--so-spacing, 0.25rem) * 3 * var(--so-alert-spacing-factor, 1))
+	);
+	padding: var(
+		--so-alert-padding,
+		calc(var(--so-spacing, 0.25rem) * 3.5 * var(--so-alert-spacing-factor, 1))
+			calc(var(--so-spacing, 0.25rem) * 4 * var(--so-alert-spacing-factor, 1))
+	);
 	min-inline-size: 0;
 	overflow-wrap: anywhere;
 }
@@ -62,12 +70,24 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: calc(var(--so-alert-gap) / 2);
+	gap: calc(
+		var(
+				--so-alert-gap,
+				calc(var(--so-spacing, 0.25rem) * 3 * var(--so-alert-spacing-factor, 1))
+			) /
+			2
+	);
 	grid-row: 2;
-	margin-block-start: var(--so-alert-gap);
+	margin-block-start: var(
+		--so-alert-gap,
+		calc(var(--so-spacing, 0.25rem) * 3 * var(--so-alert-spacing-factor, 1))
+	);
 }
 .so-alert__title:not(:empty) + .so-alert__content:not(:empty) {
-	margin-block-start: calc(var(--so-alert-gap) / 2);
+	margin-block-start: var(
+		--so-alert-body-gap,
+		calc(var(--so-spacing, 0.25rem) * 0.5 * var(--so-alert-spacing-factor, 1))
+	);
 }
 
 .so-alert__icon:empty,
@@ -113,4 +133,26 @@
 .so-alert--size-2xl {
 	font-size: var(--so-button-font-size-2xl);
 	line-height: var(--so-button-line-height-2xl);
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-alert--size-sm {
+	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-sm, 1));
+}
+
+:where(.so-alert),
+.so-alert--size-normal {
+	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-normal, 1));
+}
+
+.so-alert--size-lg {
+	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-lg, 1));
+}
+
+.so-alert--size-xl {
+	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-xl, 1));
+}
+
+.so-alert--size-2xl {
+	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-2xl, 1));
 }

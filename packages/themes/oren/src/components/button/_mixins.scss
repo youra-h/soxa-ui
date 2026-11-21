@@ -65,7 +65,7 @@ $self-focus: ('&:focus', '&:focus-visible');
 // даёт общий слой тем (`components/button.css` и `components/tags.css` в
 // `@soxa-ui/theme-base`).
 @mixin button-surface-look {
-	@apply rounded-md;
+	border-radius: var(--so-button-radius, var(--so-radius));
 	@include button-transition;
 	@apply outline-transparent;
 }

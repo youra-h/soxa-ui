@@ -39,7 +39,7 @@ $easing: linear;
 // всех сторон: окно стоит поодаль от краёв экрана.
 .so-dialog {
 	@include modal.surface;
-	@apply rounded-lg;
+	border-radius: var(--so-dialog-radius, calc(var(--so-radius) * 1.3333333333333333));
 
 	// Развёрнутое окно — на весь экран. Кольцо кромки, тень и скругление
 	// рисовали край окна над страницей — у развёрнутого края нет. Контур

@@ -16,3 +16,40 @@
 	-webkit-user-select: none;
 	user-select: none;
 }
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-drag-and-drop--size-sm {
+	--so-drag-and-drop-spacing-factor: var(
+		--so-drag-and-drop-spacing-scale,
+		var(--so-surface-scale-sm, 1)
+	);
+}
+
+:where(.so-drag-and-drop),
+.so-drag-and-drop--size-normal {
+	--so-drag-and-drop-spacing-factor: var(
+		--so-drag-and-drop-spacing-scale,
+		var(--so-surface-scale-normal, 1)
+	);
+}
+
+.so-drag-and-drop--size-lg {
+	--so-drag-and-drop-spacing-factor: var(
+		--so-drag-and-drop-spacing-scale,
+		var(--so-surface-scale-lg, 1)
+	);
+}
+
+.so-drag-and-drop--size-xl {
+	--so-drag-and-drop-spacing-factor: var(
+		--so-drag-and-drop-spacing-scale,
+		var(--so-surface-scale-xl, 1)
+	);
+}
+
+.so-drag-and-drop--size-2xl {
+	--so-drag-and-drop-spacing-factor: var(
+		--so-drag-and-drop-spacing-scale,
+		var(--so-surface-scale-2xl, 1)
+	);
+}

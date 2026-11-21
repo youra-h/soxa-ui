@@ -2321,6 +2321,8 @@ describe('ручка ширины', () => {
 
 		const [name, , age] = headers()
 		const button = find('.so-table-column__sort', name)
+		// Keep the fixture's minimum hit area overlapping the resize strip at any density.
+		button.style.setProperty('--so-table-sort-padding', '0px')
 		const edge = name.getBoundingClientRect()
 		const strip = resizerOf(name).getBoundingClientRect()
 		const own = button.getBoundingClientRect()

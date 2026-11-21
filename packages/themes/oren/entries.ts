@@ -35,6 +35,7 @@
  */
 export const COMMON_PARTS: readonly string[] = [
 	'reset',
+	'settings',
 	'direction',
 	'disabled',
 	'caption',

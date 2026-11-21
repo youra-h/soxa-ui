@@ -22,7 +22,8 @@ $variants: 'accent', 'positive', 'negative', 'caution';
 @mixin field-frame-look($block) {
 	--so-#{$block}-border: 1px;
 
-	@apply rounded-md #{'border-(length:--so-' + $block + '-border)'};
+	border-radius: var(--so-#{$block}-radius, var(--so-radius));
+	@apply #{'border-(length:--so-' + $block + '-border)'};
 	@apply bg-so-component-surface;
 	@apply text-so-component;
 	@apply transition-colors duration-150;

@@ -2251,3 +2251,13 @@ Tailwind — `--spacing`, `--radius-*`, `--text-*`, `--font-*`, `--default-*`,
 Сторож переменных общего слоя тем пропускает их списком
 (`packages/themes/base/__tests__/variable-prefix.spec.ts`).
 Решение за владельцем проекта, само не делать.
+
+## Shared geometry settings
+
+The theme supplies values for the optional settings declared by base: shared radius,
+spacing unit and independently configurable family scales. Resolve a component radius
+first from its optional local variable, then from the shared radius. Keep functional
+circles and explicit circle/square shapes. Preserve relative inner and panel radii when
+needed; the README documents their proportions. Spacing geometry is calculated in base;
+a visual rule reads the resolved geometry from its contract, not an optional override
+that may still be unset. The scale table and migration are in README.md.

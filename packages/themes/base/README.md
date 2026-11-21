@@ -403,3 +403,49 @@ the application uses Tailwind, name the order before any stylesheet loads, so th
 
 Breadcrumbs provides an ordered navigation trail with native links, localized accessible names
 and an overflow menu. See the [API and examples](../../../docs/api/breadcrumbs.md).
+
+## Shared radius and spacing settings
+
+The base declares optional settings in [settings.css](./src/settings.css) with `initial`.
+For a custom property this means unset, so a consuming `var()` can use its fallback.
+An empty token list (`--setting: ;`) would suppress that fallback. A visual theme supplies
+the radius, spacing unit and family multipliers; the base retains structural fallbacks.
+
+- `--so-radius`: shared corner radius. Visual themes read it at the styled node,
+  after an optional final override such as `--so-input-radius` or `--so-list-box-radius`.
+  Round indicators and explicit circle/square shapes keep their shape. Oren preserves
+  relative radii: larger panels use 4/3 of the shared radius; small inner corners use less.
+- `--so-spacing`: shared spacing unit, with a structural fallback of 0.25rem.
+- `--so-<family>-scale-<size>`: spacing multiplier for `field`, `control`,
+  `collection`, `message` or `surface`, and `sm`, `normal`, `lg`, `xl`, `2xl`.
+- `--so-<component>-spacing-scale`: optional multiplier overriding that component's family.
+
+Resolve calculations on the component, rather than in root aliases, so changing a setting
+on a subtree affects its components. Exact component lengths override calculated defaults
+and are never multiplied again. Font sizes, heights, minimum pointer targets, viewport
+offsets and circular shapes keep their own contracts. Values already expressed in em
+continue to follow their surrounding font.
+
+Input, DateInput, NumberInput, Textarea, Select, DatePicker, Field and Label use `field`.
+Button and small controls use `control`; lists, menus, tabs, tags, tables, calendars,
+accordions and breadcrumbs use `collection`. Alert and Toasts use `message`.
+Overlay panels and other standalone surfaces use `surface`. A multiplier affects only
+spacing that a component actually has. An overlay follows settings at its DOM target;
+set shared settings on the document or on its teleport container when needed.
+
+### Migration for direct variable reads
+
+Spacing variables that previously held fixed root defaults now describe optional final
+overrides. Setting an existing variable to a length still wins, including zero. When a
+custom theme reads one directly, supply a fallback or use the component's computed CSS
+property. For example, replace `gap: var(--so-input-slot-spacing)` with
+`gap: var(--so-input-slot-spacing, calc(var(--so-spacing, 0.25rem) * var(--so-input-spacing-scale, var(--so-field-scale-normal, 1))))`
+for an independently styled normal field. Choose the appropriate size when styling others.
+The same optional-override rule applies to `--so-code-block-radius`; use
+`var(--so-code-block-radius, calc(var(--so-radius, 0px) * 4 / 3))`.
+The full variable list and descriptions are in [theme-variables.json](./theme-variables.json).
+
+Alert uses the original compact Toasts spacing as its message reference: 0.875rem block
+padding, 1rem inline padding and 0.125rem between title and description at normal size.
+The message scale multiplies these defaults. `--so-alert-padding` remains an exact CSS
+padding shorthand; `--so-alert-body-gap` overrides only the title-to-description gap.

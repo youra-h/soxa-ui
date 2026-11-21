@@ -123,7 +123,7 @@ $empty: ".so-date-picker--mode-range:where(:not(:has(.so-date-input__segment:not
 // прозрачностью и временем панели Popover у триггера, а с жестом закрытая
 // панель уходит от поля, пока гаснет.
 .so-date-picker__panel {
-	@apply rounded-md;
+	border-radius: var(--so-date-picker-radius, var(--so-radius));
 	@apply text-so-component shadow-md;
 	@apply ring-1 ring-so-neutral-300;
 	@apply outline outline-transparent;

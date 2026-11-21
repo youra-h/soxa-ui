@@ -12,11 +12,11 @@
 	--so-badge-font-size-xl: 1rem;
 	--so-badge-font-size-2xl: 1.125rem;
 
-	--so-badge-padding-sm: 0.25rem;
-	--so-badge-padding-normal: 0.375rem;
-	--so-badge-padding-lg: 0.4375rem;
-	--so-badge-padding-xl: 0.5rem;
-	--so-badge-padding-2xl: 0.625rem;
+	--so-badge-padding-sm: initial;
+	--so-badge-padding-normal: initial;
+	--so-badge-padding-lg: initial;
+	--so-badge-padding-xl: initial;
+	--so-badge-padding-2xl: initial;
 
 	--so-badge-dot-size-sm: 0.375rem;
 	--so-badge-dot-size-normal: 0.5rem;
@@ -29,7 +29,10 @@
 .so-badge {
 	--so-badge-height: var(--so-badge-height-normal);
 	--so-badge-font-size: var(--so-badge-font-size-normal);
-	--so-badge-padding: var(--so-badge-padding-normal);
+	--so-badge-padding: var(
+		--so-badge-padding-normal,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-badge-spacing-factor, 1))
+	);
 	--so-badge-dot-size: var(--so-badge-dot-size-normal);
 
 	position: relative;
@@ -40,28 +43,40 @@
 .so-badge--size-sm {
 	--so-badge-height: var(--so-badge-height-sm);
 	--so-badge-font-size: var(--so-badge-font-size-sm);
-	--so-badge-padding: var(--so-badge-padding-sm);
+	--so-badge-padding: var(
+		--so-badge-padding-sm,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-badge-spacing-factor, 1))
+	);
 	--so-badge-dot-size: var(--so-badge-dot-size-sm);
 }
 
 .so-badge--size-lg {
 	--so-badge-height: var(--so-badge-height-lg);
 	--so-badge-font-size: var(--so-badge-font-size-lg);
-	--so-badge-padding: var(--so-badge-padding-lg);
+	--so-badge-padding: var(
+		--so-badge-padding-lg,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-badge-spacing-factor, 1))
+	);
 	--so-badge-dot-size: var(--so-badge-dot-size-lg);
 }
 
 .so-badge--size-xl {
 	--so-badge-height: var(--so-badge-height-xl);
 	--so-badge-font-size: var(--so-badge-font-size-xl);
-	--so-badge-padding: var(--so-badge-padding-xl);
+	--so-badge-padding: var(
+		--so-badge-padding-xl,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-badge-spacing-factor, 1))
+	);
 	--so-badge-dot-size: var(--so-badge-dot-size-xl);
 }
 
 .so-badge--size-2xl {
 	--so-badge-height: var(--so-badge-height-2xl);
 	--so-badge-font-size: var(--so-badge-font-size-2xl);
-	--so-badge-padding: var(--so-badge-padding-2xl);
+	--so-badge-padding: var(
+		--so-badge-padding-2xl,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-badge-spacing-factor, 1))
+	);
 	--so-badge-dot-size: var(--so-badge-dot-size-2xl);
 }
 
@@ -103,4 +118,26 @@
 	inset-block-start: 0;
 	inset-inline-end: 0;
 	translate: calc(50% * var(--so-dir-sign)) -50%;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-badge--size-sm {
+	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-sm, 1));
+}
+
+:where(.so-badge),
+.so-badge--size-normal {
+	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-normal, 1));
+}
+
+.so-badge--size-lg {
+	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-lg, 1));
+}
+
+.so-badge--size-xl {
+	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-xl, 1));
+}
+
+.so-badge--size-2xl {
+	--so-badge-spacing-factor: var(--so-badge-spacing-scale, var(--so-surface-scale-2xl, 1));
 }

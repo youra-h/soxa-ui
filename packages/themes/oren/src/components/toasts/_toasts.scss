@@ -261,7 +261,7 @@ $cascade-easing: cubic-bezier(0.21, 1.02, 0.73, 1);
 // корня: переходы корня ждёт удаление закрытого тоста (`afterTransitions`).
 // Части на заливке красятся цветом текста плашки и идут тем же переходом.
 .so-toasts-item__card {
-	@apply rounded-lg;
+	border-radius: var(--so-toasts-radius, calc(var(--so-radius) * 1.3333333333333333));
 	@apply shadow-md;
 	@apply outline outline-transparent;
 	@include place.panel-surface(var(--so-toasts-item-fill, var(--so-component-surface)));

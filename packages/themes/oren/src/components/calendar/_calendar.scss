@@ -105,7 +105,7 @@
 	@apply outline-none;
 
 	&__day {
-		@apply rounded-md;
+		border-radius: var(--so-calendar-radius, var(--so-radius));
 		@apply transition-colors duration-150;
 	}
 
@@ -216,15 +216,15 @@
 		&[data-range-start='true']::before {
 			inset-inline-start: var(--so-calendar-bleed);
 			border-inline-start: var(--so-calendar-band-edge);
-			border-start-start-radius: var(--radius-md);
-			border-end-start-radius: var(--radius-md);
+			border-start-start-radius: var(--so-calendar-radius, var(--so-radius));
+			border-end-start-radius: var(--so-calendar-radius, var(--so-radius));
 		}
 
 		&[data-range-end='true']::before {
 			inset-inline-end: var(--so-calendar-bleed);
 			border-inline-end: var(--so-calendar-band-edge);
-			border-start-end-radius: var(--radius-md);
-			border-end-end-radius: var(--radius-md);
+			border-start-end-radius: var(--so-calendar-radius, var(--so-radius));
+			border-end-end-radius: var(--so-calendar-radius, var(--so-radius));
 		}
 	}
 
@@ -243,8 +243,8 @@
 		)::before {
 		inset-inline-start: var(--so-calendar-bleed);
 		border-inline-start: var(--so-calendar-band-edge);
-		border-start-start-radius: var(--radius-md);
-		border-end-start-radius: var(--radius-md);
+		border-start-start-radius: var(--so-calendar-radius, var(--so-radius));
+		border-end-start-radius: var(--so-calendar-radius, var(--so-radius));
 	}
 
 	&:is([data-range-middle='true'], [data-range-start='true']:not([data-range-end='true'])):is(
@@ -253,8 +253,8 @@
 		)::before {
 		inset-inline-end: var(--so-calendar-bleed);
 		border-inline-end: var(--so-calendar-band-edge);
-		border-start-end-radius: var(--radius-md);
-		border-end-end-radius: var(--radius-md);
+		border-start-end-radius: var(--so-calendar-radius, var(--so-radius));
+		border-end-end-radius: var(--so-calendar-radius, var(--so-radius));
 	}
 
 	// Текст дней на ленте — ступень 800 варианта: у нейтрали это основной
@@ -398,7 +398,8 @@ $picker-panel: '.so-calendar__month > .so-calendar__heading .so-popover__panel[d
 	// поверхность у карточки. Скругление — то же, что у плиток дня: у
 	// календаря своего края нет, и затемнённый прямоугольник с острыми углами
 	// читался бы чужой рамкой.
-	@apply rounded-md bg-transparent shadow-none ring-0;
+	border-radius: var(--so-calendar-radius, var(--so-radius));
+	@apply bg-transparent shadow-none ring-0;
 
 	// Контура кромки тоже нет: в режиме принудительных цветов он стал бы рамкой
 	// вокруг всей подложки, а рамка там нужна карточке. Кольца фокуса браузера
@@ -444,7 +445,7 @@ $picker-panel: '.so-calendar__month > .so-calendar__heading .so-popover__panel[d
 // совпадают с её углами. Поверхность — она же поверхность места для
 // содержимого (`place.panel-surface`).
 .so-calendar__picker {
-	@apply rounded-md;
+	border-radius: var(--so-calendar-radius, var(--so-radius));
 	@apply text-so-component shadow-md;
 	@apply ring-1 ring-so-neutral-300;
 	@apply outline outline-transparent;

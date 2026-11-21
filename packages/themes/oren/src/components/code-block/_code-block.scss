@@ -4,13 +4,13 @@
 	background: var(--so-code-block-background);
 	color: var(--so-code-block-color);
 	border: 1px solid var(--so-code-block-border-color);
-	border-radius: var(--so-code-block-radius);
+	border-radius: var(--so-code-block-radius, calc(var(--so-radius) * 1.3333333333333333));
 }
 .so-code-block__header {
 	border-block-end: 1px solid var(--so-code-block-border-color);
 }
 .so-code-block__pre {
-	border-radius: var(--so-code-block-radius);
+	border-radius: var(--so-code-block-radius, calc(var(--so-radius) * 1.3333333333333333));
 }
 .so-code-block__pre:focus-visible {
 	@include button.button-focus-ring;

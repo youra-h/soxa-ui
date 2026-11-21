@@ -34,12 +34,12 @@
  * and containers belong to the bar, which anchors tab measurements. */
 
 :root {
-	--so-tabs-gap: 1rem;
-	--so-tabs-panel-gap: 1rem;
-	--so-tabs-panel-margin: 0.625rem;
-	--so-tabs-slot-padding: 0.375rem;
-	--so-tabs-row-padding: 0.25rem;
-	--so-tabs-close-padding: 0.25rem;
+	--so-tabs-gap: initial;
+	--so-tabs-panel-gap: initial;
+	--so-tabs-panel-margin: initial;
+	--so-tabs-slot-padding: initial;
+	--so-tabs-row-padding: initial;
+	--so-tabs-close-padding: initial;
 }
 
 .so-tabs {
@@ -66,7 +66,10 @@
 
 .so-tabs--orientation-vertical {
 	flex-direction: row;
-	gap: var(--so-tabs-panel-gap);
+	gap: var(
+		--so-tabs-panel-gap,
+		calc(var(--so-spacing, 0.25rem) * 4 * var(--so-tabs-spacing-factor, 1))
+	);
 }
 
 .so-tabs--orientation-vertical > .so-tabs__bar,
@@ -93,7 +96,10 @@
 .so-tabs__bar {
 	position: relative;
 	display: flex;
-	gap: var(--so-tabs-gap);
+	gap: var(
+		--so-tabs-gap,
+		calc(var(--so-spacing, 0.25rem) * 4 * var(--so-tabs-spacing-factor, 1))
+	);
 }
 
 /* Список забирает всё место ряда между слотами: слоты остаются у краёв ряда,
@@ -101,7 +107,10 @@
 .so-tabs__list {
 	display: flex;
 	flex-grow: 1;
-	gap: var(--so-tabs-gap);
+	gap: var(
+		--so-tabs-gap,
+		calc(var(--so-spacing, 0.25rem) * 4 * var(--so-tabs-spacing-factor, 1))
+	);
 }
 
 /* Слоты — у краёв ряда, своей ширины: стоят до списка и после него, и место
@@ -110,11 +119,17 @@
 .so-tabs__trailing {
 	display: flex;
 	align-items: center;
-	padding-inline: var(--so-tabs-slot-padding);
+	padding-inline: var(
+		--so-tabs-slot-padding,
+		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tabs-spacing-factor, 1))
+	);
 }
 
 .so-tabs-content {
-	margin-block: var(--so-tabs-panel-margin);
+	margin-block: var(
+		--so-tabs-panel-margin,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-tabs-spacing-factor, 1))
+	);
 }
 
 .so-tabs--alignment-center > .so-tabs__bar > .so-tabs__list {
@@ -173,7 +188,10 @@
 /* Строка — всё в обёртке, кроме кнопки закрытия: она стоит рядом со строкой. */
 .so-tabs-item > :not(.so-tabs-item__close) {
 	width: 100%;
-	padding-block: var(--so-tabs-row-padding);
+	padding-block: var(
+		--so-tabs-row-padding,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tabs-spacing-factor, 1))
+	);
 }
 
 /* Крестик стоит сразу за строкой, без зазора, со своим узким полем. Высота —
@@ -182,6 +200,73 @@
 	flex-shrink: 0;
 	align-self: stretch;
 	height: auto;
-	margin-block: var(--so-tabs-row-padding);
-	padding-inline: var(--so-tabs-close-padding);
+	margin-block: var(
+		--so-tabs-row-padding,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tabs-spacing-factor, 1))
+	);
+	padding-inline: var(
+		--so-tabs-close-padding,
+		calc(var(--so-spacing, 0.25rem) * var(--so-tabs-spacing-factor, 1))
+	);
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-tabs--size-sm {
+	--so-tabs-spacing-factor: var(--so-tabs-spacing-scale, var(--so-collection-scale-sm, 1));
+}
+
+:where(.so-tabs),
+.so-tabs--size-normal {
+	--so-tabs-spacing-factor: var(--so-tabs-spacing-scale, var(--so-collection-scale-normal, 1));
+}
+
+.so-tabs--size-lg {
+	--so-tabs-spacing-factor: var(--so-tabs-spacing-scale, var(--so-collection-scale-lg, 1));
+}
+
+.so-tabs--size-xl {
+	--so-tabs-spacing-factor: var(--so-tabs-spacing-scale, var(--so-collection-scale-xl, 1));
+}
+
+.so-tabs--size-2xl {
+	--so-tabs-spacing-factor: var(--so-tabs-spacing-scale, var(--so-collection-scale-2xl, 1));
+}
+
+:where(.so-tabs-item) {
+	--so-tabs-row-height: var(--so-button-height-normal);
+}
+.so-tabs-item--size-sm {
+	--so-tabs-row-height: var(--so-button-height-sm);
+}
+.so-tabs-item--size-normal {
+	--so-tabs-row-height: var(--so-button-height-normal);
+}
+.so-tabs-item--size-lg {
+	--so-tabs-row-height: var(--so-button-height-lg);
+}
+.so-tabs-item--size-xl {
+	--so-tabs-row-height: var(--so-button-height-xl);
+}
+.so-tabs-item--size-2xl {
+	--so-tabs-row-height: var(--so-button-height-2xl);
+}
+
+.so-tabs-item > .so-tabs-item__close {
+	min-block-size: 0;
+}
+.so-tabs-item__close .so-icon {
+	max-inline-size: calc(
+		var(--so-tabs-row-height) - 2 *
+			var(
+				--so-tabs-row-padding,
+				calc(var(--so-spacing, 0.25rem) * var(--so-tabs-spacing-factor, 1))
+			)
+	);
+	max-block-size: calc(
+		var(--so-tabs-row-height) - 2 *
+			var(
+				--so-tabs-row-padding,
+				calc(var(--so-spacing, 0.25rem) * var(--so-tabs-spacing-factor, 1))
+			)
+	);
 }

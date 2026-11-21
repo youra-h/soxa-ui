@@ -2,7 +2,8 @@
 
 // Segments share one frame: no inset or rounded tiles between actions.
 .so-toggle-group {
-	@apply rounded-md border bg-so-component-surface;
+	border-radius: var(--so-toggle-group-radius, var(--so-radius));
+	@apply border bg-so-component-surface;
 	border-color: var(--so-neutral-300);
 	gap: 0;
 	padding: 0;
@@ -20,32 +21,32 @@
 
 	&--orientation-horizontal {
 		> .so-toggle-group-item:first-child {
-			border-start-start-radius: calc(var(--radius-md) - 1px);
-			border-end-start-radius: calc(var(--radius-md) - 1px);
+			border-start-start-radius: calc(var(--so-toggle-group-radius, var(--so-radius)) - 1px);
+			border-end-start-radius: calc(var(--so-toggle-group-radius, var(--so-radius)) - 1px);
 		}
 
 		> .so-toggle-group-item:last-child {
-			border-start-end-radius: calc(var(--radius-md) - 1px);
-			border-end-end-radius: calc(var(--radius-md) - 1px);
+			border-start-end-radius: calc(var(--so-toggle-group-radius, var(--so-radius)) - 1px);
+			border-end-end-radius: calc(var(--so-toggle-group-radius, var(--so-radius)) - 1px);
 		}
 	}
 
 	&--orientation-vertical {
 		> .so-toggle-group-item:first-child {
-			border-start-start-radius: calc(var(--radius-md) - 1px);
-			border-start-end-radius: calc(var(--radius-md) - 1px);
+			border-start-start-radius: calc(var(--so-toggle-group-radius, var(--so-radius)) - 1px);
+			border-start-end-radius: calc(var(--so-toggle-group-radius, var(--so-radius)) - 1px);
 		}
 
 		> .so-toggle-group-item:last-child {
-			border-end-start-radius: calc(var(--radius-md) - 1px);
-			border-end-end-radius: calc(var(--radius-md) - 1px);
+			border-end-start-radius: calc(var(--so-toggle-group-radius, var(--so-radius)) - 1px);
+			border-end-end-radius: calc(var(--so-toggle-group-radius, var(--so-radius)) - 1px);
 		}
 	}
 
 	// Outlined segments keep their own frames, separated by the base gap.
 	&--view-outlined {
-		gap: var(--so-toggle-group-gap);
-		padding: calc(var(--so-toggle-group-gap) / 2);
+		gap: var(--so-toggle-group-gap-value);
+		padding: calc(var(--so-toggle-group-gap-value) / 2);
 	}
 
 	&:not(.so-toggle-group--view-outlined) {

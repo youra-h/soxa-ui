@@ -43,7 +43,7 @@
  * preflight. The layer order of an application that loads this layer itself —
  * the README of the package. */
 
-@layer so.reset, so.direction, so.disabled, so.caption, so.required, so.target, so.group,
+@layer so.reset, so.settings, so.direction, so.disabled, so.caption, so.required, so.target, so.group,
 	so.anchored, so.swipe, so.place, so.icon, so.avatar, so.avatar-group, so.button, so.toggle-group, so.check-box, so.accordion, so.date-input,
 	so.modal, so.dialog, so.alert-dialog, so.drag-and-drop, so.drawer, so.input, so.badge, so.label, so.field, so.list-box,
 	so.menu, so.breadcrumbs, so.number-input, so.pagination, so.popover, so.calendar, so.date-picker,
@@ -52,6 +52,7 @@
 	so.tooltip, so.code-block, so.alert;
 
 @import './reset.css' layer(so.reset);
+@import './settings.css' layer(so.settings);
 @import './direction.css' layer(so.direction);
 @import './disabled.css' layer(so.disabled);
 @import './caption.css' layer(so.caption);

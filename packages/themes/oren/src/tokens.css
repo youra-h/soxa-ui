@@ -236,5 +236,36 @@
 	--so-code-block-border-color: var(--so-neutral-300);
 	--so-code-block-muted-color: var(--so-neutral-600);
 	--so-code-block-highlight-background: var(--so-neutral-200);
-	--so-code-block-radius: 0.5rem;
+}
+
+:root,
+[data-so-theme='oren'],
+[data-so-theme='oren-dark'] {
+	--so-radius: 0.375rem;
+	--so-spacing: 0.25rem;
+	--so-field-scale-sm: 0.75;
+	--so-field-scale-normal: 1;
+	--so-field-scale-lg: 1.25;
+	--so-field-scale-xl: 1.5;
+	--so-field-scale-2xl: 1.75;
+	--so-control-scale-sm: 0.75;
+	--so-control-scale-normal: 1;
+	--so-control-scale-lg: 1.25;
+	--so-control-scale-xl: 1.5;
+	--so-control-scale-2xl: 1.75;
+	--so-collection-scale-sm: 0.875;
+	--so-collection-scale-normal: 1;
+	--so-collection-scale-lg: 1.125;
+	--so-collection-scale-xl: 1.25;
+	--so-collection-scale-2xl: 1.5;
+	--so-message-scale-sm: 0.875;
+	--so-message-scale-normal: 1;
+	--so-message-scale-lg: 1.125;
+	--so-message-scale-xl: 1.25;
+	--so-message-scale-2xl: 1.5;
+	--so-surface-scale-sm: 0.875;
+	--so-surface-scale-normal: 1;
+	--so-surface-scale-lg: 1.125;
+	--so-surface-scale-xl: 1.25;
+	--so-surface-scale-2xl: 1.5;
 }

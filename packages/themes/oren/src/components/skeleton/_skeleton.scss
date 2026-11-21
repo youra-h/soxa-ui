@@ -101,7 +101,7 @@
 // базу, не споря с ней. Анимацию модификатор объявляет всегда, и `none` тоже:
 // иначе под ним осталась бы пульсация базы.
 :where(.so-skeleton) .so-skeleton__placeholder {
-	@apply rounded-md;
+	border-radius: var(--so-skeleton-radius, var(--so-radius));
 	@include mixins.so-skeleton-pulse;
 
 	@include mixins.skeleton-variant('neutral');

@@ -56,7 +56,7 @@
 	// Кольцо фокуса — на ручке, вокруг всех звёзд: фокус у поля внутри неё, а
 	// поле невидимо.
 	&__thumb {
-		@apply rounded-md;
+		border-radius: var(--so-rating-radius, var(--so-radius));
 	}
 
 	&__thumb:has(> #{$this}__input:focus-visible) {

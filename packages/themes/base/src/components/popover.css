@@ -60,7 +60,7 @@
 :root {
 	--so-popover-max-width: 20rem;
 	--so-popover-max-height: 24rem;
-	--so-popover-padding: 0.5rem;
+	--so-popover-padding: initial;
 	--so-popover-close-offset: 0.5rem;
 }
 
@@ -103,13 +103,22 @@
 	align-self: stretch;
 	width: max-content;
 	min-width: 0;
-	padding: var(--so-popover-padding);
+	padding: var(
+		--so-popover-padding,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-popover-spacing-factor, 1))
+	);
 	overflow-y: auto;
 	overflow-wrap: break-word;
 }
 
 :where(.so-popover__content > .so-table__viewport) {
-	--so-table-head-offset: calc(-1 * var(--so-popover-padding));
+	--so-table-head-offset: calc(
+		-1 *
+			var(
+				--so-popover-padding,
+				calc(var(--so-spacing, 0.25rem) * 2 * var(--so-popover-spacing-factor, 1))
+			)
+	);
 }
 
 .so-popover__close {
@@ -161,4 +170,26 @@
 
 .so-popover__panel[data-edge='end'] > .so-popover__handle {
 	inset-inline-start: 0;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-popover--size-sm {
+	--so-popover-spacing-factor: var(--so-popover-spacing-scale, var(--so-surface-scale-sm, 1));
+}
+
+:where(.so-popover),
+.so-popover--size-normal {
+	--so-popover-spacing-factor: var(--so-popover-spacing-scale, var(--so-surface-scale-normal, 1));
+}
+
+.so-popover--size-lg {
+	--so-popover-spacing-factor: var(--so-popover-spacing-scale, var(--so-surface-scale-lg, 1));
+}
+
+.so-popover--size-xl {
+	--so-popover-spacing-factor: var(--so-popover-spacing-scale, var(--so-surface-scale-xl, 1));
+}
+
+.so-popover--size-2xl {
+	--so-popover-spacing-factor: var(--so-popover-spacing-scale, var(--so-surface-scale-2xl, 1));
 }

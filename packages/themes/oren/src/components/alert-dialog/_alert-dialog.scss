@@ -6,7 +6,7 @@
 }
 .so-alert-dialog {
 	@include modal.surface;
-	@apply rounded-lg;
+	border-radius: var(--so-alert-dialog-radius, calc(var(--so-radius) * 1.3333333333333333));
 }
 
 @include modal.parts('so-alert-dialog', ('close'));

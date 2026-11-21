@@ -72,7 +72,7 @@
 // закрытая уходит от поля, пока гаснет, — смахнутая от места, где её
 // отпустили.
 .so-select__panel {
-	@apply rounded-md;
+	border-radius: var(--so-select-radius, var(--so-radius));
 	@apply text-so-component shadow-md;
 	@apply ring-1 ring-so-neutral-300;
 	@apply outline outline-transparent;

@@ -140,3 +140,25 @@
 	inset-inline-start: var(--so-switch-required-offset);
 	z-index: 20;
 }
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-switch--size-sm {
+	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-sm, 1));
+}
+
+:where(.so-switch),
+.so-switch--size-normal {
+	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-normal, 1));
+}
+
+.so-switch--size-lg {
+	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-lg, 1));
+}
+
+.so-switch--size-xl {
+	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-xl, 1));
+}
+
+.so-switch--size-2xl {
+	--so-switch-spacing-factor: var(--so-switch-spacing-scale, var(--so-control-scale-2xl, 1));
+}

@@ -101,3 +101,40 @@
 .so-breadcrumbs-item[data-disabled='true'] > * {
 	--so-disabled-opacity: 1;
 }
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-breadcrumbs--size-sm {
+	--so-breadcrumbs-spacing-factor: var(
+		--so-breadcrumbs-spacing-scale,
+		var(--so-collection-scale-sm, 1)
+	);
+}
+
+:where(.so-breadcrumbs),
+.so-breadcrumbs--size-normal {
+	--so-breadcrumbs-spacing-factor: var(
+		--so-breadcrumbs-spacing-scale,
+		var(--so-collection-scale-normal, 1)
+	);
+}
+
+.so-breadcrumbs--size-lg {
+	--so-breadcrumbs-spacing-factor: var(
+		--so-breadcrumbs-spacing-scale,
+		var(--so-collection-scale-lg, 1)
+	);
+}
+
+.so-breadcrumbs--size-xl {
+	--so-breadcrumbs-spacing-factor: var(
+		--so-breadcrumbs-spacing-scale,
+		var(--so-collection-scale-xl, 1)
+	);
+}
+
+.so-breadcrumbs--size-2xl {
+	--so-breadcrumbs-spacing-factor: var(
+		--so-breadcrumbs-spacing-scale,
+		var(--so-collection-scale-2xl, 1)
+	);
+}

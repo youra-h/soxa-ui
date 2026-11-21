@@ -31,7 +31,7 @@
 // системным, и контур становится рамкой. В обычном режиме его не видно, и
 // места, как и кольцо, он не занимает.
 .so-popover__panel {
-	@apply rounded-md;
+	border-radius: var(--so-popover-radius, var(--so-radius));
 	@apply text-so-component shadow-md;
 	@apply ring-1 ring-so-neutral-300;
 	@include place.panel-surface(var(--so-component-surface));

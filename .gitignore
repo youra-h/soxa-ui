@@ -47,3 +47,9 @@ tools/bench-compare/size/
 # SvelteKit consumer source is not a library build output.
 !docs/ai/*/examples/sveltekit/src/lib/
 !docs/ai/*/examples/sveltekit/src/lib/**
+
+# Local diagnostic output; comparison screenshots and CSS evidence remain tracked.
+reports/theme-geometry/**/build.log
+
+# Verbatim stylesheet evidence is committed as lossless gzip archives.
+reports/theme-geometry/**/theme.css

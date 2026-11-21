@@ -8,43 +8,13 @@ import { build as viteBuild } from 'vite'
 import { BASE_READS, CODE_WRITES, CONTRACT, THEME_READS } from './contract'
 
 /**
- * Свои сторожа общего слоя тем — по его CSS (`packages/themes/base/AGENTS.md`,
- * «Сторожа»).
- *
- * База — то, что нужно частям в любой теме, а не облик одной, поэтому:
- *
- * - **чистый CSS**: в `src` только `.css`, и в нём ни директив Tailwind и Sass
- *   (`@apply`, `@theme`, `@use`, `@include`…), ни переменных и интерполяции
- *   Sass, ни функций Tailwind. Тема берёт базу как есть, своим сборщиком, и
- *   тема без Tailwind и Sass их не развернула бы;
- * - **без облика**: ни цвета — ни литерала (`#fff`, `oklch(…)`, `white`,
- *   системного `Canvas`), ни ступени шкалы `--so-<семейство>-<ступень>`, — ни
- *   модификатора значения темы (`--view-`, `--variant-`, `--shape-`,
- *   `--animation-`): палитру и наборы значений объявляет тема. `currentcolor`
- *   и `transparent` — не цвет темы, а цвет места и его отсутствие;
- * - **переменные — по контракту** (`theme-variables.json`, `contract.ts`):
- *   каждую переменную, которую база читает, она объявляет сама, с умолчанием,
- *   или называет в разделе `base-reads`. Умолчание для темы — переменная
- *   правила корня документа (`:root`): шкалы и геометрия частей, — и каждое
- *   такое тоже названо там, чтобы тема знала, что ей можно задать. Лишнего в
- *   разделе нет: каждую названную переменную база читает. Раздел `theme-reads`
- *   — что тема вправе читать сверх этого, — с ним не пересекается, и каждую
- *   его переменную пишут база (объявляет) или код (строкой);
- * - **в слое `so`**: каждое правило базы — в нём или в его подслое, иначе
- *   правило базы встало бы над правилами темы и утилитами приложения;
- * - **выключенное гаснет парой правил**: у каждого правила с прозрачностью из
- *   `--so-disabled-opacity` есть правило его детей с единицей в ней — иначе
- *   выключенное внутри погасшего погасло бы второй раз;
- * - **селекторы — по классам и `data-*`**: ни `aria-*`, ни атрибута
- *   `disabled` (корневой `AGENTS.md`, «CSS не стилизуется по `aria-*`»), а
- *   по `dir` — только правила знака направления;
- * - **знак направления письма** задан странице без `dir` и обоим
- *   направлениям.
- *
- * Исходники читаются как есть, а CSS базы — собранным в памяти (Vite, без
- * минификации): так его вшивает тема, импорты частей развёрнуты в их слои.
- * Сторожа, которые сейчас на базе ничего не находят, проверены на образцах в
- * конце файла: пустым сторож прошёл бы на любом CSS.
+ * Guards for the shared CSS layer and its contract with visual themes.
+ * The base is plain CSS, has no palette or visual modifiers, and stays in the
+ * so cascade layer. Every root default is listed in the public contract.
+ * Geometry read by base belongs to base-reads; visual-only optional settings
+ * belong to theme-reads and remain unset until a visual theme supplies them.
+ * Disabled opacity is paired with a descendant reset; selectors use classes
+ * and datasets. Source checks and compiled CSS checks include negative fixtures.
  */
 
 const BASE = resolve(import.meta.dirname, '..')
@@ -432,7 +402,7 @@ describe('переменные базы — объявлены или в кон�
 	})
 
 	it('каждое умолчание для темы — переменная корня документа — названо в контракте', () => {
-		expect(unlistedDefaults(css, BASE_READS)).toEqual([])
+		expect(unlistedDefaults(css, [...BASE_READS, ...THEME_READS])).toEqual([])
 	})
 
 	it('разделы не пересекаются', () => {

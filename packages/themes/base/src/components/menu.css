@@ -79,9 +79,9 @@
  * стрелки, зеркало стрелки в RTL, форма точки — рисует тема. */
 
 :root {
-	--so-menu-padding: 0.25rem;
-	--so-menu-separator-margin: 0.25rem;
-	--so-menu-group-label-padding: 0.5rem;
+	--so-menu-padding: initial;
+	--so-menu-separator-margin: initial;
+	--so-menu-group-label-padding: initial;
 	--so-menu-dot-size: 0.4em;
 	--so-menu-shortcut-gap: 1em;
 }
@@ -109,7 +109,10 @@
 	align-self: stretch;
 	width: max-content;
 	min-width: 0;
-	padding: var(--so-menu-padding);
+	padding: var(
+		--so-menu-padding,
+		calc(var(--so-spacing, 0.25rem) * var(--so-menu-spacing-factor, 1))
+	);
 	overflow-y: auto;
 }
 
@@ -190,12 +193,24 @@
 }
 
 .so-menu-group__label {
-	padding-block: var(--so-menu-group-label-padding);
+	padding-block: var(
+		--so-menu-group-label-padding,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-menu-spacing-factor, 1))
+	);
 }
 
 .so-menu-separator {
-	margin-block: var(--so-menu-separator-margin);
-	margin-inline: calc(-1 * var(--so-menu-padding));
+	margin-block: var(
+		--so-menu-separator-margin,
+		calc(var(--so-spacing, 0.25rem) * var(--so-menu-spacing-factor, 1))
+	);
+	margin-inline: calc(
+		-1 *
+			var(
+				--so-menu-padding,
+				calc(var(--so-spacing, 0.25rem) * var(--so-menu-spacing-factor, 1))
+			)
+	);
 }
 
 /* Секции без разделителя — `groupSeparators` меню или подменю выключен:
@@ -205,7 +220,12 @@
 :is(.so-menu-group, .so-menu-item) + .so-menu-group,
 .so-menu-group + .so-menu-item {
 	margin-block-start: calc(
-		2 * var(--so-menu-separator-margin) + var(--so-group-separator-width, 0px)
+		2 *
+			var(
+				--so-menu-separator-margin,
+				calc(var(--so-spacing, 0.25rem) * var(--so-menu-spacing-factor, 1))
+			) +
+			var(--so-group-separator-width, 0px)
 	);
 }
 
@@ -218,7 +238,32 @@
 .so-menu-item__content {
 	width: max-content;
 	min-width: 0;
-	padding: var(--so-popover-padding);
+	padding: var(
+		--so-popover-padding,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-menu-spacing-factor, 1))
+	);
 	overflow-y: auto;
 	overflow-wrap: break-word;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-menu--size-sm {
+	--so-menu-spacing-factor: var(--so-menu-spacing-scale, var(--so-collection-scale-sm, 1));
+}
+
+:where(.so-menu),
+.so-menu--size-normal {
+	--so-menu-spacing-factor: var(--so-menu-spacing-scale, var(--so-collection-scale-normal, 1));
+}
+
+.so-menu--size-lg {
+	--so-menu-spacing-factor: var(--so-menu-spacing-scale, var(--so-collection-scale-lg, 1));
+}
+
+.so-menu--size-xl {
+	--so-menu-spacing-factor: var(--so-menu-spacing-scale, var(--so-collection-scale-xl, 1));
+}
+
+.so-menu--size-2xl {
+	--so-menu-spacing-factor: var(--so-menu-spacing-scale, var(--so-collection-scale-2xl, 1));
 }

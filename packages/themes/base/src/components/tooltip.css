@@ -37,8 +37,8 @@
 
 :root {
 	--so-tooltip-max-width: 16rem;
-	--so-tooltip-padding-inline: 0.5rem;
-	--so-tooltip-padding-block: 0.25rem;
+	--so-tooltip-padding-inline: initial;
+	--so-tooltip-padding-block: initial;
 	--so-tooltip-line: 1.25rem;
 }
 
@@ -48,7 +48,14 @@
 
 .so-tooltip__panel {
 	max-width: min(var(--so-tooltip-max-width), calc(100vw - 1rem));
-	padding: var(--so-tooltip-padding-block) var(--so-tooltip-padding-inline);
+	padding: var(
+			--so-tooltip-padding-block,
+			calc(var(--so-spacing, 0.25rem) * var(--so-tooltip-spacing-factor, 1))
+		)
+		var(
+			--so-tooltip-padding-inline,
+			calc(var(--so-spacing, 0.25rem) * 2 * var(--so-tooltip-spacing-factor, 1))
+		);
 	line-height: var(--so-tooltip-line);
 }
 
@@ -56,4 +63,26 @@
 	width: max-content;
 	max-width: 100%;
 	overflow-wrap: break-word;
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-tooltip--size-sm {
+	--so-tooltip-spacing-factor: var(--so-tooltip-spacing-scale, var(--so-surface-scale-sm, 1));
+}
+
+:where(.so-tooltip),
+.so-tooltip--size-normal {
+	--so-tooltip-spacing-factor: var(--so-tooltip-spacing-scale, var(--so-surface-scale-normal, 1));
+}
+
+.so-tooltip--size-lg {
+	--so-tooltip-spacing-factor: var(--so-tooltip-spacing-scale, var(--so-surface-scale-lg, 1));
+}
+
+.so-tooltip--size-xl {
+	--so-tooltip-spacing-factor: var(--so-tooltip-spacing-scale, var(--so-surface-scale-xl, 1));
+}
+
+.so-tooltip--size-2xl {
+	--so-tooltip-spacing-factor: var(--so-tooltip-spacing-scale, var(--so-surface-scale-2xl, 1));
 }

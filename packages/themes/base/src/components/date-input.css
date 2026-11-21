@@ -76,10 +76,13 @@
  * обязательного поля (`required.css`). */
 .so-date-input {
 	--so-date-input-height: var(--so-input-height-normal);
-	--so-date-input-indent: var(--so-input-indent-normal);
+	--so-date-input-indent: var(
+		--so-input-indent-normal,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-date-input-spacing-factor, 1))
+	);
 	--so-date-input-slot-row: calc(
 		var(--so-date-input-height) - 2 * var(--so-date-input-border, 0px) - 2 *
-			var(--so-input-slot-gap)
+			var(--so-input-slot-gap, calc(3px * var(--so-date-input-spacing-factor, 1)))
 	);
 	position: relative;
 	display: inline-flex;
@@ -104,7 +107,10 @@
 
 .so-date-input--size-sm {
 	--so-date-input-height: var(--so-input-height-sm);
-	--so-date-input-indent: var(--so-input-indent-sm);
+	--so-date-input-indent: var(
+		--so-input-indent-sm,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-date-input-spacing-factor, 1))
+	);
 }
 
 .so-date-input--size-sm .so-date-input__segments {
@@ -114,7 +120,10 @@
 
 .so-date-input--size-normal {
 	--so-date-input-height: var(--so-input-height-normal);
-	--so-date-input-indent: var(--so-input-indent-normal);
+	--so-date-input-indent: var(
+		--so-input-indent-normal,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-date-input-spacing-factor, 1))
+	);
 }
 
 .so-date-input--size-normal .so-date-input__segments {
@@ -123,7 +132,10 @@
 
 .so-date-input--size-lg {
 	--so-date-input-height: var(--so-input-height-lg);
-	--so-date-input-indent: var(--so-input-indent-lg);
+	--so-date-input-indent: var(
+		--so-input-indent-lg,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-date-input-spacing-factor, 1))
+	);
 }
 
 .so-date-input--size-lg .so-date-input__segments {
@@ -133,7 +145,10 @@
 
 .so-date-input--size-xl {
 	--so-date-input-height: var(--so-input-height-xl);
-	--so-date-input-indent: var(--so-input-indent-xl);
+	--so-date-input-indent: var(
+		--so-input-indent-xl,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-date-input-spacing-factor, 1))
+	);
 }
 
 .so-date-input--size-xl .so-date-input__segments {
@@ -143,7 +158,10 @@
 
 .so-date-input--size-2xl {
 	--so-date-input-height: var(--so-input-height-2xl);
-	--so-date-input-indent: var(--so-input-indent-2xl);
+	--so-date-input-indent: var(
+		--so-input-indent-2xl,
+		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-date-input-spacing-factor, 1))
+	);
 }
 
 .so-date-input--size-2xl .so-date-input__segments {
@@ -158,18 +176,27 @@
 	flex-shrink: 0;
 	align-items: center;
 	justify-content: center;
-	gap: var(--so-input-slot-spacing);
+	gap: var(
+		--so-input-slot-spacing,
+		calc(var(--so-spacing, 0.25rem) * var(--so-date-input-spacing-factor, 1))
+	);
 	height: var(--so-date-input-slot-row);
 	cursor: default;
 }
 
 .so-date-input__leading {
-	padding-inline-start: var(--so-input-slot-padding);
+	padding-inline-start: var(
+		--so-input-slot-padding,
+		calc(var(--so-spacing, 0.25rem) * var(--so-date-input-spacing-factor, 1))
+	);
 }
 
 .so-date-input__trailing {
 	margin-inline-start: auto;
-	padding-inline-end: var(--so-input-slot-padding);
+	padding-inline-end: var(
+		--so-input-slot-padding,
+		calc(var(--so-spacing, 0.25rem) * var(--so-date-input-spacing-factor, 1))
+	);
 }
 
 /* Кнопка очистки — квадрат в строку слота, как у Input; кнопка календаря
@@ -221,4 +248,37 @@
  * поэтому в минимум входят и поля части. */
 .so-date-input__segment[data-type='year'] {
 	min-inline-size: calc(4ch + 2 * var(--so-date-input-segment-padding));
+}
+
+/* Resolve the family scale here; explicit length variables remain final overrides. */
+.so-date-input--size-sm {
+	--so-date-input-spacing-factor: var(--so-date-input-spacing-scale, var(--so-field-scale-sm, 1));
+}
+
+:where(.so-date-input),
+.so-date-input--size-normal {
+	--so-date-input-spacing-factor: var(
+		--so-date-input-spacing-scale,
+		var(--so-field-scale-normal, 1)
+	);
+}
+
+.so-date-input--size-lg {
+	--so-date-input-spacing-factor: var(--so-date-input-spacing-scale, var(--so-field-scale-lg, 1));
+}
+
+.so-date-input--size-xl {
+	--so-date-input-spacing-factor: var(--so-date-input-spacing-scale, var(--so-field-scale-xl, 1));
+}
+
+.so-date-input--size-2xl {
+	--so-date-input-spacing-factor: var(
+		--so-date-input-spacing-scale,
+		var(--so-field-scale-2xl, 1)
+	);
+}
+
+.so-date-input__clear .so-icon {
+	max-inline-size: var(--so-date-input-slot-row);
+	max-block-size: var(--so-date-input-slot-row);
 }
