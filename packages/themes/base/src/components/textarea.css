@@ -108,6 +108,7 @@
 }
 
 .so-textarea--size-sm {
+	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-sm, 1));
 	--so-textarea-row: var(--so-input-height-sm);
 	--so-textarea-indent: var(
 		--so-input-indent-sm,
@@ -143,6 +144,7 @@
 }
 
 .so-textarea--size-lg {
+	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-lg, 1));
 	--so-textarea-row: var(--so-input-height-lg);
 	--so-textarea-indent: var(
 		--so-input-indent-lg,
@@ -161,6 +163,7 @@
 }
 
 .so-textarea--size-xl {
+	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-xl, 1));
 	--so-textarea-row: var(--so-input-height-xl);
 	--so-textarea-indent: var(
 		--so-input-indent-xl,
@@ -179,6 +182,7 @@
 }
 
 .so-textarea--size-2xl {
+	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-2xl, 1));
 	--so-textarea-row: var(--so-input-height-2xl);
 	--so-textarea-indent: var(
 		--so-input-indent-2xl,
@@ -196,24 +200,8 @@
 	line-height: var(--so-caption-note-line-height-2xl);
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-textarea--size-sm {
-	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-sm, 1));
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-textarea),
 .so-textarea--size-normal {
 	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-normal, 1));
-}
-
-.so-textarea--size-lg {
-	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-lg, 1));
-}
-
-.so-textarea--size-xl {
-	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-xl, 1));
-}
-
-.so-textarea--size-2xl {
-	--so-textarea-spacing-factor: var(--so-textarea-spacing-scale, var(--so-field-scale-2xl, 1));
 }

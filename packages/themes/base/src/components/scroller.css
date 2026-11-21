@@ -82,6 +82,7 @@
 }
 
 .so-scroller--size-sm {
+	--so-scroller-spacing-factor: var(--so-scroller-spacing-scale, var(--so-control-scale-sm, 1));
 	gap: var(
 		--so-button-gap-sm,
 		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-scroller-spacing-factor, 1))
@@ -96,6 +97,7 @@
 }
 
 .so-scroller--size-lg {
+	--so-scroller-spacing-factor: var(--so-scroller-spacing-scale, var(--so-control-scale-lg, 1));
 	gap: var(
 		--so-button-gap-lg,
 		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-scroller-spacing-factor, 1))
@@ -103,6 +105,7 @@
 }
 
 .so-scroller--size-xl {
+	--so-scroller-spacing-factor: var(--so-scroller-spacing-scale, var(--so-control-scale-xl, 1));
 	gap: var(
 		--so-button-gap-xl,
 		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-scroller-spacing-factor, 1))
@@ -110,6 +113,7 @@
 }
 
 .so-scroller--size-2xl {
+	--so-scroller-spacing-factor: var(--so-scroller-spacing-scale, var(--so-control-scale-2xl, 1));
 	gap: var(
 		--so-button-gap-2xl,
 		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-scroller-spacing-factor, 1))
@@ -150,27 +154,11 @@
 	scroll-snap-align: start;
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-scroller--size-sm {
-	--so-scroller-spacing-factor: var(--so-scroller-spacing-scale, var(--so-control-scale-sm, 1));
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-scroller),
 .so-scroller--size-normal {
 	--so-scroller-spacing-factor: var(
 		--so-scroller-spacing-scale,
 		var(--so-control-scale-normal, 1)
 	);
-}
-
-.so-scroller--size-lg {
-	--so-scroller-spacing-factor: var(--so-scroller-spacing-scale, var(--so-control-scale-lg, 1));
-}
-
-.so-scroller--size-xl {
-	--so-scroller-spacing-factor: var(--so-scroller-spacing-scale, var(--so-control-scale-xl, 1));
-}
-
-.so-scroller--size-2xl {
-	--so-scroller-spacing-factor: var(--so-scroller-spacing-scale, var(--so-control-scale-2xl, 1));
 }

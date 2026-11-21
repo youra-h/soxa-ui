@@ -6,6 +6,7 @@
 }
 
 .so-alert-dialog {
+	--so-modal-spacing-factor: var(--so-alert-dialog-spacing-factor);
 	position: fixed;
 	inset: var(--so-alert-dialog-offset);
 	margin: auto;
@@ -53,8 +54,4 @@
 		--so-alert-dialog-spacing-scale,
 		var(--so-surface-scale-2xl, 1)
 	);
-}
-
-.so-alert-dialog {
-	--so-modal-spacing-factor: var(--so-alert-dialog-spacing-factor);
 }

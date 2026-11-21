@@ -25,26 +25,17 @@
 	--so-field-required-lift: 0.5em;
 }
 
+/* Resolve the scaled spacing unit on each consuming node to preserve local settings. */
 .so-field {
-	--so-field-gap: var(
-		--so-caption-gap-normal,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-field-spacing-factor, 1))
-	);
-	--so-field-stack: var(
-		--so-caption-stack-normal,
-		calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1))
-	);
+	--so-field-space: calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1));
+	--so-field-gap: var(--so-caption-gap-normal, calc(var(--so-field-space) * 2));
+	--so-field-stack: var(--so-caption-stack-normal, var(--so-field-space));
 }
 
 .so-field--size-sm {
-	--so-field-gap: var(
-		--so-caption-gap-sm,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-field-spacing-factor, 1))
-	);
-	--so-field-stack: var(
-		--so-caption-stack-sm,
-		calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1))
-	);
+	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-sm, 1));
+	--so-field-gap: var(--so-caption-gap-sm, calc(var(--so-field-space) * 2));
+	--so-field-stack: var(--so-caption-stack-sm, var(--so-field-space));
 }
 
 .so-field--size-sm > .so-field__label,
@@ -66,14 +57,8 @@
 }
 
 .so-field--size-normal {
-	--so-field-gap: var(
-		--so-caption-gap-normal,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-field-spacing-factor, 1))
-	);
-	--so-field-stack: var(
-		--so-caption-stack-normal,
-		calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1))
-	);
+	--so-field-gap: var(--so-caption-gap-normal, calc(var(--so-field-space) * 2));
+	--so-field-stack: var(--so-caption-stack-normal, var(--so-field-space));
 }
 
 .so-field--size-normal > .so-field__helper,
@@ -83,14 +68,9 @@
 }
 
 .so-field--size-lg {
-	--so-field-gap: var(
-		--so-caption-gap-lg,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-field-spacing-factor, 1))
-	);
-	--so-field-stack: var(
-		--so-caption-stack-lg,
-		calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1))
-	);
+	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-lg, 1));
+	--so-field-gap: var(--so-caption-gap-lg, calc(var(--so-field-space) * 2));
+	--so-field-stack: var(--so-caption-stack-lg, var(--so-field-space));
 }
 
 .so-field--size-lg > .so-field__label,
@@ -110,14 +90,9 @@
 }
 
 .so-field--size-xl {
-	--so-field-gap: var(
-		--so-caption-gap-xl,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-field-spacing-factor, 1))
-	);
-	--so-field-stack: var(
-		--so-caption-stack-xl,
-		calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1))
-	);
+	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-xl, 1));
+	--so-field-gap: var(--so-caption-gap-xl, calc(var(--so-field-space) * 2));
+	--so-field-stack: var(--so-caption-stack-xl, var(--so-field-space));
 }
 
 .so-field--size-xl > .so-field__label,
@@ -137,14 +112,9 @@
 }
 
 .so-field--size-2xl {
-	--so-field-gap: var(
-		--so-caption-gap-2xl,
-		calc(var(--so-spacing, 0.25rem) * 2 * var(--so-field-spacing-factor, 1))
-	);
-	--so-field-stack: var(
-		--so-caption-stack-2xl,
-		calc(var(--so-spacing, 0.25rem) * var(--so-field-spacing-factor, 1))
-	);
+	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-2xl, 1));
+	--so-field-gap: var(--so-caption-gap-2xl, calc(var(--so-field-space) * 2));
+	--so-field-stack: var(--so-caption-stack-2xl, var(--so-field-space));
 }
 
 .so-field--size-2xl > .so-field__label,
@@ -475,24 +445,8 @@
 	flex: 1 1 auto;
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-field--size-sm {
-	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-sm, 1));
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-field),
 .so-field--size-normal {
 	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-normal, 1));
-}
-
-.so-field--size-lg {
-	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-lg, 1));
-}
-
-.so-field--size-xl {
-	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-xl, 1));
-}
-
-.so-field--size-2xl {
-	--so-field-spacing-factor: var(--so-field-spacing-scale, var(--so-field-scale-2xl, 1));
 }

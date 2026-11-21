@@ -64,6 +64,14 @@
 	--so-tags-item-gap-2xl: initial;
 }
 
+/* Resolve the scaled spacing unit on each consuming node to preserve local settings. */
+.so-tags,
+.so-tags-item > :not(.so-tags-item__close),
+.so-tags-item > .so-tags-item__close,
+.so-tags-item > :has(+ .so-tags-item__close) {
+	--so-tags-space: calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1));
+}
+
 /* Зазор — переменной, а не числом на месте: своя раскладка в слоте `default`
  * (лента, ряд с хвостом в панели) ставит теги не прямыми детьми набора, и то
  * же число нужно уже ей. В поле оно своё (ниже). */
@@ -71,10 +79,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: var(
-		--so-tags-gap,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
-	);
+	gap: var(--so-tags-gap, calc(var(--so-tags-space) * 1.5));
 }
 
 /* Выключенный набор гаснет корнем целиком — ряд с тегами и содержимым слота
@@ -148,10 +153,7 @@
 	height: 100%;
 	padding-block: calc(
 		(var(--so-tags-item-height) - 1em) / 2 -
-			var(
-				--so-tags-close-padding,
-				calc(var(--so-spacing, 0.25rem) * 0.5 * var(--so-tags-spacing-factor, 1))
-			)
+			var(--so-tags-close-padding, calc(var(--so-tags-space) * 0.5))
 	);
 }
 
@@ -163,16 +165,10 @@
 	flex-shrink: 0;
 	align-self: stretch;
 	height: auto;
-	padding-inline: var(
-		--so-tags-close-padding,
-		calc(var(--so-spacing, 0.25rem) * 0.5 * var(--so-tags-spacing-factor, 1))
-	);
+	padding-inline: var(--so-tags-close-padding, calc(var(--so-tags-space) * 0.5));
 	margin-block: calc(
 		(var(--so-tags-item-height) - 1em) / 2 -
-			var(
-				--so-tags-close-padding,
-				calc(var(--so-spacing, 0.25rem) * 0.5 * var(--so-tags-spacing-factor, 1))
-			)
+			var(--so-tags-close-padding, calc(var(--so-tags-space) * 0.5))
 	);
 }
 
@@ -214,28 +210,16 @@
 }
 
 .so-tags-item--size-sm > :not(.so-tags-item__close) {
-	gap: var(
-		--so-tags-item-gap-sm,
-		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
-	);
-	padding-inline: var(
-		--so-tags-item-padding-sm,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
-	);
+	gap: var(--so-tags-item-gap-sm, var(--so-tags-space));
+	padding-inline: var(--so-tags-item-padding-sm, calc(var(--so-tags-space) * 1.5));
 }
 
 .so-tags-item--size-sm > :has(+ .so-tags-item__close) {
-	padding-inline-end: var(
-		--so-tags-item-gap-sm,
-		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
-	);
+	padding-inline-end: var(--so-tags-item-gap-sm, var(--so-tags-space));
 }
 
 .so-tags-item--size-sm > .so-tags-item__close {
-	margin-inline-end: var(
-		--so-tags-item-padding-sm,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
-	);
+	margin-inline-end: var(--so-tags-item-padding-sm, calc(var(--so-tags-space) * 1.5));
 }
 
 .so-tags-item--size-normal {
@@ -248,28 +232,16 @@
 }
 
 .so-tags-item--size-normal > :not(.so-tags-item__close) {
-	gap: var(
-		--so-tags-item-gap-normal,
-		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
-	);
-	padding-inline: var(
-		--so-tags-item-padding-normal,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
-	);
+	gap: var(--so-tags-item-gap-normal, var(--so-tags-space));
+	padding-inline: var(--so-tags-item-padding-normal, calc(var(--so-tags-space) * 1.5));
 }
 
 .so-tags-item--size-normal > :has(+ .so-tags-item__close) {
-	padding-inline-end: var(
-		--so-tags-item-gap-normal,
-		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
-	);
+	padding-inline-end: var(--so-tags-item-gap-normal, var(--so-tags-space));
 }
 
 .so-tags-item--size-normal > .so-tags-item__close {
-	margin-inline-end: var(
-		--so-tags-item-padding-normal,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
-	);
+	margin-inline-end: var(--so-tags-item-padding-normal, calc(var(--so-tags-space) * 1.5));
 }
 
 .so-tags-item--size-lg {
@@ -282,28 +254,16 @@
 }
 
 .so-tags-item--size-lg > :not(.so-tags-item__close) {
-	gap: var(
-		--so-tags-item-gap-lg,
-		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
-	);
-	padding-inline: var(
-		--so-tags-item-padding-lg,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
-	);
+	gap: var(--so-tags-item-gap-lg, var(--so-tags-space));
+	padding-inline: var(--so-tags-item-padding-lg, calc(var(--so-tags-space) * 1.5));
 }
 
 .so-tags-item--size-lg > :has(+ .so-tags-item__close) {
-	padding-inline-end: var(
-		--so-tags-item-gap-lg,
-		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
-	);
+	padding-inline-end: var(--so-tags-item-gap-lg, var(--so-tags-space));
 }
 
 .so-tags-item--size-lg > .so-tags-item__close {
-	margin-inline-end: var(
-		--so-tags-item-padding-lg,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
-	);
+	margin-inline-end: var(--so-tags-item-padding-lg, calc(var(--so-tags-space) * 1.5));
 }
 
 .so-tags-item--size-xl {
@@ -316,28 +276,16 @@
 }
 
 .so-tags-item--size-xl > :not(.so-tags-item__close) {
-	gap: var(
-		--so-tags-item-gap-xl,
-		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
-	);
-	padding-inline: var(
-		--so-tags-item-padding-xl,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
-	);
+	gap: var(--so-tags-item-gap-xl, var(--so-tags-space));
+	padding-inline: var(--so-tags-item-padding-xl, calc(var(--so-tags-space) * 1.5));
 }
 
 .so-tags-item--size-xl > :has(+ .so-tags-item__close) {
-	padding-inline-end: var(
-		--so-tags-item-gap-xl,
-		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
-	);
+	padding-inline-end: var(--so-tags-item-gap-xl, var(--so-tags-space));
 }
 
 .so-tags-item--size-xl > .so-tags-item__close {
-	margin-inline-end: var(
-		--so-tags-item-padding-xl,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
-	);
+	margin-inline-end: var(--so-tags-item-padding-xl, calc(var(--so-tags-space) * 1.5));
 }
 
 .so-tags-item--size-2xl {
@@ -350,28 +298,16 @@
 }
 
 .so-tags-item--size-2xl > :not(.so-tags-item__close) {
-	gap: var(
-		--so-tags-item-gap-2xl,
-		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
-	);
-	padding-inline: var(
-		--so-tags-item-padding-2xl,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
-	);
+	gap: var(--so-tags-item-gap-2xl, var(--so-tags-space));
+	padding-inline: var(--so-tags-item-padding-2xl, calc(var(--so-tags-space) * 1.5));
 }
 
 .so-tags-item--size-2xl > :has(+ .so-tags-item__close) {
-	padding-inline-end: var(
-		--so-tags-item-gap-2xl,
-		calc(var(--so-spacing, 0.25rem) * var(--so-tags-spacing-factor, 1))
-	);
+	padding-inline-end: var(--so-tags-item-gap-2xl, var(--so-tags-space));
 }
 
 .so-tags-item--size-2xl > .so-tags-item__close {
-	margin-inline-end: var(
-		--so-tags-item-padding-2xl,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-tags-spacing-factor, 1))
-	);
+	margin-inline-end: var(--so-tags-item-padding-2xl, calc(var(--so-tags-space) * 1.5));
 }
 
 /* Выключенный тег гаснет целиком, с крестиком, и нажатий не ловит

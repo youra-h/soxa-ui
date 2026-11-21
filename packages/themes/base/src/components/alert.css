@@ -119,40 +119,28 @@
 }
 
 .so-alert--size-sm {
+	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-sm, 1));
 	font-size: var(--so-button-font-size-sm);
 	line-height: var(--so-button-line-height-sm);
 }
 .so-alert--size-lg {
+	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-lg, 1));
 	font-size: var(--so-button-font-size-lg);
 	line-height: var(--so-button-line-height-lg);
 }
 .so-alert--size-xl {
+	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-xl, 1));
 	font-size: var(--so-button-font-size-xl);
 	line-height: var(--so-button-line-height-xl);
 }
 .so-alert--size-2xl {
+	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-2xl, 1));
 	font-size: var(--so-button-font-size-2xl);
 	line-height: var(--so-button-line-height-2xl);
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-alert--size-sm {
-	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-sm, 1));
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-alert),
 .so-alert--size-normal {
 	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-normal, 1));
-}
-
-.so-alert--size-lg {
-	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-lg, 1));
-}
-
-.so-alert--size-xl {
-	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-xl, 1));
-}
-
-.so-alert--size-2xl {
-	--so-alert-spacing-factor: var(--so-alert-spacing-scale, var(--so-message-scale-2xl, 1));
 }

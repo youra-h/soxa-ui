@@ -45,6 +45,7 @@
 /* Без кнопки её колонка пуста и ширины не занимает: колонки между собой без
  * зазора, промежутки держат сами кнопки. */
 .so-dialog {
+	--so-modal-spacing-factor: var(--so-dialog-spacing-factor);
 	position: fixed;
 	inset-block: var(--so-dialog-offset-top, var(--so-dialog-offset))
 		var(--so-dialog-offset-bottom, var(--so-dialog-offset));
@@ -114,8 +115,4 @@
 
 .so-dialog--size-2xl {
 	--so-dialog-spacing-factor: var(--so-dialog-spacing-scale, var(--so-surface-scale-2xl, 1));
-}
-
-.so-dialog {
-	--so-modal-spacing-factor: var(--so-dialog-spacing-factor);
 }

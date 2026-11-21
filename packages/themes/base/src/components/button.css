@@ -100,92 +100,55 @@
 	--so-disabled-opacity: 1;
 }
 
+/* Resolve the scaled spacing unit on each consuming node to preserve local settings. */
+.so-button {
+	--so-button-space: calc(var(--so-spacing, 0.25rem) * var(--so-button-spacing-factor, 1));
+}
+
 .so-button--size-sm {
+	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-sm, 1));
 	height: var(--so-button-height-sm);
-	padding-inline: var(
-		--so-button-padding-sm,
-		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-button-spacing-factor, 1))
-	);
-	gap: var(
-		--so-button-gap-sm,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-button-spacing-factor, 1))
-	);
+	padding-inline: var(--so-button-padding-sm, calc(var(--so-button-space) * 2.5));
+	gap: var(--so-button-gap-sm, calc(var(--so-button-space) * 1.5));
 	font-size: var(--so-button-font-size-sm);
 	line-height: var(--so-button-line-height-sm);
 }
 
 .so-button--size-normal {
 	height: var(--so-button-height-normal);
-	padding-inline: var(
-		--so-button-padding-normal,
-		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-button-spacing-factor, 1))
-	);
-	gap: var(
-		--so-button-gap-normal,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-button-spacing-factor, 1))
-	);
+	padding-inline: var(--so-button-padding-normal, calc(var(--so-button-space) * 2.5));
+	gap: var(--so-button-gap-normal, calc(var(--so-button-space) * 1.5));
 }
 
 .so-button--size-lg {
+	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-lg, 1));
 	height: var(--so-button-height-lg);
-	padding-inline: var(
-		--so-button-padding-lg,
-		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-button-spacing-factor, 1))
-	);
-	gap: var(
-		--so-button-gap-lg,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-button-spacing-factor, 1))
-	);
+	padding-inline: var(--so-button-padding-lg, calc(var(--so-button-space) * 2.5));
+	gap: var(--so-button-gap-lg, calc(var(--so-button-space) * 1.5));
 	font-size: var(--so-button-font-size-lg);
 	line-height: var(--so-button-line-height-lg);
 }
 
 .so-button--size-xl {
+	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-xl, 1));
 	height: var(--so-button-height-xl);
-	padding-inline: var(
-		--so-button-padding-xl,
-		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-button-spacing-factor, 1))
-	);
-	gap: var(
-		--so-button-gap-xl,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-button-spacing-factor, 1))
-	);
+	padding-inline: var(--so-button-padding-xl, calc(var(--so-button-space) * 2.5));
+	gap: var(--so-button-gap-xl, calc(var(--so-button-space) * 1.5));
 	font-size: var(--so-button-font-size-xl);
 	line-height: var(--so-button-line-height-xl);
 }
 
 .so-button--size-2xl {
+	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-2xl, 1));
 	height: var(--so-button-height-2xl);
-	padding-inline: var(
-		--so-button-padding-2xl,
-		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-button-spacing-factor, 1))
-	);
-	gap: var(
-		--so-button-gap-2xl,
-		calc(var(--so-spacing, 0.25rem) * 1.5 * var(--so-button-spacing-factor, 1))
-	);
+	padding-inline: var(--so-button-padding-2xl, calc(var(--so-button-space) * 2.5));
+	gap: var(--so-button-gap-2xl, calc(var(--so-button-space) * 1.5));
 	font-size: var(--so-button-font-size-2xl);
 	line-height: var(--so-button-line-height-2xl);
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-button--size-sm {
-	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-sm, 1));
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-button),
 .so-button--size-normal {
 	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-normal, 1));
-}
-
-.so-button--size-lg {
-	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-lg, 1));
-}
-
-.so-button--size-xl {
-	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-xl, 1));
-}
-
-.so-button--size-2xl {
-	--so-button-spacing-factor: var(--so-button-spacing-scale, var(--so-control-scale-2xl, 1));
 }

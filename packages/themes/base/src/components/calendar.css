@@ -185,6 +185,10 @@
 }
 
 .so-calendar--size-sm {
+	--so-calendar-spacing-factor: var(
+		--so-calendar-spacing-scale,
+		var(--so-collection-scale-sm, 1)
+	);
 	--so-calendar-day: var(--so-button-height-sm);
 	--so-calendar-column: max(var(--so-calendar-cell), 2.5 * var(--so-calendar-day-font-size-sm));
 }
@@ -229,6 +233,10 @@
 }
 
 .so-calendar--size-lg {
+	--so-calendar-spacing-factor: var(
+		--so-calendar-spacing-scale,
+		var(--so-collection-scale-lg, 1)
+	);
 	--so-calendar-day: var(--so-button-height-lg);
 	--so-calendar-column: max(var(--so-calendar-cell), 2.5 * var(--so-calendar-day-font-size-lg));
 }
@@ -250,6 +258,10 @@
 }
 
 .so-calendar--size-xl {
+	--so-calendar-spacing-factor: var(
+		--so-calendar-spacing-scale,
+		var(--so-collection-scale-xl, 1)
+	);
 	--so-calendar-day: var(--so-button-height-xl);
 	--so-calendar-column: max(var(--so-calendar-cell), 2.5 * var(--so-calendar-day-font-size-xl));
 }
@@ -271,6 +283,10 @@
 }
 
 .so-calendar--size-2xl {
+	--so-calendar-spacing-factor: var(
+		--so-calendar-spacing-scale,
+		var(--so-collection-scale-2xl, 1)
+	);
 	--so-calendar-day: var(--so-button-height-2xl);
 	--so-calendar-column: max(var(--so-calendar-cell), 2.5 * var(--so-calendar-day-font-size-2xl));
 }
@@ -593,39 +609,11 @@
 	overflow-wrap: normal;
 }
 
-/* Resolve the family scale here; explicit length variables remain final overrides. */
-.so-calendar--size-sm {
-	--so-calendar-spacing-factor: var(
-		--so-calendar-spacing-scale,
-		var(--so-collection-scale-sm, 1)
-	);
-}
-
+/* Use the normal family scale when the size modifier is absent. */
 :where(.so-calendar),
 .so-calendar--size-normal {
 	--so-calendar-spacing-factor: var(
 		--so-calendar-spacing-scale,
 		var(--so-collection-scale-normal, 1)
-	);
-}
-
-.so-calendar--size-lg {
-	--so-calendar-spacing-factor: var(
-		--so-calendar-spacing-scale,
-		var(--so-collection-scale-lg, 1)
-	);
-}
-
-.so-calendar--size-xl {
-	--so-calendar-spacing-factor: var(
-		--so-calendar-spacing-scale,
-		var(--so-collection-scale-xl, 1)
-	);
-}
-
-.so-calendar--size-2xl {
-	--so-calendar-spacing-factor: var(
-		--so-calendar-spacing-scale,
-		var(--so-collection-scale-2xl, 1)
 	);
 }
