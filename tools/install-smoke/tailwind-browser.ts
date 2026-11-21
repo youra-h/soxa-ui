@@ -3,7 +3,7 @@ import type { Browser, Page } from 'playwright'
 const SIZES = ['sm', 'normal', 'lg', 'xl', '2xl'] as const
 const FONTS = [14, 16, 18, 20, 24]
 const HEIGHTS = [28, 32, 36, 40, 44]
-const PADDING = [6, 10, 12, 14, 16]
+const PADDING = [7.5, 10, 12.5, 15, 17.5]
 const INDENTS = [6, 8, 10, 12, 14]
 const ROW_HEIGHTS = [28, 32, 36, 40, 44]
 
