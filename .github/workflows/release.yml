@@ -18,6 +18,7 @@ jobs:
   publish:
     outputs:
       channel: ${{ steps.channel.outputs.value }}
+      scope: ${{ steps.channel.outputs.scope }}
     name: Публикация в npm
     if: contains(github.event.head_commit.message, 'release/') || startsWith(github.event.head_commit.message, 'Выпуск ')
     runs-on: ubuntu-latest
@@ -39,6 +40,8 @@ jobs:
         run: |
           channel=$(node tools/release-notes/cli.mjs channel)
           echo "value=$channel" >> "$GITHUB_OUTPUT"
+          scope=$(node -p "JSON.parse(require('fs').readFileSync('.release/plan.json')).scope")
+          echo "scope=$scope" >> "$GITHUB_OUTPUT"
 
       # Every package is checked at its own version: the library shares one,
       # each theme and icon pack has its own. None missing from npm — a rerun
@@ -59,13 +62,24 @@ jobs:
       - if: steps.check.outputs.publish == 'true'
         run: npm ci
 
-      - if: steps.check.outputs.publish == 'true'
+      - if: steps.check.outputs.publish == 'true' && steps.channel.outputs.scope != 'mcp'
         name: Сборка пакетов
         run: npm run build
 
-      - if: steps.check.outputs.publish == 'true'
+      - if: steps.check.outputs.publish == 'true' && steps.channel.outputs.scope == 'mcp'
+        name: Сборка MCP
+        run: npm run build:mcp
+
+      - if: steps.check.outputs.publish == 'true' && steps.channel.outputs.scope != 'mcp'
         name: Импорты пакетов объявлены
         run: npm run check:published-imports
+
+      - if: steps.check.outputs.publish == 'true' && steps.channel.outputs.scope == 'mcp'
+        run: npx playwright install --with-deps chromium
+
+      - if: steps.check.outputs.publish == 'true' && steps.channel.outputs.scope == 'mcp'
+        name: Проверка tarball MCP
+        run: npm run check:mcp-package
 
       # The approved plan was validated against every unpublished package above.
       - if: steps.check.outputs.publish == 'true'
@@ -108,7 +122,12 @@ jobs:
       # Pin every package to its version in this commit: cached dist-tags may
       # still select the previous release immediately after publication.
       - name: Установка из npm в чистые проекты
+        if: needs.publish.outputs.scope != 'mcp'
         run: npm run check:install -- --registry-workspace --dir "$RUNNER_TEMP/soxa-release-install"
+
+      - name: MCP из npm
+        if: needs.publish.outputs.scope == 'mcp' || needs.publish.outputs.scope == 'all'
+        run: npm run check:mcp-package -- --registry
 
       - name: Диагностика установленного выпуска
         if: failure()

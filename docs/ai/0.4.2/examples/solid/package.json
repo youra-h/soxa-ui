@@ -1,0 +1,28 @@
+{
+  "name": "soxa-solid-recipes",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@soxa-ui/core": "0.4.2",
+    "@soxa-ui/setup": "0.4.2",
+    "@soxa-ui/solid": "0.4.2",
+    "@soxa-ui/theme-oren": "0.4.1",
+    "@soxa-ui/icons-material": "0.3.1",
+    "solid-js": "1.9.17",
+    "@soxa-ui/plugins": "0.4.2"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vite": "8.3.5",
+    "vite-plugin-solid": "2.11.16",
+    "@types/node": "24.19.2"
+  }
+}

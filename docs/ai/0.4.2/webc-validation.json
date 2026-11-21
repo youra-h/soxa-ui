@@ -1,0 +1,480 @@
+{
+  "provenance": "published-0.4.2",
+  "docsRevision": "ffa0be6f505fb65101f0c1ea1d07f3a9b761d9cd",
+  "nodeVersion": "v24.20.0",
+  "tools": [
+    {
+      "path": "tools/ai-docs/webc-smoke.mjs",
+      "sha256": "6e4478f88c0a6b5e1a188b733a058850de22223eddddac75c81da31bada1904e"
+    },
+    {
+      "path": "tools/ai-docs/webc-browser.mjs",
+      "sha256": "b9a4d19fe9d40f8af13b8b1d35ce0803a6b4f32ca40ccc2c21b350c1a17d6937"
+    },
+    {
+      "path": "tools/ai-docs/webc-webkit-container.mjs",
+      "sha256": "a35d6e0b106011eb3322f7843333382a6d7cf6893d764cce82354f52122841c2"
+    },
+    {
+      "path": "tools/ai-docs/consumer-browser.mjs",
+      "sha256": "1e0bcf759c4b36c36bfe90ec01ad6302f7266175452c435e2dd40bdb0cd058c4"
+    },
+    {
+      "path": "tools/ai-docs/corpus.mjs",
+      "sha256": "e0263bdf01c5d509dad397decf5cb9f6e399ecce8d1d05090f72cdc1652003dd"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "examples/webc/index.html",
+      "sha256": "9fbe6827ee9440ced2e9a2931713ce1ea2ff282e37063e534067c8d407619353"
+    },
+    {
+      "path": "examples/webc/main.ts",
+      "sha256": "b5670d1d4eb1b77731b11f56b347415013e202b98a7de57f08ca8eab6bbb5fa6"
+    },
+    {
+      "path": "examples/webc/package.json",
+      "sha256": "c08abd5d4ae3731005700cccfad9af93f7ae43f473281a6b985434ab54b78c9f"
+    },
+    {
+      "path": "examples/webc/setup.ts",
+      "sha256": "f51fbc789da7d76227a91962008d5e6b923b1fc228a3a15cf8fd2eb3e37ed689"
+    },
+    {
+      "path": "examples/webc/tsconfig.json",
+      "sha256": "4eef04d9ccbc93dbf2f212244c59803374e3244b052145fbc1ebc1e43a58b74e"
+    },
+    {
+      "path": "examples/webc/upgrade.html",
+      "sha256": "778a58e0344920df9975a666415c519aa9cc63d08721e372dc4347ae3d98aba2"
+    },
+    {
+      "path": "examples/webc/upgrade.ts",
+      "sha256": "a859fbcffb00db33224ab560ae445ff3a53beac3d8b18e7119e11473512e8fc4"
+    },
+    {
+      "path": "examples/webc/vite.config.ts",
+      "sha256": "1e9b41ca149da1f81fcd8adb07d66386c0e6054eb8ba1311ba6ef6d69912367b"
+    }
+  ],
+  "npmPeers": true,
+  "packages": [
+    {
+      "name": "@soxa-ui/core",
+      "version": "0.4.2",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/core/-/core-0.4.2.tgz",
+      "integrity": "sha512-4juVqN8c2CBpSFg0IrcVbtusA3mZaIGtsRjD6pjzMhRJoa6G/UvfxZewE338RBP5oUn91sdSrblf3NDFn5oXMA=="
+    },
+    {
+      "name": "@soxa-ui/icons-material",
+      "version": "0.3.1",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/icons-material/-/icons-material-0.3.1.tgz",
+      "integrity": "sha512-YyNsgvuCPZKLerpO2F/zdzgGdSYT7S1fGpcP/Tu80aG7EZsg7+g1Mt/o/cLYT1h9tV2l3yNaFPWFDDK37pDsIw=="
+    },
+    {
+      "name": "@soxa-ui/plugins",
+      "version": "0.4.2",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/plugins/-/plugins-0.4.2.tgz",
+      "integrity": "sha512-UtdAThhB4V9Npq6pIj4hVB918icorjI/gHNcIR49hOdFhGHOSSwyostImWuNWlwq+vxLSABjXIgfMwhaofjMHA=="
+    },
+    {
+      "name": "@soxa-ui/setup",
+      "version": "0.4.2",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.4.2.tgz",
+      "integrity": "sha512-Q5hfvjhvwW520HfT6iYo2i8UEg7+sz/09wf+wu7R+66xwT/v/bL1MWZSl4YWdVEnweOaUr2Nx3VA4O0T0QftOA=="
+    },
+    {
+      "name": "@soxa-ui/theme-base",
+      "version": "0.4.1",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/theme-base/-/theme-base-0.4.1.tgz",
+      "integrity": "sha512-4VxLXL5ycLRQa5n50z5x9Nnyk11EX/FCpQ7eKS4CPWFJfCeCpqGFI++tqdJe4roGwkN74CUlCBYOhjNf59t8cw=="
+    },
+    {
+      "name": "@soxa-ui/theme-oren",
+      "version": "0.4.1",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/theme-oren/-/theme-oren-0.4.1.tgz",
+      "integrity": "sha512-yxci/WJ7ccKFxSIm3f1Ad+oy04cwDnEZj6NJp/uLUGXQSc7w83PPNKD/kRAkxB/imj52VJg+KbyyznETslV1oQ=="
+    },
+    {
+      "name": "@soxa-ui/webc",
+      "version": "0.4.2",
+      "resolved": "https://registry.npmjs.org/@soxa-ui/webc/-/webc-0.4.2.tgz",
+      "integrity": "sha512-av3PfEemlgzasSZQnFx+a/nOhDsA1vssATA+RLl6hHOLFN5UFEPo6XSjOKDtwcfsXj5kV/8MipIGjFDdhndndw=="
+    }
+  ],
+  "lockSha256": "9b6c7df906dd5faab16c81a6d3af062556fb4ba2231818f7d4d4ec8c48971670",
+  "apiSha256": "85aa9b20e93d9a1ed045f866d70e310505df536b337d7b73a9974d3492861e13",
+  "corpusInputs": [
+    {
+      "id": "api-webc-accordion",
+      "sha256": "e21c58aa1ec0fcda2e0772dab83997becb6c2832e398ef27788ef07aebeecd12"
+    },
+    {
+      "id": "api-webc-accordion-item",
+      "sha256": "9826bf0093de365c2a0a7bf53382100ed1a95755316e88d55b64ca36d41b6843"
+    },
+    {
+      "id": "api-webc-alert",
+      "sha256": "4a4896cd1ce3aa67b0e0cedde23a355d319b87f4c0c3c160bac2be6838815ca0"
+    },
+    {
+      "id": "api-webc-alert-dialog",
+      "sha256": "0f1931814892b872adeba9c867f23bc8f73dc455b14b77b4358a5c5c0fa4fc62"
+    },
+    {
+      "id": "api-webc-avatar",
+      "sha256": "18b2ff29dbc24f247bb0cdf08ff121e13e10ddddc3a034b4e6d6e858e9f8d4bb"
+    },
+    {
+      "id": "api-webc-avatar-group",
+      "sha256": "534210d6decd2c4a9d59696d1b82a7c0169de843f11f98afddfcf6ca8eb22add"
+    },
+    {
+      "id": "api-webc-badge",
+      "sha256": "27f372ac9bc7eb39d74605cd587823347afe200c43077230e58f94cebc3faa40"
+    },
+    {
+      "id": "api-webc-breadcrumbs",
+      "sha256": "09899fa89baed93ae66dc11091a1d2192ce22d6c395ecccf8d99e6fc8dc96977"
+    },
+    {
+      "id": "api-webc-breadcrumbs-item",
+      "sha256": "0dd9347e490e3617512b40e92fce49b8a84ce52c6672bc0d648a0799fa02e6f3"
+    },
+    {
+      "id": "api-webc-button",
+      "sha256": "617288b3e49986e32a5b72f6361f277f7d78ebc671fad800cb50895986e4a1ed"
+    },
+    {
+      "id": "api-webc-calendar",
+      "sha256": "f89ddf403471ae49e1908461dae5230b344bfdb6734036383394921838af8e06"
+    },
+    {
+      "id": "api-webc-calendar-item",
+      "sha256": "eba373e1e2146f617d18657a5045d5d8f508d125014e860d7c0b4f228de27bf2"
+    },
+    {
+      "id": "api-webc-check-box",
+      "sha256": "e21ed922f8d51d9128156b4f737bb8bb1e49af8298cf728f3862571f184e6aed"
+    },
+    {
+      "id": "api-webc-code-block",
+      "sha256": "f053781a785383b3ea858aa3d39b813ad08ac1520f37ae22da924d092761b618"
+    },
+    {
+      "id": "api-webc-component-view",
+      "sha256": "93505e3eca9ff2493d1033a035565f7fe23ec212124b1cd53f9b13412d1839d0"
+    },
+    {
+      "id": "api-webc-date-input",
+      "sha256": "cd908f8da8cad65adfc0e225d3e8b8df2add09d46eee679101c3bacd0dac1602"
+    },
+    {
+      "id": "api-webc-date-picker",
+      "sha256": "2e1b743cf3725d45b6f43cc33d05433e46b40eb5c81a21c6feee6ba104eaaa21"
+    },
+    {
+      "id": "api-webc-dialog",
+      "sha256": "43ac88ebac48ff609056c2168313a5e96d2daed5bfcfed757517b75378eb13a6"
+    },
+    {
+      "id": "api-webc-drag-and-drop",
+      "sha256": "b0d1eeba63632ed63e750aba2baf9b36a47f2e9a2ae4980c064d9e21b7f10282"
+    },
+    {
+      "id": "api-webc-drawer",
+      "sha256": "461dfc9be536ccea149a3e322e17c9439ae08f10ccd2790aaa559658f75c842e"
+    },
+    {
+      "id": "api-webc-field",
+      "sha256": "147a994eb3fcdd5860b1773e0922bf13ed1ca83db2ad46a6f3c0fd0371207092"
+    },
+    {
+      "id": "api-webc-frame",
+      "sha256": "ab72afc150c4f0e2aca69fed4c91834e79836a6d58f10a6327e21beb418e1d2d"
+    },
+    {
+      "id": "api-webc-icon",
+      "sha256": "6a435d24e426a799d6529e4818f6ed7f87277a09e5fc10280d64a9f32d9944ee"
+    },
+    {
+      "id": "api-webc-input",
+      "sha256": "205ed775f0084027a5cedd7752e68ca5e6589e1ec71c74a73f4a3de2bd20e16d"
+    },
+    {
+      "id": "api-webc-label",
+      "sha256": "b82962d644d67fa83c91bf7f6f7c71dbdfd497173a9a97d74cb0c96f13757b88"
+    },
+    {
+      "id": "api-webc-list-box",
+      "sha256": "7ab4601d178883a6b80b611ad90b3018a4035ac7b433d0f74d2c4224a5349bf6"
+    },
+    {
+      "id": "api-webc-list-box-group",
+      "sha256": "2d284060ef7e96356a2b8c7170e94e254b9dea9745110f1ba7015ca01b541400"
+    },
+    {
+      "id": "api-webc-list-box-item",
+      "sha256": "03542bf5d4a085d30768462535c6b60eb1ee67c941c475c8775c5f7f474be337"
+    },
+    {
+      "id": "api-webc-menu",
+      "sha256": "86440b6efe7f4f2c1a2e2401d2a65fbc67790e531ceec7c8c1f8c3b5b808f70e"
+    },
+    {
+      "id": "api-webc-menu-checkbox-item",
+      "sha256": "e07e8b2ca78beb353420f3ff1a5f74bc23f45e0f94ce688780726fede1a35ea9"
+    },
+    {
+      "id": "api-webc-menu-group",
+      "sha256": "cb568987257f2f5780d73e3960b5378f502f0451cb789f7285578db83767dd95"
+    },
+    {
+      "id": "api-webc-menu-item",
+      "sha256": "572aac0b7d97391305acea9711aac021d1df56ef9a3649b609fd7b414084a63b"
+    },
+    {
+      "id": "api-webc-menu-popover-item",
+      "sha256": "aeb774a337da0c6916decf864a902f2be5ca3722326a2b4db392eeb1edb66a67"
+    },
+    {
+      "id": "api-webc-menu-radio-group",
+      "sha256": "1401174e0fd5cac40fa3ae4686c78ee5d595ab6f09d8eb70469e1cb9d4f5e034"
+    },
+    {
+      "id": "api-webc-menu-radio-item",
+      "sha256": "eab71a1054233d2a107957690ae25c13aadad8a6165a7197182a442b7639a7fd"
+    },
+    {
+      "id": "api-webc-menu-separator",
+      "sha256": "6168ae35a80f604e7672292e30ad19c4c6513b2aa05fc397cefe486ff1fe6f8e"
+    },
+    {
+      "id": "api-webc-menu-submenu",
+      "sha256": "1401685e5f05ea40ca08a4bb357995fa0f1a50f433ef24dc351566bd3aac3c64"
+    },
+    {
+      "id": "api-webc-number-input",
+      "sha256": "ebed671592e903f9863514cf556794fce18fa8db52e88ff92cf03209a5b12910"
+    },
+    {
+      "id": "api-webc-pagination",
+      "sha256": "d3a2764b3fffb2771c182e2eccdaea71c981b05ce1c43fb4a78eabefa112f338"
+    },
+    {
+      "id": "api-webc-popover",
+      "sha256": "ab48498cfcafe62fdb963d4542a51329c2d6e125d4b9efda096c5d6704c69165"
+    },
+    {
+      "id": "api-webc-progress-linear",
+      "sha256": "cd9b284e2226c0f694cd4168d35b56f7fd62385c343552a8246892e8bb2aa57b"
+    },
+    {
+      "id": "api-webc-progress-spinner",
+      "sha256": "895e4427848bda72da765f9954cb797787f4cefce70b36f2bb8ff216b782823c"
+    },
+    {
+      "id": "api-webc-radio-group",
+      "sha256": "c0c8cf930e991f4885aecf63b461dafec9944368e80f0d2c38eb4d2c316365a9"
+    },
+    {
+      "id": "api-webc-radio-group-item",
+      "sha256": "91da438d14f81837edc2bf69178d3df6a97f313f5ed012db026a04c97c9cd0a4"
+    },
+    {
+      "id": "api-webc-rating",
+      "sha256": "383d4951db700e1201439287ed5ce908f42eba1868f779c2c1267a9656ae414e"
+    },
+    {
+      "id": "api-webc-scroller",
+      "sha256": "117b2b4d8ae5a5009fc36cbe265383cb9a3c5fcf244f6b39ae14ba7c28973d77"
+    },
+    {
+      "id": "api-webc-select",
+      "sha256": "e7e07b236b049b9d6b11ad87baa25722d34e30824715a711d760d5a4b9a16e59"
+    },
+    {
+      "id": "api-webc-select-group",
+      "sha256": "954ac94e3328cf319a8449c3f3b547de0f171d83147d036200c2e95b50f85a2d"
+    },
+    {
+      "id": "api-webc-select-item",
+      "sha256": "c6ee9a921c69ead5403e0669745ba95cf096ee5ac9e16d1267460e18bb7b21ac"
+    },
+    {
+      "id": "api-webc-separator",
+      "sha256": "f230bd955b69f6d1fd00101a504e21dda1c6e918c77968c7cfd98b9ce9c35ffe"
+    },
+    {
+      "id": "api-webc-skeleton",
+      "sha256": "4a74eb9e31a754a2a36e4483b3000f0b9e0e7d108fddf9c73b052ee3e54abab7"
+    },
+    {
+      "id": "api-webc-slider",
+      "sha256": "4b54c5d342cd43066c44123c54a35c5e0eebb23e1ba3603fd8cc9eb91e9c6c57"
+    },
+    {
+      "id": "api-webc-switch",
+      "sha256": "b5dcdc8b6a3873218bf3561d212a88f77e0c50c2b02311d06268eaa7122da970"
+    },
+    {
+      "id": "api-webc-table",
+      "sha256": "4133b05876f6a1a1dda3802830088fb91f06a538236724416786c05ac3d841db"
+    },
+    {
+      "id": "api-webc-table-column",
+      "sha256": "7bc29f72ccaaa9a283d6519d0952b93189c501ce6c5b1400eff8c4e961efbab4"
+    },
+    {
+      "id": "api-webc-table-row",
+      "sha256": "865dcbf302b941e40bc1022e3d3a7e98876078ee2c9e30f90f6ddb63e89c4ce3"
+    },
+    {
+      "id": "api-webc-tabs",
+      "sha256": "00e85b79ba5e07bda8fef9d4032a4ef8187fb01c280dde734ffe2354b75dbd3e"
+    },
+    {
+      "id": "api-webc-tabs-content",
+      "sha256": "13f461b82ed49a4c573e138b7d5c82c3e8112a3487e8565f34f91cc5d7f80f94"
+    },
+    {
+      "id": "api-webc-tabs-item",
+      "sha256": "08f8b04be344d550dcbd925fe8e67c60d475ba4946cf545c0361269256ebe3c3"
+    },
+    {
+      "id": "api-webc-tags",
+      "sha256": "bec6e22a658edd6c2d4048b567d733561fb792e9e713aeccf0deedb432e89ee1"
+    },
+    {
+      "id": "api-webc-tags-item",
+      "sha256": "f8c793991406827c2e2d86e015730aaf9f02cd655feb23f819ec69d0ec25fbab"
+    },
+    {
+      "id": "api-webc-textarea",
+      "sha256": "491fcde09e1d7d84ca6a4e987347b3866d41355664aba0fd32734e0db957e7fc"
+    },
+    {
+      "id": "api-webc-toasts",
+      "sha256": "3612bf6de55137090a4b02c0775ef9750d04c9b1a07867095cd05872703292b2"
+    },
+    {
+      "id": "api-webc-toggle-button",
+      "sha256": "3c58e1278b679b1baed7a8f972e95dd5dad57a8672f5febf53f54f3cd11cdbbd"
+    },
+    {
+      "id": "api-webc-toggle-group",
+      "sha256": "7b8509064d3407413b6122dcadd3a7567e67a1646c4673777f7c9289a3dc8c03"
+    },
+    {
+      "id": "api-webc-toggle-group-item",
+      "sha256": "61cad0d762fe565abfe7de1577e645cefa438ce3065bd78523dc4bd85065ed53"
+    },
+    {
+      "id": "api-webc-tooltip",
+      "sha256": "4a1aaa046a4dbc67283aeb8b6391f7608c27aaf0166bad1eb2d5d72115807287"
+    },
+    {
+      "id": "api-webc-virtual",
+      "sha256": "1b73131e1f1ac8be9d3fac65861a7efaa3a676362ea7d47adf9de7022ea1887f"
+    },
+    {
+      "id": "external-plugins",
+      "sha256": "c9b710fdfb30b63cbb4939ef336083551d042efd231ccfc783ca3318554eb609"
+    },
+    {
+      "id": "icon-replacement",
+      "sha256": "4a22d3aebcf284471e045a9a01b455d65fa0ad4210ad64523031e655f5d88865"
+    },
+    {
+      "id": "oren-configuration",
+      "sha256": "a028bd9500381ee51848e3b3eb1e1e5d047c990d69da0228b3212fe68f4c9cc1"
+    },
+    {
+      "id": "overview",
+      "sha256": "b5aa793c53b5c1419373c232611366f1465981b501080ba0e5c8fb02381fd74f"
+    },
+    {
+      "id": "programmatic-control",
+      "sha256": "5a6a5422c4bb2cf0348aeeb1670e184bef7d230777b52cc9bc4f08e857fa8d99"
+    },
+    {
+      "id": "public-recipes-validation",
+      "sha256": "9e0acbda5066f964cbf10567496057b30e8787844d63a332b7479fcb865169e4"
+    },
+    {
+      "id": "release-changes",
+      "sha256": "b60dc6c53df571ad59b6d2fdfd03bb39a1f51d341ec497c8f613b3553ddeaa1e"
+    },
+    {
+      "id": "release-validation",
+      "sha256": "f9b117c9a989ae8ffac1d1653af81d0ead78a88f36914effa482ad457a5aad6c"
+    },
+    {
+      "id": "theme-authoring",
+      "sha256": "fcd7a02fb7e24d53befa6ec59f013378495282f39a5f2cb46c78e26d2dca0940"
+    },
+    {
+      "id": "webc-bindings",
+      "sha256": "a6a2c6b104c57aa81491e5423eff6d94139a5e01fc2744bc75c28d15f42bb78a"
+    },
+    {
+      "id": "webc-composition",
+      "sha256": "44f712524e92869c5047ea1a12d6dae3f1c0066998288e5fda3219c0be310e07"
+    },
+    {
+      "id": "webc-environment",
+      "sha256": "86cb9619c2384b7571a7b4c3798c2f21fe97e8f1a893bf14ba8b31aff4bc60c6"
+    },
+    {
+      "id": "webc-errors",
+      "sha256": "5fbb3454af6b71130d2fe37abf32f85d51f9064325e313bc1661f0b5dde97d60"
+    },
+    {
+      "id": "webc-installation",
+      "sha256": "07f1648bd5c9a61cad394086dafc524109e237ceb7833eccd69a4506dcad37c4"
+    },
+    {
+      "id": "webc-lifecycle",
+      "sha256": "5c7e32017d4bfc0a72d6f3d1a54515eee15cfed596b17d6dcbb6bee7648f78df"
+    },
+    {
+      "id": "webc-start",
+      "sha256": "a6727bc522dae4ea1a3a925af8371c2fd5ff8484b9c0e23edaedfc0435345401"
+    },
+    {
+      "id": "webc-validation",
+      "sha256": "bdc829c840bf8b3cd0adb6f5dcce4a735dd71eabe7b8bf24ce94df8a640135a9"
+    }
+  ],
+  "strictTypes": true,
+  "productionBuild": true,
+  "buildWarning": "Root import produces a chunk above the default Vite 500 kB warning threshold.",
+  "nodeImport": {
+    "supported": false,
+    "error": "ReferenceError: self is not defined"
+  },
+  "browserVersion": "156.0.8078.4",
+  "serverHTMLWithoutJavaScript": {
+    "nativeButton": true,
+    "generatedInput": false,
+    "hydrationClaim": false
+  },
+  "serverHTMLClientUpgrade": true,
+  "browser": {
+    "checks": [
+      "typed input value event and visible label focus",
+      "checkbox keyboard and accessible name",
+      "Select keyboard changes application value",
+      "DatePicker Calendar keyboard and value",
+      "compound Accordion light DOM and keyboard",
+      "native form submission through real fields",
+      "reverse property writes and cancelable before event",
+      "unique ids and registered theme icons",
+      "three remounts remove open layers and abort application listeners",
+      "clean browser console and network"
+    ],
+    "ariaObservations": [],
+    "diagnostics": []
+  }
+}

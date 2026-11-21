@@ -181,7 +181,7 @@ function selectLibrary(
 
 /**
  * Directories of the packages with a version of their own: themes and icon
- * packs. The themes that ship are not the final ones — applications write
+ * packs. Documentation MCP is independently versioned as well. The themes that ship are not the final ones — applications write
  * their own — so a theme changes on its own schedule and not with every
  * release of the library, and an icon pack likewise. Every other library
  * package belongs to the `fixed` group.
@@ -190,11 +190,11 @@ const OWN_VERSION_DIRS = ['packages/themes/', 'packages/icons/'] as const
 
 /** A theme or an icon pack: a version of its own, outside the `fixed` group. */
 function hasOwnVersion({ dir }: TWorkspacePackage): boolean {
-	return OWN_VERSION_DIRS.some((prefix) => dir.startsWith(prefix))
+	return dir === 'packages/mcp' || OWN_VERSION_DIRS.some((prefix) => dir.startsWith(prefix))
 }
 
 /** Manifest fields whose targets are files of the package. */
-const ENTRY_FIELDS = ['main', 'types', 'style', 'exports'] as const
+const ENTRY_FIELDS = ['main', 'types', 'style', 'exports', 'bin'] as const
 
 /**
  * The paths from the repository root that git ignores, in one run for all of

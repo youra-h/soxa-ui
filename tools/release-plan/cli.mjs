@@ -8,7 +8,7 @@ try {
 		(extra.length && (extra.length !== 1 || extra[0] !== '--beta'))
 	)
 		throw new Error(
-			'Usage: release:plan|release:prepare -- components|themes|icons|all [--beta]',
+			'Usage: release:plan|release:prepare -- components|themes|icons|mcp|all [--beta]',
 		)
 	const root = process.cwd()
 	if (

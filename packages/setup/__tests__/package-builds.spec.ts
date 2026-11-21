@@ -160,7 +160,13 @@ const SVELTE_RECIPE: TRecipe = { name: 'Svelte: svelte-package', tool: /\bsvelte
 /** Один проход: частичная форма Angular, FESM и свёрнутые декларации по APF. */
 const NG_PACKAGR_RECIPE: TRecipe = { name: 'Angular: ng-packagr', tool: /\bng-packagr\b/ }
 
-const RECIPES: readonly TRecipe[] = [LIB_RECIPE, SVELTE_RECIPE, NG_PACKAGR_RECIPE]
+/** Native ESM CLI and verified JSON corpora; no TypeScript declarations or framework runtime. */
+const NODE_RECIPE: TRecipe = {
+	name: 'Node documentation CLI',
+	tool: /\bnode \.\.\/\.\.\/tools\/mcp-package\/build\.mjs$/,
+}
+
+const RECIPES: readonly TRecipe[] = [LIB_RECIPE, SVELTE_RECIPE, NG_PACKAGR_RECIPE, NODE_RECIPE]
 
 /** Рецепты, чей инструмент есть в скрипте `build`. */
 function recipesOf(build: string): TRecipe[] {
@@ -818,7 +824,7 @@ describe('сборка пакетов', () => {
 		).toEqual([])
 	})
 
-	describe.each(PACKAGES)('$name', (pkg) => {
+	describe.each(PACKAGES.filter((pkg) => !NODE_RECIPE.tool.test(pkg.build)))('$name', (pkg) => {
 		it('сборка видит соседа пакетом, а не исходниками', () => {
 			const file = join(pkg.dir, 'tsconfig.build.json')
 			const violations = checkBuildTsconfig(pkg.name, file, ts.sys)
@@ -882,6 +888,16 @@ describe('сборка пакетов', () => {
 				'Входы бандла разошлись с exports (AGENTS.md, «Сборка пакетов»):\n' +
 					violations.join('\n'),
 			).toEqual([])
+		})
+	})
+
+	describe.each(packagesOf(NODE_RECIPE))('native Node recipe · $name', (pkg) => {
+		it('declares its engine, executable, JSON surface and validation before packing', () => {
+			expect(pkg.manifest.engines).toHaveProperty('node')
+			expect(pkg.manifest.bin).toEqual({ 'soxa-mcp': './dist/cli.mjs' })
+			expect(pkg.manifest.exports).toHaveProperty('./catalog.json', './dist/catalog.json')
+			expect(pkg.manifest.types).toBeUndefined()
+			expect(scriptOf(pkg.manifest, pkg.dir, 'prepack')).toContain('mcp-package/check.mjs')
 		})
 	})
 

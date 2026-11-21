@@ -8,15 +8,15 @@ import { readPreState } from '@changesets/pre'
 import { assembleReleasePlan } from '@changesets/assemble-release-plan'
 import { applyReleasePlan } from '@changesets/apply-release-plan'
 
-export const SCOPES = ['components', 'themes', 'icons']
+import { SCOPES, scopeOfPackage } from './scopes.mjs'
+export { SCOPES } from './scopes.mjs'
 export const PLAN_PATH = '.release/plan.json'
 
 export function packageScope(pkg, root, shared) {
-	if (shared.has(pkg.packageJson.name)) return 'components'
-	const dir = relative(root, pkg.dir).replaceAll('\\', '/')
-	if (dir.startsWith('packages/themes/')) return 'themes'
-	if (dir.startsWith('packages/icons/')) return 'icons'
-	throw new Error('No release scope for ' + pkg.packageJson.name)
+	return scopeOfPackage(
+		{ name: pkg.packageJson.name, dir: relative(root, pkg.dir).replaceAll('\\', '/') },
+		shared,
+	)
 }
 
 /** Keep unrelated changesets pending, including the other half of a mixed changeset. */
@@ -26,7 +26,7 @@ export function planRelease(
 	{ beta = false } = {},
 ) {
 	if (![...SCOPES, 'all'].includes(scope))
-		throw new Error('Choose components, themes, icons or all')
+		throw new Error('Choose components, themes, icons, mcp or all')
 	if (preState && scope !== 'all')
 		throw new Error(
 			'The existing global prerelease must first graduate with release:prepare -- all',

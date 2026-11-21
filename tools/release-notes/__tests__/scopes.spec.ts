@@ -14,6 +14,18 @@ const packages = [
 	{ name: '@soxa-ui/icons-material', version: '0.3.0', dir: 'packages/icons/material' },
 ]
 describe('release publication scope', () => {
+	it('gives MCP an independent approved plan and GitHub history', () => {
+		const mcp = { name: '@soxa-ui/mcp', version: '0.0.1', dir: 'packages/mcp' }
+		expect(releaseGroups([...packages, mcp], shared).at(-1)).toEqual([mcp])
+		expect(
+			packagesOfPlan(
+				{ schemaVersion: 1, scope: 'mcp', packages: [{ ...mcp, scope: 'mcp' }] },
+				[...packages, mcp],
+				shared,
+			),
+		).toEqual([mcp])
+		expect(() => assertPlannedUnpublished(packages, [mcp])).toThrow('outside')
+	})
 	it('creates separate histories for components, themes and icons', () => {
 		expect(releaseGroups(packages, shared)).toEqual(packages.map((pkg) => [pkg]))
 	})

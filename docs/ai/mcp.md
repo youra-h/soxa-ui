@@ -9,11 +9,25 @@ Build the corpus from the exact published setup API first, as described in the
 
 ## Delivery and installation
 
-The server is delivered with the public documentation tools at an immutable
-documentation commit, separately from the library version. There is no new npm
-package, npm release, `npx` executable or independent documentation database.
-`serverInfo.version` is the transport implementation version; each answer carries
-the selected corpus's `libraryVersion` and `docsRevision` independently.
+The standalone npm package is **@soxa-ui/mcp**, with executable **soxa-mcp**.
+Its release is independent of the UI library and documentation revisions. The
+package bundles 0.3.0, 0.4.1 and 0.4.2 corpora; startup needs no checkout,
+absolute corpus path or network after npm installation. The initial source
+version 0.0.0 is a preparation placeholder; it is not a published version.
+The patch changeset proposes the first 0.0.1 release through the normal pipeline.
+Read the [package guide](../../packages/mcp/README.md) for client configuration,
+Node requirements and the static JSON exports for website builds. Use the
+actual npm package version after publication, never a library version by inference.
+
+Packaged serverInfo.version reports the MCP package version; source-only
+transport reports its implementation version. Answers carry the selected
+libraryVersion and docsRevision separately. Neither means complete guide coverage.
+
+### Historical source delivery
+
+The source route below remains available for pinned documentation commits.
+It requires a separately prepared corpus. Consumers of the npm package use
+the package's default corpora instead.
 
 Requirements: Node 22.12+ and an already built schema-1 corpus. In the source
 guide's downloader command, add `--include-mcp` to fetch the three server modules:
@@ -55,10 +69,12 @@ is required by the server itself. The consumer smoke installs the SDK only in
 its isolated temporary validation directory.
 
 VS Code's configuration uses `servers` with `type: "stdio"`; Claude Desktop's
-uses `mcpServers` with the command and args above. These are configuration
-templates, **not verified desktop integrations**. No interactive editor/desktop
-client or AI conversation has been tested in this change. A deterministic SDK
-session is retained and reproducible below.
+uses `mcpServers` with the command and args above. These historical source
+configuration templates were originally checked with the SDK only. The packaged
+MCP candidate has additionally been connected to an isolated VS Code 1.147.0
+profile, with all nine tools discovered and real list_versions/get_component
+requests. See the [current validation](./0.4.2/release-validation.md). This does
+not establish Claude Desktop or conversational AI-authoring coverage.
 
 ## Retrieval contract
 
@@ -163,7 +179,7 @@ The [2026-11-18 validation record](./validation/mcp.json) pins the tested
 implementation/documentation revision and received example hashes. Its two
 retained npm locks identify the SDK/server-preparation and consumer installations.
 The protocol session made 81 tool calls; published-package types, production
-build and Chromium interactions passed. Desktop clients remain unverified.
+build and Chromium interactions passed. Desktop clients were not checked in that historical run.
 
 ## 0.4.1 corpus
 
@@ -172,5 +188,6 @@ the exact 0.4.1 documentation source with --include-mcp, build from published
 setup 0.4.1, then pass its output with --corpus. Supply both 0.3.0 and 0.4.1
 corpus directories to offer both versions; callers must still choose exactly.
 Run the SDK/consumer check with SOXA_DOCS_VERSION=0.4.1. It also retrieves the
-five new components through all six adapter boundaries. Client desktop
-integrations and conversational AI authoring remain separate, unverified work.
+five new components through all six adapter boundaries. This historical source
+check did not cover desktop integration. The later packaged VS Code check is
+recorded in the 0.4.2 validation; conversational AI authoring remains unverified.

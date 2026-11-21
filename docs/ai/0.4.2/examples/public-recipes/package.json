@@ -1,0 +1,32 @@
+{
+  "name": "soxa-public-recipes-consumer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "vue-tsc --noEmit && tsc -p tsconfig.custom.json",
+    "build": "vite build",
+    "dev": "vite",
+    "build:theme": "npm run build --workspace=@example/soxa-theme"
+  },
+  "dependencies": {
+    "@soxa-ui/vue": "0.4.2",
+    "@soxa-ui/core": "0.4.2",
+    "@soxa-ui/setup": "0.4.2",
+    "@soxa-ui/plugins": "0.4.2",
+    "@soxa-ui/theme-base": "0.4.1",
+    "@soxa-ui/theme-oren": "0.4.1",
+    "@soxa-ui/icons-material": "0.3.1",
+    "@soxa-ui/icons-lucide": "0.3.1",
+    "vue": "3.5.32"
+  },
+  "devDependencies": {
+    "typescript": "6.0.2",
+    "vue-tsc": "3.2.6",
+    "vite": "8.2.4",
+    "@vitejs/plugin-vue": "6.0.8",
+    "@types/node": "24.19.2"
+  },
+  "workspaces": [
+    "theme"
+  ]
+}

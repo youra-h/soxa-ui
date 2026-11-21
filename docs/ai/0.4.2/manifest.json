@@ -1,0 +1,2146 @@
+{
+  "schemaVersion": 1,
+  "libraryVersion": "0.4.2",
+  "libraryRevision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+  "language": "en",
+  "api": {
+    "package": "@soxa-ui/setup",
+    "version": "0.4.2",
+    "export": "@soxa-ui/setup/api.json",
+    "sha256": "85aa9b20e93d9a1ed045f866d70e310505df536b337d7b73a9974d3492861e13",
+    "tarball": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.4.2.tgz",
+    "integrity": "sha512-Q5hfvjhvwW520HfT6iYo2i8UEg7+sz/09wf+wu7R+66xwT/v/bL1MWZSl4YWdVEnweOaUr2Nx3VA4O0T0QftOA=="
+  },
+  "coverage": {
+    "vue": {
+      "api": "generated",
+      "guides": "sample"
+    },
+    "react": {
+      "api": "generated",
+      "guides": "sample"
+    },
+    "angular": {
+      "api": "generated",
+      "guides": "sample"
+    },
+    "solid": {
+      "api": "generated",
+      "guides": "sample"
+    },
+    "svelte": {
+      "api": "generated",
+      "guides": "sample"
+    },
+    "webc": {
+      "api": "generated",
+      "guides": "sample"
+    }
+  },
+  "documents": [
+    {
+      "id": "overview",
+      "title": "Soxa UI overview",
+      "path": "overview.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "README.md"
+        }
+      ],
+      "related": [
+        "vue-button",
+        "vue-start",
+        "react-start",
+        "angular-start",
+        "svelte-start",
+        "solid-start",
+        "webc-start",
+        "oren-configuration",
+        "theme-authoring",
+        "icon-replacement",
+        "programmatic-control",
+        "external-plugins",
+        "release-changes"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "vue-button",
+      "title": "Minimal Vue Button",
+      "path": "vue-button.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "installation",
+      "component": "button",
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/setup/content/descriptors/components/button.descriptor.ts"
+        }
+      ],
+      "related": ["overview", "api-vue-button"],
+      "examples": [
+        {
+          "id": "app",
+          "path": "examples/App.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "vue-start",
+      "title": "Vue and Nuxt 0.4.2 entry point",
+      "path": "vue-start.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/vue/README.md"
+        }
+      ],
+      "related": [
+        "overview",
+        "vue-installation",
+        "vue-bindings",
+        "vue-composition",
+        "vue-controller",
+        "vue-nuxt",
+        "vue-errors",
+        "vue-validation"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "vue-installation",
+      "title": "Install the checked Vue consumer",
+      "path": "vue-installation.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "installation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/themes/oren/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/setup/README.md"
+        }
+      ],
+      "related": ["overview", "vue-button", "vue-nuxt", "api-vue-button"],
+      "examples": [
+        {
+          "id": "vue-main",
+          "path": "examples/vue/main.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "vue-bindings",
+      "title": "Fields, models and events",
+      "path": "vue-bindings.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "bindings",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/core/src/common/types.ts"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/vue/src/components/label/Label.vue"
+        }
+      ],
+      "related": [
+        "vue-start",
+        "vue-composition",
+        "api-vue-input",
+        "api-vue-check-box",
+        "api-vue-label",
+        "api-vue-select",
+        "api-vue-date-picker"
+      ],
+      "examples": [
+        {
+          "id": "recipes",
+          "path": "examples/TravelRecipes.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "vue-composition",
+      "title": "Compound components and slots",
+      "path": "vue-composition.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "composition",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/vue/README.md"
+        }
+      ],
+      "related": ["vue-start", "api-vue-accordion", "api-vue-accordion-item", "api-vue-select"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "vue-controller",
+      "title": "Controllers and lifecycle",
+      "path": "vue-controller.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "lifecycle",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": ["vue-start", "api-vue-button"],
+      "examples": [
+        {
+          "id": "controller",
+          "path": "examples/CtrlExample.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "vue-nuxt",
+      "title": "Nuxt universal rendering",
+      "path": "vue-nuxt.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "nuxt",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/themes/oren/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/setup/README.md"
+        }
+      ],
+      "related": ["vue-start", "vue-installation", "vue-bindings", "vue-controller"],
+      "examples": [
+        {
+          "id": "nuxt-config",
+          "path": "examples/nuxt/nuxt.config.ts",
+          "language": "ts"
+        },
+        {
+          "id": "nuxt-plugin",
+          "path": "examples/nuxt/app/plugins/soxa.ts",
+          "language": "ts"
+        },
+        {
+          "id": "nuxt-app",
+          "path": "examples/nuxt/app/app.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "vue-errors",
+      "title": "Troubleshooting this release",
+      "path": "vue-errors.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "troubleshooting",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/vue/README.md"
+        }
+      ],
+      "related": ["vue-start", "vue-bindings", "vue-controller", "vue-nuxt"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "react-start",
+      "title": "React and Next.js consumer entry point",
+      "path": "react-start.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": [
+        "overview",
+        "react-installation",
+        "react-bindings",
+        "react-composition",
+        "react-controller",
+        "react-next",
+        "react-errors",
+        "react-validation"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "react-installation",
+      "title": "Install and register React",
+      "path": "react-installation.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "installation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": ["react-start"],
+      "examples": [
+        {
+          "id": "react-main",
+          "path": "examples/react/main.tsx",
+          "language": "tsx"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "react-bindings",
+      "title": "State, callback props and accessible fields",
+      "path": "react-bindings.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "bindings",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": [
+        "react-start",
+        "api-react-input",
+        "api-react-check-box",
+        "api-react-label",
+        "api-react-select",
+        "api-react-date-picker"
+      ],
+      "examples": [
+        {
+          "id": "react-recipes",
+          "path": "examples/react/TravelRecipes.tsx",
+          "language": "tsx"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "react-composition",
+      "title": "Children, parts and scoped render slots",
+      "path": "react-composition.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "composition",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": [
+        "react-start",
+        "api-react-accordion",
+        "api-react-accordion-item",
+        "api-react-select"
+      ],
+      "examples": [
+        {
+          "id": "react-recipes",
+          "path": "examples/react/TravelRecipes.tsx",
+          "language": "tsx"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "react-controller",
+      "title": "Controllers, DOM refs and lifetime",
+      "path": "react-controller.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "lifecycle",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": ["react-start", "api-react-button"],
+      "examples": [
+        {
+          "id": "react-controller",
+          "path": "examples/react/CtrlExample.tsx",
+          "language": "tsx"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "react-next",
+      "title": "Next.js App Router and SSR",
+      "path": "react-next.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "next",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": ["react-start", "api-react-tabs", "api-react-tabs-item", "api-react-tabs-content"],
+      "examples": [
+        {
+          "id": "next-layout",
+          "path": "examples/next/app/layout.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "next-providers",
+          "path": "examples/next/app/providers.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "next-page",
+          "path": "examples/next/app/page.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "next-client-form",
+          "path": "examples/next/app/client-form.tsx",
+          "language": "tsx"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "react-errors",
+      "title": "Troubleshoot the checked release",
+      "path": "react-errors.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "troubleshooting",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/react/src/types.ts"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/core/src/common/event/evented.ts"
+        }
+      ],
+      "related": ["react-start"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "angular-start",
+      "title": "Angular 0.4.2 consumer entry point",
+      "path": "angular-start.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": [
+        "overview",
+        "angular-installation",
+        "angular-bindings",
+        "angular-composition",
+        "angular-controller",
+        "angular-ssr",
+        "angular-errors",
+        "angular-validation"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "angular-installation",
+      "title": "Install and register standalone Angular",
+      "path": "angular-installation.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "installation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": ["angular-start", "api-angular-button"],
+      "examples": [
+        {
+          "id": "angular-package-json",
+          "path": "examples/angular/package.json",
+          "language": "json"
+        },
+        {
+          "id": "angular-angular-json",
+          "path": "examples/angular/angular.json",
+          "language": "json"
+        },
+        {
+          "id": "angular-tsconfig-json",
+          "path": "examples/angular/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "angular-tsconfig-app-json",
+          "path": "examples/angular/tsconfig.app.json",
+          "language": "json"
+        },
+        {
+          "id": "angular-src-main-ts",
+          "path": "examples/angular/src/main.ts",
+          "language": "ts"
+        },
+        {
+          "id": "angular-src-index-html",
+          "path": "examples/angular/src/index.html",
+          "language": "html"
+        },
+        {
+          "id": "angular-src-styles-css",
+          "path": "examples/angular/src/styles.css",
+          "language": "css"
+        },
+        {
+          "id": "angular-src-app-app-config-ts",
+          "path": "examples/angular/src/app/app.config.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "angular-bindings",
+      "title": "Signals, model outputs and Angular Forms",
+      "path": "angular-bindings.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "bindings",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": [
+        "angular-start",
+        "api-angular-input",
+        "api-angular-check-box",
+        "api-angular-label",
+        "api-angular-select",
+        "api-angular-date-picker"
+      ],
+      "examples": [
+        {
+          "id": "angular-src-app-app-ts",
+          "path": "examples/angular/src/app/app.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "angular-composition",
+      "title": "Parts and scoped templates",
+      "path": "angular-composition.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "composition",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": [
+        "angular-start",
+        "api-angular-accordion",
+        "api-angular-accordion-item",
+        "api-angular-select"
+      ],
+      "examples": [
+        {
+          "id": "angular-src-app-app-ts",
+          "path": "examples/angular/src/app/app.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "angular-controller",
+      "title": "Controllers, refs and component lifetime",
+      "path": "angular-controller.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "lifecycle",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": ["angular-start", "api-angular-button"],
+      "examples": [
+        {
+          "id": "angular-src-app-controller-ts",
+          "path": "examples/angular/src/app/controller.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "angular-ssr",
+      "title": "Angular SSR and hydration",
+      "path": "angular-ssr.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "ssr",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": ["angular-start", "api-angular-select", "api-angular-date-picker"],
+      "examples": [
+        {
+          "id": "angular-src-main-server-ts",
+          "path": "examples/angular/src/main.server.ts",
+          "language": "ts"
+        },
+        {
+          "id": "angular-src-server-ts",
+          "path": "examples/angular/src/server.ts",
+          "language": "ts"
+        },
+        {
+          "id": "angular-src-app-app-config-server-ts",
+          "path": "examples/angular/src/app/app.config.server.ts",
+          "language": "ts"
+        },
+        {
+          "id": "angular-src-app-app-routes-server-ts",
+          "path": "examples/angular/src/app/app.routes.server.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "angular-errors",
+      "title": "Troubleshoot Angular 0.4.2 consumption",
+      "path": "angular-errors.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "troubleshooting",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/angular/README.md"
+        }
+      ],
+      "related": ["angular-start", "angular-ssr"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "svelte-start",
+      "title": "Svelte and SvelteKit 0.4.2",
+      "path": "svelte-start.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": [
+        "overview",
+        "svelte-installation",
+        "svelte-bindings",
+        "svelte-composition",
+        "svelte-controller",
+        "svelte-sveltekit",
+        "svelte-errors",
+        "svelte-validation"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "svelte-installation",
+      "title": "Install the Svelte consumer",
+      "path": "svelte-installation.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "installation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": ["overview", "svelte-errors", "api-svelte-button"],
+      "examples": [
+        {
+          "id": "svelte-0",
+          "path": "examples/svelte/CtrlExample.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "svelte-1",
+          "path": "examples/svelte/index.html",
+          "language": "html"
+        },
+        {
+          "id": "svelte-2",
+          "path": "examples/svelte/main.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "svelte-3",
+          "path": "examples/svelte/package.json",
+          "language": "json"
+        },
+        {
+          "id": "svelte-4",
+          "path": "examples/svelte/Recipes.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "svelte-5",
+          "path": "examples/svelte/setup.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "svelte-6",
+          "path": "examples/svelte/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "svelte-7",
+          "path": "examples/svelte/vite.config.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "sveltekit-0",
+          "path": "examples/sveltekit/package.json",
+          "language": "json"
+        },
+        {
+          "id": "sveltekit-1",
+          "path": "examples/sveltekit/src/app.html",
+          "language": "html"
+        },
+        {
+          "id": "sveltekit-2",
+          "path": "examples/sveltekit/src/lib/CtrlExample.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "sveltekit-3",
+          "path": "examples/sveltekit/src/lib/Recipes.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "sveltekit-4",
+          "path": "examples/sveltekit/src/routes/+layout.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "sveltekit-5",
+          "path": "examples/sveltekit/src/routes/+page.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "sveltekit-6",
+          "path": "examples/sveltekit/src/routes/away/+page.svelte",
+          "language": "svelte"
+        },
+        {
+          "id": "sveltekit-7",
+          "path": "examples/sveltekit/sveltekit-config.json",
+          "language": "json"
+        },
+        {
+          "id": "sveltekit-8",
+          "path": "examples/sveltekit/vite.config.ts",
+          "language": "typescript"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "svelte-bindings",
+      "title": "Controlled values and events",
+      "path": "svelte-bindings.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "bindings",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": [
+        "api-svelte-input",
+        "api-svelte-check-box",
+        "api-svelte-select",
+        "api-svelte-date-picker",
+        "api-svelte-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "svelte-composition",
+      "title": "Compound components and snippets",
+      "path": "svelte-composition.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "composition",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": ["api-svelte-accordion", "api-svelte-select"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "svelte-controller",
+      "title": "Controllers, references and cleanup",
+      "path": "svelte-controller.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "controller",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": ["api-svelte-button", "api-svelte-input"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "svelte-sveltekit",
+      "title": "Universal SvelteKit rendering",
+      "path": "svelte-sveltekit.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "ssr",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": ["svelte-installation", "svelte-errors"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "svelte-errors",
+      "title": "Release-specific mistakes and limits",
+      "path": "svelte-errors.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "errors",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/components/input/Input.svelte"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/svelte/src/types.ts"
+        }
+      ],
+      "related": ["svelte-bindings", "svelte-controller", "svelte-sveltekit"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-start",
+      "title": "Solid and SolidStart 0.4.2",
+      "path": "solid-start.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": [
+        "overview",
+        "solid-installation",
+        "solid-bindings",
+        "solid-composition",
+        "solid-controller",
+        "solid-solidstart",
+        "solid-errors",
+        "solid-validation"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-installation",
+      "title": "Install and configure Solid consumers",
+      "path": "solid-installation.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "installation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": ["solid-start", "solid-validation"],
+      "examples": [
+        {
+          "id": "solid-example-0",
+          "path": "examples/solid/Recipes.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-1",
+          "path": "examples/solidstart/src/Recipes.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-2",
+          "path": "examples/solid/CtrlExample.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-3",
+          "path": "examples/solidstart/src/CtrlExample.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-4",
+          "path": "examples/solid/setup.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "solid-example-5",
+          "path": "examples/solidstart/src/setup.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "solid-example-6",
+          "path": "examples/solid/main.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-7",
+          "path": "examples/solid/index.html",
+          "language": "html"
+        },
+        {
+          "id": "solid-example-8",
+          "path": "examples/solid/vite.config.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "solid-example-9",
+          "path": "examples/solidstart/vite.config.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "solid-example-10",
+          "path": "examples/solidstart/src/app.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-11",
+          "path": "examples/solidstart/src/routes/index.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-12",
+          "path": "examples/solidstart/src/routes/away.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-13",
+          "path": "examples/solidstart/src/entry-client.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-14",
+          "path": "examples/solidstart/src/entry-server.tsx",
+          "language": "tsx"
+        },
+        {
+          "id": "solid-example-15",
+          "path": "examples/solidstart/src/env.d.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "solid-example-16",
+          "path": "examples/solid/package.json",
+          "language": "json"
+        },
+        {
+          "id": "solid-example-17",
+          "path": "examples/solid/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "solid-example-18",
+          "path": "examples/solidstart/package.json",
+          "language": "json"
+        },
+        {
+          "id": "solid-example-19",
+          "path": "examples/solidstart/tsconfig.json",
+          "language": "json"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "solid-bindings",
+      "title": "Controlled signals and callback events",
+      "path": "solid-bindings.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "bindings",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": [
+        "solid-start",
+        "api-solid-input",
+        "api-solid-check-box",
+        "api-solid-select",
+        "api-solid-date-picker",
+        "api-solid-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-composition",
+      "title": "Compound parts, children and live slot scope",
+      "path": "solid-composition.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "composition",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": [
+        "solid-start",
+        "api-solid-accordion",
+        "api-solid-accordion-item",
+        "api-solid-select"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-controller",
+      "title": "Controllers, root refs and cleanup",
+      "path": "solid-controller.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "controller",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": ["solid-start", "api-solid-button"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-solidstart",
+      "title": "SolidStart universal rendering and hydration",
+      "path": "solid-solidstart.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "ssr",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": ["solid-start", "solid-validation"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-errors",
+      "title": "Solid release-specific mistakes and limits",
+      "path": "solid-errors.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "errors",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": ["solid-start", "solid-validation"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "solid-validation",
+      "title": "Published Solid consumer validation",
+      "path": "solid-validation.md",
+      "audience": "consumer",
+      "framework": "solid",
+      "topic": "validation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/solid/README.md"
+        }
+      ],
+      "related": ["solid-start", "release-validation"],
+      "examples": [
+        {
+          "id": "solid-validation-evidence",
+          "path": "solid-validation.json",
+          "language": "json"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "webc-start",
+      "title": "Web Components 0.4.2 entry point",
+      "path": "webc-start.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "overview",
+        "webc-installation",
+        "webc-bindings",
+        "webc-composition",
+        "webc-lifecycle",
+        "webc-environment",
+        "webc-errors",
+        "webc-validation"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "webc-installation",
+      "title": "Install and register the browser consumer",
+      "path": "webc-installation.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "installation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "webc-start",
+        "api-webc-button",
+        "api-webc-input",
+        "api-webc-check-box",
+        "api-webc-select",
+        "api-webc-select-item",
+        "api-webc-date-picker",
+        "api-webc-accordion",
+        "api-webc-accordion-item",
+        "api-webc-label"
+      ],
+      "examples": [
+        {
+          "id": "webc-example-0",
+          "path": "examples/webc/package.json",
+          "language": "json"
+        },
+        {
+          "id": "webc-example-1",
+          "path": "examples/webc/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "webc-example-2",
+          "path": "examples/webc/index.html",
+          "language": "html"
+        },
+        {
+          "id": "webc-example-3",
+          "path": "examples/webc/setup.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "webc-example-4",
+          "path": "examples/webc/main.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "webc-upgrade-html",
+          "path": "examples/webc/upgrade.html",
+          "language": "html"
+        },
+        {
+          "id": "webc-upgrade-ts",
+          "path": "examples/webc/upgrade.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "webc-vite-config-ts",
+          "path": "examples/webc/vite.config.ts",
+          "language": "typescript"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "webc-bindings",
+      "title": "Element properties, DOM events and form values",
+      "path": "webc-bindings.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "bindings",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "webc-start",
+        "api-webc-button",
+        "api-webc-input",
+        "api-webc-check-box",
+        "api-webc-select",
+        "api-webc-select-item",
+        "api-webc-date-picker",
+        "api-webc-accordion",
+        "api-webc-accordion-item",
+        "api-webc-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "webc-composition",
+      "title": "Compound elements and unscoped light-DOM slots",
+      "path": "webc-composition.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "composition",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "webc-start",
+        "api-webc-button",
+        "api-webc-input",
+        "api-webc-check-box",
+        "api-webc-select",
+        "api-webc-select-item",
+        "api-webc-date-picker",
+        "api-webc-accordion",
+        "api-webc-accordion-item",
+        "api-webc-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "webc-lifecycle",
+      "title": "Connection, controllers and application cleanup",
+      "path": "webc-lifecycle.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "lifecycle",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "webc-start",
+        "api-webc-button",
+        "api-webc-input",
+        "api-webc-check-box",
+        "api-webc-select",
+        "api-webc-select-item",
+        "api-webc-date-picker",
+        "api-webc-accordion",
+        "api-webc-accordion-item",
+        "api-webc-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "webc-environment",
+      "title": "Customized built-ins and server-authored HTML",
+      "path": "webc-environment.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "ssr",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "webc-start",
+        "api-webc-button",
+        "api-webc-input",
+        "api-webc-check-box",
+        "api-webc-select",
+        "api-webc-select-item",
+        "api-webc-date-picker",
+        "api-webc-accordion",
+        "api-webc-accordion-item",
+        "api-webc-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "webc-errors",
+      "title": "Web Components release-specific mistakes and limits",
+      "path": "webc-errors.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "errors",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": [
+        "webc-start",
+        "api-webc-button",
+        "api-webc-input",
+        "api-webc-check-box",
+        "api-webc-select",
+        "api-webc-select-item",
+        "api-webc-date-picker",
+        "api-webc-accordion",
+        "api-webc-accordion-item",
+        "api-webc-label"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "webc-validation",
+      "title": "Published Web Components consumer validation",
+      "path": "webc-validation.md",
+      "audience": "consumer",
+      "framework": "webc",
+      "topic": "validation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/ui/webc/README.md"
+        }
+      ],
+      "related": ["webc-start", "release-validation"],
+      "examples": [
+        {
+          "id": "webc-validation-evidence",
+          "path": "webc-validation.json",
+          "language": "json"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "oren-configuration",
+      "title": "Configure Oren, schemes, direction and motion",
+      "path": "oren-configuration.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "theming",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/themes/oren/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/plugins/README.md"
+        }
+      ],
+      "related": [
+        "theme-authoring",
+        "icon-replacement",
+        "programmatic-control",
+        "external-plugins",
+        "public-recipes-validation"
+      ],
+      "examples": [
+        {
+          "id": "public-recipe-main-ts",
+          "path": "examples/public-recipes/main.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-index-html",
+          "path": "examples/public-recipes/index.html",
+          "language": "html"
+        },
+        {
+          "id": "public-recipe-page-css",
+          "path": "examples/public-recipes/page.css",
+          "language": "css"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "theme-authoring",
+      "title": "Build a theme on Base",
+      "path": "theme-authoring.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "themes",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/themes/base/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/themes/base/theme-contract.json"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/themes/base/theme-variables.json"
+        }
+      ],
+      "related": [
+        "oren-configuration",
+        "icon-replacement",
+        "programmatic-control",
+        "external-plugins",
+        "public-recipes-validation"
+      ],
+      "examples": [
+        {
+          "id": "public-recipe-theme-package-json",
+          "path": "examples/public-recipes/theme/package.json",
+          "language": "json"
+        },
+        {
+          "id": "public-recipe-theme-index-css",
+          "path": "examples/public-recipes/theme/index.css",
+          "language": "css"
+        },
+        {
+          "id": "public-recipe-theme-index-d-ts",
+          "path": "examples/public-recipes/theme/index.d.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-theme-setup-ts",
+          "path": "examples/public-recipes/theme/setup.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-theme-tsconfig-json",
+          "path": "examples/public-recipes/theme/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "public-recipe-theme-vite-config-ts",
+          "path": "examples/public-recipes/theme/vite.config.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-custom-ts",
+          "path": "examples/public-recipes/custom.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-custom-html",
+          "path": "examples/public-recipes/custom.html",
+          "language": "html"
+        },
+        {
+          "id": "public-recipe-custom-types-ts",
+          "path": "examples/public-recipes/custom-types.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-tsconfig-custom-json",
+          "path": "examples/public-recipes/tsconfig.custom.json",
+          "language": "json"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "icon-replacement",
+      "title": "Replace icon roles",
+      "path": "icon-replacement.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "icons",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/setup/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/setup/content/icons/roles.ts"
+        }
+      ],
+      "related": [
+        "oren-configuration",
+        "theme-authoring",
+        "programmatic-control",
+        "external-plugins",
+        "public-recipes-validation"
+      ],
+      "examples": [
+        {
+          "id": "public-recipe-configure-ts",
+          "path": "examples/public-recipes/configure.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-inspect-contracts-mjs",
+          "path": "examples/public-recipes/inspect-contracts.mjs",
+          "language": "javascript"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "programmatic-control",
+      "title": "Programmatic control and ownership",
+      "path": "programmatic-control.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "controllers",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/core/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/plugins/README.md"
+        }
+      ],
+      "related": [
+        "oren-configuration",
+        "theme-authoring",
+        "icon-replacement",
+        "external-plugins",
+        "public-recipes-validation",
+        "vue-controller",
+        "react-controller",
+        "angular-controller",
+        "svelte-controller",
+        "solid-controller",
+        "webc-lifecycle"
+      ],
+      "examples": [
+        {
+          "id": "public-recipe-app-vue",
+          "path": "examples/public-recipes/App.vue",
+          "language": "vue"
+        },
+        {
+          "id": "public-recipe-auditbutton-vue",
+          "path": "examples/public-recipes/AuditButton.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "external-plugins",
+      "title": "Add application behavior with public plugins",
+      "path": "external-plugins.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "extensions",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/setup/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/plugins/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "docs/api/README.md"
+        }
+      ],
+      "related": [
+        "oren-configuration",
+        "theme-authoring",
+        "icon-replacement",
+        "programmatic-control",
+        "public-recipes-validation",
+        "api-vue-button",
+        "api-react-button",
+        "api-angular-button",
+        "api-svelte-button",
+        "api-solid-button",
+        "api-webc-button"
+      ],
+      "examples": [
+        {
+          "id": "public-recipe-text-audit-ts",
+          "path": "examples/public-recipes/text-audit.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-plugin-types-ts",
+          "path": "examples/public-recipes/plugin-types.ts",
+          "language": "typescript"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "public-recipes-validation",
+      "title": "Published theme and extension validation",
+      "path": "public-recipes-validation.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "validation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/themes/base/README.md"
+        },
+        {
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+          "path": "packages/setup/README.md"
+        }
+      ],
+      "related": [
+        "oren-configuration",
+        "theme-authoring",
+        "icon-replacement",
+        "programmatic-control",
+        "external-plugins",
+        "release-validation"
+      ],
+      "examples": [
+        {
+          "id": "public-recipe-package-json",
+          "path": "examples/public-recipes/package.json",
+          "language": "json"
+        },
+        {
+          "id": "public-recipe-tsconfig-json",
+          "path": "examples/public-recipes/tsconfig.json",
+          "language": "json"
+        },
+        {
+          "id": "public-recipe-vite-config-ts",
+          "path": "examples/public-recipes/vite.config.ts",
+          "language": "typescript"
+        },
+        {
+          "id": "public-recipe-readme-md",
+          "path": "examples/public-recipes/README.md",
+          "language": "markdown"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "release-changes",
+      "title": "0.4.2 changes and coverage",
+      "path": "release-changes.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "release",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "path": "packages/core/CHANGELOG.md",
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d"
+        },
+        {
+          "path": "packages/setup/CHANGELOG.md",
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d"
+        },
+        {
+          "path": "packages/ui/svelte/CHANGELOG.md",
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d"
+        },
+        {
+          "path": "packages/themes/oren/CHANGELOG.md",
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d"
+        }
+      ],
+      "related": [
+        "overview",
+        "api-vue-alert",
+        "api-vue-alert-dialog",
+        "api-vue-avatar",
+        "api-vue-avatar-group",
+        "api-vue-separator",
+        "api-react-alert",
+        "api-react-alert-dialog",
+        "api-react-avatar",
+        "api-react-avatar-group",
+        "api-react-separator",
+        "api-angular-alert",
+        "api-angular-alert-dialog",
+        "api-angular-avatar",
+        "api-angular-avatar-group",
+        "api-angular-separator",
+        "api-svelte-alert",
+        "api-svelte-alert-dialog",
+        "api-svelte-avatar",
+        "api-svelte-avatar-group",
+        "api-svelte-separator",
+        "api-solid-alert",
+        "api-solid-alert-dialog",
+        "api-solid-avatar",
+        "api-solid-avatar-group",
+        "api-solid-separator",
+        "api-webc-alert",
+        "api-webc-alert-dialog",
+        "api-webc-avatar",
+        "api-webc-avatar-group",
+        "api-webc-separator",
+        "release-validation"
+      ],
+      "links": [],
+      "examples": []
+    },
+    {
+      "id": "vue-validation",
+      "title": "Vue / Nuxt 0.4.2 validation",
+      "path": "vue-validation.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "validation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "path": "packages/ui/vue/README.md",
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d"
+        }
+      ],
+      "related": ["vue-start", "release-validation"],
+      "links": [],
+      "examples": []
+    },
+    {
+      "id": "react-validation",
+      "title": "React / Next.js 0.4.2 validation",
+      "path": "react-validation.md",
+      "audience": "consumer",
+      "framework": "react",
+      "topic": "validation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "path": "packages/ui/react/README.md",
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d"
+        }
+      ],
+      "related": ["react-start", "release-validation"],
+      "links": [],
+      "examples": []
+    },
+    {
+      "id": "angular-validation",
+      "title": "Angular CSR / SSR 0.4.2 validation",
+      "path": "angular-validation.md",
+      "audience": "consumer",
+      "framework": "angular",
+      "topic": "validation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "path": "packages/ui/angular/README.md",
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d"
+        }
+      ],
+      "related": ["angular-start", "release-validation"],
+      "links": [],
+      "examples": []
+    },
+    {
+      "id": "svelte-validation",
+      "title": "Svelte / SvelteKit 0.4.2 validation",
+      "path": "svelte-validation.md",
+      "audience": "consumer",
+      "framework": "svelte",
+      "topic": "validation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "path": "packages/ui/svelte/README.md",
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d"
+        }
+      ],
+      "related": ["svelte-start", "release-validation"],
+      "links": [],
+      "examples": []
+    },
+    {
+      "id": "release-validation",
+      "title": "Published 0.4.2 validation and limits",
+      "path": "release-validation.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "validation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "path": "packages/setup/CHANGELOG.md",
+          "revision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d"
+        }
+      ],
+      "related": ["release-changes"],
+      "links": [],
+      "examples": [
+        {
+          "id": "release-evidence",
+          "path": "release-validation.json",
+          "language": "json"
+        }
+      ]
+    }
+  ],
+  "packages": {
+    "@soxa-ui/vue": "0.4.2",
+    "@soxa-ui/setup": "0.4.2",
+    "@soxa-ui/core": "0.4.2",
+    "@soxa-ui/plugins": "0.4.2",
+    "@soxa-ui/theme-base": "0.4.1",
+    "@soxa-ui/theme-oren": "0.4.1",
+    "@soxa-ui/icons-material": "0.3.1",
+    "@soxa-ui/react": "0.4.2",
+    "@soxa-ui/angular": "0.4.2",
+    "@soxa-ui/svelte": "0.4.2",
+    "@soxa-ui/solid": "0.4.2",
+    "@soxa-ui/webc": "0.4.2",
+    "@soxa-ui/icons-lucide": "0.3.1"
+  },
+  "contributorGuides": "pending"
+}

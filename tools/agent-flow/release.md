@@ -6,7 +6,7 @@ Use an existing clean pool worktree. Never switch the main folder or create a
 worktree. Check GitHub authentication, fetch origin and inspect unfinished
 release PRs. Start a release branch from origin/main in the assigned workspace.
 
-Choose the requested scope: components, themes, icons or all. Run
+Choose the requested scope: components, themes, icons, mcp or all. Run
 `npm run release:plan -- <scope>` and inspect every bumped package. The component
 fixed group shares one version; themes and icon packs version independently.
 Dependency updates outside the selected scope block preparation. Preview all
@@ -40,3 +40,10 @@ ranges admit the component beta. The approved manifest records the beta channel;
 publication uses npm's beta tag and GitHub prereleases, leaving latest unchanged.
 Changesets archives the release notes for later stable graduation without adding
 a repository-wide pre.json. A later stable release still requires an owner request.
+
+## Independent documentation MCP
+
+Use the mcp scope for @soxa-ui/mcp, outside the component fixed group.
+The [build and publication rules](../../docs/agents/build.md#independent-documentation-mcp)
+cover the native Node build, first scoped publication and required npm rights.
+The same release authorization, exact-plan gate and owner merge rules apply.

@@ -1,26 +1,13 @@
 import { posix } from 'node:path'
+import { isBuiltin } from 'node:module'
 import ts from 'typescript'
 
 /**
- * Опубликованный пакет объявляет всё, что импортирует: имя пакета из каждого
- * голого спецификатора стоит в `dependencies` или `peerDependencies` либо
- * совпадает с именем самого пакета (см. AGENTS.md, «Версии пакетов»).
- *
- * В репозитории необъявленный импорт не виден: npm поднимает зависимости всех
- * воркспейсов в общий `node_modules`, и нужный пакет находится и без записи в
- * манифесте. Из пакета, поставленного строгим менеджером (pnpm, Yarn PnP),
- * видно только объявленное — так адаптер Angular импортировал
- * `@angular/common`, держа его в `devDependencies`, пока это не заметили в
- * собранном пакете. `devDependencies` потребитель не ставит, поэтому они не в
- * счёт.
- *
- * Читается то, что уезжает в npm, — файлы тарболла, а не исходники: корни
- * исходников у пакетов разные, в них лежит то, что в пакет не попадает
- * (кодоген Angular с `prettier` и `node:*`), а часть импортов появляется только
- * в выходе (`react/jsx-runtime` вставляет компилятор JSX). Декларации
- * резолвятся у потребителя так же, как код, поэтому читаются и они.
- *
- * Исключений нет: `node:fs` в опубликованном пакете — такое же нарушение.
+ * Every published import must be declared in dependencies or peerDependencies.
+ * Inspect packed code and declarations so workspace hoisting cannot hide a
+ * missing dependency. Development-only dependencies do not reach consumers.
+ * Node built-ins are engine-provided only for packages declaring a Node CLI;
+ * they remain forbidden in browser-facing library packages.
  */
 
 /** Манифест как есть: поля не принимаются на веру, а проверяются по одному. */
@@ -200,6 +187,16 @@ export function findUndeclaredImports(
 		.flatMap((file) =>
 			[...new Set(specifiersOf(file))]
 				.filter((specifier) => !isPath(specifier))
+				.filter(
+					(specifier) =>
+						!(
+							isBuiltin(specifier) &&
+							isObject(manifest.engines) &&
+							typeof manifest.engines.node === 'string' &&
+							isObject(manifest.bin) &&
+							Object.values(manifest.bin).some((target) => typeof target === 'string')
+						),
+				)
 				.map((specifier) => ({
 					file: file.path,
 					specifier,
@@ -210,7 +207,7 @@ export function findUndeclaredImports(
 }
 
 /** Поля манифеста, чьи цели — файлы пакета: те же, что у `workspace-manifests.spec.ts`. */
-const ENTRY_FIELDS = ['main', 'types', 'style', 'exports'] as const
+const ENTRY_FIELDS = ['main', 'types', 'style', 'exports', 'bin'] as const
 
 /** Цели точки входа: строка — путь, объект условий или подпутей и массив — вглубь. */
 function targetsOf(value: unknown): string[] {
