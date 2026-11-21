@@ -69,10 +69,12 @@ is required by the server itself. The consumer smoke installs the SDK only in
 its isolated temporary validation directory.
 
 VS Code's configuration uses `servers` with `type: "stdio"`; Claude Desktop's
-uses `mcpServers` with the command and args above. These are configuration
-templates, **not verified desktop integrations**. No interactive editor/desktop
-client or AI conversation has been tested in this change. A deterministic SDK
-session is retained and reproducible below.
+uses `mcpServers` with the command and args above. These historical source
+configuration templates were originally checked with the SDK only. The packaged
+MCP candidate has additionally been connected to an isolated VS Code 1.147.0
+profile, with all nine tools discovered and real list_versions/get_component
+requests. See the [current validation](./0.4.2/release-validation.md). This does
+not establish Claude Desktop or conversational AI-authoring coverage.
 
 ## Retrieval contract
 
@@ -177,7 +179,7 @@ The [2026-11-18 validation record](./validation/mcp.json) pins the tested
 implementation/documentation revision and received example hashes. Its two
 retained npm locks identify the SDK/server-preparation and consumer installations.
 The protocol session made 81 tool calls; published-package types, production
-build and Chromium interactions passed. Desktop clients remain unverified.
+build and Chromium interactions passed. Desktop clients were not checked in that historical run.
 
 ## 0.4.1 corpus
 

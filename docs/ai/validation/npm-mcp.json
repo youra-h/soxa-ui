@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-21T13:52:33.734Z",
+  "package": {
+    "name": "@soxa-ui/mcp",
+    "version": "0.0.0",
+    "source": "local-tarball",
+    "integrity": "sha512-7sqXo88OlS0Ad1Rutr34QbSCABWyjhpimMNxgLiKAzfRAxqyLE+zaQA8QwA47oeCuVeRWtW56B7rN3pOVknSfw==",
+    "size": 3122009,
+    "unpackedSize": 41882561,
+    "fileCount": 1380
+  },
+  "node": "v24.20.0",
+  "platform": "win32",
+  "sdk": [
+    {
+      "sdk": "1.32.2",
+      "protocol": {
+        "resources": {},
+        "tools": {}
+      },
+      "server": {
+        "name": "soxa-ui-docs",
+        "version": "0.0.0"
+      },
+      "provenance": {
+        "schemaVersion": 1,
+        "libraryVersion": "0.3.0",
+        "libraryRevision": "9ae988633936a03e291e8e414028456fe1039c6b",
+        "docsRevision": "208a572121faf1d0428169fb1de16a23951590d3",
+        "language": "en",
+        "packages": {
+          "@soxa-ui/vue": "0.3.0",
+          "@soxa-ui/setup": "0.3.0",
+          "@soxa-ui/core": "0.3.0",
+          "@soxa-ui/plugins": "0.3.0",
+          "@soxa-ui/theme-base": "0.3.0",
+          "@soxa-ui/theme-oren": "0.3.0",
+          "@soxa-ui/icons-material": "0.3.0",
+          "@soxa-ui/react": "0.3.0",
+          "@soxa-ui/angular": "0.3.0",
+          "@soxa-ui/svelte": "0.3.0",
+          "@soxa-ui/solid": "0.3.0",
+          "@soxa-ui/webc": "0.3.0",
+          "@soxa-ui/icons-lucide": "0.3.0"
+        },
+        "coverage": {
+          "vue": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "react": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "angular": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "solid": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "svelte": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "webc": {
+            "api": "generated",
+            "guides": "sample"
+          }
+        },
+        "contributorGuides": "pending",
+        "apiSource": {
+          "package": "@soxa-ui/setup",
+          "version": "0.3.0",
+          "export": "@soxa-ui/setup/api.json",
+          "sha256": "869aa23426237c0b130466cd0de9fa0ff8e960412a99e058de824c9be02104dd",
+          "tarball": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.3.0.tgz",
+          "integrity": "sha512-byutzJyCBW7oCrqze6Dgr1+2QZ019yAZ0kIAY7+1SWQLFE6kW53RJOpo7LH+FB9jSifY7Os2k92YUf7hVmjaZg=="
+        }
+      },
+      "sources": [
+        {
+          "documentId": "vue-installation",
+          "exampleId": "vue-main",
+          "target": "src/main.ts",
+          "sha256": "5e946a35333d66bd34e3fe0739fdff7041c7c8925f4f829faf84dc3b046b8a49"
+        },
+        {
+          "documentId": "vue-bindings",
+          "exampleId": "recipes",
+          "target": "TravelRecipes.vue",
+          "sha256": "01ffa864b2e86ba7f71f39068f287f45edbf152c74567ba6a8d895bb502f8806"
+        },
+        {
+          "documentId": "vue-controller",
+          "exampleId": "controller",
+          "target": "CtrlExample.vue",
+          "sha256": "d17a7ccee08b07e88e34c66125a4fb8fc2d06fe4de11f4cccd70e195550d615b"
+        }
+      ],
+      "calls": 81,
+      "context": "Fresh scripted SDK client. Reads no corpus/source files; receives library code and instructions only through MCP."
+    },
+    {
+      "sdk": "1.32.2",
+      "protocol": {
+        "resources": {},
+        "tools": {}
+      },
+      "server": {
+        "name": "soxa-ui-docs",
+        "version": "0.0.0"
+      },
+      "provenance": {
+        "schemaVersion": 1,
+        "libraryVersion": "0.4.1",
+        "libraryRevision": "7c1a7886b2c9d17c21ae91cc347d680b0f4ab2cf",
+        "docsRevision": "208a572121faf1d0428169fb1de16a23951590d3",
+        "language": "en",
+        "packages": {
+          "@soxa-ui/vue": "0.4.1",
+          "@soxa-ui/setup": "0.4.1",
+          "@soxa-ui/core": "0.4.1",
+          "@soxa-ui/plugins": "0.4.1",
+          "@soxa-ui/theme-base": "0.4.1",
+          "@soxa-ui/theme-oren": "0.4.1",
+          "@soxa-ui/icons-material": "0.3.1",
+          "@soxa-ui/react": "0.4.1",
+          "@soxa-ui/angular": "0.4.1",
+          "@soxa-ui/svelte": "0.4.1",
+          "@soxa-ui/solid": "0.4.1",
+          "@soxa-ui/webc": "0.4.1",
+          "@soxa-ui/icons-lucide": "0.3.1"
+        },
+        "coverage": {
+          "vue": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "react": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "angular": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "solid": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "svelte": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "webc": {
+            "api": "generated",
+            "guides": "sample"
+          }
+        },
+        "contributorGuides": "pending",
+        "apiSource": {
+          "package": "@soxa-ui/setup",
+          "version": "0.4.1",
+          "export": "@soxa-ui/setup/api.json",
+          "sha256": "368e374f7536177b8909c1de051a6e923757a68ef67b7249fa07b36c4f1c1354",
+          "tarball": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.4.1.tgz",
+          "integrity": "sha512-hUe7gJhRzwBU/7gC5cNcSlwxOOLCMpOmKGqKgrqZyHn2kgPanyypGAZAef6K2ysVGcMwHdflqMgTTG9kqc90Pw=="
+        }
+      },
+      "sources": [
+        {
+          "documentId": "vue-installation",
+          "exampleId": "vue-main",
+          "target": "src/main.ts",
+          "sha256": "5e946a35333d66bd34e3fe0739fdff7041c7c8925f4f829faf84dc3b046b8a49"
+        },
+        {
+          "documentId": "vue-bindings",
+          "exampleId": "recipes",
+          "target": "TravelRecipes.vue",
+          "sha256": "01ffa864b2e86ba7f71f39068f287f45edbf152c74567ba6a8d895bb502f8806"
+        },
+        {
+          "documentId": "vue-controller",
+          "exampleId": "controller",
+          "target": "CtrlExample.vue",
+          "sha256": "d17a7ccee08b07e88e34c66125a4fb8fc2d06fe4de11f4cccd70e195550d615b"
+        }
+      ],
+      "calls": 369,
+      "context": "Fresh scripted SDK client. Reads no corpus/source files; receives library code and instructions only through MCP."
+    },
+    {
+      "sdk": "1.32.2",
+      "protocol": {
+        "resources": {},
+        "tools": {}
+      },
+      "server": {
+        "name": "soxa-ui-docs",
+        "version": "0.0.0"
+      },
+      "provenance": {
+        "schemaVersion": 1,
+        "libraryVersion": "0.4.2",
+        "libraryRevision": "07680130cc383e5729aa2bd455ca8feaf5d05a9d",
+        "docsRevision": "208a572121faf1d0428169fb1de16a23951590d3",
+        "language": "en",
+        "packages": {
+          "@soxa-ui/vue": "0.4.2",
+          "@soxa-ui/setup": "0.4.2",
+          "@soxa-ui/core": "0.4.2",
+          "@soxa-ui/plugins": "0.4.2",
+          "@soxa-ui/theme-base": "0.4.1",
+          "@soxa-ui/theme-oren": "0.4.1",
+          "@soxa-ui/icons-material": "0.3.1",
+          "@soxa-ui/react": "0.4.2",
+          "@soxa-ui/angular": "0.4.2",
+          "@soxa-ui/svelte": "0.4.2",
+          "@soxa-ui/solid": "0.4.2",
+          "@soxa-ui/webc": "0.4.2",
+          "@soxa-ui/icons-lucide": "0.3.1"
+        },
+        "coverage": {
+          "vue": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "react": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "angular": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "solid": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "svelte": {
+            "api": "generated",
+            "guides": "sample"
+          },
+          "webc": {
+            "api": "generated",
+            "guides": "sample"
+          }
+        },
+        "contributorGuides": "pending",
+        "apiSource": {
+          "package": "@soxa-ui/setup",
+          "version": "0.4.2",
+          "export": "@soxa-ui/setup/api.json",
+          "sha256": "85aa9b20e93d9a1ed045f866d70e310505df536b337d7b73a9974d3492861e13",
+          "tarball": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.4.2.tgz",
+          "integrity": "sha512-Q5hfvjhvwW520HfT6iYo2i8UEg7+sz/09wf+wu7R+66xwT/v/bL1MWZSl4YWdVEnweOaUr2Nx3VA4O0T0QftOA=="
+        }
+      },
+      "sources": [
+        {
+          "documentId": "vue-installation",
+          "exampleId": "vue-main",
+          "target": "src/main.ts",
+          "sha256": "5e946a35333d66bd34e3fe0739fdff7041c7c8925f4f829faf84dc3b046b8a49"
+        },
+        {
+          "documentId": "vue-bindings",
+          "exampleId": "recipes",
+          "target": "TravelRecipes.vue",
+          "sha256": "01ffa864b2e86ba7f71f39068f287f45edbf152c74567ba6a8d895bb502f8806"
+        },
+        {
+          "documentId": "vue-controller",
+          "exampleId": "controller",
+          "target": "CtrlExample.vue",
+          "sha256": "d17a7ccee08b07e88e34c66125a4fb8fc2d06fe4de11f4cccd70e195550d615b"
+        }
+      ],
+      "calls": 369,
+      "context": "Fresh scripted SDK client. Reads no corpus/source files; receives library code and instructions only through MCP."
+    }
+  ],
+  "checks": {
+    "bin": "passed",
+    "offlineRuntime": "passed",
+    "unknownVersions": "passed",
+    "sdk": "passed",
+    "vue042Types": "passed",
+    "vue042Production": "passed",
+    "vue042Chromium": "passed"
+  },
+  "editor": "not-tested",
+  "context": "Automated tarball/SDK/consumer smoke. VS Code integration is recorded separately in 0.4.2/release-validation.json."
+}

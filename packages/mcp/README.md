@@ -36,7 +36,7 @@ Claude Desktop uses the same command/args under mcpServers. On Windows clients
 that require a shell for .cmd files, use command cmd and args
 ["/c", "npx", "-y", "@soxa-ui/mcp@<published-mcp-version>"]. A preinstalled
 soxa-mcp executable also works. Configuration examples do not establish that an
-interactive client was tested; see the repository's delivery validation record.
+interactive client was tested; see the [delivery validation](../../docs/ai/0.4.2/release-validation.md).
 
 The server writes protocol messages to stdout and diagnostics to stderr. Close
 stdin to terminate. It reads only its bundled corpora, never application files.
