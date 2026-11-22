@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/icons-lucide",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Иконки Lucide: реализация контракта ролей ICON_ROLES",
   "keywords": [
     "soxa",
@@ -41,6 +41,6 @@
     "generate": "node scripts/generate.mjs"
   },
   "peerDependencies": {
-    "@soxa-ui/setup": "^0.4.0-beta.0"
+    "@soxa-ui/setup": "^0.5.0"
   }
 }

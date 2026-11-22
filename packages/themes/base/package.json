@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/theme-base",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Общий слой тем Soxa UI: сброс частей библиотеки, знак направления письма и структура частей с числами в переменных — чистый CSS, без препроцессора, — и плагины раскладки для поведения темы",
   "keywords": [
     "soxa",
@@ -47,8 +47,8 @@
     "test": "vitest run"
   },
   "peerDependencies": {
-    "@soxa-ui/core": "^0.4.1",
-    "@soxa-ui/plugins": "^0.4.1"
+    "@soxa-ui/core": "^0.5.0",
+    "@soxa-ui/plugins": "^0.5.0"
   },
   "devDependencies": {
     "postcss": "^8.5.9",

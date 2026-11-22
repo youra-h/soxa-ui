@@ -1,5 +1,26 @@
 # @soxa-ui/theme-oren
 
+## 0.5.0
+
+### Minor Changes
+
+- 64c0204: Add shared radius and spacing settings with component overrides and purpose-specific size multipliers. Breaking: spacing variables and CodeBlock radius are now optional final overrides instead of fixed root defaults. Custom themes reading these variables directly must add var() fallbacks or read computed CSS properties; explicit local length overrides continue to win. Alert now uses the compact Toasts spacing reference. See the theme-base README migration guide.
+
+  Consumer upgrade instructions: docs/upgrade/0.5.0.md.
+
+### Patch Changes
+
+- Updated dependencies [e07c34d]
+- Updated dependencies [dd6ea64]
+- Updated dependencies [9688944]
+- Updated dependencies [1a52ea6]
+- Updated dependencies [2598c1b]
+- Updated dependencies [64c0204]
+- Updated dependencies [5b88716]
+  - @soxa-ui/theme-base@0.5.0
+  - @soxa-ui/core@0.5.0
+  - @soxa-ui/setup@0.5.0
+
 ## 0.4.1
 
 ### Patch Changes

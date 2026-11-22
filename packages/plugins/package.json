@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/plugins",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Плагины поведения в рантайме, ставятся в TPluginBundle: DOM, фокус, клавиатура, оверлей",
   "keywords": [
     "soxa",
@@ -36,7 +36,7 @@
     "dist"
   ],
   "dependencies": {
-    "@soxa-ui/core": "0.4.2"
+    "@soxa-ui/core": "0.5.0"
   },
   "scripts": {
     "build": "vite build -c vite.lib.config.ts && tsc -p tsconfig.build.json",

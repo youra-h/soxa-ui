@@ -1,5 +1,16 @@
 # @soxa-ui/icons-lucide
 
+## 0.3.2
+
+### Patch Changes
+
+- Updated dependencies [dd6ea64]
+- Updated dependencies [9688944]
+- Updated dependencies [1a52ea6]
+- Updated dependencies [2598c1b]
+- Updated dependencies [5b88716]
+  - @soxa-ui/setup@0.5.0
+
 ## 0.3.1
 
 ### Patch Changes

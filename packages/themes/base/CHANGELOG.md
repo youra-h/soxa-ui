@@ -1,5 +1,26 @@
 # @soxa-ui/theme-base
 
+## 0.5.0
+
+### Minor Changes
+
+- 64c0204: Add shared radius and spacing settings with component overrides and purpose-specific size multipliers. Breaking: spacing variables and CodeBlock radius are now optional final overrides instead of fixed root defaults. Custom themes reading these variables directly must add var() fallbacks or read computed CSS properties; explicit local length overrides continue to win. Alert now uses the compact Toasts spacing reference. See the theme-base README migration guide.
+
+  Consumer upgrade instructions: docs/upgrade/0.5.0.md.
+
+### Patch Changes
+
+- e07c34d: Reduce repeated spacing calculations and size selectors without changing rendered geometry or local overrides.
+- 1a52ea6: Add `Select.Separator` and `ListBox.Separator` to separate groups written in markup. A separator hides when filtering leaves no shown content on one of its sides, including adjacent separators and list edges.
+
+  Record the manual separator emission sites in the existing theme class contract.
+- Updated dependencies [dd6ea64]
+- Updated dependencies [9688944]
+- Updated dependencies [1a52ea6]
+- Updated dependencies [2598c1b]
+  - @soxa-ui/core@0.5.0
+  - @soxa-ui/plugins@0.5.0
+
 ## 0.4.1
 
 ### Patch Changes
