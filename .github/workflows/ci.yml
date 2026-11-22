@@ -296,6 +296,7 @@ jobs:
         with:
           name: release-compatibility-report
           path: node_modules/.cache/soxa-compatibility/report.json
+          include-hidden-files: true
           if-no-files-found: ignore
 
       # After the build as well: React Server Components (the Next.js App
