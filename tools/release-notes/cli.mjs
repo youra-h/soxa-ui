@@ -9,7 +9,7 @@
 // `https://github.com/<owner>/<repo>/blob/<sha>`. `notes` previews on a release
 // branch what `release` will publish: `unpublished` lists what the branch bumped.
 
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
 import { resolve } from 'node:path'
 import {
@@ -105,7 +105,11 @@ function run(command, args) {
 		const [links, sha] = args
 		const published = readPublished()
 		const shared = sharedVersion(ROOT)
-		const notes = notesOf(withChangelogs(ROOT, published), shared, links)
+		const planFile = resolve(ROOT, '.release/plan.json')
+		const upgradeGuide = existsSync(planFile)
+			? JSON.parse(readFileSync(planFile, 'utf8')).upgradeGuide
+			: undefined
+		const notes = notesOf(withChangelogs(ROOT, published), shared, links, upgradeGuide)
 
 		if (command === 'notes') {
 			process.stdout.write(notes)
@@ -144,7 +148,7 @@ function run(command, args) {
 						: ['--latest=false']),
 				],
 				{
-					input: notesOf(withChangelogs(ROOT, group), shared, links),
+					input: notesOf(withChangelogs(ROOT, group), shared, links, upgradeGuide),
 					stdio: ['pipe', 'inherit', 'inherit'],
 				},
 			)

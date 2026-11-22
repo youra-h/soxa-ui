@@ -132,6 +132,8 @@ library dependency ranges specify compatibility. Check the changelog of each pac
 
 ### Deprecation and migration
 
+Start with the [version-specific upgrade instructions](docs/upgrade/README.md) before updating.
+
 A deprecation notice names the replacement, shows how to migrate and states the release planned
 for removal in the documentation and changelog; applicable TypeScript APIs also use `@deprecated`.
 For example, a notice about a renamed prop must show both the old and the replacement usage.

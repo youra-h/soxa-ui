@@ -1,5 +1,6 @@
 import { execFileSync, spawnSync } from 'node:child_process'
 import { loadRelease, prepareRelease } from './plan.mjs'
+import { upgradeGuideFor, requireUpgradeGuide } from '../release-compatibility/upgrade.mjs'
 
 const [command, scope, ...extra] = process.argv.slice(2)
 try {
@@ -17,8 +18,15 @@ try {
 	)
 		throw new Error('Prepare a release from a clean worktree')
 	const release = await loadRelease(root, scope, { beta: extra[0] === '--beta' })
+	if (release.manifest.packages.length)
+		release.manifest.upgradeGuide = upgradeGuideFor(release.manifest)
 	console.log(JSON.stringify(release.manifest, null, 2))
 	if (command === 'prepare') {
+		requireUpgradeGuide(root, release.manifest)
+		execFileSync(process.execPath, ['tools/release-compatibility/cli.mjs', 'check'], {
+			cwd: root,
+			stdio: 'inherit',
+		})
 		await prepareRelease(root, release)
 		const args = [
 			'install',

@@ -172,7 +172,7 @@ export function releaseOf(published, shared) {
  * `packages` — `{ name, version, file, changelog }`: `file` is the path of the
  * changelog from the repository root, `changelog` its text.
  */
-export function notesOf(packages, shared, linkBase) {
+export function notesOf(packages, shared, linkBase, upgradeGuide) {
 	const label = ({ name, version }) => (shared.has(name) ? name : `${name}@${version}`)
 	const changed = []
 	const quiet = []
@@ -200,6 +200,17 @@ export function notesOf(packages, shared, linkBase) {
 	}
 
 	const out = []
+	const guides = new Set([
+		...(upgradeGuide ? [upgradeGuide] : []),
+		...[...unique.values()].flatMap(
+			(entry) => entry.text.match(/docs\/upgrade\/[A-Za-z0-9._/-]+\.md/g) ?? [],
+		),
+	])
+	if (guides.size) {
+		out.push('### Upgrade instructions', '')
+		for (const guide of guides) out.push(`- [Consumer upgrade guide](${linkBase}/${guide})`)
+		out.push('')
+	}
 
 	if (unique.size === 0) {
 		out.push('No changes in the packages.', '')
