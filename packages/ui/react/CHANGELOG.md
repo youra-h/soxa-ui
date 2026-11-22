@@ -1,5 +1,29 @@
 # @soxa-ui/react
 
+## 0.5.0
+
+### Patch Changes
+
+- 9688944: Faster Tabs and Tags on large collections, especially declarative items: mounting 1000 markup items is 2–4 times faster in every adapter and on the server.
+
+  - A collection item's `change:order` is emitted only when its own position changed; appending an item no longer notifies every sibling. Item order is memoized per storage write instead of copying the collection on every read.
+  - Activation and selection update `data-selected` only on the items whose state changed.
+  - The active tab indicator is measured at most once a frame. Unmounting 1000 declarative tabs in Solid took over 20 seconds and now takes about 0.2 seconds.
+  - Angular detaches every binding when the application starts tearing down, so server requests no longer pay for items leaving their collection one by one. Angular, Solid, Svelte and Web Components stop listening to the state on `detach`.
+  - Prepared (`initial`) mounts share one acceptance gate per bundle instead of copying every plugin definition per item.
+- 1a52ea6: Add `Select.Separator` and `ListBox.Separator` to separate groups written in markup. A separator hides when filtering leaves no shown content on one of its sides, including adjacent separators and list edges.
+
+  Record the manual separator emission sites in the existing theme class contract.
+- 5b88716: Release prepared collection transaction receipts and temporary ARIA state after a React mount commits. Reuse generated tab and panel fallback IDs during initial collection preparation.
+- Updated dependencies [dd6ea64]
+- Updated dependencies [9688944]
+- Updated dependencies [1a52ea6]
+- Updated dependencies [2598c1b]
+- Updated dependencies [5b88716]
+  - @soxa-ui/core@0.5.0
+  - @soxa-ui/plugins@0.5.0
+  - @soxa-ui/setup@0.5.0
+
 ## 0.4.2
 
 ### Patch Changes

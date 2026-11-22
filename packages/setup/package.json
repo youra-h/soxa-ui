@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/setup",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Общее для всех адаптеров: дескрипторы компонентов, их сборка на монтирование и связывание с фреймворком",
   "keywords": [
     "soxa",
@@ -37,8 +37,8 @@
     "dist"
   ],
   "dependencies": {
-    "@soxa-ui/core": "0.4.2",
-    "@soxa-ui/plugins": "0.4.2"
+    "@soxa-ui/core": "0.5.0",
+    "@soxa-ui/plugins": "0.5.0"
   },
   "scripts": {
     "build": "vite build -c vite.lib.config.ts && tsc -p tsconfig.build.json && tsx --tsconfig tsconfig.json ../../tools/api-docs/cli.ts --package",

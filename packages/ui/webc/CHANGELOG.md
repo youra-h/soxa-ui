@@ -1,5 +1,38 @@
 # @soxa-ui/webc
 
+## 0.5.0
+
+### Patch Changes
+
+- dd6ea64: Prepared (`initial`) Tabs and Tags keep their mount-local ARIA only until the framework accepts the mount, then write tab links and close button names into the item models as an ordinary mount does. On the client, Vue, Solid, Svelte, Angular and Web Components read the state directly: 1000 prepared tabs now hold 0.3–0.4 MiB more than the `items` path instead of 1.2–1.9 MiB (React: 1.1 MiB instead of 1.6 MiB). Every component with localized button names also stops keeping an unused listener set per mount.
+
+  Breaking for code that wires prepared mounts by hand (components, props, events, classes and `data-*` are unchanged):
+
+  - `getSnapshot()` and `subscribe()` are removed from `TNamesPlugin` and its subclasses, from `TTabsItemIdsPlugin` and from `TTabsContentBindingExtension`; `TTabsItemIdsPlugin.initial` and `TCollectionInitialPartPlugin.aria` are removed too. Before acceptance these values are in the mount's patches: read `TPluginMount.patches` (new, with `TPluginMount.patch()`); after acceptance read the item model (`aria`, `closeAria`).
+  - `TCollectionAriaState` now takes `(state, mount)` instead of an options object, and the `ICollectionAriaLink` and `ICollectionAriaStateOptions` types are removed. Use `collectionInitialState(context, state)`, which returns the plain state once the mount is accepted.
+
+  Consumer upgrade instructions: docs/upgrade/0.5.0.md.
+
+  Also update custom collection integrations: replace preparation owner accept/release and transactions.rollbackOwner with the returned transaction handle; call prepare(options) and transactions.begin(options) without item/owner, use ICollectionTransactionOptions instead of removed IPreparationOptions, drop the ICollectionTransactions type parameter, and provide readonly revision in custom drivers. Replace removed IPluginMountOptions with the relevant context type; TPluginMount.defer now returns void. collectionInitialOwnerOptions no longer takes a descriptor, and custom TItemGroupPart implementations must provide visible.
+- 9688944: Faster Tabs and Tags on large collections, especially declarative items: mounting 1000 markup items is 2–4 times faster in every adapter and on the server.
+
+  - A collection item's `change:order` is emitted only when its own position changed; appending an item no longer notifies every sibling. Item order is memoized per storage write instead of copying the collection on every read.
+  - Activation and selection update `data-selected` only on the items whose state changed.
+  - The active tab indicator is measured at most once a frame. Unmounting 1000 declarative tabs in Solid took over 20 seconds and now takes about 0.2 seconds.
+  - Angular detaches every binding when the application starts tearing down, so server requests no longer pay for items leaving their collection one by one. Angular, Solid, Svelte and Web Components stop listening to the state on `detach`.
+  - Prepared (`initial`) mounts share one acceptance gate per bundle instead of copying every plugin definition per item.
+- 1a52ea6: Add `Select.Separator` and `ListBox.Separator` to separate groups written in markup. A separator hides when filtering leaves no shown content on one of its sides, including adjacent separators and list edges.
+
+  Record the manual separator emission sites in the existing theme class contract.
+- Updated dependencies [dd6ea64]
+- Updated dependencies [9688944]
+- Updated dependencies [1a52ea6]
+- Updated dependencies [2598c1b]
+- Updated dependencies [5b88716]
+  - @soxa-ui/core@0.5.0
+  - @soxa-ui/plugins@0.5.0
+  - @soxa-ui/setup@0.5.0
+
 ## 0.4.2
 
 ### Patch Changes
