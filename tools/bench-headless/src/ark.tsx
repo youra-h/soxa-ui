@@ -113,3 +113,22 @@ export function ComboboxDemo() {
 		</Combobox.Root>
 	)
 }
+
+export function AppDemo() {
+	return (
+		<>
+			<section aria-label="Form">
+				<FormDemo />
+			</section>
+			<section aria-label="Tabs">
+				<TabsDemo />
+			</section>
+			<section aria-label="Dialog">
+				<DialogDemo />
+			</section>
+			<section aria-label="Select">
+				<SelectDemo />
+			</section>
+		</>
+	)
+}

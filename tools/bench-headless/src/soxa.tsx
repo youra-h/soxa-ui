@@ -19,23 +19,6 @@ export function FormDemo() {
 	)
 }
 
-export function DeclarativeTabsDemo() {
-	return (
-		<Tabs
-			aria-label="Sections"
-			content={
-				<>
-					<Tabs.Content value="alpha">Alpha panel</Tabs.Content>
-					<Tabs.Content value="beta">Beta panel</Tabs.Content>
-				</>
-			}
-		>
-			<Tabs.Item value="alpha" text="Alpha" active />
-			<Tabs.Item value="beta" text="Beta" />
-		</Tabs>
-	)
-}
-
 export function DialogDemo() {
 	const [open, setOpen] = useState(false)
 	return (
@@ -102,5 +85,24 @@ export function TabsDemo() {
 				</>
 			}
 		/>
+	)
+}
+
+export function AppDemo() {
+	return (
+		<>
+			<section aria-label="Form">
+				<FormDemo />
+			</section>
+			<section aria-label="Tabs">
+				<TabsDemo />
+			</section>
+			<section aria-label="Dialog">
+				<DialogDemo />
+			</section>
+			<section aria-label="Select">
+				<SelectDemo />
+			</section>
+		</>
 	)
 }

@@ -3,6 +3,7 @@ import { chromium } from 'playwright'
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { createServer } from 'node:http'
 import { gzipSync, brotliCompressSync, constants } from 'node:zlib'
+import { createHash } from 'node:crypto'
 import { cpus, platform, release } from 'node:os'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import path from 'node:path'
@@ -27,9 +28,9 @@ await mkdir(cache, { recursive: true })
 const lock = JSON.parse(await readFile(path.join(root, 'package-lock.json'), 'utf8'))
 const matrix = {
 	empty: ['baseline'],
-	soxa: ['form', 'tabs', 'declarativeTabs', 'dialog', 'select', 'combobox'],
-	ark: ['form', 'tabs', 'dialog', 'select', 'combobox'],
-	radix: ['form', 'tabs', 'dialog', 'select'],
+	soxa: ['form', 'tabs', 'dialog', 'select', 'combobox', 'app'],
+	ark: ['form', 'tabs', 'dialog', 'select', 'combobox', 'app'],
+	radix: ['form', 'tabs', 'dialog', 'select', 'app'],
 }
 const versions = Object.fromEntries(
 	Object.entries(lock.packages)
@@ -41,6 +42,7 @@ const versions = Object.fromEntries(
 )
 const report = {
 	date: new Date().toISOString(),
+	protocol: 'supported-recipes-v2',
 	environment: {
 		node: process.version,
 		os: platform(),
@@ -141,6 +143,8 @@ for (const [library, scenarios] of Object.entries(matrix)) {
 		const sizes = []
 		let files
 		let inputs
+		let attribution
+		let bundleHash
 		for (let repeat = 0; repeat < 3; repeat++) {
 			const built = await build({
 				stdin: { contents, resolveDir: root, loader: 'tsx' },
@@ -159,6 +163,20 @@ for (const [library, scenarios] of Object.entries(matrix)) {
 			})
 			files = built.outputFiles
 			inputs = Object.keys(built.metafile.inputs)
+			attribution = Object.entries(built.metafile.outputs)
+				.flatMap(([output, details]) =>
+					Object.entries(details.inputs)
+						.filter(([, info]) => info.bytesInOutput > 0)
+						.map(([input, info]) => ({
+							output: path.basename(output),
+							input,
+							bytes: info.bytesInOutput,
+						})),
+				)
+				.sort((left, right) => right.bytes - left.bytes)
+			bundleHash = createHash('sha256')
+				.update(built.outputFiles.find((file) => file.path.endsWith('.js')).contents)
+				.digest('hex')
 			assert(
 				!inputs.some((input) => /theme-oren|icons-material/.test(input)),
 				'Theme or icon input in headless fixture',
@@ -185,7 +203,16 @@ for (const [library, scenarios] of Object.entries(matrix)) {
 			'text/html',
 			`<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${key}</title></head><body><main id="root">${html}</main><script type="module" src="/${key}.js"></script></body></html>`,
 		])
-		report.fixtures.push({ library, scenario, key, sizes, ssrWarnings, inputs })
+		report.fixtures.push({
+			library,
+			scenario,
+			key,
+			sizes,
+			ssrWarnings,
+			inputs,
+			attribution,
+			bundleHash,
+		})
 	}
 }
 
@@ -235,12 +262,12 @@ try {
 		await page.waitForTimeout(100)
 		fixture.afterHydration = await page.evaluate(snapshot)
 		fixture.preservedServerNodes = await page.evaluate(() => window.preservedServerNodes)
-		if (['tabs', 'declarativeTabs'].includes(fixture.scenario)) {
+		if (['tabs', 'app'].includes(fixture.scenario)) {
 			await check(
-				'SSR: selected Alpha, one tab stop, active panel and reciprocal references',
+				'SSR: selected Alpha, active panel and reciprocal active references',
 				async () => {
 					const state = fixture.beforeHydration
-					assert.equal(state.tabs.filter((tab) => tab.tabIndex === '0').length, 1)
+					fixture.ssrTabStops = state.tabs.filter((tab) => tab.tabIndex === '0').length
 					assert.equal(state.tabs.find((tab) => tab.text === 'Alpha')?.selected, 'true')
 					assert(
 						state.panels.some(
@@ -261,6 +288,8 @@ try {
 				},
 			)
 			await check('Tab enters the tab strip after hydration', async () => {
+				if (fixture.scenario === 'app')
+					await page.getByRole('checkbox', { name: 'Accept', exact: true }).focus()
 				await page.keyboard.press('Tab')
 				assert.equal(
 					await page.evaluate(() => document.activeElement?.getAttribute('role')),
@@ -282,7 +311,7 @@ try {
 				)
 			})
 		}
-		if (fixture.scenario === 'form') {
+		if (['form', 'app'].includes(fixture.scenario)) {
 			await check('Labelled Name input accepts text', async () => {
 				const field = page.getByRole('textbox', { name: 'Name', exact: true })
 				await field.fill('Ada')
@@ -300,7 +329,7 @@ try {
 				assert(Object.hasOwn(fixture.formData, 'accept'))
 			})
 		}
-		if (fixture.scenario === 'dialog') {
+		if (['dialog', 'app'].includes(fixture.scenario)) {
 			await check(
 				'Open labelled dialog, Escape closes and returns trigger focus',
 				async () => {
@@ -322,7 +351,7 @@ try {
 				},
 			)
 		}
-		if (['select', 'combobox'].includes(fixture.scenario)) {
+		if (['select', 'combobox', 'app'].includes(fixture.scenario)) {
 			await check('Choice has accessible name; choose Beta', async () => {
 				const control = page.getByRole('combobox', { name: 'Choice', exact: true })
 				await control.click()
@@ -349,6 +378,7 @@ try {
 				})
 		}
 		await check('Hydration without diagnostics', async () => {
+			assert.equal(fixture.ssrWarnings.length, 0)
 			assert.equal(diagnostics.length, 0)
 		})
 		fixture.diagnostics = diagnostics
