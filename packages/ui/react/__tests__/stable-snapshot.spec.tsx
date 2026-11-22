@@ -5,6 +5,8 @@
  */
 
 import { describe, it, expect } from 'vitest'
+import { TPluginMount } from '@soxa-ui/plugins'
+import { TCollectionAriaState } from '@soxa-ui/setup'
 import type { TStateSnapshot } from '@soxa-ui/setup'
 import { TStableSnapshot } from '../src/adapter/runtime/stable-snapshot.class'
 
@@ -102,5 +104,22 @@ describe('TStableSnapshot', () => {
 		const snapshot = new TStableSnapshot(source)
 
 		expect(snapshot.getSnapshot()).toBe(snapshot.getSnapshot())
+	})
+
+	it('keeps the same snapshot when the committed state matches the prepared ARIA', () => {
+		const mount = new TPluginMount()
+		const source = sourceOf({ aria: { role: 'tab' } })
+		const snapshot = new TStableSnapshot(new TCollectionAriaState(source, mount))
+
+		mount.patch('aria', { id: 'declared-tab' })
+		const prepared = snapshot.getSnapshot()
+
+		mount.accept()
+		source.write({ aria: { role: 'tab', id: 'declared-tab' } })
+		const release = snapshot.subscribe(() => {})
+
+		expect(snapshot.getSnapshot()).toBe(prepared)
+
+		release()
 	})
 })

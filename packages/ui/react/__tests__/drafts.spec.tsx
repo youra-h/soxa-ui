@@ -48,7 +48,7 @@ describe('TDrafts', () => {
 		const { held } = drafts.take({ ctrl })
 
 		drafts.add(held, destroy, 'a')
-		drafts.accept(held)
+		drafts.forget(held)
 		drafts.take({ ctrl })
 
 		expect(destroy).not.toHaveBeenCalled()
@@ -107,7 +107,7 @@ describe('TDrafts', () => {
 			const { held } = drafts.take({ ctrl })
 
 			drafts.add(held, vi.fn(), 'a')
-			drafts.accept(held)
+			drafts.forget(held)
 
 			expect(drafts.take({ ctrl }).mountId).toBeUndefined()
 		})

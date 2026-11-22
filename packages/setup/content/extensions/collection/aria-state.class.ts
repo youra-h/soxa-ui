@@ -44,21 +44,38 @@ export class TCollectionAriaState {
 		return Object.freeze(snapshot)
 	}
 
-	subscribe(listener: TStateListener): () => void {
-		const patched = this._patched(this._state.getSnapshot())
-		let active = true
+	/** A consumer that keeps the port can switch to the exchange state at acceptance. */
+	subscribe(
+		listener: TStateListener,
+		accepted?: (state: TCollectionStatePort) => void,
+	): () => void {
+		const state = this._state
 
-		// Acceptance drops the patches, and a value the model already held sends no event of its own
+		if (accepted && this._mount.accepted) {
+			accepted(state)
+
+			return state.subscribe(listener)
+		}
+
+		const patched = this._patched(state.getSnapshot())
+		const pending: { view?: TCollectionAriaState } = { view: this }
+
+		// Acceptance can change the rendered field without a model event.
 		this._mount.defer(() => {
-			if (!active) return
+			if (!pending.view) return
 
-			for (const name of patched) listener(name, this._state.getSnapshot()[name])
+			pending.view = undefined
+			accepted?.(state)
+
+			for (const name of patched) listener(name, state.getSnapshot()[name])
 		})
 
-		const release = this._state.subscribe((name) => listener(name, this.getSnapshot()[name]))
+		const release = state.subscribe((name) =>
+			listener(name, (pending.view ?? state).getSnapshot()[name]),
+		)
 
 		return () => {
-			active = false
+			pending.view = undefined
 			release()
 		}
 	}

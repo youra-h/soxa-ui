@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-22",
+  "n": 1000,
+  "framework": "react",
+  "revisions": {
+    "baseline": "77c5d89902fc0c2c36503eb8be6c722edc4bc2fc",
+    "optimized": "5b887161600fbc18c73e991988c8022fe15bb594"
+  },
+  "protocol": "client-v3-isolated-phases",
+  "environment": {
+    "node": "v24.20.0",
+    "chromium": "156.0.8078.4",
+    "playwright": "1.64.1",
+    "react": "19.3.1",
+    "os": "Windows 11 Pro (10.0.26300)",
+    "cpu": "AMD Ryzen 9 9950X3D 16-Core Processor"
+  },
+  "variantOrder": [
+    [
+      "baseline",
+      "optimized"
+    ],
+    [
+      "optimized",
+      "baseline"
+    ],
+    [
+      "baseline",
+      "optimized"
+    ]
+  ],
+  "files": [
+    "1-baseline-react-soxa-tabs-data-client.json",
+    "1-baseline-react-soxa-tabs-initial-client.json",
+    "1-optimized-react-soxa-tabs-data-client.json",
+    "1-optimized-react-soxa-tabs-initial-client.json",
+    "1-baseline-react-soxa-tags-data-client.json",
+    "1-baseline-react-soxa-tags-initial-client.json",
+    "1-optimized-react-soxa-tags-data-client.json",
+    "1-optimized-react-soxa-tags-initial-client.json",
+    "2-optimized-react-soxa-tabs-data-client.json",
+    "2-optimized-react-soxa-tabs-initial-client.json",
+    "2-baseline-react-soxa-tabs-data-client.json",
+    "2-baseline-react-soxa-tabs-initial-client.json",
+    "2-optimized-react-soxa-tags-data-client.json",
+    "2-optimized-react-soxa-tags-initial-client.json",
+    "2-baseline-react-soxa-tags-data-client.json",
+    "2-baseline-react-soxa-tags-initial-client.json",
+    "3-baseline-react-soxa-tabs-data-client.json",
+    "3-baseline-react-soxa-tabs-initial-client.json",
+    "3-optimized-react-soxa-tabs-data-client.json",
+    "3-optimized-react-soxa-tabs-initial-client.json",
+    "3-baseline-react-soxa-tags-data-client.json",
+    "3-baseline-react-soxa-tags-initial-client.json",
+    "3-optimized-react-soxa-tags-data-client.json",
+    "3-optimized-react-soxa-tags-initial-client.json"
+  ]
+}

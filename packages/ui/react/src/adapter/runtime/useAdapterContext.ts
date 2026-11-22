@@ -82,12 +82,12 @@ class TBuilt<T extends TAdapterContexts> {
 	/**
 	 * @param contexts exactly what the factory returned
 	 * @param scope the elevator the contexts are assembled on
-	 * @param held `ctrl` and the collection engine that came from outside
+	 * @param _held `ctrl` and the collection engine that came from outside
 	 */
 	constructor(
 		readonly contexts: T,
 		readonly scope: TReactElevatorScope,
-		readonly held: readonly object[],
+		private _held: readonly object[] | undefined,
 	) {}
 
 	get destroyed(): boolean {
@@ -104,8 +104,7 @@ class TBuilt<T extends TAdapterContexts> {
 	 * children before the owner, whose consumer has to hear them enter.
 	 */
 	accept(): void {
-		this._receipt?.commit()
-		drafts.accept(this.held)
+		this._releaseDraft()?.commit()
 
 		accepting(this.contexts, () => attachAll(this.contexts))
 	}
@@ -114,10 +113,21 @@ class TBuilt<T extends TAdapterContexts> {
 		if (this._destroyed) return
 
 		this._destroyed = true
-		this._receipt?.cancel()
-		drafts.accept(this.held)
+		this._releaseDraft()?.cancel()
 
 		destroyAll(this.contexts)
+	}
+
+	private _releaseDraft(): ICollectionTransaction | undefined {
+		const receipt = this._receipt
+		this._receipt = undefined
+
+		if (this._held) {
+			drafts.forget(this._held)
+			this._held = undefined
+		}
+
+		return receipt
 	}
 }
 

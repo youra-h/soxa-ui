@@ -240,11 +240,14 @@ export class TCollectionInitialSource {
 
 			if (!firstByValue.has(value)) firstByValue.set(value, ordinal)
 
+			const tabFallbackId = mount.createId(`initial-tab-${ordinal}`)
+			const panelFallbackId = mount.createId(`initial-panel-${ordinal}`)
+
 			return {
-				tabId: idOf(source) ?? mount.createId(`initial-tab-${ordinal}`),
-				panelId: mount.createId(`initial-panel-${ordinal}`),
-				tabFallbackId: mount.createId(`initial-tab-${ordinal}`),
-				panelFallbackId: mount.createId(`initial-panel-${ordinal}`),
+				tabId: idOf(source) ?? tabFallbackId,
+				panelId: panelFallbackId,
+				tabFallbackId,
+				panelFallbackId,
 			}
 		})
 
@@ -253,7 +256,9 @@ export class TCollectionInitialSource {
 			const ordinal = firstByValue.get(this._panelValue(panel))
 
 			if (ordinal !== undefined) {
-				links[ordinal].panelId = panel.id ?? mount.createId(`initial-panel-${ordinal}`)
+				const link = links[ordinal]
+
+				link.panelId = panel.id ?? link.panelFallbackId
 			}
 		}
 
