@@ -18,6 +18,7 @@
 | [`table/`](table/README.md)             | таблица на 5000 строк рядом с таблицами библиотек соседей; `history.md` — история до 2026-10-24                      | [`tools/bench-table`](../tools/bench-table/)             |
 | [`pages/`](pages/README.md)             | страницы компонентов: вес десятков копий, утечки по циклам и за долгую сессию; `report.md` — отчёт для статьи        | [`tools/bench-pages`](../tools/bench-pages/)             |
 | [`compare/`](compare/README.md)         | страницы компонентов soxa рядом с соседями: вес, монтирование, утечки, размер сборки                                 | [`tools/bench-compare`](../tools/bench-compare/)         |
+| [`headless/`](headless/README.md)       | Soxa, Ark UI и Radix: API, SSR, доступность и размер опубликованных React-пакетов без темы; отчёт для сайта и статей | [`tools/bench-headless`](../tools/bench-headless/)       |
 | [`ssr/`](ssr/README.md)                 | серверный рендер: утечки на тысячах рендеров в Node и языки соседних запросов; `report.md` — отчёт                   | [`tools/bench-ssr`](../tools/bench-ssr/)                 |
 | [`collections/`](collections/README.md) | 1000 Tabs и Tags до и после подготовки SSR: корректность HTML, сервер, клиент, память и соседние библиотеки          | [`tools/bench-collections`](../tools/bench-collections/) |
 | [`parity/`](parity/README.md)           | одинаковость платформ: события и дерево доступности после каждого шага сценария; `report.md` — отчёт                 | [`tools/bench-pages`](../tools/bench-pages/)             |
