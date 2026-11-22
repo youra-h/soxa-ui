@@ -1,11 +1,7 @@
 /**
- * TDrafts — сборки, которые React ещё не принял, и освобождение тех, что он
- * отбросил. AGENTS.md (React), «Срок жизни контекста».
- *
- * 1. `take(options)` — до сборки контекста: уничтожает непринятую сборку с
- *    тем же `ctrl` или движком и отдаёт взятое;
- * 2. `add(held, destroy)` — собранное становится черновиком;
- * 3. `accept(held)` при коммите — больше не черновик.
+ * Tracks assemblies React has not accepted. A retry can discard a draft
+ * that borrowed the same controller or engine. Acceptance and destruction
+ * both remove the draft's entries. See the React adapter's AGENTS.md.
  */
 
 import type { IAdapterContextOptions } from '@soxa-ui/setup'
@@ -39,13 +35,17 @@ export class TDrafts {
 	}
 
 	add(held: readonly object[], destroy: () => void, mountId: string): void {
+		if (held.length === 0) return
+
 		const draft = { held, destroy, mountId }
 
 		for (const value of held) this._drafts.set(value, draft)
 	}
 
-	accept(held: readonly object[]): void {
-		this._forget(held)
+	forget(held: readonly object[]): void {
+		for (const value of held) {
+			if (this._drafts.get(value)?.held === held) this._drafts.delete(value)
+		}
 	}
 
 	private _discard(value: object): void {
@@ -53,13 +53,7 @@ export class TDrafts {
 
 		if (draft === undefined) return
 
-		this._forget(draft.held)
+		this.forget(draft.held)
 		draft.destroy()
-	}
-
-	private _forget(held: readonly object[]): void {
-		for (const value of held) {
-			if (this._drafts.get(value)?.held === held) this._drafts.delete(value)
-		}
 	}
 }

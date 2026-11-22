@@ -49,10 +49,12 @@ describe('prepared mount state', () => {
 	it('passes model changes through the patches and reads the model itself once accepted', () => {
 		const { ctrl, context, state, mount, port } = prepared()
 		const listener = vi.fn()
-		const release = port.subscribe(listener)
+		const accepted = vi.fn()
+		const release = port.subscribe(listener, accepted)
+
+		expect(accepted).not.toHaveBeenCalled()
 
 		ctrl.aria.add('aria-label', 'Updated external label')
-
 		expect(listener).toHaveBeenLastCalledWith('aria', {
 			'aria-label': 'Updated external label',
 			id: 'declared-tab',
@@ -63,8 +65,12 @@ describe('prepared mount state', () => {
 		mount.accept()
 
 		// The patched field is announced again: the model may already hold what the mount wrote
+		expect(accepted).toHaveBeenCalledExactlyOnceWith(state)
 		expect(listener).toHaveBeenCalledExactlyOnceWith('aria', state.getSnapshot().aria)
 		expect(port.getSnapshot()).toBe(state.getSnapshot())
+
+		ctrl.aria.add('aria-label', 'Accepted label')
+		expect(listener).toHaveBeenLastCalledWith('aria', state.getSnapshot().aria)
 
 		release()
 		listener.mockClear()
@@ -86,6 +92,22 @@ describe('prepared mount state', () => {
 
 		expect(listener).not.toHaveBeenCalled()
 
+		context.destroy()
+	})
+
+	it('subscribes the listener directly when the mount is already accepted', () => {
+		const { context, state, mount, port } = prepared()
+		const subscribe = vi.spyOn(state, 'subscribe')
+		const listener = vi.fn()
+		const accepted = vi.fn()
+
+		mount.accept()
+		const release = port.subscribe(listener, accepted)
+
+		expect(accepted).toHaveBeenCalledExactlyOnceWith(state)
+		expect(subscribe).toHaveBeenCalledExactlyOnceWith(listener)
+
+		release()
 		context.destroy()
 	})
 })

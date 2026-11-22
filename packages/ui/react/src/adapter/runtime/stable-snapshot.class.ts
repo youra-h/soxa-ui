@@ -8,6 +8,7 @@
  * кому они нужны так.
  */
 
+import { TCollectionAriaState } from '@soxa-ui/setup'
 import type { TStateSnapshot, TStateStore } from '@soxa-ui/setup'
 
 function isPlain(value: unknown): value is object {
@@ -41,9 +42,19 @@ export class TStableSnapshot {
 	private _source: TStateSnapshot | null = null
 	private _snapshot: TStateSnapshot | null = null
 
-	constructor(private readonly _state: Pick<TStateStore, 'getSnapshot' | 'subscribe'>) {}
+	constructor(private _state: Pick<TStateStore, 'getSnapshot' | 'subscribe'>) {}
 
-	readonly subscribe = (onChange: () => void): (() => void) => this._state.subscribe(onChange)
+	readonly subscribe = (onChange: () => void): (() => void) => {
+		const state = this._state
+
+		if (state instanceof TCollectionAriaState) {
+			return state.subscribe(onChange, (direct) => {
+				this._state = direct
+			})
+		}
+
+		return state.subscribe(onChange)
+	}
 
 	readonly getSnapshot = (): TStateSnapshot => {
 		const source = this._state.getSnapshot()
