@@ -9,6 +9,8 @@
 [Angular](angular.md), [Web Components](webc.md). Оптимизация 19.11.2026 —
 [2026-11-19-1000.md](2026-11-19-1000.md), оверлеи `initial` только до
 принятия 20.11.2026 — [2026-11-20-initial-overlays.md](2026-11-20-initial-overlays.md).
+Освобождение временного состояния React после коммита —
+[2026-11-22-react-initial.md](2026-11-22-react-initial.md).
 Исходники стенда —
 [tools/bench-collections](../../tools/bench-collections).
 
