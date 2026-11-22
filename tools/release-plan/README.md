@@ -11,7 +11,10 @@ npm run release:plan -- themes
 npm run release:plan -- icons
 ```
 
-From a clean release branch, use the same scope with `release:prepare`.
+From a clean release branch, build the packages, review the
+[compatibility report](../release-compatibility/README.md) and write the version-specific
+[consumer upgrade guide](../../docs/upgrade/README.md). Then use the same scope with
+`release:prepare`. Preparation checks the guide and published contracts before versioning.
 Changesets generates versions, dependency updates and changelogs; the command
 updates the lockfile and records the approved package versions in
 `.release/plan.json`. No package is published by these commands.

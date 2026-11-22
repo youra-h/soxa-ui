@@ -12,6 +12,15 @@ fixed group shares one version; themes and icon packs version independently.
 Dependency updates outside the selected scope block preparation. Preview all
 before proposing a coordinated release. No pending changes means no release.
 
+Before versioning, build the packages and run npm run check:compatibility. Review the
+exact published-contract deltas and write the version-specific consumer guide under
+docs/upgrade/ with Who is affected, Before, After and Verification sections. Link it
+from the upgrade index and breaking changesets. The prepare command checks this
+before changing versions; the guide is retained in GitHub Release notes. A review
+record explains compatibility but never supplies owner permission for a breaking API.
+After actual publication, advance the exact npm baseline with compatibility:baseline
+and reconcile stale reviews in a separate normal PR.
+
 Run npm install --no-audit --no-fund and verify manifests and lock remain
 unchanged before versioning. Use `npm run release:prepare -- <scope>`; never
 hand-edit versions or CHANGELOG. The first stable graduation uses all and removes

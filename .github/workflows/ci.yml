@@ -35,6 +35,7 @@ jobs:
           npm run test:min-peers
           npm run test:release-notes
           npm run test:release-plan
+          npm run test:compatibility
           npm run test:ai-docs
           npm run test:api-docs
           npm run typecheck:api-docs
@@ -286,6 +287,17 @@ jobs:
 
       - name: Public adapter API
         run: npm run check:public-api
+
+      - name: Compatibility with published releases
+        run: npm run check:compatibility
+
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-compatibility-report
+          path: node_modules/.cache/soxa-compatibility/report.json
+          include-hidden-files: true
+          if-no-files-found: ignore
 
       # After the build as well: React Server Components (the Next.js App
       # Router) run every module a Server Component imports on the server,

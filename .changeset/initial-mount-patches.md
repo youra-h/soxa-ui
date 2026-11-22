@@ -1,4 +1,5 @@
 ---
+'@soxa-ui/core': minor
 '@soxa-ui/plugins': minor
 '@soxa-ui/setup': minor
 '@soxa-ui/angular': patch
@@ -14,3 +15,7 @@ Breaking for code that wires prepared mounts by hand (components, props, events,
 
 - `getSnapshot()` and `subscribe()` are removed from `TNamesPlugin` and its subclasses, from `TTabsItemIdsPlugin` and from `TTabsContentBindingExtension`; `TTabsItemIdsPlugin.initial` and `TCollectionInitialPartPlugin.aria` are removed too. Before acceptance these values are in the mount's patches: read `TPluginMount.patches` (new, with `TPluginMount.patch()`); after acceptance read the item model (`aria`, `closeAria`).
 - `TCollectionAriaState` now takes `(state, mount)` instead of an options object, and the `ICollectionAriaLink` and `ICollectionAriaStateOptions` types are removed. Use `collectionInitialState(context, state)`, which returns the plain state once the mount is accepted.
+
+Consumer upgrade instructions: docs/upgrade/0.5.0.md.
+
+Also update custom collection integrations: replace preparation owner accept/release and transactions.rollbackOwner with the returned transaction handle; call prepare(options) and transactions.begin(options) without item/owner, use ICollectionTransactionOptions instead of removed IPreparationOptions, drop the ICollectionTransactions type parameter, and provide readonly revision in custom drivers. Replace removed IPluginMountOptions with the relevant context type; TPluginMount.defer now returns void. collectionInitialOwnerOptions no longer takes a descriptor, and custom TItemGroupPart implementations must provide visible.

@@ -81,6 +81,10 @@ jobs:
         name: Проверка tarball MCP
         run: npm run check:mcp-package
 
+      - if: steps.check.outputs.publish == 'true' && steps.channel.outputs.scope != 'mcp'
+        name: Compatibility with published releases
+        run: npm run check:compatibility
+
       # The approved plan was validated against every unpublished package above.
       - if: steps.check.outputs.publish == 'true'
         name: Публикация

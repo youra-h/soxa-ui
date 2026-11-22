@@ -72,7 +72,11 @@
     "check:ai-docs:webc": "node tools/ai-docs/webc-smoke.mjs",
     "check:ai-docs:recipes": "node tools/ai-docs/recipes-smoke.mjs",
     "build:mcp": "npm run build --workspace=@soxa-ui/mcp",
-    "check:mcp-package": "node tools/mcp-package/smoke.mjs"
+    "check:mcp-package": "node tools/mcp-package/smoke.mjs",
+    "test:compatibility": "node --test tools/release-compatibility/compatibility.test.mjs",
+    "compatibility:baseline": "node tools/release-compatibility/cli.mjs baseline",
+    "compatibility:report": "node tools/release-compatibility/cli.mjs report",
+    "check:compatibility": "node tools/release-compatibility/cli.mjs check && tsc --noEmit --strict --skipLibCheck --module esnext --moduleResolution bundler --target ES2022 tools/release-compatibility/upgrade-examples.ts"
   },
   "devDependencies": {
     "@changesets/apply-release-plan": "^8.1.1",
