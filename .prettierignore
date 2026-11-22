@@ -48,3 +48,6 @@ benchmarks/ai/manual-runs
 
 # Archived theme CSS is immutable screenshot evidence; SHA-256 records its original bytes.
 reports/theme-geometry/**/theme.css
+# Headless comparison evidence is preserved byte-for-byte.
+benchmarks/headless/results
+tools/bench-headless/.cache
