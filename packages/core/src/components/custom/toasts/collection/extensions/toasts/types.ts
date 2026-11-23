@@ -1,6 +1,6 @@
 import type { IExtension } from '../../../../../base/collection'
 import type { IToasts } from '../../../types'
-import type { IToastsItem, TToastsItemType } from '../../../item/types'
+import type { IToastsItem, TToastsItemType, TToastsItemView } from '../../../item/types'
 
 /**
  * Опции тоста для `show`.
@@ -19,6 +19,8 @@ export interface IToastOptions<TRender = unknown> {
 	 * начале строки. Не задан — обычное сообщение
 	 */
 	type?: TToastsItemType
+	/** Theme-defined surface treatment. */
+	view?: TToastsItemView
 	/**
 	 * Тост ждёт — работа ещё идёт («Сохраняем…»): на месте значка кольцо, и сам
 	 * тост не закрывается. Кончилась работа — снимите флаг у тоста

@@ -57,7 +57,7 @@ import type {
 	TToastsItemType,
 	TToastsPlacement,
 } from '@soxa-ui/core'
-import { Button, Toasts } from '@soxa-ui/vue'
+import { Alert, Button, Toasts } from '@soxa-ui/vue'
 import type { TToastRender } from '@soxa-ui/vue'
 import { BUTTON_VIEWS, TOASTS_ITEM_TYPES } from '@soxa-ui/playground-shared'
 
@@ -532,6 +532,56 @@ describe('вид', () => {
 			}
 		},
 	)
+
+	it.each(SCHEMES)('%s: soft toasts match the Alert palette', async (scheme) => {
+		document.documentElement.dataset.soTheme = scheme
+
+		const variants = ['normal', 'accent', 'positive', 'caution', 'negative'] as const
+		const alerts = render(() =>
+			variants.map((variant) => h(Alert, { variant, view: 'soft' as const })),
+		).querySelectorAll('.so-alert')
+		const { show, rest } = await mount({ max: KINDS.length })
+		const toasts = await show(
+			...KINDS.map(({ name, type }) => ({
+				text: name,
+				description: 'Details',
+				type,
+				view: 'soft' as const,
+			})),
+		)
+		await rest()
+
+		for (const [index, { name }] of KINDS.entries()) {
+			const item = titled(name)
+			const alert = alerts[index]
+			if (!alert) throw new Error('Missing Alert reference for ' + name)
+			const plate = style(card(item))
+			const alertStyle = style(alert)
+
+			expect(plate.backgroundColor, name).toBe(alertStyle.backgroundColor)
+			expect(opacity(plate.backgroundColor), name).toBe(1)
+			expect(plate.color, name).toBe(alertStyle.color)
+			expect(style(part(item, 'description')).color, name).toBe(alertStyle.color)
+			expect(style(part(item, 'close')).color, name).toBe(alertStyle.color)
+			expect(style(part(item, 'icon')).color, name).toBe(
+				style(find('.so-alert__icon', alert)).color,
+			)
+			expect(contrast(plate.color, [plate.backgroundColor]), name).toBeGreaterThanOrEqual(
+				TEXT,
+			)
+		}
+
+		const item = titled('success')
+		const softFill = style(card(item)).backgroundColor
+		const success = toasts.find((toast) => toast.type === 'success')
+		if (!success) throw new Error('Missing success toast')
+		success.view = undefined
+		await nextTick()
+		await colorsSettled(card(item))
+
+		expect(style(card(item)).backgroundColor).not.toBe(softFill)
+		expect(style(part(item, 'icon')).color).toBe(style(card(item)).color)
+	})
 
 	/**
 	 * The node's visible shadow layers, as the computed style gives them: the

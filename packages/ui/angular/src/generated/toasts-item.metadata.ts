@@ -27,6 +27,7 @@ export const ToastsItemInputNames = [
 	'text',
 	'description',
 	'type',
+	'view',
 	'loading',
 	'closable',
 	'duration',
@@ -37,6 +38,7 @@ export const ToastsItemOutputNames = [
 	'soChangeText',
 	'soChangeDescription',
 	'soChangeType',
+	'soChangeView',
 	'soChangeLoading',
 	'soChangeClosable',
 	'soChangeDuration',
@@ -50,6 +52,7 @@ export const ToastsItemOutputNames = [
 	'textChange',
 	'descriptionChange',
 	'typeChange',
+	'viewChange',
 	'loadingChange',
 	'closableChange',
 	'durationChange',
@@ -67,6 +70,7 @@ export const ToastsItemOutputNames = [
 		'text',
 		'description',
 		'type',
+		'view',
 		{ name: 'loading', transform: booleanInput },
 		{ name: 'closable', transform: booleanInput },
 		'duration',
@@ -102,6 +106,7 @@ export abstract class TToastsItemSurface<TInstance extends IEntity> extends TVie
 	declare text: TInputValue<typeof descriptor, 'text'>
 	declare description: TInputValue<typeof descriptor, 'description'>
 	declare type: TInputValue<typeof descriptor, 'type'>
+	declare view: TInputValue<typeof descriptor, 'view'>
 	declare loading: TInputValue<typeof descriptor, 'loading'>
 	declare closable: TInputValue<typeof descriptor, 'closable'>
 	declare duration: TInputValue<typeof descriptor, 'duration'>
@@ -121,6 +126,7 @@ export abstract class TToastsItemSurface<TInstance extends IEntity> extends TVie
 	declare readonly soChangeText: TOutputEmitter<typeof descriptor, 'change:text'>
 	declare readonly soChangeDescription: TOutputEmitter<typeof descriptor, 'change:description'>
 	declare readonly soChangeType: TOutputEmitter<typeof descriptor, 'change:type'>
+	declare readonly soChangeView: TOutputEmitter<typeof descriptor, 'change:view'>
 	declare readonly soChangeLoading: TOutputEmitter<typeof descriptor, 'change:loading'>
 	declare readonly soChangeClosable: TOutputEmitter<typeof descriptor, 'change:closable'>
 	declare readonly soChangeDuration: TOutputEmitter<typeof descriptor, 'change:duration'>
@@ -136,6 +142,7 @@ export abstract class TToastsItemSurface<TInstance extends IEntity> extends TVie
 	declare readonly textChange: TModelEmitter<typeof descriptor, 'text'>
 	declare readonly descriptionChange: TModelEmitter<typeof descriptor, 'description'>
 	declare readonly typeChange: TModelEmitter<typeof descriptor, 'type'>
+	declare readonly viewChange: TModelEmitter<typeof descriptor, 'view'>
 	declare readonly loadingChange: TModelEmitter<typeof descriptor, 'loading'>
 	declare readonly closableChange: TModelEmitter<typeof descriptor, 'closable'>
 	declare readonly durationChange: TModelEmitter<typeof descriptor, 'duration'>
