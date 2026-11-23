@@ -268,4 +268,6 @@
 	--so-surface-scale-lg: 1.125;
 	--so-surface-scale-xl: 1.25;
 	--so-surface-scale-2xl: 1.5;
+
+	--so-backdrop-blur: 3px;
 }
