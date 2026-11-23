@@ -37,15 +37,34 @@ $types: (
 	'error': 'negative',
 );
 
-$soft: '.so-toasts-item--view-soft';
 $typed: ();
 
 @each $type, $_ in $types {
 	$typed: list.append($typed, '.so-toasts-item--type-#{$type}', $separator: comma);
 }
 
-// Preserve the default signal fill for typed toasts and its original specificity.
-$filled: ':is(#{$typed}):where(:not(#{$soft}))';
+$item-views: ();
+$manager-views: ();
+
+@each $view in ('outlined', 'filled', 'soft') {
+	$item-views: list.append($item-views, '.so-toasts-item--view-#{$view}', $separator: comma);
+	$manager-views: list.append($manager-views, '.so-toasts--view-#{$view}', $separator: comma);
+}
+
+$inherit-view: ':where(:not(:is(#{$item-views})))';
+$manager-items: ':is(#{$manager-views}) > .so-toasts__list > .so-toasts-item';
+$implicit-view: '#{$inherit-view}:where(:not(#{$manager-items}))';
+
+// The region supplies a live default to its own list. An item class takes priority.
+@function toast-view($view) {
+	$direct: '.so-toasts-item--view-#{$view}';
+	$inherited: ':where(.so-toasts--view-#{$view} > .so-toasts__list) > .so-toasts-item#{$inherit-view}';
+	@return ':is(#{$direct}, #{$inherited})';
+}
+
+$outlined: toast-view('outlined');
+$soft: toast-view('soft');
+$filled: ":is(#{toast-view('filled')}, :is(#{$typed})#{$implicit-view})";
 
 // Описание на заливке — цвет текста на 95 %: чуть тише заголовка, а главное
 // отличие описания — начертание: заголовок плотнее.
@@ -201,9 +220,13 @@ $cascade-easing: cubic-bezier(0.21, 1.02, 0.73, 1);
 	}
 }
 
+#{$outlined},
+#{$soft} {
+	--so-toasts-item-muted: var(--so-component-text);
+}
+
 #{$soft} {
 	--so-toasts-item-fill: var(--so-toasts-item-soft);
-	--so-toasts-item-muted: var(--so-component-text);
 }
 
 #{$filled} {
@@ -249,8 +272,9 @@ $cascade-easing: cubic-bezier(0.21, 1.02, 0.73, 1);
 	color: var(--so-toasts-item-text, var(--so-component-text));
 }
 
-// Only the default untyped card uses the neutral rim.
-.so-toasts-item:not(#{$soft}, #{$typed}) > .so-toasts-item__card {
+// The neutral rim marks outlined cards and the original untyped card.
+#{$outlined} > .so-toasts-item__card,
+.so-toasts-item:not(#{$typed})#{$implicit-view} > .so-toasts-item__card {
 	@apply ring-1 ring-so-neutral-300;
 }
 

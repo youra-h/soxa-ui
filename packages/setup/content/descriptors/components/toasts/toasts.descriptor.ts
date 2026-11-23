@@ -66,10 +66,17 @@ export const ToastsDescriptor = defineDescriptor(() =>
 			props: {
 				placement: { type: String, triggers: ['change:placement'] },
 				layout: { type: String, triggers: ['change:layout'] },
+				view: { type: String, triggers: ['change:view'] },
 				max: { type: Number, triggers: ['change:max'] },
 				duration: { type: Number, triggers: ['change:duration'] },
 			},
-			events: ['change:placement', 'change:layout', 'change:max', 'change:duration'],
+			events: [
+				'change:placement',
+				'change:layout',
+				'change:view',
+				'change:max',
+				'change:duration',
+			],
 		},
 
 		plugins: [

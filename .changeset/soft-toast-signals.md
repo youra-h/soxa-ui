@@ -6,4 +6,4 @@
 '@soxa-ui/theme-oren': patch
 ---
 
-Add `view: 'soft'` on toasts with the same tinted surfaces and neutral text as Alert in both Oren color schemes.
+Add outlined, filled and soft views to Toasts in Oren. Set the view on the manager and override it on individual notifications.

@@ -196,19 +196,28 @@
   {
     "id": "toasts-soft-view",
     "impact": "compatible",
-    "reason": "Toast show options, item props and adapter bindings gain an optional view and a new change event. Existing inputs, event names, theme selectors and the default card appearance are preserved. Oren registers soft for Toast items; the base theme contract adds that block to the existing view modifier.",
+    "reason": "Toasts and individual items gain optional view inputs and change events. Existing props, event names, CSS selectors and default appearance are preserved. The item view overrides the manager default. Oren supplies outlined, filled and soft through one registry, and the base theme contract adds both Toasts blocks to the existing view modifier.",
     "baseline": "40c1a001cea801ac6ba41fd66d0443f5ca58f67d151fe033a5df3aea64d49be5",
     "guide": "docs/upgrade/toasts-soft-view.md",
     "changes": [
+      "d0a368cb38853bc7698efbafa8434337f96c43de5798cc1eba3ed9ecb1d291ca",
+      "7cd63c28f35023510806f32cb0e58be117aaa4251f1bb821114bbef474ee929e",
+      "ec5f23276360b58ce0fb2d2497cddf262adb85b587a8be41aefbbe31dc7619ee",
+      "46abbd2afa92b14b8ea8fa129aa3119125f2f15cc95e37381ab28a033805a0f1",
+      "d1cf39a73e1aac165ca7fea7e260b8134160c023a7b6afc296be604cabddcad4",
+      "3b0b61c9f3d7b18ff0dddaa56637d9613dd04e67b585bc4d28e61237503996ed",
       "71a388b90605ab44c04ed8d28ec2a4c45a3911dc871b38caab5d55dcbec76334",
       "b2b592efa2b0bf869f2e039bed2415b9c364fa2b3a0e0b46e33ed881df1ff85a",
       "c071404a6aca1a4a0d3e45b7381833e2cc65bcb2ae74a8f71a2948081f6d519f",
       "d3d23ac9054128d30b74b7f3a6ee5092dfe7540f83afe772574553f5ca7a208e",
+      "20752315ba00570a5f447ab5ecba7ab93dace4c1faa23c9bc152610aafa23fa4",
       "e0ef4d8b1721c9b662f6a05371c1def48274c29e0f0ef704f7ba5e3708a3f35d",
       "99587270494670c4c4fd908cdc51066d9be52e9d48b00d845a4f71844f60a1f2",
-      "e5aa52cfc8496e8aefa4f70b82b048428bdf3c6eacdab3b0efa442c73951ebb3",
-      "c1546e9a5a03e81ba7c05fcf296df0c6f5f8ecc07cdc2f4ae72e8ea3a3ad609d",
-      "a6ebb3381408ca27247bd8faf9a7a24d6861b4c03130a4a9617baac47920eaec",
+      "506b875aeb443a1709ef6d6a223b1035c87234fdf1ba038bf554921f3e680faa",
+      "81ba28d1b2336e4a478ea9a56af87c46d863fadfe4072a8ea38bf986e5f6b069",
+      "d0dde2e77682ba14e65b80f436aa01552d5f27fd0d1ec6f8d297fd752d2b74e9",
+      "d9d55ac1f8a0c57d3fb8e09e6669de142ec6d05bdf27b02eb2ae499c260f92e1",
+      "275695335ac92969fa7d7647406309c3417c4f5f973ef8cdcd85e0843996baa7",
       "13da6e343a36b24e113d66966c1ba5324c0435cd2340c3803236064d6649cfa2"
     ]
   }

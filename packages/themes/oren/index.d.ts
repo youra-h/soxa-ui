@@ -37,8 +37,10 @@ declare module '@soxa-ui/core' {
 		filled: true
 	}
 
-	/** Toast surfaces. The default uses a solid fill for typed messages. */
+	/** Shared surface treatments for Toasts and individual toast items. */
 	interface IToastsItemViews {
+		outlined: true
+		filled: true
 		soft: true
 	}
 

@@ -1,11 +1,18 @@
-# Toast appearance in Oren
+﻿# Toast appearance in Oren
 
 ## Who is affected
 
-Applications using Toasts with Oren can opt into the soft view. Existing
-calls and custom themes require no migration.
+Applications using Toasts with Oren can set a view for the container and
+override it on individual notifications. Existing calls and custom themes
+require no migration.
 
 ## Before
+
+```vue
+<Toasts>
+  <App />
+</Toasts>
+```
 
 ```ts
 const { show } = useToasts()
@@ -14,15 +21,28 @@ show({ text: 'Message sent', type: 'success' })
 
 ## After
 
-Pass `view: 'soft'` to use the same tinted surface and neutral text as Alert soft.
+`Toasts` and its items accept `outlined`, `filled` and `soft`. Set the view
+on the container to style its notifications by default.
+
+```vue
+<Toasts view="filled">
+  <App />
+</Toasts>
+```
+
+Inside the container, use `show()` to override the view for one notification.
+The outlined notification below has a neutral surface and no message type.
 
 ```ts
 const { show } = useToasts()
-show({ text: 'Message sent', type: 'success', view: 'soft' })
+show({ text: 'Message sent', type: 'success' })
+show({ text: 'You have a new message', view: 'outlined' })
 ```
 
 ## Verification
 
-Check the notification in the light and dark Oren schemes. The icon uses the
-message type color. The title, description and close button use the neutral
-text color. The original call still uses the standard success fill.
+Check the same container in both Oren schemes. The success toast uses a
+solid signal color, while the ordinary toast has an outline. Change the
+container view to `soft` to see the success toast adopt a tinted surface.
+The other toast keeps its outline. Clearing its own `view` on the item
+controller restores the current container view.

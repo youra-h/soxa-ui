@@ -3268,11 +3268,12 @@
         "packages/core/src/components/custom/tabs/tabs.class.ts",
         "packages/core/src/components/custom/tags/tags.class.ts",
         "packages/core/src/components/custom/toasts/item/item.class.ts",
+        "packages/core/src/components/custom/toasts/toasts.class.ts",
         "packages/core/src/components/custom/toggle-group/toggle-group.class.ts"
       ],
       "pattern": "so-<block>--view-<value>",
       "description": "Theme-defined visual treatment; absent when unset.",
-      "scope": "Alert, Badge, Button, CheckBox, RadioGroup/items, Tabs, Accordion/items, Tags/items, ListBox/Select rows, Toasts items",
+      "scope": "Alert, Badge, Button, CheckBox, RadioGroup/items, Tabs, Accordion/items, Tags/items, ListBox/Select rows, Toasts and items",
       "values": "<view>; values declared by the theme"
     }
   ],

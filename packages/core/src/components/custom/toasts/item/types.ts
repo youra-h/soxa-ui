@@ -72,7 +72,7 @@ export interface IToastsItemProps extends IComponentViewProps {
 	 * начале строки. Не задан — обычное сообщение
 	 */
 	type?: TToastsItemType
-	/** Theme-defined surface treatment. */
+	/** Surface treatment for this item, overriding the manager's view when set. */
 	view?: TToastsItemView
 	/**
 	 * Тост ждёт — идёт работа, о которой он сообщает («Сохраняем…»): на месте

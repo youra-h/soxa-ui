@@ -19,7 +19,7 @@ export interface IToastOptions<TRender = unknown> {
 	 * начале строки. Не задан — обычное сообщение
 	 */
 	type?: TToastsItemType
-	/** Theme-defined surface treatment. */
+	/** Surface treatment for this item, overriding the manager's view when set. */
 	view?: TToastsItemView
 	/**
 	 * Тост ждёт — работа ещё идёт («Сохраняем…»): на месте значка кольцо, и сам
