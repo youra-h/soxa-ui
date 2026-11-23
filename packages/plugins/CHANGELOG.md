@@ -1,5 +1,13 @@
 # @soxa-ui/plugins
 
+## 0.6.0
+
+### Patch Changes
+
+- Updated dependencies [815c2c6]
+- Updated dependencies [2e8653a]
+  - @soxa-ui/core@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/angular",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Адаптер Angular: компоненты на headless-моделях ядра",
   "keywords": [
     "soxa",
@@ -39,9 +39,9 @@
     "test": "ng test --no-watch"
   },
   "dependencies": {
-    "@soxa-ui/core": "0.5.0",
-    "@soxa-ui/plugins": "0.5.0",
-    "@soxa-ui/setup": "0.5.0",
+    "@soxa-ui/core": "0.6.0",
+    "@soxa-ui/plugins": "0.6.0",
+    "@soxa-ui/setup": "0.6.0",
     "tslib": "^2.8.1"
   },
   "peerDependencies": {
@@ -61,8 +61,8 @@
     "@angular/forms": "^22.2.0",
     "@angular/platform-browser": "^22.2.0",
     "@angular/platform-server": "^22.2.0",
-    "@soxa-ui/icons-material": "0.3.2",
-    "@soxa-ui/theme-oren": "0.5.0",
+    "@soxa-ui/icons-material": "0.3.3",
+    "@soxa-ui/theme-oren": "0.6.0",
     "@types/node": "^22.0.0",
     "ng-packagr": "^22.1.1",
     "rxjs": "^7.8.2",

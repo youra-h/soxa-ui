@@ -3,83 +3,83 @@
   "scope": "all",
   "packages": [
     {
-      "name": "@soxa-ui/theme-base",
-      "version": "0.5.0",
-      "previousVersion": "0.4.1",
+      "name": "@soxa-ui/theme-oren",
+      "version": "0.6.0",
+      "previousVersion": "0.5.0",
       "scope": "themes"
     },
     {
       "name": "@soxa-ui/core",
-      "version": "0.5.0",
-      "previousVersion": "0.4.2",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/plugins",
-      "version": "0.5.0",
-      "previousVersion": "0.4.2",
+      "version": "0.6.0",
+      "previousVersion": "0.5.0",
       "scope": "components"
     },
     {
       "name": "@soxa-ui/setup",
-      "version": "0.5.0",
-      "previousVersion": "0.4.2",
+      "version": "0.6.0",
+      "previousVersion": "0.5.0",
       "scope": "components"
     },
     {
-      "name": "@soxa-ui/angular",
-      "version": "0.5.0",
-      "previousVersion": "0.4.2",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/solid",
-      "version": "0.5.0",
-      "previousVersion": "0.4.2",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/svelte",
-      "version": "0.5.0",
-      "previousVersion": "0.4.2",
-      "scope": "components"
+      "name": "@soxa-ui/theme-base",
+      "version": "0.6.0",
+      "previousVersion": "0.5.0",
+      "scope": "themes"
     },
     {
       "name": "@soxa-ui/vue",
-      "version": "0.5.0",
-      "previousVersion": "0.4.2",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/webc",
-      "version": "0.5.0",
-      "previousVersion": "0.4.2",
+      "version": "0.6.0",
+      "previousVersion": "0.5.0",
       "scope": "components"
     },
     {
       "name": "@soxa-ui/react",
-      "version": "0.5.0",
-      "previousVersion": "0.4.2",
+      "version": "0.6.0",
+      "previousVersion": "0.5.0",
       "scope": "components"
     },
     {
-      "name": "@soxa-ui/theme-oren",
-      "version": "0.5.0",
-      "previousVersion": "0.4.1",
-      "scope": "themes"
+      "name": "@soxa-ui/solid",
+      "version": "0.6.0",
+      "previousVersion": "0.5.0",
+      "scope": "components"
+    },
+    {
+      "name": "@soxa-ui/svelte",
+      "version": "0.6.0",
+      "previousVersion": "0.5.0",
+      "scope": "components"
+    },
+    {
+      "name": "@soxa-ui/angular",
+      "version": "0.6.0",
+      "previousVersion": "0.5.0",
+      "scope": "components"
+    },
+    {
+      "name": "@soxa-ui/webc",
+      "version": "0.6.0",
+      "previousVersion": "0.5.0",
+      "scope": "components"
+    },
+    {
+      "name": "@soxa-ui/plugins",
+      "version": "0.6.0",
+      "previousVersion": "0.5.0",
+      "scope": "components"
     },
     {
       "name": "@soxa-ui/icons-lucide",
-      "version": "0.3.2",
-      "previousVersion": "0.3.1",
+      "version": "0.3.3",
+      "previousVersion": "0.3.2",
       "scope": "icons"
     },
     {
       "name": "@soxa-ui/icons-material",
-      "version": "0.3.2",
-      "previousVersion": "0.3.1",
+      "version": "0.3.3",
+      "previousVersion": "0.3.2",
       "scope": "icons"
     }
   ],
-  "upgradeGuide": "docs/upgrade/0.5.0.md"
+  "upgradeGuide": "docs/upgrade/0.6.0.md"
 }
