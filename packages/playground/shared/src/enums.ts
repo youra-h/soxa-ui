@@ -6,6 +6,7 @@ import type {
 	TButtonView,
 	TBadgeView,
 	TAlertView,
+	TBackdropView,
 	TAvatarShape,
 	TCheckBoxView,
 	TLabelPosition,
@@ -316,6 +317,8 @@ export const FRAME_PLACEMENTS = enumOf<TFramePlacement>()([
  * нашла бы умолчания среди значений.
  */
 export const HTML_TAGS = ['div', 'span', 'label', 'button', 'a', 'section', 'li'] as const
+
+export const BACKDROP_VIEWS = enumOf<TBackdropView>()(['none', 'dim', 'blur'])
 
 export const ALERT_VIEWS = enumOf<TAlertView>()(['outlined', 'soft', 'filled'])
 

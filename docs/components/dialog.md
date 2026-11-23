@@ -16,6 +16,18 @@ non-modal window. Use `dismissible=false` for consent that must wait for an expl
 The close button remains controlled by `closable`; all user closure requests retain
 `close:before`. The `alert` option uses `alertdialog` only while `modal=true`.
 
+## Backdrop appearance
+
+With Oren, set the backdrop on `Dialog`, `AlertDialog`, or `Drawer` with the
+`backdrop` prop. Oren uses `dim` by default. Use `blur` for the tint with
+background blur, or `none` for a transparent backdrop.
+
+The shared backdrop element has the `.so-backdrop` class and precedes the panel.
+
+The modal still manages focus and outside presses with a transparent backdrop.
+For example, `<Dialog backdrop="none" :dismissible="false">` keeps focus
+inside the dialog and ignores outside presses.
+
 ## Cookie consent with the Vue package
 
 Install a library version containing the non-modal Dialog feature, plus its compatible Oren

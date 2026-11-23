@@ -1,19 +1,20 @@
 <script lang="ts">
+import Backdrop from '../../adapter/backdrop/Backdrop'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import SetupAlertDialog from './setup.component'
 
-export default { ...SetupAlertDialog, inheritAttrs: false, components: { Button, Icon } }
+export default { ...SetupAlertDialog, inheritAttrs: false, components: { Backdrop, Button, Icon } }
 </script>
 
 <template>
 	<teleport :to="target">
 		<template v-if="rendered">
-			<div
-				class="so-alert-dialog__backdrop"
-				v-show="visible"
-				:style="layout_backdropStyles"
-				v-bind="backdropDataset"
+			<Backdrop
+				:classes="backdropClasses"
+				:visible="visible"
+				:styles="layout_backdropStyles"
+				:dataset="backdropDataset"
 			/>
 			<component
 				:is="tag"

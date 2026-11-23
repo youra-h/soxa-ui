@@ -342,13 +342,13 @@ describe('хост Svelte', () => {
 		[
 			'dialog',
 			button('Открыть окно'),
-			'.so-dialog__backdrop, .so-dialog, .so-dialog__title, .so-dialog__body, .so-dialog__body > *, .so-dialog__footer, .so-dialog__footer > *, .so-dialog__close',
+			'.so-backdrop:has(+ .so-dialog), .so-dialog, .so-dialog__title, .so-dialog__body, .so-dialog__body > *, .so-dialog__footer, .so-dialog__footer > *, .so-dialog__close',
 			10,
 		],
 		[
 			'drawer',
 			button('Открыть панель'),
-			'.so-drawer__backdrop, .so-drawer, .so-drawer__title, .so-drawer__body, .so-drawer__body > *, .so-drawer__footer, .so-drawer__footer > *, .so-drawer__close',
+			'.so-backdrop:has(+ .so-drawer), .so-drawer, .so-drawer__title, .so-drawer__body, .so-drawer__body > *, .so-drawer__footer, .so-drawer__footer > *, .so-drawer__close',
 			10,
 		],
 		[

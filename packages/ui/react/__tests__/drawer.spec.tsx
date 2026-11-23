@@ -31,7 +31,7 @@ import { find, mount, nextFrame, track } from './mount'
 const node = (selector: string, scope: ParentNode = document) => find(scope, selector, HTMLElement)
 
 const panel = (scope: ParentNode = document) => node('.so-drawer', scope)
-const backdrop = (scope: ParentNode = document) => node('.so-drawer__backdrop', scope)
+const backdrop = (scope: ParentNode = document) => node('.so-backdrop:has(+ .so-drawer)', scope)
 const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'none'
 const opener = () => node('.so-test-opener')
 const host = () => node('.so-test-host')
@@ -603,9 +603,7 @@ describe('React', () => {
 			</div>,
 		)
 
-		expect(
-			html.querySelector('.so-test-host > .so-drawer__backdrop + .so-drawer'),
-		).not.toBeNull()
+		expect(html.querySelector('.so-test-host > .so-backdrop + .so-drawer')).not.toBeNull()
 	})
 
 	it('гидратация закрытой с contained — без расхождений, панель — узел сервера', async () => {

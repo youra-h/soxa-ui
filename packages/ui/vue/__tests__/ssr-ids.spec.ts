@@ -293,7 +293,7 @@ describe('номер слоя при гидратации', () => {
 	])('%s: без расхождений, номер — кадром узла', async (_, render, block) => {
 		const { server, teleported, warnings } = await hydrate(render)
 		const panel = `.${block}`
-		const backdrop = `.${block}__backdrop`
+		const backdrop = '.so-backdrop'
 		const printed = [server, teleported].flatMap((root) => [
 			...root.querySelectorAll(`${panel}, ${backdrop}`),
 		])

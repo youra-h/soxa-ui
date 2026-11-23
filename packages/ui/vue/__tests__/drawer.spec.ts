@@ -39,7 +39,7 @@ function find(selector: string, scope: ParentNode = document): HTMLElement {
 }
 
 const panel = (scope: ParentNode = document) => find('.so-drawer', scope)
-const backdrop = (scope: ParentNode = document) => find('.so-drawer__backdrop', scope)
+const backdrop = (scope: ParentNode = document) => find('.so-backdrop:has(+ .so-drawer)', scope)
 const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'none'
 const opener = () => find('.so-test-opener')
 

@@ -4,10 +4,10 @@ import {
 	renderSlot,
 	roleIcon,
 	toAriaProps,
-	toRootLayout,
 	toRootProps,
 	useClickAction,
 } from '../../adapter'
+import { Backdrop } from '../../adapter/backdrop/Backdrop'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { useSetupDialog } from './setup.component'
@@ -30,7 +30,6 @@ export function Dialog(props: DialogProps): ReactElement | null {
 		rendered,
 		tag,
 		target,
-		visible,
 		modal,
 		attrs,
 		aria,
@@ -42,8 +41,6 @@ export function Dialog(props: DialogProps): ReactElement | null {
 		maximizable,
 		maximizeAria,
 		maximized,
-		backdropDataset,
-		layout_backdropStyles,
 		dismiss_ownerAttribute,
 	} = state
 
@@ -53,15 +50,7 @@ export function Dialog(props: DialogProps): ReactElement | null {
 
 	return (
 		<Teleport to={target}>
-			{modal ? (
-				<div
-					{...toAriaProps(backdropDataset)}
-					{...toRootLayout(
-						{ layout_styles: layout_backdropStyles, visible },
-						{ className: 'so-dialog__backdrop' },
-					)}
-				/>
-			) : null}
+			{modal ? <Backdrop state={state} /> : null}
 			<Tag
 				tabIndex={-1}
 				{...toRootProps(

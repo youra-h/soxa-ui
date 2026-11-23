@@ -97,7 +97,7 @@ describe('AlertDialog browser', () => {
 		expect(document.activeElement).toBe(node('.so-alert-dialog__close'))
 		await userEvent.keyboard('{Tab}')
 		expect(document.activeElement).toBe(node('.so-alert-dialog__cancel'))
-		await userEvent.click(page.elementLocator(node('.so-alert-dialog__backdrop')), {
+		await userEvent.click(page.elementLocator(node('.so-backdrop:has(+ .so-alert-dialog)')), {
 			position: { x: 5, y: 5 },
 		})
 		expect(ctrl.visible).toBe(true)

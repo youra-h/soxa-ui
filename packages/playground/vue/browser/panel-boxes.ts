@@ -30,11 +30,11 @@ export const TOOLTIP_PARTS = '.so-tooltip__panel, .so-tooltip__content'
 
 /** The parts of an open dialog: the backdrop, the dialog, the title, the body with its content, the footer with its buttons, the cross. */
 export const DIALOG_PARTS =
-	'.so-dialog__backdrop, .so-dialog, .so-dialog__title, .so-dialog__body, .so-dialog__body > *, .so-dialog__footer, .so-dialog__footer > *, .so-dialog__close'
+	'.so-backdrop:has(+ .so-dialog), .so-dialog, .so-dialog__title, .so-dialog__body, .so-dialog__body > *, .so-dialog__footer, .so-dialog__footer > *, .so-dialog__close'
 
 /** The parts of an open drawer — the same as the dialog's. */
 export const DRAWER_PARTS =
-	'.so-drawer__backdrop, .so-drawer, .so-drawer__title, .so-drawer__body, .so-drawer__body > *, .so-drawer__footer, .so-drawer__footer > *, .so-drawer__close'
+	'.so-backdrop:has(+ .so-drawer), .so-drawer, .so-drawer__title, .so-drawer__body, .so-drawer__body > *, .so-drawer__footer, .so-drawer__footer > *, .so-drawer__close'
 
 /**
  * How long an open panel or layer may take to stand still, ms. A limit in

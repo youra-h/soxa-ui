@@ -31,8 +31,8 @@ $exit-duration: 150ms;
 // им нечему. Разгон и торможение нужны движению, а прозрачность — не движение.
 $easing: linear;
 
-.so-dialog__backdrop {
-	@include modal.backdrop;
+.so-backdrop:has(+ :where(.so-dialog)) {
+	@include modal.backdrop-views;
 }
 
 // Панель — поверхность модального слоя (`modal.surface`) со скруглением со
@@ -69,7 +69,7 @@ $easing: linear;
 // прозрачность — не движение, окно стоит на месте, и переход один в любом
 // режиме движения.
 .so-dialog,
-.so-dialog__backdrop {
+.so-backdrop:has(+ :where(.so-dialog)) {
 	transition-property: opacity, display;
 	transition-timing-function: $easing;
 	transition-behavior: allow-discrete;
@@ -86,7 +86,7 @@ $easing: linear;
 
 @starting-style {
 	.so-dialog:where([data-open='true']),
-	.so-dialog__backdrop:where([data-open='true']) {
+	.so-backdrop:has(+ :where(.so-dialog)):where([data-open='true']) {
 		@apply opacity-0;
 	}
 }

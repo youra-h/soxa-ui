@@ -44,6 +44,12 @@
       "scope": "Avatar.Group"
     },
     {
+      "name": "so-backdrop",
+      "sources": ["packages/core/src/components/base/modal-layer/backdrop.class.ts"],
+      "description": "Decorative backdrop rendered beside a modal panel.",
+      "scope": "backdrop"
+    },
+    {
       "name": "so-badge",
       "sources": ["packages/core/src/components/custom/badge/badge.class.ts"],
       "description": "Noninteractive badge wrapper.",
@@ -527,19 +533,6 @@
         "packages/ui/vue/src/components/alert-dialog/AlertDialog.vue"
       ],
       "description": "AlertDialog action emission.",
-      "scope": "AlertDialog"
-    },
-    {
-      "name": "so-alert-dialog__backdrop",
-      "sources": [
-        "packages/ui/angular/src/components/alert-dialog/alert-dialog.component.html",
-        "packages/ui/react/src/components/alert-dialog/AlertDialog.tsx",
-        "packages/ui/solid/src/components/alert-dialog/AlertDialog.tsx",
-        "packages/ui/svelte/src/components/alert-dialog/AlertDialog.svelte",
-        "packages/ui/vue/src/components/alert-dialog/AlertDialog.vue",
-        "packages/ui/webc/src/components/alert-dialog/alert-dialog.template.ts"
-      ],
-      "description": "AlertDialog backdrop emission.",
       "scope": "AlertDialog"
     },
     {
@@ -1436,19 +1429,6 @@
       "scope": "so-date-picker"
     },
     {
-      "name": "so-dialog__backdrop",
-      "sources": [
-        "packages/ui/angular/src/components/dialog/dialog.component.html",
-        "packages/ui/react/src/components/dialog/Dialog.tsx",
-        "packages/ui/solid/src/components/dialog/Dialog.tsx",
-        "packages/ui/svelte/src/components/dialog/Dialog.svelte",
-        "packages/ui/vue/src/components/dialog/Dialog.vue",
-        "packages/ui/webc/src/components/dialog/dialog.template.ts"
-      ],
-      "description": "backdrop part of dialog. Availability follows the rendered component structure.",
-      "scope": "so-dialog"
-    },
-    {
       "name": "so-dialog__body",
       "sources": [
         "packages/ui/angular/src/components/dialog/dialog.component.html",
@@ -1518,19 +1498,6 @@
       "sources": ["packages/plugins/src/custom/drag-and-drop/drag.plugin.ts"],
       "description": "item part of drag and drop. Availability follows the rendered component structure.",
       "scope": "so-drag-and-drop"
-    },
-    {
-      "name": "so-drawer__backdrop",
-      "sources": [
-        "packages/ui/angular/src/components/drawer/drawer.component.html",
-        "packages/ui/react/src/components/drawer/Drawer.tsx",
-        "packages/ui/solid/src/components/drawer/Drawer.tsx",
-        "packages/ui/svelte/src/components/drawer/Drawer.svelte",
-        "packages/ui/vue/src/components/drawer/Drawer.vue",
-        "packages/ui/webc/src/components/drawer/drawer.template.ts"
-      ],
-      "description": "backdrop part of drawer. Availability follows the rendered component structure.",
-      "scope": "so-drawer"
     },
     {
       "name": "so-drawer__body",
@@ -3257,6 +3224,7 @@
     {
       "name": "--view-",
       "sources": [
+        "packages/core/src/components/base/modal-layer/backdrop.class.ts",
         "packages/core/src/components/custom/accordion/accordion.class.ts",
         "packages/core/src/components/custom/alert/alert.class.ts",
         "packages/core/src/components/custom/badge/badge.class.ts",

@@ -4,10 +4,10 @@ import {
 	renderSlot,
 	roleIcon,
 	toAriaProps,
-	toRootLayout,
 	toRootProps,
 	useClickAction,
 } from '../../adapter'
+import { Backdrop } from '../../adapter/backdrop/Backdrop'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { useSetupAlertDialog } from './setup.component'
@@ -24,7 +24,6 @@ export function AlertDialog(props: AlertDialogProps): ReactElement | null {
 		rendered,
 		tag,
 		target,
-		visible,
 		attrs,
 		aria,
 		dataset,
@@ -32,8 +31,6 @@ export function AlertDialog(props: AlertDialogProps): ReactElement | null {
 		bodyAria,
 		closable,
 		closeAria,
-		backdropDataset,
-		layout_backdropStyles,
 		dismiss_ownerAttribute,
 		names_cancel,
 		names_confirm,
@@ -45,13 +42,7 @@ export function AlertDialog(props: AlertDialogProps): ReactElement | null {
 
 	return (
 		<Teleport to={target}>
-			<div
-				{...toAriaProps(backdropDataset)}
-				{...toRootLayout(
-					{ layout_styles: layout_backdropStyles, visible },
-					{ className: 'so-alert-dialog__backdrop' },
-				)}
-			/>
+			<Backdrop state={state} />
 			<Tag
 				tabIndex={-1}
 				{...toRootProps(

@@ -4,10 +4,10 @@ import {
 	renderSlot,
 	roleIcon,
 	toAriaProps,
-	toRootLayout,
 	toRootProps,
 	useClickAction,
 } from '../../adapter'
+import { Backdrop } from '../../adapter/backdrop/Backdrop'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { useSetupDrawer } from './setup.component'
@@ -28,7 +28,6 @@ export function Drawer(props: DrawerProps): ReactElement | null {
 		tag,
 		target,
 		contained,
-		visible,
 		attrs,
 		aria,
 		dataset,
@@ -36,8 +35,6 @@ export function Drawer(props: DrawerProps): ReactElement | null {
 		closable,
 		closeAria,
 		handleRendered,
-		backdropDataset,
-		layout_backdropStyles,
 		dismiss_ownerAttribute,
 	} = state
 
@@ -47,13 +44,7 @@ export function Drawer(props: DrawerProps): ReactElement | null {
 
 	return (
 		<Teleport to={target} disabled={contained}>
-			<div
-				{...toAriaProps(backdropDataset)}
-				{...toRootLayout(
-					{ layout_styles: layout_backdropStyles, visible },
-					{ className: 'so-drawer__backdrop' },
-				)}
-			/>
+			<Backdrop state={state} />
 			<Tag
 				tabIndex={-1}
 				{...toRootProps(

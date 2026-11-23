@@ -6,6 +6,7 @@ import type {
 	TAlertView,
 	TButtonView,
 	TBadgeView,
+	TBackdropView,
 	TCheckBoxView,
 	TComponentVariant,
 	TListBoxView,
@@ -33,6 +34,7 @@ describe('реестры значений оформления', () => {
 		const exact: Record<string, true> = {
 			variant: true satisfies TExact<TComponentVariant, 'brand' | 'danger'>,
 			alertView: true satisfies TExact<TAlertView, 'solid' | 'hollow'>,
+			backdropView: true satisfies TExact<TBackdropView, 'clear' | 'frosted'>,
 			badgeView: true satisfies TExact<TBadgeView, 'solid' | 'hollow'>,
 			buttonView: true satisfies TExact<TButtonView, 'solid' | 'ghost'>,
 			tabsView: true satisfies TExact<TTabsView, 'pills' | 'cards'>,

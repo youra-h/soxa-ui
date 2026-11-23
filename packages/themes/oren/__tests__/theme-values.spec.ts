@@ -38,6 +38,7 @@ const REGISTRIES: Record<string, { modifier: string; blocks: readonly string[] |
 		modifier: 'view',
 		blocks: ['so-button', 'so-list-box', 'so-accordion', 'so-tags', 'so-toggle-group'],
 	},
+	IBackdropViews: { modifier: 'view', blocks: ['so-backdrop'] },
 	ITabsViews: { modifier: 'view', blocks: ['so-tabs'] },
 	ICheckBoxViews: { modifier: 'view', blocks: ['so-check-box'] },
 	IRadioGroupViews: { modifier: 'view', blocks: ['so-radio-group-item'] },

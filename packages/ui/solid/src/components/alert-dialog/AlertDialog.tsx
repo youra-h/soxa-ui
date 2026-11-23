@@ -10,14 +10,13 @@ import {
 	roleIcon,
 } from '../../adapter'
 import { Show } from '../../adapter/runtime/flow'
+import { Backdrop } from '../../adapter/backdrop/Backdrop'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { setupAlertDialog } from './setup.component'
 import type { AlertDialogProps } from './base.component'
 
 const CLOSE = roleIcon('close')
-const BACKDROP = ['so-alert-dialog__backdrop']
-
 export function AlertDialog(props: AlertDialogProps): JSX.Element {
 	const binding = setupAlertDialog(props)
 	const state = binding.state
@@ -25,15 +24,6 @@ export function AlertDialog(props: AlertDialogProps): JSX.Element {
 	const confirm = clickAction(ctrl.confirm)
 	const cancel = clickAction(ctrl.cancel)
 	const close = clickAction(() => ctrl.requestClose('button'))
-	const backdrop = createRootProps(() => ({
-		state: {
-			classes: BACKDROP,
-			layout_styles: state.layout_backdropStyles,
-			visible: state.visible,
-		},
-		sets: [state.backdropDataset],
-		forward: {},
-	}))
 	const panel = createRootProps(() => ({
 		state,
 		sets: [state.attrs, state.aria, state.dataset, state.dismiss_ownerAttribute],
@@ -53,7 +43,7 @@ export function AlertDialog(props: AlertDialogProps): JSX.Element {
 	return (
 		<Show when={state.rendered}>
 			<Teleport to={state.target}>
-				<div {...backdrop()} />
+				<Backdrop state={state} />
 				<Root
 					tag={state.tag}
 					attributes={() => ({ tabindex: '-1', ...panel() })}

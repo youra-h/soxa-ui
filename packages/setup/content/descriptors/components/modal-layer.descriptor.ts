@@ -43,6 +43,8 @@ export function createModalLayerDescriptor(focus: IPluginDefinition) {
 
 		contribution: {
 			props: {
+				backdrop: { type: String, triggers: ['change:backdrop'] },
+				backdropClasses: { type: Array, protected: true, triggers: ['change:backdrop'] },
 				width: { type: [Number, String], triggers: ['change:width'] },
 				height: { type: [Number, String], triggers: ['change:height'] },
 				closable: { type: Boolean, triggers: ['change:closable'] },
@@ -74,6 +76,7 @@ export function createModalLayerDescriptor(focus: IPluginDefinition) {
 			 */
 			events: [
 				'close:before',
+				'change:backdrop',
 				'change:width',
 				'change:height',
 				'change:closable',
