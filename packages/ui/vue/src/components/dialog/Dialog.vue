@@ -1,4 +1,5 @@
 <script lang="ts">
+import Backdrop from '../../adapter/backdrop/Backdrop'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import SetupDialog from './setup.component'
@@ -9,25 +10,19 @@ import SetupDialog from './setup.component'
  * в телепорт и до окна не доезжал — ни `class`, ни `data-*`, ни события.
  * Поэтому переносим вручную, на панель: корень окна — она.
  */
-export default { ...SetupDialog, inheritAttrs: false, components: { Button, Icon } }
+export default { ...SetupDialog, inheritAttrs: false, components: { Backdrop, Button, Icon } }
 </script>
 
 <template>
 	<teleport :to="target">
 		<!-- The modal backdrop precedes its panel; non-modal dialogs leave the page accessible. -->
 		<template v-if="rendered">
-			<!--
-				Номер слоя у подложки тот же, что у окна: для окна под этим
-				она — слой выше, и нажатие по ней его не закрывает. Открытость
-				— тоже: подложка гаснет вместе с окном. Пометки владельцем у неё
-				нет — для своего окна она мимо.
-			-->
-			<div
+			<Backdrop
 				v-if="modal"
-				class="so-dialog__backdrop"
-				v-show="visible"
-				:style="layout_backdropStyles"
-				v-bind="backdropDataset"
+				:classes="backdropClasses"
+				:visible="visible"
+				:styles="layout_backdropStyles"
+				:dataset="backdropDataset"
 			/>
 
 			<!--

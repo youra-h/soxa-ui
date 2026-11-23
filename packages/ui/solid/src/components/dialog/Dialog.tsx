@@ -10,6 +10,7 @@ import {
 	roleIcon,
 } from '../../adapter'
 import { Show } from '../../adapter/runtime/flow'
+import { Backdrop } from '../../adapter/backdrop/Backdrop'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { setupDialog } from './setup.component'
@@ -19,9 +20,6 @@ import type { DialogProps } from './base.component'
 const CLOSE = roleIcon('close')
 const MAXIMIZE = roleIcon('arrowsOutward')
 const RESTORE = roleIcon('arrowsInward')
-
-/** Класс подложки — её разметка: своего экземпляра у подложки нет. */
-const BACKDROP = ['so-dialog__backdrop']
 
 /**
  * Модальное окно: подложка и панель — соседи в телепорте, подложка раньше; корень — панель.
@@ -33,15 +31,6 @@ export function Dialog(props: DialogProps): JSX.Element {
 	const ctrl = binding.ctrl
 	const toggleMaximized = clickAction(() => ctrl.toggleMaximized())
 	const close = clickAction(() => ctrl.requestClose('button'))
-	const backdrop = createRootProps(() => ({
-		state: {
-			classes: BACKDROP,
-			layout_styles: state.layout_backdropStyles,
-			visible: state.visible,
-		},
-		sets: [state.backdropDataset],
-		forward: {},
-	}))
 	const panel = createRootProps(() => ({
 		state,
 		sets: [state.attrs, state.aria, state.dataset, state.dismiss_ownerAttribute],
@@ -66,7 +55,7 @@ export function Dialog(props: DialogProps): JSX.Element {
 		<Show when={state.rendered}>
 			<Teleport to={state.target}>
 				<Show when={state.modal}>
-					<div {...backdrop()} />
+					<Backdrop state={state} />
 				</Show>
 				<Root
 					tag={state.tag}

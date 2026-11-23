@@ -3,7 +3,8 @@ import type { TCloseReason } from '../layer'
 import type { TDefaultValues } from '../component'
 import { TAria } from '../../../common'
 import type { TDatasetAttributes, TEventSink } from '../../../common'
-import type { IModalLayer, IModalLayerProps, TModalLayerEvents } from './types'
+import TBackdrop from './backdrop.class'
+import type { IModalLayer, IModalLayerProps, TBackdropView, TModalLayerEvents } from './types'
 
 /**
  * Модальный слой — общая база модального окна и выезжающей панели.
@@ -55,17 +56,25 @@ export default class TModalLayer<
 	extends TLayer<TProps, TEvents>
 	implements IModalLayer<TProps, TEvents>
 {
+	protected static backdropPartClass?: string
+
 	static defaultValues: typeof TLayer.defaultValues &
-		TDefaultValues<IModalLayerProps, 'closable' | 'dismissible', 'width' | 'height'> = {
+		TDefaultValues<
+			IModalLayerProps,
+			'closable' | 'dismissible',
+			'width' | 'height' | 'backdrop'
+		> = {
 		...TLayer.defaultValues,
 		// Не `'auto'`, как у Frame: размер по умолчанию выбирает тема, а
 		// `auto` растянул бы окно по экрану
 		width: undefined,
+		backdrop: undefined,
 		height: undefined,
 		closable: true,
 		dismissible: true,
 	}
 
+	private readonly _backdrop: TBackdrop
 	protected _width: number | string | undefined
 	protected _height: number | string | undefined
 	protected _closable: boolean
@@ -78,6 +87,10 @@ export default class TModalLayer<
 
 		super(props)
 
+		this._backdrop = new TBackdrop(
+			ctor.backdropPartClass,
+			props.backdrop ?? ctor.defaultValues.backdrop,
+		)
 		this._width = props.width ?? ctor.defaultValues.width
 		this._height = props.height ?? ctor.defaultValues.height
 		this._closable = props.closable ?? ctor.defaultValues.closable
@@ -219,16 +232,10 @@ export default class TModalLayer<
 	}
 
 	/**
-	 * `data-*` подложки — тот же номер слоя и та же открытость, что у панели.
-	 *
-	 * Подложка — сосед панели, и нажатие по ней для плагинов слоя — нажатие
-	 * мимо. Но слой бывает открыт поверх слоя, и для нижнего подложка верхнего
-	 * — нажатие в слой выше своего, то есть внутри: без номера нажатие по
-	 * подложке верхнего окна закрыло бы оба. Пометки владельцем (`data-owner`)
-	 * у подложки нет: для своего слоя она — мимо.
-	 *
-	 * Открытость — чтобы подложка гасла вместе с панелью: экземпляра у неё нет,
-	 * и `data-open` ей отдаёт этот набор.
+	 * The backdrop shares its panel’s layer number and open state. An outside press
+	 * on a higher backdrop dismisses only that layer. The backdrop stays a sibling
+	 * of its panel and carries no owner marker, so the press counts as outside
+	 * for its own layer.
 	 */
 	get backdropDataset(): TDatasetAttributes {
 		const layer = this._dataset.get(FRAME_LAYER_ATTRIBUTE)
@@ -239,9 +246,26 @@ export default class TModalLayer<
 		}
 	}
 
+	get backdrop(): TBackdropView | undefined {
+		return this._backdrop.view
+	}
+
+	set backdrop(value: TBackdropView | undefined) {
+		const oldValue = this._backdrop.view
+		if (value === oldValue) return
+
+		this._backdrop.view = value
+		this._sink.emit('change:backdrop', { newValue: value, oldValue })
+	}
+
+	get backdropClasses(): string[] {
+		return this._backdrop.classes.toArray()
+	}
+
 	override getProps(): TProps {
 		return {
 			...super.getProps(),
+			backdrop: this.backdrop,
 			width: this._width,
 			height: this._height,
 			closable: this._closable,

@@ -44,7 +44,7 @@ $backdrop-easing: linear;
 // Подложка — вуаль модального слоя (`modal.backdrop`). Закрытая гаснет:
 // `data-open` у неё тот же, что у панели.
 .so-drawer__backdrop {
-	@include modal.backdrop;
+	@include modal.backdrop-views;
 
 	&[data-open='false'] {
 		@apply opacity-0;

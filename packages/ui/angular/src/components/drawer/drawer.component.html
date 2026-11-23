@@ -6,8 +6,7 @@
 	-->
 	<div
 		#companion
-		class="so-drawer__backdrop"
-		[style]="state()['layout_backdropStyles']"
+		[so-modal-backdrop]="state()"
 		[so-attributes]="state()['backdropDataset']"
 	></div>
 	<!-- Порядок — полоса, заголовок, тело, подвал, крестик: крестик — последняя остановка Tab. -->

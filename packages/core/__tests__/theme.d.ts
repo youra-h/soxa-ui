@@ -36,6 +36,11 @@ declare module '@soxa-ui/core' {
 		ghost: true
 	}
 
+	interface IBackdropViews {
+		clear: true
+		frosted: true
+	}
+
 	interface ITabsViews {
 		pills: true
 		cards: true

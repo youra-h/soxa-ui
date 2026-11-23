@@ -10,6 +10,7 @@ import {
 	roleIcon,
 } from '../../adapter'
 import { Show } from '../../adapter/runtime/flow'
+import { Backdrop } from '../../adapter/backdrop/Backdrop'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import { setupDrawer } from './setup.component'
@@ -18,24 +19,12 @@ import type { DrawerProps } from './base.component'
 /** Иконка кнопки закрытия по умолчанию. */
 const CLOSE = roleIcon('close')
 
-/** Класс подложки — её разметка: своего экземпляра у подложки нет. */
-const BACKDROP = ['so-drawer__backdrop']
-
 /** Выезжающая панель: подложка и панель — соседи в телепорте, подложка раньше; корень — панель. */
 export function Drawer(props: DrawerProps): JSX.Element {
 	const binding = setupDrawer(props)
 	const state = binding.state
 	const ctrl = binding.ctrl
 	const close = clickAction(() => ctrl.requestClose('button'))
-	const backdrop = createRootProps(() => ({
-		state: {
-			classes: BACKDROP,
-			layout_styles: state.layout_backdropStyles,
-			visible: state.visible,
-		},
-		sets: [state.backdropDataset],
-		forward: {},
-	}))
 	const panel = createRootProps(() => ({
 		state,
 		sets: [state.attrs, state.aria, state.dataset, state.dismiss_ownerAttribute],
@@ -50,7 +39,7 @@ export function Drawer(props: DrawerProps): JSX.Element {
 	return (
 		<Show when={state.rendered}>
 			<Teleport to={state.target} disabled={state.contained}>
-				<div {...backdrop()} />
+				<Backdrop state={state} />
 				<Root
 					tag={state.tag}
 					attributes={() => ({ tabindex: '-1', ...panel() })}

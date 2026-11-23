@@ -10,6 +10,7 @@ export default class TAlertDialog
 	implements IAlertDialog
 {
 	static override baseClass = 'so-alert-dialog'
+	protected static override backdropPartClass = 'so-alert-dialog__backdrop'
 
 	static override defaultValues: typeof TDialog.defaultValues = {
 		...TDialog.defaultValues,

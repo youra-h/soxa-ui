@@ -32,7 +32,7 @@ $exit-duration: 150ms;
 $easing: linear;
 
 .so-dialog__backdrop {
-	@include modal.backdrop;
+	@include modal.backdrop-views;
 }
 
 // Панель — поверхность модального слоя (`modal.surface`) со скруглением со

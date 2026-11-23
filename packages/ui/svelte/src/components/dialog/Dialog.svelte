@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { TAttributesMap } from '@soxa-ui/core'
-	import { clickAction, Dynamic, Teleport, roleIcon, toRootProps, toShownStyleText } from '../../adapter'
+	import { clickAction, Dynamic, Teleport, roleIcon, toRootProps } from '../../adapter'
+	import Backdrop from '../../adapter/backdrop/Backdrop.svelte'
 	import { Button } from '../button'
 	import { Icon } from '../icon'
 	import { setupDialog } from './setup.component'
@@ -33,11 +34,7 @@
 -->
 {#if state.rendered}
 	<Teleport to={state.target}>
-		{#if state.modal}<div
-			class="so-dialog__backdrop"
-			style={toShownStyleText(state.layout_backdropStyles, state.visible === true)}
-			{...state.backdropDataset}
-		></div>{/if}<Dynamic
+		{#if state.modal}<Backdrop {state} />{/if}<Dynamic
 			rendered
 			tag={state.tag}
 			attributes={toRootProps(

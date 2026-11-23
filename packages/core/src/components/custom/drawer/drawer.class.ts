@@ -37,6 +37,7 @@ import type { IDrawer, IDrawerProps, TDrawerEvents, TDrawerPlacement } from './t
  */
 export default class TDrawer extends TModalLayer<IDrawerProps, TDrawerEvents> implements IDrawer {
 	static override baseClass = 'so-drawer'
+	protected static override backdropPartClass = 'so-drawer__backdrop'
 
 	static defaultValues: typeof TModalLayer.defaultValues &
 		TDefaultValues<IDrawerProps, 'placement' | 'swipe' | 'contained'> = {

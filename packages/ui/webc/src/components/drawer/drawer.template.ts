@@ -8,7 +8,8 @@
 
 import type { IDrawer } from '@soxa-ui/core'
 import { DEFAULT_SLOT } from '@soxa-ui/setup'
-import { bind, createDetail, ownerAttributes, ownerStyles, type ITemplate } from '../../adapter'
+import { bind, createDetail, ownerAttributes, type ITemplate } from '../../adapter'
+import { backdropOutputs, createBackdrop, paintBackdrop } from '../../adapter/backdrop/backdrop'
 import { lendRoleIcon } from '../common/icon-button'
 import { TButtonElement, type TButtonElementProps } from '../button'
 import type { TDrawerOutputs } from './setup.component'
@@ -30,7 +31,7 @@ export const drawerTemplate: ITemplate<IDrawer, unknown, TDrawerOutputs> = {
 		const { hasSlot } = ctx
 
 		const { ownerDocument } = root
-		const backdrop = ownerDocument.createElement('div')
+		const backdrop = createBackdrop(ownerDocument)
 		const handle = ownerDocument.createElement('div')
 		const title = ownerDocument.createElement('h2')
 		const body = ownerDocument.createElement('div')
@@ -40,7 +41,6 @@ export const drawerTemplate: ITemplate<IDrawer, unknown, TDrawerOutputs> = {
 			attributes: { type: 'button' },
 		})
 
-		backdrop.className = 'so-drawer__backdrop'
 		handle.className = 'so-drawer__handle'
 		handle.setAttribute('aria-hidden', 'true')
 		title.className = 'so-drawer__title'
@@ -79,16 +79,10 @@ export const drawerTemplate: ITemplate<IDrawer, unknown, TDrawerOutputs> = {
 		}),
 
 		// Подложка — тот же слой, открытость и место, что у панели
-		bind('layout_backdropStyles', ({ root, state }) => {
+		bind(backdropOutputs, ({ root, state }) => {
 			const backdrop = parts.get(root)?.backdrop
 
-			if (backdrop) ownerStyles(backdrop, state.layout_backdropStyles)
-		}),
-
-		bind('backdropDataset', ({ root, state }) => {
-			const backdrop = parts.get(root)?.backdrop
-
-			if (backdrop) ownerAttributes(backdrop, state.backdropDataset)
+			if (backdrop) paintBackdrop(backdrop, state)
 		}),
 
 		bind('titleAria', ({ root, state }) => {

@@ -65,6 +65,13 @@ declare module '@soxa-ui/core' {
 		none: true
 	}
 
+	/** Modal backdrop. The default is the same tint as dim. */
+	interface IBackdropViews {
+		none: true
+		dim: true
+		blur: true
+	}
+
 	/** The view of tabs. Without a view — `line`. */
 	interface ITabsViews {
 		line: true

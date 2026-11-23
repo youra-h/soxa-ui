@@ -2,7 +2,7 @@
 @use '../button/mixins' as button;
 
 .so-alert-dialog__backdrop {
-	@include modal.backdrop;
+	@include modal.backdrop-views;
 }
 .so-alert-dialog {
 	@include modal.surface;

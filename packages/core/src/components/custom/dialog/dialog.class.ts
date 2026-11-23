@@ -20,6 +20,7 @@ export default class TDialog<
 	implements IDialog<TProps, TEvents>
 {
 	static override baseClass = 'so-dialog'
+	protected static override backdropPartClass = 'so-dialog__backdrop'
 
 	static defaultValues: typeof TModalLayer.defaultValues &
 		TDefaultValues<

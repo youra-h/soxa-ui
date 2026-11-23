@@ -44,6 +44,12 @@
       "scope": "Avatar.Group"
     },
     {
+      "name": "so-backdrop",
+      "sources": ["packages/core/src/components/base/modal-layer/backdrop.class.ts"],
+      "description": "Decorative backdrop rendered beside a modal panel.",
+      "scope": "backdrop"
+    },
+    {
       "name": "so-badge",
       "sources": ["packages/core/src/components/custom/badge/badge.class.ts"],
       "description": "Noninteractive badge wrapper.",
@@ -531,14 +537,7 @@
     },
     {
       "name": "so-alert-dialog__backdrop",
-      "sources": [
-        "packages/ui/angular/src/components/alert-dialog/alert-dialog.component.html",
-        "packages/ui/react/src/components/alert-dialog/AlertDialog.tsx",
-        "packages/ui/solid/src/components/alert-dialog/AlertDialog.tsx",
-        "packages/ui/svelte/src/components/alert-dialog/AlertDialog.svelte",
-        "packages/ui/vue/src/components/alert-dialog/AlertDialog.vue",
-        "packages/ui/webc/src/components/alert-dialog/alert-dialog.template.ts"
-      ],
+      "sources": ["packages/core/src/components/custom/alert-dialog/alert-dialog.class.ts"],
       "description": "AlertDialog backdrop emission.",
       "scope": "AlertDialog"
     },
@@ -1437,14 +1436,7 @@
     },
     {
       "name": "so-dialog__backdrop",
-      "sources": [
-        "packages/ui/angular/src/components/dialog/dialog.component.html",
-        "packages/ui/react/src/components/dialog/Dialog.tsx",
-        "packages/ui/solid/src/components/dialog/Dialog.tsx",
-        "packages/ui/svelte/src/components/dialog/Dialog.svelte",
-        "packages/ui/vue/src/components/dialog/Dialog.vue",
-        "packages/ui/webc/src/components/dialog/dialog.template.ts"
-      ],
+      "sources": ["packages/core/src/components/custom/dialog/dialog.class.ts"],
       "description": "backdrop part of dialog. Availability follows the rendered component structure.",
       "scope": "so-dialog"
     },
@@ -1521,14 +1513,7 @@
     },
     {
       "name": "so-drawer__backdrop",
-      "sources": [
-        "packages/ui/angular/src/components/drawer/drawer.component.html",
-        "packages/ui/react/src/components/drawer/Drawer.tsx",
-        "packages/ui/solid/src/components/drawer/Drawer.tsx",
-        "packages/ui/svelte/src/components/drawer/Drawer.svelte",
-        "packages/ui/vue/src/components/drawer/Drawer.vue",
-        "packages/ui/webc/src/components/drawer/drawer.template.ts"
-      ],
+      "sources": ["packages/core/src/components/custom/drawer/drawer.class.ts"],
       "description": "backdrop part of drawer. Availability follows the rendered component structure.",
       "scope": "so-drawer"
     },
@@ -3257,6 +3242,7 @@
     {
       "name": "--view-",
       "sources": [
+        "packages/core/src/components/base/modal-layer/backdrop.class.ts",
         "packages/core/src/components/custom/accordion/accordion.class.ts",
         "packages/core/src/components/custom/alert/alert.class.ts",
         "packages/core/src/components/custom/badge/badge.class.ts",
@@ -4017,6 +4003,13 @@
       "pattern": "data-indicator",
       "scope": "ListBox and Select list root and item wrapper; none | start | end",
       "description": "Computed emission: ListBox and Select list root and item wrapper; none | start | end. This source expression is checked explicitly so new dynamic cases require a documented mapping."
+    },
+    {
+      "name": "partClass",
+      "sources": ["packages/core/src/components/base/modal-layer/backdrop.class.ts"],
+      "description": "Legacy modal part class kept on the shared backdrop node.",
+      "scope": "backdrop",
+      "pattern": "so-{dialog|alert-dialog|drawer}__backdrop"
     },
     {
       "name": "TDragPlugin.DRAGGING_CLASS",

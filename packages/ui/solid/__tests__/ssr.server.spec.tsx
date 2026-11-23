@@ -201,7 +201,7 @@ describe('Dialog, Drawer и Toasts · серверный рендер', () => {
 
 		expect(teleported).toBe('')
 		expect(contained).toMatch(
-			/^<div [^>]*class="so-drawer__backdrop ?"[^>]*style="[^"]*display:none"[^>]*><\/div><div [^>]*role="dialog"/,
+			/^<div [^>]*class="so-backdrop so-drawer__backdrop ?"[^>]*style="[^"]*display:none"[^>]*><\/div><div [^>]*role="dialog"/,
 		)
 		expect(contained).toMatch(/class="so-drawer so-drawer--placement-end ?"/)
 		expect(contained).toContain('tabindex="-1"')

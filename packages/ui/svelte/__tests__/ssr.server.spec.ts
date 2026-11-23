@@ -143,7 +143,7 @@ describe('оверлеи · серверный рендер', () => {
 
 		expect(teleported).toBe('')
 		expect(contained).toMatch(
-			/^<div class="so-drawer__backdrop" style="[^"]*display: none"[^>]*><\/div><div [^>]*role="dialog"/,
+			/^<div class="so-backdrop so-drawer__backdrop" style="[^"]*display: none"[^>]*><\/div><div [^>]*role="dialog"/,
 		)
 		expect(contained).toContain('class="so-drawer so-drawer--placement-end"')
 		expect(contained).toContain('<div class="so-drawer__body"><span>Панель</span></div>')
