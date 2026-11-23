@@ -49,6 +49,7 @@ import type {
 	TDrawerPlacement,
 	TSwipe,
 	TToastsItemType,
+	TToastsItemView,
 	TToastsLayout,
 	TToastsPlacement,
 } from '@soxa-ui/core'
@@ -278,6 +279,8 @@ export const TOASTS_PLACEMENTS = enumOf<TToastsPlacement>()([
 
 /** Как тосты стоят в регионе: столбцом или стопкой. */
 export const TOASTS_LAYOUTS = enumOf<TToastsLayout>()(['list', 'cascade'])
+
+export const TOASTS_VIEWS = enumOf<TToastsItemView>()(['outlined', 'filled', 'soft'])
 
 /**
  * Вид сообщения тоста — значок вида в начале строки. Обычного сообщения в

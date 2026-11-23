@@ -49,6 +49,7 @@ import {
 	TIME_PRECISIONS,
 	TOASTS_LAYOUTS,
 	TOASTS_PLACEMENTS,
+	TOASTS_VIEWS,
 	TOOLTIP_PLACEMENTS,
 	TOOLTIP_TYPES,
 } from './enums'
@@ -422,6 +423,7 @@ const OWN: Record<string, Record<string, string>> = {
 			'Панель внутри своего контейнера, а не поверх страницы: встаёт в ближайшем позиционированном предке и не запирает прокрутку документа',
 	},
 	toasts: {
+		view: 'Оформление по умолчанию для тостов без собственного view',
 		placement:
 			'Где регион тостов: у верхнего или нижнего края окна — у начала строки, по центру или у конца. start и end меняются местами в RTL; смахивают тост туда же',
 		layout: 'Как стоят тосты: list — столбцом, cascade — стопкой, где задние выглядывают из-под переднего. Стопку листают колесом над ней и стрелками ↑ ↓, фокус выводит тост вперёд',
@@ -578,7 +580,7 @@ const OPTIONS: Record<string, Record<string, readonly string[]>> = {
 	separator: { orientation: ['horizontal', 'vertical'] },
 	dialog: { placement: DIALOG_PLACEMENTS },
 	drawer: { placement: DRAWER_PLACEMENTS, swipe: SWIPES },
-	toasts: { placement: TOASTS_PLACEMENTS, layout: TOASTS_LAYOUTS },
+	toasts: { placement: TOASTS_PLACEMENTS, layout: TOASTS_LAYOUTS, view: TOASTS_VIEWS },
 	tabs: {
 		view: TABS_VIEWS,
 		orientation: TABS_ORIENTATIONS,

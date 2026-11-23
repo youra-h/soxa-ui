@@ -43,16 +43,9 @@ $typed: ();
 	$typed: list.append($typed, '.so-toasts-item--type-#{$type}', $separator: comma);
 }
 
-$item-views: ();
-$manager-views: ();
-
-@each $view in ('outlined', 'filled', 'soft') {
-	$item-views: list.append($item-views, '.so-toasts-item--view-#{$view}', $separator: comma);
-	$manager-views: list.append($manager-views, '.so-toasts--view-#{$view}', $separator: comma);
-}
-
-$inherit-view: ':where(:not(:is(#{$item-views})))';
-$manager-items: ':is(#{$manager-views}) > .so-toasts__list > .so-toasts-item';
+// Match the modifier prefix so the fallback also respects views added by custom themes.
+$inherit-view: ':where(:not([class*="so-toasts-item--view-"]))';
+$manager-items: '[class*="so-toasts--view-"] > .so-toasts__list > .so-toasts-item';
 $implicit-view: '#{$inherit-view}:where(:not(#{$manager-items}))';
 
 // The region supplies a live default to its own list. An item class takes priority.
