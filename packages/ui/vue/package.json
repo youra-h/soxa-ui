@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/vue",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Адаптер Vue: компоненты на headless-моделях ядра",
   "keywords": [
     "soxa",
@@ -41,15 +41,15 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@soxa-ui/core": "0.5.0",
-    "@soxa-ui/plugins": "0.5.0",
-    "@soxa-ui/setup": "0.5.0"
+    "@soxa-ui/core": "0.6.0",
+    "@soxa-ui/plugins": "0.6.0",
+    "@soxa-ui/setup": "0.6.0"
   },
   "peerDependencies": {
     "vue": "^3.5.21"
   },
   "devDependencies": {
-    "@soxa-ui/icons-material": "0.3.2",
+    "@soxa-ui/icons-material": "0.3.3",
     "@types/node": "^26.1.1",
     "vite-plugin-vue-devtools": "^8.2.1",
     "vue": "^3.5.32",

@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/svelte",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Адаптер Svelte: компоненты на headless-моделях ядра",
   "keywords": [
     "soxa",
@@ -43,9 +43,9 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "dependencies": {
-    "@soxa-ui/core": "0.5.0",
-    "@soxa-ui/plugins": "0.5.0",
-    "@soxa-ui/setup": "0.5.0",
+    "@soxa-ui/core": "0.6.0",
+    "@soxa-ui/plugins": "0.6.0",
+    "@soxa-ui/setup": "0.6.0",
     "esm-env": "^1.2.2"
   },
   "peerDependencies": {
@@ -53,8 +53,8 @@
   },
   "devDependencies": {
     "@sinonjs/fake-timers": "^15.4.0",
-    "@soxa-ui/icons-material": "0.3.2",
-    "@soxa-ui/theme-oren": "0.5.0",
+    "@soxa-ui/icons-material": "0.3.3",
+    "@soxa-ui/theme-oren": "0.6.0",
     "@sveltejs/package": "^3.0.1",
     "@sveltejs/vite-plugin-svelte": "^7.3.0",
     "svelte": "^5.55.10",

@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/theme-oren",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Тема oren: CSS под BEM-классы и data-* компонентов Soxa UI, светлая и тёмная схемы",
   "keywords": [
     "soxa",
@@ -51,11 +51,11 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@soxa-ui/theme-base": "0.5.0"
+    "@soxa-ui/theme-base": "0.6.0"
   },
   "peerDependencies": {
-    "@soxa-ui/core": "^0.5.0",
-    "@soxa-ui/setup": "^0.5.0"
+    "@soxa-ui/core": "^0.6.0",
+    "@soxa-ui/setup": "^0.6.0"
   },
   "devDependencies": {
     "@tailwindcss/node": "^4.2.2",

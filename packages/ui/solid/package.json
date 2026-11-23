@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/solid",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Адаптер Solid: компоненты на headless-моделях ядра",
   "keywords": [
     "soxa",
@@ -42,16 +42,16 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
-    "@soxa-ui/core": "0.5.0",
-    "@soxa-ui/plugins": "0.5.0",
-    "@soxa-ui/setup": "0.5.0"
+    "@soxa-ui/core": "0.6.0",
+    "@soxa-ui/plugins": "0.6.0",
+    "@soxa-ui/setup": "0.6.0"
   },
   "peerDependencies": {
     "solid-js": "^1.9.13"
   },
   "devDependencies": {
-    "@soxa-ui/icons-material": "0.3.2",
-    "@soxa-ui/theme-oren": "0.5.0",
+    "@soxa-ui/icons-material": "0.3.3",
+    "@soxa-ui/theme-oren": "0.6.0",
     "solid-js": "^1.9.17",
     "vite-plugin-solid": "^2.11.14"
   }

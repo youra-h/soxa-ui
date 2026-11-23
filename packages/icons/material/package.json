@@ -1,6 +1,6 @@
 {
   "name": "@soxa-ui/icons-material",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Иконки Material: реализация контракта ролей ICON_ROLES",
   "keywords": [
     "soxa",
@@ -41,6 +41,6 @@
     "generate": "node scripts/generate.mjs"
   },
   "peerDependencies": {
-    "@soxa-ui/setup": "^0.5.0"
+    "@soxa-ui/setup": "^0.6.0"
   }
 }
