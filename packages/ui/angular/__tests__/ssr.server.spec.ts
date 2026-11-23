@@ -1001,7 +1001,8 @@ describe('Dialog и Drawer · гидратация', () => {
 		] as const) {
 			const title = document.getElementById(root.getAttribute('aria-labelledby') ?? '')
 
-			expect(root.previousElementSibling?.className).toBe(`${block}__backdrop`)
+			expect(root.previousElementSibling?.classList).toContain(`${block}__backdrop`)
+			expect(root.previousElementSibling?.classList).toContain('so-backdrop')
 			expect(root.style.display).toBe('')
 			expect(root.classList).toContain(block)
 			expect(root.getAttribute('data-open')).toBe('true')
