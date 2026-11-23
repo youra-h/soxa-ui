@@ -719,7 +719,9 @@ describe('Oren backdrop views', () => {
 		await nextTick()
 		expect(backdrop()).toBe(node)
 		expect(node.classList.contains('so-backdrop--view-blur')).toBe(true)
-		expect(styles().backdropFilter).toBe('blur(8px)')
+		expect(styles().backdropFilter).toBe('blur(3px)')
+		node.style.setProperty('--so-backdrop-blur', '6px')
+		expect(styles().backdropFilter).toBe('blur(6px)')
 		await expect.poll(() => styles().opacity).toBe('1')
 
 		view.value = 'dim'
