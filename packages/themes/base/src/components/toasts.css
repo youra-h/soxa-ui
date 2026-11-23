@@ -278,6 +278,8 @@
 .so-toasts-item__close {
 	flex-shrink: 0;
 	aspect-ratio: 1;
+	/* Keep the button at its normal size when a stretched cascade card has a definite height. */
+	max-height: none;
 	padding-inline: 0;
 	margin-block: calc((var(--so-toasts-line) - var(--so-button-height-normal)) / 2);
 	margin-inline-end: calc(var(--so-button-height-normal) / -4);

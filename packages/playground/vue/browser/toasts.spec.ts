@@ -48,7 +48,7 @@
 import { describe, it, expect, beforeEach, afterEach, onTestFinished } from 'vitest'
 import { render, cleanup } from './render'
 import { commands, page, userEvent } from 'vitest/browser'
-import { defineComponent, h, nextTick, ref } from 'vue'
+import { defineComponent, h, nextTick, reactive, ref } from 'vue'
 import { createEngineToasts } from '@soxa-ui/core'
 import type {
 	IToastsItem,
@@ -364,6 +364,30 @@ describe('части тоста', () => {
 		expect(icon.right).toBeLessThanOrEqual(text.left + EPSILON)
 		expect(Math.abs((icon.top + icon.bottom) / 2 - middle)).toBeLessThan(EPSILON)
 		expect(Math.abs((close.top + close.bottom) / 2 - middle)).toBeLessThan(EPSILON)
+	})
+
+	it('keeps the close button square and full size when switching to cascade', async () => {
+		const props = reactive<Pick<IToastsProps, 'layout'>>({ layout: 'list' })
+		const { show, rest } = await mount(props)
+
+		await show('Saved')
+		await rest()
+
+		const [item] = items()
+
+		if (!item) throw new Error('Toast did not render')
+
+		const close = part(item, 'close')
+
+		for (const layout of ['list', 'cascade'] as const) {
+			props.layout = layout
+			await nextTick()
+			await rest()
+
+			const { width, height } = close.getBoundingClientRect()
+
+			expect([width, height], layout).toEqual([32, 32])
+		}
 	})
 
 	it('у текста в несколько строк значок — по центру первой', async () => {
