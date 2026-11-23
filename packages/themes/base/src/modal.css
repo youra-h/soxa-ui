@@ -1,56 +1,20 @@
-/* ─── Модальный слой ─────────────────────────────────────────
- * Общее у модального окна (Dialog) и выезжающей панели (Drawer). Анатомия у
- * них одна: корень — сама панель, подложка — её сосед, раньше в DOM, а внутри
- * панели — заголовок, тело, подвал и кнопки шапки, которые стоят в DOM
- * последними, а в ряд заголовка их переносят области сетки. Своё у
- * компонента — место и размер, колонки и строки сетки и состав кнопок шапки
- * (`components/dialog.css`, `components/drawer.css`).
- *
- *   .so-dialog__backdrop, .so-drawer__backdrop   подложка
- *   .so-dialog, .so-drawer                       панель — сетка
- *     .so-…__title                               заголовок, `h2`
- *     .so-…__body                                тело — прокручивается оно
- *     .so-…__footer                              подвал — ряд действий
- *     .so-dialog__maximize, .so-…__close         кнопки шапки — Button
- *
- * Подложка — на весь экран, под панелью. Она обязательная разметка, а не
- * украшение: фон под панелью скрыт от скринридера, но не от указателя, и к
- * странице его не пускает только она. Нажатие по ней плагины слоя считают
- * нажатием мимо панели. `z-index` подложке и панели пишет код, одним числом:
- * панель рисуется поверх просто порядком.
- *
- * Прокручивается тело, а не панель, поэтому шапка, подвал и кнопки остаются на
- * месте: панель — сетка, и строка тела сжимается до остатка высоты. Отступ —
- * внутри прокрутки: у края прокручиваемой области обрезалось бы кольцо фокуса
- * вложенного контрола. Прокрутка до конца не переходит на страницу под
- * панелью, а длинное слово переносится, а не заводит полосу по горизонтали.
- * Пустые заголовок и подвал места не занимают: тело тогда начинается или
- * кончается у края панели полным отступом.
- *
- * Кнопки шапки — квадрат высоты Button своего размера (`normal`: размера у них
- * нет), в конце строки заголовка, каждая по центру его первой строки:
- * заголовок переносится — кнопки остаются наверху. Строка заголовка —
- * переменная, и от неё считается место кнопок: разойдись они, кнопка съехала
- * бы с заголовка молча. Промежуток между кнопками держит первая из них, а
- * угол — последняя: её значок отстоит от края панели на тот же отступ, что
- * текст заголовка с другой стороны. Значок в квадрате отстоит от его края на
- * четверть высоты, поэтому до края панели — отступ без этой четверти.
- *
- * Таблица прямо в теле — её окно (`.so-table__viewport`) прямой ребёнок тела:
- * закреплённая шапка встаёт к краю тела, а не под отступ
- * (`--so-table-head-offset` — минус отступ сверху, таблица наследует его от
- * окна). Закреплённое браузер ставит под отступ контейнера, и в отступе над
- * шапкой проступали бы строки, которые уходят под неё. Только прямой ребёнок:
- * глубже у таблицы бывает свой контейнер прокрутки, и сдвиг тела унёс бы её
- * шапку за его край. Контекст нулевой специфичности — свой сдвиг таблицы
- * сильнее.
- *
- * Отступы, промежутки и строка заголовка — переменные корня документа;
- * умолчания — числа темы oren, тема задаёт свои на корне документа.
- *
- * Облик — вуаль подложки, поверхность, кромка, тень и скругление панели, кегль
- * и начертание заголовка, вид кнопок шапки, проявление, въезд и жест — рисует
- * тема. */
+/* Dialog, AlertDialog and Drawer share the modal layout.
+ * The backdrop precedes the panel in the DOM and uses the same z-index. It
+ * covers the viewport or the positioned container and receives outside presses.
+ * The panel is a grid. Its title and footer collapse when empty, and its body
+ * scrolls independently. Body padding keeps nested focus rings inside the
+ * scrollport. The grid places header buttons after the title visually while
+ * DOM order keeps them last for tab navigation.
+ * Keep padding inside the scrollport so the edge stays clear of the controls.
+ * The body contains overscroll and wraps long words. A table directly in it
+ * pins its header to the body edge using the negative body padding. Keep
+ * the table selector at zero specificity so the table can override this.
+ * Header buttons are square and centered on the first title line. The same
+ * variable sets the title line height and the center of the button. The
+ * gap belongs to the first of the buttons, and the inset of the last keeps
+ * its icon aligned with the end padding opposite the title.
+ * The theme sets padding, gaps, title line height and backdrop appearance.
+ */
 
 :root {
 	--so-modal-padding: initial;
@@ -60,11 +24,13 @@
 	--so-modal-button-gap: initial;
 }
 
-.so-dialog__backdrop,
-.so-drawer__backdrop,
-.so-alert-dialog__backdrop {
+.so-backdrop {
 	position: fixed;
 	inset: 0;
+}
+
+.so-backdrop[data-contained='true'] {
+	position: absolute;
 }
 
 .so-dialog,

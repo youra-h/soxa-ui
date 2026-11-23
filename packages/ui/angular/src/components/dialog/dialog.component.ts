@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core'
 import { NgTemplateOutlet } from '@angular/common'
 import type { IDialog } from '@soxa-ui/core'
 import { AttributesDirective, RoleIconDirective } from '../../adapter'
+import { BackdropDirective } from '../../adapter/backdrop/backdrop.directive'
 import { TButtonComponent } from '../button'
 import { TIconComponent } from '../icon'
 import { TDialogSurface } from '../../generated/dialog.metadata'
@@ -16,6 +17,7 @@ import { setupDialog } from './setup.component'
 	imports: [
 		NgTemplateOutlet,
 		AttributesDirective,
+		BackdropDirective,
 		RoleIconDirective,
 		TButtonComponent,
 		TIconComponent,

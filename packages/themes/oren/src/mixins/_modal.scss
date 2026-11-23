@@ -31,6 +31,24 @@
 	@apply bg-so-component-veil opacity-50;
 }
 
+// The modal parts share their appearance. The calendar picker uses the tint alone.
+@mixin backdrop-views {
+	@include backdrop;
+
+	&:where(.so-backdrop--view-none) {
+		background-color: transparent;
+	}
+
+	@supports (backdrop-filter: blur(8px)) {
+		&:where(.so-backdrop--view-blur) {
+			// Tint the background color so the blur itself stays fully opaque.
+			background-color: color-mix(in srgb, var(--so-component-veil) 50%, transparent);
+			backdrop-filter: blur(8px);
+			opacity: 1;
+		}
+	}
+}
+
 // Поверхность панели — та же семья, что панели Select и Popover: поверхность
 // контрола (она же поверхность места для того, что внутри), кромка кольцом и
 // тень. Кромка держит край панели там, где тень не видна, — в тёмной схеме и

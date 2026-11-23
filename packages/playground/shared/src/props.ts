@@ -5,6 +5,7 @@ import {
 	BUTTON_VIEWS,
 	BADGE_VIEWS,
 	ALERT_VIEWS,
+	BACKDROP_VIEWS,
 	AVATAR_SHAPES,
 	CALENDAR_MODES,
 	CHECK_BOX_VIEWS,
@@ -127,6 +128,7 @@ const CODE_SNIPPETS = [
  * значило бы получить двадцать слегка разных формулировок.
  */
 const SHARED: Record<string, string> = {
+	backdrop: 'Оформление подложки: прозрачная, затемнённая или затемнённая с размытием фона',
 	rendered: 'Есть ли компонент в дереве. Аналог v-if: false — узла нет вовсе',
 	visible: 'Виден ли компонент. В отличие от rendered узел остаётся в дереве',
 	tag: 'Тег корневого элемента. Меняет разметку, не меняя поведения',
@@ -531,6 +533,7 @@ const OWN: Record<string, Record<string, string>> = {
  */
 const OPTIONS: Record<string, Record<string, readonly string[]>> = {
 	'*': {
+		backdrop: BACKDROP_VIEWS,
 		size: COMPONENT_SIZES,
 		variant: COMPONENT_VARIANTS,
 		direction: DIRECTIONS,

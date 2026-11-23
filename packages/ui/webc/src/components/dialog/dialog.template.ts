@@ -13,9 +13,9 @@ import {
 	lendBefore,
 	lendMark,
 	ownerAttributes,
-	ownerStyles,
 	type ITemplate,
 } from '../../adapter'
+import { backdropOutputs, createBackdrop, paintBackdrop } from '../../adapter/backdrop/backdrop'
 import { TButtonElement, type TButtonElementProps } from '../button'
 import { TIconElement, type TIconElementProps } from '../icon'
 import type { TDialogOutputs } from './setup.component'
@@ -77,7 +77,7 @@ export const dialogTemplate: ITemplate<IDialog, unknown, TDialogOutputs> = {
 		const { hasSlot } = ctx
 
 		const { ownerDocument } = root
-		const backdrop = ownerDocument.createElement('div')
+		const backdrop = createBackdrop(ownerDocument)
 		// Заголовок стоит всегда: на него окно ссылается `aria-labelledby`
 		const title = ownerDocument.createElement('h2')
 		const body = ownerDocument.createElement('div')
@@ -87,7 +87,6 @@ export const dialogTemplate: ITemplate<IDialog, unknown, TDialogOutputs> = {
 
 		// Пометки владельцем у подложки нет — нажатие по ней мимо; к странице
 		// указатель не пускает только она
-		backdrop.className = 'so-dialog__backdrop'
 		title.className = 'so-dialog__title'
 		body.className = 'so-dialog__body'
 		footer.className = 'so-dialog__footer'
@@ -139,16 +138,10 @@ export const dialogTemplate: ITemplate<IDialog, unknown, TDialogOutputs> = {
 			ownerAttributes(root, { tabindex: '-1', ...state.dismiss_ownerAttribute })
 		}),
 
-		bind('layout_backdropStyles', ({ root, state }) => {
+		bind(backdropOutputs, ({ root, state }) => {
 			const backdrop = parts.get(root)?.backdrop
 
-			if (backdrop) ownerStyles(backdrop, state.layout_backdropStyles)
-		}),
-
-		bind('backdropDataset', ({ root, state }) => {
-			const backdrop = parts.get(root)?.backdrop
-
-			if (backdrop) ownerAttributes(backdrop, state.backdropDataset)
+			if (backdrop) paintBackdrop(backdrop, state)
 		}),
 
 		bind('titleAria', ({ root, state }) => {

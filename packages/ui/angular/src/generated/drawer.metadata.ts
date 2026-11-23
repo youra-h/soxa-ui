@@ -22,6 +22,7 @@ export const DrawerInputNames = [
 	'visible',
 	'direction',
 	'target',
+	'backdrop',
 	'width',
 	'height',
 	'closable',
@@ -37,6 +38,7 @@ export const DrawerOutputNames = [
 	'soChangeZIndex',
 	'soChangeTarget',
 	'soCloseBefore',
+	'soChangeBackdrop',
 	'soChangeWidth',
 	'soChangeHeight',
 	'soChangeClosable',
@@ -53,6 +55,7 @@ export const DrawerOutputNames = [
 	'tagChange',
 	'directionChange',
 	'targetChange',
+	'backdropChange',
 	'widthChange',
 	'heightChange',
 	'closableChange',
@@ -73,6 +76,7 @@ export const DrawerOutputNames = [
 		{ name: 'visible', transform: booleanInput },
 		'direction',
 		'target',
+		'backdrop',
 		'width',
 		'height',
 		{ name: 'closable', transform: booleanInput },
@@ -118,6 +122,7 @@ export abstract class TDrawerSurface<TInstance extends IEntity> extends TViewSur
 	declare visible: TInputValue<typeof descriptor, 'visible'>
 	declare direction: TInputValue<typeof descriptor, 'direction'>
 	declare target: TInputValue<typeof descriptor, 'target'>
+	declare backdrop: TInputValue<typeof descriptor, 'backdrop'>
 	declare width: TInputValue<typeof descriptor, 'width'>
 	declare height: TInputValue<typeof descriptor, 'height'>
 	declare closable: TInputValue<typeof descriptor, 'closable'>
@@ -142,6 +147,7 @@ export abstract class TDrawerSurface<TInstance extends IEntity> extends TViewSur
 	declare readonly soChangeZIndex: TOutputEmitter<typeof descriptor, 'change:zIndex'>
 	declare readonly soChangeTarget: TOutputEmitter<typeof descriptor, 'change:target'>
 	declare readonly soCloseBefore: TOutputEmitter<typeof descriptor, 'close:before'>
+	declare readonly soChangeBackdrop: TOutputEmitter<typeof descriptor, 'change:backdrop'>
 	declare readonly soChangeWidth: TOutputEmitter<typeof descriptor, 'change:width'>
 	declare readonly soChangeHeight: TOutputEmitter<typeof descriptor, 'change:height'>
 	declare readonly soChangeClosable: TOutputEmitter<typeof descriptor, 'change:closable'>
@@ -169,6 +175,7 @@ export abstract class TDrawerSurface<TInstance extends IEntity> extends TViewSur
 	declare readonly tagChange: TModelEmitter<typeof descriptor, 'tag'>
 	declare readonly directionChange: TModelEmitter<typeof descriptor, 'direction'>
 	declare readonly targetChange: TModelEmitter<typeof descriptor, 'target'>
+	declare readonly backdropChange: TModelEmitter<typeof descriptor, 'backdrop'>
 	declare readonly widthChange: TModelEmitter<typeof descriptor, 'width'>
 	declare readonly heightChange: TModelEmitter<typeof descriptor, 'height'>
 	declare readonly closableChange: TModelEmitter<typeof descriptor, 'closable'>

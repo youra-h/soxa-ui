@@ -204,7 +204,9 @@ describe.each(FRAMEWORKS)('new component audit / $id', ({ id }) => {
 		expect(panel.contains(document.activeElement)).toBe(true)
 		await userEvent.keyboard('{Tab}{Tab}{Tab}{Tab}')
 		expect(panel.contains(document.activeElement)).toBe(true)
-		await userEvent.click(find('.so-alert-dialog__backdrop'), { position: { x: 5, y: 5 } })
+		await userEvent.click(find('.so-backdrop:has(+ .so-alert-dialog)'), {
+			position: { x: 5, y: 5 },
+		})
 		expect(ctrl.visible).toBe(true)
 		find('.so-alert-dialog__cancel').focus()
 		await userEvent.keyboard('{Escape}')

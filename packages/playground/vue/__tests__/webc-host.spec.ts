@@ -749,7 +749,7 @@ describe('хост Web Components · оверлеи', () => {
 		const dialog = find(document.body, ':scope > .so-dialog')
 
 		expect(opener.textContent?.trim()).toBe('Открыть окно')
-		expect(dialog.previousElementSibling?.classList.contains('so-dialog__backdrop')).toBe(true)
+		expect(dialog.previousElementSibling?.classList.contains('so-backdrop')).toBe(true)
 		expect(find(dialog, '.so-dialog__title').textContent).toBe('Настройки')
 		expect(texts(find(dialog, '.so-dialog__body').children)).toEqual([
 			'Произвольное содержимое: текст, поля, кнопки',
@@ -776,7 +776,7 @@ describe('хост Web Components · оверлеи', () => {
 		handle.unmount()
 		await flush()
 
-		expect(document.querySelector('.so-dialog, .so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-dialog, .so-backdrop:has(+ .so-dialog)')).toBeNull()
 	})
 
 	/**
@@ -793,7 +793,7 @@ describe('хост Web Components · оверлеи', () => {
 
 		expect(opener.textContent?.trim()).toBe('Открыть панель')
 		expect(box.style.position).toBe('relative')
-		expect(drawer.previousElementSibling?.classList.contains('so-drawer__backdrop')).toBe(true)
+		expect(drawer.previousElementSibling?.classList.contains('so-backdrop')).toBe(true)
 		expect(find(drawer, '.so-drawer__title').textContent).toBe('Фильтры')
 		expect(texts(find(drawer, '.so-drawer__footer').children)).toEqual([
 			'Сбросить',
@@ -809,8 +809,8 @@ describe('хост Web Components · оверлеи', () => {
 		await flush()
 
 		expect(drawer.parentElement).toBe(document.body)
-		expect(drawer.previousElementSibling?.classList.contains('so-drawer__backdrop')).toBe(true)
-		expect(box.querySelector('.so-drawer__backdrop')).toBeNull()
+		expect(drawer.previousElementSibling?.classList.contains('so-backdrop')).toBe(true)
+		expect(box.querySelector('.so-backdrop:has(+ .so-drawer)')).toBeNull()
 
 		handle.unmount()
 	})

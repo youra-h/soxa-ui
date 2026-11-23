@@ -192,5 +192,52 @@
       "00c568b50bc92a8b004bcffb76561f36427d5fce0d21e60b9e60457f8c3add3f",
       "f18bc9a8d321bde8f9cd7a0f74df8c7131e3bffd79f5df2eeebd82d449cd6fa1"
     ]
+  },
+  {
+    "id": "modal-backdrops",
+    "impact": "compatible",
+    "reason": "Dialog, AlertDialog and Drawer add an optional theme-defined backdrop prop and its binding events. The structural modal interface keeps the new members optional. Existing props, events and the default tint are preserved. The Vue declaration references the shared internal view.",
+    "baseline": "40c1a001cea801ac6ba41fd66d0443f5ca58f67d151fe033a5df3aea64d49be5",
+    "guide": "docs/upgrade/0.5.0.md",
+    "changes": [
+      "b6020e027026d4ac9e33eaa000940e22d052146246e34378d119e84902b07d57",
+      "bbcf16f40a408c6f857c8320b5895ae23a579becd933b27e80dca3c54272191c",
+      "f02ddf1a5def08e1319c7b268de7f02cf32c8a2b7b88a84d7eb38e735e009bab",
+      "e55741ea1b66ee79763893403320e744408fddeafef615e05a8583be097c29d8",
+      "b049fc9ef9d57d3b5e275ac43d1d27be825aec847bf1bf23a9584688c7ad4465",
+      "25fc376f2ee3bd7b77272df4cbb45ea3abd0ea92ed1f218cc11b33551bea19ee",
+      "aabe0329620cf7f33a884896feabf620e8c6ac6e79eeb8bcfd1a5e15b3698278",
+      "7b31c298a597fb58fc5c551435edf63edbefea9c47755c4946a5d65c465be193",
+      "a378e5ed53a3f45aa3318d78dfd94223120da757b6bee9e2aa50103fc58805c6",
+      "60e74d99adbb11c1a1f4470473716fed18b93af84481695092d1af23b4bd57fc",
+      "d830be516d7f4ec2f022cc5d46928c1ee6570024bffa2fc4eafd6c69aa3c3519",
+      "1ad647ab25f756196968c85ede337603d9d65b49fc596a22163f5fe1a0bbda92",
+      "646319ad1fc79238dc1554df8d86e4c41c4031d1c043885a4c9979964df4df0a",
+      "d71292f25ffbb75cac43a70021a7409172c32e9252288853664ea48a5a1e6484",
+      "565c7aa4b8747dd01281805e81c5db4effa0459e0e61aa314eb6593b8695b5ac",
+      "f84e7d04b4f6d47e4a76b160f320ddbe99e79b4e207869178ead93ca627468f0",
+      "0b76d779ad9c14cd05bda97aa24a71f621899642dcb437438467e0481998f9f7",
+      "ee537e2cce0a43218a3d7a20e2cd18d5055df2c67229caee26af69ee1b8183aa",
+      "b5ee3ff2c658df0f59d773186e96b8ae517e1cd857ca1e08dc73abbb69601f35",
+      "298903a1dec5cea62f2a724f8cfb52625198ca3c50a82afa1159e611ad3d7b8b",
+      "8dd1e86a7bc5a8a638a52db753bffe6424d6ed0e80d53bd66231554ad4220248",
+      "ac9e88d7f28a855174e3cc398c43bddd07a5da3a626153c34889d688ee396da1",
+      "780406f95848133f33fdd004f761431d64e7ae0b71aa0888813f3c7b930db263",
+      "0b21673d1a2bb902e3ec4ea7c24d57877eac2c9c78dea45e62262763ea5e7e1e",
+      "f28e36783e87715bfc34c582e4219f8b504eaba0a0f67178afee56b1f7e4b547"
+    ]
+  },
+  {
+    "id": "shared-backdrop-class",
+    "impact": "breaking",
+    "changeset": "late-ends-fix",
+    "reason": "Modal backdrops now have a single class. Themes must replace all three component-specific backdrop selectors with .so-backdrop and use the next panel sibling if different rules are needed.",
+    "baseline": "40c1a001cea801ac6ba41fd66d0443f5ca58f67d151fe033a5df3aea64d49be5",
+    "guide": "docs/upgrade/0.5.0.md",
+    "changes": [
+      "bb536a5f7c5874aeb26e00e027605bba7d4ded8ebb797424e9f8c11d100918f6",
+      "0b6343ee3b4c67d1fcf294e0dbb9cc3a09794b41b3bcddfad80f3e58cd78513f",
+      "0ac5fe37092cc678dc24bb407a548caae4d0e73c3cfb1f732342cd6f8b0e2fc4"
+    ]
   }
 ]

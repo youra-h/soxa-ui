@@ -1,8 +1,7 @@
 @if (placed()) {
 	<div
 		#companion
-		class="so-alert-dialog__backdrop"
-		[style]="state()['layout_backdropStyles']"
+		[so-modal-backdrop]="state()"
 		[so-attributes]="state()['backdropDataset']"
 	></div>
 	<h2 class="so-alert-dialog__title" [so-attributes]="state()['titleAria']">

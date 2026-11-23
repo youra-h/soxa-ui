@@ -1,8 +1,15 @@
-import type { TValuePayload } from '../../../common'
+import type { TThemeRegistry, TValuePayload } from '../../../common'
 import type { ICloseRequestable, ILayer, ILayerProps, TCloseEvent, TLayerEvents } from '../layer'
 import type { TAria, TAriaAttributes, TDatasetAttributes } from '../../../common'
 
+/** Backdrop views are declared by the theme. */
+export interface IBackdropViews extends TThemeRegistry {}
+
+export type TBackdropView = Extract<keyof IBackdropViews, string>
+
 export interface IModalLayerProps extends ILayerProps {
+	/** Appearance of the modal backdrop. The theme supplies the default. */
+	backdrop?: TBackdropView
 	/**
 	 * Ширина панели: число — px, строка — CSS-значение. Не задана — ширину
 	 * даёт тема
@@ -23,6 +30,7 @@ export interface IModalLayerProps extends ILayerProps {
 }
 
 export type TModalLayerEvents = TLayerEvents & {
+	'change:backdrop': (payload: TValuePayload<TBackdropView | undefined>) => void
 	/**
 	 * close:before — пользователь закрывает панель: кнопкой закрытия, нажатием
 	 * мимо, Escape или жестом (`e.reason`). `e.preventDefault()` оставляет её
@@ -48,6 +56,8 @@ export interface IModalLayer<
 	TEvents extends Record<string, (...args: any) => any> = TModalLayerEvents,
 >
 	extends ILayer<TProps, TEvents>, ICloseRequestable {
+	backdrop?: TBackdropView
+	readonly backdropClasses?: string[]
 	/** Ширина панели; `undefined` — ширину даёт тема */
 	width: number | string | undefined
 	/** Высота панели; `undefined` — высоту даёт тема */

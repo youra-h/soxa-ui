@@ -41,7 +41,7 @@ type TPopoverTriggerScope = DescriptorSlots<typeof PopoverDescriptor>['trigger']
 const node = (selector: string, scope: ParentNode = document) => find(scope, selector, HTMLElement)
 
 const panel = (scope: ParentNode = document) => node('.so-dialog', scope)
-const backdrop = (scope: ParentNode = document) => node('.so-dialog__backdrop', scope)
+const backdrop = (scope: ParentNode = document) => node('.so-backdrop:has(+ .so-dialog)', scope)
 const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'none'
 const opener = () => node('.so-test-opener')
 
@@ -929,7 +929,7 @@ describe('Solid', () => {
 		))
 
 		expect(document.querySelector('.so-dialog')).toBeNull()
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 	})
 
 	it('снятое окно уносит панель и подложку из цели', () => {
@@ -940,7 +940,7 @@ describe('Solid', () => {
 		destroy()
 
 		expect(document.querySelector('.so-dialog')).toBeNull()
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 	})
 
 	/**
@@ -986,7 +986,7 @@ describe('non-modal dialog', () => {
 		expect(document.documentElement.style.overflow).not.toBe('hidden')
 		expect(document.body.style.overflow).not.toBe('hidden')
 
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 
 		const last = panel().querySelector('.so-dialog__close')
 		if (!(last instanceof HTMLElement)) throw new Error('Missing close button')

@@ -150,7 +150,7 @@ const find = (selector: string): HTMLElement => {
 }
 
 const panel = () => find('.so-drawer')
-const backdrop = () => find('.so-drawer__backdrop')
+const backdrop = () => find('.so-backdrop:has(+ .so-drawer)')
 const handle = () => find('.so-drawer__handle')
 const opener = () => find('.so-test-opener')
 const active = () => document.activeElement

@@ -1,4 +1,5 @@
 <script lang="ts">
+import Backdrop from '../../adapter/backdrop/Backdrop'
 import { Button } from '../button'
 import { Icon } from '../icon'
 import SetupDrawer from './setup.component'
@@ -9,7 +10,7 @@ import SetupDrawer from './setup.component'
  * бы в телепорт и до панели не доезжал — ни `class`, ни `data-*`, ни события.
  * Поэтому переносим вручную, на панель: корень выезжающей панели — она.
  */
-export default { ...SetupDrawer, inheritAttrs: false, components: { Button, Icon } }
+export default { ...SetupDrawer, inheritAttrs: false, components: { Backdrop, Button, Icon } }
 </script>
 
 <template>
@@ -34,11 +35,11 @@ export default { ...SetupDrawer, inheritAttrs: false, components: { Button, Icon
 				тоже: она гаснет вместе с панелью и внутри контейнера накрывает
 				только его. Пометки владельцем у неё нет — для своей панели она мимо.
 			-->
-			<div
-				class="so-drawer__backdrop"
-				v-show="visible"
-				:style="layout_backdropStyles"
-				v-bind="backdropDataset"
+			<Backdrop
+				:classes="backdropClasses"
+				:visible="visible"
+				:styles="layout_backdropStyles"
+				:dataset="backdropDataset"
 			/>
 
 			<!--

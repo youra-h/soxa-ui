@@ -122,16 +122,13 @@ function localeProvider(selector: string, scope: ParentNode = document): TLocale
 }
 
 const panel = (scope: ParentNode = document) => find('.so-drawer', scope)
-const backdrop = (scope: ParentNode = document) => find('.so-drawer__backdrop', scope)
+const backdrop = (scope: ParentNode = document) => find('.so-backdrop:has(+ .so-drawer)', scope)
 const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'none'
 const opener = () => find('.so-test-opener')
 const host = () => find('.so-test-host')
 
-/**
- * Узлы страницы, спрятанные от скринридера: фон панели поверх страницы в
- * `body` — её соседи. Узлы внутри панели (иконка крестика) сюда не входят.
- */
-const muted = () => [...document.querySelectorAll('body > [aria-hidden="true"]')]
+/** Direct children of the page muted by the modal, excluding its decorative backdrop. */
+const muted = () => [...document.querySelectorAll('body > [aria-hidden="true"]:not(.so-backdrop)')]
 
 /** Якоря телепорта в поддереве — комментарии на месте увезённых корней. */
 function anchors(scope: Node): Comment[] {
@@ -247,7 +244,7 @@ describe('разметка', () => {
 		expect(shade.parentElement).toBe(document.body)
 		expect(shade.nextElementSibling).toBe(panel())
 		expect(backdrop()).toBe(shade)
-		expect(document.querySelectorAll('.so-drawer__backdrop')).toHaveLength(1)
+		expect(document.querySelectorAll('.so-backdrop:has(+ .so-drawer)')).toHaveLength(1)
 	})
 
 	it('панель — модальный диалог, имя — заголовок', async () => {
@@ -363,7 +360,7 @@ describe('подложка — спутник панели', () => {
 
 		drawer.remove()
 
-		expect(host().querySelector('.so-drawer__backdrop')).toBeNull()
+		expect(host().querySelector('.so-backdrop:has(+ .so-drawer)')).toBeNull()
 	})
 
 	/**
@@ -378,7 +375,7 @@ describe('подложка — спутник панели', () => {
 		await flush()
 
 		expect(drawer.isConnected).toBe(false)
-		expect(document.querySelector('.so-drawer__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-drawer)')).toBeNull()
 
 		document.body.appendChild(container)
 		await flush()
@@ -386,7 +383,7 @@ describe('подложка — спутник панели', () => {
 		expect(drawer.parentElement).toBe(document.body)
 		expect(backdrop().nextElementSibling).toBe(drawer)
 		expect(isOpen(backdrop())).toBe(true)
-		expect(document.querySelectorAll('.so-drawer__backdrop')).toHaveLength(1)
+		expect(document.querySelectorAll('.so-backdrop:has(+ .so-drawer)')).toHaveLength(1)
 	})
 })
 

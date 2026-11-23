@@ -1,13 +1,7 @@
 import type { IAlertDialog } from '@soxa-ui/core'
 import { DEFAULT_SLOT } from '@soxa-ui/setup'
-import {
-	bind,
-	createDetail,
-	lend,
-	ownerAttributes,
-	ownerStyles,
-	type ITemplate,
-} from '../../adapter'
+import { bind, createDetail, lend, ownerAttributes, type ITemplate } from '../../adapter'
+import { backdropOutputs, createBackdrop, paintBackdrop } from '../../adapter/backdrop/backdrop'
 import { TButtonElement, type TButtonElementProps } from '../button'
 import { TIconElement } from '../icon'
 import type { TAlertDialogOutputs } from './setup.component'
@@ -39,7 +33,7 @@ function buttonOf(doc: Document, part: string): TButtonElementProps {
 export const alertDialogTemplate: ITemplate<IAlertDialog, unknown, TAlertDialogOutputs> = {
 	create: (root, ctx) => {
 		const doc = root.ownerDocument
-		const backdrop = doc.createElement('div')
+		const backdrop = createBackdrop(doc)
 		const title = doc.createElement('h2')
 		const body = doc.createElement('div')
 		const footer = doc.createElement('div')
@@ -50,7 +44,6 @@ export const alertDialogTemplate: ITemplate<IAlertDialog, unknown, TAlertDialogO
 		const cancelText = !hasFooter && !ctx.hasSlot('cancel') ? doc.createTextNode('') : null
 		const actionText = !hasFooter && !ctx.hasSlot('action') ? doc.createTextNode('') : null
 
-		backdrop.className = 'so-alert-dialog__backdrop'
 		title.className = 'so-alert-dialog__title'
 		body.className = 'so-alert-dialog__body'
 		footer.className = 'so-alert-dialog__footer'
@@ -104,13 +97,10 @@ export const alertDialogTemplate: ITemplate<IAlertDialog, unknown, TAlertDialogO
 		bind('dismiss_ownerAttribute', ({ root, state }) =>
 			ownerAttributes(root, { tabindex: '-1', ...state.dismiss_ownerAttribute }),
 		),
-		bind('layout_backdropStyles', ({ root, state }) => {
-			const p = parts.get(root)
-			if (p) ownerStyles(p.backdrop, state.layout_backdropStyles)
-		}),
-		bind('backdropDataset', ({ root, state }) => {
-			const p = parts.get(root)
-			if (p) ownerAttributes(p.backdrop, state.backdropDataset)
+		bind(backdropOutputs, ({ root, state }) => {
+			const backdrop = parts.get(root)?.backdrop
+
+			if (backdrop) paintBackdrop(backdrop, state)
 		}),
 		bind('titleAria', ({ root, state }) => {
 			const p = parts.get(root)

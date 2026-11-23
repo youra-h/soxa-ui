@@ -279,7 +279,7 @@ describe('Dialog — прокручивается тело', () => {
 		)
 
 		// Мимо окна — подложка: к странице нажатие не доходит
-		expect(document.elementFromPoint(4, 4)).toBe(find('.so-dialog__backdrop'))
+		expect(document.elementFromPoint(4, 4)).toBe(find('.so-backdrop:has(+ .so-dialog)'))
 	})
 })
 

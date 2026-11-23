@@ -125,16 +125,13 @@ function localeProvider(selector: string, scope: ParentNode = document): TLocale
 }
 
 const panel = (scope: ParentNode = document) => find('.so-dialog', scope)
-const backdrop = (scope: ParentNode = document) => find('.so-dialog__backdrop', scope)
+const backdrop = (scope: ParentNode = document) => find('.so-backdrop:has(+ .so-dialog)', scope)
 const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'none'
 const opener = () => find('.so-test-opener')
 const place = () => find('.so-test-place')
 
-/**
- * Узлы страницы, спрятанные от скринридера: фон окна в `body` — его соседи.
- * Узлы внутри окна (иконка крестика) сюда не входят.
- */
-const muted = () => [...document.querySelectorAll('body > [aria-hidden="true"]')]
+/** Direct children of the page muted by the modal, excluding its decorative backdrop. */
+const muted = () => [...document.querySelectorAll('body > [aria-hidden="true"]:not(.so-backdrop)')]
 
 /** Якоря телепорта в поддереве — комментарии на месте увезённых корней. */
 function anchors(scope: Node): Comment[] {
@@ -207,7 +204,7 @@ describe('разметка', () => {
 		expect(backdrop().nextElementSibling).toBe(panel())
 		expect(panel().contains(backdrop())).toBe(false)
 		expect(anchors(place())).toHaveLength(1)
-		expect(place().querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(place().querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 	})
 
 	it('закрытое окно спрятано вместе с подложкой, а не убрано', async () => {
@@ -451,7 +448,7 @@ describe('подложка — спутник окна', () => {
 
 		dialog.remove()
 
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 		expect(anchors(place())).toHaveLength(0)
 	})
 
@@ -469,14 +466,14 @@ describe('подложка — спутник окна', () => {
 		await flush()
 
 		expect(dialog.isConnected).toBe(false)
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 
 		document.body.appendChild(container)
 		await flush()
 
 		expect(dialog.parentElement).toBe(document.body)
 		expect(backdrop().nextElementSibling).toBe(dialog)
-		expect(document.querySelectorAll('.so-dialog__backdrop')).toHaveLength(1)
+		expect(document.querySelectorAll('.so-backdrop:has(+ .so-dialog)')).toHaveLength(1)
 		expect(isOpen(backdrop())).toBe(true)
 	})
 
@@ -489,7 +486,7 @@ describe('подложка — спутник окна', () => {
 
 		expect(dialog.parentElement).toBe(document.body)
 		expect(backdrop().nextElementSibling).toBe(dialog)
-		expect(document.querySelectorAll('.so-dialog__backdrop')).toHaveLength(1)
+		expect(document.querySelectorAll('.so-backdrop:has(+ .so-dialog)')).toHaveLength(1)
 		expect(anchors(place())).toHaveLength(0)
 		expect(anchors(other)).toHaveLength(1)
 	})

@@ -137,11 +137,8 @@ const trigger = () => find('.so-test-trigger')
 const panel = (scope: ParentNode = document) => find('.so-popover__panel', scope)
 const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'none'
 
-/**
- * Узлы страницы, спрятанные от скринридера: фон модального слоя в `body` — его
- * соседи. Узлы внутри слоя (иконка крестика) сюда не входят.
- */
-const muted = () => [...document.querySelectorAll('body > [aria-hidden="true"]')]
+/** Direct children of the page muted by the modal, excluding its decorative backdrop. */
+const muted = () => [...document.querySelectorAll('body > [aria-hidden="true"]:not(.so-backdrop)')]
 
 /** Значения `detail` событий с этим именем на элементе. */
 function collect(el: Element, name: string): unknown[] {
@@ -897,7 +894,7 @@ describe('вложенные слои', () => {
 		await flush()
 		await nextFrame()
 
-		const shade = find('.so-dialog__backdrop')
+		const shade = find('.so-backdrop:has(+ .so-dialog)')
 
 		expect(dialog.parentElement).toBe(document.body)
 		expect(isOpen(dialog)).toBe(true)

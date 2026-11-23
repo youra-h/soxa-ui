@@ -39,10 +39,6 @@
 	--so-drawer-gap: initial;
 }
 
-.so-drawer__backdrop[data-contained='true'] {
-	position: absolute;
-}
-
 .so-drawer {
 	--so-modal-spacing-factor: var(--so-drawer-spacing-factor);
 	position: fixed;

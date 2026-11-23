@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { TAttributesMap } from '@soxa-ui/core'
-	import { clickAction, Dynamic, Teleport, roleIcon, toRootProps, toShownStyleText } from '../../adapter'
+	import { clickAction, Dynamic, Teleport, roleIcon, toRootProps } from '../../adapter'
+	import Backdrop from '../../adapter/backdrop/Backdrop.svelte'
 	import { Button } from '../button'
 	import { Icon } from '../icon'
 	import { setupAlertDialog } from './setup.component'
@@ -20,11 +21,7 @@
 
 {#if state.rendered}
 	<Teleport to={state.target}>
-		<div
-			class="so-alert-dialog__backdrop"
-			style={toShownStyleText(state.layout_backdropStyles, state.visible === true)}
-			{...state.backdropDataset}
-		></div><Dynamic
+		<Backdrop {state} /><Dynamic
 			rendered
 			tag={state.tag}
 			attributes={toRootProps(

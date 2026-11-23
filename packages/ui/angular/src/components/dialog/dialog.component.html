@@ -4,8 +4,7 @@
 	@if (state()['modal']) {
 		<div
 			#companion
-			class="so-dialog__backdrop"
-			[style]="state()['layout_backdropStyles']"
+			[so-modal-backdrop]="state()"
 			[so-attributes]="state()['backdropDataset']"
 		></div>
 	}

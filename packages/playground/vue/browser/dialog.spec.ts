@@ -26,7 +26,7 @@ import { render, cleanup } from './render'
 import { page, userEvent } from 'vitest/browser'
 import { defineComponent, h, nextTick, ref, type VNode } from 'vue'
 import { Button, Dialog } from '@soxa-ui/vue'
-import type { IDialogProps, TDialogPlacement } from '@soxa-ui/core'
+import type { IDialogProps, TBackdropView, TDialogPlacement } from '@soxa-ui/core'
 import type { TDialogOffsetEvent } from '@soxa-ui/plugins'
 
 import { reducedMotion } from './media'
@@ -130,7 +130,7 @@ const find = (selector: string): HTMLElement => {
 }
 
 const panel = () => find('.so-dialog')
-const backdrop = () => find('.so-dialog__backdrop')
+const backdrop = () => find('.so-backdrop:has(+ .so-dialog)')
 const opener = () => find('.so-test-opener')
 const isOpen = () => getComputedStyle(panel()).display !== 'none'
 const active = () => document.activeElement
@@ -699,6 +699,48 @@ describe('фокус', () => {
 	})
 })
 
+describe('Oren backdrop views', () => {
+	it('switches views on the same node and keeps the transparent backdrop interactive', async () => {
+		const view = ref<TBackdropView>()
+		await show({
+			get backdrop() {
+				return view.value
+			},
+		})
+		await open()
+
+		const node = backdrop()
+		expect(node.getAttribute('aria-hidden')).toBe('true')
+		const styles = () => getComputedStyle(node)
+		await expect.poll(() => styles().opacity).toBe('0.5')
+		const tint = styles().backgroundColor
+
+		view.value = 'blur'
+		await nextTick()
+		expect(backdrop()).toBe(node)
+		expect(node.classList.contains('so-backdrop--view-blur')).toBe(true)
+		expect(styles().backdropFilter).toBe('blur(8px)')
+		await expect.poll(() => styles().opacity).toBe('1')
+
+		view.value = 'dim'
+		await nextTick()
+		expect(styles().backdropFilter).toBe('none')
+		expect(styles().backgroundColor).toBe(tint)
+
+		view.value = undefined
+		await nextTick()
+		expect(node.classList.contains('so-backdrop--view-dim')).toBe(false)
+
+		view.value = 'none'
+		await nextTick()
+		expect(styles().backgroundColor).toBe('rgba(0, 0, 0, 0)')
+		expect(document.elementFromPoint(4, 4)).toBe(node)
+		await userEvent.click(node, { position: { x: 4, y: 4 } })
+		await expect.poll(isOpen).toBe(false)
+		expect(active()).toBe(opener())
+	})
+})
+
 describe('non-modal page interaction', () => {
 	it('preserves opening focus, permits Tab in both directions and keeps a corner fixed while scrolling', async () => {
 		const shown = await show(
@@ -715,7 +757,7 @@ describe('non-modal page interaction', () => {
 		await userEvent.click(opener())
 		await settled(panel())
 		expect(active()).toBe(opener())
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 		expect(panel().hasAttribute('aria-modal')).toBe(false)
 		expect(opener().closest('[aria-hidden="true"], [inert]')).toBeNull()
 		expect(getComputedStyle(document.documentElement).overflow).not.toBe('hidden')

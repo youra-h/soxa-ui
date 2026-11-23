@@ -215,7 +215,7 @@ function check(): void {
 const node = (selector: string, scope: ParentNode = document) => find(scope, selector, HTMLElement)
 
 const panel = (scope: ParentNode = document) => node('.so-drawer', scope)
-const backdrop = (scope: ParentNode = document) => node('.so-drawer__backdrop', scope)
+const backdrop = (scope: ParentNode = document) => node('.so-backdrop:has(+ .so-drawer)', scope)
 const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'none'
 const opener = () => node('.so-test-opener')
 const host = () => node('.so-test-host')
@@ -323,7 +323,7 @@ describe('разметка', () => {
 		expect(backdrop()).toBe(shade)
 		expect(root.parentElement).toBe(document.body)
 		expect(shade.nextElementSibling).toBe(root)
-		expect(document.querySelectorAll('.so-drawer__backdrop')).toHaveLength(1)
+		expect(document.querySelectorAll('.so-backdrop:has(+ .so-drawer)')).toHaveLength(1)
 	})
 
 	it('панель — модальный диалог, имя — заголовок', async () => {
@@ -724,7 +724,7 @@ describe('подложка — спутник панели', () => {
 	it('снятая на месте панель уносит подложку из контейнера', async () => {
 		const fixture = await render(RemovalPage)
 
-		expect(host().querySelector('.so-drawer__backdrop')?.nextElementSibling).toBe(
+		expect(host().querySelector('.so-backdrop:has(+ .so-drawer)')?.nextElementSibling).toBe(
 			node('.so-test-removable'),
 		)
 
@@ -732,6 +732,6 @@ describe('подложка — спутник панели', () => {
 		check()
 
 		expect(document.querySelector('.so-test-removable')).toBeNull()
-		expect(host().querySelector('.so-drawer__backdrop')).toBeNull()
+		expect(host().querySelector('.so-backdrop:has(+ .so-drawer)')).toBeNull()
 	})
 })
