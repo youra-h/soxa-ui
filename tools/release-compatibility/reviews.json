@@ -198,7 +198,7 @@
     "impact": "compatible",
     "reason": "Dialog, AlertDialog and Drawer add an optional theme-defined backdrop prop and its binding events. The structural modal interface keeps the new members optional. Existing props, events and the default tint are preserved. The Vue declaration references the shared internal view.",
     "baseline": "40c1a001cea801ac6ba41fd66d0443f5ca58f67d151fe033a5df3aea64d49be5",
-    "guide": "docs/upgrade/0.5.0.md",
+    "guide": "docs/upgrade/0.6.0.md",
     "changes": [
       "b6020e027026d4ac9e33eaa000940e22d052146246e34378d119e84902b07d57",
       "bbcf16f40a408c6f857c8320b5895ae23a579becd933b27e80dca3c54272191c",
@@ -232,7 +232,7 @@
     "changeset": "late-ends-fix",
     "reason": "Modal backdrops now have a single class. Themes must replace all three component-specific backdrop selectors with .so-backdrop and use the next panel sibling if different rules are needed.",
     "baseline": "40c1a001cea801ac6ba41fd66d0443f5ca58f67d151fe033a5df3aea64d49be5",
-    "guide": "docs/upgrade/0.5.0.md",
+    "guide": "docs/upgrade/0.6.0.md",
     "changes": [
       "bb536a5f7c5874aeb26e00e027605bba7d4ded8ebb797424e9f8c11d100918f6",
       "0b6343ee3b4c67d1fcf294e0dbb9cc3a09794b41b3bcddfad80f3e58cd78513f",

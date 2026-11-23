@@ -20,7 +20,8 @@ The close button remains controlled by `closable`; all user closure requests ret
 
 With Oren, set the backdrop on `Dialog`, `AlertDialog`, or `Drawer` with the
 `backdrop` prop. Oren uses `dim` by default. Use `blur` for the tint with
-background blur, or `none` for a transparent backdrop.
+background blur, or `none` for a transparent backdrop. Oren uses `3px` by default for
+blur. Override `--so-backdrop-blur` to set the radius.
 
 The shared backdrop element has the `.so-backdrop` class and precedes the panel.
 

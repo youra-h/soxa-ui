@@ -13,7 +13,7 @@ render it in Vue, React, Angular, Svelte, Solid and Web Components.**
 [![npm](https://img.shields.io/npm/v/@soxa-ui/core?label=npm)](https://www.npmjs.com/org/soxa-ui)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-> **Status:** Stable `0.5.0` is the current release under npm `latest`.
+> **Status:** Stable `0.6.0` is the current release under npm `latest`.
 > Alert, AlertDialog, Avatar and Separator are included across all six adapters.
 > Every released component in [the component table](#components) is available in all six adapters:
 > Vue, React, Angular, Svelte, Solid and Web Components. The public API has been frozen since the first beta;
@@ -96,9 +96,9 @@ dependency on that same version. A theme and an icon pack have versions of their
 the range of library versions they work with, which npm checks on install. Then plug in the theme
 and the icons at the application entry point, as shown below.
 
-Components and both supplied themes are available at `0.5.0`. Both icon packs are at `0.3.2`, with
-their existing icons and compatibility with the component release. Read the [0.5.0 upgrade instructions](docs/upgrade/0.5.0.md)
-for custom prepared-mount integrations and theme variable fallbacks. npm checks each pack's declared library compatibility when installing it.
+Components and both supplied themes are available at `0.6.0`. Both icon packs are at `0.3.3` for
+compatibility with this component release. Read the [0.6.0 upgrade instructions](docs/upgrade/0.6.0.md)
+for the shared modal backdrop and Toasts views.
 
 ## Compatibility and support
 
@@ -296,10 +296,10 @@ release that includes the component in at least one adapter. `0.3.0` is the firs
 | DatePicker      | Date field and a calendar in a panel: a single date or a range                                                | *          | 0.3.0   |
 | Popover         | Panel at a trigger with any content: a non-modal dialog                                                       | *          | 0.3.0   |
 | Tooltip         | Hint for an element, shown on hover and on keyboard focus                                                     | *          | 0.3.0   |
-| Dialog          | [Modal or non-modal window](docs/components/dialog.md), centered or at an edge                                | *          | 0.3.0   |
+| Dialog          | [Modal or non-modal window](docs/components/dialog.md) with configurable backdrop                             | *          | 0.3.0   |
 | AlertDialog     | [Modal confirmation](docs/components/alert-dialog.md) with localized default actions and a replaceable footer | *          | 0.4.0   |
-| Drawer          | Panel that slides in at an edge of the screen or a container, can be swiped away                              | *          | 0.3.0   |
-| Toasts          | Pop-up notifications shown from code: a queue, auto-dismiss with a pause, swipe to close                      | *          | 0.3.0   |
+| Drawer          | Swipeable panel at a screen or container edge, with configurable backdrop                                     | *          | 0.3.0   |
+| Toasts          | Queued notifications with configurable views, auto-dismiss with a pause and swipe to close                    | *          | 0.3.0   |
 | Scroller        | Single-row strip of any content, paged with two buttons                                                       | *          | 0.3.0   |
 | ListBox         | List with single or multiple selection                                                                        | *          | 0.3.0   |
 | Table           | Table: columns as data, sorting by column headers, row selection with checkboxes                              | *          | 0.3.0   |
