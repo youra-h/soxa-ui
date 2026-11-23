@@ -1,7 +1,7 @@
 # Versioned public documentation source
 
 This directory is the library-owned source format for small, versioned AI
-documentation records. The available release directories are **0.3.0** and **0.4.1**. The separate
+documentation records. The available release directories are **0.3.0, 0.4.1, 0.4.2 and 0.6.0**. The separate
 website owns its routes, localization, prose pages, rendering and public
 `llms.txt` endpoints. This format supplies metadata, a minimal shared overview,
 consumer recipes for all six adapters and generated API records; it does not replace those pages.
@@ -352,9 +352,19 @@ API coverage from runnable examples and the remaining React Tabs SSR limit.
 The source contains no new website pages, localization, site dependency update
 or hosted MCP endpoint. Those remain website-owned work.
 
+## Published 0.6.0 corpus
+
+Use [the overview](./0.6.0/overview.md) and [upgrade notes](./0.6.0/release-changes.md)
+with exact published setup 0.6.0. The corpus includes generated API for all six
+adapters and [Vue/Oren examples](./0.6.0/vue-appearance.md) for the new modal
+backdrop and notification views. Other adapter guides for this version remain pending.
+
+`npm run check:mcp-package` verifies the bundled 0.6.0 corpus through the MCP SDK
+and runs the retrieved Vue examples against the exact npm packages in Chromium.
+
 ## Standalone MCP package
 
-The @soxa-ui/mcp workspace bundles exact 0.3.0, 0.4.1 and 0.4.2 JSON corpora.
+The @soxa-ui/mcp workspace bundles exact 0.3.0, 0.4.1, 0.4.2 and 0.6.0 JSON corpora.
 See the [package guide](../../packages/mcp/README.md) for installation after
 publication, client configuration and JSON exports for site builds. MCP
 publication uses an independent mcp release scope and requires owner approval.

@@ -88,6 +88,21 @@ try {
 				assert.equal(record.api.component, component)
 				assert.equal(record.framework, framework)
 			}
+	const releaseAppearance = version === '0.6.0'
+	if (releaseAppearance)
+		for (const framework of ['vue', 'react', 'angular', 'solid', 'svelte', 'webc'])
+			for (const [component, prop] of [
+				['dialog', 'backdrop'],
+				['alert-dialog', 'backdrop'],
+				['drawer', 'backdrop'],
+				['toasts', 'view'],
+			]) {
+				const record = await read('get_component', { framework, component })
+				assert.ok(
+					record.api.props.some((entry) => entry.name === prop),
+					framework + '/' + component,
+				)
+			}
 	const installation = await call('get_installation', boundary)
 	assert.ok(installation.items.some((entry) => entry.id === 'vue-installation'))
 	await read('get_document', { id: 'vue-installation' })
@@ -101,12 +116,19 @@ try {
 		examples.push(...result.items)
 		exampleOffset = result.nextOffset
 	} while (exampleOffset !== null)
-	const sources = []
-	for (const [id, exampleId, target] of [
+	const exampleFiles = [
 		['vue-installation', 'vue-main', 'src/main.ts'],
 		['vue-bindings', 'recipes', 'TravelRecipes.vue'],
 		['vue-controller', 'controller', 'CtrlExample.vue'],
-	]) {
+	]
+	if (releaseAppearance)
+		exampleFiles.push(
+			['vue-appearance', 'release-appearance', 'ReleaseAppearance.vue'],
+			['vue-appearance', 'toast-actions', 'ToastActions.vue'],
+		)
+
+	const sources = []
+	for (const [id, exampleId, target] of exampleFiles) {
 		assert.ok(examples.some((entry) => entry.documentId === id && entry.id === exampleId))
 		const example = await read('get_example', { id, example: exampleId })
 		const hash = createHash('sha256').update(example.content).digest('hex')

@@ -1,0 +1,296 @@
+{
+  "schemaVersion": 1,
+  "libraryVersion": "0.6.0",
+  "libraryRevision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+  "language": "en",
+  "api": {
+    "package": "@soxa-ui/setup",
+    "version": "0.6.0",
+    "export": "@soxa-ui/setup/api.json",
+    "sha256": "21af24e3dc0489f5e400502c3a80439faae9a9e51a3764a9d98d087233f01ad3",
+    "tarball": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.6.0.tgz",
+    "integrity": "sha512-dI2q+bXZvz9zcnpGOOKiSLdNRK4Ig6HRrwymntL0KEryonGEC3wVv2j077Oo8r8DiBH/vFsEJIUZL9VhVR+5PA=="
+  },
+  "coverage": {
+    "vue": {
+      "api": "generated",
+      "guides": "sample"
+    },
+    "react": {
+      "api": "generated",
+      "guides": "pending"
+    },
+    "angular": {
+      "api": "generated",
+      "guides": "pending"
+    },
+    "solid": {
+      "api": "generated",
+      "guides": "pending"
+    },
+    "svelte": {
+      "api": "generated",
+      "guides": "pending"
+    },
+    "webc": {
+      "api": "generated",
+      "guides": "pending"
+    }
+  },
+  "documents": [
+    {
+      "id": "overview",
+      "title": "Soxa UI 0.6.0 overview",
+      "path": "overview.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "README.md"
+        },
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "docs/upgrade/0.6.0.md"
+        }
+      ],
+      "related": ["release-changes", "vue-start", "oren-configuration"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "release-changes",
+      "title": "Upgrade to Soxa UI 0.6.0",
+      "path": "release-changes.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "release",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "docs/upgrade/0.6.0.md"
+        },
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "docs/upgrade/toasts-soft-view.md"
+        }
+      ],
+      "related": [
+        "overview",
+        "oren-configuration",
+        "api-vue-dialog",
+        "api-vue-alert-dialog",
+        "api-vue-drawer",
+        "api-vue-toasts",
+        "api-react-dialog",
+        "api-react-alert-dialog",
+        "api-react-drawer",
+        "api-react-toasts",
+        "api-angular-dialog",
+        "api-angular-alert-dialog",
+        "api-angular-drawer",
+        "api-angular-toasts",
+        "api-solid-dialog",
+        "api-solid-alert-dialog",
+        "api-solid-drawer",
+        "api-solid-toasts",
+        "api-svelte-dialog",
+        "api-svelte-alert-dialog",
+        "api-svelte-drawer",
+        "api-svelte-toasts",
+        "api-webc-dialog",
+        "api-webc-alert-dialog",
+        "api-webc-drawer",
+        "api-webc-toasts"
+      ],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "oren-configuration",
+      "title": "Oren backdrop and notification views",
+      "path": "oren-configuration.md",
+      "audience": "consumer",
+      "framework": "all",
+      "topic": "theming",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "docs/upgrade/0.6.0.md"
+        },
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "docs/upgrade/toasts-soft-view.md"
+        },
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "packages/themes/oren/README.md"
+        }
+      ],
+      "related": ["release-changes", "vue-installation"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "vue-start",
+      "title": "Soxa UI 0.6.0 with Vue",
+      "path": "vue-start.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "overview",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "docs/upgrade/0.6.0.md"
+        }
+      ],
+      "related": ["vue-installation", "vue-bindings", "vue-controller", "vue-appearance"],
+      "examples": [],
+      "links": []
+    },
+    {
+      "id": "vue-installation",
+      "title": "Install Soxa UI 0.6.0 and Oren in Vue",
+      "path": "vue-installation.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "installation",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "packages/themes/oren/README.md"
+        }
+      ],
+      "related": ["vue-start", "vue-bindings", "vue-controller", "vue-appearance"],
+      "examples": [
+        {
+          "id": "vue-main",
+          "path": "examples/vue/main.ts",
+          "language": "ts"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "vue-bindings",
+      "title": "Vue fields and model bindings",
+      "path": "vue-bindings.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "bindings",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "docs/api/generated/contract.json"
+        }
+      ],
+      "related": ["vue-installation", "api-vue-input", "api-vue-select", "api-vue-date-picker"],
+      "examples": [
+        {
+          "id": "recipes",
+          "path": "examples/TravelRecipes.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "vue-controller",
+      "title": "Use a raw Vue controller",
+      "path": "vue-controller.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "lifecycle",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "packages/ui/vue/README.md"
+        },
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "packages/core/README.md"
+        }
+      ],
+      "related": ["vue-installation", "api-vue-button"],
+      "examples": [
+        {
+          "id": "controller",
+          "path": "examples/CtrlExample.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "vue-appearance",
+      "title": "Show a blurred dialog and soft notifications in Vue",
+      "path": "vue-appearance.md",
+      "audience": "consumer",
+      "framework": "vue",
+      "topic": "theming",
+      "component": null,
+      "status": "sample",
+      "sources": [
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "docs/upgrade/0.6.0.md"
+        },
+        {
+          "revision": "faddbc53b0901d8418460a5500f12b492d6fb0ff",
+          "path": "docs/upgrade/toasts-soft-view.md"
+        }
+      ],
+      "related": ["vue-installation", "oren-configuration", "api-vue-dialog", "api-vue-toasts"],
+      "examples": [
+        {
+          "id": "release-appearance",
+          "path": "examples/ReleaseAppearance.vue",
+          "language": "vue"
+        },
+        {
+          "id": "toast-actions",
+          "path": "examples/ToastActions.vue",
+          "language": "vue"
+        }
+      ],
+      "links": []
+    }
+  ],
+  "packages": {
+    "@soxa-ui/vue": "0.6.0",
+    "@soxa-ui/setup": "0.6.0",
+    "@soxa-ui/core": "0.6.0",
+    "@soxa-ui/plugins": "0.6.0",
+    "@soxa-ui/theme-base": "0.6.0",
+    "@soxa-ui/theme-oren": "0.6.0",
+    "@soxa-ui/icons-material": "0.3.3"
+  },
+  "contributorGuides": "pending"
+}

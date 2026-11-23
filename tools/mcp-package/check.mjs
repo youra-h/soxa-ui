@@ -15,7 +15,7 @@ for (const file of ['cli.mjs', 'mcp.mjs', 'mcp-catalog.mjs', 'mcp-tools.mjs', 'c
 	assert.ok(readFileSync(join(dist, file), 'utf8').length > 0)
 assert.deepEqual(
 	catalog.versions.map((v) => v.libraryVersion),
-	['0.3.0', '0.4.1', '0.4.2'],
+	['0.3.0', '0.4.1', '0.4.2', '0.6.0'],
 )
 const loaded = openCatalog(catalog.versions.map((v) => join(dist, v.directory)))
 for (const version of loaded.versions()) {
