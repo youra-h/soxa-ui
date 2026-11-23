@@ -56,8 +56,8 @@ export interface IModalLayer<
 	TEvents extends Record<string, (...args: any) => any> = TModalLayerEvents,
 >
 	extends ILayer<TProps, TEvents>, ICloseRequestable {
-	backdrop: TBackdropView | undefined
-	readonly backdropClasses: string[]
+	backdrop?: TBackdropView
+	readonly backdropClasses?: string[]
 	/** Ширина панели; `undefined` — ширину даёт тема */
 	width: number | string | undefined
 	/** Высота панели; `undefined` — высоту даёт тема */
