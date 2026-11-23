@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { chromium } from 'playwright'
-import { checkPage, serve } from '../ai-docs/consumer-browser.mjs'
+import { checkPage, checkReleaseAppearance, serve } from '../ai-docs/consumer-browser.mjs'
 import { registryVersion } from '../release-notes/release-notes.mjs'
 
 const root = fileURLToPath(new URL('../../', import.meta.url))
@@ -79,9 +79,10 @@ if (registry) {
 assert.equal(Object.keys(installedManifest.dependencies ?? {}).length, 0)
 const catalog = JSON.parse(readFileSync(join(installed, 'dist/catalog.json')))
 assert.equal(catalog.packageVersion, manifest.version)
+const libraryVersions = ['0.3.0', '0.4.1', '0.4.2', '0.6.0']
 assert.deepEqual(
 	catalog.versions.map((v) => v.libraryVersion),
-	['0.3.0', '0.4.1', '0.4.2'],
+	libraryVersions,
 )
 // Test the npm executable shim from an unrelated cwd, with stdin EOF and no network.
 put('offline.mjs', "globalThis.fetch = () => { throw new Error('Unexpected runtime network') }\n")
@@ -150,9 +151,11 @@ assert.equal(responses.find((v) => v.id === 1).result.serverInfo.version, manife
 assert.equal(responses[0].error.code, -32700)
 assert.equal(responses.find((v) => v.id === 6).error.code, -32602)
 assert.equal(responses.find((v) => v.id === 7).error.code, -32601)
-assert.equal(
-	JSON.parse(responses.find((v) => v.id === 2).result.content[0].text).versions.length,
-	3,
+assert.deepEqual(
+	JSON.parse(responses.find((v) => v.id === 2).result.content[0].text).versions.map(
+		(v) => v.libraryVersion,
+	),
+	libraryVersions,
 )
 assert.equal(responses.find((v) => v.id === 3).result.isError, true)
 assert.equal(responses.find((v) => v.id === 4).result.isError, true)
@@ -160,7 +163,7 @@ assert.deepEqual(responses.find((v) => v.id === 5).result, {})
 const server = join(installed, 'dist/cli.mjs')
 const sdk = []
 cpSync(join(root, 'tools/ai-docs/mcp-client.mjs'), join(directory, 'mcp-client.mjs'))
-for (const version of ['0.3.0', '0.4.1', '0.4.2']) {
+for (const version of libraryVersions) {
 	console.log(
 		execFileSync(process.execPath, ['mcp-client.mjs', server, '--bundled', version], {
 			cwd: directory,
@@ -188,7 +191,9 @@ try {
 		'0',
 	])
 	try {
-		await checkPage(browser, production.url, false)
+		await checkPage(browser, production.url, false, {
+			afterInteractions: checkReleaseAppearance,
+		})
 	} finally {
 		production.server.kill()
 	}
@@ -219,9 +224,9 @@ const evidence = {
 		offlineRuntime: 'passed',
 		unknownVersions: 'passed',
 		sdk: 'passed',
-		vue042Types: 'passed',
-		vue042Production: 'passed',
-		vue042Chromium: 'passed',
+		vue060Types: 'passed',
+		vue060Production: 'passed',
+		vue060Chromium: 'passed',
 	},
 	editor: 'not-tested',
 	directory,

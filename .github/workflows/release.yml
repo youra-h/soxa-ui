@@ -19,6 +19,7 @@ jobs:
     outputs:
       channel: ${{ steps.channel.outputs.value }}
       scope: ${{ steps.channel.outputs.scope }}
+      has_mcp: ${{ steps.channel.outputs.has_mcp }}
     name: Публикация в npm
     if: contains(github.event.head_commit.message, 'release/') || startsWith(github.event.head_commit.message, 'Выпуск ')
     runs-on: ubuntu-latest
@@ -42,6 +43,8 @@ jobs:
           echo "value=$channel" >> "$GITHUB_OUTPUT"
           scope=$(node -p "JSON.parse(require('fs').readFileSync('.release/plan.json')).scope")
           echo "scope=$scope" >> "$GITHUB_OUTPUT"
+          has_mcp=$(node -p "require('./.release/plan.json').packages.some((pkg) => pkg.name === '@soxa-ui/mcp')")
+          echo "has_mcp=$has_mcp" >> "$GITHUB_OUTPUT"
 
       # Every package is checked at its own version: the library shares one,
       # each theme and icon pack has its own. None missing from npm — a rerun
@@ -130,7 +133,7 @@ jobs:
         run: npm run check:install -- --registry-workspace --dir "$RUNNER_TEMP/soxa-release-install"
 
       - name: MCP из npm
-        if: needs.publish.outputs.scope == 'mcp' || needs.publish.outputs.scope == 'all'
+        if: needs.publish.outputs.has_mcp == 'true'
         run: npm run check:mcp-package -- --registry
 
       - name: Диагностика установленного выпуска

@@ -31,7 +31,7 @@ try {
 		throw new Error('Unexpected output')
 	rmSync(destination, { recursive: true, force: true })
 	mkdirSync(destination, { recursive: true })
-	for (const version of ['0.3.0', '0.4.1', '0.4.2']) {
+	for (const version of ['0.3.0', '0.4.1', '0.4.2', '0.6.0']) {
 		const manifestPath = join(root, 'docs/ai', version, 'manifest.json')
 		const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'))
 		const response = await fetch(manifest.api.tarball, { signal: AbortSignal.timeout(60000) })

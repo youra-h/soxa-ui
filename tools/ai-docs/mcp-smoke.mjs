@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
-import { serve, checkPage } from './consumer-browser.mjs'
+import { serve, checkPage, checkReleaseAppearance } from './consumer-browser.mjs'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
 const release = documentationRelease(root)
@@ -73,7 +73,9 @@ try {
 		'0',
 	])
 	try {
-		await checkPage(browser, production.url, false)
+		await checkPage(browser, production.url, false, {
+			afterInteractions: version === '0.6.0' ? checkReleaseAppearance : undefined,
+		})
 	} finally {
 		production.server.kill()
 	}
@@ -94,6 +96,7 @@ evidence.validation = {
 		'Submit',
 		'Unique ids',
 		'No console/page/request errors',
+		...(version === '0.6.0' ? ['Dialog backdrop and Oren notification views'] : []),
 	],
 }
 writeFileSync(join(directory, 'mcp-evidence.json'), JSON.stringify(evidence, null, 2) + '\n')

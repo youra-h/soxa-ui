@@ -151,6 +151,50 @@ export async function checkPage(
 	}
 }
 
+export async function checkReleaseAppearance(page) {
+	const opener = page.getByRole('button', { name: 'Open blurred dialog' })
+	const dialog = page.getByRole('dialog', { name: 'Travel details' })
+	const backdrop = page.locator('.so-backdrop--view-blur')
+	await opener.click()
+	await dialog.waitFor()
+	await backdrop.waitFor()
+	assert.equal(await backdrop.evaluate((el) => getComputedStyle(el).backdropFilter), 'blur(3px)')
+	await page.addStyleTag({ content: '.so-backdrop { --so-backdrop-blur: 6px; }' })
+	assert.equal(await backdrop.evaluate((el) => getComputedStyle(el).backdropFilter), 'blur(6px)')
+	await page.keyboard.press('Escape')
+	await dialog.waitFor({ state: 'hidden' })
+	assert.equal(await opener.evaluate((el) => el === document.activeElement), true)
+
+	await page.getByRole('button', { name: 'Show soft notification' }).click()
+	const soft = page
+		.locator('.so-toasts--view-soft .so-toasts-item')
+		.filter({ hasText: 'Itinerary saved' })
+	await soft.waitFor()
+	await page.getByRole('button', { name: 'Show outlined notification' }).click()
+	const outlined = page
+		.locator('.so-toasts-item--view-outlined')
+		.filter({ hasText: 'Itinerary shared' })
+	await outlined.waitFor()
+
+	for (const scheme of ['oren', 'oren-dark']) {
+		await page
+			.locator('html')
+			.evaluate((el, value) => el.setAttribute('data-so-theme', value), scheme)
+		assert.notEqual(
+			await soft.evaluate((el) =>
+				getComputedStyle(el).getPropertyValue('--so-toasts-item-fill').trim(),
+			),
+			'',
+		)
+		assert.equal(
+			await outlined.evaluate((el) =>
+				getComputedStyle(el).getPropertyValue('--so-toasts-item-fill').trim(),
+			),
+			'',
+		)
+	}
+}
+
 export async function missingReferences(page) {
 	return page.evaluate(() =>
 		Array.from(

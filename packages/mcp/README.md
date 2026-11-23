@@ -1,15 +1,16 @@
 # @soxa-ui/mcp
 
 Read-only stdio MCP for Soxa UI. The package includes canonical JSON documents
-and generated API from the exact published setup artifacts for **0.3.0, 0.4.1
-and 0.4.2**. No checkout or corpus build is required by consumers. After npm
+and generated API from the exact published setup artifacts for **0.3.0, 0.4.1,
+0.4.2 and 0.6.0**. No checkout or corpus build is required by consumers. After npm
 has installed the package, server execution requires no network.
 
 Requires Node **^22.12.0 || ^24 || >=26**. MCP package versions are independent
 of library versions and documentation revisions. Start with list_versions and
 choose an exact version, audience and framework. Unknown versions and latest
-are rejected. Guide coverage is sample for all six adapters; contributor guides
-remain pending. Read the reported provenance and validation records for limits.
+are rejected. The 0.6.0 corpus has generated API for all six adapters, shared
+upgrade and Oren guidance, and sample Vue recipes. Read the catalog's coverage
+and provenance for each exact library version.
 
 ## Connect
 

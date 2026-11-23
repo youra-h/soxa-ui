@@ -11,10 +11,9 @@ Build the corpus from the exact published setup API first, as described in the
 
 The standalone npm package is **@soxa-ui/mcp**, with executable **soxa-mcp**.
 Its release is independent of the UI library and documentation revisions. The
-package bundles 0.3.0, 0.4.1 and 0.4.2 corpora; startup needs no checkout,
-absolute corpus path or network after npm installation. The initial source
-version 0.0.0 is a preparation placeholder; it is not a published version.
-The patch changeset proposes the first 0.0.1 release through the normal pipeline.
+package bundles versioned corpora and starts after npm installation using its
+local JSON data. Version 0.0.1 serves 0.3.0, 0.4.1 and 0.4.2. See the
+[0.0.2 upgrade guide](../upgrade/mcp-0.0.2.md) for Soxa UI 0.6.0 support.
 Read the [package guide](../../packages/mcp/README.md) for client configuration,
 Node requirements and the static JSON exports for website builds. Use the
 actual npm package version after publication, never a library version by inference.
@@ -73,7 +72,7 @@ uses `mcpServers` with the command and args above. These historical source
 configuration templates were originally checked with the SDK only. The packaged
 MCP candidate has additionally been connected to an isolated VS Code 1.147.0
 profile, with all nine tools discovered and real list_versions/get_component
-requests. See the [current validation](./0.4.2/release-validation.md). This does
+requests. See the [0.4.2 delivery validation](./0.4.2/release-validation.md). This does
 not establish Claude Desktop or conversational AI-authoring coverage.
 
 ## Retrieval contract
