@@ -3,27 +3,27 @@
   "packages": [
     {
       "name": "@soxa-ui/angular",
-      "version": "0.5.0",
-      "integrity": "sha512-jrQNwpAdovK+lUgHEx//mVzeLoK44fJPQycr/XpB/5nLsFBqCQLZcD+uwW5i0v3fnvonmZ5i8Ng//7ylS7KcHw==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/angular/-/angular-0.5.0.tgz"
+      "version": "0.6.0",
+      "integrity": "sha512-LDoqV0b9CpXMrOW7C34CZhDial9Z/o8DZ63f6khdV5Va+m4d9yTLBUQ3lqXk677OqY7QWrJq3ZP//9MVMVm9sg==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/angular/-/angular-0.6.0.tgz"
     },
     {
       "name": "@soxa-ui/core",
-      "version": "0.5.0",
-      "integrity": "sha512-huCoQHRrCv8Qm3GRC1CbfO1SZ6pQFt8+sd7QfwC+b90iziT+3bc36DMPCtnT/wYbrhBRS4qCZM2ZoLNamwTxww==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/core/-/core-0.5.0.tgz"
+      "version": "0.6.0",
+      "integrity": "sha512-G72LGKS1kZGRlVegRGcn6uUxzPv61mzC27gn0Xp3tqEjf47CAl0qtJ3kRED7REZKi3+ekUH/Ku8CGXu8PuAyfA==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/core/-/core-0.6.0.tgz"
     },
     {
       "name": "@soxa-ui/icons-lucide",
-      "version": "0.3.2",
-      "integrity": "sha512-QD11XBte/NfryadUQoNspTrPIhpZgszSyx0m6XCc0izAn5FhK+FIlkuCjIx0TavKn3GtWL8ihinGCTl4tPt7yA==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/icons-lucide/-/icons-lucide-0.3.2.tgz"
+      "version": "0.3.3",
+      "integrity": "sha512-oXSrpRIfm5td8JkOF/s7Ado4p1XtMyVxIR7PIVgJzv8zV1m+b+QwX89Tsj1QDuXhVJoyNlMQjq86/quqXaj24A==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/icons-lucide/-/icons-lucide-0.3.3.tgz"
     },
     {
       "name": "@soxa-ui/icons-material",
-      "version": "0.3.2",
-      "integrity": "sha512-/EtXBNeZV8yu9+AJbuyiTRuEQPdLzAprOiLRzLCcSg9or9hUy1TqkCHsW9RAz+pwLPagL7GbMrlXMYDPV81nIg==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/icons-material/-/icons-material-0.3.2.tgz"
+      "version": "0.3.3",
+      "integrity": "sha512-1Ju3gQrbcuXYr/a6t3zPgbZF+8Opf7L09fSffVbKKz5lomrZWgPXxBkJJQMVPYzgB3Fcfzu7awiKwgFDcsz62g==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/icons-material/-/icons-material-0.3.3.tgz"
     },
     {
       "name": "@soxa-ui/mcp",
@@ -33,57 +33,57 @@
     },
     {
       "name": "@soxa-ui/plugins",
-      "version": "0.5.0",
-      "integrity": "sha512-dlCJGrnQZo+3NLMzE67yalm6SdObk4HupraOholgJpsIhzbfk00nDHBDihBItOXheG6xoKbgGN5MOYqq5lvqUA==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/plugins/-/plugins-0.5.0.tgz"
+      "version": "0.6.0",
+      "integrity": "sha512-K3vr6qrtM6U7Ahj6HeyJNv/jfvtlzGmReL+/Pvvivz65NcKbS+u6MDBXSvMok7CW3xw1fZGHQiqrwtrzxsK9+A==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/plugins/-/plugins-0.6.0.tgz"
     },
     {
       "name": "@soxa-ui/react",
-      "version": "0.5.0",
-      "integrity": "sha512-J7mOWpc0TS8jzb7RAFgsk6YTP6I8RqwHVzyx/CKz3ABwyGOrE3WWNcd7FDDCoAVo0LnTlYDrAI580Qh6+KVL8w==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/react/-/react-0.5.0.tgz"
+      "version": "0.6.0",
+      "integrity": "sha512-RqtS7G5smZDIy0XkCR7VULgo3KGLiOgf+10ywK6aptTwvAUs2N+UWyT6iCEoGeoetn4RX63SQLnLeG5jhG61UA==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/react/-/react-0.6.0.tgz"
     },
     {
       "name": "@soxa-ui/setup",
-      "version": "0.5.0",
-      "integrity": "sha512-UFSuzfnI7aL8hYpDuHcOM0NARgtJNmIVb07DQwzaCfO0yJSYXAL3oZWzjJKNZeuQvpcqmc8rrTFkJUMUa5vWnQ==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.5.0.tgz"
+      "version": "0.6.0",
+      "integrity": "sha512-dI2q+bXZvz9zcnpGOOKiSLdNRK4Ig6HRrwymntL0KEryonGEC3wVv2j077Oo8r8DiBH/vFsEJIUZL9VhVR+5PA==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/setup/-/setup-0.6.0.tgz"
     },
     {
       "name": "@soxa-ui/solid",
-      "version": "0.5.0",
-      "integrity": "sha512-lBCravtr06dBxLiiwS7CB47cfi/93lGkUR/B9XuH1v71t1tlqZtKY/DaybNIPMgwzQnpoH4C3gC9vxp/np61mA==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/solid/-/solid-0.5.0.tgz"
+      "version": "0.6.0",
+      "integrity": "sha512-xTSNXjI5I5NhtMdwOCnAjF1RWfl6WhjtcXPxGrL164CvNuk3KWdpJCVF2KTBXxCtTXaWwt6Dq/BIg02U+8FSSg==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/solid/-/solid-0.6.0.tgz"
     },
     {
       "name": "@soxa-ui/svelte",
-      "version": "0.5.0",
-      "integrity": "sha512-ETmDF95j83NqCF7IEgghQQdvMDaKCAB4mIgPrGuBpyJcaH1E4fvDdMYRvSnpiMggdgfeXt9B+0s94PrimSeHDA==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/svelte/-/svelte-0.5.0.tgz"
+      "version": "0.6.0",
+      "integrity": "sha512-gdnwVBmPtTzaH6D2MnUwnrd2IrYyy+3MdrUpZHs5FzQ/6lLr5RCC2OLiNyWDyajWLbGHzF8uoVNMYd+t4Vf/+g==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/svelte/-/svelte-0.6.0.tgz"
     },
     {
       "name": "@soxa-ui/theme-base",
-      "version": "0.5.0",
-      "integrity": "sha512-sdDGrBNUQY8DfS0+44lAXxdWeJ1KNLG0wJXqWiwJ5DwEqiKvf0Rx31yflDDBKEYZD3QOaH7bmhrZm7DAtJ9CoA==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/theme-base/-/theme-base-0.5.0.tgz"
+      "version": "0.6.0",
+      "integrity": "sha512-YXBq2hcHNT7Iu+qs3t2P5YmCHTRgboFTfyaB1100Y1y+jr1OQc2eCiYITs3RhhoEXMhK4GmG4/J2DfZZHEVCSg==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/theme-base/-/theme-base-0.6.0.tgz"
     },
     {
       "name": "@soxa-ui/theme-oren",
-      "version": "0.5.0",
-      "integrity": "sha512-sSnOkRT9J6/FXY//Y2se0WGrKe33ERIBYMTdZecNXNk4zbjuTKVK5vgeRoPdqb/RPg+F2XdeAM/dFWuAlrR86A==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/theme-oren/-/theme-oren-0.5.0.tgz"
+      "version": "0.6.0",
+      "integrity": "sha512-jWroLLk897C3gEECENZou5M6wCtVEhnA49o3j5HkFBeI8wrPGjPQzp2ifVW5zBdUjpng+Ik+sR+gpFXZHhIzyQ==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/theme-oren/-/theme-oren-0.6.0.tgz"
     },
     {
       "name": "@soxa-ui/vue",
-      "version": "0.5.0",
-      "integrity": "sha512-Z/73Da2ti4xaOastxd5FXgaRPN/k6OJOH8zfYLZTrDdK0saUY/0oYjXIIldOTc3hh72uoYORnXaj4ob2pr86Vg==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/vue/-/vue-0.5.0.tgz"
+      "version": "0.6.0",
+      "integrity": "sha512-oTipaUd2zoa0bP6ApMQY1/tQtfqa+jFZtDycg0eOVhAxmytMLgWMyqyO8qGPwsOiiQa7BUQRmIH4VBDy6+SAyQ==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/vue/-/vue-0.6.0.tgz"
     },
     {
       "name": "@soxa-ui/webc",
-      "version": "0.5.0",
-      "integrity": "sha512-CMOUJtGDTQzrseye+8gNSTLD1K3+/2la5HotTEr1oQVAb2N4Uf6shO6AIWWdyPgdCMOPCKZ52eXjG5Rgp53yDg==",
-      "tarball": "https://registry.npmjs.org/@soxa-ui/webc/-/webc-0.5.0.tgz"
+      "version": "0.6.0",
+      "integrity": "sha512-rdhQIZlo5OIS6uuQDXWOawquJJ6k7Fksn+OQts7b6zHFRH8n6FDI7BY6GAedK+E9NPCwYaUEMFdG62Se744zSQ==",
+      "tarball": "https://registry.npmjs.org/@soxa-ui/webc/-/webc-0.6.0.tgz"
     }
   ]
 }
