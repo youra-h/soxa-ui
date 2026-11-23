@@ -710,6 +710,7 @@ describe('Oren backdrop views', () => {
 		await open()
 
 		const node = backdrop()
+		expect(node.getAttribute('aria-hidden')).toBe('true')
 		const styles = () => getComputedStyle(node)
 		await expect.poll(() => styles().opacity).toBe('0.5')
 		const tint = styles().backgroundColor

@@ -130,11 +130,8 @@ const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'no
 const opener = () => find('.so-test-opener')
 const place = () => find('.so-test-place')
 
-/**
- * Узлы страницы, спрятанные от скринридера: фон окна в `body` — его соседи.
- * Узлы внутри окна (иконка крестика) сюда не входят.
- */
-const muted = () => [...document.querySelectorAll('body > [aria-hidden="true"]')]
+/** Direct children of the page muted by the modal, excluding its decorative backdrop. */
+const muted = () => [...document.querySelectorAll('body > [aria-hidden="true"]:not(.so-backdrop)')]
 
 /** Якоря телепорта в поддереве — комментарии на месте увезённых корней. */
 function anchors(scope: Node): Comment[] {
