@@ -1,85 +1,13 @@
 {
   "schemaVersion": 1,
-  "scope": "all",
+  "scope": "mcp",
   "packages": [
     {
-      "name": "@soxa-ui/theme-oren",
-      "version": "0.6.0",
-      "previousVersion": "0.5.0",
-      "scope": "themes"
-    },
-    {
-      "name": "@soxa-ui/core",
-      "version": "0.6.0",
-      "previousVersion": "0.5.0",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/setup",
-      "version": "0.6.0",
-      "previousVersion": "0.5.0",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/theme-base",
-      "version": "0.6.0",
-      "previousVersion": "0.5.0",
-      "scope": "themes"
-    },
-    {
-      "name": "@soxa-ui/vue",
-      "version": "0.6.0",
-      "previousVersion": "0.5.0",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/react",
-      "version": "0.6.0",
-      "previousVersion": "0.5.0",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/solid",
-      "version": "0.6.0",
-      "previousVersion": "0.5.0",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/svelte",
-      "version": "0.6.0",
-      "previousVersion": "0.5.0",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/angular",
-      "version": "0.6.0",
-      "previousVersion": "0.5.0",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/webc",
-      "version": "0.6.0",
-      "previousVersion": "0.5.0",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/plugins",
-      "version": "0.6.0",
-      "previousVersion": "0.5.0",
-      "scope": "components"
-    },
-    {
-      "name": "@soxa-ui/icons-lucide",
-      "version": "0.3.3",
-      "previousVersion": "0.3.2",
-      "scope": "icons"
-    },
-    {
-      "name": "@soxa-ui/icons-material",
-      "version": "0.3.3",
-      "previousVersion": "0.3.2",
-      "scope": "icons"
+      "name": "@soxa-ui/mcp",
+      "version": "0.0.2",
+      "previousVersion": "0.0.1",
+      "scope": "mcp"
     }
   ],
-  "upgradeGuide": "docs/upgrade/0.6.0.md"
+  "upgradeGuide": "docs/upgrade/mcp-0.0.2.md"
 }
