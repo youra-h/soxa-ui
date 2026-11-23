@@ -8,7 +8,7 @@ npm run check:compatibility
 ```
 
 The report compares every publishable package with an **exact published baseline**:
-component packages 0.4.2, themes 0.4.1, icon packs 0.3.1 and MCP 0.0.1 at introduction.
+component packages and themes 0.5.0, icon packs 0.3.2 and MCP 0.0.1.
 [baseline.json](./baseline.json) records each version, npm tarball URL and sha512
 integrity. The checker verifies archives on every read and never substitutes latest,
 a sibling source checkout or an unbuilt package. Network or parse failures fail the check.
@@ -60,8 +60,8 @@ checks the versioned packages again; consumed breaking changes must retain their
 in the generated changelog. GitHub Release notes link the guide even when long notes
 are folded into package changelog links.
 
-See [release preparation](../agent-flow/release.md). The current concrete instructions
-are [the planned 0.5.0 upgrade](../../docs/upgrade/0.5.0.md). These commands do not publish
+See [release preparation](../agent-flow/release.md) and the
+[consumer upgrade index](../../docs/upgrade/README.md). These commands do not publish
 or merge a release.
 
 After a release has actually been published and the checkout has those exact versions,
