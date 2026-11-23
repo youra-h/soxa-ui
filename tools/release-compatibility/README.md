@@ -8,7 +8,7 @@ npm run check:compatibility
 ```
 
 The report compares every publishable package with an **exact published baseline**:
-component packages and themes 0.5.0, icon packs 0.3.2 and MCP 0.0.1.
+component packages and themes 0.6.0, icon packs 0.3.3 and MCP 0.0.1.
 [baseline.json](./baseline.json) records each version, npm tarball URL and sha512
 integrity. The checker verifies archives on every read and never substitutes latest,
 a sibling source checkout or an unbuilt package. Network or parse failures fail the check.
