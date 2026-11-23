@@ -43,7 +43,7 @@ $backdrop-easing: linear;
 
 // Подложка — вуаль модального слоя (`modal.backdrop`). Закрытая гаснет:
 // `data-open` у неё тот же, что у панели.
-.so-drawer__backdrop {
+.so-backdrop:has(+ :where(.so-drawer)) {
 	@include modal.backdrop-views;
 
 	&[data-open='false'] {
@@ -170,7 +170,7 @@ $backdrop-easing: linear;
 	}
 }
 
-.so-drawer__backdrop {
+.so-backdrop:has(+ :where(.so-drawer)) {
 	transition-property: opacity, display;
 	transition-timing-function: $backdrop-easing;
 	transition-behavior: allow-discrete;
@@ -190,7 +190,7 @@ $backdrop-easing: linear;
 		translate: var(--so-drawer-away);
 	}
 
-	.so-drawer__backdrop:where([data-open='true']) {
+	.so-backdrop:has(+ :where(.so-drawer)):where([data-open='true']) {
 		@apply opacity-0;
 	}
 }

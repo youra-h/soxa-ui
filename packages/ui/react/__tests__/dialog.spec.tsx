@@ -37,7 +37,7 @@ type TPopoverTriggerScope = DescriptorSlots<typeof PopoverDescriptor>['trigger']
 const node = (selector: string, scope: ParentNode = document) => find(scope, selector, HTMLElement)
 
 const panel = (scope: ParentNode = document) => node('.so-dialog', scope)
-const backdrop = (scope: ParentNode = document) => node('.so-dialog__backdrop', scope)
+const backdrop = (scope: ParentNode = document) => node('.so-backdrop:has(+ .so-dialog)', scope)
 const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'none'
 const opener = () => node('.so-test-opener')
 
@@ -990,7 +990,7 @@ describe('React', () => {
 		await nextFrame()
 
 		expect(document.querySelectorAll('.so-dialog')).toHaveLength(1)
-		expect(document.querySelectorAll('.so-dialog__backdrop')).toHaveLength(1)
+		expect(document.querySelectorAll('.so-backdrop:has(+ .so-dialog)')).toHaveLength(1)
 
 		act(() => {
 			opener().focus()
@@ -1059,7 +1059,7 @@ describe('non-modal dialog', () => {
 		expect(document.documentElement.style.overflow).not.toBe('hidden')
 		expect(document.body.style.overflow).not.toBe('hidden')
 
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 
 		const last = panel().querySelector('.so-dialog__close')
 		if (!(last instanceof HTMLElement)) throw new Error('Missing close button')

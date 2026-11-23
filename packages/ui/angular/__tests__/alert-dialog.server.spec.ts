@@ -21,7 +21,7 @@ it('hydrates the hidden server host into one named modal and safe actions', asyn
 	await nextFrame()
 	expect(document.querySelector('.so-alert-dialog')).toBe(host)
 	expect(host?.getAttribute('role')).toBe('alertdialog')
-	expect(document.querySelectorAll('.so-alert-dialog__backdrop')).toHaveLength(1)
+	expect(document.querySelectorAll('.so-backdrop:has(+ .so-alert-dialog)')).toHaveLength(1)
 	expect(document.getElementById(host?.getAttribute('aria-labelledby') ?? '')?.textContent).toBe(
 		'Delete?',
 	)

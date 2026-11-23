@@ -37,7 +37,7 @@ import { find, mount, nextFrame, type TMounted } from './mount'
 const node = (selector: string, scope: ParentNode = document) => find(scope, selector, HTMLElement)
 
 const panel = (scope: ParentNode = document) => node('.so-drawer', scope)
-const backdrop = (scope: ParentNode = document) => node('.so-drawer__backdrop', scope)
+const backdrop = (scope: ParentNode = document) => node('.so-backdrop:has(+ .so-drawer)', scope)
 const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'none'
 const opener = () => node('.so-test-opener')
 const host = () => node('.so-test-host')
@@ -566,7 +566,7 @@ describe('Solid', () => {
 		/** Панель одна, на своём месте, теми же узлами с тем же полем — и живая. */
 		const expectPanel = (place: Element, inPlace: boolean) => {
 			expect(document.querySelectorAll('.so-drawer')).toHaveLength(1)
-			expect(document.querySelectorAll('.so-drawer__backdrop')).toHaveLength(1)
+			expect(document.querySelectorAll('.so-backdrop:has(+ .so-drawer)')).toHaveLength(1)
 			expect(panel()).toBe(own)
 			expect(backdrop()).toBe(shade)
 			expect(place.contains(own)).toBe(true)
@@ -605,6 +605,6 @@ describe('Solid', () => {
 		destroy()
 
 		expect(document.querySelector('.so-drawer')).toBeNull()
-		expect(document.querySelector('.so-drawer__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-drawer)')).toBeNull()
 	})
 })

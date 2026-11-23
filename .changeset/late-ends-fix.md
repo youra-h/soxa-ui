@@ -1,8 +1,8 @@
 ---
-'@soxa-ui/core': patch
+'@soxa-ui/core': minor
 '@soxa-ui/setup': patch
-'@soxa-ui/theme-base': patch
-'@soxa-ui/theme-oren': patch
+'@soxa-ui/theme-base': minor
+'@soxa-ui/theme-oren': minor
 '@soxa-ui/vue': patch
 '@soxa-ui/react': patch
 '@soxa-ui/solid': patch
@@ -12,3 +12,5 @@
 ---
 
 Add shared modal backdrops with theme-defined views. Oren supports transparent, dimmed, and blurred backdrops for Dialog, AlertDialog, and Drawer.
+
+Custom themes must replace .so-dialog__backdrop, .so-alert-dialog__backdrop, and .so-drawer__backdrop with .so-backdrop. For panel-specific styles, match the following panel with :has(+ .so-dialog), :has(+ .so-alert-dialog), or :has(+ .so-drawer). See [upgrading to 0.5.0](docs/upgrade/0.5.0.md).

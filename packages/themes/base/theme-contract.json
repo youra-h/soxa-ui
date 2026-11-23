@@ -536,12 +536,6 @@
       "scope": "AlertDialog"
     },
     {
-      "name": "so-alert-dialog__backdrop",
-      "sources": ["packages/core/src/components/custom/alert-dialog/alert-dialog.class.ts"],
-      "description": "AlertDialog backdrop emission.",
-      "scope": "AlertDialog"
-    },
-    {
       "name": "so-alert-dialog__body",
       "sources": [
         "packages/ui/angular/src/components/alert-dialog/alert-dialog.component.html",
@@ -1435,12 +1429,6 @@
       "scope": "so-date-picker"
     },
     {
-      "name": "so-dialog__backdrop",
-      "sources": ["packages/core/src/components/custom/dialog/dialog.class.ts"],
-      "description": "backdrop part of dialog. Availability follows the rendered component structure.",
-      "scope": "so-dialog"
-    },
-    {
       "name": "so-dialog__body",
       "sources": [
         "packages/ui/angular/src/components/dialog/dialog.component.html",
@@ -1510,12 +1498,6 @@
       "sources": ["packages/plugins/src/custom/drag-and-drop/drag.plugin.ts"],
       "description": "item part of drag and drop. Availability follows the rendered component structure.",
       "scope": "so-drag-and-drop"
-    },
-    {
-      "name": "so-drawer__backdrop",
-      "sources": ["packages/core/src/components/custom/drawer/drawer.class.ts"],
-      "description": "backdrop part of drawer. Availability follows the rendered component structure.",
-      "scope": "so-drawer"
     },
     {
       "name": "so-drawer__body",
@@ -4003,13 +3985,6 @@
       "pattern": "data-indicator",
       "scope": "ListBox and Select list root and item wrapper; none | start | end",
       "description": "Computed emission: ListBox and Select list root and item wrapper; none | start | end. This source expression is checked explicitly so new dynamic cases require a documented mapping."
-    },
-    {
-      "name": "partClass",
-      "sources": ["packages/core/src/components/base/modal-layer/backdrop.class.ts"],
-      "description": "Legacy modal part class kept on the shared backdrop node.",
-      "scope": "backdrop",
-      "pattern": "so-{dialog|alert-dialog|drawer}__backdrop"
     },
     {
       "name": "TDragPlugin.DRAGGING_CLASS",

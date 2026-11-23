@@ -30,7 +30,7 @@ afterEach(() => {
 const node = (selector: string, scope: ParentNode = document) => find(scope, selector, HTMLElement)
 
 const panel = () => node('.so-drawer')
-const backdrop = () => node('.so-drawer__backdrop')
+const backdrop = () => node('.so-backdrop:has(+ .so-drawer)')
 const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'none'
 const opener = () => node('.so-test-opener')
 

@@ -436,7 +436,7 @@ describe('хост Angular · превью своим шаблоном', () => {
 		if (!(dialog instanceof HTMLElement)) throw new Error('окна нет')
 
 		expect(dialog.parentElement).toBe(document.body)
-		expect(dialog.previousElementSibling?.classList).toContain('so-dialog__backdrop')
+		expect(dialog.previousElementSibling?.classList).toContain('so-backdrop')
 		expect(dialog.classList).toContain('so-dialog--placement-end')
 		expect(dialog.style.display).toBe('none')
 		expect(textsOf(dialog, '.so-dialog__title')).toEqual(['Настройки'])
@@ -463,7 +463,7 @@ describe('хост Angular · превью своим шаблоном', () => {
 
 		expect(node.childNodes).toHaveLength(0)
 		expect(dialog.isConnected).toBe(false)
-		expect(document.querySelector('.so-dialog__backdrop')).toBe(null)
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBe(null)
 	})
 
 	/**
@@ -485,14 +485,14 @@ describe('хост Angular · превью своим шаблоном', () => {
 		handle.update({ contained: true, visible: true })
 
 		expect(drawer.parentElement).toBe(box)
-		expect(drawer.previousElementSibling?.classList).toContain('so-drawer__backdrop')
+		expect(drawer.previousElementSibling?.classList).toContain('so-backdrop')
 		expect(drawer.style.display).toBe('')
 		expect(textsOf(drawer, '.so-drawer__title')).toEqual(['Фильтры'])
 
 		handle.unmount()
 
 		expect(node.childNodes).toHaveLength(0)
-		expect(document.querySelector('.so-drawer, .so-drawer__backdrop')).toBe(null)
+		expect(document.querySelector('.so-drawer, .so-backdrop:has(+ .so-drawer)')).toBe(null)
 	})
 
 	/**

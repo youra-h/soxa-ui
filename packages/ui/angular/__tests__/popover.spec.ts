@@ -926,7 +926,7 @@ describe('вложенные слои', () => {
 		await nextFrame()
 
 		const dialog = node('.so-dialog')
-		const backdrop = node('.so-dialog__backdrop')
+		const backdrop = node('.so-backdrop:has(+ .so-dialog)')
 
 		expect(dialog.parentElement).toBe(document.body)
 		expect(isOpen(dialog)).toBe(true)

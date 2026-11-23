@@ -7,9 +7,8 @@ export default class TBackdrop extends TComponentView {
 
 	private _view: TBackdropView | undefined
 
-	constructor(partClass: string | undefined, view: TBackdropView | undefined) {
+	constructor(view: TBackdropView | undefined) {
 		super()
-		if (partClass) this._classes.add(partClass, false)
 		this.view = view
 	}
 

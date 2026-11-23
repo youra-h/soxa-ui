@@ -41,7 +41,7 @@ function find(selector: string, scope: ParentNode = document): HTMLElement {
 }
 
 const panel = (scope: ParentNode = document) => find('.so-dialog', scope)
-const backdrop = (scope: ParentNode = document) => find('.so-dialog__backdrop', scope)
+const backdrop = (scope: ParentNode = document) => find('.so-backdrop:has(+ .so-dialog)', scope)
 const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'none'
 const opener = () => find('.so-test-opener')
 
@@ -774,7 +774,7 @@ describe('non-modal dialog', () => {
 		expect(document.documentElement.style.overflow).not.toBe('hidden')
 		expect(document.body.style.overflow).not.toBe('hidden')
 
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 
 		const last = panel().querySelector('.so-dialog__close')
 		if (!(last instanceof HTMLElement)) throw new Error('Missing close button')
@@ -806,7 +806,7 @@ describe('non-modal dialog', () => {
 		expect(document.activeElement).toBe(find('.so-test-second'))
 		expect(document.body.style.overflow).not.toBe('hidden')
 		expect(opener().closest('[aria-hidden="true"]')).toBeNull()
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 	})
 
 	it('handles Escape only inside the non-modal dialog', async () => {

@@ -56,8 +56,6 @@ export default class TModalLayer<
 	extends TLayer<TProps, TEvents>
 	implements IModalLayer<TProps, TEvents>
 {
-	protected static backdropPartClass?: string
-
 	static defaultValues: typeof TLayer.defaultValues &
 		TDefaultValues<
 			IModalLayerProps,
@@ -87,10 +85,7 @@ export default class TModalLayer<
 
 		super(props)
 
-		this._backdrop = new TBackdrop(
-			ctor.backdropPartClass,
-			props.backdrop ?? ctor.defaultValues.backdrop,
-		)
+		this._backdrop = new TBackdrop(props.backdrop ?? ctor.defaultValues.backdrop)
 		this._width = props.width ?? ctor.defaultValues.width
 		this._height = props.height ?? ctor.defaultValues.height
 		this._closable = props.closable ?? ctor.defaultValues.closable

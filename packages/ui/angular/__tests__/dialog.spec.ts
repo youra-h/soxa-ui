@@ -344,7 +344,7 @@ function check(): void {
 const node = (selector: string, scope: ParentNode = document) => find(scope, selector, HTMLElement)
 
 const panel = (scope: ParentNode = document) => node('.so-dialog', scope)
-const backdrop = (scope: ParentNode = document) => node('.so-dialog__backdrop', scope)
+const backdrop = (scope: ParentNode = document) => node('.so-backdrop:has(+ .so-dialog)', scope)
 const isOpen = (element: HTMLElement = panel()) => element.style.display !== 'none'
 const opener = () => node('.so-test-opener')
 const place = () => node('.so-test-place')
@@ -409,7 +409,7 @@ describe('разметка', () => {
 		expect(backdrop().nextElementSibling).toBe(panel())
 		expect(panel().contains(backdrop())).toBe(false)
 		expect(anchors(place())).toHaveLength(1)
-		expect(place().querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(place().querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 	})
 
 	it('закрытое окно спрятано вместе с подложкой, а не убрано', async () => {
@@ -1158,7 +1158,7 @@ describe('подложка — спутник окна', () => {
 		expect(root.style.display).toBe('none')
 		expect(root.textContent).toBe('')
 		expect(root.classList.contains('so-dialog')).toBe(false)
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 		expect(anchors(place())).toHaveLength(0)
 
 		fixture.componentInstance.target.set('body')
@@ -1169,7 +1169,7 @@ describe('подложка — спутник окна', () => {
 		expect(backdrop().nextElementSibling).toBe(root)
 		expect(isOpen()).toBe(true)
 		expect(isOpen(backdrop())).toBe(true)
-		expect(document.querySelectorAll('.so-dialog__backdrop')).toHaveLength(1)
+		expect(document.querySelectorAll('.so-backdrop:has(+ .so-dialog)')).toHaveLength(1)
 	})
 
 	it('rendered: false прячет окно вместе с подложкой', async () => {
@@ -1197,7 +1197,7 @@ describe('подложка — спутник окна', () => {
 		check()
 
 		expect(document.querySelector('.so-test-removable')).toBeNull()
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 		expect(anchors(place())).toHaveLength(0)
 	})
 
@@ -1217,7 +1217,7 @@ describe('подложка — спутник окна', () => {
 		check()
 
 		expect(root.isConnected).toBe(false)
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 		expect(anchors(document.body)).toHaveLength(0)
 
 		fixture.componentInstance.open.set(true)
@@ -1226,7 +1226,7 @@ describe('подложка — спутник окна', () => {
 		expect(panel()).toBe(root)
 		expect(root.parentElement).toBe(document.body)
 		expect(backdrop().nextElementSibling).toBe(root)
-		expect(document.querySelectorAll('.so-dialog__backdrop')).toHaveLength(1)
+		expect(document.querySelectorAll('.so-backdrop:has(+ .so-dialog)')).toHaveLength(1)
 		expect(anchors(node('.so-test-card'))).toHaveLength(1)
 	})
 })
@@ -1249,7 +1249,7 @@ describe('non-modal dialog', () => {
 		expect(document.documentElement.style.overflow).not.toBe('hidden')
 		expect(document.body.style.overflow).not.toBe('hidden')
 
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 
 		const last = panel().querySelector('.so-dialog__close')
 		if (!(last instanceof HTMLElement)) throw new Error('Missing close button')

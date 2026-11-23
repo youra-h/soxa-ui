@@ -961,7 +961,7 @@ describe('Dialog и Drawer · серверный рендер', () => {
 	it('подложек в разметке сервера нет', async () => {
 		const page = await serverPage(ModalPage)
 
-		expect(page.querySelector('.so-dialog__backdrop, .so-drawer__backdrop')).toBeNull()
+		expect(page.querySelector('.so-backdrop')).toBeNull()
 	})
 })
 
@@ -1001,7 +1001,6 @@ describe('Dialog и Drawer · гидратация', () => {
 		] as const) {
 			const title = document.getElementById(root.getAttribute('aria-labelledby') ?? '')
 
-			expect(root.previousElementSibling?.classList).toContain(`${block}__backdrop`)
 			expect(root.previousElementSibling?.classList).toContain('so-backdrop')
 			expect(root.style.display).toBe('')
 			expect(root.classList).toContain(block)
@@ -1011,9 +1010,7 @@ describe('Dialog и Drawer · гидратация', () => {
 			expect(root.contains(title)).toBe(true)
 		}
 
-		expect(
-			document.querySelectorAll('.so-dialog__backdrop, .so-drawer__backdrop'),
-		).toHaveLength(2)
+		expect(document.querySelectorAll('.so-backdrop')).toHaveLength(2)
 		expect(error).not.toHaveBeenCalled()
 		expect(warn).not.toHaveBeenCalled()
 	})

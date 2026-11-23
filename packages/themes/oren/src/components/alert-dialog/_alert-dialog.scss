@@ -1,7 +1,7 @@
 @use '../../mixins/modal';
 @use '../button/mixins' as button;
 
-.so-alert-dialog__backdrop {
+.so-backdrop:has(+ :where(.so-alert-dialog)) {
 	@include modal.backdrop-views;
 }
 .so-alert-dialog {
@@ -21,7 +21,7 @@
 }
 
 .so-alert-dialog,
-.so-alert-dialog__backdrop {
+.so-backdrop:has(+ :where(.so-alert-dialog)) {
 	transition-property: opacity, display;
 	transition-timing-function: linear;
 	transition-behavior: allow-discrete;
@@ -37,7 +37,7 @@
 
 @starting-style {
 	.so-alert-dialog:where([data-open='true']),
-	.so-alert-dialog__backdrop:where([data-open='true']) {
+	.so-backdrop:has(+ :where(.so-alert-dialog)):where([data-open='true']) {
 		@apply opacity-0;
 	}
 }

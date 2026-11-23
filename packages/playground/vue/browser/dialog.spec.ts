@@ -130,7 +130,7 @@ const find = (selector: string): HTMLElement => {
 }
 
 const panel = () => find('.so-dialog')
-const backdrop = () => find('.so-dialog__backdrop')
+const backdrop = () => find('.so-backdrop:has(+ .so-dialog)')
 const opener = () => find('.so-test-opener')
 const isOpen = () => getComputedStyle(panel()).display !== 'none'
 const active = () => document.activeElement
@@ -757,7 +757,7 @@ describe('non-modal page interaction', () => {
 		await userEvent.click(opener())
 		await settled(panel())
 		expect(active()).toBe(opener())
-		expect(document.querySelector('.so-dialog__backdrop')).toBeNull()
+		expect(document.querySelector('.so-backdrop:has(+ .so-dialog)')).toBeNull()
 		expect(panel().hasAttribute('aria-modal')).toBe(false)
 		expect(opener().closest('[aria-hidden="true"], [inert]')).toBeNull()
 		expect(getComputedStyle(document.documentElement).overflow).not.toBe('hidden')
