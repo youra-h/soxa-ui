@@ -5,7 +5,13 @@ import type {
 } from '../../../base/component-view'
 import type { ISwipeable, TSwipeableEvents, TSwipeSide } from '../../../base/layer'
 import type { ICloseRequestable } from '../../../base/layer'
-import type { TAria, TAriaAttributes, TChangeEvent, TValuePayload } from '../../../../common'
+import type {
+	TAria,
+	TAriaAttributes,
+	TChangeEvent,
+	TThemeRegistry,
+	TValuePayload,
+} from '../../../../common'
 
 /**
  * Вид сообщения тоста — что случилось: сведения (`info`), успех (`success`),
@@ -20,6 +26,11 @@ import type { TAria, TAriaAttributes, TChangeEvent, TValuePayload } from '../../
  */
 export type TToastsItemType = 'info' | 'success' | 'warning' | 'error'
 
+/** Appearance values are supplied by the active theme. */
+export interface IToastsItemViews extends TThemeRegistry {}
+
+export type TToastsItemView = Extract<keyof IToastsItemViews, string>
+
 export type TToastsItemEvents = TComponentViewEvents &
 	TSwipeableEvents & {
 		/** change:text */
@@ -30,6 +41,7 @@ export type TToastsItemEvents = TComponentViewEvents &
 		'change:description': (payload: TValuePayload<string>) => void
 		/** change:type — вид сообщения; `undefined` — обычное */
 		'change:type': (payload: TValuePayload<TToastsItemType | undefined>) => void
+		'change:view': (payload: TValuePayload<TToastsItemView | undefined>) => void
 		/** change:loading — тост ждёт или ожидание снято */
 		'change:loading': (payload: TValuePayload<boolean>) => void
 		/** change:closable */
@@ -60,6 +72,8 @@ export interface IToastsItemProps extends IComponentViewProps {
 	 * начале строки. Не задан — обычное сообщение
 	 */
 	type?: TToastsItemType
+	/** Surface treatment for this item, overriding the manager's view when set. */
+	view?: TToastsItemView
 	/**
 	 * Тост ждёт — идёт работа, о которой он сообщает («Сохраняем…»): на месте
 	 * значка бежит кольцо, при любом виде, и сам тост не закрывается. Снятое
@@ -94,6 +108,7 @@ export interface IToastsItem<
 	description: string
 	/** Вид сообщения; `undefined` — обычное сообщение */
 	type: TToastsItemType | undefined
+	view?: TToastsItemView | undefined
 	/** Тост ждёт: на месте значка кольцо, и сам тост не закрывается */
 	loading: boolean
 	/** Есть ли у тоста кнопка закрытия */

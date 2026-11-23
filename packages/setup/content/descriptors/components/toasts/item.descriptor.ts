@@ -45,6 +45,7 @@ export const ToastsItemDescriptor = defineDescriptor(() =>
 				 * не значение темы: значок по нему выбирает разметка
 				 */
 				type: { type: String, triggers: ['change:type'] },
+				view: { type: String, triggers: ['change:view'] },
 				/** Тост ждёт: на месте значка кольцо, и сам тост не закрывается */
 				loading: { type: Boolean, triggers: ['change:loading'] },
 				closable: { type: Boolean, triggers: ['change:closable'] },
@@ -71,6 +72,7 @@ export const ToastsItemDescriptor = defineDescriptor(() =>
 				'change:text',
 				'change:description',
 				'change:type',
+				'change:view',
 				'change:loading',
 				'change:closable',
 				'change:duration',

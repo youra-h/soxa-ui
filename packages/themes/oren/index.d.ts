@@ -37,6 +37,13 @@ declare module '@soxa-ui/core' {
 		filled: true
 	}
 
+	/** Shared surface treatments for Toasts and individual toast items. */
+	interface IToastsItemViews {
+		outlined: true
+		filled: true
+		soft: true
+	}
+
 	interface IBadgeViews {
 		filled: true
 		outlined: true

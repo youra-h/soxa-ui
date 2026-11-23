@@ -1,3 +1,4 @@
+import type { TToastsItemView } from './item/types'
 import { TLayer } from '../../base/layer'
 import type { TDefaultValues } from '../../base/component'
 import type { IToasts, IToastsProps, TToastsEvents, TToastsLayout, TToastsPlacement } from './types'
@@ -13,19 +14,21 @@ export default class TToasts extends TLayer<IToastsProps, TToastsEvents> impleme
 	static override baseClass = 'so-toasts'
 
 	static defaultValues: typeof TLayer.defaultValues &
-		TDefaultValues<IToastsProps, 'placement' | 'layout' | 'max' | 'duration'> = {
+		TDefaultValues<IToastsProps, 'placement' | 'layout' | 'max' | 'duration', 'view'> = {
 		...TLayer.defaultValues,
 		// Регион виден всегда: открыт или закрыт — у самого тоста
 		visible: true,
 		tag: 'section',
 		placement: 'bottom-end',
 		layout: 'list',
+		view: undefined,
 		max: 3,
 		duration: 5000,
 	}
 
 	protected _placement!: TToastsPlacement
 	protected _layout!: TToastsLayout
+	protected _view: TToastsItemView | undefined
 	protected _max: number
 	protected _duration: number
 
@@ -39,6 +42,8 @@ export default class TToasts extends TLayer<IToastsProps, TToastsEvents> impleme
 
 		this._applyPlacement(props.placement ?? ctor.defaultValues.placement)
 		this._applyLayout(props.layout ?? ctor.defaultValues.layout)
+		this._view = props.view ?? ctor.defaultValues.view
+		this._classes.swap({ prefix: '--view-', newValue: this._view })
 
 		// The interactive region stays quiet; the shared plugin announces message text.
 		this._aria.add('role', 'region')
@@ -73,6 +78,18 @@ export default class TToasts extends TLayer<IToastsProps, TToastsEvents> impleme
 		this.events.emit('change:layout', { newValue: value, oldValue: oldLayout })
 	}
 
+	get view(): TToastsItemView | undefined {
+		return this._view
+	}
+
+	set view(value: TToastsItemView | undefined) {
+		if (value === this._view) return
+
+		const oldValue = this._view
+		this._classes.swap({ prefix: '--view-', oldValue, newValue: value })
+		this._view = value
+		this.events.emit('change:view', { newValue: value, oldValue })
+	}
 	/** Сколько тостов видно разом; остальные ждут, пока место освободится. */
 	get max(): number {
 		return this._max
@@ -126,6 +143,7 @@ export default class TToasts extends TLayer<IToastsProps, TToastsEvents> impleme
 			...super.getProps(),
 			placement: this._placement,
 			layout: this._layout,
+			view: this._view,
 			max: this._max,
 			duration: this._duration,
 		}

@@ -8,6 +8,7 @@ compatibility ranges in their manifests.
 | Upgrade                                    | Status                                      | Guide                                      |
 | ------------------------------------------ | ------------------------------------------- | ------------------------------------------ |
 | Components 0.4.2 and themes 0.4.1 to 0.5.0 | Release line; install after npm publication | [Upgrade instructions](./0.5.0.md)         |
+| Toasts soft view                           | Optional since its introduction             | [Toast appearance](./toasts-soft-view.md)  |
 | Previous npm scope to Soxa UI              | Historical package rename                   | [Scope migration](../migration-to-soxa.md) |
 
 A guide describes consumer action, not permission to publish. An approved release

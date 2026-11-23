@@ -29,8 +29,7 @@
 // корня тоста доиграли. По `data-layer` и `data-open` региона тема ничего не
 // красит: регион открыт всегда, а открытость тоста — у самого тоста.
 
-// Вид сообщения → семейство цвета его заливки (см. «Вид сообщения» ниже).
-// Обычное сообщение — без модификатора, на белой плашке.
+// Map each semantic toast type to its signal palette.
 $types: (
 	'info': 'accent',
 	'success': 'positive',
@@ -38,12 +37,27 @@ $types: (
 	'error': 'negative',
 );
 
-// Модификаторы видов списком — у залитых плашек всё, кроме заливки, общее.
 $typed: ();
 
 @each $type, $_ in $types {
 	$typed: list.append($typed, '.so-toasts-item--type-#{$type}', $separator: comma);
 }
+
+// Match the modifier prefix so the fallback also respects views added by custom themes.
+$inherit-view: ':where(:not([class*="so-toasts-item--view-"]))';
+$manager-items: '[class*="so-toasts--view-"] > .so-toasts__list > .so-toasts-item';
+$implicit-view: '#{$inherit-view}:where(:not(#{$manager-items}))';
+
+// The region supplies a live default to its own list. An item class takes priority.
+@function toast-view($view) {
+	$direct: '.so-toasts-item--view-#{$view}';
+	$inherited: ':where(.so-toasts--view-#{$view} > .so-toasts__list) > .so-toasts-item#{$inherit-view}';
+	@return ':is(#{$direct}, #{$inherited})';
+}
+
+$outlined: toast-view('outlined');
+$soft: toast-view('soft');
+$filled: ":is(#{toast-view('filled')}, :is(#{$typed})#{$implicit-view})";
 
 // Описание на заливке — цвет текста на 95 %: чуть тише заголовка, а главное
 // отличие описания — начертание: заголовок плотнее.
@@ -184,50 +198,32 @@ $cascade-easing: cubic-bezier(0.21, 1.02, 0.73, 1);
 	}
 }
 
-// Вид сообщения — модификатор корня `--type-*`: `info`, `success`, `warning`,
-// `error`; без модификатора — обычное сообщение. Это не значение темы, а union
-// библиотеки: смысл у вида один в любой теме, и значок по нему выбирает
-// разметка. Тема только красит.
-//
-// Обычное сообщение — на белой плашке: поверхность контрола, текст его цвета,
-// описание тише, значок нейтралью. Плашка с видом залита цветом семейства вида
-// (`$types`), и всё на ней — цвета её текста, белого: заголовок, описание,
-// значок, кольцо ожидания на его месте, крестик и подписи кнопок своего
-// содержимого; фон кнопок — тень (см. «Кнопки на заливке вида» ниже). Вид
-// говорит заливка и глиф значка; заголовок говорит, что случилось.
-//
-// Заливка — сигнал: ступень 500 семейства, та же, что у заливки `filled` у
-// Button своего цвета, и синий тоста рядом с синей кнопкой — один синий.
-// Ступень одна в обеих схемах: середина хроматических шкал насыщенная в обеих
-// (AGENTS.md темы, «Номер ступени — это роль»).
-//
-// Модификатор вида пишет только переменные, части их читают — как вариант у
-// Button (`button-tones`): заливку (`--so-toasts-item-fill`), текст
-// (`--so-toasts-item-text`), описание (`--so-toasts-item-muted`) и тон значка
-// (`--so-toasts-item-tone`, им красится значок, и кольцо на его месте берёт
-// его же). Без вида переменных нет, и части берут своё — цвета белой плашки.
-// Тон значка обычного сообщения — нейтраль 500, ступень приглушённого текста:
-// значок не спорит с заголовком цветом и стоит вровень с описанием. На заливке тон,
-// текст и описание — `currentColor`, цвет текста плашки: перекрашенная
-// плашка (смена вида у открытого тоста) ведёт их своим переходом цвета, и
-// части не отстают от неё.
-//
-// В режиме принудительных цветов заливку браузер снимает, текст и значки
-// красит цветом текста системы, и вид отличает только глиф — поэтому глифы у
-// пяти видов разные, как значок ошибки Field.
-//
-// Корень нулевой специфичности: модификатор вида перекрывает его, не споря.
+// Soft uses the same palette steps as Alert. The icon and loading ring carry
+// the signal, while the title, description and controls use neutral text.
 :where(.so-toasts-item) {
-	--so-toasts-item-tone: var(--so-neutral-500);
+	--so-toasts-item-signal: var(--so-neutral-500);
+	--so-toasts-item-soft: var(--so-neutral-100);
+	--so-toasts-item-tone: var(--so-toasts-item-signal);
 }
 
 @each $type, $color in $types {
 	.so-toasts-item--type-#{$type} {
-		--so-toasts-item-fill: var(--so-#{$color}-500);
+		--so-toasts-item-signal: var(--so-#{$color}-500);
+		--so-toasts-item-soft: var(--so-#{$color}-100);
 	}
 }
 
-#{$typed} {
+#{$outlined},
+#{$soft} {
+	--so-toasts-item-muted: var(--so-component-text);
+}
+
+#{$soft} {
+	--so-toasts-item-fill: var(--so-toasts-item-soft);
+}
+
+#{$filled} {
+	--so-toasts-item-fill: var(--so-toasts-item-signal);
 	--so-toasts-item-text: #{on-signal.$text};
 	--so-toasts-item-muted: #{veil.layer(currentColor, $muted-on-fill)};
 	--so-toasts-item-tone: currentColor;
@@ -269,8 +265,9 @@ $cascade-easing: cubic-bezier(0.21, 1.02, 0.73, 1);
 	color: var(--so-toasts-item-text, var(--so-component-text));
 }
 
-// Кольцо кромки — только у белой плашки, без вида (см. выше)
-.so-toasts-item:not(#{$typed}) > .so-toasts-item__card {
+// The neutral rim marks outlined cards and the original untyped card.
+#{$outlined} > .so-toasts-item__card,
+.so-toasts-item:not(#{$typed})#{$implicit-view} > .so-toasts-item__card {
 	@apply ring-1 ring-so-neutral-300;
 }
 
@@ -360,7 +357,7 @@ $cascade-easing: cubic-bezier(0.21, 1.02, 0.73, 1);
 // Нулевая специфичность и после Button: перекрывает нейтраль кнопки
 // (`:where(.so-button)`) порядком, а вариант, заданный кнопке потребителем, —
 // модификатор на класс сильнее — остаётся своим.
-:where(:is(#{$typed}) .so-button) {
+:where(#{$filled} .so-button) {
 	@include button.button-text-colored-tones;
 	--so-component-text: currentColor;
 	--so-component-focus-ring: currentColor;

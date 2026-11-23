@@ -720,6 +720,7 @@ class ToastsTrigger {
 				[target]="target()"
 				[placement]="placement()"
 				[layout]="layout()"
+				[view]="view()"
 				[max]="max()"
 				[duration]="duration()"
 			>
@@ -736,6 +737,7 @@ export class ToastsPreview implements TFixture {
 	readonly target = input<TToastsComponent['target']>()
 	readonly placement = input<TToastsComponent['placement']>()
 	readonly layout = input<TToastsComponent['layout']>()
+	readonly view = input<TToastsComponent['view']>()
 	readonly max = input<TToastsComponent['max']>()
 	readonly duration = input<TToastsComponent['duration']>()
 	readonly copy = viewChild.required(CopyDirective)

@@ -28,6 +28,7 @@ export const ToastsInputNames = [
 	'target',
 	'placement',
 	'layout',
+	'view',
 	'max',
 	'duration',
 	'engine',
@@ -39,6 +40,7 @@ export const ToastsOutputNames = [
 	'soChangeTarget',
 	'soChangePlacement',
 	'soChangeLayout',
+	'soChangeView',
 	'soChangeMax',
 	'soChangeDuration',
 	'soEngineCreate',
@@ -66,6 +68,7 @@ export const ToastsOutputNames = [
 	'targetChange',
 	'placementChange',
 	'layoutChange',
+	'viewChange',
 	'maxChange',
 	'durationChange',
 	'itemsChange',
@@ -82,6 +85,7 @@ export const ToastsOutputNames = [
 		'target',
 		'placement',
 		'layout',
+		'view',
 		'max',
 		'duration',
 		'engine',
@@ -124,6 +128,7 @@ export abstract class TToastsSurface<TInstance extends IEntity> extends TViewSur
 	declare target: TInputValue<typeof descriptor, 'target'>
 	declare placement: TInputValue<typeof descriptor, 'placement'>
 	declare layout: TInputValue<typeof descriptor, 'layout'>
+	declare view: TInputValue<typeof descriptor, 'view'>
 	declare max: TInputValue<typeof descriptor, 'max'>
 	declare duration: TInputValue<typeof descriptor, 'duration'>
 	declare engine: TInputValue<typeof descriptor, 'engine'>
@@ -144,6 +149,7 @@ export abstract class TToastsSurface<TInstance extends IEntity> extends TViewSur
 	declare readonly soChangeTarget: TOutputEmitter<typeof descriptor, 'change:target'>
 	declare readonly soChangePlacement: TOutputEmitter<typeof descriptor, 'change:placement'>
 	declare readonly soChangeLayout: TOutputEmitter<typeof descriptor, 'change:layout'>
+	declare readonly soChangeView: TOutputEmitter<typeof descriptor, 'change:view'>
 	declare readonly soChangeMax: TOutputEmitter<typeof descriptor, 'change:max'>
 	declare readonly soChangeDuration: TOutputEmitter<typeof descriptor, 'change:duration'>
 	declare readonly soElementReady: TOutputEmitter<typeof descriptor, 'element:ready'>
@@ -173,6 +179,7 @@ export abstract class TToastsSurface<TInstance extends IEntity> extends TViewSur
 	declare readonly targetChange: TModelEmitter<typeof descriptor, 'target'>
 	declare readonly placementChange: TModelEmitter<typeof descriptor, 'placement'>
 	declare readonly layoutChange: TModelEmitter<typeof descriptor, 'layout'>
+	declare readonly viewChange: TModelEmitter<typeof descriptor, 'view'>
 	declare readonly maxChange: TModelEmitter<typeof descriptor, 'max'>
 	declare readonly durationChange: TModelEmitter<typeof descriptor, 'duration'>
 	declare readonly itemsChange: TModelEmitter<typeof descriptor, 'items'>

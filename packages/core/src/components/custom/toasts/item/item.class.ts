@@ -3,7 +3,13 @@ import type { TDefaultValues } from '../../../base/component'
 import type { TCloseReason, TSwipe, TSwipeSide } from '../../../base/layer'
 import { TAria, TChangeEvent } from '../../../../common'
 import type { TEventSink } from '../../../../common'
-import type { IToastsItem, IToastsItemProps, TToastsItemEvents, TToastsItemType } from './types'
+import type {
+	IToastsItem,
+	IToastsItemProps,
+	TToastsItemEvents,
+	TToastsItemType,
+	TToastsItemView,
+} from './types'
 
 /**
  * One toast in the manager's collection. Its type supplies the visual icon
@@ -28,13 +34,14 @@ export default class TToastsItem<
 		TDefaultValues<
 			IToastsItemProps,
 			'text' | 'description' | 'loading' | 'closable' | 'alert',
-			'type' | 'duration' | 'render'
+			'type' | 'view' | 'duration' | 'render'
 		> = {
 		...TComponentView.defaultValues,
 		tag: 'li',
 		text: '',
 		description: '',
 		type: undefined,
+		view: undefined,
 		loading: false,
 		closable: true,
 		duration: undefined,
@@ -45,6 +52,7 @@ export default class TToastsItem<
 	protected _text: string
 	protected _description: string
 	protected _type: TToastsItemType | undefined
+	protected _view: TToastsItemView | undefined
 	protected _loading: boolean
 	protected _closable: boolean
 	protected _duration: number | undefined
@@ -65,6 +73,7 @@ export default class TToastsItem<
 		this._text = own.text ?? ctor.defaultValues.text
 		this._description = own.description ?? ctor.defaultValues.description
 		this._type = own.type ?? ctor.defaultValues.type
+		this._view = own.view ?? ctor.defaultValues.view
 		this._loading = own.loading ?? ctor.defaultValues.loading
 		this._closable = own.closable ?? ctor.defaultValues.closable
 		this._duration = own.duration ?? ctor.defaultValues.duration
@@ -84,6 +93,7 @@ export default class TToastsItem<
 		)
 
 		this._classes.swap({ prefix: '--type-', newValue: this._type })
+		this._classes.swap({ prefix: '--view-', newValue: this._view })
 		this._syncRole()
 		// The shared announcer delivers the message; this subtree is for navigation.
 		this._aria.add('aria-live', 'off')
@@ -149,6 +159,19 @@ export default class TToastsItem<
 		this._classes.swap({ prefix: '--type-', oldValue: this._type, newValue: value })
 		this._type = value
 		this._sink.emit('change:type', { newValue: value, oldValue: oldType })
+	}
+
+	get view(): TToastsItemView | undefined {
+		return this._view
+	}
+
+	set view(value: TToastsItemView | undefined) {
+		if (value === this._view) return
+
+		const oldValue = this._view
+		this._classes.swap({ prefix: '--view-', oldValue, newValue: value })
+		this._view = value
+		this._sink.emit('change:view', { newValue: value, oldValue })
 	}
 
 	/** Тост ждёт: на месте значка кольцо, и сам тост не закрывается. */
@@ -343,6 +366,7 @@ export default class TToastsItem<
 			text: this._text,
 			description: this._description,
 			type: this._type,
+			view: this._view,
 			loading: this._loading,
 			closable: this._closable,
 			duration: this._duration,

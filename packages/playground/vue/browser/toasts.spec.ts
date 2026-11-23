@@ -48,16 +48,17 @@
 import { describe, it, expect, beforeEach, afterEach, onTestFinished } from 'vitest'
 import { render, cleanup } from './render'
 import { commands, page, userEvent } from 'vitest/browser'
-import { defineComponent, h, nextTick } from 'vue'
+import { defineComponent, h, nextTick, ref } from 'vue'
 import { createEngineToasts } from '@soxa-ui/core'
 import type {
 	IToastsItem,
 	IToastsProps,
 	TToastInput,
 	TToastsItemType,
+	TToastsItemView,
 	TToastsPlacement,
 } from '@soxa-ui/core'
-import { Button, Toasts } from '@soxa-ui/vue'
+import { Alert, Button, Toasts } from '@soxa-ui/vue'
 import type { TToastRender } from '@soxa-ui/vue'
 import { BUTTON_VIEWS, TOASTS_ITEM_TYPES } from '@soxa-ui/playground-shared'
 
@@ -532,6 +533,98 @@ describe('вид', () => {
 			}
 		},
 	)
+
+	it.each(SCHEMES)('%s: soft toasts match the Alert palette', async (scheme) => {
+		document.documentElement.dataset.soTheme = scheme
+
+		const variants = ['normal', 'accent', 'positive', 'caution', 'negative'] as const
+		const alerts = render(() =>
+			variants.map((variant) => h(Alert, { variant, view: 'soft' as const })),
+		).querySelectorAll('.so-alert')
+		const { show, rest } = await mount({ max: KINDS.length })
+		const toasts = await show(
+			...KINDS.map(({ name, type }) => ({
+				text: name,
+				description: 'Details',
+				type,
+				view: 'soft' as const,
+			})),
+		)
+		await rest()
+
+		for (const [index, { name }] of KINDS.entries()) {
+			const item = titled(name)
+			const alert = alerts[index]
+			if (!alert) throw new Error('Missing Alert reference for ' + name)
+			const plate = style(card(item))
+			const alertStyle = style(alert)
+
+			expect(plate.backgroundColor, name).toBe(alertStyle.backgroundColor)
+			expect(opacity(plate.backgroundColor), name).toBe(1)
+			expect(plate.color, name).toBe(alertStyle.color)
+			expect(style(part(item, 'description')).color, name).toBe(alertStyle.color)
+			expect(style(part(item, 'close')).color, name).toBe(alertStyle.color)
+			expect(style(part(item, 'icon')).color, name).toBe(
+				style(find('.so-alert__icon', alert)).color,
+			)
+			expect(contrast(plate.color, [plate.backgroundColor]), name).toBeGreaterThanOrEqual(
+				TEXT,
+			)
+		}
+
+		const item = titled('success')
+		const softFill = style(card(item)).backgroundColor
+		const success = toasts.find((toast) => toast.type === 'success')
+		if (!success) throw new Error('Missing success toast')
+		success.view = undefined
+		await nextTick()
+		await colorsSettled(card(item))
+
+		expect(style(card(item)).backgroundColor).not.toBe(softFill)
+		expect(style(part(item, 'icon')).color).toBe(style(card(item)).color)
+	})
+
+	it.each(SCHEMES)('%s: item view overrides the live Toasts default', async (scheme) => {
+		document.documentElement.dataset.soTheme = scheme
+
+		const view = ref<TToastsItemView>('filled')
+		const { show, rest } = await mount({
+			get view() {
+				return view.value
+			},
+		})
+		const palette = render(() => [
+			h(Alert, { view: 'filled' as const, class: 'reference-filled' }),
+			h(Alert, { view: 'outlined' as const, class: 'reference-outlined' }),
+			h(Alert, { view: 'soft' as const, class: 'reference-soft' }),
+		])
+		const [override] = await show({ text: 'Override', view: 'outlined' }, { text: 'Inherited' })
+		if (!override) throw new Error('Missing outlined toast')
+		await rest()
+
+		const inherited = card(titled('Inherited'))
+		const outlined = card(titled('Override'))
+		const expectView = (plate: HTMLElement, view: TToastsItemView) => {
+			const expected = style(find('.reference-' + view, palette))
+			expect(style(plate).backgroundColor).toBe(expected.backgroundColor)
+			expect(style(plate).color).toBe(expected.color)
+			expect(ringed(plate)).toBe(view === 'outlined')
+		}
+
+		expectView(inherited, 'filled')
+		expectView(outlined, 'outlined')
+
+		view.value = 'soft'
+		await nextTick()
+		await colorsSettled(inherited)
+		expectView(inherited, 'soft')
+		expectView(outlined, 'outlined')
+
+		override.view = undefined
+		await nextTick()
+		await colorsSettled(outlined)
+		expectView(outlined, 'soft')
+	})
 
 	/**
 	 * The node's visible shadow layers, as the computed style gives them: the

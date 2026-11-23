@@ -2,7 +2,7 @@ import type { TValuePayload } from '../../../common'
 import type { ILayer, ILayerProps, TLayerEvents } from '../../base/layer'
 import type { TCollectionStorageDriverEvents } from '../../base/collection'
 import type { IToastsCollectionProps } from './collection/types'
-import type { IToastsItem, IToastsItemProps } from './item/types'
+import type { IToastsItem, IToastsItemProps, TToastsItemView } from './item/types'
 
 /**
  * Где регион тостов: у верхнего или нижнего края окна — у начала строки, по
@@ -32,6 +32,7 @@ export type TToastsEvents = TLayerEvents &
 		'change:placement': (payload: TValuePayload<TToastsPlacement>) => void
 		/** change:layout */
 		'change:layout': (payload: TValuePayload<TToastsLayout>) => void
+		'change:view': (payload: TValuePayload<TToastsItemView | undefined>) => void
 		/** change:max */
 		'change:max': (payload: TValuePayload<number>) => void
 		/** change:duration */
@@ -47,6 +48,8 @@ export interface IToastsComponentProps extends ILayerProps {
 	 * которую листают колесом и стрелками. По умолчанию `list`
 	 */
 	layout?: TToastsLayout
+	/** Default surface treatment for items without their own view. */
+	view?: TToastsItemView
 	/** Сколько тостов видно разом; остальные ждут места. По умолчанию 3 */
 	max?: number
 	/**
@@ -68,6 +71,8 @@ export interface IToasts<
 	placement: TToastsPlacement
 	/** Как тосты стоят в регионе: столбцом или стопкой */
 	layout: TToastsLayout
+	/** Default surface treatment for items without their own view. */
+	view?: TToastsItemView | undefined
 	/** Сколько тостов видно разом */
 	max: number
 	/** Длительность тоста без своей, мс; `0` — держится, пока не закроют */
