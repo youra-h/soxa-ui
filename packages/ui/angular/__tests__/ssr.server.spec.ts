@@ -638,6 +638,13 @@ describe('ProgressLinear, Slider, Rating и Scroller · серверный ре�
 
 		expect(scroller.getAttribute('data-can-prev')).toBe('false')
 		expect(scroller.getAttribute('data-can-next')).toBe('false')
+
+		for (const direction of ['prev', 'next']) {
+			const arrow = find(scroller, `.so-scroller__${direction}`, HTMLButtonElement)
+			expect(arrow.getAttribute('autocomplete')).toBe('off')
+			expect(arrow.disabled).toBe(true)
+		}
+
 		expect(
 			find(scroller, '.so-scroller__prev', HTMLButtonElement).getAttribute('aria-label'),
 		).toBe('Scroll back')

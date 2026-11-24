@@ -8,6 +8,9 @@ import type { ScrollerProps } from './base.component'
 /** Одна иконка на обе кнопки: стрелку «назад» зеркалит тема. */
 const Arrow = roleIcon('arrowRight')
 
+// Firefox can restore disabled before hydration. Pass its button attribute through as HTML.
+const arrowAttributes = { autoComplete: 'off' }
+
 /**
  * Scroller — лента в одну строку: кнопки «назад» и «вперёд» вокруг вьюпорта.
  * `viewportAria` — после `tabIndex`: ряд с roving tabindex сам решает, кому быть остановкой.
@@ -39,6 +42,7 @@ export function Scroller(props: ScrollerProps): ReactElement | null {
 			<Button
 				embedded="scroller.prev"
 				type="button"
+				{...arrowAttributes}
 				className="so-scroller__prev"
 				size={size}
 				disabled={prevDisabled}
@@ -60,6 +64,7 @@ export function Scroller(props: ScrollerProps): ReactElement | null {
 			<Button
 				embedded="scroller.next"
 				type="button"
+				{...arrowAttributes}
 				className="so-scroller__next"
 				size={size}
 				disabled={nextDisabled}

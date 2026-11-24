@@ -46,9 +46,11 @@ export default { ...SetupScroller, components: { Button, Icon } }
 			роли для «влево» в контракте иконок нет, и стрелку «назад»
 			зеркалит тема. В RTL зеркалится вторая — это тоже её дело.
 		-->
+		<!-- Both arrows opt out of Firefox restoring disabled before hydration. -->
 		<Button
 			embedded="scroller.prev"
 			type="button"
+			autocomplete="off"
 			class="so-scroller__prev"
 			:size="size"
 			:disabled="prevDisabled"
@@ -80,6 +82,7 @@ export default { ...SetupScroller, components: { Button, Icon } }
 		<Button
 			embedded="scroller.next"
 			type="button"
+			autocomplete="off"
 			class="so-scroller__next"
 			:size="size"
 			:disabled="nextDisabled"

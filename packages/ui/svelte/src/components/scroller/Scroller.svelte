@@ -13,6 +13,9 @@
 
 	// Одна иконка на обе кнопки: роли «влево» нет, стрелку в начало строки зеркалит тема
 	const ARROW = roleIcon('arrowRight')
+
+	// Firefox can restore disabled before hydration. Pass its button attribute through as HTML.
+	const arrowAttributes = { autocomplete: 'off' }
 </script>
 
 <!--
@@ -34,6 +37,7 @@
 	<Button
 		embedded="scroller.prev"
 		type="button"
+		{...arrowAttributes}
 		class="so-scroller__prev"
 		size={state.size}
 		disabled={state.prevDisabled}
@@ -53,6 +57,7 @@
 	</div><Button
 		embedded="scroller.next"
 		type="button"
+		{...arrowAttributes}
 		class="so-scroller__next"
 		size={state.size}
 		disabled={state.nextDisabled}

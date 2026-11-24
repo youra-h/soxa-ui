@@ -11,6 +11,7 @@
 
 import { describe, it, expect } from 'vitest'
 import { act } from 'react'
+import { renderToString } from 'react-dom/server'
 import { TScroller } from '@soxa-ui/core'
 import { enUS, extendLocale, ruRU } from '@soxa-ui/plugins'
 import type { TLocale } from '@soxa-ui/plugins'
@@ -30,6 +31,17 @@ async function render(node: Parameters<typeof mount>[0]): Promise<void> {
 	mount(node)
 	await nextFrame()
 }
+
+it('renders both arrows disabled with Firefox state restoration off', () => {
+	const template = document.createElement('template')
+	template.innerHTML = renderToString(<Scroller>{content}</Scroller>)
+
+	for (const direction of ['prev', 'next']) {
+		const arrow = template.content.querySelector(`button.so-scroller__${direction}`)
+		expect(arrow?.getAttribute('autocomplete')).toBe('off')
+		expect(arrow?.hasAttribute('disabled')).toBe(true)
+	}
+})
 
 describe('состав', () => {
 	it('корень — ряд из кнопки, вьюпорта и кнопки, в этом порядке', async () => {

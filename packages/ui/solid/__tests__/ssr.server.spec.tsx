@@ -506,6 +506,13 @@ describe('Scroller · серверный рендер', () => {
 			)),
 		)
 
+		const arrows = body.match(/<button [^>]*>/g) ?? []
+		expect(arrows).toHaveLength(2)
+		for (const arrow of arrows) {
+			expect(arrow).toContain('autocomplete="off"')
+			expect(arrow).toMatch(/\sdisabled[=\s>]/)
+		}
+
 		expect(body).toMatch(/^<div [^>]*data-can-prev="false"[^>]*data-can-next="false"/)
 		expect(body).toContain('aria-label="Scroll back"')
 		expect(body).toContain('aria-label="Scroll forward"')

@@ -16,6 +16,9 @@ import type { ScrollerProps } from './base.component'
 /** Одна стрелка на обе кнопки: роли «влево» нет, стрелку в начало строки зеркалит тема. */
 const ARROW = roleIcon('arrowRight')
 
+// Firefox can restore disabled before hydration. Pass its button attribute through as HTML.
+const arrowAttributes = { autocomplete: 'off' }
+
 /**
  * Лента в одну строку: кнопка «назад», вьюпорт, кнопка «вперёд».
  * Кнопки — снаружи вьюпорта: роль ряда (`listbox` у тегов) ложится на вьюпорт, а
@@ -48,6 +51,7 @@ export function Scroller(props: ScrollerProps): JSX.Element {
 				<Button
 					embedded="scroller.prev"
 					type="button"
+					{...arrowAttributes}
 					class="so-scroller__prev"
 					size={state.size}
 					disabled={state.prevDisabled}
@@ -67,6 +71,7 @@ export function Scroller(props: ScrollerProps): JSX.Element {
 				<Button
 					embedded="scroller.next"
 					type="button"
+					{...arrowAttributes}
 					class="so-scroller__next"
 					size={state.size}
 					disabled={state.nextDisabled}
