@@ -10,6 +10,7 @@
 
 import { describe, it, expect, afterEach } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { renderToString } from 'vue/server-renderer'
 import { defineComponent, h, nextTick, ref, type VNode } from 'vue'
 import { LocaleProvider, Scroller } from '@soxa-ui/vue'
 import { TScroller } from '@soxa-ui/core'
@@ -47,6 +48,17 @@ const viewport = () => find('.so-scroller__viewport')
 
 /** Содержимое ленты — произвольная разметка: коллекции у неё нет. */
 const content = () => [h('span', { class: 'so-test-item' }, 'Первый')]
+
+it('renders both arrows disabled with Firefox state restoration off', async () => {
+	const template = document.createElement('template')
+	template.innerHTML = await renderToString(h(Scroller, null, { default: content }))
+
+	for (const direction of ['prev', 'next']) {
+		const arrow = template.content.querySelector(`button.so-scroller__${direction}`)
+		expect(arrow?.getAttribute('autocomplete')).toBe('off')
+		expect(arrow?.hasAttribute('disabled')).toBe(true)
+	}
+})
 
 describe('состав', () => {
 	it('корень — ряд из кнопки, вьюпорта и кнопки, в этом порядке', async () => {

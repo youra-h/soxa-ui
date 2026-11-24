@@ -387,6 +387,13 @@ describe('стиль и наборы на сервере', () => {
 	it('Scroller — кнопки с именами и значками, вьюпорт с содержимым', () => {
 		const body = markup(render(Scroller, { props: { children: content } }).body)
 
+		const arrows = body.match(/<button [^>]*>/g) ?? []
+		expect(arrows).toHaveLength(2)
+		for (const arrow of arrows) {
+			expect(arrow).toContain('autocomplete="off"')
+			expect(arrow).toMatch(/\sdisabled[=\s>]/)
+		}
+
 		expect(body).toMatch(/^<div [^>]*data-can-prev="false" data-can-next="false"/)
 		expect(body).toMatch(/<button [^>]*so-scroller__prev" aria-label="Scroll back"/)
 		expect(body).toMatch(/<button [^>]*so-scroller__next" aria-label="Scroll forward"/)
