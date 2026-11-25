@@ -1,0 +1,483 @@
+{
+  "commit": "8314321b8ad22b4893220b94bf9eea63aa9b3635",
+  "date": "2026-11-25T13:13:28.209Z",
+  "angular": "22.2.3",
+  "material": "22.2.4",
+  "n": 5000,
+  "columns": 20,
+  "repeats": 3,
+  "measurements": [
+    {
+      "run": 0,
+      "lib": "material",
+      "memory": 104188879,
+      "render": {
+        "paint": 1685,
+        "settled": 1704
+      },
+      "select": {
+        "paint": 469,
+        "settled": 2128
+      },
+      "deselect": {
+        "paint": 645,
+        "settled": 2295
+      },
+      "asc": {
+        "paint": 1526,
+        "settled": 1549
+      },
+      "desc": {
+        "paint": 1792,
+        "settled": 1955
+      },
+      "replace": {
+        "paint": 1385,
+        "settled": 1411
+      },
+      "unmount": {
+        "paint": 277,
+        "settled": 307
+      },
+      "afterUnmount": 3222334,
+      "cells": 105000,
+      "firstAsc": "Анна 10156",
+      "firstDesc": "Кирилл 99934"
+    },
+    {
+      "run": 0,
+      "lib": "soxa-direct",
+      "memory": 61111653,
+      "render": {
+        "paint": 1253,
+        "settled": 1309
+      },
+      "select": {
+        "paint": 449,
+        "settled": 2575
+      },
+      "deselect": {
+        "paint": 644,
+        "settled": 2694
+      },
+      "asc": {
+        "paint": 1310,
+        "settled": 1332
+      },
+      "desc": {
+        "paint": 1169,
+        "settled": 1223
+      },
+      "replace": {
+        "paint": 1083,
+        "settled": 1141
+      },
+      "unmount": {
+        "paint": 124,
+        "settled": 154
+      },
+      "afterUnmount": 2887314,
+      "cells": 105000,
+      "firstAsc": "Анна 10156",
+      "firstDesc": "Кирилл 99934"
+    },
+    {
+      "run": 0,
+      "lib": "soxa-cdk",
+      "memory": 105102149,
+      "render": {
+        "paint": 1661,
+        "settled": 1692
+      },
+      "select": {
+        "paint": 471,
+        "settled": 2202
+      },
+      "deselect": {
+        "paint": 648,
+        "settled": 2362
+      },
+      "asc": {
+        "paint": 1586,
+        "settled": 1614
+      },
+      "desc": {
+        "paint": 1787,
+        "settled": 1930
+      },
+      "replace": {
+        "paint": 1400,
+        "settled": 1427
+      },
+      "unmount": {
+        "paint": 270,
+        "settled": 296
+      },
+      "afterUnmount": 3396907,
+      "cells": 105000,
+      "firstAsc": "Анна 10156",
+      "firstDesc": "Кирилл 99934"
+    },
+    {
+      "run": 0,
+      "lib": "soxa+fit=none+width=3248+track",
+      "memory": 211653724,
+      "render": {
+        "paint": 1780,
+        "settled": 1886
+      },
+      "select": {
+        "paint": 736,
+        "settled": 765
+      },
+      "deselect": {
+        "paint": 627,
+        "settled": 644
+      },
+      "asc": {
+        "paint": 1088,
+        "settled": 1119
+      },
+      "desc": {
+        "paint": 1079,
+        "settled": 1189
+      },
+      "replace": {
+        "paint": 1618,
+        "settled": 1649
+      },
+      "unmount": {
+        "paint": 217,
+        "settled": 247
+      },
+      "afterUnmount": 4768310,
+      "cells": 105000,
+      "firstAsc": "Анна 250",
+      "firstDesc": "Кирилл 99934"
+    },
+    {
+      "run": 1,
+      "lib": "soxa-direct",
+      "memory": 61117753,
+      "render": {
+        "paint": 1249,
+        "settled": 1301
+      },
+      "select": {
+        "paint": 448,
+        "settled": 2543
+      },
+      "deselect": {
+        "paint": 659,
+        "settled": 2747
+      },
+      "asc": {
+        "paint": 1302,
+        "settled": 1311
+      },
+      "desc": {
+        "paint": 1053,
+        "settled": 1112
+      },
+      "replace": {
+        "paint": 1071,
+        "settled": 1125
+      },
+      "unmount": {
+        "paint": 121,
+        "settled": 154
+      },
+      "afterUnmount": 2888942,
+      "cells": 105000,
+      "firstAsc": "Анна 10156",
+      "firstDesc": "Кирилл 99934"
+    },
+    {
+      "run": 1,
+      "lib": "soxa-cdk",
+      "memory": 105101659,
+      "render": {
+        "paint": 1655,
+        "settled": 1679
+      },
+      "select": {
+        "paint": 474,
+        "settled": 2180
+      },
+      "deselect": {
+        "paint": 645,
+        "settled": 2327
+      },
+      "asc": {
+        "paint": 1531,
+        "settled": 1546
+      },
+      "desc": {
+        "paint": 1804,
+        "settled": 1984
+      },
+      "replace": {
+        "paint": 1391,
+        "settled": 1424
+      },
+      "unmount": {
+        "paint": 267,
+        "settled": 293
+      },
+      "afterUnmount": 3398811,
+      "cells": 105000,
+      "firstAsc": "Анна 10156",
+      "firstDesc": "Кирилл 99934"
+    },
+    {
+      "run": 1,
+      "lib": "soxa+fit=none+width=3248+track",
+      "memory": 211485741,
+      "render": {
+        "paint": 1813,
+        "settled": 1885
+      },
+      "select": {
+        "paint": 728,
+        "settled": 745
+      },
+      "deselect": {
+        "paint": 628,
+        "settled": 660
+      },
+      "asc": {
+        "paint": 1039,
+        "settled": 1081
+      },
+      "desc": {
+        "paint": 1075,
+        "settled": 1193
+      },
+      "replace": {
+        "paint": 1575,
+        "settled": 1606
+      },
+      "unmount": {
+        "paint": 219,
+        "settled": 240
+      },
+      "afterUnmount": 4635994,
+      "cells": 105000,
+      "firstAsc": "Анна 250",
+      "firstDesc": "Кирилл 99934"
+    },
+    {
+      "run": 1,
+      "lib": "material",
+      "memory": 104124652,
+      "render": {
+        "paint": 1650,
+        "settled": 1682
+      },
+      "select": {
+        "paint": 473,
+        "settled": 2198
+      },
+      "deselect": {
+        "paint": 659,
+        "settled": 2312
+      },
+      "asc": {
+        "paint": 1541,
+        "settled": 1566
+      },
+      "desc": {
+        "paint": 1795,
+        "settled": 1987
+      },
+      "replace": {
+        "paint": 1470,
+        "settled": 1506
+      },
+      "unmount": {
+        "paint": 277,
+        "settled": 313
+      },
+      "afterUnmount": 3159550,
+      "cells": 105000,
+      "firstAsc": "Анна 10156",
+      "firstDesc": "Кирилл 99934"
+    },
+    {
+      "run": 2,
+      "lib": "soxa-cdk",
+      "memory": 105105768,
+      "render": {
+        "paint": 1671,
+        "settled": 1695
+      },
+      "select": {
+        "paint": 474,
+        "settled": 2113
+      },
+      "deselect": {
+        "paint": 681,
+        "settled": 2511
+      },
+      "asc": {
+        "paint": 1527,
+        "settled": 1564
+      },
+      "desc": {
+        "paint": 1796,
+        "settled": 1965
+      },
+      "replace": {
+        "paint": 1412,
+        "settled": 1445
+      },
+      "unmount": {
+        "paint": 267,
+        "settled": 293
+      },
+      "afterUnmount": 3397419,
+      "cells": 105000,
+      "firstAsc": "Анна 10156",
+      "firstDesc": "Кирилл 99934"
+    },
+    {
+      "run": 2,
+      "lib": "soxa+fit=none+width=3248+track",
+      "memory": 211661437,
+      "render": {
+        "paint": 1780,
+        "settled": 1888
+      },
+      "select": {
+        "paint": 734,
+        "settled": 755
+      },
+      "deselect": {
+        "paint": 626,
+        "settled": 656
+      },
+      "asc": {
+        "paint": 1065,
+        "settled": 1105
+      },
+      "desc": {
+        "paint": 1060,
+        "settled": 1185
+      },
+      "replace": {
+        "paint": 1578,
+        "settled": 1614
+      },
+      "unmount": {
+        "paint": 214,
+        "settled": 235
+      },
+      "afterUnmount": 4798354,
+      "cells": 105000,
+      "firstAsc": "Анна 250",
+      "firstDesc": "Кирилл 99934"
+    },
+    {
+      "run": 2,
+      "lib": "material",
+      "memory": 104019478,
+      "render": {
+        "paint": 1642,
+        "settled": 1660
+      },
+      "select": {
+        "paint": 471,
+        "settled": 2144
+      },
+      "deselect": {
+        "paint": 643,
+        "settled": 2329
+      },
+      "asc": {
+        "paint": 1535,
+        "settled": 1565
+      },
+      "desc": {
+        "paint": 1796,
+        "settled": 1980
+      },
+      "replace": {
+        "paint": 1384,
+        "settled": 1415
+      },
+      "unmount": {
+        "paint": 278,
+        "settled": 309
+      },
+      "afterUnmount": 3054246,
+      "cells": 105000,
+      "firstAsc": "Анна 10156",
+      "firstDesc": "Кирилл 99934"
+    },
+    {
+      "run": 2,
+      "lib": "soxa-direct",
+      "memory": 61107703,
+      "render": {
+        "paint": 1253,
+        "settled": 1309
+      },
+      "select": {
+        "paint": 448,
+        "settled": 2545
+      },
+      "deselect": {
+        "paint": 647,
+        "settled": 2663
+      },
+      "asc": {
+        "paint": 1302,
+        "settled": 1313
+      },
+      "desc": {
+        "paint": 1088,
+        "settled": 1143
+      },
+      "replace": {
+        "paint": 1101,
+        "settled": 1146
+      },
+      "unmount": {
+        "paint": 122,
+        "settled": 153
+      },
+      "afterUnmount": 2889154,
+      "cells": 105000,
+      "firstAsc": "Анна 10156",
+      "firstDesc": "Кирилл 99934"
+    }
+  ],
+  "parity": {
+    "material": {
+      "initial": "4ad4a450e9eff177d04b69cc51ef082fdc64f41c7ec7abd9405f1e9968c7b37d",
+      "asc": "f0e07ac51987b7b2129f44d3692da495a9eac9c154c0400207c25838622432b6",
+      "desc": "8e4a78e211e5ac924197d8f6bd1f3d4b5d04ca7826c47e78b0a36d7831dea13a",
+      "replaced": "d266088a91cb218d958710dacc22fbba3cab1ffdd4c11df357008a0603cd25f1",
+      "reset": "4c8669db9282ae31a017187367923b7e9f9ccbfd3d9d431d3ffac78fd3a9bd9c",
+      "keyboardAndIndeterminate": true
+    },
+    "soxa-direct": {
+      "initial": "4ad4a450e9eff177d04b69cc51ef082fdc64f41c7ec7abd9405f1e9968c7b37d",
+      "asc": "f0e07ac51987b7b2129f44d3692da495a9eac9c154c0400207c25838622432b6",
+      "desc": "8e4a78e211e5ac924197d8f6bd1f3d4b5d04ca7826c47e78b0a36d7831dea13a",
+      "replaced": "d266088a91cb218d958710dacc22fbba3cab1ffdd4c11df357008a0603cd25f1",
+      "reset": "4c8669db9282ae31a017187367923b7e9f9ccbfd3d9d431d3ffac78fd3a9bd9c",
+      "keyboardAndIndeterminate": true
+    },
+    "soxa-cdk": {
+      "initial": "4ad4a450e9eff177d04b69cc51ef082fdc64f41c7ec7abd9405f1e9968c7b37d",
+      "asc": "f0e07ac51987b7b2129f44d3692da495a9eac9c154c0400207c25838622432b6",
+      "desc": "8e4a78e211e5ac924197d8f6bd1f3d4b5d04ca7826c47e78b0a36d7831dea13a",
+      "replaced": "d266088a91cb218d958710dacc22fbba3cab1ffdd4c11df357008a0603cd25f1",
+      "reset": "4c8669db9282ae31a017187367923b7e9f9ccbfd3d9d431d3ffac78fd3a9bd9c",
+      "keyboardAndIndeterminate": true
+    }
+  },
+  "browser": "156.0.8078.4",
+  "parityPassed": true
+}

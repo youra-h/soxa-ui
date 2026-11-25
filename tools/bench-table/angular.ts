@@ -26,6 +26,16 @@ type TLib = {
 const libs: Record<string, () => Promise<TLib>> = {
 	soxa: () => import('./libs/angular/soxa'),
 	plain: () => import('./libs/angular/plain'),
+	'soxa-direct': () =>
+		import('./libs/angular/soxa-core').then(({ DirectBench, sel }) => ({
+			Bench: DirectBench,
+			sel,
+		})),
+	'soxa-cdk': () =>
+		import('./libs/angular/soxa-core').then(({ MaterialRendererBench, sel }) => ({
+			Bench: MaterialRendererBench,
+			sel,
+		})),
 	tanstack: () => import('./libs/angular/tanstack'),
 	material: () => import('./libs/angular/material'),
 	aggrid: () => import('./libs/angular/aggrid'),
