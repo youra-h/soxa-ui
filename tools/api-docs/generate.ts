@@ -173,7 +173,7 @@ export function contractOf(
 	}
 }
 
-function angularSelector(manifest: string): string {
+function angularSelector(manifest: string, exportName: string): string {
 	for (const file of filesIn(dirname(manifest)).filter(
 		(file) => dirname(file) === dirname(manifest) && file.endsWith('.component.ts'),
 	)) {
@@ -184,7 +184,7 @@ function angularSelector(manifest: string): string {
 			true,
 		)
 		for (const statement of source.statements) {
-			if (!ts.isClassDeclaration(statement) || !ts.canHaveDecorators(statement)) continue
+			if (!ts.isClassDeclaration(statement) || statement.name?.text !== exportName) continue
 			for (const decorator of ts.getDecorators(statement) ?? []) {
 				const call = decorator.expression
 				if (
@@ -205,7 +205,7 @@ function angularSelector(manifest: string): string {
 			}
 		}
 	}
-	throw new Error(`Missing Angular selector: ${manifest}`)
+	throw new Error(`Missing Angular selector for ${exportName} in ${manifest}`)
 }
 
 function webcSelector(manifest: string, exportName: string): string | undefined {
@@ -269,7 +269,7 @@ export async function generateApi(): Promise<TApi> {
 				available[framework] = {
 					exportName,
 					...(framework === 'angular'
-						? { selector: angularSelector(manifest.file) }
+						? { selector: angularSelector(manifest.file, exportName) }
 						: {}),
 					...(framework === 'webc'
 						? { selector: webcSelector(manifest.file, exportName) }
