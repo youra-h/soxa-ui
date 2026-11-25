@@ -12,10 +12,10 @@ export { TCollectionInitialSource } from './initial-source.class'
 export {
 	TCollectionPreparation,
 	TCollectionPreparationLifetime,
-	collectionPreparedSource,
 	collectionNeedsPreparation,
 	collectionPreparationConfig,
 } from './preparation.class'
+export { collectionPreparedSource } from './prepared-sources'
 export { TCollectionInitialExtension } from './initial.extension.class'
 export {
 	createCollectionInitialSource,

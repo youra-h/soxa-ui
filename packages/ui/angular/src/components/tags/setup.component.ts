@@ -14,11 +14,12 @@ export function setupTags(
 	ctrl: ITags | undefined,
 	props: object,
 	engine: ITagsProps['engine'],
+	create = createAngularAdapterContext,
 ): TBinding<ITags, TTagsCollectionFacade> {
-	const adapter = createAngularAdapterContext(TagsDescriptor(), { ctrl, props })
+	const adapter = create(TagsDescriptor(), { ctrl, props })
 	const owner = useAdapter(adapter)
 
-	const collectionAdapter = createAngularAdapterContext(
+	const collectionAdapter = create(
 		TagsCollectionDescriptor(),
 		{ props, options: { owner: adapter.instance, engine: engine } },
 		{ bundle: adapter.bundle },

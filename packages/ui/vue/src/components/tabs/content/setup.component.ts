@@ -9,9 +9,9 @@ import {
 	useCollectionAdapter,
 	useExpose,
 	VueElevatorFactory,
-	createVueAdapterContext,
 	type SetupContext,
 } from '../../../adapter'
+import { createVuePreparedAdapterContext } from '../../../adapter/common/collection-preparation'
 import BaseTabsContent, { type TabsContentProps } from './base.component'
 
 /**
@@ -24,12 +24,12 @@ export default {
 	extends: BaseTabsContent,
 	expose: useExpose(),
 	setup(props: TabsContentProps, { emit }: SetupContext) {
-		const adapter = createVueAdapterContext(TabsContentDescriptor(), {
+		const adapter = createVuePreparedAdapterContext(TabsContentDescriptor(), {
 			ctrl: props.ctrl,
 			props,
 		})
 
-		const contentAdapter = createVueAdapterContext(
+		const contentAdapter = createVuePreparedAdapterContext(
 			TabsCollectionContentDescriptor(),
 			{ props },
 			{ bundle: adapter.bundle },

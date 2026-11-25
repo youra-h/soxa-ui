@@ -12,9 +12,9 @@ import {
 	useCollectionAdapter,
 	useSplitAttrs,
 	VueElevatorFactory,
-	createVueAdapterContext,
 	type SetupContext,
 } from '../../adapter'
+import { createVuePreparedAdapterContext } from '../../adapter/common/collection-preparation'
 import BaseTabs, { type TabsProps } from './base.component'
 
 export default {
@@ -23,9 +23,12 @@ export default {
 	extends: BaseTabs,
 	expose: useExpose(),
 	setup(props: TabsProps, { emit }: SetupContext) {
-		const adapter = createVueAdapterContext(TabsDescriptor(), { ctrl: props.ctrl, props })
+		const adapter = createVuePreparedAdapterContext(TabsDescriptor(), {
+			ctrl: props.ctrl,
+			props,
+		})
 
-		const collectionAdapter = createVueAdapterContext(
+		const collectionAdapter = createVuePreparedAdapterContext(
 			TabsCollectionDescriptor(),
 			{
 				props,

@@ -12,9 +12,9 @@ import {
 	VueElevatorFactory,
 	roleIcon,
 	useSplitAttrs,
-	createVueAdapterContext,
 	type SetupContext,
 } from '../../../adapter'
+import { createVuePreparedAdapterContext } from '../../../adapter/common/collection-preparation'
 import BaseTabsItem, { type TabsItemProps } from './base.component'
 
 export default {
@@ -23,9 +23,12 @@ export default {
 	extends: BaseTabsItem,
 	expose: useExpose(),
 	setup(props: TabsItemProps, { emit }: SetupContext) {
-		const adapter = createVueAdapterContext(TabsItemDescriptor(), { ctrl: props.ctrl, props })
+		const adapter = createVuePreparedAdapterContext(TabsItemDescriptor(), {
+			ctrl: props.ctrl,
+			props,
+		})
 
-		const itemAdapter = createVueAdapterContext(
+		const itemAdapter = createVuePreparedAdapterContext(
 			TabsCollectionItemDescriptor(),
 			{ props },
 			{ bundle: adapter.bundle },

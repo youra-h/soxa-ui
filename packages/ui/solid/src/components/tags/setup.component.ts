@@ -8,11 +8,11 @@ import {
 } from '../../adapter'
 import type { TagsProps } from './base.component'
 
-export function setupTags(props: TagsProps) {
+export function setupTags(props: TagsProps, create = createSolidAdapterContext) {
 	const { elevator, layer } = useElevator()
-	const adapter = createSolidAdapterContext(TagsDescriptor(), { ctrl: props.ctrl, props })
+	const adapter = create(TagsDescriptor(), { ctrl: props.ctrl, props })
 
-	const collectionAdapter = createSolidAdapterContext(
+	const collectionAdapter = create(
 		TagsCollectionDescriptor(),
 		{
 			props,

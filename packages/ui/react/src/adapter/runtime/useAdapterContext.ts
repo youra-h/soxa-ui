@@ -8,13 +8,13 @@
  */
 
 import { useContext, useEffect, useEffectEvent, useId, useMemo, useReducer, useRef } from 'react'
-import {
-	createAdapterContext,
-	TCollectionPreparation,
+import { createAdapterContext } from '@soxa-ui/setup'
+import type {
+	IAdapterContext,
+	TElevatorFactory,
 	TCollectionPreparationLifetime,
-	collectionPreparationConfig,
 } from '@soxa-ui/setup'
-import type { IAdapterContext, TElevatorFactory } from '@soxa-ui/setup'
+import type { TCreateCollectionPreparation } from './collection-preparation'
 import type { ICollectionTransaction } from '@soxa-ui/core'
 import { ElevatorContext, type TElevatorLayer } from '../elevator/layer'
 import { LocaleContext } from '../locale/context'
@@ -75,7 +75,7 @@ class TBuilt<T extends TAdapterContexts> {
 	private _receipt?: ICollectionTransaction
 
 	/** Preparation tracks resources; native acceptance alone confirms this attempt. */
-	prepare(preparation: TCollectionPreparation | undefined): void {
+	prepare(preparation: ReturnType<TCreateCollectionPreparation> | undefined): void {
 		this._receipt = preparation?.pending(listOf(this.contexts), this.destroy)
 	}
 
@@ -133,6 +133,7 @@ class TBuilt<T extends TAdapterContexts> {
 
 export function useAdapterContext<T extends TAdapterContexts>(
 	factory: (create: TCreateAdapterContext, elevator: TElevatorFactory) => T,
+	createPreparation?: TCreateCollectionPreparation,
 ): TAssembly<T> {
 	const mountId = useId()
 	const locale = useContext(LocaleContext)
@@ -146,7 +147,7 @@ export function useAdapterContext<T extends TAdapterContexts>(
 
 	const assemble = (layer: TElevatorLayer): TBuilt<T> => {
 		const scope = new TReactElevatorScope(layer)
-		let preparation: TCollectionPreparation | undefined
+		const preparation = createPreparation?.(scope.elevator, preparationLifetime)
 		const held: object[] = []
 
 		// A retry of a discarded render over the same `ctrl` keeps the discarded one's id
@@ -156,14 +157,7 @@ export function useAdapterContext<T extends TAdapterContexts>(
 		// gave them
 		const create: TCreateAdapterContext = (descriptor, options, config) => {
 			// One preparation per assembly pass: its receipt covers every context of it
-			config = collectionPreparationConfig(descriptor, config, () => {
-				preparationLifetime.current ??= new TCollectionPreparationLifetime()
-
-				return (preparation ??= new TCollectionPreparation(
-					scope.elevator,
-					preparationLifetime.current,
-				))
-			})
+			config = preparation ? preparation.config(descriptor, config) : config
 
 			const taken = drafts.take(options)
 

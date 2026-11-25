@@ -6,11 +6,11 @@ import {
 import type { ITabsItem, TTabsItemCollectionFacade } from '@soxa-ui/core'
 import {
 	AngularElevatorFactory,
-	createAngularAdapterContext,
 	joinBindings,
 	useAdapter,
 	useCollectionAdapter,
 } from '../../../adapter'
+import { createAngularPreparedAdapterContext } from '../../../adapter/common/collection-preparation'
 import type { TBinding } from '../../../adapter'
 
 /** Таб: свой контекст и фасада; в коллекцию входит, когда контекст фасада принят (`ngOnInit`). */
@@ -18,10 +18,10 @@ export function setupTabsItem(
 	ctrl: ITabsItem | undefined,
 	props: object,
 ): TBinding<ITabsItem, TTabsItemCollectionFacade> {
-	const adapter = createAngularAdapterContext(TabsItemDescriptor(), { ctrl, props })
+	const adapter = createAngularPreparedAdapterContext(TabsItemDescriptor(), { ctrl, props })
 	const owner = useAdapter(adapter)
 
-	const item = createAngularAdapterContext(
+	const item = createAngularPreparedAdapterContext(
 		TabsCollectionItemDescriptor(),
 		{ props },
 		{ bundle: adapter.bundle },

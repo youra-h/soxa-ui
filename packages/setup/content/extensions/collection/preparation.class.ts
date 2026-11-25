@@ -4,7 +4,6 @@
 import { TCollectionInitialPartPlugin, TCollectionInitialPlugin } from '@soxa-ui/plugins'
 import { preparationOf, TPreparationExtension } from '@soxa-ui/core'
 import type { ICollectionTransaction } from '@soxa-ui/core'
-import type { IPluginBundle } from '@soxa-ui/plugins'
 import type {
 	IAdapterPreparation,
 	IAdapterContext,
@@ -25,7 +24,7 @@ import {
 } from './initial'
 import type { TCollectionInitialSource } from './initial-source.class'
 
-const sources = new WeakMap<IPluginBundle, TCollectionInitialSource>()
+import { collectionPreparedSource, rememberCollectionPreparedSource } from './prepared-sources'
 
 /** Sources survive native reassembly, but are never shared across native mounts. */
 export class TCollectionPreparationLifetime {
@@ -45,13 +44,6 @@ export class TCollectionPreparationLifetime {
 
 		return sources.get(index)
 	}
-}
-
-/** A facade shares the source of its own bundle, not a process-global current owner. */
-export function collectionPreparedSource(
-	bundle: IPluginBundle | null | undefined,
-): TCollectionInitialSource | undefined {
-	return bundle ? sources.get(bundle) : undefined
 }
 
 /** Unrelated components and unprepared shared facades keep the ordinary assembly path. */
@@ -143,7 +135,7 @@ export class TCollectionPreparation implements IAdapterPreparation {
 				options: collectionInitialOwnerOptions(options, source),
 				complete: (context) => {
 					if (source && context.bundle) {
-						sources.set(context.bundle, source)
+						rememberCollectionPreparedSource(context.bundle, source)
 						this._source = source
 					}
 				},

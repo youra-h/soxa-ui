@@ -5,6 +5,7 @@ import {
 	TabsDescriptor,
 } from '@soxa-ui/setup'
 import { useAdapter, useAdapterContext, useCollectionAdapter } from '../../adapter'
+import { createCollectionPreparation } from '../../adapter/runtime/collection-preparation'
 import type { TabsProps } from './base.component'
 
 export function useSetupTabs(props: TabsProps) {
@@ -26,7 +27,7 @@ export function useSetupTabs(props: TabsProps) {
 			.use(TDragAndDropCollectionExtension, { elevator })
 
 		return [adapter, collectionAdapter] as const
-	})
+	}, createCollectionPreparation)
 
 	return {
 		...useCollectionAdapter(useAdapter(adapter, props), collectionAdapter, props),

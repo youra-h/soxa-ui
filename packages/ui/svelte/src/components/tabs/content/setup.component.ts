@@ -4,13 +4,13 @@ import {
 	TabsContentDescriptor,
 } from '@soxa-ui/setup'
 import {
-	createSvelteAdapterContext,
 	joinBindings,
 	useAdapter,
 	useCollectionAdapter,
 	useElevator,
 	type TRootReceiver,
 } from '../../../adapter'
+import { createSveltePreparedAdapterContext } from '../../../adapter/common/collection-preparation'
 import type { TabsContentProps } from './base.component'
 
 export function setupTabsContent(
@@ -20,13 +20,13 @@ export function setupTabsContent(
 ) {
 	const elevator = useElevator()
 	const props = getProps()
-	const adapter = createSvelteAdapterContext(TabsContentDescriptor(), {
+	const adapter = createSveltePreparedAdapterContext(TabsContentDescriptor(), {
 		ctrl: props.ctrl,
 		props,
 		mountId,
 	})
 
-	const content = createSvelteAdapterContext(
+	const content = createSveltePreparedAdapterContext(
 		TabsCollectionContentDescriptor(),
 		{ props, mountId },
 		{ bundle: adapter.bundle },

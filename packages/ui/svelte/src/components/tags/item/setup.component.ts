@@ -17,16 +17,18 @@ export function setupTagsItem(
 	getProps: () => TagsItemProps,
 	mountId: string,
 	receive: TRootReceiver,
+	getCreate: () => typeof createSvelteAdapterContext | undefined,
 ) {
 	const elevator = useElevator()
 	const props = getProps()
-	const adapter = createSvelteAdapterContext(TagsItemDescriptor(), {
+	const create = getCreate() ?? createSvelteAdapterContext
+	const adapter = create(TagsItemDescriptor(), {
 		ctrl: props.ctrl,
 		props,
 		mountId,
 	})
 
-	const item = createSvelteAdapterContext(
+	const item = create(
 		TagsCollectionItemDescriptor(),
 		{ props, mountId },
 		{ bundle: adapter.bundle },

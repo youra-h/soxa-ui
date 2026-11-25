@@ -1,11 +1,7 @@
 import { TCollectionExtension, TagsCollectionDescriptor, TagsDescriptor } from '@soxa-ui/setup'
 import type { ITags, TTagsCollectionFacade } from '@soxa-ui/core'
-import {
-	createWebcAdapterContext,
-	joinBindings,
-	useAdapter,
-	useCollectionAdapter,
-} from '../../adapter'
+import { joinBindings, useAdapter, useCollectionAdapter } from '../../adapter'
+import { createWebcPreparedAdapterContext } from '../../adapter/common/collection-preparation'
 import type { TBinding, TUpdateListener } from '../../adapter'
 import { createWebcElevator } from '../../adapter/elevator'
 
@@ -15,9 +11,9 @@ export function setupTags(
 	props: Record<string, unknown>,
 	onUpdate: TUpdateListener,
 ): TBinding<ITags, TTagsCollectionFacade> {
-	const adapter = createWebcAdapterContext(host, TagsDescriptor(), { ctrl, props })
+	const adapter = createWebcPreparedAdapterContext(host, TagsDescriptor(), { ctrl, props })
 
-	const collectionAdapter = createWebcAdapterContext(
+	const collectionAdapter = createWebcPreparedAdapterContext(
 		host,
 		TagsCollectionDescriptor(),
 		{ props, options: { owner: adapter.instance, engine: props['engine'] } },

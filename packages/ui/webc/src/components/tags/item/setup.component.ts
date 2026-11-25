@@ -4,12 +4,8 @@ import {
 	TagsItemDescriptor,
 } from '@soxa-ui/setup'
 import type { ITagsItem, TTagsItemCollectionFacade } from '@soxa-ui/core'
-import {
-	createWebcAdapterContext,
-	joinBindings,
-	useAdapter,
-	useCollectionAdapter,
-} from '../../../adapter'
+import { joinBindings, useAdapter, useCollectionAdapter } from '../../../adapter'
+import { createWebcPreparedAdapterContext } from '../../../adapter/common/collection-preparation'
 import type { TBinding, TUpdateListener } from '../../../adapter'
 import { createWebcElevator } from '../../../adapter/elevator'
 
@@ -19,9 +15,9 @@ export function setupTagsItem(
 	props: Record<string, unknown>,
 	onUpdate: TUpdateListener,
 ): TBinding<ITagsItem, TTagsItemCollectionFacade> {
-	const adapter = createWebcAdapterContext(host, TagsItemDescriptor(), { ctrl, props })
+	const adapter = createWebcPreparedAdapterContext(host, TagsItemDescriptor(), { ctrl, props })
 
-	const itemAdapter = createWebcAdapterContext(
+	const itemAdapter = createWebcPreparedAdapterContext(
 		host,
 		TagsCollectionItemDescriptor(),
 		{ props },

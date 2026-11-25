@@ -1,5 +1,5 @@
 <script lang="ts">
-import { TagsItem } from './item'
+import TagsItem from './item/Item.vue'
 import SetupTags from './setup.component'
 
 export default { ...SetupTags, components: { TagsItem } }

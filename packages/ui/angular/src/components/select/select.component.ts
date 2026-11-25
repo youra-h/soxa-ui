@@ -10,7 +10,7 @@ import {
 import { TFrameComponent } from '../frame'
 import { TIconComponent } from '../icon'
 import { TInputComponent } from '../input'
-import { TTagsComponent } from '../tags'
+import { TEmbeddedTagsComponent } from '../tags/embedded.component'
 import { TSelectItemComponent } from './item'
 import { TSelectGroupComponent } from './group'
 import { TSelectSurface } from '../../generated/select.metadata'
@@ -30,7 +30,7 @@ import { setupSelect } from './setup.component'
 		TFrameComponent,
 		TIconComponent,
 		TInputComponent,
-		TTagsComponent,
+		TEmbeddedTagsComponent,
 		TSelectItemComponent,
 		TSelectGroupComponent,
 	],

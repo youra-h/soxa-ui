@@ -7,11 +7,11 @@ import {
 import type { ITabs, ITabsProps, TTabsCollectionFacade } from '@soxa-ui/core'
 import {
 	AngularElevatorFactory,
-	createAngularAdapterContext,
 	joinBindings,
 	useAdapter,
 	useCollectionAdapter,
 } from '../../adapter'
+import { createAngularPreparedAdapterContext } from '../../adapter/common/collection-preparation'
 import type { TBinding } from '../../adapter'
 
 /** Tabs: движок и регистратор лифт опускает в слой набора — их берут и табы, и панели. */
@@ -20,10 +20,10 @@ export function setupTabs(
 	props: object,
 	engine: ITabsProps['engine'],
 ): TBinding<ITabs, TTabsCollectionFacade> {
-	const adapter = createAngularAdapterContext(TabsDescriptor(), { ctrl, props })
+	const adapter = createAngularPreparedAdapterContext(TabsDescriptor(), { ctrl, props })
 	const owner = useAdapter(adapter)
 
-	const collectionAdapter = createAngularAdapterContext(
+	const collectionAdapter = createAngularPreparedAdapterContext(
 		TabsCollectionDescriptor(),
 		{ props, options: { owner: adapter.instance, engine: engine } },
 		{ bundle: adapter.bundle },

@@ -4,20 +4,15 @@ import {
 	TabsCollectionDescriptor,
 	TabsDescriptor,
 } from '@soxa-ui/setup'
-import {
-	createSolidAdapterContext,
-	useAdapter,
-	joinBindings,
-	useCollectionAdapter,
-	useElevator,
-} from '../../adapter'
+import { useAdapter, joinBindings, useCollectionAdapter, useElevator } from '../../adapter'
+import { createSolidPreparedAdapterContext } from '../../adapter/common/collection-preparation'
 import type { TabsProps } from './base.component'
 
 export function setupTabs(props: TabsProps) {
 	const { elevator, layer } = useElevator()
-	const adapter = createSolidAdapterContext(TabsDescriptor(), { ctrl: props.ctrl, props })
+	const adapter = createSolidPreparedAdapterContext(TabsDescriptor(), { ctrl: props.ctrl, props })
 
-	const collectionAdapter = createSolidAdapterContext(
+	const collectionAdapter = createSolidPreparedAdapterContext(
 		TabsCollectionDescriptor(),
 		{
 			props,

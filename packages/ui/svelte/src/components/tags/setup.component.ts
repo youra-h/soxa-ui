@@ -9,17 +9,23 @@ import {
 } from '../../adapter'
 import type { TagsProps } from './base.component'
 
-export function setupTags(getProps: () => TagsProps, mountId: string, receive: TRootReceiver) {
+export function setupTags(
+	getProps: () => TagsProps,
+	mountId: string,
+	receive: TRootReceiver,
+	getCreate: () => typeof createSvelteAdapterContext | undefined,
+) {
 	const elevator = useElevator()
 	const props = getProps()
+	const create = getCreate() ?? createSvelteAdapterContext
 
-	const adapter = createSvelteAdapterContext(TagsDescriptor(), {
+	const adapter = create(TagsDescriptor(), {
 		ctrl: props.ctrl,
 		props,
 		mountId,
 	})
 
-	const collectionAdapter = createSvelteAdapterContext(
+	const collectionAdapter = create(
 		TagsCollectionDescriptor(),
 		{
 			props,

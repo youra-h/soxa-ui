@@ -17,15 +17,15 @@ import type { TBinding } from '../../../adapter'
 export function setupTagsItem(
 	ctrl: ITagsItem | undefined,
 	props: object,
+	create = createAngularAdapterContext,
 ): TBinding<ITagsItem, TTagsItemCollectionFacade> {
-	const adapter = createAngularAdapterContext(TagsItemDescriptor(), { ctrl, props })
+	const adapter = create(TagsItemDescriptor(), { ctrl, props })
 	const owner = useAdapter(adapter)
 
-	const item = createAngularAdapterContext(
-		TagsCollectionItemDescriptor(),
-		{ props },
-		{ bundle: adapter.bundle },
-	).use(TCollectionItemExtension, { adapter, elevator: AngularElevatorFactory })
+	const item = create(TagsCollectionItemDescriptor(), { props }, { bundle: adapter.bundle }).use(
+		TCollectionItemExtension,
+		{ adapter, elevator: AngularElevatorFactory },
+	)
 
 	return joinBindings(owner, useCollectionAdapter(item))
 }

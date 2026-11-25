@@ -3,21 +3,19 @@ import {
 	TabsCollectionContentDescriptor,
 	TabsContentDescriptor,
 } from '@soxa-ui/setup'
-import {
-	createSolidAdapterContext,
-	useAdapter,
-	joinBindings,
-	useCollectionAdapter,
-	useElevator,
-} from '../../../adapter'
+import { useAdapter, joinBindings, useCollectionAdapter, useElevator } from '../../../adapter'
+import { createSolidPreparedAdapterContext } from '../../../adapter/common/collection-preparation'
 import type { TabsContentProps } from './base.component'
 
 /** Панель таба: свой таб по `value` находит лифтом `TTabsContentBindingExtension`. */
 export function setupTabsContent(props: TabsContentProps) {
 	const { elevator } = useElevator()
-	const adapter = createSolidAdapterContext(TabsContentDescriptor(), { ctrl: props.ctrl, props })
+	const adapter = createSolidPreparedAdapterContext(TabsContentDescriptor(), {
+		ctrl: props.ctrl,
+		props,
+	})
 
-	const content = createSolidAdapterContext(
+	const content = createSolidPreparedAdapterContext(
 		TabsCollectionContentDescriptor(),
 		{ props },
 		{ bundle: adapter.bundle },

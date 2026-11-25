@@ -15,7 +15,7 @@ import {
 import { Frame } from '../frame'
 import { Icon } from '../icon'
 import { Input } from '../input'
-import { Tags } from '../tags'
+import { EmbeddedTags } from '../tags/embedded'
 import { SelectItem } from './item'
 import { SelectGroup } from './group'
 import { useSetupSelect } from './setup.component'
@@ -37,7 +37,7 @@ function drawTags(
 
 	return (
 		renderSlot(props.tags, { tags, engine }) ?? (
-			<Tags
+			<EmbeddedTags
 				key={tags.uid}
 				embedded="select.tags"
 				className="so-select__tags"

@@ -1,12 +1,12 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core'
 import { NgTemplateOutlet } from '@angular/common'
-import type { ITagsItem } from '@soxa-ui/core'
 import { AttributesDirective, RoleIconDirective } from '../../../adapter'
 import { TButtonComponent } from '../../button'
 import { TItemRowComponent } from '../../item-row'
 import { TIconComponent } from '../../icon'
-import { TTagsItemSurface } from '../../../generated/tags-item.metadata'
+import { TTagsItemView, tagsItemRoot } from './view.directive'
 import { setupTagsItem } from './setup.component'
+import { createAngularPreparedAdapterContext } from '../../../adapter/common/collection-preparation'
 
 /**
  * Тег: строка — Button на `div` с набором `aria`, кнопка закрытия — её сосед:
@@ -25,20 +25,11 @@ import { setupTagsItem } from './setup.component'
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './tags-item.component.html',
 })
-export class TTagsItemComponent extends TTagsItemSurface<ITagsItem> {
+export class TTagsItemComponent extends TTagsItemView {
 	constructor() {
-		super(setupTagsItem, {
-			strategy: 'host',
-			sets: ['aria', 'attrs', 'dataset'],
-			aria: 'rootAria',
-			control: true,
-			order: 'order',
-		})
-	}
-
-	/** Закрыть тег; клик не всплывает: иначе `press` корней дал бы выбор и открыл панель Select. */
-	protected close(event: Event): void {
-		event.stopPropagation()
-		this.facade()?.context?.adapters.tags.close()
+		super(
+			(ctrl, inputs) => setupTagsItem(ctrl, inputs, createAngularPreparedAdapterContext),
+			tagsItemRoot,
+		)
 	}
 }

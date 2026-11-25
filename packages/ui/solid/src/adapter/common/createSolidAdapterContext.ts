@@ -1,10 +1,5 @@
 import { createUniqueId } from 'solid-js'
-import {
-	createAdapterContext,
-	TCollectionPreparation,
-	collectionPreparationConfig,
-} from '@soxa-ui/setup'
-import { useElevator } from '../elevator'
+import { createAdapterContext } from '@soxa-ui/setup'
 import { nearestLocale } from '../locale/context'
 
 /**
@@ -18,12 +13,6 @@ export const createSolidAdapterContext: typeof createAdapterContext = (
 	options,
 	config,
 ) => {
-	config = collectionPreparationConfig(
-		descriptor,
-		config,
-		() => new TCollectionPreparation(useElevator().elevator),
-	)
-
 	if (config?.bundle !== undefined) return createAdapterContext(descriptor, options, config)
 
 	return createAdapterContext(

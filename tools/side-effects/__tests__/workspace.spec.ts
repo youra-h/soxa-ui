@@ -137,6 +137,11 @@ const BUTTONS: Readonly<Record<string, string>> = {
 	'@soxa-ui/webc/button': "import '@soxa-ui/webc/button'",
 }
 
+const COLLECTION_PREPARATION = [
+	'packages/setup/content/extensions/collection/initial-source.class.ts',
+	'packages/setup/content/extensions/collection/preparation.class.ts',
+]
+
 /** Every string target of an `exports` value, however deep the conditions go. */
 function targetsOf(value: unknown): string[] {
 	if (typeof value === 'string') return [value]
@@ -330,13 +335,31 @@ describe('sideEffects библиотечных пакетов', () => {
 	)
 
 	it.each(Object.entries(BUTTONS))(
-		'%s: сборка одной кнопки не содержит Table и Calendar',
+		'%s: сборка одной кнопки не содержит Table, Calendar и подготовку initial',
 		async (_path, application) => {
 			const kept = modulesKept(await bundle(application, Object.keys(SOURCES)))
 
 			// Not idle: the button is there
 			expect(kept).toContain('packages/core/src/components/custom/button/button.class.ts')
 			expect(kept.filter((file) => /\/(table|calendar)\//.test(file))).toEqual([])
+			expect(kept.filter((file) => COLLECTION_PREPARATION.includes(file))).toEqual([])
+		},
+	)
+
+	it.each(['react', 'vue', 'solid', 'svelte', 'angular'])(
+		'%s: Tabs включает подготовку initial, Select берёт теги из своего движка',
+		async (adapter) => {
+			const pkg = `@soxa-ui/${adapter}`
+			const component = (name: string) => (adapter === 'angular' ? `T${name}Component` : name)
+			const sources = Object.keys(SOURCES)
+			const [tabs, select] = await Promise.all([
+				bundle(named(pkg, component('Tabs')), sources).then(modulesKept),
+				bundle(named(pkg, component('Select')), sources).then(modulesKept),
+			])
+
+			expect(tabs).toEqual(expect.arrayContaining(COLLECTION_PREPARATION))
+			expect(select).toContain('packages/core/src/components/custom/tags/tags.class.ts')
+			expect(select.filter((file) => COLLECTION_PREPARATION.includes(file))).toEqual([])
 		},
 	)
 })

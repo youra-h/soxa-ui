@@ -5,12 +5,8 @@ import {
 	TabsDescriptor,
 } from '@soxa-ui/setup'
 import type { ITabs, TTabsCollectionFacade } from '@soxa-ui/core'
-import {
-	createWebcAdapterContext,
-	joinBindings,
-	useAdapter,
-	useCollectionAdapter,
-} from '../../adapter'
+import { joinBindings, useAdapter, useCollectionAdapter } from '../../adapter'
+import { createWebcPreparedAdapterContext } from '../../adapter/common/collection-preparation'
 import type { TBinding, TUpdateListener } from '../../adapter'
 import { createWebcElevator } from '../../adapter/elevator'
 
@@ -20,10 +16,10 @@ export function setupTabs(
 	props: Record<string, unknown>,
 	onUpdate: TUpdateListener,
 ): TBinding<ITabs, TTabsCollectionFacade> {
-	const adapter = createWebcAdapterContext(host, TabsDescriptor(), { ctrl, props })
+	const adapter = createWebcPreparedAdapterContext(host, TabsDescriptor(), { ctrl, props })
 	const elevator = createWebcElevator(host)
 
-	const collectionAdapter = createWebcAdapterContext(
+	const collectionAdapter = createWebcPreparedAdapterContext(
 		host,
 		TabsCollectionDescriptor(),
 		{ props, options: { owner: adapter.instance, engine: props['engine'] } },

@@ -1,9 +1,4 @@
-import {
-	createAdapterContext,
-	TCollectionPreparation,
-	TCollectionPreparationLifetime,
-	collectionPreparationConfig,
-} from '@soxa-ui/setup'
+import { createAdapterContext } from '@soxa-ui/setup'
 import type {
 	IAdapterContext,
 	IAdapterContextConfig,
@@ -13,9 +8,6 @@ import type {
 	TContextContract,
 } from '@soxa-ui/setup'
 import { nearestLocale } from '../locale/context'
-import { createWebcElevator } from '../elevator'
-
-const preparationLifetimes = new WeakMap<Element, TCollectionPreparationLifetime>()
 
 /**
  * Сборка элемента: локаль — ближайшего `<so-locale-provider>` вверх от хоста.
@@ -35,22 +27,6 @@ export function createWebcAdapterContext<
 	return createAdapterContext(
 		descriptor,
 		{ ...options, locale: options.locale ?? nearestLocale(host) },
-		collectionPreparationConfig(
-			descriptor,
-			config,
-			() => new TCollectionPreparation(createWebcElevator(host), lifetimeOf(host)),
-		),
+		config,
 	)
-}
-
-/** A host keeps its sources across reconnection and moves: the element is the native mount. */
-function lifetimeOf(host: Element): TCollectionPreparationLifetime {
-	let lifetime = preparationLifetimes.get(host)
-
-	if (!lifetime) {
-		lifetime = new TCollectionPreparationLifetime()
-		preparationLifetimes.set(host, lifetime)
-	}
-
-	return lifetime
 }

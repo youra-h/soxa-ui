@@ -11,7 +11,7 @@
 	import { Frame } from '../frame'
 	import { Icon } from '../icon'
 	import { Input } from '../input'
-	import { Tags } from '../tags'
+	import Tags from '../tags/TagsView.svelte'
 	import { SelectItem } from './item'
 	import { SelectGroup } from './group'
 	import { setupSelect } from './setup.component'

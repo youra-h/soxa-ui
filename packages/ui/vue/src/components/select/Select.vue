@@ -2,7 +2,7 @@
 import { Frame } from '../frame'
 import { Input } from '../input'
 import { Icon } from '../icon'
-import { Tags } from '../tags'
+import Tags from '../tags/Tags.vue'
 import { SelectItem } from './item'
 import { SelectGroup } from './group'
 import SetupSelect from './setup.component'

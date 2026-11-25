@@ -4,9 +4,13 @@ import {
 	TagsItemDescriptor,
 } from '@soxa-ui/setup'
 import { useAdapter, useAdapterContext, useCollectionAdapter } from '../../../adapter'
+import type { TCreateCollectionPreparation } from '../../../adapter/runtime/collection-preparation'
 import type { TagsItemProps } from './base.component'
 
-export function useSetupTagsItem(props: TagsItemProps) {
+export function useSetupTagsItem(
+	props: TagsItemProps,
+	createPreparation?: TCreateCollectionPreparation,
+) {
 	const {
 		contexts: [adapter, item],
 	} = useAdapterContext((create, elevator) => {
@@ -19,7 +23,7 @@ export function useSetupTagsItem(props: TagsItemProps) {
 		).use(TCollectionItemExtension, { adapter, elevator })
 
 		return [adapter, item] as const
-	})
+	}, createPreparation)
 
 	return {
 		...useCollectionAdapter(useAdapter(adapter, props), item, props),

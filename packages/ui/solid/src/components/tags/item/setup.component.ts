@@ -12,15 +12,14 @@ import {
 } from '../../../adapter'
 import type { TagsItemProps } from './base.component'
 
-export function setupTagsItem(props: TagsItemProps) {
+export function setupTagsItem(props: TagsItemProps, create = createSolidAdapterContext) {
 	const { elevator } = useElevator()
-	const adapter = createSolidAdapterContext(TagsItemDescriptor(), { ctrl: props.ctrl, props })
+	const adapter = create(TagsItemDescriptor(), { ctrl: props.ctrl, props })
 
-	const item = createSolidAdapterContext(
-		TagsCollectionItemDescriptor(),
-		{ props },
-		{ bundle: adapter.bundle },
-	).use(TCollectionItemExtension, { adapter, elevator })
+	const item = create(TagsCollectionItemDescriptor(), { props }, { bundle: adapter.bundle }).use(
+		TCollectionItemExtension,
+		{ adapter, elevator },
+	)
 
 	const itemBinding = useCollectionAdapter(item, props)
 	const owner = useAdapter(adapter, props)

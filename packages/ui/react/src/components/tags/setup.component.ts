@@ -1,8 +1,9 @@
 import { TCollectionExtension, TagsCollectionDescriptor, TagsDescriptor } from '@soxa-ui/setup'
 import { useAdapter, useAdapterContext, useCollectionAdapter } from '../../adapter'
+import type { TCreateCollectionPreparation } from '../../adapter/runtime/collection-preparation'
 import type { TagsProps } from './base.component'
 
-export function useSetupTags(props: TagsProps) {
+export function useSetupTags(props: TagsProps, createPreparation?: TCreateCollectionPreparation) {
 	const {
 		contexts: [adapter, collectionAdapter],
 		layer,
@@ -19,7 +20,7 @@ export function useSetupTags(props: TagsProps) {
 		).use(TCollectionExtension, { elevator })
 
 		return [adapter, collectionAdapter] as const
-	})
+	}, createPreparation)
 
 	return {
 		...useCollectionAdapter(useAdapter(adapter, props), collectionAdapter, props),

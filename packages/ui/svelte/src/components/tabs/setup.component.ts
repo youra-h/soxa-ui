@@ -5,26 +5,26 @@ import {
 	TabsDescriptor,
 } from '@soxa-ui/setup'
 import {
-	createSvelteAdapterContext,
 	joinBindings,
 	useAdapter,
 	useCollectionAdapter,
 	useElevator,
 	type TRootReceiver,
 } from '../../adapter'
+import { createSveltePreparedAdapterContext } from '../../adapter/common/collection-preparation'
 import type { TabsProps } from './base.component'
 
 export function setupTabs(getProps: () => TabsProps, mountId: string, receive: TRootReceiver) {
 	const elevator = useElevator()
 	const props = getProps()
 
-	const adapter = createSvelteAdapterContext(TabsDescriptor(), {
+	const adapter = createSveltePreparedAdapterContext(TabsDescriptor(), {
 		ctrl: props.ctrl,
 		props,
 		mountId,
 	})
 
-	const collectionAdapter = createSvelteAdapterContext(
+	const collectionAdapter = createSveltePreparedAdapterContext(
 		TabsCollectionDescriptor(),
 		{
 			props,

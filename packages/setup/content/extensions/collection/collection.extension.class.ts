@@ -29,7 +29,7 @@ import {
 	COLLECTION_INITIAL_ELEVATOR,
 } from './keys'
 import { TCollectionMembers } from './members.class'
-import { collectionPreparedSource } from './preparation.class'
+import { collectionPreparedSource } from './prepared-sources'
 import { TCollectionInitialExtension } from './initial.extension.class'
 import type { ICollectionExtensionOptions, TCollectionOwner } from './types'
 

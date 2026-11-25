@@ -5,6 +5,7 @@ import { SlotDirective, provideElevator } from '../../adapter'
 import { TTagsItemComponent } from './item'
 import { TTagsSurface } from '../../generated/tags.metadata'
 import { setupTags } from './setup.component'
+import { createAngularPreparedAdapterContext } from '../../adapter/common/collection-preparation'
 
 /**
  * Набор тегов: корень — сам ряд с ролью. AGENTS.md (Angular),
@@ -19,6 +20,10 @@ import { setupTags } from './setup.component'
 })
 export class TTagsComponent extends TTagsSurface<ITags> {
 	constructor() {
-		super((ctrl, inputs) => setupTags(ctrl, inputs, this.engine), { strategy: 'host' })
+		super(
+			(ctrl, inputs) =>
+				setupTags(ctrl, inputs, this.engine, createAngularPreparedAdapterContext),
+			{ strategy: 'host' },
+		)
 	}
 }
