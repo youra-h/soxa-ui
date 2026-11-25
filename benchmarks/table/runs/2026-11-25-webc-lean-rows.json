@@ -1,0 +1,370 @@
+{
+  "browser": "156.0.8078.4",
+  "date": "2026-11-25",
+  "baseCommit": "d03d656abf5d777779cd6c6edd8df7e95b897bc3",
+  "n": 5000,
+  "repeats": 3,
+  "carbon": "2.66.0",
+  "spectrum": "1.12.5",
+  "parityPassed": true,
+  "results": [
+    {
+      "lib": "soxa+fit=none+width=3248+track",
+      "run": 0,
+      "render": {
+        "paint": 1593,
+        "settled": 1655
+      },
+      "baseline": 5186578,
+      "mounted": {
+        "rows": 5000,
+        "checked": 0,
+        "first": "Анна 13153",
+        "nodes": 125221,
+        "heads": "Имя, Кол 1, Кол 2",
+        "heap": 145596356
+      },
+      "delta": 140273406,
+      "shape": {
+        "cells": 105000,
+        "checkboxes": 5000
+      },
+      "initialHash": "4ad4a450e9eff177d04b69cc51ef082fdc64f41c7ec7abd9405f1e9968c7b37d",
+      "select": {
+        "paint": 619,
+        "settled": 640
+      },
+      "deselect": {
+        "paint": 518,
+        "settled": 539
+      },
+      "sortAsc": {
+        "paint": 1092,
+        "settled": 1125
+      },
+      "firstAsc": "Анна 250",
+      "ascHash": "f4d17089b21c3831d2bd0a5d5000f66dd9c810e33ebd7f4cd417fd8cdfd2d359",
+      "sortDesc": {
+        "paint": 1124,
+        "settled": 1172
+      },
+      "firstDesc": "Кирилл 99934",
+      "descHash": "b305fa67975ad194f3e600ef8daf3bcd6d18f767b67938c49060d7d0640e9188",
+      "replace": {
+        "paint": 1730,
+        "settled": 1759
+      },
+      "afterReplaceFirst": "Кирилл 99693",
+      "replacedHash": "8e10132a6762593063219ca50a0467ebca7cc5122a6472d58573d2eb528d89e3"
+    },
+    {
+      "lib": "soxa+fit=none+width=3248+track+leanRows",
+      "run": 0,
+      "render": {
+        "paint": 1375,
+        "settled": 1432
+      },
+      "baseline": 5188138,
+      "mounted": {
+        "rows": 5000,
+        "checked": 0,
+        "first": "Анна 13153",
+        "nodes": 125221,
+        "heads": "Имя, Кол 1, Кол 2",
+        "heap": 61780668
+      },
+      "delta": 56396822,
+      "shape": {
+        "cells": 105000,
+        "checkboxes": 5000
+      },
+      "initialHash": "4ad4a450e9eff177d04b69cc51ef082fdc64f41c7ec7abd9405f1e9968c7b37d",
+      "select": {
+        "paint": 293,
+        "settled": 331
+      },
+      "deselect": {
+        "paint": 208,
+        "settled": 227
+      },
+      "sortAsc": {
+        "paint": 1133,
+        "settled": 1166
+      },
+      "firstAsc": "Анна 250",
+      "ascHash": "f4d17089b21c3831d2bd0a5d5000f66dd9c810e33ebd7f4cd417fd8cdfd2d359",
+      "sortDesc": {
+        "paint": 1198,
+        "settled": 1230
+      },
+      "firstDesc": "Кирилл 99934",
+      "descHash": "b305fa67975ad194f3e600ef8daf3bcd6d18f767b67938c49060d7d0640e9188",
+      "replace": {
+        "paint": 1561,
+        "settled": 1613
+      },
+      "afterReplaceFirst": "Кирилл 99693",
+      "replacedHash": "8e10132a6762593063219ca50a0467ebca7cc5122a6472d58573d2eb528d89e3"
+    },
+    {
+      "lib": "carbon",
+      "run": 0,
+      "render": {
+        "paint": 8972,
+        "settled": 9023
+      },
+      "baseline": 2340324,
+      "mounted": {
+        "rows": 5000,
+        "checked": 0,
+        "first": "Анна 13153",
+        "nodes": 270242,
+        "heap": 80977958
+      },
+      "delta": 78490030,
+      "shape": {
+        "cells": 100000,
+        "checkboxes": 5000
+      },
+      "select": {
+        "paint": 1195,
+        "settled": 1223
+      },
+      "deselect": {
+        "paint": 1190,
+        "settled": 1227
+      },
+      "sortAsc": {
+        "paint": 4633,
+        "settled": 4671
+      },
+      "firstAsc": "Анна 10156",
+      "sortDesc": {
+        "paint": 5061,
+        "settled": 5098
+      },
+      "firstDesc": "Кирилл 99934",
+      "replace": {
+        "paint": 5077,
+        "settled": 5154
+      },
+      "afterReplaceFirst": "Анна 92076"
+    },
+    {
+      "lib": "spectrum",
+      "run": 0,
+      "render": {
+        "paint": 2348,
+        "settled": 2407
+      },
+      "baseline": 2599583,
+      "mounted": {
+        "rows": 5000,
+        "checked": 0,
+        "first": "Анна 13153",
+        "nodes": 240070,
+        "heap": 77771816
+      },
+      "delta": 70259539,
+      "shape": {
+        "cells": 100000,
+        "checkboxes": 5000
+      },
+      "select": {
+        "paint": 1163,
+        "settled": 1395
+      },
+      "deselect": {
+        "paint": 1017,
+        "settled": 1241
+      },
+      "sortAsc": {
+        "paint": 1723,
+        "settled": 1763
+      },
+      "firstAsc": "Анна 250",
+      "sortDesc": {
+        "paint": 1981,
+        "settled": 2003
+      },
+      "firstDesc": "Кирилл 99934",
+      "replace": {
+        "paint": 2055,
+        "settled": 2066
+      },
+      "afterReplaceFirst": "Кирилл 99693"
+    },
+    {
+      "lib": "soxa+fit=none+width=3248+track",
+      "run": 1,
+      "render": {
+        "paint": 1649,
+        "settled": 1712
+      },
+      "baseline": 5187482,
+      "mounted": {
+        "rows": 5000,
+        "checked": 0,
+        "first": "Анна 13153",
+        "nodes": 125221,
+        "heads": "Имя, Кол 1, Кол 2",
+        "heap": 145600716
+      },
+      "delta": 140276930,
+      "shape": {
+        "cells": 105000,
+        "checkboxes": 5000
+      }
+    },
+    {
+      "lib": "soxa+fit=none+width=3248+track+leanRows",
+      "run": 1,
+      "render": {
+        "paint": 1391,
+        "settled": 1454
+      },
+      "baseline": 5186594,
+      "mounted": {
+        "rows": 5000,
+        "checked": 0,
+        "first": "Анна 13153",
+        "nodes": 125221,
+        "heads": "Имя, Кол 1, Кол 2",
+        "heap": 61794556
+      },
+      "delta": 56412546,
+      "shape": {
+        "cells": 105000,
+        "checkboxes": 5000
+      }
+    },
+    {
+      "lib": "carbon",
+      "run": 1,
+      "render": {
+        "paint": 8990,
+        "settled": 9012
+      },
+      "baseline": 2340324,
+      "mounted": {
+        "rows": 5000,
+        "checked": 0,
+        "first": "Анна 13153",
+        "nodes": 270242,
+        "heap": 80901770
+      },
+      "delta": 78489274,
+      "shape": {
+        "cells": 100000,
+        "checkboxes": 5000
+      }
+    },
+    {
+      "lib": "spectrum",
+      "run": 1,
+      "render": {
+        "paint": 2297,
+        "settled": 2359
+      },
+      "baseline": 2770059,
+      "mounted": {
+        "rows": 5000,
+        "checked": 0,
+        "first": "Анна 13153",
+        "nodes": 240070,
+        "heap": 79278247
+      },
+      "delta": 70261435,
+      "shape": {
+        "cells": 100000,
+        "checkboxes": 5000
+      }
+    },
+    {
+      "lib": "soxa+fit=none+width=3248+track",
+      "run": 2,
+      "render": {
+        "paint": 1696,
+        "settled": 1753
+      },
+      "baseline": 5187810,
+      "mounted": {
+        "rows": 5000,
+        "checked": 0,
+        "first": "Анна 13153",
+        "nodes": 125221,
+        "heads": "Имя, Кол 1, Кол 2",
+        "heap": 145596452
+      },
+      "delta": 140273838,
+      "shape": {
+        "cells": 105000,
+        "checkboxes": 5000
+      }
+    },
+    {
+      "lib": "soxa+fit=none+width=3248+track+leanRows",
+      "run": 2,
+      "render": {
+        "paint": 1363,
+        "settled": 1422
+      },
+      "baseline": 5188810,
+      "mounted": {
+        "rows": 5000,
+        "checked": 0,
+        "first": "Анна 13153",
+        "nodes": 125221,
+        "heads": "Имя, Кол 1, Кол 2",
+        "heap": 61812016
+      },
+      "delta": 56427374,
+      "shape": {
+        "cells": 105000,
+        "checkboxes": 5000
+      }
+    },
+    {
+      "lib": "carbon",
+      "run": 2,
+      "render": {
+        "paint": 8841,
+        "settled": 8897
+      },
+      "baseline": 2340324,
+      "mounted": {
+        "rows": 5000,
+        "checked": 0,
+        "first": "Анна 13153",
+        "nodes": 270242,
+        "heap": 81785807
+      },
+      "delta": 78490729,
+      "shape": {
+        "cells": 100000,
+        "checkboxes": 5000
+      }
+    },
+    {
+      "lib": "spectrum",
+      "run": 2,
+      "render": {
+        "paint": 2305,
+        "settled": 2356
+      },
+      "baseline": 2599583,
+      "mounted": {
+        "rows": 5000,
+        "checked": 0,
+        "first": "Анна 13153",
+        "nodes": 240070,
+        "heap": 93544822
+      },
+      "delta": 70262063,
+      "shape": {
+        "cells": 100000,
+        "checkboxes": 5000
+      }
+    }
+  ]
+}
