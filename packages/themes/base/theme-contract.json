@@ -2939,9 +2939,9 @@
       "name": "so-tags-item__close",
       "sources": [
         "packages/ui/angular/src/components/tags/item/tags-item.component.html",
-        "packages/ui/react/src/components/tags/item/Item.tsx",
-        "packages/ui/solid/src/components/tags/item/Item.tsx",
-        "packages/ui/svelte/src/components/tags/item/Item.svelte",
+        "packages/ui/react/src/components/tags/item/view.tsx",
+        "packages/ui/solid/src/components/tags/item/view.tsx",
+        "packages/ui/svelte/src/components/tags/item/TagsItemView.svelte",
         "packages/ui/vue/src/components/tags/item/Item.vue",
         "packages/ui/webc/src/components/tags/item/tags-item.template.ts"
       ],
