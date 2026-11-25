@@ -6,6 +6,7 @@
   "scripts": {
     "build": "vite build",
     "bench": "vite build && node run.mjs",
+    "bench:angular-parity": "node angular-parity.mjs",
     "trace": "vite build && node trace.mjs",
     "prof": "node prof.mjs",
     "heap": "node --max-old-space-size=8192 heap.mjs"
