@@ -3,6 +3,17 @@ import { execFileSync } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
+export async function isPublishedPackage(name) {
+	const response = await fetch('https://registry.npmjs.org/' + encodeURIComponent(name), {
+		method: 'HEAD',
+		signal: AbortSignal.timeout(60000),
+	})
+	if (response.status === 404) return false
+	if (!response.ok)
+		throw new Error('Cannot verify publication of ' + name + ': ' + response.status)
+	return true
+}
+
 export async function metadata(name, version) {
 	if (!/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(version))
 		throw new Error('Expected exact package version')

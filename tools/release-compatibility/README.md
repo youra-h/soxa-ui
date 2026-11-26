@@ -7,7 +7,7 @@ npm run compatibility:report
 npm run check:compatibility
 ```
 
-The report compares every publishable package with an **exact published baseline**:
+The report compares previously published packages with an **exact published baseline**:
 component packages and themes 0.6.0, icon packs 0.3.3 and MCP 0.0.1.
 [baseline.json](./baseline.json) records each version, npm tarball URL and sha512
 integrity. The checker verifies archives on every read and never substitutes latest,
@@ -74,8 +74,10 @@ npm run compatibility:baseline
 Commit the new pins, remove or reconcile stale reviews and rerun the build/check.
 Never advance the baseline to hide an unreviewed change: baseline accepts only exact
 versions already available from npm. Keep the old upgrade guides for consumers.
-All existing publishable packages must remain represented; onboarding a newly published
-package requires updating its baseline pin.
+A package gets its first baseline pin after its first publication. Until then, the
+checker accepts a missing pin only if the public npm registry returns 404 for the
+package name. A published name must have a baseline pin even when the local version
+has yet to be published.
 
 ## Limits
 
