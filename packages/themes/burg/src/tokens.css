@@ -3,6 +3,7 @@
 	--so-radius: 0.5rem;
 	--so-spacing: 0.25rem;
 	--so-place-surface: var(--so-panel-surface, var(--so-burg-surface));
+	--so-burg-focus-edge: oklch(0.66 0 0);
 
 	--so-button-height-normal: 1.875rem;
 	--so-button-height-sm: calc(var(--so-button-height-normal) - 0.125rem);
@@ -15,6 +16,16 @@
 	--so-button-font-size-lg: calc(var(--so-burg-button-font-size-normal) + 0.0625rem);
 	--so-button-font-size-xl: calc(var(--so-burg-button-font-size-normal) + 0.125rem);
 	--so-button-font-size-2xl: calc(var(--so-burg-button-font-size-normal) + 0.1875rem);
+
+	--so-input-height-sm: var(--so-button-height-sm);
+	--so-input-height-normal: var(--so-button-height-normal);
+	--so-input-height-lg: var(--so-button-height-lg);
+	--so-input-height-xl: var(--so-button-height-xl);
+	--so-input-height-2xl: var(--so-button-height-2xl);
+	--so-input-font-size-sm: var(--so-button-font-size-sm);
+	--so-input-font-size-lg: var(--so-button-font-size-lg);
+	--so-input-font-size-xl: var(--so-button-font-size-xl);
+	--so-input-font-size-2xl: var(--so-button-font-size-2xl);
 }
 
 [data-so-theme='burg'] {
@@ -22,7 +33,10 @@
 	--so-burg-surface: #fff;
 	--so-burg-text: #232529;
 	--so-burg-border: #c8cbd0;
-	--so-burg-focus: #356aa0;
+	--so-burg-muted: #626872;
+	--so-burg-row-highlight: oklch(0.96 0 0);
+	--so-burg-focus: oklch(0.84 0 0);
+	--so-burg-progress-accent: #356aa0;
 	--so-burg-danger: #a6333a;
 }
 
@@ -31,6 +45,9 @@
 	--so-burg-surface: #202226;
 	--so-burg-text: #eff0f3;
 	--so-burg-border: #62666f;
-	--so-burg-focus: #a2c7ee;
+	--so-burg-muted: #aeb3bd;
+	--so-burg-row-highlight: oklch(0.3 0 0);
+	--so-burg-focus: oklch(0.48 0 0);
+	--so-burg-progress-accent: #a2c7ee;
 	--so-burg-danger: #ffa1a7;
 }

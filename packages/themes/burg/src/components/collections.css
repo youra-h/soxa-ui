@@ -1,0 +1,94 @@
+/* Teleported panels carry the scheme on their own root. */
+:where(.so-list-box, .so-select__panel, .so-menu__panel, .so-menu-item__panel):where(
+	[data-so-theme='burg'],
+	[data-so-theme='burg-dark'],
+	[data-so-theme='burg'] *,
+	[data-so-theme='burg-dark'] *
+) {
+	--so-panel-surface: var(--so-burg-surface);
+	--so-group-separator-width: 1px;
+	background-color: var(--so-panel-surface);
+	color: var(--so-burg-text);
+	border: 1px solid var(--so-burg-border);
+}
+
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	&:where(.so-select__panel),
+	:where(.so-select__panel) {
+		border-radius: var(--so-select-radius, var(--so-radius));
+	}
+
+	&:where(.so-menu__panel, .so-menu-item__panel),
+	:where(.so-menu__panel, .so-menu-item__panel) {
+		border-radius: var(--so-menu-radius, var(--so-radius));
+	}
+
+	:where(.so-list-box) {
+		border-radius: var(--so-list-box-radius, var(--so-radius));
+	}
+
+	:where(.so-list-box__list:focus-visible) {
+		outline: 2px solid var(--so-burg-focus-edge);
+		outline-offset: -2px;
+		border-radius: calc(var(--so-radius) * 0.75);
+	}
+
+	:where(.so-list-box-item, .so-select-item, .so-menu-item) > :where(.so-button) {
+		--so-burg-button-ink: var(--so-burg-button-tone);
+		border-radius: var(--so-button-radius, calc(var(--so-radius) * 0.75));
+		font-weight: 450;
+		outline-offset: -2px;
+	}
+
+	:where(.so-list-box-item, .so-select-item, .so-menu-item)
+		> :where(.so-button:not(.so-button--view-filled)) {
+		--so-burg-button-fill: transparent;
+	}
+
+	:where(.so-list-box-item, .so-select-item) > :where(.so-button--view-filled) {
+		--so-burg-button-ink: var(--so-burg-surface);
+	}
+
+	:where(.so-menu-item--variant-negative) > :where(.so-button) {
+		--so-burg-button-tone: var(--so-burg-danger);
+	}
+
+	:where(.so-list-box-item, .so-select-item, .so-menu-item):where(
+			[data-highlighted='true'],
+			[data-open='true'],
+			[data-selected='true']
+		):not(:where([data-disabled='true']))
+		> :where(.so-button:not(.so-button--view-filled)) {
+		--so-burg-button-background: var(--so-burg-row-highlight);
+	}
+
+	@media (hover: hover) {
+		:where(.so-list-box-item, .so-select-item, .so-menu-item)
+			> :where(.so-button:hover:not(.so-button--view-filled, [data-disabled='true'])) {
+			--so-burg-button-background: var(--so-burg-row-highlight);
+		}
+	}
+
+	:where(.so-list-box-group__label, .so-select-group__label, .so-menu-group__label) {
+		color: var(--so-burg-muted);
+		font-weight: 600;
+	}
+
+	:where(.so-list-box__separator, .so-select__separator, .so-menu-separator) {
+		block-size: var(--so-group-separator-width);
+		background-color: var(--so-burg-border);
+	}
+
+	:where(.so-menu-item__shortcut, .so-menu-item__arrow) {
+		color: var(--so-burg-muted);
+	}
+
+	:where(.so-menu-item__dot) {
+		border-radius: 50%;
+		background-color: currentColor;
+	}
+
+	:where(.so-menu-item__arrow) {
+		scale: var(--so-dir-sign) 1;
+	}
+}
