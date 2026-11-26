@@ -17,11 +17,9 @@ import type {
 	TListIndicator,
 	TSkeletonShape,
 	TSkeletonAnimation,
-	TProgressLinearOrientation,
-	TSlideOrientation,
+	TOrientation,
 	TSlideSnap,
 	TSliderTooltip,
-	TTabsOrientation,
 	TTabsAlignment,
 	TTabsPosition,
 	TTabsView,
@@ -141,16 +139,7 @@ export const SKELETON_SHAPES = enumOf<TSkeletonShape>()(['rect', 'rounded', 'cir
 
 export const SKELETON_ANIMATIONS = enumOf<TSkeletonAnimation>()(['pulse', 'wave', 'none'])
 
-export const TABS_ORIENTATIONS = enumOf<TTabsOrientation>()(['horizontal', 'vertical'])
-
-/** Ось хода ползунка — общая у всего, что задают перетаскиванием. */
-export const SLIDE_ORIENTATIONS = enumOf<TSlideOrientation>()(['horizontal', 'vertical'])
-
-/** Ось полосы ProgressLinear: вдоль строки или снизу вверх. */
-export const PROGRESS_LINEAR_ORIENTATIONS = enumOf<TProgressLinearOrientation>()([
-	'horizontal',
-	'vertical',
-])
+export const ORIENTATIONS = enumOf<TOrientation>()(['horizontal', 'vertical'])
 
 /** Щелчок к меткам: как метки притягивают ручку, которую тянут указателем. */
 export const SLIDE_SNAPS = enumOf<TSlideSnap>()(['none', 'magnet', 'plateau', 'settle', 'hold'])

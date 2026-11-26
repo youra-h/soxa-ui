@@ -50,6 +50,7 @@ export const MOBILE_COMPONENTS = [
 	'progress-linear',
 	'progress-spinner',
 	'separator',
+	'splitter',
 	'skeleton',
 	'drag-and-drop',
 	'virtual',

@@ -508,6 +508,24 @@ a:not([class^='so-'], [class*=' so-']) {
 	max-inline-size: 100%;
 }
 
+.pg-prop__head--json.so-field--position-top > .so-field__control {
+	inline-size: min(100%, 32rem);
+}
+
+.pg-prop__notice {
+	display: block;
+	margin-block-start: 4px;
+	color: var(--so-negative-800);
+}
+
+.pg-prop__json {
+	inline-size: 100%;
+}
+
+.pg-prop__json textarea {
+	font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
 /* Поля тянутся на всю ширину контрола */
 .pg-prop__head > .so-field__control :is(.so-input, .so-select) {
 	width: 100%;
@@ -888,4 +906,56 @@ a:not([class^='so-'], [class*=' so-']) {
 /* Ссылка в тексте: ссылки стенда без подчёркивания, а здесь её иначе не видно */
 .pg-empty__link {
 	text-decoration: underline;
+}
+
+.pg-splitter-preview {
+	inline-size: min(100%, 36rem);
+	block-size: 9rem;
+	isolation: isolate;
+	overflow: hidden;
+	border: 1px solid var(--so-neutral-200);
+	border-radius: 6px;
+}
+
+.pg-splitter-preview[data-offset] {
+	border-color: transparent;
+	border-radius: 0;
+}
+
+.pg-splitter-preview[data-orientation='vertical'] {
+	block-size: 15rem;
+}
+
+.pg-splitter-preview > .so-splitter__panel {
+	background: var(--so-component-surface);
+}
+
+.pg-splitter-preview[data-offset] > .so-splitter__panel {
+	border-radius: 6px;
+	box-shadow: inset 0 0 0 1px var(--so-neutral-200);
+}
+
+.pg-splitter-preview > :is(.so-splitter__panel:first-child, .so-splitter__panel:last-child) {
+	background: var(--so-neutral-100);
+}
+
+.pg-splitter-preview__pane {
+	display: grid;
+	align-content: start;
+	gap: 2px;
+	min-inline-size: 0;
+	padding: 8px clamp(4px, 2vw, 12px);
+	font-size: 12px;
+	line-height: 1.35;
+}
+
+.pg-splitter-preview__pane > * {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.pg-splitter-preview__pane code {
+	color: var(--so-neutral-600);
+	font-size: 11px;
 }

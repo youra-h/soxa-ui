@@ -1,7 +1,7 @@
 import type { IComponentDescriptor, IPluginDefinition } from '@soxa-ui/setup'
 
 /**
- * How a prop is edited. Derived from metadata, never set by hand.
+ * How the Playground manifest edits a prop.
  *
  * `number-or-text` is the field of a prop typed exactly `Number` and `String`:
  * a typed number goes out as a number, anything else as a string
@@ -9,7 +9,9 @@ import type { IComponentDescriptor, IPluginDefinition } from '@soxa-ui/setup'
  * `height`), and for them these are two forms of the value: a number is px, a
  * string is a CSS value (`10%`, `2rem`, `auto`).
  */
-export type TControlKind = 'switch' | 'text' | 'number' | 'number-or-text' | 'select'
+export type TControlKind = 'switch' | 'text' | 'number' | 'number-or-text' | 'select' | 'json'
+
+export type TJsonPropParser = (text: string) => { value: unknown } | { error: string }
 
 /**
  * Where a prop lives on its plugin.
@@ -48,6 +50,7 @@ export type TPropControl = TPropOwner & {
 	 */
 	name: string
 	kind: TControlKind
+	parseJson?: TJsonPropParser
 	/** Options for `select`; empty for the rest. */
 	options?: readonly string[]
 	/**
@@ -57,6 +60,7 @@ export type TPropControl = TPropOwner & {
 	 */
 	values?: Readonly<Record<string, unknown>>
 	description: string
+	notice?: string
 	/**
 	 * The default from the prop spec (`TPropSpec.default`).
 	 *
@@ -65,10 +69,9 @@ export type TPropControl = TPropOwner & {
 	 */
 	default?: unknown
 	/**
-	 * The value a row opens with: what the preview itself gives the component
-	 * (`PREVIEW_PROPS`), such as a button's label or a field's placeholder. The
-	 * row's field shows the same as the columns, and the default stays separate:
-	 * the instance gets it when the field is cleared.
+	 * The value a row opens with. An editor can override the shared `PREVIEW_PROPS`
+	 * for its own example. The field and both columns open with this value.
+	 * Clearing the field gives the instance the descriptor default.
 	 *
 	 * The key matters, as with `default`: no key means the preview does not set
 	 * this prop, and the row opens with the default.

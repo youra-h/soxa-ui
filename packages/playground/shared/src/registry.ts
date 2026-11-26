@@ -69,6 +69,9 @@ import {
 	SeparatorDescriptor,
 	SkeletonDescriptor,
 	SliderDescriptor,
+	SplitterDescriptor,
+	SplitterPanelDescriptor,
+	SplitterHandleDescriptor,
 	StylableDescriptor,
 	SwitchDescriptor,
 	TableDescriptor,
@@ -148,6 +151,18 @@ export const COMPONENTS: readonly TComponentEntry[] = [
 		group: 'display',
 		span: 1,
 		description: 'Перекрывающаяся группа с явным числом скрытых пользователей',
+	},
+	{
+		id: 'splitter',
+		label: 'Splitter',
+		descriptor: SplitterDescriptor,
+		parts: {
+			Panel: () => [SplitterPanelDescriptor()],
+			Handle: () => [SplitterHandleDescriptor()],
+		},
+		group: 'utilities',
+		span: 2,
+		description: 'Панели с перетаскиваемыми границами и ограничениями размеров',
 	},
 	{
 		id: 'file-upload',

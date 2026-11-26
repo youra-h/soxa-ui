@@ -302,6 +302,12 @@
       "scope": "so-slider"
     },
     {
+      "name": "so-splitter",
+      "sources": ["packages/core/src/components/custom/splitter/splitter.class.ts"],
+      "description": "Root of the layout that distributes space among Splitter panels.",
+      "scope": "so-splitter"
+    },
+    {
       "name": "so-switch",
       "sources": ["packages/core/src/components/custom/switch/switch.class.ts"],
       "description": "Root of switch. Inherited component classes use the concrete component's base name.",
@@ -2826,6 +2832,31 @@
       "scope": "so-slider"
     },
     {
+      "name": "so-splitter__grip",
+      "sources": [
+        "packages/ui/angular/src/components/splitter/handle/splitter-handle.component.ts",
+        "packages/ui/react/src/components/splitter/handle/SplitterHandle.tsx",
+        "packages/ui/solid/src/components/splitter/handle/SplitterHandle.tsx",
+        "packages/ui/svelte/src/components/splitter/handle/SplitterHandle.svelte",
+        "packages/ui/vue/src/components/splitter/handle/SplitterHandle.vue",
+        "packages/ui/webc/src/components/splitter/handle/SplitterHandle.element.ts"
+      ],
+      "description": "Optional grip centered on a handle with a decorative icon slot.",
+      "scope": "so-splitter"
+    },
+    {
+      "name": "so-splitter__panel",
+      "sources": ["packages/core/src/components/custom/splitter/panel/panel.class.ts"],
+      "description": "Panel in a Splitter, sized as a share of available space.",
+      "scope": "so-splitter"
+    },
+    {
+      "name": "so-splitter__thumb",
+      "sources": ["packages/core/src/components/custom/splitter/handle/handle.class.ts"],
+      "description": "Focusable handle between two panels in a Splitter.",
+      "scope": "so-splitter"
+    },
+    {
       "name": "so-switch__track",
       "sources": [
         "packages/ui/angular/src/components/switch/switch.component.html",
@@ -3386,7 +3417,8 @@
       "name": "--size-",
       "sources": [
         "packages/core/src/components/custom/menu/menu.class.ts",
-        "packages/core/src/components/custom/menu/submenu/submenu.class.ts"
+        "packages/core/src/components/custom/menu/submenu/submenu.class.ts",
+        "packages/core/src/components/custom/splitter/handle/handle.class.ts"
       ],
       "pattern": "so-<block>--size-<value>",
       "description": "Library size scale; normal is emitted too.",
@@ -3495,6 +3527,14 @@
       "presence": "Always present on applicable component instances, including the initial render; false is serialized as \"false\"."
     },
     {
+      "name": "data-collapsed",
+      "sources": ["packages/core/src/components/custom/splitter/panel/panel.class.ts"],
+      "description": "Indicates a panel that consumes no space in the Splitter.",
+      "scope": "so-splitter",
+      "values": "empty",
+      "presence": "When the state applies"
+    },
+    {
       "name": "data-contained",
       "sources": [
         "packages/core/src/components/custom/drawer/drawer.class.ts",
@@ -3536,7 +3576,11 @@
     },
     {
       "name": "data-disabled",
-      "sources": ["packages/core/src/components/base/control/control.class.ts"],
+      "sources": [
+        "packages/core/src/components/base/control/control.class.ts",
+        "packages/core/src/components/custom/splitter/handle/handle.class.ts",
+        "packages/plugins/src/custom/splitter/handle.ts"
+      ],
       "description": "Control is disabled, including disabled inherited from its owner.",
       "scope": "TControl descendants and collection items",
       "values": "true | false",
@@ -3555,6 +3599,8 @@
       "sources": [
         "packages/core/src/components/custom/file-upload/file-upload.class.ts",
         "packages/core/src/components/custom/slider/slider.class.ts",
+        "packages/core/src/components/custom/splitter/handle/handle.class.ts",
+        "packages/core/src/components/custom/splitter/splitter.class.ts",
         "packages/core/src/components/custom/table/collection/extensions/columns/columns.extension.ts"
       ],
       "description": "Drag in progress.",
@@ -3652,6 +3698,14 @@
       "presence": "TDataset serializes false as \"false\"; null/undefined removes the attribute. See scope for the bound DOM node."
     },
     {
+      "name": "data-index",
+      "sources": ["packages/core/src/components/custom/splitter/handle/handle.class.ts"],
+      "description": "Identifies a handle by the zero-based index of the panel before it.",
+      "scope": "so-splitter",
+      "values": "numeric index",
+      "presence": "When the state applies"
+    },
+    {
       "name": "data-indicator",
       "sources": [
         "packages/core/src/components/custom/list-box/collection/extensions/list-box/list-box.extension.ts",
@@ -3737,6 +3791,14 @@
       "presence": "TDataset serializes false as \"false\"; null/undefined removes the attribute. See scope for the bound DOM node."
     },
     {
+      "name": "data-offset",
+      "sources": ["packages/core/src/components/custom/splitter/splitter.class.ts"],
+      "description": "Indicates that Splitter panels are spaced away from their dividers.",
+      "scope": "so-splitter",
+      "values": "Empty string.",
+      "presence": "Only when the offset is positive."
+    },
+    {
       "name": "data-open",
       "sources": [
         "packages/core/src/components/base/layer/layer.class.ts",
@@ -3753,6 +3815,14 @@
       "scope": "Frame/popup panel, Dialog/Drawer backdrop and panel, Toast item; Popover/Menu/Select/DatePicker root",
       "values": "true | false",
       "presence": "TDataset serializes false as \"false\"; null/undefined removes the attribute. See scope for the bound DOM node."
+    },
+    {
+      "name": "data-orientation",
+      "sources": ["packages/core/src/components/custom/splitter/splitter.class.ts"],
+      "description": "Represents a named thickness of a Splitter handle.",
+      "scope": "so-splitter",
+      "values": "numeric index",
+      "presence": "When the state applies"
     },
     {
       "name": "data-out-of-bounds",
@@ -4117,6 +4187,13 @@
       "pattern": "so-<block>--size-<size>",
       "scope": "TStylable descendants and Icon; sm | normal | lg | xl | 2xl",
       "description": "Computed emission: TStylable descendants and Icon; sm | normal | lg | xl | 2xl. This source expression is checked explicitly so new dynamic cases require a documented mapping."
+    },
+    {
+      "name": "`--size-${this.size}`",
+      "sources": ["packages/core/src/components/custom/splitter/handle/handle.class.ts"],
+      "description": "Represents a named thickness of a Splitter handle.",
+      "scope": "so-splitter",
+      "pattern": "so-splitter__thumb--size-<size>"
     },
     {
       "name": "`${ctor.baseClass}__panel`",

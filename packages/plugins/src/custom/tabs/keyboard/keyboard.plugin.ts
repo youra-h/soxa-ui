@@ -1,4 +1,4 @@
-import type { ITabs, ITabsItem, TTabsCollection, TTabsOrientation } from '@soxa-ui/core'
+import type { ITabs, ITabsItem, TTabsCollection, TOrientation } from '@soxa-ui/core'
 import { TBasePlugin } from '../../../base'
 import type { IPluginContext } from '../../../base'
 import { TElementPlugin } from '../../element'
@@ -11,7 +11,7 @@ import { tabOf } from '../tab'
 import type { TTabsKeyboardPluginEvents } from './types'
 
 /** Стрелки «к предыдущему» и «к следующему» — на оси ориентации списка. */
-const AXIS_KEYS: Record<TTabsOrientation, readonly [back: string, forward: string]> = {
+const AXIS_KEYS: Record<TOrientation, readonly [back: string, forward: string]> = {
 	horizontal: ['ArrowLeft', 'ArrowRight'],
 	vertical: ['ArrowUp', 'ArrowDown'],
 }

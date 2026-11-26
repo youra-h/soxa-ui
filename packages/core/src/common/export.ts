@@ -8,6 +8,7 @@ export type {
 	TComponentSize,
 	TValuePayload,
 	TScrollBehavior,
+	TOrientation,
 	TConstructor,
 } from './types'
 export * from './attributes'

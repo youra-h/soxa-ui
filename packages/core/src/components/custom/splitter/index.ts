@@ -1,0 +1,7 @@
+export { TSplitter } from './splitter.class'
+export { TSplitterPanel } from './panel/panel.class'
+export { TSplitterHandle } from './handle/handle.class'
+export type * from './types'
+export type * from './part/types'
+export type * from './panel/types'
+export type * from './handle/types'

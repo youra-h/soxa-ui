@@ -633,6 +633,118 @@ export const PREVIEWS: Record<string, TPreview> = {
 			})),
 		},
 	},
+	splitter: {
+		tag: 'div',
+		is: 'so-splitter',
+		attributes: { class: 'pg-splitter-preview' },
+		slots: {
+			default: [
+				{
+					tag: 'div',
+					is: 'so-splitter-panel',
+					props: { panel: 'files' },
+					slots: {
+						default: [
+							{
+								tag: 'div',
+								attributes: { class: 'pg-splitter-preview__pane' },
+								slots: {
+									default: [
+										{
+											tag: 'strong',
+											slots: {
+												default: [() => document.createTextNode('Файлы')],
+											},
+										},
+										{
+											tag: 'code',
+											slots: {
+												default: [() => document.createTextNode('App.vue')],
+											},
+										},
+									],
+								},
+							},
+						],
+					},
+				},
+				{
+					tag: 'div',
+					is: 'so-splitter-handle',
+					props: { panel: 'files', size: 'sm', aria_label: 'Файлы' },
+				},
+				{
+					tag: 'div',
+					is: 'so-splitter-panel',
+					props: { panel: 'editor' },
+					slots: {
+						default: [
+							{
+								tag: 'div',
+								attributes: { class: 'pg-splitter-preview__pane' },
+								slots: {
+									default: [
+										{
+											tag: 'strong',
+											slots: {
+												default: [
+													() => document.createTextNode('Редактор'),
+												],
+											},
+										},
+										{
+											tag: 'code',
+											slots: {
+												default: [
+													() => document.createTextNode('<Splitter />'),
+												],
+											},
+										},
+									],
+								},
+							},
+						],
+					},
+				},
+				{
+					tag: 'div',
+					is: 'so-splitter-handle',
+					props: { panel: 'editor', size: 'lg', aria_label: 'Редактор' },
+				},
+				{
+					tag: 'div',
+					is: 'so-splitter-panel',
+					props: { panel: 'preview' },
+					slots: {
+						default: [
+							{
+								tag: 'div',
+								attributes: { class: 'pg-splitter-preview__pane' },
+								slots: {
+									default: [
+										{
+											tag: 'strong',
+											slots: {
+												default: [() => document.createTextNode('Вывод')],
+											},
+										},
+										{
+											tag: 'code',
+											slots: {
+												default: [
+													() => document.createTextNode('Сборка готова'),
+												],
+											},
+										},
+									],
+								},
+							},
+						],
+					},
+				},
+			],
+		},
+	},
 	'file-upload': { tag: 'div', is: 'so-file-upload' },
 	'code-block': { tag: 'div', is: 'so-code-block' },
 	label: {

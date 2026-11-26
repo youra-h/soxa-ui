@@ -3,6 +3,7 @@ import { TBasePlugin } from '../../../base'
 import type { IPluginContext } from '../../../base'
 import { TElementPlugin } from '../../element'
 import type { IDomEventTarget } from '../../../utils'
+import { TPointerGesture } from '../../../utils/pointer-gesture'
 import { fractionAt, lengthAlong, slideDirection } from '../direction'
 import { fieldOf, thumbsOf, trackOf } from '../parts'
 import type { TSlideDirection } from '../types'
@@ -33,11 +34,14 @@ const SNAP_STRATEGIES: Readonly<Record<TSlideSnap, TSlideSnapStrategyCtor>> = {
 /** Стоянка ручки на метке в режиме `hold`, мс, — пока опция не задана. */
 const HOLD_DELAY = 250
 
+type TSlideGesture = Omit<TSlidePointerGesture, 'pointer'>
+type TSlideStart = Omit<TSlidePointerStart, 'pointer'>
+
 /**
  * Где ручка жеста была бы без щелчка: сдвинута от своего места при нажатии на
  * столько же, на сколько указатель.
  */
-function unsnapped(gesture: TSlidePointerGesture): number {
+function unsnapped(gesture: TSlideGesture): number {
 	return gesture.anchor + (gesture.at - gesture.origin)
 }
 
@@ -75,9 +79,8 @@ function unsnapped(gesture: TSlidePointerGesture): number {
 export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPluginEvents> {
 	private _owner: ISlidable | null = null
 	private _root: Element | null = null
-	private _gesture: TSlidePointerGesture | null = null
-	/** Жест кончился отпусканием: следующий `click` корня — его, а не пользователя */
-	private _swallowClick = false
+	private _gesture: TSlideGesture | null = null
+	private readonly _pointer = new TPointerGesture()
 	/** Класс стратегии щелчка для следующего жеста — по режиму владельца */
 	private _snapStrategy: TSlideSnapStrategyCtor = TNoneSnapStrategy
 	private _holdDelay = HOLD_DELAY
@@ -129,6 +132,7 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 	}
 
 	private _detach(): void {
+		this._pointer.finish()
 		this._end()
 
 		const target: IDomEventTarget | null = this._root
@@ -141,15 +145,13 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 		target?.removeEventListener('click', this._onClick)
 
 		this._root = null
-		this._swallowClick = false
 	}
 
 	private readonly _onPointerDown = (event: PointerEvent): void => {
 		const owner = this._owner
 		const root = this._root
 
-		// Основная кнопка; жест уже идёт — второй указатель его не перехватывает
-		if (!owner || !root || this._gesture || event.button !== 0) return
+		if (!owner || !root || !this._pointer.canStart(event)) return
 
 		const track = trackOf(owner, root)
 
@@ -161,8 +163,7 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 		const thumb = thumbsOf(owner, track).findIndex(
 			(node) => event.target instanceof Node && node.contains(event.target),
 		)
-		const start: TSlidePointerStart = {
-			pointer: event.pointerId,
+		const start: TSlideStart = {
 			track,
 			direction,
 			origin: fraction,
@@ -172,16 +173,9 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 
 		if (!gesture) return
 
-		event.preventDefault()
-
 		this._gesture = gesture
-		this._swallowClick = false
 		this._scheduleWake(gesture.snap.wakeAt)
-
-		// Протяжка за пределами ползунка и отпускание где угодно приходят
-		// корню. Среда без захвата указателя (jsdom) ведёт жест без него:
-		// события там приходят туда, куда их отправили
-		if ('setPointerCapture' in root) root.setPointerCapture(event.pointerId)
+		this._pointer.start(root, event)
 
 		this._focusActive()
 	}
@@ -193,9 +187,9 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 	private _grab(
 		owner: ISlidable,
 		thumb: number,
-		start: TSlidePointerStart,
+		start: TSlideStart,
 		box: DOMRectReadOnly,
-	): TSlidePointerGesture | null {
+	): TSlideGesture | null {
 		if (!owner.grab(thumb, start.origin)) return null
 
 		const anchor = owner.fractions[thumb]
@@ -210,9 +204,9 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 	 */
 	private _press(
 		owner: ISlidable,
-		start: TSlidePointerStart,
+		start: TSlideStart,
 		box: DOMRectReadOnly,
-	): TSlidePointerGesture | null {
+	): TSlideGesture | null {
 		const anchor = start.origin
 		const snap = this._snapFor(owner, start.direction, box, anchor)
 		const placed = snap.follow(anchor, performance.now())
@@ -242,7 +236,7 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 	private readonly _onPointerMove = (event: PointerEvent): void => {
 		const gesture = this._gesture
 
-		if (!gesture || event.pointerId !== gesture.pointer) return
+		if (!gesture || !this._pointer.owns(event)) return
 
 		gesture.at = fractionAt(gesture.direction, gesture.track.getBoundingClientRect(), event)
 
@@ -259,7 +253,7 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 	 * равенству с точкой нажатия. Щелчок оставил ручку на том же месте —
 	 * сообщать нечего.
 	 */
-	private _follow(gesture: TSlidePointerGesture): void {
+	private _follow(gesture: TSlideGesture): void {
 		const target = unsnapped(gesture)
 		const placed = gesture.snap.follow(target, performance.now())
 
@@ -297,21 +291,11 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 	}
 
 	private readonly _onPointerUp = (event: PointerEvent): void => {
-		const gesture = this._gesture
-
-		if (!gesture || event.pointerId !== gesture.pointer) return
-
-		// За отпусканием браузер пришлёт `click`; отнятый указатель — нет
-		this._swallowClick = event.type === 'pointerup'
-
-		this._end()
+		if (this._pointer.finish(event)) this._end()
 	}
 
 	private readonly _onClick = (event: MouseEvent): void => {
-		if (!this._swallowClick) return
-
-		this._swallowClick = false
-		event.preventDefault()
+		this._pointer.preventTrailingClick(event)
 	}
 
 	/**

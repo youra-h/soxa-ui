@@ -55,3 +55,4 @@ export * from './alert-dialog'
 
 export * from './collection-initial'
 export * from './file-upload'
+export * from './splitter'

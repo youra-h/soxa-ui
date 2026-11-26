@@ -25,7 +25,7 @@ import { userEvent } from 'vitest/browser'
 import { defineComponent, h, type VNodeChild } from 'vue'
 import type { ITabsProps, TTabsOrientation, TTabsView } from '@soxa-ui/core'
 import { Tabs, TabsContent, TabsItem } from '@soxa-ui/vue'
-import { TABS_ALIGNMENTS, TABS_ORIENTATIONS, TABS_VIEWS } from '@soxa-ui/playground-shared'
+import { TABS_ALIGNMENTS, ORIENTATIONS, TABS_VIEWS } from '@soxa-ui/playground-shared'
 
 import { find, style } from './colors'
 import { forcedColors } from './media'
@@ -196,9 +196,9 @@ const outerOf = (view: TTabsView, orientation: TTabsOrientation): TTabsLook =>
 
 /** Вид внешних × вид внутренних × ориентации тех и других. */
 const VIEW_CASES = TABS_VIEWS.flatMap((outerView) =>
-	TABS_ORIENTATIONS.flatMap((outerOrientation) =>
+	ORIENTATIONS.flatMap((outerOrientation) =>
 		TABS_VIEWS.flatMap((innerView) =>
-			TABS_ORIENTATIONS.map((innerOrientation) => ({
+			ORIENTATIONS.map((innerOrientation) => ({
 				name: `${outerView} ${ORIENTATION_NAMES[outerOrientation]} → ${innerView} ${ORIENTATION_NAMES[innerOrientation]}`,
 				outer: outerOf(outerView, outerOrientation),
 				inner: { view: innerView, orientation: innerOrientation },
@@ -234,7 +234,7 @@ const ALIGNMENT_CASES = TABS_ALIGNMENTS.flatMap((alignment) =>
  * ориентациях. Ориентация внутренних системных цветов не меняет.
  */
 const FORCED_CASES = TABS_VIEWS.flatMap((outerView) =>
-	TABS_ORIENTATIONS.flatMap((outerOrientation) =>
+	ORIENTATIONS.flatMap((outerOrientation) =>
 		TABS_VIEWS.map((innerView) => ({
 			name: `${outerView} ${ORIENTATION_NAMES[outerOrientation]} → ${innerView}`,
 			outer: outerOf(outerView, outerOrientation),

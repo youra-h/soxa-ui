@@ -3,8 +3,14 @@ import type {
 	IValueControlProps,
 	TValueControlEvents,
 } from '../../base/value-control'
-import type { TAriaAttributes, TDatasetAttributes, TEvented, TValuePayload } from '../../../common'
-import type { ISlidable, TSlideOrientation, TSlideSnap } from '../slide'
+import type {
+	TAriaAttributes,
+	TDatasetAttributes,
+	TEvented,
+	TOrientation,
+	TValuePayload,
+} from '../../../common'
+import type { ISlidable, TSlideSnap } from '../slide'
 
 /**
  * Значение ползунка: число — одна ручка, массив — по ручке на элемент.
@@ -132,7 +138,7 @@ export type TSliderEvents = TValueControlEvents<TSliderValue> & {
 	/** change:largeStep */
 	'change:largeStep': (payload: TValuePayload<number>) => void
 	/** change:orientation */
-	'change:orientation': (payload: TValuePayload<TSlideOrientation>) => void
+	'change:orientation': (payload: TValuePayload<TOrientation>) => void
 	/** change:inverted */
 	'change:inverted': (payload: TValuePayload<boolean>) => void
 	/** change:origin */
@@ -170,7 +176,7 @@ export interface ISliderProps extends IValueControlProps<TSliderValue> {
 	/** Сколько шагов в крупном шаге (Shift со стрелкой, PageUp и PageDown); у списка — позиций */
 	largeStep?: number
 	/** Ось хода */
-	orientation?: TSlideOrientation
+	orientation?: TOrientation
 	/** Значение растёт в обратную сторону: справа налево или сверху вниз */
 	inverted?: boolean
 	/**
@@ -219,7 +225,7 @@ export interface ISlider
 	/** Сколько шагов в крупном шаге */
 	largeStep: number
 	/** Ось хода */
-	orientation: TSlideOrientation
+	orientation: TOrientation
 	/** Значение растёт в обратную сторону */
 	inverted: boolean
 	/** Откуда растёт заливка одной ручки; `undefined` — от `min` */

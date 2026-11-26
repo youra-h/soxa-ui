@@ -196,3 +196,7 @@
 @layer components.so.badge {
 	@include meta.load-css('components/badge/badge');
 }
+
+@layer components.so.splitter {
+	@include meta.load-css('components/splitter/splitter');
+}

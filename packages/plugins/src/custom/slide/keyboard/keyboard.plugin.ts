@@ -3,7 +3,7 @@ import { TBasePlugin } from '../../../base'
 import type { IPluginContext } from '../../../base'
 import { TElementPlugin } from '../../element'
 import type { IDomEventTarget } from '../../../utils'
-import { arrowStep, slideDirection } from '../direction'
+import { slideKeyAction } from '../keys'
 import { fieldOf, thumbsOf, trackOf } from '../parts'
 import type { TSlideKeyboardPluginEvents } from './types'
 
@@ -82,7 +82,7 @@ export class TSlideKeyboardPlugin extends TBasePlugin<ISlidable, TSlideKeyboardP
 		if (!owner || !root) return
 
 		const index = this._thumbOf(owner, root, event.target)
-		const action = index < 0 ? null : this._actionOf(owner, root, event)
+		const action = index < 0 ? null : slideKeyAction(owner, root, event)
 
 		if (!action) return
 
@@ -116,32 +116,6 @@ export class TSlideKeyboardPlugin extends TBasePlugin<ISlidable, TSlideKeyboardP
 		const value = String(owner.values[index])
 
 		if (field.value !== value) field.value = value
-	}
-
-	/** Что клавиша делает с ручкой; не наша клавиша — `null`, её обработает браузер. */
-	private _actionOf(
-		owner: ISlidable,
-		root: Element,
-		event: KeyboardEvent,
-	): ((index: number) => void) | null {
-		switch (event.key) {
-			case 'Home':
-				return (index) => owner.moveToEdge(index, 'start')
-			case 'End':
-				return (index) => owner.moveToEdge(index, 'end')
-			case 'PageUp':
-				return (index) => owner.shift(index, owner.largeStep)
-			case 'PageDown':
-				return (index) => owner.shift(index, -owner.largeStep)
-		}
-
-		const step = arrowStep(slideDirection(owner, root), event.key)
-
-		if (step === null) return null
-
-		const count = event.shiftKey ? step * owner.largeStep : step
-
-		return (index) => owner.shift(index, count)
 	}
 
 	/** Номер ручки, чьё поле — цель события; не поле ручки — `-1`. */

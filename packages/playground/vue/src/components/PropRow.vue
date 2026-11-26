@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onUnmounted, shallowRef, watch } from 'vue'
+import { computed, onUnmounted, ref, shallowRef, watch } from 'vue'
 import { createEngine, isEventSource } from '@soxa-ui/core'
 import { TPluginBundle } from '@soxa-ui/plugins'
 import { Field } from '@soxa-ui/vue'
@@ -17,6 +17,8 @@ import {
 import PropControl from './PropControl.vue'
 import PreviewColumns from './PreviewColumns.vue'
 import CodeView from './CodeView.vue'
+
+const controlError = ref('')
 
 const props = defineProps<{
 	entry: TComponentEntry
@@ -243,16 +245,24 @@ const instanceBind = computed(() => ({
 		-->
 		<Field
 			class="pg-prop__head"
+			:class="{ 'pg-prop__head--json': control.kind === 'json' }"
 			:position="control.kind === 'switch' ? 'start' : 'top'"
 			size="sm"
 			:label="control.name"
 			:helper="control.description"
+			:error="controlError"
+			:invalid="Boolean(controlError)"
 		>
 			<template #label-content>
 				<code class="pg-prop__name">{{ control.name }}</code>
 			</template>
 
-			<PropControl :control="control" v-model="value" />
+			<template v-if="control.notice" #helper-content>
+				{{ control.description }}
+				<span class="pg-prop__notice">{{ control.notice }}</span>
+			</template>
+
+			<PropControl :control="control" v-model="value" @update:error="controlError = $event" />
 		</Field>
 
 		<PreviewColumns

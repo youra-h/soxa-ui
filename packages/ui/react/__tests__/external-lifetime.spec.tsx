@@ -70,6 +70,9 @@ import {
 	TSeparator,
 	TSkeleton,
 	TSlider,
+	TSplitter,
+	TSplitterHandle,
+	TSplitterPanel,
 	TSwitch,
 	TTable,
 	TTabs,
@@ -138,6 +141,7 @@ import {
 	Separator,
 	Skeleton,
 	Slider,
+	Splitter,
 	Switch,
 	Table,
 	Tabs,
@@ -944,6 +948,25 @@ const COMPONENTS: Readonly<Record<string, Readonly<Record<string, TCase>>>> = {
 			() => new TSlider({ value: [20, 80] }),
 			(ctrl) => <Slider ctrl={ctrl} />,
 		),
+	},
+	Splitter: {
+		'owner, panels and handle with external ctrl': () => {
+			const ctrl = new TSplitter({ panels: [{ id: 'first' }, { id: 'second' }] })
+			const first = new TSplitterPanel({ panel: 'first' })
+			const second = new TSplitterPanel({ panel: 'second' })
+			const handle = new TSplitterHandle({ panel: 'first' })
+
+			return {
+				node: (
+					<Splitter ctrl={ctrl}>
+						<Splitter.Panel ctrl={first} />
+						<Splitter.Handle ctrl={handle} aria_label="First panel" />
+						<Splitter.Panel ctrl={second} />
+					</Splitter>
+				),
+				buses: [ctrl.events, first.events, handle.events, second.events],
+			}
+		},
 	},
 	Switch: {
 		ctrl: overCtrl(

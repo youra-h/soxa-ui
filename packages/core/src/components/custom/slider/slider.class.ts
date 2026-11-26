@@ -3,8 +3,8 @@ import type { TDefaultValues } from '../../base/component'
 import { createScale } from '../../../common'
 import { sameValue } from '../../../common/utility/same-value'
 import { percent } from '../../../common/utility/percent'
-import type { IScale, TAriaAttributes } from '../../../common'
-import type { TSlideEdge, TSlideOrientation, TSlideSnap } from '../slide'
+import type { IScale, TAriaAttributes, TOrientation } from '../../../common'
+import type { TSlideEdge, TSlideSnap } from '../slide'
 import type {
 	ISlider,
 	ISliderProps,
@@ -140,7 +140,7 @@ export default class TSlider
 	protected _step: TSliderStep
 	protected _scale: IScale
 	protected _largeStep: number
-	protected _orientation!: TSlideOrientation
+	protected _orientation!: TOrientation
 	protected _inverted: boolean
 	protected _origin: number | undefined
 	protected _marks: TSliderMarks
@@ -271,11 +271,11 @@ export default class TSlider
 		this.events.emit('change:largeStep', { newValue: value, oldValue: oldLargeStep })
 	}
 
-	get orientation(): TSlideOrientation {
+	get orientation(): TOrientation {
 		return this._orientation
 	}
 
-	set orientation(value: TSlideOrientation) {
+	set orientation(value: TOrientation) {
 		const oldOrientation = this.orientation
 
 		if (this._orientation === value) return
@@ -641,7 +641,7 @@ export default class TSlider
 		return raw.map((value) => this._scale.snap(value)).sort((a, b) => a - b)
 	}
 
-	protected _applyOrientation(newValue: TSlideOrientation, oldValue?: TSlideOrientation): void {
+	protected _applyOrientation(newValue: TOrientation, oldValue?: TOrientation): void {
 		this._classes.swap({ prefix: '--orientation-', oldValue, newValue })
 		// Не для вида: по ориентации скринридер объявляет, какими стрелками
 		// двигать ручку. Уходит на каждое поле и у нескольких ручек (`_fieldAria`)

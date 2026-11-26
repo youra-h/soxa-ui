@@ -201,6 +201,10 @@
       "types": "./dist/components/toggle-group/index.d.ts",
       "default": "./dist/components/toggle-group/index.js"
     },
+    "./splitter": {
+      "types": "./dist/components/splitter/index.d.ts",
+      "default": "./dist/components/splitter/index.js"
+    },
     "./file-upload": {
       "types": "./dist/components/file-upload/index.d.ts",
       "default": "./dist/components/file-upload/index.js"

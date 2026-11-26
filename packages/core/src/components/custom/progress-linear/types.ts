@@ -1,4 +1,4 @@
-import type { TValuePayload } from '../../../common'
+import type { TOrientation, TValuePayload } from '../../../common'
 import type { IProgress, IProgressProps, TProgressEvents } from '../../base/progress'
 
 /**
@@ -12,21 +12,21 @@ export type TProgressLinearStyle = Record<`--${string}`, string>
  * Ось полосы: `horizontal` — вдоль строки, от её начала; `vertical` — снизу
  * вверх, как вертикальный Slider.
  */
-export type TProgressLinearOrientation = 'horizontal' | 'vertical'
+export type TProgressLinearOrientation = TOrientation
 
 export interface IProgressLinearProps extends IProgressProps {
 	/** Ось полосы */
-	orientation?: TProgressLinearOrientation
+	orientation?: TOrientation
 }
 
 export type TProgressLinearEvents = TProgressEvents & {
 	/** change:orientation */
-	'change:orientation': (payload: TValuePayload<TProgressLinearOrientation>) => void
+	'change:orientation': (payload: TValuePayload<TOrientation>) => void
 }
 
 export interface IProgressLinear extends IProgress<IProgressLinearProps, TProgressLinearEvents> {
 	/** Ось полосы */
-	orientation: TProgressLinearOrientation
+	orientation: TOrientation
 	/**
 	 * `--so-progress-linear-percent` — доля готового, прижатая к 0–100 %. Пока
 	 * полоса бежит, переменной нет

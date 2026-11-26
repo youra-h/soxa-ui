@@ -44,6 +44,14 @@ export function lengthAlong(direction: TSlideDirection, box: DOMRectReadOnly): n
 	return box[LENGTH[direction]]
 }
 
+export function offsetAlong(
+	direction: TSlideDirection,
+	box: DOMRectReadOnly,
+	point: TSlidePoint,
+): number {
+	return OFFSET[direction](box, point)
+}
+
 /**
  * Доля хода в точке указателя по коробке дорожки: 0 — у `min`, 1 — у `max`,
  * за краями — за 0 и 1. Коробка дорожки — ход центров ручек, её края и есть 0
@@ -62,7 +70,7 @@ export function fractionAt(
 ): number {
 	const length = lengthAlong(direction, box)
 
-	return length > 0 ? OFFSET[direction](box, point) / length : 0
+	return length > 0 ? offsetAlong(direction, box, point) / length : 0
 }
 
 /**
