@@ -4,8 +4,8 @@ import type { IPluginContext } from '../../../base'
 import { TElementPlugin } from '../../element'
 import type { IDomEventTarget } from '../../../utils'
 import { arrowStep, slideDirection } from '../direction'
-import { fieldOf, thumbsOf, trackOf } from '../parts'
-import type { TSlideKeyboardPluginEvents } from './types'
+import { fieldOf, thumbIndex, thumbsOf, trackOf } from '../parts'
+import type { ISlideKeyboardPluginOptions, TSlideKeyboardPluginEvents } from './types'
 
 /**
  * TSlideKeyboardPlugin — клавиатура и жест скринридера у полей ручек.
@@ -33,9 +33,11 @@ import type { TSlideKeyboardPluginEvents } from './types'
 export class TSlideKeyboardPlugin extends TBasePlugin<ISlidable, TSlideKeyboardPluginEvents> {
 	private _owner: ISlidable | null = null
 	private _root: Element | null = null
+	private _options: ISlideKeyboardPluginOptions = {}
 
-	override install(ctx: IPluginContext): void {
-		super.install(ctx)
+	override install(ctx: IPluginContext, options: ISlideKeyboardPluginOptions = {}): void {
+		super.install(ctx, options)
+		this._options = options
 
 		this._owner = ctx.getInstance<ISlidable>()
 
@@ -125,6 +127,11 @@ export class TSlideKeyboardPlugin extends TBasePlugin<ISlidable, TSlideKeyboardP
 		event: KeyboardEvent,
 	): ((index: number) => void) | null {
 		switch (event.key) {
+			case 'Enter': {
+				const activate = this._options.activate
+
+				return activate ? (index) => activate(owner, index) : null
+			}
 			case 'Home':
 				return (index) => owner.moveToEdge(index, 'start')
 			case 'End':
@@ -139,6 +146,13 @@ export class TSlideKeyboardPlugin extends TBasePlugin<ISlidable, TSlideKeyboardP
 
 		if (step === null) return null
 
+		if (
+			this._options.axisOnly &&
+			(owner.orientation === 'horizontal') !==
+				(event.key === 'ArrowLeft' || event.key === 'ArrowRight')
+		)
+			return null
+
 		const count = event.shiftKey ? step * owner.largeStep : step
 
 		return (index) => owner.shift(index, count)
@@ -146,10 +160,15 @@ export class TSlideKeyboardPlugin extends TBasePlugin<ISlidable, TSlideKeyboardP
 
 	/** Номер ручки, чьё поле — цель события; не поле ручки — `-1`. */
 	private _thumbOf(owner: ISlidable, root: Element, target: EventTarget | null): number {
-		const track = trackOf(owner, root)
+		const parts = this._options.parts ?? {}
+		const track = (parts.track ?? trackOf)(owner, root)
 
 		if (!track) return -1
 
-		return thumbsOf(owner, track).findIndex((thumb) => fieldOf(thumb) === target)
+		return thumbIndex(
+			parts,
+			thumbsOf(owner, track),
+			(thumb) => (parts.field ?? fieldOf)(thumb) === target,
+		)
 	}
 }

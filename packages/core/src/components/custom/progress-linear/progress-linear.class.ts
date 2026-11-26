@@ -1,11 +1,11 @@
 import { TProgress } from '../../base/progress'
 import type { TDefaultValues } from '../../base/component'
+import type { TOrientation } from '../../../common'
 import { percent } from '../../../common/utility/percent'
 import type {
 	IProgressLinear,
 	IProgressLinearProps,
 	TProgressLinearEvents,
-	TProgressLinearOrientation,
 	TProgressLinearStyle,
 } from './types'
 
@@ -28,7 +28,7 @@ export default class TProgressLinear
 		orientation: 'horizontal',
 	}
 
-	protected _orientation!: TProgressLinearOrientation
+	protected _orientation!: TOrientation
 
 	constructor(props: Partial<IProgressLinearProps> = {}) {
 		super(props)
@@ -42,11 +42,11 @@ export default class TProgressLinear
 	/* Свойства                                                           */
 	/* ------------------------------------------------------------------ */
 
-	get orientation(): TProgressLinearOrientation {
+	get orientation(): TOrientation {
 		return this._orientation
 	}
 
-	set orientation(value: TProgressLinearOrientation) {
+	set orientation(value: TOrientation) {
 		const oldOrientation = this.orientation
 
 		if (this._orientation === value) return
@@ -78,10 +78,7 @@ export default class TProgressLinear
 	/* ------------------------------------------------------------------ */
 
 	/** Orientation is a prop-prefixed class; progressbar has no aria-orientation. */
-	protected _applyOrientation(
-		newValue: TProgressLinearOrientation,
-		oldValue?: TProgressLinearOrientation,
-	): void {
+	protected _applyOrientation(newValue: TOrientation, oldValue?: TOrientation): void {
 		this._classes.swap({ prefix: '--orientation-', oldValue, newValue })
 		this._orientation = newValue
 	}

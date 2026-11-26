@@ -173,3 +173,14 @@ export {
 
 export { TFileUploadElement } from './components/file-upload'
 export type { TFileUploadElementProps } from './components/file-upload'
+
+export {
+	TSplitterElement,
+	TSplitterPanelElement,
+	TSplitterHandleElement,
+} from './components/splitter'
+export type {
+	TSplitterElementProps,
+	TSplitterPanelElementProps,
+	TSplitterHandleElementProps,
+} from './components/splitter'

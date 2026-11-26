@@ -1,3 +1,4 @@
+import { TSplitter, type ISplitterPanelConfig } from '@soxa-ui/core'
 import type { TPropSpec } from '@soxa-ui/setup'
 import { underscorePropNaming } from '@soxa-ui/setup'
 import {
@@ -27,7 +28,7 @@ import {
 	MENU_PLACEMENTS,
 	POPOVER_EDGES,
 	POPOVER_PLACEMENTS,
-	PROGRESS_LINEAR_ORIENTATIONS,
+	ORIENTATIONS,
 	RADIO_GROUP_VIEWS,
 	SCROLL_BEHAVIORS,
 	SELECTION_MODES,
@@ -35,7 +36,6 @@ import {
 	SELECT_PLACEMENTS,
 	SKELETON_ANIMATIONS,
 	SKELETON_SHAPES,
-	SLIDE_ORIENTATIONS,
 	SLIDE_SNAPS,
 	SLIDER_TOOLTIPS,
 	TABLE_COLUMN_FITS,
@@ -43,7 +43,6 @@ import {
 	TABLE_RESIZE_PREVIEWS,
 	TABLE_SORT_MODES,
 	TABS_ALIGNMENTS,
-	TABS_ORIENTATIONS,
 	TABS_POSITIONS,
 	TABS_VIEWS,
 	TAGS_OVERFLOWS,
@@ -58,6 +57,7 @@ import { COLLECTION_VALUES, GROUPED_ITEMS, PRODUCE_GROUPS } from './items'
 import type {
 	TComponentEntry,
 	TControlKind,
+	TJsonPropParser,
 	TPropControl,
 	TPropControlGroups,
 	TPropOwner,
@@ -279,6 +279,13 @@ const OWN: Record<string, Record<string, string>> = {
 		swipe: 'За что панель можно смахнуть, чтобы закрыть: ни за что, за полосу или за любое место, кроме опций и прокручиваемого списка. Смахивают от поля: под ним — вниз, над ним — вверх',
 		tagsOverflow:
 			'Что делать с тегами в поле, когда они не помещаются в строку: переносить или прокручивать. Нужен множественный выбор',
+	},
+	splitter: {
+		orientation: 'Направление панелей: horizontal — в ряд, vertical — друг под другом',
+		offset: 'Расстояние от центра разделителя до края каждой панели, px. При 0 панели соприкасаются',
+		width: 'Толщина разделителя, px. Пусто — размер ручки по теме',
+		thumb: 'Показывает центральный захват. Разделитель можно двигать и без него',
+		panels: 'Панели по порядку. Начальный, минимальный и максимальный размеры задаются в процентах доступного места',
 	},
 	'file-upload': {
 		required:
@@ -550,6 +557,7 @@ const OPTIONS: Record<string, Record<string, readonly string[]>> = {
 		size: COMPONENT_SIZES,
 		variant: COMPONENT_VARIANTS,
 		direction: DIRECTIONS,
+		orientation: ORIENTATIONS,
 		tag: HTML_TAGS,
 		// Из списочного контракта — имена уникальны, разночтений быть не может
 		contentFit: LIST_CONTENT_FITS,
@@ -566,7 +574,6 @@ const OPTIONS: Record<string, Record<string, readonly string[]>> = {
 	'toggle-group': {
 		view: BUTTON_VIEWS,
 		mode: SELECTION_MODES,
-		orientation: ['horizontal', 'vertical'],
 	},
 	'check-box': { view: CHECK_BOX_VIEWS },
 	alert: { view: ALERT_VIEWS },
@@ -586,18 +593,15 @@ const OPTIONS: Record<string, Record<string, readonly string[]>> = {
 	popover: { placement: POPOVER_PLACEMENTS, edge: POPOVER_EDGES, swipe: SWIPES },
 	menu: { placement: MENU_PLACEMENTS, openOn: MENU_OPEN_ONS },
 	tooltip: { placement: TOOLTIP_PLACEMENTS, type: TOOLTIP_TYPES },
-	slider: { orientation: SLIDE_ORIENTATIONS, snap: SLIDE_SNAPS, tooltip: SLIDER_TOOLTIPS },
+	slider: { snap: SLIDE_SNAPS, tooltip: SLIDER_TOOLTIPS },
 	calendar: { mode: CALENDAR_MODES },
 	'date-input': { kind: DATE_INPUT_KINDS, timePrecision: TIME_PRECISIONS },
 	'date-picker': { mode: DATE_PICKER_MODES, swipe: SWIPES },
-	'progress-linear': { orientation: PROGRESS_LINEAR_ORIENTATIONS },
-	separator: { orientation: ['horizontal', 'vertical'] },
 	dialog: { placement: DIALOG_PLACEMENTS },
 	drawer: { placement: DRAWER_PLACEMENTS, swipe: SWIPES },
 	toasts: { placement: TOASTS_PLACEMENTS, layout: TOASTS_LAYOUTS, view: TOASTS_VIEWS },
 	tabs: {
 		view: TABS_VIEWS,
-		orientation: TABS_ORIENTATIONS,
 		alignment: TABS_ALIGNMENTS,
 		position: TABS_POSITIONS,
 	},
@@ -611,6 +615,12 @@ const OPTIONS: Record<string, Record<string, readonly string[]>> = {
 	skeleton: { shape: SKELETON_SHAPES, animation: SKELETON_ANIMATIONS },
 	frame: { strategy: FRAME_STRATEGIES },
 }
+
+const SPLITTER_PANELS = [
+	{ id: 'files', defaultSize: 25, minSize: 15, maxSize: 45 },
+	{ id: 'editor', defaultSize: 50, minSize: 20, maxSize: 75 },
+	{ id: 'preview', minSize: 10, maxSize: 60 },
+] as const satisfies readonly ISplitterPanelConfig[]
 
 /**
  * Что превью задаёт компоненту само — пропсы превью.
@@ -643,6 +653,7 @@ export const PREVIEW_PROPS: Readonly<Record<string, Readonly<Record<string, unkn
 	badge: { value: 8 },
 	avatar: { initials: 'AL', aria_label: 'Ada Lovelace' },
 	'avatar-group': { overflow: 3 },
+	splitter: { panels: SPLITTER_PANELS },
 	'file-upload': { multiple: true, maxFiles: 4, maxFileSize: 10_000_000 },
 	'code-block': {
 		language: 'typescript',
@@ -956,6 +967,52 @@ const PRESET_VALUES: Record<string, Record<string, Readonly<Record<string, unkno
 	},
 }
 
+function isSplitterPanel(value: unknown): value is ISplitterPanelConfig {
+	if (typeof value !== 'object' || value === null) return false
+	if (!('id' in value) || typeof value.id !== 'string') return false
+	if ('collapsible' in value && typeof value.collapsible !== 'boolean') return false
+
+	return ['defaultSize', 'minSize', 'maxSize'].every(
+		(key) => !(key in value) || typeof Reflect.get(value, key) === 'number',
+	)
+}
+
+const parseSplitterPanels: TJsonPropParser = (text) => {
+	let value: unknown
+
+	try {
+		value = JSON.parse(text)
+	} catch {
+		return { error: 'Введите корректный JSON' }
+	}
+
+	if (!Array.isArray(value) || !value.every(isSplitterPanel)) {
+		return { error: 'Нужен массив панелей с текстовым id и числовыми размерами' }
+	}
+
+	try {
+		// Validate the limits with the same model that drives both previews.
+		new TSplitter({ panels: value })
+	} catch {
+		return { error: 'Проверьте уникальность id и допустимые размеры панелей' }
+	}
+
+	return { value }
+}
+
+const JSON_EDITORS: Record<
+	string,
+	Record<string, { parseJson: TJsonPropParser; initial?: unknown; notice?: string }>
+> = {
+	splitter: {
+		panels: {
+			parseJson: parseSplitterPanels,
+			initial: [{ ...SPLITTER_PANELS[0], collapsible: true }, ...SPLITTER_PANELS.slice(1)],
+			notice: 'При collapsible: true панель сначала останавливается на minSize. Если тянуть дальше до половины minSize, панель сворачивается до 0%, когда соседняя панель может занять освободившееся место.',
+		},
+	},
+}
+
 export function optionsForProp(componentId: string, prop: string): readonly string[] | undefined {
 	const values = valuesForProp(componentId, prop)
 
@@ -999,16 +1056,14 @@ function isNumberOrText(names: readonly string[]): boolean {
 }
 
 /**
- * Чем редактировать проп — выводится, а не задаётся руками.
- *
- * Порядок важен: список значений сильнее типа. `view` объявлен как `String`,
- * но редактировать его текстовым полем бессмысленно — вариантов четыре.
- * Дальше решает первый конструктор, кроме объединения ровно `Number` и
- * `String`: ему числовое поле не годится — `10%` и `auto` оно превратило бы в
- * `NaN`, — а текстовое отдало бы и `40` строкой.
+ * Explicit option lists and structured editors take priority over the prop constructor.
+ * The Number and String union accepts both numbers and CSS lengths as written.
  */
 export function controlKind(componentId: string, prop: TPropSpec): TControlKind {
-	if (optionsForProp(componentId, underscorePropNaming(prop.name))) return 'select'
+	const name = underscorePropNaming(prop.name)
+
+	if (optionsForProp(componentId, name)) return 'select'
+	if (JSON_EDITORS[componentId]?.[name]) return 'json'
 
 	const names = ctorNames(prop.type)
 
@@ -1049,13 +1104,16 @@ export function propControl(
 ): TPropControl {
 	const name = underscorePropNaming(prop.name)
 	const preview = previewProps(componentId)
+	const editor = JSON_EDITORS[componentId]?.[name]
 
 	const control: TPropControl = {
 		...owner,
 		name,
 		kind: controlKind(componentId, prop),
 		options: optionsForProp(componentId, name),
+		parseJson: editor?.parseJson,
 		description: describeProp(componentId, name) ?? '',
+		notice: editor?.notice,
 		preset: presetForProp(componentId, name),
 	}
 
@@ -1063,7 +1121,8 @@ export function propControl(
 
 	if (values) control.values = values
 	if (Object.hasOwn(prop, 'default')) control.default = prop.default
-	if (Object.hasOwn(preview, name)) control.initial = preview[name]
+	if (editor && Object.hasOwn(editor, 'initial')) control.initial = editor.initial
+	else if (Object.hasOwn(preview, name)) control.initial = preview[name]
 
 	return control
 }

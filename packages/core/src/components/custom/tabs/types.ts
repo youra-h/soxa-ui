@@ -1,12 +1,12 @@
 import type { TAttributes, TAttributesMap } from '../../../common'
-import type { TValuePayload } from '../../../common'
+import type { TOrientation, TValuePayload } from '../../../common'
 import type { IControl, IControlProps, TControlEvents } from '../../base/control'
 import type { TThemeRegistry } from '../../../common'
 import type { TCollectionStorageDriverEvents } from '../../base/collection'
 import type { ITabsCollectionProps } from './collection/types'
 import type { ITabsItem, ITabsItemProps } from './item/types'
 
-export type TTabsOrientation = 'horizontal' | 'vertical'
+export type TTabsOrientation = TOrientation
 export type TTabsAlignment = 'start' | 'center' | 'end' | 'stretch'
 export type TTabsPosition = 'start' | 'end'
 /**
@@ -23,7 +23,7 @@ export type TTabsEvents = TControlEvents &
 	TCollectionStorageDriverEvents<ITabsItem> & {
 		'change:scrollAttrs': (payload: TValuePayload<TAttributesMap>) => void
 		/** change:orientation */
-		'change:orientation': (payload: TValuePayload<TTabsOrientation>) => void
+		'change:orientation': (payload: TValuePayload<TOrientation>) => void
 		/** change:alignment */
 		'change:alignment': (payload: TValuePayload<TTabsAlignment>) => void
 		/** change:position */
@@ -55,7 +55,7 @@ export type TTabsEvents = TControlEvents &
 /** Пропсы самого компонента Tabs (без коллекционной части). */
 export interface ITabsComponentProps extends IControlProps {
 	/** Ориентация табов */
-	orientation?: TTabsOrientation
+	orientation?: TOrientation
 	/** Выравнивание табов */
 	alignment?: TTabsAlignment
 	/** Позиция табов (для vertical) */
@@ -74,7 +74,7 @@ export interface ITabs extends IControl<ITabsProps, TTabsEvents> {
 	/** Native attributes of the scrolling part, separate from the semantic root. */
 	readonly scrollAttrs: TAttributes
 	/** Ориентация табов */
-	orientation: TTabsOrientation
+	orientation: TOrientation
 	/** Выравнивание табов */
 	alignment: TTabsAlignment
 	/** Позиция табов (для vertical) */

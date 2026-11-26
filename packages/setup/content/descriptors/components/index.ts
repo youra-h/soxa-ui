@@ -67,3 +67,8 @@ export { AvatarGroupDescriptor } from './avatar/group.descriptor'
 export { SeparatorDescriptor } from './separator.descriptor'
 export { AlertDialogDescriptor } from './alert-dialog.descriptor'
 export { FileUploadDescriptor } from './file-upload.descriptor'
+export {
+	SplitterDescriptor,
+	SplitterPanelDescriptor,
+	SplitterHandleDescriptor,
+} from './splitter.descriptor'

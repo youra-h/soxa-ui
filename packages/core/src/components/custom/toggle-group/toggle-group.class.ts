@@ -1,12 +1,7 @@
 import { TControl } from '../../base/control'
 import type { TDefaultValues } from '../../base/component'
-import type {
-	IToggleGroup,
-	IToggleGroupProps,
-	TToggleGroupEvents,
-	TToggleGroupView,
-	TToggleGroupOrientation,
-} from './types'
+import type { TOrientation } from '../../../common'
+import type { IToggleGroup, IToggleGroupProps, TToggleGroupEvents, TToggleGroupView } from './types'
 
 /** Accessible group appearance and orientation; composition and selection live in its engine. */
 export class TToggleGroup
@@ -22,7 +17,7 @@ export class TToggleGroup
 		orientation: 'horizontal',
 	}
 
-	protected _orientation: TToggleGroupOrientation
+	protected _orientation: TOrientation
 
 	protected _view: TToggleGroupView | undefined
 
@@ -37,11 +32,11 @@ export class TToggleGroup
 		this.aria.add('role', 'group')
 	}
 
-	get orientation(): TToggleGroupOrientation {
+	get orientation(): TOrientation {
 		return this._orientation
 	}
 
-	set orientation(value: TToggleGroupOrientation) {
+	set orientation(value: TOrientation) {
 		if (value === this._orientation) return
 
 		const oldValue = this._orientation

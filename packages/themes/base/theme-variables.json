@@ -1,5 +1,10 @@
 {
   "base-reads": {
+    "--so-splitter-panel-size": "Share of available panel space written by the Splitter layout model.",
+    "--so-splitter-handle-size": "Theme thickness of a Splitter handle along its resize axis. Base defaults to 8px.",
+    "--so-splitter-width": "Optional exact thickness of every handle in the current Splitter.",
+    "--so-splitter-offset": "Distance from the divider center to each neighboring panel. Base defaults to zero.",
+    "--so-splitter-handle-thickness": "Resolved width of the divider and its hit area. Base uses the exact width or theme scale.",
     "--so-disabled-opacity": "Disabled opacity: dims the box or root of a disabled component. The base layer sets descendants of the dimmed node to 1; default: 0.35.",
     "--so-caption-gap-sm": "Caption scale: inline gap between a caption and its control (Label, Field and radio text), size sm. Optional final length override; otherwise derived from shared spacing and the component family scale.",
     "--so-caption-gap-normal": "Caption scale: inline gap between a caption and its control (Label, Field and radio text), size normal. Optional final length override; otherwise derived from shared spacing and the component family scale.",

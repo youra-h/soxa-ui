@@ -1,0 +1,99 @@
+$hover-delay: var(--so-splitter-hover-delay);
+
+.so-splitter__thumb {
+	--so-splitter-rule-color: var(--so-neutral-300);
+	--so-splitter-rule-width: 2px;
+	--so-splitter-grip-color: var(--so-neutral-200);
+
+	color: var(--so-neutral-600);
+	outline-offset: -2px;
+	transition-property: none;
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		margin: auto;
+		inline-size: var(--so-splitter-width, var(--so-splitter-rule-width));
+		block-size: 100%;
+		background-color: var(--so-splitter-rule-color);
+		pointer-events: none;
+		transition-property: none;
+	}
+
+	&[data-dragging] {
+		--so-splitter-rule-color: var(--so-accent-500);
+		--so-splitter-grip-color: var(--so-accent-500);
+
+		color: var(--so-accent-700);
+	}
+
+	@media (hover: hover) {
+		// Only entry waits. Leaving or beginning a drag cancels the pending transition.
+		&:hover:not([data-disabled], [data-dragging]) {
+			--so-splitter-rule-color: var(--so-accent-500);
+			--so-splitter-grip-color: var(--so-accent-500);
+
+			color: var(--so-accent-700);
+			transition: color 0s $hover-delay;
+
+			&::before {
+				transition: background-color 0s $hover-delay;
+			}
+
+			> .so-splitter__grip {
+				transition: border-color 0s $hover-delay;
+			}
+		}
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--so-accent-500);
+	}
+
+	@media (forced-colors: active) {
+		outline: 1px solid CanvasText;
+	}
+}
+
+.so-splitter[data-orientation='vertical'] > .so-splitter__thumb::before {
+	inline-size: 100%;
+	block-size: var(--so-splitter-width, var(--so-splitter-rule-width));
+}
+
+.so-splitter__thumb--size-sm {
+	--so-splitter-handle-size: 4px;
+	--so-splitter-rule-width: 1px;
+}
+
+.so-splitter__thumb--size-normal {
+	--so-splitter-handle-size: 8px;
+}
+
+.so-splitter__thumb--size-lg {
+	--so-splitter-handle-size: 16px;
+	--so-splitter-rule-width: 3px;
+}
+
+.so-splitter__grip {
+	min-inline-size: 8px;
+	min-block-size: 24px;
+	border: 1px solid var(--so-splitter-grip-color);
+	border-radius: 999px;
+	background: var(--so-component-surface);
+	box-shadow: 0 1px 3px color-mix(in srgb, var(--so-component-text) 14%, transparent);
+	transition-property: none;
+
+	&:not(:empty) {
+		padding: 2px 3px;
+	}
+
+	@media (forced-colors: active) {
+		outline: 1px solid CanvasText;
+	}
+}
+
+.so-splitter[data-orientation='vertical'] > .so-splitter__thumb > .so-splitter__grip {
+	min-inline-size: 24px;
+	min-block-size: 8px;
+}

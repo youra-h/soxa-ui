@@ -2,8 +2,8 @@ import { TInputControl } from '../../base/input-control'
 import type { TDefaultValues } from '../../base/component'
 import { createScale } from '../../../common'
 import { decimal } from '../../../common/utility/percent'
-import type { IScale } from '../../../common'
-import type { TSlideEdge, TSlideOrientation, TSlideSnap } from '../slide'
+import type { IScale, TOrientation } from '../../../common'
+import type { TSlideEdge, TSlideSnap } from '../slide'
 import type { IRating, IRatingProps, TRatingEvents, TRatingStar } from './types'
 
 /**
@@ -140,7 +140,7 @@ export default class TRating
 	/* Перетаскивание (`ISlidable`)                                       */
 	/* ------------------------------------------------------------------ */
 
-	get orientation(): TSlideOrientation {
+	get orientation(): TOrientation {
 		return 'horizontal'
 	}
 

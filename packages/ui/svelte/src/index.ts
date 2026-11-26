@@ -268,3 +268,13 @@ export type {
 
 export { FileUpload } from './components/file-upload'
 export type { FileUploadProps, FileUploadEventProps } from './components/file-upload'
+
+export { Splitter, SplitterPanel, SplitterHandle } from './components/splitter'
+export type {
+	SplitterProps,
+	SplitterEventProps,
+	SplitterPanelProps,
+	SplitterPanelEventProps,
+	SplitterHandleProps,
+	SplitterHandleEventProps,
+} from './components/splitter'

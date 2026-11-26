@@ -1,0 +1,54 @@
+.so-splitter {
+	--so-splitter-width: initial;
+	--so-splitter-offset: 0px;
+
+	display: flex;
+	min-inline-size: 0;
+	min-block-size: 0;
+}
+
+.so-splitter[data-orientation='vertical'] {
+	flex-direction: column;
+}
+
+.so-splitter__panel {
+	flex: var(--so-splitter-panel-size, 1) 1 0px;
+	min-inline-size: 0;
+	min-block-size: 0;
+	overflow: auto;
+}
+
+.so-splitter__panel[data-collapsed] {
+	display: none;
+}
+
+.so-splitter__thumb {
+	--so-splitter-handle-thickness: var(--so-splitter-width, var(--so-splitter-handle-size, 8px));
+
+	display: grid;
+	flex: 0 0 var(--so-splitter-handle-thickness);
+	/* The hit area straddles the boundary. Only the offset takes space away from panels. */
+	margin-inline: calc(var(--so-splitter-offset) - var(--so-splitter-handle-thickness) / 2);
+	place-items: center;
+	position: relative;
+	z-index: 1;
+	touch-action: none;
+	cursor: col-resize;
+}
+
+.so-splitter[data-orientation='vertical'] > .so-splitter__thumb {
+	margin-inline: 0;
+	margin-block: calc(var(--so-splitter-offset) - var(--so-splitter-handle-thickness) / 2);
+	cursor: row-resize;
+}
+
+.so-splitter > .so-splitter__thumb[data-disabled] {
+	cursor: default;
+	touch-action: auto;
+}
+
+.so-splitter__grip {
+	display: grid;
+	place-items: center;
+	position: absolute;
+}

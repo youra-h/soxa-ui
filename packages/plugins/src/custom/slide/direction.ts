@@ -59,9 +59,8 @@ export function fractionAt(
 	direction: TSlideDirection,
 	box: DOMRectReadOnly,
 	point: TSlidePoint,
+	length = lengthAlong(direction, box),
 ): number {
-	const length = lengthAlong(direction, box)
-
 	return length > 0 ? OFFSET[direction](box, point) / length : 0
 }
 

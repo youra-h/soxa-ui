@@ -66,4 +66,6 @@ export type TValuePayload<TValue> = {
 	oldValue: TValue
 }
 
+export type TOrientation = 'horizontal' | 'vertical'
+
 export type TScrollBehavior = 'none' | 'instant' | 'smooth'

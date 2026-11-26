@@ -15,6 +15,9 @@ import {
 	TAvatarGroupComponent,
 	TCodeBlockComponent,
 	TFileUploadComponent,
+	TSplitterComponent,
+	TSplitterHandleComponent,
+	TSplitterPanelComponent,
 	TButtonComponent,
 	TToggleButtonComponent,
 	TToggleGroupComponent,
@@ -1477,4 +1480,64 @@ export class FileUploadPreview implements TFixture {
 	readonly maxFiles = input<TFileUploadComponent['maxFiles']>()
 	readonly copy = viewChild.required(CopyDirective)
 	readonly subjects = viewChildren(TFileUploadComponent)
+}
+
+@Component({
+	selector: 'pg-splitter-preview',
+	imports: [TSplitterComponent, TSplitterHandleComponent, TSplitterPanelComponent, CopyDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: { style: 'display: contents' },
+	template: `
+		<ng-template pg-copy>
+			<div
+				so-splitter
+				class="pg-splitter-preview"
+				[ctrl]="ctrl()"
+				[rendered]="rendered()"
+				[visible]="visible()"
+				[direction]="direction()"
+				[orientation]="orientation()"
+				[offset]="offset()"
+				[width]="width()"
+				[thumb]="thumb()"
+				[disabled]="disabled()"
+				[panels]="panels()"
+			>
+				<div so-splitter-panel panel="files">
+					<div class="pg-splitter-preview__pane">
+						<strong>Файлы</strong>
+						<code>App.vue</code>
+					</div>
+				</div>
+				<div so-splitter-handle panel="files" size="sm" aria_label="Файлы"></div>
+				<div so-splitter-panel panel="editor">
+					<div class="pg-splitter-preview__pane">
+						<strong>Редактор</strong>
+						<code>&lt;Splitter /&gt;</code>
+					</div>
+				</div>
+				<div so-splitter-handle panel="editor" size="lg" aria_label="Редактор"></div>
+				<div so-splitter-panel panel="preview">
+					<div class="pg-splitter-preview__pane">
+						<strong>Вывод</strong>
+						<code>Сборка готова</code>
+					</div>
+				</div>
+			</div>
+		</ng-template>
+	`,
+})
+export class SplitterPreview implements TFixture {
+	readonly ctrl = input<TSplitterComponent['ctrl']>()
+	readonly rendered = input<TSplitterComponent['rendered']>()
+	readonly visible = input<TSplitterComponent['visible']>()
+	readonly direction = input<TSplitterComponent['direction']>()
+	readonly orientation = input<TSplitterComponent['orientation']>()
+	readonly offset = input<TSplitterComponent['offset']>()
+	readonly width = input<TSplitterComponent['width']>()
+	readonly thumb = input<TSplitterComponent['thumb']>()
+	readonly disabled = input<TSplitterComponent['disabled']>()
+	readonly panels = input<TSplitterComponent['panels']>()
+	readonly copy = viewChild.required(CopyDirective)
+	readonly subjects = viewChildren(TSplitterComponent)
 }

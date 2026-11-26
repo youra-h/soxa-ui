@@ -1,4 +1,4 @@
-import type { TClasses, TValuePayload } from '../../../common'
+import type { TClasses, TOrientation, TValuePayload } from '../../../common'
 
 /**
  * Перетаскивание значения — **только контракт**, класса в этой папке нет.
@@ -24,7 +24,7 @@ import type { TClasses, TValuePayload } from '../../../common'
  */
 
 /** Ось хода: вдоль строки или снизу вверх. */
-export type TSlideOrientation = 'horizontal' | 'vertical'
+export type TSlideOrientation = TOrientation
 
 /** Край хода ручки: `start` — к меньшим значениям, `end` — к большим. */
 export type TSlideEdge = 'start' | 'end'
@@ -91,7 +91,7 @@ export interface ISlidable {
 	/** Смена режима щелчка — по ней плагин указателя переключает стратегию */
 	readonly events: ISlideEvents
 	/** Ось хода */
-	readonly orientation: TSlideOrientation
+	readonly orientation: TOrientation
 	/** Значение растёт в обратную сторону: справа налево или сверху вниз */
 	readonly inverted: boolean
 	/** Сколько шагов в крупном шаге: Shift со стрелкой, PageUp и PageDown */

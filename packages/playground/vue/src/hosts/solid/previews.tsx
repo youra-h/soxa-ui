@@ -56,6 +56,7 @@ import {
 	Badge,
 	CodeBlock,
 	FileUpload,
+	Splitter,
 	Label,
 	ListBox,
 	Menu,
@@ -441,6 +442,30 @@ export const PREVIEWS: Record<string, TPreview> = {
 		>
 			{ALERT_SAMPLE.message}
 		</Alert>
+	),
+	splitter: (bind) => (
+		<Splitter {...bind} class="pg-splitter-preview">
+			<Splitter.Panel panel="files">
+				<div class="pg-splitter-preview__pane">
+					<strong>Файлы</strong>
+					<code>App.vue</code>
+				</div>
+			</Splitter.Panel>
+			<Splitter.Handle panel="files" size="sm" aria_label="Файлы" />
+			<Splitter.Panel panel="editor">
+				<div class="pg-splitter-preview__pane">
+					<strong>Редактор</strong>
+					<code>&lt;Splitter /&gt;</code>
+				</div>
+			</Splitter.Panel>
+			<Splitter.Handle panel="editor" size="lg" aria_label="Редактор" />
+			<Splitter.Panel panel="preview">
+				<div class="pg-splitter-preview__pane">
+					<strong>Вывод</strong>
+					<code>Сборка готова</code>
+				</div>
+			</Splitter.Panel>
+		</Splitter>
 	),
 	'file-upload': (bind) => <FileUpload {...bind()} />,
 	'code-block': (bind) => <CodeBlock {...bind()} />,

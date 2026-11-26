@@ -48,7 +48,7 @@
 	so.modal, so.dialog, so.alert-dialog, so.drag-and-drop, so.drawer, so.input, so.badge, so.label, so.field, so.list-box,
 	so.menu, so.breadcrumbs, so.number-input, so.pagination, so.popover, so.calendar, so.date-picker,
 	so.progress-linear, so.progress-spinner, so.radio-group, so.rating, so.scroller, so.select,
-	so.separator, so.skeleton, so.slider, so.switch, so.table, so.tabs, so.tags, so.textarea, so.toasts,
+	so.separator, so.skeleton, so.slider, so.splitter, so.switch, so.table, so.tabs, so.tags, so.textarea, so.toasts,
 	so.tooltip, so.code-block, so.file-upload, so.alert;
 
 @import './reset.css' layer(so.reset);
@@ -96,6 +96,7 @@
 @import './components/separator.css' layer(so.separator);
 @import './components/skeleton.css' layer(so.skeleton);
 @import './components/slider.css' layer(so.slider);
+@import './components/splitter.css' layer(so.splitter);
 @import './components/switch.css' layer(so.switch);
 @import './components/table.css' layer(so.table);
 @import './components/tabs.css' layer(so.tabs);

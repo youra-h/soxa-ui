@@ -1,11 +1,10 @@
-import { TAttributes } from '../../../common'
+import { TAttributes, type TOrientation } from '../../../common'
 import { TControl } from '../../base/control'
 import type { TDefaultValues } from '../../base/component'
 import type {
 	ITabs,
 	ITabsProps,
 	TTabsEvents,
-	TTabsOrientation,
 	TTabsAlignment,
 	TTabsPosition,
 	TTabsView,
@@ -29,7 +28,7 @@ export class TTabs extends TControl<ITabsProps, TTabsEvents> implements ITabs {
 			closable: false,
 		}
 
-	protected _orientation!: TTabsOrientation
+	protected _orientation!: TOrientation
 	protected _alignment!: TTabsAlignment
 	protected _position!: TTabsPosition
 	protected _view: TTabsView | undefined
@@ -63,11 +62,11 @@ export class TTabs extends TControl<ITabsProps, TTabsEvents> implements ITabs {
 		this._closable = props.closable ?? ctor.defaultValues.closable
 	}
 
-	get orientation(): TTabsOrientation {
+	get orientation(): TOrientation {
 		return this._orientation
 	}
 
-	set orientation(value: TTabsOrientation) {
+	set orientation(value: TOrientation) {
 		const oldOrientation = this.orientation
 
 		if (this._orientation !== value) {
@@ -76,7 +75,7 @@ export class TTabs extends TControl<ITabsProps, TTabsEvents> implements ITabs {
 		}
 	}
 
-	protected _applyOrientation(newValue: TTabsOrientation, oldValue?: TTabsOrientation) {
+	protected _applyOrientation(newValue: TOrientation, oldValue?: TOrientation) {
 		this._classes.swap({ prefix: '--orientation-', oldValue, newValue })
 		// Не для вида: по ориентации скринридер объявляет, какими стрелками
 		// ходить по списку, — у вертикального это ↑/↓ (`TTabsKeyboardPlugin`)

@@ -56,6 +56,7 @@ import {
 	Badge,
 	CodeBlock,
 	FileUpload,
+	Splitter,
 	Label,
 	ListBox,
 	Menu,
@@ -478,6 +479,29 @@ export const PREVIEWS: Record<string, TPreview> = {
 			default: () => ALERT_SAMPLE.message,
 			action: () => h(Button, { type: 'button' }, () => ALERT_SAMPLE.action),
 		}),
+	splitter: (bind) =>
+		h(Splitter, { ...bind, class: 'pg-splitter-preview' }, () => [
+			h(Splitter.Panel, { panel: 'files' }, () =>
+				h('div', { class: 'pg-splitter-preview__pane' }, [
+					h('strong', 'Файлы'),
+					h('code', 'App.vue'),
+				]),
+			),
+			h(Splitter.Handle, { panel: 'files', size: 'sm', aria_label: 'Файлы' }),
+			h(Splitter.Panel, { panel: 'editor' }, () =>
+				h('div', { class: 'pg-splitter-preview__pane' }, [
+					h('strong', 'Редактор'),
+					h('code', '<Splitter />'),
+				]),
+			),
+			h(Splitter.Handle, { panel: 'editor', size: 'lg', aria_label: 'Редактор' }),
+			h(Splitter.Panel, { panel: 'preview' }, () =>
+				h('div', { class: 'pg-splitter-preview__pane' }, [
+					h('strong', 'Вывод'),
+					h('code', 'Сборка готова'),
+				]),
+			),
+		]),
 	'file-upload': (bind) =>
 		h(FileUpload, bind, {
 			'item-progress': ({ file, id }: { file: File; id: number }) =>

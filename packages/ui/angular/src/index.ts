@@ -94,3 +94,9 @@ export { TSelectSeparatorComponent } from './components/select/separator'
 export { TListBoxSeparatorComponent } from './components/list-box/separator'
 
 export { TFileUploadComponent } from './components/file-upload'
+
+export {
+	TSplitterComponent,
+	TSplitterPanelComponent,
+	TSplitterHandleComponent,
+} from './components/splitter'

@@ -195,19 +195,18 @@ export function fieldText(row: DOMWrapper<Element>): string {
 }
 
 /**
- * Строки, чья шапка не связана с редактором. Шапка — поле формы `Field`, и
- * связывает его само: `for` подписи ведёт на `<input>` редактора, а `id`
- * подсказки с описанием пропа стоит в `aria-describedby` того же `<input>`.
- * Описание — из строки, а не из DOM: пропавшая подсказка тоже находка.
+ * Lists rows where Field fails to associate its label or help text with the editor.
+ * The expected description comes from the prop metadata so missing help text is detected.
  */
 export function unlinkedHeads(wrapper: VueWrapper): string[] {
 	return wrapper.findAllComponents(PropRow).flatMap((row) => {
-		const { name, description } = row.props('control')
-		const input = row.get('.pg-prop__head > .so-field__control input').element
+		const { name, description, kind } = row.props('control')
+		const editorTag = kind === 'json' ? 'textarea' : 'input'
+		const editor = row.get(`.pg-prop__head > .so-field__control ${editorTag}`).element
 		const target = row.get('.pg-prop__head > .so-field__label').attributes('for')
 		const helper = row.find('.pg-prop__head > .so-field__helper')
-		const described = input.getAttribute('aria-describedby')?.split(/\s+/) ?? []
-		const labelled = input.id !== '' && target === input.id
+		const described = editor.getAttribute('aria-describedby')?.split(/\s+/) ?? []
+		const labelled = editor.id !== '' && target === editor.id
 		const explained =
 			description === '' || (helper.exists() && described.includes(helper.element.id))
 

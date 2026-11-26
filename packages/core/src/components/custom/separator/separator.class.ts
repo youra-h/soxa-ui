@@ -1,6 +1,7 @@
 import { TComponentView } from '../../base/component-view'
 import type { TDefaultValues } from '../../base/component'
-import type { ISeparator, ISeparatorProps, TSeparatorEvents, TSeparatorOrientation } from './types'
+import type { TOrientation } from '../../../common'
+import type { ISeparator, ISeparatorProps, TSeparatorEvents } from './types'
 
 /** A non-interactive boundary between adjacent sections of content. */
 export default class TSeparator
@@ -16,7 +17,7 @@ export default class TSeparator
 		decorative: false,
 	}
 
-	protected _orientation: TSeparatorOrientation
+	protected _orientation: TOrientation
 	protected _decorative: boolean
 
 	constructor(props: Partial<ISeparatorProps> = {}) {
@@ -29,11 +30,11 @@ export default class TSeparator
 		this._syncAria()
 	}
 
-	get orientation(): TSeparatorOrientation {
+	get orientation(): TOrientation {
 		return this._orientation
 	}
 
-	set orientation(value: TSeparatorOrientation) {
+	set orientation(value: TOrientation) {
 		const oldValue = this._orientation
 		if (oldValue === value) return
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { Input, Select, Switch } from '@soxa-ui/vue'
+import { Input, Select, Switch, Textarea } from '@soxa-ui/vue'
 import { parseNumber, parseNumberOrText, type TPropControl } from '@soxa-ui/playground-shared'
 
 /**
@@ -14,7 +14,7 @@ import { parseNumber, parseNumberOrText, type TPropControl } from '@soxa-ui/play
  */
 const props = defineProps<{ control: TPropControl; modelValue: unknown }>()
 
-const emit = defineEmits<{ 'update:modelValue': [unknown] }>()
+const emit = defineEmits<{ 'update:modelValue': [unknown]; 'update:error': [string] }>()
 
 /** Текст поля по значению модели: не задано — пусто. */
 const textOf = (value: unknown): string => (value == null ? '' : String(value))
@@ -50,11 +50,26 @@ function onOption(option: unknown): void {
  * набранное поле держит само, а текст модели берёт, только когда её сменил
  * не этот ввод: свой ввод ведёт модель ровно к тому числу, что набрано.
  */
-const numberText = ref(asText.value)
+const numberText = ref(props.control.kind === 'json' ? '' : asText.value)
+
+// Keep the draft and its formatting while the preview echoes the parsed value.
+const jsonOf = (value: unknown): string => JSON.stringify(value, null, 2) ?? ''
+const jsonText = ref(props.control.kind === 'json' ? jsonOf(props.modelValue) : '')
+let acceptedJson = props.modelValue
 
 watch(
 	() => props.modelValue,
 	(value) => {
+		if (props.control.kind === 'json') {
+			if (value !== acceptedJson) {
+				acceptedJson = value
+				jsonText.value = jsonOf(value)
+				emit('update:error', '')
+			}
+
+			return
+		}
+
 		if (parseNumber(numberText.value) !== value) numberText.value = textOf(value)
 	},
 )
@@ -78,6 +93,25 @@ function onNumber(value: unknown): void {
  */
 function onNumberOrText(value: unknown): void {
 	emit('update:modelValue', parseNumberOrText(String(value ?? '')))
+}
+
+function onJson(value: unknown): void {
+	const text = String(value ?? '')
+	jsonText.value = text
+
+	const result = props.control.parseJson?.(text)
+
+	if (!result) return
+
+	if ('error' in result) {
+		emit('update:error', result.error)
+
+		return
+	}
+
+	acceptedJson = result.value
+	emit('update:error', '')
+	emit('update:modelValue', result.value)
 }
 </script>
 
@@ -104,6 +138,16 @@ function onNumberOrText(value: unknown): void {
 			:text="option"
 		/>
 	</Select>
+
+	<Textarea
+		v-else-if="control.kind === 'json'"
+		class="pg-prop__json"
+		:value="jsonText"
+		:rows="12"
+		size="sm"
+		spellcheck="false"
+		@update:value="onJson($event)"
+	/>
 
 	<Input
 		v-else-if="control.kind === 'number'"

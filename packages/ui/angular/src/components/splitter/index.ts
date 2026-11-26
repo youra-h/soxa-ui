@@ -1,0 +1,5 @@
+export * from '../../generated/splitter.metadata'
+export * from './setup.component'
+export * from './splitter.component'
+export * from './panel'
+export * from './handle'

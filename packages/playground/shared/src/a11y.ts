@@ -19,6 +19,7 @@ export const A11Y_COMPONENTS = [
 	'label',
 	'field',
 	'slider',
+	'splitter',
 	'rating',
 	'radio-group',
 	'select',
@@ -178,6 +179,7 @@ export const A11Y_CASES: readonly TAuditCase[] = [
 		['.so-avatar__fallback .so-icon'],
 		{ fixture: 'avatar-fallback' },
 	),
+	audit('splitter', 'initial', '.so-splitter', {}, ['.so-splitter__thumb']),
 	audit('file-upload', 'choose', '.so-file-upload', { required: true }, [
 		'.so-file-upload__choose',
 		'.so-file-upload__input',

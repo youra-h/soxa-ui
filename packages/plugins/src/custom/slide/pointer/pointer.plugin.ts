@@ -4,8 +4,7 @@ import type { IPluginContext } from '../../../base'
 import { TElementPlugin } from '../../element'
 import type { IDomEventTarget } from '../../../utils'
 import { fractionAt, lengthAlong, slideDirection } from '../direction'
-import { fieldOf, thumbsOf, trackOf } from '../parts'
-import type { TSlideDirection } from '../types'
+import { fieldOf, slideThumb, thumbIndex, thumbsOf, trackOf, type ISlideParts } from '../parts'
 import {
 	THoldSnapStrategy,
 	TMagnetSnapStrategy,
@@ -81,6 +80,7 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 	/** Класс стратегии щелчка для следующего жеста — по режиму владельца */
 	private _snapStrategy: TSlideSnapStrategyCtor = TNoneSnapStrategy
 	private _holdDelay = HOLD_DELAY
+	private _parts: ISlideParts = {}
 	/** Конец стоянки ручки на метке: стратегии снова нужна ручка, хотя указатель стоит */
 	private _wakeTimer: ReturnType<typeof setTimeout> | null = null
 
@@ -88,6 +88,7 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 		super.install(ctx, options)
 
 		this._holdDelay = options?.holdDelay ?? this._holdDelay
+		this._parts = options?.parts ?? {}
 		this._owner = ctx.getInstance<ISlidable>()
 
 		const element = ctx.get(TElementPlugin)
@@ -151,14 +152,17 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 		// Основная кнопка; жест уже идёт — второй указатель его не перехватывает
 		if (!owner || !root || this._gesture || event.button !== 0) return
 
-		const track = trackOf(owner, root)
+		const track = (this._parts.track ?? trackOf)(owner, root)
 
 		if (!track) return
 
 		const direction = slideDirection(owner, root)
 		const box = track.getBoundingClientRect()
-		const fraction = fractionAt(direction, box, event)
-		const thumb = thumbsOf(owner, track).findIndex(
+		const length = this._parts.length?.(direction, track) ?? lengthAlong(direction, box)
+		const fraction = fractionAt(direction, box, event, length)
+		const thumb = thumbIndex(
+			this._parts,
+			thumbsOf(owner, track),
 			(node) => event.target instanceof Node && node.contains(event.target),
 		)
 		const start: TSlidePointerStart = {
@@ -168,7 +172,7 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 			origin: fraction,
 		}
 		const gesture =
-			thumb >= 0 ? this._grab(owner, thumb, start, box) : this._press(owner, start, box)
+			thumb >= 0 ? this._grab(owner, thumb, start, length) : this._press(owner, start, length)
 
 		if (!gesture) return
 
@@ -194,12 +198,12 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 		owner: ISlidable,
 		thumb: number,
 		start: TSlidePointerStart,
-		box: DOMRectReadOnly,
+		length: number,
 	): TSlidePointerGesture | null {
 		if (!owner.grab(thumb, start.origin)) return null
 
 		const anchor = owner.fractions[thumb]
-		const snap = this._snapFor(owner, start.direction, box, anchor)
+		const snap = this._snapFor(owner, length, anchor)
 
 		return { ...start, snap, anchor, at: start.origin, placed: anchor }
 	}
@@ -211,10 +215,10 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 	private _press(
 		owner: ISlidable,
 		start: TSlidePointerStart,
-		box: DOMRectReadOnly,
+		length: number,
 	): TSlidePointerGesture | null {
 		const anchor = start.origin
-		const snap = this._snapFor(owner, start.direction, box, anchor)
+		const snap = this._snapFor(owner, length, anchor)
 		const placed = snap.follow(anchor, performance.now())
 
 		if (!owner.press(placed)) return null
@@ -223,14 +227,7 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 	}
 
 	/** Стратегия щелчка на жест: точки — метки владельца, радиус — доля длины дорожки. */
-	private _snapFor(
-		owner: ISlidable,
-		direction: TSlideDirection,
-		box: DOMRectReadOnly,
-		anchor: number,
-	): ISlideSnapStrategy {
-		const length = lengthAlong(direction, box)
-
+	private _snapFor(owner: ISlidable, length: number, anchor: number): ISlideSnapStrategy {
 		return new this._snapStrategy({
 			points: owner.snapPoints,
 			radius: length > 0 ? owner.snapRadius / length : 0,
@@ -244,7 +241,13 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 
 		if (!gesture || event.pointerId !== gesture.pointer) return
 
-		gesture.at = fractionAt(gesture.direction, gesture.track.getBoundingClientRect(), event)
+		const { direction, track } = gesture
+		gesture.at = fractionAt(
+			direction,
+			track.getBoundingClientRect(),
+			event,
+			this._parts.length?.(direction, track),
+		)
 
 		this._follow(gesture)
 	}
@@ -353,7 +356,8 @@ export class TSlidePointerPlugin extends TBasePlugin<ISlidable, TSlidePointerPlu
 
 		if (!owner || !gesture || index === undefined) return
 
-		const field = fieldOf(thumbsOf(owner, gesture.track)[index])
+		const thumb = slideThumb(this._parts, thumbsOf(owner, gesture.track), index)
+		const field = (this._parts.field ?? fieldOf)(thumb)
 
 		if (field && field.ownerDocument.activeElement !== field)
 			field.focus({ preventScroll: true, focusVisible: false })

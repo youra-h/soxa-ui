@@ -1,4 +1,5 @@
 import type { TPluginEvents } from '../../../base'
+import type { ISlideParts } from '../parts'
 import type { TSlideDirection } from '../types'
 import type { ISlideSnapStrategy } from './strategies'
 
@@ -10,6 +11,7 @@ import type { ISlideSnapStrategy } from './strategies'
 export type TSlidePointerPluginEvents = TPluginEvents
 
 export interface ISlidePointerPluginOptions {
+	parts?: ISlideParts
 	/**
 	 * Сколько мс ручка стоит на пересечённой метке в режиме щелчка `hold`,
 	 * прежде чем догнать указатель. По умолчанию — 250: столько хватает, чтобы
