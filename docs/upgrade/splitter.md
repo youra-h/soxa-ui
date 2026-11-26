@@ -32,9 +32,6 @@ The `panels` prop on `Splitter` takes panel IDs and size limits as percentages o
 The panel and handle parts reference those IDs in the same layout order.
 Oren uses a 100 ms hover delay unless a theme supplies `--so-splitter-hover-delay`.
 
-The slide plugins also accept optional configuration for the track, handle and keyboard handling.
-Existing calls keep their current defaults.
-
 ## Verification
 
 Type-check existing orientation imports after installing the new packages.

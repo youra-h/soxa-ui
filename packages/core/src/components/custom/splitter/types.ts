@@ -4,7 +4,7 @@ import type {
 	IComponentViewProps,
 	TComponentViewEvents,
 } from '../../base/component-view'
-import type { ISlidable } from '../slide'
+import type { TSlideEdge } from '../slide'
 import type { ISplitterPanelConfig } from './panel/types'
 
 export interface ISplitterProps extends IComponentViewProps {
@@ -31,11 +31,9 @@ export type TSplitterEvents = TComponentViewEvents & {
 	'change:sizes': (payload: TValuePayload<readonly number[]>) => void
 	'change:activeThumb': (payload: TValuePayload<number | undefined>) => void
 	commit: (sizes: readonly number[]) => void
-	'change:snap': (payload: TValuePayload<ISlidable['snap']>) => void
 }
 
-export interface ISplitter
-	extends IComponentView<ISplitterProps, TSplitterEvents>, Omit<ISlidable, 'events'> {
+export interface ISplitter extends IComponentView<ISplitterProps, TSplitterEvents> {
 	panels: readonly ISplitterPanelConfig[]
 	orientation: TOrientation
 	offset: number
@@ -44,6 +42,14 @@ export interface ISplitter
 	readonly splitterStyle: Record<string, string>
 	disabled: boolean
 	readonly sizes: readonly number[]
+	readonly inverted: boolean
+	readonly largeStep: number
+	readonly activeThumb: number | undefined
+	grab(index: number, fraction: number): boolean
+	drag(fraction: number): void
+	release(): void
+	shift(index: number, count: number): void
+	moveToEdge(index: number, edge: TSlideEdge): void
 	indexOf(panel: string): number
 	activate(index: number): void
 	togglePanel(panel: string): void

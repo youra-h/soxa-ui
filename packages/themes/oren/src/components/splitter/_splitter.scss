@@ -1,4 +1,8 @@
-$hover-delay: var(--so-splitter-hover-delay, 100ms);
+$hover-delay: var(--so-splitter-hover-delay);
+
+:where(:root) {
+	--so-splitter-hover-delay: 100ms;
+}
 
 .so-splitter__thumb {
 	--so-splitter-rule-color: var(--so-neutral-300);

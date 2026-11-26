@@ -1,5 +1,4 @@
 import type { ISlidable } from '@soxa-ui/core'
-import type { TSlideDirection } from './types'
 
 /**
  * Части перетаскивания в разметке владельца — по его классам, а не строкой в
@@ -31,31 +30,4 @@ export function fieldOf(thumb: Element | undefined): HTMLInputElement | null {
 			(child): child is HTMLInputElement => child instanceof HTMLInputElement,
 		) ?? null
 	)
-}
-
-export interface ISlideParts {
-	track?: typeof trackOf
-	field?: (thumb: Element | undefined) => HTMLElement | null
-	index?: (thumb: Element) => number
-	length?: (direction: TSlideDirection, track: Element) => number
-}
-
-export function thumbIndex(
-	parts: ISlideParts,
-	thumbs: Element[],
-	match: (thumb: Element) => boolean,
-): number {
-	const index = thumbs.findIndex(match)
-
-	return index < 0 ? -1 : (parts.index?.(thumbs[index]) ?? index)
-}
-
-export function slideThumb(
-	parts: ISlideParts,
-	thumbs: Element[],
-	index: number,
-): Element | undefined {
-	const indexOf = parts.index
-
-	return indexOf ? thumbs.find((thumb) => indexOf(thumb) === index) : thumbs[index]
 }

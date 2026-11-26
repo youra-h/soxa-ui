@@ -3,9 +3,9 @@ import { TBasePlugin } from '../../../base'
 import type { IPluginContext } from '../../../base'
 import { TElementPlugin } from '../../element'
 import type { IDomEventTarget } from '../../../utils'
-import { arrowStep, slideDirection } from '../direction'
-import { fieldOf, thumbIndex, thumbsOf, trackOf } from '../parts'
-import type { ISlideKeyboardPluginOptions, TSlideKeyboardPluginEvents } from './types'
+import { slideKeyAction } from '../keys'
+import { fieldOf, thumbsOf, trackOf } from '../parts'
+import type { TSlideKeyboardPluginEvents } from './types'
 
 /**
  * TSlideKeyboardPlugin — клавиатура и жест скринридера у полей ручек.
@@ -33,11 +33,9 @@ import type { ISlideKeyboardPluginOptions, TSlideKeyboardPluginEvents } from './
 export class TSlideKeyboardPlugin extends TBasePlugin<ISlidable, TSlideKeyboardPluginEvents> {
 	private _owner: ISlidable | null = null
 	private _root: Element | null = null
-	private _options: ISlideKeyboardPluginOptions = {}
 
-	override install(ctx: IPluginContext, options: ISlideKeyboardPluginOptions = {}): void {
-		super.install(ctx, options)
-		this._options = options
+	override install(ctx: IPluginContext): void {
+		super.install(ctx)
 
 		this._owner = ctx.getInstance<ISlidable>()
 
@@ -84,7 +82,7 @@ export class TSlideKeyboardPlugin extends TBasePlugin<ISlidable, TSlideKeyboardP
 		if (!owner || !root) return
 
 		const index = this._thumbOf(owner, root, event.target)
-		const action = index < 0 ? null : this._actionOf(owner, root, event)
+		const action = index < 0 ? null : slideKeyAction(owner, root, event)
 
 		if (!action) return
 
@@ -120,55 +118,12 @@ export class TSlideKeyboardPlugin extends TBasePlugin<ISlidable, TSlideKeyboardP
 		if (field.value !== value) field.value = value
 	}
 
-	/** Что клавиша делает с ручкой; не наша клавиша — `null`, её обработает браузер. */
-	private _actionOf(
-		owner: ISlidable,
-		root: Element,
-		event: KeyboardEvent,
-	): ((index: number) => void) | null {
-		switch (event.key) {
-			case 'Enter': {
-				const activate = this._options.activate
-
-				return activate ? (index) => activate(owner, index) : null
-			}
-			case 'Home':
-				return (index) => owner.moveToEdge(index, 'start')
-			case 'End':
-				return (index) => owner.moveToEdge(index, 'end')
-			case 'PageUp':
-				return (index) => owner.shift(index, owner.largeStep)
-			case 'PageDown':
-				return (index) => owner.shift(index, -owner.largeStep)
-		}
-
-		const step = arrowStep(slideDirection(owner, root), event.key)
-
-		if (step === null) return null
-
-		if (
-			this._options.axisOnly &&
-			(owner.orientation === 'horizontal') !==
-				(event.key === 'ArrowLeft' || event.key === 'ArrowRight')
-		)
-			return null
-
-		const count = event.shiftKey ? step * owner.largeStep : step
-
-		return (index) => owner.shift(index, count)
-	}
-
 	/** Номер ручки, чьё поле — цель события; не поле ручки — `-1`. */
 	private _thumbOf(owner: ISlidable, root: Element, target: EventTarget | null): number {
-		const parts = this._options.parts ?? {}
-		const track = (parts.track ?? trackOf)(owner, root)
+		const track = trackOf(owner, root)
 
 		if (!track) return -1
 
-		return thumbIndex(
-			parts,
-			thumbsOf(owner, track),
-			(thumb) => (parts.field ?? fieldOf)(thumb) === target,
-		)
+		return thumbsOf(owner, track).findIndex((thumb) => fieldOf(thumb) === target)
 	}
 }

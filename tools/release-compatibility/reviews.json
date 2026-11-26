@@ -76,17 +76,5 @@
       "b6cb236c8f8b7a76fad2650c69c18ee56dd04c0e9ddb0d622c5699ebc3405aa1",
       "6c8b56c576a0969f3df660eebab5f4295130554b49f2f8f520f43dd1a22d7684"
     ]
-  },
-  {
-    "id": "splitter-slide-plugin-options",
-    "baseline": "48896a297de7fc62a1da6f6e4a0715e4e222117c3fb80af6d3a7d6d8b5dd3f7b",
-    "impact": "compatible",
-    "reason": "The pointer length and keyboard options are optional, as is the parts resolver in pointer plugin options. Without those options, the slide plugins continue to use the existing track, thumbs, and keyboard mappings.",
-    "guide": "docs/upgrade/splitter.md",
-    "changes": [
-      "e44f90799e1eedba8cb064e1b6168907c85c187f317b60f779d27b0e610d4100",
-      "44c4dbd5b2e4edc67391c6d68b153f2e386f78e10c43f1bd02d0f47ff0161bf4",
-      "d306283cecd8b5ed76143484793cfe6f3c21d518e721dd055048fbfd75d5484c"
-    ]
   }
 ]

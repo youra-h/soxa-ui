@@ -2846,16 +2846,13 @@
     },
     {
       "name": "so-splitter__panel",
-      "sources": [
-        "packages/core/src/components/custom/splitter/part.class.ts",
-        "packages/plugins/src/custom/splitter/parts.ts"
-      ],
+      "sources": ["packages/core/src/components/custom/splitter/panel/panel.class.ts"],
       "description": "Panel in a Splitter, sized as a share of available space.",
       "scope": "so-splitter"
     },
     {
       "name": "so-splitter__thumb",
-      "sources": ["packages/core/src/components/custom/splitter/part.class.ts"],
+      "sources": ["packages/core/src/components/custom/splitter/handle/handle.class.ts"],
       "description": "Focusable handle between two panels in a Splitter.",
       "scope": "so-splitter"
     },
@@ -3421,7 +3418,7 @@
       "sources": [
         "packages/core/src/components/custom/menu/menu.class.ts",
         "packages/core/src/components/custom/menu/submenu/submenu.class.ts",
-        "packages/core/src/components/custom/splitter/part.class.ts"
+        "packages/core/src/components/custom/splitter/handle/handle.class.ts"
       ],
       "pattern": "so-<block>--size-<value>",
       "description": "Library size scale; normal is emitted too.",
@@ -3531,7 +3528,7 @@
     },
     {
       "name": "data-collapsed",
-      "sources": ["packages/core/src/components/custom/splitter/part.class.ts"],
+      "sources": ["packages/core/src/components/custom/splitter/panel/panel.class.ts"],
       "description": "Indicates a panel that consumes no space in the Splitter.",
       "scope": "so-splitter",
       "values": "empty",
@@ -3581,8 +3578,8 @@
       "name": "data-disabled",
       "sources": [
         "packages/core/src/components/base/control/control.class.ts",
-        "packages/core/src/components/custom/splitter/part.class.ts",
-        "packages/plugins/src/custom/splitter/parts.ts"
+        "packages/core/src/components/custom/splitter/handle/handle.class.ts",
+        "packages/plugins/src/custom/splitter/handle.ts"
       ],
       "description": "Control is disabled, including disabled inherited from its owner.",
       "scope": "TControl descendants and collection items",
@@ -3602,7 +3599,7 @@
       "sources": [
         "packages/core/src/components/custom/file-upload/file-upload.class.ts",
         "packages/core/src/components/custom/slider/slider.class.ts",
-        "packages/core/src/components/custom/splitter/part.class.ts",
+        "packages/core/src/components/custom/splitter/handle/handle.class.ts",
         "packages/core/src/components/custom/splitter/splitter.class.ts",
         "packages/core/src/components/custom/table/collection/extensions/columns/columns.extension.ts"
       ],
@@ -3702,10 +3699,7 @@
     },
     {
       "name": "data-index",
-      "sources": [
-        "packages/core/src/components/custom/splitter/part.class.ts",
-        "packages/plugins/src/custom/splitter/parts.ts"
-      ],
+      "sources": ["packages/core/src/components/custom/splitter/handle/handle.class.ts"],
       "description": "Identifies a handle by the zero-based index of the panel before it.",
       "scope": "so-splitter",
       "values": "numeric index",
@@ -4196,7 +4190,7 @@
     },
     {
       "name": "`--size-${this.size}`",
-      "sources": ["packages/core/src/components/custom/splitter/part.class.ts"],
+      "sources": ["packages/core/src/components/custom/splitter/handle/handle.class.ts"],
       "description": "Represents a named thickness of a Splitter handle.",
       "scope": "so-splitter",
       "pattern": "so-splitter__thumb--size-<size>"

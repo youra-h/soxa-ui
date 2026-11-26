@@ -154,6 +154,25 @@ describe.each(FRAMEWORKS)('Splitter geometry · $id', ({ id }) => {
 		await userEvent.keyboard('{ArrowDown}')
 		await expect.poll(() => separator.getAttribute('aria-valuenow')).toBe('26')
 
+		const secondSeparator = part(root, '[role="separator"]', 1)
+		const layout = part(root, '.so-splitter')
+		const track = layout.getBoundingClientRect()
+		const handle = secondSeparator.getBoundingClientRect()
+		const panelLength = [...layout.querySelectorAll('.so-splitter__panel')].reduce(
+			(total, panel) => total + panel.getBoundingClientRect().height,
+			0,
+		)
+		const position = { x: 0.5, y: (handle.top + handle.height / 2 - track.top) / track.height }
+		const pixels = 12
+		await commands.quickDrag('.pg-splitter-preview', position, {
+			...position,
+			y: position.y + pixels / track.height,
+		})
+		await expect
+			.poll(() => Number(secondSeparator.getAttribute('aria-valuenow')))
+			.toBeCloseTo(49 + (pixels * 100) / panelLength, 0)
+		expect(separator.getAttribute('aria-valuenow')).toBe('26')
+
 		preview.update({ panels, orientation: 'vertical' })
 		await expect.poll(() => inspect('vertical')).toEqual([0, 4, 0])
 		await expect.poll(() => root.querySelectorAll('.so-splitter__grip').length).toBe(2)

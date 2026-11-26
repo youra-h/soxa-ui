@@ -3,12 +3,11 @@
  */
 
 import { TSplitter, TSplitterHandle, TSplitterPanel } from '@soxa-ui/core'
-import { splitterSlideParts } from '@soxa-ui/plugins'
 import { defineComponent, defineDescriptor } from '../../../protected/define'
 import {
 	AriaPluginDescriptor,
-	SlideKeyboardPluginDescriptor,
-	SlidePointerPluginDescriptor,
+	SplitterKeyboardPluginDescriptor,
+	SplitterPointerPluginDescriptor,
 } from '../plugins'
 import { ComponentViewDescriptor } from './component-view.descriptor'
 
@@ -42,17 +41,7 @@ export const SplitterDescriptor = defineDescriptor(() =>
 				'commit',
 			],
 		},
-		plugins: [
-			SlidePointerPluginDescriptor.with({ parts: splitterSlideParts }),
-			SlideKeyboardPluginDescriptor.with({
-				parts: splitterSlideParts,
-				axisOnly: true,
-				activate: (owner, index) => {
-					if ('activate' in owner && typeof owner.activate === 'function')
-						owner.activate(index)
-				},
-			}),
-		],
+		plugins: [SplitterPointerPluginDescriptor, SplitterKeyboardPluginDescriptor],
 	}),
 )
 

@@ -28,9 +28,6 @@ export class TSplitter
 	}
 
 	readonly largeStep = 10
-	readonly snap = 'none'
-	readonly snapRadius = 0
-	readonly snapPoints: readonly number[] = []
 
 	private _panels: readonly TPanel[]
 	private _sizes: readonly number[]
@@ -202,16 +199,6 @@ export class TSplitter
 		return this._sizes
 	}
 
-	get values(): readonly number[] {
-		let position = 0
-
-		return this._sizes.slice(0, -1).map((size) => (position += size))
-	}
-
-	get fractions(): readonly number[] {
-		return this.values.map((value) => value / 100)
-	}
-
 	get activeThumb(): number | undefined {
 		return this._drag?.index
 	}
@@ -243,15 +230,11 @@ export class TSplitter
 
 		if (max - min <= EPSILON) return false
 
-		this._drag = { index, offset: fraction * 100 - this.values[index], sizes: this._sizes }
+		this._drag = { index, offset: fraction * 100 - this._sizes[index], sizes: this._sizes }
 		this._dataset.add('dragging', '')
 		this.events.emit('change:activeThumb', { newValue: index, oldValue: undefined })
 
 		return true
-	}
-
-	press(): boolean {
-		return false
 	}
 
 	drag(fraction: number): void {
@@ -259,9 +242,7 @@ export class TSplitter
 
 		if (!drag) return
 
-		const before = drag.sizes.slice(0, drag.index).reduce((sum, size) => sum + size, 0)
-
-		this._resize(drag.index, fraction * 100 - drag.offset - before)
+		this._resize(drag.index, fraction * 100 - drag.offset)
 	}
 
 	release(): void {
@@ -274,11 +255,6 @@ export class TSplitter
 		this.events.emit('change:activeThumb', { newValue: undefined, oldValue: drag.index })
 
 		if (drag.sizes !== this._sizes) this.events.emit('commit', this._sizes)
-	}
-
-	settle(fraction: number): void {
-		this.drag(fraction)
-		this.release()
 	}
 
 	shift(index: number, count: number): void {

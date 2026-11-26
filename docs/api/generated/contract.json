@@ -53369,6 +53369,34 @@
         "webc": { "props": {}, "events": {}, "models": {}, "slots": {} }
       }
     },
+    "SplitterKeyboardPluginDescriptor": {
+      "source": "packages/setup/content/descriptors/plugins/splitter-keyboard.plugin.ts",
+      "props": [],
+      "events": [],
+      "slots": [],
+      "frameworks": {
+        "vue": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "react": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "angular": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "solid": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "svelte": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "webc": { "props": {}, "events": {}, "models": {}, "slots": {} }
+      }
+    },
+    "SplitterPointerPluginDescriptor": {
+      "source": "packages/setup/content/descriptors/plugins/splitter-pointer.plugin.ts",
+      "props": [],
+      "events": [],
+      "slots": [],
+      "frameworks": {
+        "vue": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "react": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "angular": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "solid": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "svelte": { "props": {}, "events": {}, "models": {}, "slots": {} },
+        "webc": { "props": {}, "events": {}, "models": {}, "slots": {} }
+      }
+    },
     "SwipePluginDescriptor": {
       "source": "packages/setup/content/descriptors/plugins/swipe.plugin.ts",
       "props": [],
