@@ -20,8 +20,8 @@ function sourceProvenance() {
 }
 
 /**
- * The playground consumes workspace source directly; the theme supplies its
- * built CSS. Both HTML entries use the same framework plugins and aliases.
+ * The playground consumes workspace source directly, with built CSS for Oren.
+ * Both HTML entries use the same framework plugins and aliases.
  */
 export default defineConfig({
 	plugins: [...plugins(), openInEditor()],

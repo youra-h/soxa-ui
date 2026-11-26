@@ -21,7 +21,7 @@
     "bench:validate": "node tools/bench-validation/run.mjs",
     "build": "npm run build --workspace=@soxa-ui/core && npm run build --workspace=@soxa-ui/plugins && npm run build --workspace=@soxa-ui/setup && npm run build --workspace=@soxa-ui/icons-material && npm run build --workspace=@soxa-ui/icons-lucide && npm run build --workspace=@soxa-ui/theme-base && npm run build --workspace=@soxa-ui/theme-oren && npm run build --workspace=@soxa-ui/theme-burg && npm run build --workspace=@soxa-ui/vue && npm run build --workspace=@soxa-ui/react && npm run build --workspace=@soxa-ui/solid && npm run build --workspace=@soxa-ui/webc && npm run build --workspace=@soxa-ui/svelte && npm run build --workspace=@soxa-ui/angular && npm run build --workspace=@soxa-ui/mcp",
     "watch:theme": "npm run watch --workspace=@soxa-ui/theme-oren",
-    "dev": "concurrently -k -n oren,burg,playground -c blue,magenta,green \"npm run watch:theme\" \"npm run watch --workspace=@soxa-ui/theme-burg\" \"npm run dev --workspace=@soxa-ui/playground-vue\"",
+    "dev": "concurrently -k -n theme,playground -c blue,green \"npm run watch:theme\" \"npm run dev --workspace=@soxa-ui/playground-vue\"",
     "test:setup": "npm run test --workspace=@soxa-ui/setup",
     "test:core": "npm run test --workspace=@soxa-ui/core",
     "test:theme": "npm run test --workspace=@soxa-ui/theme-base && npm run test --workspace=@soxa-ui/theme-oren",
