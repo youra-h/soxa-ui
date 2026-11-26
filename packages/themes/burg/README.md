@@ -28,6 +28,13 @@ Set `--so-button-press-effect` on a button, container, or theme boundary.
 
 The face returns to rest on release. The effect follows the Soxa motion policy.
 
+### Lists, fields, and progress
+
+ListBox, Select, and Menu share row colors for highlighting and selection.
+Input, Select, and Textarea use the same size scale as Button and a shared
+neutral focus ring flush with the field border. ProgressLinear and ProgressSpinner use the same indicator
+color and follow the Soxa motion policy while progress is unknown.
+
 Set `data-so-theme="burg"` or `data-so-theme="burg-dark"` on the document root
 or the container of the themed components. Load the stylesheet and register
 the layout plugins at the application entry point.

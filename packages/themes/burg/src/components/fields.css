@@ -1,0 +1,74 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-input, .so-textarea) {
+		--so-burg-field-border: var(--so-burg-border);
+		background-color: var(--so-burg-surface);
+		color: var(--so-burg-text);
+	}
+
+	:where(.so-input) {
+		--so-input-border: 1px;
+		border: var(--so-input-border) solid var(--so-burg-field-border);
+		border-radius: var(--so-input-radius, var(--so-radius));
+	}
+
+	:where(.so-textarea) {
+		--so-textarea-border: 1px;
+		border: var(--so-textarea-border) solid var(--so-burg-field-border);
+		border-radius: var(--so-textarea-radius, var(--so-radius));
+	}
+
+	:where(.so-select[data-open='true']) > :where(.so-select__field),
+	:where(.so-input, .so-textarea):where(:has(> :is(input, textarea):focus)) {
+		--so-burg-field-border: var(--so-burg-focus-edge);
+		outline: 3px solid var(--so-burg-focus);
+		outline-offset: 0;
+	}
+
+	:where(.so-select[data-invalid='true']) > :where(.so-select__field),
+	:where(.so-input[data-invalid='true'], .so-textarea[data-invalid='true']) {
+		--so-burg-field-border: var(--so-burg-danger);
+	}
+
+	:where(.so-input) > :where(input),
+	:where(.so-textarea) > :where(textarea) {
+		outline: none;
+		border-radius: inherit;
+
+		&::placeholder {
+			color: var(--so-burg-muted);
+			opacity: 1;
+		}
+	}
+
+	:where(.so-input--size-normal) > :where(input),
+	:where(.so-textarea--size-normal) > :where(textarea) {
+		font-size: var(--so-burg-button-font-size-normal);
+	}
+
+	:where(.so-textarea__counter, .so-select__arrow) {
+		color: var(--so-burg-muted);
+	}
+
+	:where(.so-textarea[data-limit='exceeded']) > :where(.so-textarea__counter) {
+		color: var(--so-burg-danger);
+	}
+
+	:where(.so-select[data-open='true']) :where(.so-select__arrow) {
+		rotate: 180deg;
+	}
+
+	:where(.so-input__clear, .so-select__field .so-tags-item__close) {
+		--so-burg-button-fill: transparent;
+		--so-burg-button-ink: var(--so-burg-muted);
+	}
+
+	:where(.so-select__tags) :where(.so-tags-item) {
+		background: var(--so-burg-row-highlight);
+		border-radius: calc(var(--so-radius) * 0.75);
+	}
+
+	:where(.so-select__tags) :where(.so-tags-item) > :where(.so-button:not(.so-tags-item__close)) {
+		--so-burg-button-fill: transparent;
+		--so-burg-button-ink: var(--so-burg-text);
+	}
+}
