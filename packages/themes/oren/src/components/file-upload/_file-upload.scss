@@ -1,25 +1,23 @@
+@use 'sass:map';
 @use '../button/mixins' as button;
 @use '../../mixins/required';
 
+// Keep the icon, link and hover border on one shade with enough text contrast.
+$upload-weights: (
+	accent: 84%,
+	positive: 75%,
+	negative: 90%,
+	caution: 63%,
+);
+
 @mixin upload-tone($tone) {
-	.so-file-upload__symbol {
-		background-color: var(--so-#{$tone}-50);
-		color: var(--so-#{$tone}-600);
-	}
-
-	.so-file-upload__browse {
-		color: var(--so-#{$tone}-600);
-	}
-
-	.so-file-upload__choose:not(:disabled):hover {
-		border-color: var(--so-#{$tone}-600);
-	}
-
-	&[data-dragging='true'] > .so-file-upload__dropzone {
-		border-color: var(--so-#{$tone}-600);
-		outline: 1px solid var(--so-#{$tone}-600);
-		outline-offset: -1px;
-	}
+	$weight: map.get($upload-weights, $tone) or 100%;
+	--so-file-upload-action: #{color-mix(
+			in oklab,
+			var(--so-#{$tone}-600) $weight,
+			var(--so-#{$tone}-900)
+		)};
+	--so-file-upload-symbol-bg: var(--so-#{$tone}-50);
 }
 
 .so-file-upload {
@@ -48,6 +46,12 @@
 	color: var(--so-neutral-900);
 }
 
+.so-file-upload[data-dragging='true'] > .so-file-upload__dropzone {
+	border-color: var(--so-file-upload-action);
+	outline: 1px solid var(--so-file-upload-action);
+	outline-offset: -1px;
+}
+
 .so-file-upload__item {
 	border: 1px solid var(--so-neutral-300);
 	border-radius: var(--so-radius);
@@ -55,6 +59,8 @@
 }
 
 .so-file-upload__symbol {
+	background-color: var(--so-file-upload-symbol-bg);
+	color: var(--so-file-upload-action);
 	border-radius: 50%;
 	--so-icon-color: currentColor;
 }
@@ -104,6 +110,7 @@
 }
 
 .so-file-upload__browse {
+	color: var(--so-file-upload-action);
 	padding: 0;
 	border: 0;
 	background: transparent;
@@ -116,6 +123,10 @@
 .so-file-upload__choose:disabled,
 .so-file-upload__browse:disabled {
 	cursor: default;
+}
+
+.so-file-upload__choose:not(:disabled):hover {
+	border-color: var(--so-file-upload-action);
 }
 
 .so-file-upload__browse:not(:disabled):hover {
