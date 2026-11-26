@@ -155,7 +155,8 @@ describe.each(FRAMEWORKS)('FileUpload · $id', ({ id }) => {
 
 it('keeps the simulated upload and byte counts in the selected playground language', async () => {
 	const scope = effectScope()
-	const settings = scope.run(useLanguage)!
+	const settings = scope.run(useLanguage)
+	if (!settings) throw new Error('The playground language scope is inactive')
 	const previousLanguage = settings.language.value
 	try {
 		settings.choose('en-US')
