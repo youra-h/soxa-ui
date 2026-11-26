@@ -10,36 +10,27 @@ try {
 	const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null')
 
 	if (saved) {
-		theme.value = saved.theme ?? theme.value
+		if (THEMES.some(({ value }) => value === saved.theme)) theme.value = saved.theme
 		dark.value = Boolean(saved.dark)
 	}
 } catch {
 	// Приватный режим или заблокированное хранилище — не повод падать
 }
 
+watchEffect(() => {
+	document.documentElement.dataset.soTheme = dark.value ? `${theme.value}-dark` : theme.value
+
+	try {
+		localStorage.setItem(STORAGE_KEY, JSON.stringify({ theme: theme.value, dark: dark.value }))
+	} catch {
+		// The theme can still change when storage is unavailable.
+	}
+})
+
 /**
- * Тема и цветовая схема.
- *
- * Схема — не отдельная тема, а суффикс: `oren` и `oren-dark` — два значения
- * одного атрибута `data-so-theme`, светлые токены объявлены на `:root`, тёмные
- * перекрывают их ниже по файлу. Поэтому переключатель один, а не два списка.
- *
- * Состояние общее на всё приложение (модульный `ref`, а не `provide`): тему
- * читает и шапка, и любая страница, а второго экземпляра стенда не бывает.
+ * The app shares these refs across settings and preview hosts. The scheme is
+ * stored separately and becomes the suffix of the document's theme attribute.
  */
 export function useTheme() {
-	watchEffect(() => {
-		document.documentElement.dataset.soTheme = dark.value ? `${theme.value}-dark` : theme.value
-
-		try {
-			localStorage.setItem(
-				STORAGE_KEY,
-				JSON.stringify({ theme: theme.value, dark: dark.value }),
-			)
-		} catch {
-			// см. выше
-		}
-	})
-
 	return { theme, dark, themes: THEMES }
 }
