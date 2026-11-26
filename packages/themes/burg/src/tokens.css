@@ -1,0 +1,36 @@
+[data-so-theme='burg'],
+[data-so-theme='burg-dark'] {
+	--so-radius: 0.5rem;
+	--so-spacing: 0.25rem;
+	--so-place-surface: var(--so-panel-surface, var(--so-burg-surface));
+
+	--so-button-height-normal: 1.875rem;
+	--so-button-height-sm: calc(var(--so-button-height-normal) - 0.125rem);
+	--so-button-height-lg: calc(var(--so-button-height-normal) + 0.125rem);
+	--so-button-height-xl: calc(var(--so-button-height-normal) + 0.25rem);
+	--so-button-height-2xl: calc(var(--so-button-height-normal) + 0.375rem);
+
+	--so-burg-button-font-size-normal: 0.8125rem;
+	--so-button-font-size-sm: calc(var(--so-burg-button-font-size-normal) - 0.0625rem);
+	--so-button-font-size-lg: calc(var(--so-burg-button-font-size-normal) + 0.0625rem);
+	--so-button-font-size-xl: calc(var(--so-burg-button-font-size-normal) + 0.125rem);
+	--so-button-font-size-2xl: calc(var(--so-burg-button-font-size-normal) + 0.1875rem);
+}
+
+[data-so-theme='burg'] {
+	color-scheme: light;
+	--so-burg-surface: #fff;
+	--so-burg-text: #232529;
+	--so-burg-border: #c8cbd0;
+	--so-burg-focus: #356aa0;
+	--so-burg-danger: #a6333a;
+}
+
+[data-so-theme='burg-dark'] {
+	color-scheme: dark;
+	--so-burg-surface: #202226;
+	--so-burg-text: #eff0f3;
+	--so-burg-border: #62666f;
+	--so-burg-focus: #a2c7ee;
+	--so-burg-danger: #ffa1a7;
+}

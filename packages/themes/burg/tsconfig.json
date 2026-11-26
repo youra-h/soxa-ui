@@ -1,0 +1,16 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "@soxa-ui/core": ["../../core/src"],
+      "@soxa-ui/plugins": ["../../plugins/src"],
+      "@soxa-ui/setup": ["../../setup/index.ts"],
+      "@soxa-ui/theme-base/setup": ["../base/setup/index.ts"],
+      "@soxa-ui/theme-burg": ["./index.d.ts"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

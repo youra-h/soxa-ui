@@ -1,0 +1,11 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declarationMap": false,
+    "outDir": "dist/setup",
+    "rootDir": "setup"
+  },
+  "include": ["setup/**/*.ts"]
+}
