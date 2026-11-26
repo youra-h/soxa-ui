@@ -1,4 +1,4 @@
-import { freezeLocale } from '../locale'
+import { FILE_UPLOAD_NAMES, freezeLocale } from '../locale'
 
 /**
  * Английский (США) — локаль по умолчанию: её получает набор без провайдера.
@@ -9,6 +9,7 @@ import { freezeLocale } from '../locale'
 export const enUS = freezeLocale({
 	tag: 'en-US',
 	translations: {
+		fileUpload: FILE_UPLOAD_NAMES,
 		alertDialog: { confirm: 'Confirm', cancel: 'Cancel' },
 		alert: { close: 'Close' },
 		codeBlock: {

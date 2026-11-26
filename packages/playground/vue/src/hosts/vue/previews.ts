@@ -55,6 +55,7 @@ import {
 	AvatarGroup,
 	Badge,
 	CodeBlock,
+	FileUpload,
 	Label,
 	ListBox,
 	Menu,
@@ -82,6 +83,7 @@ import {
 	useToasts,
 	type TToastRender,
 } from '@soxa-ui/vue'
+import FileUploadProgress from './FileUploadProgress.vue'
 import type { TParts } from './events'
 
 /**
@@ -475,6 +477,11 @@ export const PREVIEWS: Record<string, TPreview> = {
 			title: () => ALERT_SAMPLE.title,
 			default: () => ALERT_SAMPLE.message,
 			action: () => h(Button, { type: 'button' }, () => ALERT_SAMPLE.action),
+		}),
+	'file-upload': (bind) =>
+		h(FileUpload, bind, {
+			'item-progress': ({ file, id }: { file: File; id: number }) =>
+				h(FileUploadProgress, { key: id, file }),
 		}),
 	'code-block': (bind) => h(CodeBlock, bind),
 	badge: (bind) => h(Badge, bind),

@@ -280,6 +280,17 @@ const OWN: Record<string, Record<string, string>> = {
 		tagsOverflow:
 			'Что делать с тегами в поле, когда они не помещаются в строку: переносить или прокручивать. Нужен множественный выбор',
 	},
+	'file-upload': {
+		required:
+			'Показывает маркер обязательного поля. Для отправки формы нужен хотя бы один файл',
+		variant: 'Цвет значка, ссылки и активной рамки. По умолчанию используется акцентный цвет',
+		size: 'Меняет кегль, размер кнопки и внутренние отступы',
+		accept: 'Допустимые MIME-типы, маски и расширения через запятую',
+		form: 'ID HTML-формы, которой принадлежит поле',
+		multiple: 'Разрешить выбор нескольких файлов',
+		maxFiles: 'Максимальное число файлов в списке',
+		maxFileSize: 'Максимальный размер одного файла в байтах',
+	},
 	'code-block': {
 		variant: 'Цвет активной вкладки в теме. Не меняет фон блока или цвета подсветки кода',
 		code: 'Исходный текст в одиночном режиме; копируется без изменения',
@@ -632,6 +643,7 @@ export const PREVIEW_PROPS: Readonly<Record<string, Readonly<Record<string, unkn
 	badge: { value: 8 },
 	avatar: { initials: 'AL', aria_label: 'Ada Lovelace' },
 	'avatar-group': { overflow: 3 },
+	'file-upload': { multiple: true, maxFiles: 4, maxFileSize: 10_000_000 },
 	'code-block': {
 		language: 'typescript',
 		code: 'const greeting = "Hello Soxa!";\nconsole.log(greeting);',

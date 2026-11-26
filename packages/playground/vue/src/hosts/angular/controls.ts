@@ -14,6 +14,7 @@ import {
 	TAvatarComponent,
 	TAvatarGroupComponent,
 	TCodeBlockComponent,
+	TFileUploadComponent,
 	TButtonComponent,
 	TToggleButtonComponent,
 	TToggleGroupComponent,
@@ -1448,4 +1449,32 @@ export class SeparatorPreview implements TFixture {
 	readonly decorative = input<TSeparatorComponent['decorative']>()
 	readonly copy = viewChild.required(CopyDirective)
 	readonly subjects = viewChildren(TSeparatorComponent)
+}
+
+@Component({
+	selector: 'pg-file-upload-preview',
+	imports: [TFileUploadComponent, CopyDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: { style: 'display: contents' },
+	template:
+		'<ng-template pg-copy><div so-file-upload [ctrl]="ctrl()" [rendered]="rendered()" [visible]="visible()" [direction]="direction()" [size]="size()" [variant]="variant()" [disabled]="disabled()" [focused]="focused()" [accept]="accept()" [name]="name()" [form]="form()" [multiple]="multiple()" [required]="required()" [maxFileSize]="maxFileSize()" [maxFiles]="maxFiles()"></div></ng-template>',
+})
+export class FileUploadPreview implements TFixture {
+	readonly ctrl = input<TFileUploadComponent['ctrl']>()
+	readonly rendered = input<TFileUploadComponent['rendered']>()
+	readonly visible = input<TFileUploadComponent['visible']>()
+	readonly direction = input<TFileUploadComponent['direction']>()
+	readonly size = input<TFileUploadComponent['size']>()
+	readonly variant = input<TFileUploadComponent['variant']>()
+	readonly disabled = input<TFileUploadComponent['disabled']>()
+	readonly focused = input<TFileUploadComponent['focused']>()
+	readonly accept = input<TFileUploadComponent['accept']>()
+	readonly name = input<TFileUploadComponent['name']>()
+	readonly form = input<TFileUploadComponent['form']>()
+	readonly multiple = input<TFileUploadComponent['multiple']>()
+	readonly required = input<TFileUploadComponent['required']>()
+	readonly maxFileSize = input<TFileUploadComponent['maxFileSize']>()
+	readonly maxFiles = input<TFileUploadComponent['maxFiles']>()
+	readonly copy = viewChild.required(CopyDirective)
+	readonly subjects = viewChildren(TFileUploadComponent)
 }

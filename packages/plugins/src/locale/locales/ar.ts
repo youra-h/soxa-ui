@@ -7,6 +7,16 @@ import { freezeLocale } from '../locale'
 export const arEG = freezeLocale({
 	tag: 'ar-EG',
 	translations: {
+		fileUpload: {
+			choose: 'اختيار الملفات',
+			drop: 'اسحب الملفات إلى هنا أو',
+			browse: 'انقر للتحميل',
+			limit: 'الحد الأقصى لحجم الملف: {size}',
+			remove: 'إزالة {name}',
+			type: '{name}: نوع الملف غير مدعوم.',
+			size: '{name}: الملف كبير جدًا.',
+			count: '{name}: تم بلوغ الحد الأقصى لعدد الملفات.',
+		},
 		alertDialog: { confirm: 'تأكيد', cancel: 'إلغاء' },
 		alert: { close: 'إغلاق' },
 		codeBlock: {

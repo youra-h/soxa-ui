@@ -11,6 +11,17 @@ export const CODE_BLOCK_NAMES = Object.freeze({
 	error: 'Unable to copy code',
 })
 
+export const FILE_UPLOAD_NAMES = Object.freeze({
+	choose: 'Choose files',
+	drop: 'Drag your file here or',
+	browse: 'click to upload',
+	limit: 'Maximum file size: {size}',
+	remove: 'Remove {name}',
+	type: '{name}: unsupported file type.',
+	size: '{name}: file is too large.',
+	count: '{name}: file limit reached.',
+})
+
 /** Defaults for locales written before Breadcrumbs was introduced. */
 export const BREADCRUMBS_NAMES = Object.freeze({
 	navigation: 'Breadcrumbs',
@@ -90,6 +101,11 @@ function overlay(base: TTranslations, patch: TPartialTranslations): TTranslation
 			...BREADCRUMBS_NAMES,
 			...base.breadcrumbs,
 			...defined(patch.breadcrumbs),
+		}),
+		fileUpload: Object.freeze({
+			...FILE_UPLOAD_NAMES,
+			...base.fileUpload,
+			...defined(patch.fileUpload),
 		}),
 		modal: section(base, patch, 'modal'),
 		dialog: section(base, patch, 'dialog'),

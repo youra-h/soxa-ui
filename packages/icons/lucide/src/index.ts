@@ -104,6 +104,11 @@ export const success: TIconSource = {
 	body: '<g fill="none" stroke="var(--so-icon-color, currentColor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></g>',
 }
 
+export const upload: TIconSource = {
+	viewBox: '0 0 24 24',
+	body: '<g fill="none" stroke="var(--so-icon-color, currentColor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m17 8-5-5-5 5"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></g>',
+}
+
 export const warning: TIconSource = {
 	viewBox: '0 0 24 24',
 	body: '<g fill="none" stroke="var(--so-icon-color, currentColor)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></g>',

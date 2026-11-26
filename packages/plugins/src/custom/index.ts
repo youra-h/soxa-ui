@@ -54,3 +54,4 @@ export * from './avatar'
 export * from './alert-dialog'
 
 export * from './collection-initial'
+export * from './file-upload'

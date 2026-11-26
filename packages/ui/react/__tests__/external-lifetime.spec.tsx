@@ -37,6 +37,7 @@ import {
 	TAvatar,
 	TAvatarGroup,
 	TCodeBlock,
+	TFileUpload,
 	TButton,
 	TToggleButton,
 	TItemRow,
@@ -106,6 +107,7 @@ import {
 	AvatarGroup,
 	Badge,
 	CodeBlock,
+	FileUpload,
 	Button,
 	ToggleButton,
 	Calendar,
@@ -385,6 +387,12 @@ const COMPONENTS: Readonly<Record<string, Readonly<Record<string, TCase>>>> = {
 		inline: overCtrl(
 			() => new TAlert({ closable: true }),
 			(ctrl) => <Alert ctrl={ctrl}>Message</Alert>,
+		),
+	},
+	FileUpload: {
+		chooser: overCtrl(
+			() => new TFileUpload(),
+			(ctrl) => <FileUpload ctrl={ctrl} />,
 		),
 	},
 	CodeBlock: {

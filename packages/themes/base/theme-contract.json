@@ -134,6 +134,12 @@
       "scope": "so-field"
     },
     {
+      "name": "so-file-upload",
+      "sources": ["packages/core/src/components/custom/file-upload/file-upload.class.ts"],
+      "description": "Root of FileUpload.",
+      "scope": "so-file-upload"
+    },
+    {
       "name": "so-frame",
       "sources": ["packages/core/src/components/custom/frame/frame.class.ts"],
       "description": "Root of frame. Inherited component classes use the concrete component's base name.",
@@ -1641,6 +1647,201 @@
       ],
       "description": "label part of field. Availability follows the rendered component structure.",
       "scope": "so-field"
+    },
+    {
+      "name": "so-file-upload__browse",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "Inline text button that opens the same native file picker.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__choose",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "Accessible round button that opens the file picker.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__details",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "FileUpload details part.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__dropzone",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "FileUpload dropzone part.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__hint",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "FileUpload hint part.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__input",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "FileUpload input part.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__item",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "FileUpload item part.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__list",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "FileUpload list part.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__message",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "FileUpload message part.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__preview",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "FileUpload preview part.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__progress",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "FileUpload progress part.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__prompt",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "Primary line with the drag instruction and inline file picker action.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__remove",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "FileUpload remove part.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__size",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "FileUpload size part.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__symbol",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "FileUpload symbol part.",
+      "scope": "so-file-upload"
     },
     {
       "name": "so-input__clear",
@@ -3352,13 +3553,14 @@
     {
       "name": "data-dragging",
       "sources": [
+        "packages/core/src/components/custom/file-upload/file-upload.class.ts",
         "packages/core/src/components/custom/slider/slider.class.ts",
         "packages/core/src/components/custom/table/collection/extensions/columns/columns.extension.ts"
       ],
-      "description": "Pointer drag in progress.",
-      "scope": "Slider root and thumb; Table root and dragged column header",
-      "values": "Slider root/thumb: true | false; Table root/header: true or absent",
-      "presence": "Table flags exist only during the gesture; Slider writes both boolean states."
+      "description": "Drag in progress.",
+      "scope": "FileUpload root; Slider root and thumb; Table root and dragged column header",
+      "values": "FileUpload root and Slider root/thumb: true | false; Table root/header: true or absent",
+      "presence": "Table flags exist only during the gesture; FileUpload and Slider write both boolean states."
     },
     {
       "name": "data-drop",
@@ -3385,6 +3587,21 @@
       "scope": "Select root",
       "values": "true | false",
       "presence": "Always present on applicable component instances, including the initial render; false is serialized as \"false\"."
+    },
+    {
+      "name": "data-file-id",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "Stable identity of the file represented by a FileUpload remove button.",
+      "scope": "FileUpload remove button",
+      "values": "A positive integer, unique within the FileUpload instance.",
+      "presence": "Present on each selected file?s remove button."
     },
     {
       "name": "data-grid",

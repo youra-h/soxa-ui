@@ -110,6 +110,7 @@ describe('узел фокуса у дескрипторов с TActionPlugin', (
 				'CheckBoxDescriptor',
 				'DateInputDescriptor',
 				'DatePickerDescriptor',
+				'FileUploadDescriptor',
 				'InputDescriptor',
 				'ListBoxDescriptor',
 				'ListBoxItemDescriptor',

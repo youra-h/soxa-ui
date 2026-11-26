@@ -13,6 +13,7 @@ export const MOBILE_COMPONENTS = [
 	'avatar-group',
 	'badge',
 	'code-block',
+	'file-upload',
 	'button',
 	'toggle-button',
 	'toggle-group',

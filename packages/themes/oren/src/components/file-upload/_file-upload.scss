@@ -1,0 +1,145 @@
+@use 'sass:map';
+@use '../button/mixins' as button;
+@use '../../mixins/required';
+
+// Keep the icon, link and hover border on one shade with enough text contrast.
+$upload-weights: (
+	accent: 84%,
+	positive: 75%,
+	negative: 90%,
+	caution: 63%,
+);
+
+@mixin upload-tone($tone) {
+	$weight: map.get($upload-weights, $tone) or 100%;
+	--so-file-upload-action: #{color-mix(
+			in oklab,
+			var(--so-#{$tone}-600) $weight,
+			var(--so-#{$tone}-900)
+		)};
+	--so-file-upload-symbol-bg: var(--so-#{$tone}-50);
+}
+
+.so-file-upload {
+	color: var(--so-neutral-900);
+	@include upload-tone(accent);
+}
+
+.so-file-upload--variant-normal {
+	@include upload-tone(neutral);
+}
+
+@each $tone in button.$variants {
+	.so-file-upload--variant-#{$tone} {
+		@include upload-tone($tone);
+	}
+}
+
+.so-file-upload:where(:has(> .so-file-upload__input:required))::after {
+	@include required.required-dot;
+}
+
+.so-file-upload__dropzone {
+	border: 1px dashed var(--so-neutral-300);
+	border-radius: var(--so-radius);
+	background: var(--so-component-surface);
+	color: var(--so-neutral-900);
+}
+
+.so-file-upload[data-dragging='true'] > .so-file-upload__dropzone {
+	border-color: var(--so-file-upload-action);
+	outline: 1px solid var(--so-file-upload-action);
+	outline-offset: -1px;
+}
+
+.so-file-upload__item {
+	border: 1px solid var(--so-neutral-300);
+	border-radius: var(--so-radius);
+	background: var(--so-component-surface);
+}
+
+.so-file-upload__symbol {
+	background-color: var(--so-file-upload-symbol-bg);
+	color: var(--so-file-upload-action);
+	border-radius: 50%;
+	--so-icon-color: currentColor;
+}
+
+.so-file-upload__prompt {
+	font-size: 1em;
+	font-weight: 500;
+}
+
+.so-file-upload__hint {
+	font-size: 0.875em;
+}
+
+.so-file-upload__preview {
+	overflow: hidden;
+	border-radius: var(--so-radius);
+	background: var(--so-neutral-100);
+	color: var(--so-neutral-700);
+	font-size: 0.875em;
+}
+
+.so-file-upload__size,
+.so-file-upload__message {
+	font-size: 0.875em;
+}
+
+.so-file-upload__hint,
+.so-file-upload__size {
+	color: var(--so-neutral-700);
+}
+
+.so-file-upload__message {
+	color: var(--so-negative-700);
+}
+
+.so-file-upload__choose,
+.so-file-upload__browse {
+	font: inherit;
+	cursor: pointer;
+}
+
+.so-file-upload__choose {
+	padding: 3px;
+	border: 1px solid var(--so-neutral-200);
+	border-radius: 50%;
+	background: var(--so-component-surface);
+}
+
+.so-file-upload__browse {
+	color: var(--so-file-upload-action);
+	padding: 0;
+	border: 0;
+	background: transparent;
+}
+
+:where(.so-file-upload__remove) {
+	@include button.button-view('plain');
+}
+
+.so-file-upload__choose:disabled,
+.so-file-upload__browse:disabled {
+	cursor: default;
+}
+
+.so-file-upload__choose:not(:disabled):hover {
+	border-color: var(--so-file-upload-action);
+}
+
+.so-file-upload__browse:not(:disabled):hover {
+	text-decoration: underline;
+}
+
+.so-file-upload__choose:focus-visible,
+.so-file-upload__browse:focus-visible {
+	@include button.button-focus-ring;
+}
+
+@media (forced-colors: active) {
+	.so-file-upload[data-dragging='true'] > .so-file-upload__dropzone {
+		outline-color: Highlight;
+	}
+}

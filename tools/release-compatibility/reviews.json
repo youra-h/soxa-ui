@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "id": "file-upload-additive-contracts",
+    "baseline": "48896a297de7fc62a1da6f6e4a0715e4e222117c3fb80af6d3a7d6d8b5dd3f7b",
+    "impact": "compatible",
+    "reason": "The new translation section is optional and has a fallback for existing complete locales. The drag attribute gains the FileUpload root as an additional scope with its own boolean values. Slider and Table keep their existing scope and value semantics.",
+    "guide": "docs/upgrade/file-upload.md",
+    "changes": [
+      "c9d399ee31a33b09b164b0818a6c21c8bd1ccfb37e4da6919a34ed56e653ebc1",
+      "b46a264660723189bf117bea61641a5b78bb4817b663f0649d1e2d5f522a85e5"
+    ]
+  },
+  {
+    "id": "file-upload-angular-descriptor-alias",
+    "baseline": "48896a297de7fc62a1da6f6e4a0715e4e222117c3fb80af6d3a7d6d8b5dd3f7b",
+    "impact": "compatible",
+    "reason": "The extra FileUpload Angular surface makes the bundle use AlertDialogDescriptor directly in place of its local alias descriptor. The references resolve to the same setup export and the normalized signatures are identical after replacing that alias.",
+    "guide": "docs/upgrade/file-upload.md",
+    "changes": ["a592eae02415da54cc56cd552172fbd8e4231967b5645571020cf1878100a8e5"]
+  }
+]

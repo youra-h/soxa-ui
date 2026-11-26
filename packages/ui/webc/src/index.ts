@@ -170,3 +170,6 @@ export {
 	TListBoxSeparatorElement,
 	type TListBoxSeparatorElementProps,
 } from './components/list-box/separator'
+
+export { TFileUploadElement } from './components/file-upload'
+export type { TFileUploadElementProps } from './components/file-upload'

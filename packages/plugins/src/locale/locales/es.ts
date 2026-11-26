@@ -4,6 +4,16 @@ import { freezeLocale } from '../locale'
 export const esES = freezeLocale({
 	tag: 'es-ES',
 	translations: {
+		fileUpload: {
+			choose: 'Elegir archivos',
+			drop: 'Arrastra tus archivos aquí o',
+			browse: 'haz clic para subirlos',
+			limit: 'Tamaño máximo del archivo: {size}',
+			remove: 'Eliminar {name}',
+			type: '{name}: tipo de archivo no compatible.',
+			size: '{name}: archivo demasiado grande.',
+			count: '{name}: se alcanzó el límite de archivos.',
+		},
 		alertDialog: { confirm: 'Confirmar', cancel: 'Cancelar' },
 		alert: { close: 'Cerrar' },
 		codeBlock: {

@@ -30,6 +30,7 @@ import {
 	DragAndDropDescriptor,
 	DrawerDescriptor,
 	FieldDescriptor,
+	FileUploadDescriptor,
 	FrameDescriptor,
 	IconDescriptor,
 	InputDescriptor,
@@ -147,6 +148,14 @@ export const COMPONENTS: readonly TComponentEntry[] = [
 		group: 'display',
 		span: 1,
 		description: 'Перекрывающаяся группа с явным числом скрытых пользователей',
+	},
+	{
+		id: 'file-upload',
+		label: 'FileUpload',
+		descriptor: FileUploadDescriptor,
+		group: 'forms',
+		span: 2,
+		description: 'Выбор и перетаскивание файлов с проверкой ограничений и превью',
 	},
 	{
 		id: 'code-block',

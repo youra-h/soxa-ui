@@ -4,6 +4,16 @@ import { freezeLocale } from '../locale'
 export const ruRU = freezeLocale({
 	tag: 'ru-RU',
 	translations: {
+		fileUpload: {
+			choose: 'Выбрать файлы',
+			drop: 'Перетащите или',
+			browse: 'выберите файлы',
+			limit: 'Максимальный размер файла: {size}',
+			remove: 'Удалить {name}',
+			type: '{name}: неподдерживаемый тип файла.',
+			size: '{name}: файл слишком большой.',
+			count: '{name}: достигнут лимит файлов.',
+		},
 		alertDialog: { confirm: 'Подтвердить', cancel: 'Отмена' },
 		alert: { close: 'Закрыть' },
 		codeBlock: {

@@ -4,6 +4,16 @@ import { freezeLocale } from '../locale'
 export const zhCN = freezeLocale({
 	tag: 'zh-CN',
 	translations: {
+		fileUpload: {
+			choose: '选择文件',
+			drop: '将文件拖放到此处或',
+			browse: '点击上传',
+			limit: '文件大小上限：{size}',
+			remove: '移除 {name}',
+			type: '{name}：不支持此文件类型。',
+			size: '{name}：文件过大。',
+			count: '{name}：已达到文件数量上限。',
+		},
 		alertDialog: { confirm: '确认', cancel: '取消' },
 		alert: { close: '关闭' },
 		codeBlock: { region: '代码', copy: '复制', copied: '已复制', error: '无法复制' },
