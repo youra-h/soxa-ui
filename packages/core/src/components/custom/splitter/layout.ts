@@ -1,4 +1,4 @@
-import type { ISplitterPanelConfig } from './types'
+import type { ISplitterPanelConfig } from './panel/types'
 
 export type TPanel = Required<Pick<ISplitterPanelConfig, 'minSize' | 'maxSize'>> &
 	ISplitterPanelConfig

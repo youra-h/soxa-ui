@@ -5,17 +5,7 @@ import type {
 	TComponentViewEvents,
 } from '../../base/component-view'
 import type { ISlidable } from '../slide'
-
-export interface ISplitterPanelConfig {
-	/** Identifies a panel within this splitter. */
-	id: string
-	/** Initial percentage of the space available to panels. Unspecified sizes share the remainder. */
-	defaultSize?: number
-	minSize?: number
-	maxSize?: number
-	/** Allows this panel to shrink to zero and restore its previous size. */
-	collapsible?: boolean
-}
+import type { ISplitterPanelConfig } from './panel/types'
 
 export interface ISplitterProps extends IComponentViewProps {
 	/** Panel configuration in the same order as the rendered panels. Sizes are percentages. */
@@ -58,43 +48,4 @@ export interface ISplitter
 	activate(index: number): void
 	togglePanel(panel: string): void
 	rangeOf(index: number): readonly [min: number, max: number]
-}
-
-export interface ISplitterPartProps extends IComponentViewProps {
-	/** Panel identifier. On a handle, identifies the panel directly before the boundary. */
-	panel?: string
-}
-
-export type TSplitterPartEvents = TComponentViewEvents & {
-	'change:panel': (payload: TValuePayload<string>) => void
-}
-
-export type TSplitterPanelEvents = TSplitterPartEvents & {
-	'change:panelStyle': (payload: TValuePayload<Record<string, number>>) => void
-}
-
-export interface ISplitterPanel extends IComponentView<ISplitterPartProps, TSplitterPanelEvents> {
-	readonly panelStyle: Record<string, number>
-	panel: string
-	sync(owner: ISplitter | null): void
-}
-
-export interface ISplitterHandleProps extends ISplitterPartProps {
-	/** Theme thickness token. Oren provides sm, normal and lg. */
-	size?: string
-}
-
-export type TSplitterHandleEvents = TSplitterPartEvents & {
-	'change:size': (payload: TValuePayload<string>) => void
-	'change:thumbShown': (payload: TValuePayload<boolean>) => void
-}
-
-export interface ISplitterHandle extends IComponentView<
-	ISplitterHandleProps,
-	TSplitterHandleEvents
-> {
-	panel: string
-	size: string
-	readonly thumbShown: boolean
-	sync(owner: ISplitter | null): void
 }

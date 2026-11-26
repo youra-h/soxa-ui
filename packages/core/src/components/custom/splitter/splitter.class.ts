@@ -3,7 +3,8 @@ import type { TDefaultValues } from '../../base/component'
 import type { TOrientation } from '../../../common'
 import type { TSlideEdge } from '../slide'
 import { clamp, EPSILON, fitSizes, normalizePanels, type TPanel } from './layout'
-import type { ISplitter, ISplitterPanelConfig, ISplitterProps, TSplitterEvents } from './types'
+import type { ISplitterPanelConfig } from './panel/types'
+import type { ISplitter, ISplitterProps, TSplitterEvents } from './types'
 
 export class TSplitter
 	extends TComponentView<ISplitterProps, TSplitterEvents>
