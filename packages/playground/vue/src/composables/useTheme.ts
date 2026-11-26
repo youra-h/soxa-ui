@@ -28,12 +28,8 @@ watchEffect(() => {
 })
 
 /**
- * Тема и цветовая схема.
- *
- * Схема — суффикс значения `data-so-theme`. Её можно менять отдельно от темы.
- *
- * Состояние общее на всё приложение (модульный `ref`, а не `provide`): тему
- * читает и шапка, и любая страница, а второго экземпляра стенда не бывает.
+ * The app shares these refs across settings and preview hosts. The scheme is
+ * stored separately and becomes the suffix of the document's theme attribute.
  */
 export function useTheme() {
 	return { theme, dark, themes: THEMES }
