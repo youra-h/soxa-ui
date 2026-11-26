@@ -44,6 +44,7 @@ export class TFileUploadNativePlugin extends TBasePlugin<IFileUpload, TEvents> {
 	private _bind(root: Element, owner: IFileUpload): (() => void) | undefined {
 		const input = fileUploadInput(root)
 		const choose = fileUploadChoose(root)
+		const browse = root.querySelector<HTMLButtonElement>('.so-file-upload__browse')
 		const doc = root.ownerDocument
 		const win = doc.defaultView
 		if (!input || !choose || !win) return
@@ -127,6 +128,7 @@ export class TFileUploadNativePlugin extends TBasePlugin<IFileUpload, TEvents> {
 
 		owner.events.on('selection', sync)
 		choose.addEventListener('click', pick)
+		browse?.addEventListener('click', pick)
 		input.addEventListener('change', change)
 		input.addEventListener('invalid', invalid)
 		root.addEventListener('click', remove)
@@ -137,6 +139,7 @@ export class TFileUploadNativePlugin extends TBasePlugin<IFileUpload, TEvents> {
 			active = false
 			owner.events.off('selection', sync)
 			choose.removeEventListener('click', pick)
+			browse?.removeEventListener('click', pick)
 			input.removeEventListener('change', change)
 			input.removeEventListener('invalid', invalid)
 			root.removeEventListener('click', remove)

@@ -1,7 +1,44 @@
 @use '../button/mixins' as button;
+@use '../../mixins/required';
+
+@mixin upload-tone($tone) {
+	.so-file-upload__symbol {
+		background-color: var(--so-#{$tone}-50);
+		color: var(--so-#{$tone}-600);
+	}
+
+	.so-file-upload__browse {
+		color: var(--so-#{$tone}-600);
+	}
+
+	.so-file-upload__choose:not(:disabled):hover {
+		border-color: var(--so-#{$tone}-600);
+	}
+
+	&[data-dragging='true'] > .so-file-upload__dropzone {
+		border-color: var(--so-#{$tone}-600);
+		outline: 1px solid var(--so-#{$tone}-600);
+		outline-offset: -1px;
+	}
+}
 
 .so-file-upload {
 	color: var(--so-neutral-900);
+	@include upload-tone(accent);
+}
+
+.so-file-upload--variant-normal {
+	@include upload-tone(neutral);
+}
+
+@each $tone in button.$variants {
+	.so-file-upload--variant-#{$tone} {
+		@include upload-tone($tone);
+	}
+}
+
+.so-file-upload:where(:has(> .so-file-upload__input:required))::after {
+	@include required.required-dot;
 }
 
 .so-file-upload__dropzone {
@@ -9,12 +46,6 @@
 	border-radius: var(--so-radius);
 	background: var(--so-component-surface);
 	color: var(--so-neutral-900);
-}
-
-.so-file-upload[data-dragging='true'] > .so-file-upload__dropzone {
-	border-color: var(--so-accent-600);
-	outline: 1px solid var(--so-accent-600);
-	outline-offset: -1px;
 }
 
 .so-file-upload__item {
@@ -25,8 +56,16 @@
 
 .so-file-upload__symbol {
 	border-radius: 50%;
-	background: var(--so-accent-100);
-	color: var(--so-accent-800);
+	--so-icon-color: currentColor;
+}
+
+.so-file-upload__prompt {
+	font-size: 1em;
+	font-weight: 500;
+}
+
+.so-file-upload__hint {
+	font-size: 0.875em;
 }
 
 .so-file-upload__preview {
@@ -37,7 +76,6 @@
 	font-size: 0.875em;
 }
 
-.so-file-upload__hint,
 .so-file-upload__size,
 .so-file-upload__message {
 	font-size: 0.875em;
@@ -53,40 +91,39 @@
 }
 
 .so-file-upload__choose,
-.so-file-upload__remove {
+.so-file-upload__browse {
 	font: inherit;
 	cursor: pointer;
 }
 
 .so-file-upload__choose {
-	padding: 0.375em 0.75em;
-	border: 1px solid currentcolor;
-	border-radius: var(--so-radius);
-	color: var(--so-accent-700);
+	padding: 3px;
+	border: 1px solid var(--so-neutral-200);
+	border-radius: 50%;
+	background: var(--so-component-surface);
+}
+
+.so-file-upload__browse {
+	padding: 0;
+	border: 0;
 	background: transparent;
 }
 
-.so-file-upload__remove {
-	min-inline-size: 2em;
-	min-block-size: 2em;
-	border: 0;
-	border-radius: var(--so-radius);
-	background: transparent;
-	color: inherit;
+:where(.so-file-upload__remove) {
+	@include button.button-view('plain');
 }
 
 .so-file-upload__choose:disabled,
-.so-file-upload__remove:disabled {
+.so-file-upload__browse:disabled {
 	cursor: default;
 }
 
-.so-file-upload__choose:not(:disabled):hover,
-.so-file-upload__remove:not(:disabled):hover {
-	background: var(--so-neutral-100);
+.so-file-upload__browse:not(:disabled):hover {
+	text-decoration: underline;
 }
 
 .so-file-upload__choose:focus-visible,
-.so-file-upload__remove:focus-visible {
+.so-file-upload__browse:focus-visible {
 	@include button.button-focus-ring;
 }
 

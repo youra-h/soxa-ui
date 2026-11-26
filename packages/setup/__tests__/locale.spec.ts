@@ -75,7 +75,8 @@ const NAMED: Record<string, Record<string, (locale: TLocale) => string>> = {
 	},
 	FileUploadDescriptor: {
 		names_choose: ({ translations }) => translations.fileUpload?.choose ?? 'Choose files',
-		names_hint: ({ translations }) => translations.fileUpload?.drop ?? 'Drag files here',
+		names_drop: ({ translations }) => translations.fileUpload?.drop ?? 'Drag your file here or',
+		names_browse: ({ translations }) => translations.fileUpload?.browse ?? 'click to upload',
 	},
 	CodeBlockDescriptor: {
 		contentAria: ({ translations }) => translations.codeBlock?.region ?? 'Code',

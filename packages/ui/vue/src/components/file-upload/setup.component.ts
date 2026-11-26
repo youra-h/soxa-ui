@@ -1,5 +1,12 @@
-import { FileUploadDescriptor } from '@soxa-ui/setup'
-import { useAdapter, useExpose, createVueAdapterContext, type SetupContext } from '../../adapter'
+import { FileUploadDescriptor, hasIcon } from '@soxa-ui/setup'
+import {
+	useAdapter,
+	useExpose,
+	createVueAdapterContext,
+	extendBinding,
+	roleIcon,
+	type SetupContext,
+} from '../../adapter'
 import BaseFileUpload, { type FileUploadProps } from './base.component'
 
 export default {
@@ -8,6 +15,9 @@ export default {
 	expose: useExpose(),
 	setup(props: FileUploadProps, { emit }: SetupContext) {
 		const adapter = createVueAdapterContext(FileUploadDescriptor(), { ctrl: props.ctrl, props })
-		return useAdapter(adapter, props, emit)
+		return extendBinding(useAdapter(adapter, props, emit), {
+			uploadIcon: roleIcon(hasIcon('upload') ? 'upload' : 'arrowUpward'),
+			removeIcon: roleIcon('close'),
+		})
 	},
 }

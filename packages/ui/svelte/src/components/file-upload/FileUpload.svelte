@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { Dynamic, toRootProps } from '../../adapter'
+	import { hasIcon } from '@soxa-ui/setup'
+	import { Dynamic, toRootProps, roleIcon } from '../../adapter'
+	import { Button } from '../button'
+	import { Icon } from '../icon'
 	import { setupFileUpload } from './setup.component'
 	import type { FileUploadProps } from './base.component'
 
@@ -7,6 +10,8 @@
 	const mountId = $props.id()
 	const binding = setupFileUpload(() => props, mountId, (node) => (ref = node))
 	const state = binding.state
+	const uploadIcon = roleIcon(hasIcon('upload') ? 'upload' : 'arrowUpward')
+	const removeIcon = roleIcon('close')
 </script>
 
 <Dynamic
@@ -28,8 +33,15 @@
 		disabled={state.disabled}
 	/>
 	<div class="so-file-upload__dropzone">
-		<span class="so-file-upload__symbol" aria-hidden="true">&#8593;</span>
-		<button class="so-file-upload__choose" type="button" disabled={state.disabled}>{state.names_choose}</button>
+		<button class="so-file-upload__choose" type="button" aria-label={state.names_choose} disabled={state.disabled}>
+			<span class="so-file-upload__symbol" aria-hidden="true">
+				<Icon embedded="file-upload.upload-icon" tag={uploadIcon} />
+			</span>
+		</button>
+		<div class="so-file-upload__prompt">
+			{state.names_drop}{' '}
+			<button class="so-file-upload__browse" type="button" disabled={state.disabled}>{state.names_browse}</button>
+		</div>
 		<div class="so-file-upload__hint">{state.names_hint}</div>
 	</div>
 	<div class="so-file-upload__message" role="status">{state.names_message}</div>
@@ -48,13 +60,16 @@
 						<bdi>{row.file.name}</bdi>
 						<span class="so-file-upload__size">{row.sizeText}</span>
 					</div>
-					<button
+					<Button
+						embedded="file-upload.remove"
 						class="so-file-upload__remove"
 						type="button"
 						data-file-id={row.id}
 						aria-label={row.removeLabel}
 						disabled={state.disabled}
-					>&times;</button>
+					>
+						<Icon embedded="file-upload.remove-icon" tag={removeIcon} />
+					</Button>
 					{#if props['item-progress']}
 						<div class="so-file-upload__progress">
 							{@render props['item-progress']({ file: row.file, id: row.id })}

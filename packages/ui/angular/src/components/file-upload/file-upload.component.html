@@ -11,10 +11,26 @@
 	[disabled]="state()['disabled'] ?? false"
 />
 <div class="so-file-upload__dropzone">
-	<span class="so-file-upload__symbol" aria-hidden="true">&#8593;</span>
-	<button class="so-file-upload__choose" type="button" [disabled]="state()['disabled'] ?? false">
-		{{ state()['names_choose'] }}
+	<button
+		class="so-file-upload__choose"
+		type="button"
+		[attr.aria-label]="state()['names_choose']"
+		[disabled]="state()['disabled'] ?? false"
+	>
+		<span class="so-file-upload__symbol" aria-hidden="true">
+			<svg [so-role-icon]="uploadRole"></svg>
+		</span>
 	</button>
+	<div class="so-file-upload__prompt">
+		{{ (state()['names_drop'] ?? '') + ' ' }}
+		<button
+			class="so-file-upload__browse"
+			type="button"
+			[disabled]="state()['disabled'] ?? false"
+		>
+			{{ state()['names_browse'] }}
+		</button>
+	</div>
 	<div class="so-file-upload__hint">{{ state()['names_hint'] }}</div>
 </div>
 <div class="so-file-upload__message" role="status">{{ state()['names_message'] }}</div>
@@ -35,13 +51,15 @@
 						<span class="so-file-upload__size">{{ row.sizeText }}</span>
 					</div>
 					<button
+						so-button
+						embedded="file-upload.remove"
 						class="so-file-upload__remove"
 						type="button"
 						[attr.data-file-id]="row.id"
 						[attr.aria-label]="row.removeLabel"
 						[disabled]="state()['disabled'] ?? false"
 					>
-						&times;
+						<svg so-icon embedded="file-upload.remove-icon" so-role-icon="close"></svg>
 					</button>
 					@if (slot('item-progress'); as progress) {
 						<div class="so-file-upload__progress">

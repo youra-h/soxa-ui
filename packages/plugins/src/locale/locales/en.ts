@@ -11,7 +11,8 @@ export const enUS = freezeLocale({
 	translations: {
 		fileUpload: {
 			choose: 'Choose files',
-			drop: 'Drag files here',
+			drop: 'Drag your file here or',
+			browse: 'click to upload',
 			limit: 'Maximum file size: {size}',
 			remove: 'Remove {name}',
 			type: '{name}: unsupported file type.',

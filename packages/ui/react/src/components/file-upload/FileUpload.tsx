@@ -1,7 +1,12 @@
+import { hasIcon } from '@soxa-ui/setup'
 import type { ElementType, ReactElement } from 'react'
-import { hasSlot, renderSlot, toRootProps } from '../../adapter'
+import { hasSlot, renderSlot, toRootProps, roleIcon } from '../../adapter'
 import { useSetupFileUpload } from './setup.component'
+import { Button } from '../button'
+import { Icon } from '../icon'
 import type { FileUploadProps } from './base.component'
+
+const CLOSE = roleIcon('close')
 
 export function FileUpload(props: FileUploadProps): ReactElement | null {
 	const { ref, forwardProps, state } = useSetupFileUpload(props)
@@ -10,6 +15,8 @@ export function FileUpload(props: FileUploadProps): ReactElement | null {
 	const Tag = state.tag as ElementType
 	const rows = state.names_rows ?? []
 	const progress = props['item-progress']
+
+	const UploadIcon = roleIcon(hasIcon('upload') ? 'upload' : 'arrowUpward')
 
 	return (
 		<Tag {...toRootProps(ref, state, [state.attrs, state.aria, state.dataset], forwardProps)}>
@@ -26,12 +33,26 @@ export function FileUpload(props: FileUploadProps): ReactElement | null {
 				disabled={state.disabled}
 			/>
 			<div className="so-file-upload__dropzone">
-				<span className="so-file-upload__symbol" aria-hidden="true">
-					&#8593;
-				</span>
-				<button className="so-file-upload__choose" type="button" disabled={state.disabled}>
-					{state.names_choose}
+				<button
+					className="so-file-upload__choose"
+					type="button"
+					aria-label={state.names_choose}
+					disabled={state.disabled}
+				>
+					<span className="so-file-upload__symbol" aria-hidden="true">
+						<UploadIcon />
+					</span>
 				</button>
+				<div className="so-file-upload__prompt">
+					{state.names_drop}{' '}
+					<button
+						className="so-file-upload__browse"
+						type="button"
+						disabled={state.disabled}
+					>
+						{state.names_browse}
+					</button>
+				</div>
 				<div className="so-file-upload__hint">{state.names_hint}</div>
 			</div>
 			<div className="so-file-upload__message" role="status">
@@ -54,15 +75,16 @@ export function FileUpload(props: FileUploadProps): ReactElement | null {
 									<bdi>{row.file.name}</bdi>
 									<span className="so-file-upload__size">{row.sizeText}</span>
 								</div>
-								<button
+								<Button
+									embedded="file-upload.remove"
 									className="so-file-upload__remove"
 									type="button"
 									data-file-id={row.id}
 									aria-label={row.removeLabel}
 									disabled={state.disabled}
 								>
-									&times;
-								</button>
+									<Icon embedded="file-upload.remove-icon" tag={CLOSE} />
+								</Button>
 								{hasSlot(progress) ? (
 									<div className="so-file-upload__progress">
 										{renderSlot(progress, { file: row.file, id: row.id })}

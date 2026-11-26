@@ -6,7 +6,7 @@
     "reason": "The new translation section is optional and has a fallback for existing complete locales. The drag attribute gains the FileUpload root as an additional scope with its own boolean values. Slider and Table keep their existing scope and value semantics.",
     "guide": "docs/upgrade/file-upload.md",
     "changes": [
-      "f1d7863a78cce52f00610aaa5c2ccd29259c557ad5b5223d543c77bd632666f8",
+      "c9d399ee31a33b09b164b0818a6c21c8bd1ccfb37e4da6919a34ed56e653ebc1",
       "b46a264660723189bf117bea61641a5b78bb4817b663f0649d1e2d5f522a85e5"
     ]
   },

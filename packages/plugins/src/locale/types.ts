@@ -17,7 +17,9 @@ import type { IListenable } from '../base/types'
  */
 export type TTranslations = {
 	readonly fileUpload?: Readonly<
-		Record<'choose' | 'drop' | 'limit' | 'remove' | 'type' | 'size' | 'count', string>
+		Record<'choose' | 'drop' | 'limit' | 'remove' | 'type' | 'size' | 'count', string> & {
+			browse?: string
+		}
 	>
 	/** Optional so complete custom locales created before AlertDialog remain compatible. */
 	readonly alertDialog?: { readonly confirm: string; readonly cancel: string }

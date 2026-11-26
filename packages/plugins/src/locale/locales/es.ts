@@ -6,12 +6,13 @@ export const esES = freezeLocale({
 	translations: {
 		fileUpload: {
 			choose: 'Elegir archivos',
-			drop: 'Arrastra los archivos aqu?',
-			limit: 'Tama?o m?ximo del archivo: {size}',
+			drop: 'Arrastra tus archivos aquí o',
+			browse: 'haz clic para subirlos',
+			limit: 'Tamaño máximo del archivo: {size}',
 			remove: 'Eliminar {name}',
 			type: '{name}: tipo de archivo no compatible.',
 			size: '{name}: archivo demasiado grande.',
-			count: '{name}: se alcanz? el l?mite de archivos.',
+			count: '{name}: se alcanzó el límite de archivos.',
 		},
 		alertDialog: { confirm: 'Confirmar', cancel: 'Cancelar' },
 		alert: { close: 'Cerrar' },

@@ -1649,6 +1649,19 @@
       "scope": "so-field"
     },
     {
+      "name": "so-file-upload__browse",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "Inline text button that opens the same native file picker.",
+      "scope": "so-file-upload"
+    },
+    {
       "name": "so-file-upload__choose",
       "sources": [
         "packages/ui/angular/src/components/file-upload/file-upload.component.html",
@@ -1658,7 +1671,7 @@
         "packages/ui/vue/src/components/file-upload/FileUpload.vue",
         "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
       ],
-      "description": "FileUpload choose part.",
+      "description": "Accessible round button that opens the file picker.",
       "scope": "so-file-upload"
     },
     {
@@ -1776,6 +1789,19 @@
         "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
       ],
       "description": "FileUpload progress part.",
+      "scope": "so-file-upload"
+    },
+    {
+      "name": "so-file-upload__prompt",
+      "sources": [
+        "packages/ui/angular/src/components/file-upload/file-upload.component.html",
+        "packages/ui/react/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/solid/src/components/file-upload/FileUpload.tsx",
+        "packages/ui/svelte/src/components/file-upload/FileUpload.svelte",
+        "packages/ui/vue/src/components/file-upload/FileUpload.vue",
+        "packages/ui/webc/src/components/file-upload/file-upload.template.ts"
+      ],
+      "description": "Primary line with the drag instruction and inline file picker action.",
       "scope": "so-file-upload"
     },
     {

@@ -1,7 +1,9 @@
 <script lang="ts">
+import { Button } from '../button'
+import { Icon } from '../icon'
 import SetupFileUpload from './setup.component'
 
-export default { ...SetupFileUpload }
+export default { ...SetupFileUpload, components: { Button, Icon } }
 </script>
 
 <template>
@@ -26,10 +28,22 @@ export default { ...SetupFileUpload }
 			:disabled="disabled"
 		/>
 		<div class="so-file-upload__dropzone">
-			<span class="so-file-upload__symbol" aria-hidden="true">&#8593;</span>
-			<button class="so-file-upload__choose" type="button" :disabled="disabled">
-				{{ names_choose }}
+			<button
+				class="so-file-upload__choose"
+				type="button"
+				:aria-label="names_choose"
+				:disabled="disabled"
+			>
+				<span class="so-file-upload__symbol" aria-hidden="true">
+					<component :is="uploadIcon" />
+				</span>
 			</button>
+			<div class="so-file-upload__prompt">
+				{{ names_drop }}{{ ' ' }}
+				<button class="so-file-upload__browse" type="button" :disabled="disabled">
+					{{ names_browse }}
+				</button>
+			</div>
 			<div class="so-file-upload__hint">{{ names_hint }}</div>
 		</div>
 		<div class="so-file-upload__message" role="status">{{ names_message }}</div>
@@ -43,15 +57,16 @@ export default { ...SetupFileUpload }
 					<bdi>{{ row.file.name }}</bdi>
 					<span class="so-file-upload__size">{{ row.sizeText }}</span>
 				</div>
-				<button
+				<Button
+					embedded="file-upload.remove"
 					class="so-file-upload__remove"
 					type="button"
 					:data-file-id="row.id"
 					:aria-label="row.removeLabel"
 					:disabled="disabled"
 				>
-					&times;
-				</button>
+					<Icon embedded="file-upload.remove-icon" :tag="removeIcon" />
+				</Button>
 				<div v-if="$slots['item-progress']" class="so-file-upload__progress">
 					<slot name="item-progress" :file="row.file" :id="row.id" />
 				</div>

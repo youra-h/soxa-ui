@@ -13,7 +13,8 @@ export const CODE_BLOCK_NAMES = Object.freeze({
 
 export const FILE_UPLOAD_NAMES = Object.freeze({
 	choose: 'Choose files',
-	drop: 'Drag files here',
+	drop: 'Drag your file here or',
+	browse: 'click to upload',
 	limit: 'Maximum file size: {size}',
 	remove: 'Remove {name}',
 	type: '{name}: unsupported file type.',

@@ -34,6 +34,8 @@ const names = definePlugin({
 	contribution: {
 		props: {
 			choose: { protected: true, triggers: ['change:presentation'] },
+			drop: { protected: true, triggers: ['change:presentation'] },
+			browse: { protected: true, triggers: ['change:presentation'] },
 			hint: { protected: true, triggers: ['change:presentation'] },
 			rows: { protected: true, triggers: ['change:presentation'] },
 			message: { protected: true, triggers: ['change:presentation'] },

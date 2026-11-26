@@ -64,7 +64,7 @@ export const COMPONENTS: Readonly<Record<string, readonly string[]>> = {
 	avatar: ['avatar'],
 	'avatar-group': ['avatar', 'avatar-group'],
 	badge: ['badge'],
-	'file-upload': ['file-upload'],
+	'file-upload': ['icon', 'button', 'file-upload'],
 	'code-block': ['icon', 'button', 'tabs', 'code-block'],
 	button: ['button'],
 	'toggle-button': ['button'],

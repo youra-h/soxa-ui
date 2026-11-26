@@ -6,7 +6,8 @@ export const frFR = freezeLocale({
 	translations: {
 		fileUpload: {
 			choose: 'Choisir des fichiers',
-			drop: 'Glissez les fichiers ici',
+			drop: 'Glissez vos fichiers ici ou',
+			browse: 'cliquez pour les ajouter',
 			limit: 'Taille maximale du fichier : {size}',
 			remove: 'Supprimer {name}',
 			type: '{name} : type de fichier non pris en charge.',

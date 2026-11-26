@@ -27,6 +27,7 @@
 .so-input:where([data-required='true'])::after,
 .so-number-input:where([data-required='true'])::after,
 .so-textarea:where([data-required='true'])::after,
+.so-file-upload:where(:has(> .so-file-upload__input:required))::after,
 .so-date-input:where([data-required='true'])::after,
 .so-date-picker--mode-range.so-date-picker:where([data-required='true'])::after {
 	content: '';

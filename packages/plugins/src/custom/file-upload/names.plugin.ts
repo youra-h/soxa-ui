@@ -25,11 +25,19 @@ export class TFileUploadNamesPlugin extends TNamesPlugin<IFileUpload, TEvents> {
 		return this._names.choose
 	}
 
+	get drop(): string {
+		return this._names.drop
+	}
+
+	get browse(): string {
+		return this._names.browse ?? this._names.choose
+	}
+
 	get hint(): string {
 		const limit = this._owner?.maxFileSize ?? Infinity
 		return Number.isFinite(limit)
-			? this._names.drop + ' ? ' + this._names.limit.replace('{size}', this._format(limit))
-			: this._names.drop
+			? this._names.limit.replace('{size}', this._format(limit))
+			: ''
 	}
 
 	get rows(): readonly TRow[] {

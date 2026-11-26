@@ -1,8 +1,13 @@
+import { hasIcon } from '@soxa-ui/setup'
 import type { JSX } from 'solid-js'
-import { Root, createRootProps, hasSlot, renderSlot } from '../../adapter'
+import { Root, createRootProps, hasSlot, renderSlot, roleIcon } from '../../adapter'
 import { For, Show } from '../../adapter/runtime/flow'
 import { setupFileUpload } from './setup.component'
+import { Button } from '../button'
+import { Icon } from '../icon'
 import type { FileUploadProps } from './base.component'
+
+const CLOSE = roleIcon('close')
 
 export function FileUpload(props: FileUploadProps): JSX.Element {
 	const binding = setupFileUpload(props)
@@ -12,6 +17,8 @@ export function FileUpload(props: FileUploadProps): JSX.Element {
 		sets: [state.attrs, state.aria, state.dataset],
 		forward: binding.forwardProps(),
 	}))
+
+	const UploadIcon = roleIcon(hasIcon('upload') ? 'upload' : 'arrowUpward')
 
 	return (
 		<Show when={state.rendered}>
@@ -29,12 +36,26 @@ export function FileUpload(props: FileUploadProps): JSX.Element {
 					disabled={state.disabled}
 				/>
 				<div class="so-file-upload__dropzone">
-					<span class="so-file-upload__symbol" aria-hidden="true">
-						&#8593;
-					</span>
-					<button class="so-file-upload__choose" type="button" disabled={state.disabled}>
-						{state.names_choose}
+					<button
+						class="so-file-upload__choose"
+						type="button"
+						aria-label={state.names_choose}
+						disabled={state.disabled}
+					>
+						<span class="so-file-upload__symbol" aria-hidden="true">
+							<UploadIcon />
+						</span>
 					</button>
+					<div class="so-file-upload__prompt">
+						{state.names_drop}{' '}
+						<button
+							class="so-file-upload__browse"
+							type="button"
+							disabled={state.disabled}
+						>
+							{state.names_browse}
+						</button>
+					</div>
 					<div class="so-file-upload__hint">{state.names_hint}</div>
 				</div>
 				<div class="so-file-upload__message" role="status">
@@ -57,15 +78,16 @@ export function FileUpload(props: FileUploadProps): JSX.Element {
 										<bdi>{row.file.name}</bdi>
 										<span class="so-file-upload__size">{row.sizeText}</span>
 									</div>
-									<button
+									<Button
+										embedded="file-upload.remove"
 										class="so-file-upload__remove"
 										type="button"
 										data-file-id={row.id}
 										aria-label={row.removeLabel}
 										disabled={state.disabled}
 									>
-										&times;
-									</button>
+										<Icon embedded="file-upload.remove-icon" tag={CLOSE} />
+									</Button>
 									<Show when={hasSlot(props['item-progress'])}>
 										<div class="so-file-upload__progress">
 											{renderSlot(props['item-progress'], {
