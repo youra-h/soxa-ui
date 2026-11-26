@@ -9,6 +9,7 @@ export const A11Y_COMPONENTS = [
 	'avatar',
 	'avatar-group',
 	'code-block',
+	'file-upload',
 	'breadcrumbs',
 	'input',
 	'number-input',
@@ -177,6 +178,10 @@ export const A11Y_CASES: readonly TAuditCase[] = [
 		['.so-avatar__fallback .so-icon'],
 		{ fixture: 'avatar-fallback' },
 	),
+	audit('file-upload', 'choose', '.so-file-upload', { required: true }, [
+		'.so-file-upload__choose',
+		'.so-file-upload__input',
+	]),
 	audit('code-block', 'basic', '.so-code-block', { code: 'const x = 1;\n' }, [
 		'.so-code-block__pre',
 		'.so-code-block__copy',

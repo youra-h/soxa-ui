@@ -210,6 +210,8 @@ export type { ToggleGroupProps } from './components/toggle-group/base.component'
 export type { ToggleGroupItemProps } from './components/toggle-group/item/base.component'
 
 export { CodeBlock } from './components/code-block'
+export { FileUpload } from './components/file-upload'
+export type { FileUploadProps } from './components/file-upload/base.component'
 export type { CodeBlockProps } from './components/code-block'
 
 export { Alert } from './components/alert'

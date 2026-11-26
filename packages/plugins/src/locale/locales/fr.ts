@@ -4,6 +4,15 @@ import { freezeLocale } from '../locale'
 export const frFR = freezeLocale({
 	tag: 'fr-FR',
 	translations: {
+		fileUpload: {
+			choose: 'Choisir des fichiers',
+			drop: 'Glissez les fichiers ici',
+			limit: 'Taille maximale du fichier : {size}',
+			remove: 'Supprimer {name}',
+			type: '{name} : type de fichier non pris en charge.',
+			size: '{name} : fichier trop volumineux.',
+			count: '{name} : nombre maximal de fichiers atteint.',
+		},
 		alertDialog: { confirm: 'Confirmer', cancel: 'Annuler' },
 		alert: { close: 'Fermer' },
 		codeBlock: {

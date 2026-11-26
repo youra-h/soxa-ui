@@ -510,6 +510,29 @@
       }
     },
     {
+      "id": "file-upload",
+      "name": "FileUpload",
+      "contract": "file-upload",
+      "sources": [
+        {
+          "role": "descriptor",
+          "descriptor": "FileUploadDescriptor",
+          "source": "packages/setup/content/descriptors/components/file-upload.descriptor.ts"
+        }
+      ],
+      "frameworks": {
+        "vue": { "exportName": "FileUpload" },
+        "react": { "exportName": "FileUpload" },
+        "angular": {
+          "exportName": "TFileUploadComponent",
+          "selector": "div[so-file-upload], [so-file-upload]"
+        },
+        "solid": { "exportName": "FileUpload" },
+        "svelte": { "exportName": "FileUpload" },
+        "webc": { "exportName": "TFileUploadElement", "selector": "div[is=\"so-file-upload\"]" }
+      }
+    },
+    {
       "id": "frame",
       "name": "Frame",
       "contract": "frame",
@@ -15540,6 +15563,688 @@
             "label-content": { "name": "label-content", "syntax": "slot=\"label-content\"" },
             "helper-content": { "name": "helper-content", "syntax": "slot=\"helper-content\"" },
             "error-content": { "name": "error-content", "syntax": "slot=\"error-content\"" }
+          }
+        }
+      }
+    },
+    "file-upload": {
+      "source": "packages/setup/content/descriptors/components/file-upload.descriptor.ts",
+      "props": [
+        {
+          "name": "ctrl",
+          "canonicalName": "ctrl",
+          "type": "import(\"@soxa-ui/core\").TFileUpload | undefined",
+          "declaredType": "TInstance",
+          "required": false,
+          "description": "Готовый инстанс ядра вместо собранного по пропсам. Только сам объект:\nреактивная обёртка фреймворка ему не нужна — ядро шлёт события само.",
+          "hasDefault": false
+        },
+        {
+          "name": "embedded",
+          "canonicalName": "embedded",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "description": "Имя места, если компонент — деталь разметки другого компонента soxa\n(`tags.close`). Ставит разметка библиотеки, а не потребитель: по нему\n`usePlugins` со `scope: 'own'` пропускает вложенный компонент.",
+          "hasDefault": false
+        },
+        {
+          "name": "pluginProps",
+          "canonicalName": "pluginProps",
+          "type": "import(\"@soxa-ui/setup\").TExternalPluginProps | undefined",
+          "declaredType": "TExternalPluginProps",
+          "required": false,
+          "description": "Значения пропсов плагинов, поставленных снаружи (`usePlugins`,\n`bundle.use`), по имени пропа: `{ timer_ms: 500 }`. Типы ключей\nприложение дописывает в `IExternalPluginProps`.",
+          "hasDefault": false
+        },
+        {
+          "name": "rendered",
+          "canonicalName": "rendered",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Отрисован ли компонент (аналог v-if)",
+          "hasDefault": true,
+          "default": "true"
+        },
+        {
+          "name": "visible",
+          "canonicalName": "visible",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Виден ли компонент (логическая видимость)",
+          "hasDefault": true,
+          "default": "true"
+        },
+        {
+          "name": "tag",
+          "canonicalName": "tag",
+          "type": "string | object | undefined",
+          "declaredType": "string | object",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"div\""
+        },
+        {
+          "name": "direction",
+          "canonicalName": "direction",
+          "type": "import(\"@soxa-ui/core\").TDirection | undefined",
+          "declaredType": "TDirection",
+          "values": ["ltr", "rtl", "inherit"],
+          "required": false,
+          "description": "Направление письма; по умолчанию `'inherit'` — наследуется от предка",
+          "hasDefault": true,
+          "default": "\"inherit\""
+        },
+        {
+          "name": "size",
+          "canonicalName": "size",
+          "type": "\"sm\" | \"normal\" | \"lg\" | \"xl\" | \"2xl\" | undefined",
+          "declaredType": "TComponentSize",
+          "values": ["sm", "normal", "lg", "xl", "2xl"],
+          "required": false,
+          "hasDefault": true,
+          "default": "\"normal\""
+        },
+        {
+          "name": "variant",
+          "canonicalName": "variant",
+          "type": "undefined",
+          "declaredType": "TComponentVariant",
+          "required": false,
+          "description": "Вариант темы. Не задан — модификатора нет, компонент выглядит вариантом темы по умолчанию",
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "disabled",
+          "canonicalName": "disabled",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "focused",
+          "canonicalName": "focused",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "accept",
+          "canonicalName": "accept",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"\""
+        },
+        {
+          "name": "name",
+          "canonicalName": "name",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"\""
+        },
+        {
+          "name": "form",
+          "canonicalName": "form",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"\""
+        },
+        {
+          "name": "multiple",
+          "canonicalName": "multiple",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "required",
+          "canonicalName": "required",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "maxFileSize",
+          "canonicalName": "maxFileSize",
+          "type": "number | undefined",
+          "declaredType": "number",
+          "required": false,
+          "description": "Per-file size limit in bytes. Zero permits only empty files.",
+          "hasDefault": true,
+          "default": "Infinity"
+        },
+        {
+          "name": "maxFiles",
+          "canonicalName": "maxFiles",
+          "type": "number | undefined",
+          "declaredType": "number",
+          "required": false,
+          "description": "Maximum number of retained files. Defaults to no additional limit.",
+          "hasDefault": true,
+          "default": "Infinity"
+        },
+        {
+          "name": "aria_label",
+          "canonicalName": "aria:label",
+          "type": "string | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "aria_labelledBy",
+          "canonicalName": "aria:labelledBy",
+          "type": "string | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "aria_describedBy",
+          "canonicalName": "aria:describedBy",
+          "type": "string | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        }
+      ],
+      "events": [
+        {
+          "name": "bundle:create",
+          "type": "(bundle: unknown) => void",
+          "description": "Плагины компонента созданы при монтировании; аргумент — их bundle."
+        },
+        {
+          "name": "plugin:event",
+          "type": "(event: import(\"@soxa-ui/core\").TPluginEvent) => void",
+          "description": "Событие внешнего плагина: полное имя (`timer:tick`) и аргументы."
+        },
+        { "name": "show", "type": "() => void", "description": "show" },
+        { "name": "hide", "type": "() => void", "description": "hide" },
+        {
+          "name": "show:before",
+          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
+          "description": "show:before — вызов e.preventDefault() отменяет показ"
+        },
+        {
+          "name": "hide:before",
+          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
+          "description": "hide:before — вызов e.preventDefault() отменяет скрытие"
+        },
+        {
+          "name": "ready",
+          "type": "(value: boolean) => void",
+          "description": "Component availability changed: true when the instance has an announced\nroot DOM element, false when that root is removed or replaced.\nDoes not wait for other plugins' DOM handlers or asynchronous work."
+        },
+        {
+          "name": "change:rendered",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
+          "description": "change:rendered"
+        },
+        {
+          "name": "change:visible",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
+          "description": "change:visible"
+        },
+        {
+          "name": "change:tag",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | object>) => void",
+          "description": "change:tag"
+        },
+        {
+          "name": "change:direction",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TDirection>) => void",
+          "description": "change:direction"
+        },
+        {
+          "name": "change:size",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TComponentSize>) => void",
+          "description": "change:size"
+        },
+        {
+          "name": "change:variant",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TComponentVariant | undefined>) => void",
+          "description": "change:variant"
+        },
+        {
+          "name": "change:disabled",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        },
+        {
+          "name": "change:focused",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        },
+        {
+          "name": "change:files",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<readonly File[]>) => void"
+        },
+        {
+          "name": "reject",
+          "type": "(rejections: readonly import(\"@soxa-ui/core\").IFileUploadRejection[]) => void"
+        },
+        { "name": "element:ready", "type": "(element: Element) => void" },
+        { "name": "element:removed", "type": "() => void" },
+        { "name": "action:press", "type": "(event: MouseEvent) => void" },
+        { "name": "action:click", "type": "(event: MouseEvent) => void" },
+        { "name": "action:focus", "type": "(event: FocusEvent) => void" },
+        { "name": "action:blur", "type": "(event: FocusEvent) => void" },
+        {
+          "name": "aria:change:label",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
+        },
+        {
+          "name": "aria:change:labelledBy",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
+        },
+        {
+          "name": "aria:change:describedBy",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
+        }
+      ],
+      "slots": [
+        {
+          "name": "item-progress",
+          "description": "Application-provided upload status for one selected file",
+          "scope": {
+            "file": { "type": "File", "required": true },
+            "id": { "type": "number", "required": true }
+          }
+        }
+      ],
+      "frameworks": {
+        "vue": {
+          "props": {
+            "ctrl": ":ctrl",
+            "embedded": ":embedded",
+            "pluginProps": ":pluginProps",
+            "rendered": ":rendered",
+            "visible": ":visible",
+            "tag": ":tag",
+            "direction": ":direction",
+            "size": ":size",
+            "variant": ":variant",
+            "disabled": ":disabled",
+            "focused": ":focused",
+            "accept": ":accept",
+            "name": ":name",
+            "form": ":form",
+            "multiple": ":multiple",
+            "required": ":required",
+            "maxFileSize": ":maxFileSize",
+            "maxFiles": ":maxFiles",
+            "aria_label": ":aria_label",
+            "aria_labelledBy": ":aria_labelledBy",
+            "aria_describedBy": ":aria_describedBy"
+          },
+          "events": {
+            "bundle:create": "@bundle:create",
+            "plugin:event": "@plugin:event",
+            "show": "@show",
+            "hide": "@hide",
+            "show:before": "@show:before",
+            "hide:before": "@hide:before",
+            "ready": "@ready",
+            "change:rendered": "@change:rendered",
+            "change:visible": "@change:visible",
+            "change:tag": "@change:tag",
+            "change:direction": "@change:direction",
+            "change:size": "@change:size",
+            "change:variant": "@change:variant",
+            "change:disabled": "@change:disabled",
+            "change:focused": "@change:focused",
+            "change:files": "@change:files",
+            "reject": "@reject",
+            "element:ready": "@element:ready",
+            "element:removed": "@element:removed",
+            "action:press": "@action:press",
+            "action:click": "@action:click",
+            "action:focus": "@action:focus",
+            "action:blur": "@action:blur",
+            "aria:change:label": "@aria:change:label",
+            "aria:change:labelledBy": "@aria:change:labelledBy",
+            "aria:change:describedBy": "@aria:change:describedBy"
+          },
+          "models": {
+            "rendered": "@update:rendered",
+            "visible": "@update:visible",
+            "tag": "@update:tag",
+            "direction": "@update:direction",
+            "size": "@update:size",
+            "variant": "@update:variant",
+            "disabled": "@update:disabled",
+            "focused": "@update:focused",
+            "accept": "@update:accept",
+            "name": "@update:name",
+            "form": "@update:form",
+            "multiple": "@update:multiple",
+            "required": "@update:required",
+            "maxFileSize": "@update:maxFileSize",
+            "maxFiles": "@update:maxFiles",
+            "aria_label": "@update:aria_label",
+            "aria_labelledBy": "@update:aria_labelledBy",
+            "aria_describedBy": "@update:aria_describedBy"
+          },
+          "slots": {
+            "item-progress": { "name": "item-progress", "syntax": "<template #item-progress>" }
+          }
+        },
+        "react": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "size": "size",
+            "variant": "variant",
+            "disabled": "disabled",
+            "focused": "focused",
+            "accept": "accept",
+            "name": "name",
+            "form": "form",
+            "multiple": "multiple",
+            "required": "required",
+            "maxFileSize": "maxFileSize",
+            "maxFiles": "maxFiles",
+            "aria_label": "aria_label",
+            "aria_labelledBy": "aria_labelledBy",
+            "aria_describedBy": "aria_describedBy"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:size": "onChangeSize",
+            "change:variant": "onChangeVariant",
+            "change:disabled": "onChangeDisabled",
+            "change:focused": "onChangeFocused",
+            "change:files": "onChangeFiles",
+            "reject": "onReject",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved",
+            "action:press": "onActionPress",
+            "action:click": "onActionClick",
+            "action:focus": "onActionFocus",
+            "action:blur": "onActionBlur",
+            "aria:change:label": "onAriaChangeLabel",
+            "aria:change:labelledBy": "onAriaChangeLabelledBy",
+            "aria:change:describedBy": "onAriaChangeDescribedBy"
+          },
+          "models": {},
+          "slots": { "item-progress": { "name": "item-progress", "syntax": "item-progress" } }
+        },
+        "angular": {
+          "props": {
+            "ctrl": "[ctrl]",
+            "embedded": "[embedded]",
+            "pluginProps": "[pluginProps]",
+            "rendered": "[rendered]",
+            "visible": "[visible]",
+            "direction": "[direction]",
+            "size": "[size]",
+            "variant": "[variant]",
+            "disabled": "[disabled]",
+            "focused": "[focused]",
+            "accept": "[accept]",
+            "name": "[name]",
+            "form": "[form]",
+            "multiple": "[multiple]",
+            "required": "[required]",
+            "maxFileSize": "[maxFileSize]",
+            "maxFiles": "[maxFiles]",
+            "aria_label": "[aria_label]",
+            "aria_labelledBy": "[aria_labelledBy]",
+            "aria_describedBy": "[aria_describedBy]"
+          },
+          "events": {
+            "bundle:create": "(soBundleCreate)",
+            "plugin:event": "(soPluginEvent)",
+            "show": "(soShow)",
+            "hide": "(soHide)",
+            "show:before": "(soShowBefore)",
+            "hide:before": "(soHideBefore)",
+            "ready": "(soReady)",
+            "change:rendered": "(soChangeRendered)",
+            "change:visible": "(soChangeVisible)",
+            "change:tag": "(soChangeTag)",
+            "change:direction": "(soChangeDirection)",
+            "change:size": "(soChangeSize)",
+            "change:variant": "(soChangeVariant)",
+            "change:disabled": "(soChangeDisabled)",
+            "change:focused": "(soChangeFocused)",
+            "change:files": "(soChangeFiles)",
+            "reject": "(soReject)",
+            "element:ready": "(soElementReady)",
+            "element:removed": "(soElementRemoved)",
+            "action:press": "(soActionPress)",
+            "action:click": "(soActionClick)",
+            "action:focus": "(soActionFocus)",
+            "action:blur": "(soActionBlur)",
+            "aria:change:label": "(soAriaChangeLabel)",
+            "aria:change:labelledBy": "(soAriaChangeLabelledBy)",
+            "aria:change:describedBy": "(soAriaChangeDescribedBy)"
+          },
+          "models": {
+            "rendered": "(renderedChange)",
+            "visible": "(visibleChange)",
+            "tag": "(tagChange)",
+            "direction": "(directionChange)",
+            "size": "(sizeChange)",
+            "variant": "(variantChange)",
+            "disabled": "(disabledChange)",
+            "focused": "(focusedChange)",
+            "accept": "(acceptChange)",
+            "name": "(nameChange)",
+            "form": "(formChange)",
+            "multiple": "(multipleChange)",
+            "required": "(requiredChange)",
+            "maxFileSize": "(maxFileSizeChange)",
+            "maxFiles": "(maxFilesChange)",
+            "aria_label": "(aria_labelChange)",
+            "aria_labelledBy": "(aria_labelledByChange)",
+            "aria_describedBy": "(aria_describedByChange)"
+          },
+          "slots": {
+            "item-progress": {
+              "name": "item-progress",
+              "syntax": "<ng-template slot=\"item-progress\">"
+            }
+          }
+        },
+        "solid": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "size": "size",
+            "variant": "variant",
+            "disabled": "disabled",
+            "focused": "focused",
+            "accept": "accept",
+            "name": "name",
+            "form": "form",
+            "multiple": "multiple",
+            "required": "required",
+            "maxFileSize": "maxFileSize",
+            "maxFiles": "maxFiles",
+            "aria_label": "aria_label",
+            "aria_labelledBy": "aria_labelledBy",
+            "aria_describedBy": "aria_describedBy"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:size": "onChangeSize",
+            "change:variant": "onChangeVariant",
+            "change:disabled": "onChangeDisabled",
+            "change:focused": "onChangeFocused",
+            "change:files": "onChangeFiles",
+            "reject": "onReject",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved",
+            "action:press": "onActionPress",
+            "action:click": "onActionClick",
+            "action:focus": "onActionFocus",
+            "action:blur": "onActionBlur",
+            "aria:change:label": "onAriaChangeLabel",
+            "aria:change:labelledBy": "onAriaChangeLabelledBy",
+            "aria:change:describedBy": "onAriaChangeDescribedBy"
+          },
+          "models": {},
+          "slots": { "item-progress": { "name": "item-progress", "syntax": "item-progress" } }
+        },
+        "svelte": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "size": "size",
+            "variant": "variant",
+            "disabled": "disabled",
+            "focused": "focused",
+            "accept": "accept",
+            "name": "name",
+            "form": "form",
+            "multiple": "multiple",
+            "required": "required",
+            "maxFileSize": "maxFileSize",
+            "maxFiles": "maxFiles",
+            "aria_label": "aria_label",
+            "aria_labelledBy": "aria_labelledBy",
+            "aria_describedBy": "aria_describedBy"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:size": "onChangeSize",
+            "change:variant": "onChangeVariant",
+            "change:disabled": "onChangeDisabled",
+            "change:focused": "onChangeFocused",
+            "change:files": "onChangeFiles",
+            "reject": "onReject",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved",
+            "action:press": "onActionPress",
+            "action:click": "onActionClick",
+            "action:focus": "onActionFocus",
+            "action:blur": "onActionBlur",
+            "aria:change:label": "onAriaChangeLabel",
+            "aria:change:labelledBy": "onAriaChangeLabelledBy",
+            "aria:change:describedBy": "onAriaChangeDescribedBy"
+          },
+          "models": {},
+          "slots": {
+            "item-progress": { "name": "item-progress", "syntax": "item-progress={content}" }
+          }
+        },
+        "webc": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "size": "size",
+            "variant": "variant",
+            "disabled": "disabled",
+            "focused": "focused",
+            "accept": "accept",
+            "name": "name",
+            "form": "form",
+            "multiple": "multiple",
+            "required": "required",
+            "maxFileSize": "maxFileSize",
+            "maxFiles": "maxFiles",
+            "aria_label": "aria_label",
+            "aria_labelledBy": "aria_labelledBy",
+            "aria_describedBy": "aria_describedBy"
+          },
+          "events": {
+            "bundle:create": "addEventListener('so:bundle:create', handler)",
+            "plugin:event": "addEventListener('so:plugin:event', handler)",
+            "show": "addEventListener('so:show', handler)",
+            "hide": "addEventListener('so:hide', handler)",
+            "show:before": "addEventListener('so:show:before', handler)",
+            "hide:before": "addEventListener('so:hide:before', handler)",
+            "ready": "addEventListener('so:ready', handler)",
+            "change:rendered": "addEventListener('so:change:rendered', handler)",
+            "change:visible": "addEventListener('so:change:visible', handler)",
+            "change:tag": "addEventListener('so:change:tag', handler)",
+            "change:direction": "addEventListener('so:change:direction', handler)",
+            "change:size": "addEventListener('so:change:size', handler)",
+            "change:variant": "addEventListener('so:change:variant', handler)",
+            "change:disabled": "addEventListener('so:change:disabled', handler)",
+            "change:focused": "addEventListener('so:change:focused', handler)",
+            "change:files": "addEventListener('so:change:files', handler)",
+            "reject": "addEventListener('so:reject', handler)",
+            "element:ready": "addEventListener('so:element:ready', handler)",
+            "element:removed": "addEventListener('so:element:removed', handler)",
+            "action:press": "addEventListener('so:action:press', handler)",
+            "action:click": "addEventListener('so:action:click', handler)",
+            "action:focus": "addEventListener('so:action:focus', handler)",
+            "action:blur": "addEventListener('so:action:blur', handler)",
+            "aria:change:label": "addEventListener('so:aria:change:label', handler)",
+            "aria:change:labelledBy": "addEventListener('so:aria:change:labelledBy', handler)",
+            "aria:change:describedBy": "addEventListener('so:aria:change:describedBy', handler)"
+          },
+          "models": {},
+          "slots": {
+            "item-progress": { "name": "item-progress", "syntax": "slot=\"item-progress\"" }
           }
         }
       }

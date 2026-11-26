@@ -9,6 +9,15 @@ import { freezeLocale } from '../locale'
 export const enUS = freezeLocale({
 	tag: 'en-US',
 	translations: {
+		fileUpload: {
+			choose: 'Choose files',
+			drop: 'Drag files here',
+			limit: 'Maximum file size: {size}',
+			remove: 'Remove {name}',
+			type: '{name}: unsupported file type.',
+			size: '{name}: file is too large.',
+			count: '{name}: file limit reached.',
+		},
 		alertDialog: { confirm: 'Confirm', cancel: 'Cancel' },
 		alert: { close: 'Close' },
 		codeBlock: {

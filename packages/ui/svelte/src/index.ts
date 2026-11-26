@@ -265,3 +265,6 @@ export type {
 	ListBoxSeparatorProps,
 	ListBoxSeparatorEventProps,
 } from './components/list-box/separator'
+
+export { FileUpload } from './components/file-upload'
+export type { FileUploadProps, FileUploadEventProps } from './components/file-upload'

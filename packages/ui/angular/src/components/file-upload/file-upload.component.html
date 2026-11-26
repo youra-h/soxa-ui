@@ -1,0 +1,59 @@
+<input
+	class="so-file-upload__input"
+	type="file"
+	tabindex="-1"
+	[attr.aria-label]="state()['names_choose']"
+	[attr.accept]="state()['accept'] || null"
+	[attr.name]="state()['name'] || null"
+	[attr.form]="state()['form'] || null"
+	[multiple]="state()['multiple'] ?? false"
+	[required]="state()['required'] ?? false"
+	[disabled]="state()['disabled'] ?? false"
+/>
+<div class="so-file-upload__dropzone">
+	<span class="so-file-upload__symbol" aria-hidden="true">&#8593;</span>
+	<button class="so-file-upload__choose" type="button" [disabled]="state()['disabled'] ?? false">
+		{{ state()['names_choose'] }}
+	</button>
+	<div class="so-file-upload__hint">{{ state()['names_hint'] }}</div>
+</div>
+<div class="so-file-upload__message" role="status">{{ state()['names_message'] }}</div>
+@if (state()['names_rows']; as rows) {
+	@if (rows.length) {
+		<ul class="so-file-upload__list" role="list">
+			@for (row of rows; track row.id) {
+				<li class="so-file-upload__item">
+					<div class="so-file-upload__preview" aria-hidden="true">
+						@if (state()['native_previews']?.[row.id]; as preview) {
+							<img [src]="preview" alt="" />
+						} @else {
+							<span>{{ row.extension }}</span>
+						}
+					</div>
+					<div class="so-file-upload__details">
+						<bdi>{{ row.file.name }}</bdi>
+						<span class="so-file-upload__size">{{ row.sizeText }}</span>
+					</div>
+					<button
+						class="so-file-upload__remove"
+						type="button"
+						[attr.data-file-id]="row.id"
+						[attr.aria-label]="row.removeLabel"
+						[disabled]="state()['disabled'] ?? false"
+					>
+						&times;
+					</button>
+					@if (slot('item-progress'); as progress) {
+						<div class="so-file-upload__progress">
+							<ng-container
+								[ngTemplateOutlet]="progress"
+								[ngTemplateOutletContext]="{ file: row.file, id: row.id }"
+							/>
+						</div>
+					}
+				</li>
+			}
+		</ul>
+	}
+}
+<ng-content select="ng-template[slot]" />

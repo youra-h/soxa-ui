@@ -5,6 +5,14 @@
 	min-inline-size: 0;
 }
 
+.so-file-upload[data-disabled='true'] {
+	opacity: var(--so-disabled-opacity);
+}
+
+.so-file-upload[data-disabled='true'] > * {
+	--so-disabled-opacity: 1;
+}
+
 .so-file-upload__input {
 	position: absolute;
 	inline-size: 1px;
@@ -65,8 +73,17 @@
 	min-inline-size: 0;
 }
 
-.so-file-upload__message:empty,
-.so-file-upload__progress:empty {
+.so-file-upload__message:empty {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+}
+
+.so-file-upload__progress:empty,
+.so-file-upload__list[hidden],
+.so-file-upload__preview > [hidden] {
 	display: none;
 }
 

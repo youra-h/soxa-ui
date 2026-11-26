@@ -633,6 +633,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 			})),
 		},
 	},
+	'file-upload': { tag: 'div', is: 'so-file-upload' },
 	'code-block': { tag: 'div', is: 'so-code-block' },
 	label: {
 		tag: 'label',

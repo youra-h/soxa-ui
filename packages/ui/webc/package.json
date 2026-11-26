@@ -201,6 +201,10 @@
       "types": "./dist/components/toggle-group/index.d.ts",
       "default": "./dist/components/toggle-group/index.js"
     },
+    "./file-upload": {
+      "types": "./dist/components/file-upload/index.d.ts",
+      "default": "./dist/components/file-upload/index.js"
+    },
     "./code-block": {
       "types": "./dist/components/code-block/index.d.ts",
       "default": "./dist/components/code-block/index.js"

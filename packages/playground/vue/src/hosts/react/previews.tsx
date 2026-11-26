@@ -46,6 +46,7 @@ import {
 	AvatarGroup,
 	Badge,
 	CodeBlock,
+	FileUpload,
 	Label,
 	ListBox,
 	Menu,
@@ -412,6 +413,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 			{ALERT_SAMPLE.message}
 		</Alert>
 	),
+	'file-upload': (bind) => <FileUpload {...bind} />,
 	'code-block': (bind) => <CodeBlock {...bind} />,
 	badge: (bind) => <Badge {...bind} />,
 	avatar: (bind) => <Avatar {...bind} />,

@@ -4,6 +4,15 @@ import { freezeLocale } from '../locale'
 export const zhCN = freezeLocale({
 	tag: 'zh-CN',
 	translations: {
+		fileUpload: {
+			choose: '????',
+			drop: '????????',
+			limit: '???????{size}',
+			remove: '?? {name}',
+			type: '{name}??????????',
+			size: '{name}??????',
+			count: '{name}???????????',
+		},
 		alertDialog: { confirm: '确认', cancel: '取消' },
 		alert: { close: '关闭' },
 		codeBlock: { region: '代码', copy: '复制', copied: '已复制', error: '无法复制' },

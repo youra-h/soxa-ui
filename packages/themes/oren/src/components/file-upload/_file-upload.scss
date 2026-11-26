@@ -75,8 +75,13 @@
 	color: inherit;
 }
 
-.so-file-upload__choose:hover,
-.so-file-upload__remove:hover {
+.so-file-upload__choose:disabled,
+.so-file-upload__remove:disabled {
+	cursor: default;
+}
+
+.so-file-upload__choose:not(:disabled):hover,
+.so-file-upload__remove:not(:disabled):hover {
 	background: var(--so-neutral-100);
 }
 
