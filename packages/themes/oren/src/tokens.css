@@ -15,10 +15,6 @@
  * объяснение целиком в шапке tokens-dark.css.
  */
 
-:root {
-	--so-splitter-hover-delay: 100ms;
-}
-
 :root,
 [data-so-theme='oren'] {
 	/* Схема для самого браузера. То, что он рисует сам, — полосы
