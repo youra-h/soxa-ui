@@ -597,7 +597,10 @@ export function findComponent(id: string): TComponentEntry | undefined {
  * Themes. The dark scheme is not a separate theme but the `${value}-dark`
  * attribute, so it is not listed: a switch turns it on.
  */
-export const THEMES: readonly TThemeEntry[] = [{ id: 'oren', label: 'Oren', value: 'oren' }]
+export const THEMES: readonly TThemeEntry[] = [
+	{ id: 'oren', label: 'Oren', value: 'oren' },
+	{ id: 'burg', label: 'Burg', value: 'burg' },
+]
 
 /** Icon packs. They implement the `ICON_ROLES` contract. */
 export const ICON_PACKS: readonly TIconPackEntry[] = [
