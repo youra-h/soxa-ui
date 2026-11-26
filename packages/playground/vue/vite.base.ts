@@ -93,20 +93,20 @@ export function constants(): Record<string, string> {
 }
 
 /**
- * Алиасы на исходники соседей.
- *
- * Тема отдаёт готовый `dist/index.css`: её корень — CSS, и подключают его
- * только dev-сервер и браузерный прогон (`themeCss`). В jsdom стилей нет, и
- * тему туда не тянем. `/setup` темы — раньше корня пакета: алиас сравнивается
- * префиксом. Поведение темы ставит плагины раскладки общего слоя тем, и его
- * `/setup` — тоже исходником. Корню общего слоя алиас не нужен: это CSS-исходник,
- * и спеки «база без темы» берут его через манифест.
+ * The playground uses built CSS for Oren and reads Burg's plain CSS directly
+ * from the workspace. Both CSS aliases are skipped for jsdom. The Oren setup
+ * alias comes before its package root because aliases also match prefixes.
  */
 export function aliases({ themeCss }: { themeCss: boolean }): Record<string, string> {
 	return {
 		'@soxa-ui/theme-oren/setup': resolve('../../themes/oren/setup/index.ts'),
 		'@soxa-ui/theme-base/setup': resolve('../../themes/base/setup/index.ts'),
-		...(themeCss ? { '@soxa-ui/theme-oren': resolve('../../themes/oren/dist/index.css') } : {}),
+		...(themeCss
+			? {
+					'@soxa-ui/theme-oren': resolve('../../themes/oren/dist/index.css'),
+					'@soxa-ui/theme-burg': resolve('../../themes/burg/src/index.css'),
+				}
+			: {}),
 		'@soxa-ui/core': resolve('../../core/src'),
 		'@soxa-ui/icons-lucide': resolve('../../icons/lucide/src'),
 		'@soxa-ui/icons-material': resolve('../../icons/material/src'),
