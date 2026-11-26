@@ -1,0 +1,92 @@
+@use '../button/mixins' as button;
+
+.so-file-upload {
+	color: var(--so-neutral-900);
+}
+
+.so-file-upload__dropzone {
+	border: 1px dashed var(--so-neutral-300);
+	border-radius: var(--so-radius);
+	background: var(--so-component-surface);
+	color: var(--so-neutral-900);
+}
+
+.so-file-upload[data-dragging='true'] > .so-file-upload__dropzone {
+	border-color: var(--so-accent-600);
+	outline: 1px solid var(--so-accent-600);
+	outline-offset: -1px;
+}
+
+.so-file-upload__item {
+	border: 1px solid var(--so-neutral-300);
+	border-radius: var(--so-radius);
+	background: var(--so-component-surface);
+}
+
+.so-file-upload__symbol {
+	border-radius: 50%;
+	background: var(--so-accent-100);
+	color: var(--so-accent-800);
+}
+
+.so-file-upload__preview {
+	overflow: hidden;
+	border-radius: var(--so-radius);
+	background: var(--so-neutral-100);
+	color: var(--so-neutral-700);
+	font-size: 0.875em;
+}
+
+.so-file-upload__hint,
+.so-file-upload__size,
+.so-file-upload__message {
+	font-size: 0.875em;
+}
+
+.so-file-upload__hint,
+.so-file-upload__size {
+	color: var(--so-neutral-700);
+}
+
+.so-file-upload__message {
+	color: var(--so-negative-700);
+}
+
+.so-file-upload__choose,
+.so-file-upload__remove {
+	font: inherit;
+	cursor: pointer;
+}
+
+.so-file-upload__choose {
+	padding: 0.375em 0.75em;
+	border: 1px solid currentcolor;
+	border-radius: var(--so-radius);
+	color: var(--so-accent-700);
+	background: transparent;
+}
+
+.so-file-upload__remove {
+	min-inline-size: 2em;
+	min-block-size: 2em;
+	border: 0;
+	border-radius: var(--so-radius);
+	background: transparent;
+	color: inherit;
+}
+
+.so-file-upload__choose:hover,
+.so-file-upload__remove:hover {
+	background: var(--so-neutral-100);
+}
+
+.so-file-upload__choose:focus-visible,
+.so-file-upload__remove:focus-visible {
+	@include button.button-focus-ring;
+}
+
+@media (forced-colors: active) {
+	.so-file-upload[data-dragging='true'] > .so-file-upload__dropzone {
+		outline-color: Highlight;
+	}
+}

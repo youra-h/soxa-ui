@@ -1,0 +1,78 @@
+.so-file-upload {
+	position: relative;
+	display: grid;
+	gap: 1em;
+	min-inline-size: 0;
+}
+
+.so-file-upload__input {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+.so-file-upload__dropzone {
+	display: grid;
+	justify-items: center;
+	gap: 0.625em;
+	padding: 1.5em 1em;
+	text-align: center;
+}
+
+.so-file-upload__list {
+	display: grid;
+	gap: 0.75em;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.so-file-upload__item {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 0.75em;
+	padding: 0.75em;
+	min-inline-size: 0;
+}
+
+.so-file-upload__preview {
+	display: grid;
+	place-items: center;
+	inline-size: 3em;
+	block-size: 3em;
+}
+
+.so-file-upload__preview > img {
+	inline-size: 100%;
+	block-size: 100%;
+	object-fit: cover;
+}
+
+.so-file-upload__details {
+	overflow-wrap: anywhere;
+}
+
+.so-file-upload__size {
+	display: block;
+}
+
+.so-file-upload__progress {
+	grid-column: 1 / -1;
+	min-inline-size: 0;
+}
+
+.so-file-upload__message:empty,
+.so-file-upload__progress:empty {
+	display: none;
+}
+
+.so-file-upload__symbol {
+	display: grid;
+	place-items: center;
+	inline-size: 2.5em;
+	block-size: 2.5em;
+}

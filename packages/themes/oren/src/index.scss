@@ -177,6 +177,10 @@
 	@include meta.load-css('components/tooltip/tooltip');
 }
 
+@layer components.so.file-upload {
+	@include meta.load-css('components/file-upload/file-upload');
+}
+
 @layer components.so.code-block {
 	@include meta.load-css('components/code-block/code-block');
 }
