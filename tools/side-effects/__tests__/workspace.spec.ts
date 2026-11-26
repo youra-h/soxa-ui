@@ -100,6 +100,7 @@ const SOURCES: Readonly<Record<string, string>> = {
 	'@soxa-ui/icons-material': 'packages/icons/material/src/index.ts',
 	'@soxa-ui/icons-lucide': 'packages/icons/lucide/src/index.ts',
 	'@soxa-ui/theme-base/setup': 'packages/themes/base/setup/index.ts',
+	'@soxa-ui/theme-burg/setup': 'packages/themes/burg/setup/index.ts',
 	'@soxa-ui/theme-oren/setup': 'packages/themes/oren/setup/index.ts',
 	'@soxa-ui/vue': 'packages/ui/vue/src/index.ts',
 	'@soxa-ui/react': 'packages/ui/react/src/index.ts',

@@ -1,0 +1,52 @@
+# @soxa-ui/theme-burg
+
+Burg is a theme for Soxa UI. The initial Button styles include `filled`,
+`outlined`, and `plain` views in light and dark schemes. Theme Base handles size,
+spacing, and disabled state.
+
+| Button size | Height | Font size |
+| ----------- | ------ | --------- |
+| `sm`        | 28px   | 12px      |
+| `normal`    | 30px   | 13px      |
+| `lg`        | 32px   | 14px      |
+| `xl`        | 34px   | 15px      |
+| `2xl`       | 36px   | 16px      |
+
+These values use `rem` and assume a 16px root font size. To give a button fully
+rounded ends, set `--so-button-radius: 9999px` on the button or its container.
+This setting overrides the shared `--so-radius`.
+
+### Button press effect
+
+Set `--so-button-press-effect` on a button, container, or theme boundary.
+
+| Value             | While pressed                 |
+| ----------------- | ----------------------------- |
+| `translateY(1px)` | Moves the face down by 1px    |
+| `scaleX(0.97)`    | Narrows the face to 97% width |
+| `none`            | Keeps the face in place       |
+
+The face returns to rest on release. The effect follows the Soxa motion policy.
+
+Set `data-so-theme="burg"` or `data-so-theme="burg-dark"` on the document root
+or the container of the themed components. Load the stylesheet and register
+the layout plugins at the application entry point.
+
+```ts
+import '@soxa-ui/theme-burg'
+import burg from '@soxa-ui/theme-burg/setup'
+import { useTheme } from '@soxa-ui/setup'
+
+useTheme(burg)
+```
+
+Run these commands from the repository root. The full package build uses the
+built declarations of Core, Setup, and Theme Base. The CSS build and the theme
+checks also work directly from a checkout with dependencies installed.
+
+```sh
+npm run build:css --workspace=@soxa-ui/theme-burg
+npm run watch --workspace=@soxa-ui/theme-burg
+npm run build --workspace=@soxa-ui/theme-burg
+npm run test:theme
+```

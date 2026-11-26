@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { readChangesets } from '@changesets/read'
 import { npmPackages } from '../release-notes/release-notes.mjs'
 import { compareSnapshots, hash, snapshotPackage } from './snapshot.mjs'
-import { metadata, publishedPackage } from './registry.mjs'
+import { isPublishedPackage, metadata, publishedPackage } from './registry.mjs'
 import { validateReviews } from './review.mjs'
 
 const root = fileURLToPath(new URL('../../', import.meta.url))
@@ -35,11 +35,15 @@ try {
 		const baseline = read(baselineFile)
 		if (baseline.schemaVersion !== 1 || !baseline.packages?.length)
 			throw new Error('Invalid published compatibility baseline')
-		if (new Set(baseline.packages.map((pkg) => pkg.name)).size !== baseline.packages.length)
+		const baselineNames = new Set(baseline.packages.map((pkg) => pkg.name))
+		if (baselineNames.size !== baseline.packages.length)
 			throw new Error('Duplicate baseline package')
-		for (const pkg of packages)
-			if (!baseline.packages.some((record) => record.name === pkg.name))
+		for (const pkg of packages) {
+			if (baselineNames.has(pkg.name)) continue
+			if (await isPublishedPackage(pkg.name))
 				throw new Error('Missing published baseline package: ' + pkg.name)
+			console.log('No published version to compare for ' + pkg.name)
+		}
 		mkdirSync(output, { recursive: true })
 		const temporary = mkdtempSync(join(tmpdir(), 'soxa-compatibility-'))
 		try {

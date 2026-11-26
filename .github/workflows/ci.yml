@@ -329,6 +329,7 @@ jobs:
         run: |
           npx tsc --noEmit -p packages/themes/base/tsconfig.json
           npx tsc --noEmit -p packages/themes/oren/tsconfig.json
+          npx tsc --noEmit -p packages/themes/burg/tsconfig.json
 
       # The stand is the only place where components are drawn with all their
       # props at once and in two modes (prop and core instance). A page broken

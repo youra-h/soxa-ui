@@ -5,7 +5,7 @@ import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 import { compareSnapshots, hash, snapshotPackage } from './snapshot.mjs'
 import { validateReviews } from './review.mjs'
-import { verifyIntegrity } from './registry.mjs'
+import { isPublishedPackage, verifyIntegrity } from './registry.mjs'
 
 function fixture(run) {
 	const root = mkdtempSync(join(tmpdir(), 'soxa-compat-test-'))
@@ -223,6 +223,21 @@ test('corrupted archive bytes never become a published baseline', () => {
 		() => verifyIntegrity(Buffer.from('corrupt'), 'sha512-wrong'),
 		/integrity mismatch/,
 	)
+})
+
+test('first publication is determined by package name and requires a registry 404', async (t) => {
+	const results = [200, 404, 503].map((status) => new Response(null, { status }))
+	const fetch = t.mock.method(globalThis, 'fetch', () => results.shift())
+	const name = '@soxa-ui/test'
+	assert.equal(await isPublishedPackage(name), true)
+	assert.equal(await isPublishedPackage(name), false)
+	await assert.rejects(
+		isPublishedPackage(name),
+		/Cannot verify publication of @soxa-ui\/test: 503/,
+	)
+	const [url, options] = fetch.mock.calls[0].arguments
+	assert.equal(url, 'https://registry.npmjs.org/%40soxa-ui%2Ftest')
+	assert.equal(options.method, 'HEAD')
 })
 
 test('compiler alias renumbering and object-property order do not create migrations', () => {

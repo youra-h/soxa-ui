@@ -470,6 +470,7 @@
     "--so-avatar-radius": "Optional final corner radius for this component or surface; overrides the shared radius. Unset in base.",
     "--so-breadcrumbs-radius": "Optional final corner radius for this component or surface; overrides the shared radius. Unset in base.",
     "--so-button-radius": "Optional final corner radius for this component or surface; overrides the shared radius. Unset in base.",
+    "--so-button-press-effect": "Optional transform of the Button face while pressed: translateY(...) moves it down, scaleX(...) narrows it, and none cancels any inherited effect. The visual theme applies the effect when motion is enabled. Unset in base.",
     "--so-calendar-radius": "Optional final corner radius for this component or surface; overrides the shared radius. Unset in base.",
     "--so-check-box-radius": "Optional final corner radius for this component or surface; overrides the shared radius. Unset in base.",
     "--so-code-block-radius": "Optional final corner radius for this component or surface; overrides the shared radius. Unset in base.",

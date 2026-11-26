@@ -1,0 +1,57 @@
+{
+  "name": "@soxa-ui/theme-burg",
+  "version": "0.0.0",
+  "description": "Burg theme for Soxa UI components",
+  "keywords": [
+    "soxa",
+    "ui",
+    "theme",
+    "css"
+  ],
+  "license": "MIT",
+  "author": "Yuri Soldatov",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youra-h/soxa-ui.git",
+    "directory": "packages/themes/burg"
+  },
+  "homepage": "https://github.com/youra-h/soxa-ui",
+  "bugs": {
+    "url": "https://github.com/youra-h/soxa-ui/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "style": "./dist/index.css",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./dist/index.css"
+    },
+    "./setup": {
+      "types": "./dist/setup/index.d.ts",
+      "default": "./dist/setup/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "build": "npm run build:css && vite build -c vite.setup.config.ts && tsc -p tsconfig.build.json",
+    "build:css": "vite build",
+    "watch": "vite build --watch"
+  },
+  "dependencies": {
+    "@soxa-ui/theme-base": "0.6.0"
+  },
+  "peerDependencies": {
+    "@soxa-ui/core": "^0.6.0",
+    "@soxa-ui/setup": "^0.6.0"
+  }
+}

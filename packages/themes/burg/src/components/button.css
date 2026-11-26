@@ -1,0 +1,89 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-button) {
+		--so-burg-button-tone: var(--so-burg-text);
+		--so-burg-button-fill: var(--so-burg-button-tone);
+		--so-burg-button-ink: var(--so-burg-surface);
+		--so-burg-button-background: var(--so-burg-button-fill);
+		--so-burg-button-border: transparent;
+		--so-icon-color: currentColor;
+
+		isolation: isolate;
+		color: var(--so-burg-button-ink);
+		border: 1px solid transparent;
+		border-radius: var(--so-button-radius, var(--so-radius));
+		font-weight: 550;
+	}
+
+	/* Keep the hit target stationary while the face and label move. */
+	:where(.so-button)::after {
+		content: '';
+		position: absolute;
+		inset: -1px;
+		z-index: -1;
+		pointer-events: none;
+		border: inherit;
+		border-color: var(--so-burg-button-border);
+		border-radius: inherit;
+		background-color: var(--so-burg-button-background);
+	}
+
+	:where(.so-button--size-normal) {
+		font-size: var(--so-burg-button-font-size-normal);
+	}
+
+	:where(.so-button--variant-negative) {
+		--so-burg-button-tone: var(--so-burg-danger);
+	}
+
+	:where(.so-button--view-outlined, .so-button--view-plain) {
+		--so-burg-button-fill: transparent;
+		--so-burg-button-ink: var(--so-burg-button-tone);
+	}
+
+	:where(.so-button--view-outlined) {
+		--so-burg-button-border: var(--so-burg-border);
+	}
+
+	@media (hover: hover) {
+		:where(.so-button:not([data-disabled='true']):hover) {
+			--so-burg-button-background: color-mix(
+				in srgb,
+				var(--so-burg-button-fill),
+				var(--so-burg-button-ink) 9%
+			);
+		}
+	}
+
+	:where(.so-button:not([data-disabled='true']):is(:active, [data-selected='true'])) {
+		--so-burg-button-background: color-mix(
+			in srgb,
+			var(--so-burg-button-fill),
+			var(--so-burg-button-ink) 17%
+		);
+	}
+
+	:where(.so-button:focus-visible) {
+		outline: 2px solid var(--so-burg-focus);
+		outline-offset: 2px;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:where(:root:not([data-so-motion='reduce']))
+		:where([data-so-theme='burg'], [data-so-theme='burg-dark'])
+		:where(.so-button:active:not([data-disabled='true'])) {
+		&::after,
+		& > :where(*) {
+			transform: var(--so-button-press-effect, revert-layer);
+		}
+	}
+}
+
+:where(:root[data-so-motion='full'])
+	:where([data-so-theme='burg'], [data-so-theme='burg-dark'])
+	:where(.so-button:active:not([data-disabled='true'])) {
+	&::after,
+	& > :where(*) {
+		transform: var(--so-button-press-effect, revert-layer);
+	}
+}

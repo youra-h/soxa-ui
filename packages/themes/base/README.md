@@ -449,3 +449,11 @@ Alert uses the original compact Toasts spacing as its message reference: 0.875re
 padding, 1rem inline padding and 0.125rem between title and description at normal size.
 The message scale multiplies these defaults. `--so-alert-padding` remains an exact CSS
 padding shorthand; `--so-alert-body-gap` overrides only the title-to-description gap.
+
+## Button press effect
+
+Visual themes can read `--so-button-press-effect` to move the Button face down
+with `translateY(...)` or narrow it with `scaleX(...)`. Set `none` to cancel an
+inherited effect. Apply the effect while pressed under the library's motion
+policy. Keep the hit target stationary so a press at the edge can still activate
+the button on release. Theme Base leaves the setting unset.
