@@ -21,12 +21,14 @@ const labels: Readonly<Record<string, TUploadLabels>> = {
 
 const props = defineProps<{ file: File }>()
 const duration = 12_000
+
 const elapsed = ref(0)
 let timer: ReturnType<typeof setInterval> | undefined
 
 const fraction = computed(() => Math.min(1, elapsed.value / duration))
 const percent = computed(() => Math.floor(fraction.value * 100))
 const uploading = computed(() => fraction.value < 1)
+
 const text = computed(() => labels[locale.value.tag] ?? english)
 const percentText = computed(() =>
 	new Intl.NumberFormat(locale.value.tag, { style: 'percent' }).format(percent.value / 100),
@@ -37,13 +39,16 @@ const size = computed(() => {
 	const total = props.file.size
 	const scale = Math.min(units.length - 1, Math.floor(Math.log10(Math.max(1, total)) / 3))
 	const unit = units[scale]
+
 	const formatter = new Intl.NumberFormat(locale.value.tag, {
 		style: 'unit',
 		unit,
 		unitDisplay: 'short',
 		maximumFractionDigits: scale ? 1 : 0,
 	})
+
 	const divisor = 1000 ** scale
+
 	return {
 		transferred: formatter.format(Math.floor(total * fraction.value) / divisor),
 		total: formatter.format(total / divisor),
@@ -52,8 +57,10 @@ const size = computed(() => {
 
 onMounted(() => {
 	const started = performance.now()
+
 	timer = setInterval(() => {
 		elapsed.value = performance.now() - started
+
 		if (!uploading.value) clearInterval(timer)
 	}, 100)
 })

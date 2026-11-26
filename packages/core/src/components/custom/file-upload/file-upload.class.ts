@@ -52,6 +52,7 @@ export default class TFileUpload
 
 	constructor(props: Partial<IFileUploadProps> = {}) {
 		super(props)
+
 		const defaults = (new.target as typeof TFileUpload).defaultValues
 
 		this._settings = {
@@ -63,6 +64,7 @@ export default class TFileUpload
 			maxFileSize: props.maxFileSize ?? defaults.maxFileSize,
 			maxFiles: props.maxFiles ?? defaults.maxFiles,
 		}
+
 		this._dataset.add('dragging', false)
 	}
 
@@ -92,6 +94,7 @@ export default class TFileUpload
 	}
 	set multiple(value: boolean) {
 		this._set('multiple', value)
+
 		if (!value && this.items.length > 1) this._replace(this.items.slice(0, 1))
 	}
 
@@ -121,6 +124,7 @@ export default class TFileUpload
 	}
 	set dragging(value: boolean) {
 		if (this._dragging === value) return
+
 		this._dragging = value
 		this._dataset.add('dragging', value)
 	}
@@ -128,9 +132,11 @@ export default class TFileUpload
 	get items(): readonly IFileUploadItem[] {
 		return this._items.items
 	}
+
 	get files(): readonly File[] {
 		return this.items.map(({ file }) => file)
 	}
+
 	get rejections(): readonly IFileUploadRejection[] {
 		return this._rejections
 	}
@@ -141,6 +147,7 @@ export default class TFileUpload
 		const current = this.items
 		const accepted: IFileUploadItem[] = this.multiple ? [...current] : []
 		const rejected: IFileUploadRejection[] = []
+
 		const rules = this.accept
 			.toLowerCase()
 			.split(',')
@@ -158,13 +165,16 @@ export default class TFileUpload
 		// A rejected single selection leaves the current file in the control.
 		this._replace(accepted.length || this.multiple ? accepted : current)
 		this._setRejections(rejected)
+
 		if (rejected.length) this.events.emit('reject', rejected)
 	}
 
 	removeFile(id: number): void {
 		if (this.disabled) return
+
 		const items = this.items
 		const kept = items.filter((item) => item.id !== id)
+
 		if (kept.length === items.length) return
 
 		this._replace(kept)
@@ -182,6 +192,7 @@ export default class TFileUpload
 
 	private _set<K extends keyof TSettings>(key: K, value: TSettings[K]): void {
 		if (this._settings[key] === value) return
+
 		this._settings[key] = value
 		this.events.emit('change:settings')
 	}
@@ -192,8 +203,10 @@ export default class TFileUpload
 			current.length !== items.length || current.some((item, index) => item !== items[index])
 
 		if (changed) this._items.items = items
+
 		// Native input synchronization precedes public callbacks, including on rejection.
 		this.events.emit('selection')
+
 		if (changed) {
 			this.events.emit('change:files', {
 				newValue: this.files,
@@ -204,6 +217,7 @@ export default class TFileUpload
 
 	private _setRejections(rejections: readonly IFileUploadRejection[]): void {
 		if (!rejections.length && !this._rejections.length) return
+
 		this._rejections = rejections
 		this.events.emit('change:rejections')
 	}

@@ -10,6 +10,7 @@ const CLOSE = roleIcon('close')
 
 export function FileUpload(props: FileUploadProps): ReactElement | null {
 	const { ref, forwardProps, state } = useSetupFileUpload(props)
+
 	if (!state.rendered) return null
 
 	const Tag = state.tag as ElementType

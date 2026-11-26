@@ -25,10 +25,13 @@ export class TFileUploadNativePlugin extends TBasePlugin<IFileUpload, TEvents> {
 
 	override install(ctx: IPluginContext): void {
 		super.install(ctx)
+
 		const owner = ctx.getInstance<IFileUpload>()
+
 		if (!owner) return
 
 		const element = ctx.get(TElementPlugin)
+
 		element?.events.on('bind', (root) => {
 			this._cleanup?.()
 			this._cleanup = root ? this._bind(root, owner) : undefined
@@ -38,6 +41,7 @@ export class TFileUploadNativePlugin extends TBasePlugin<IFileUpload, TEvents> {
 	override destroy(): void {
 		this._cleanup?.()
 		this._cleanup = undefined
+
 		super.destroy()
 	}
 
@@ -47,12 +51,15 @@ export class TFileUploadNativePlugin extends TBasePlugin<IFileUpload, TEvents> {
 		const browse = root.querySelector<HTMLButtonElement>('.so-file-upload__browse')
 		const doc = root.ownerDocument
 		const win = doc.defaultView
+
 		if (!input || !choose || !win) return
 
 		let active = true
 		const urls = new Map<number, string>()
+
 		const syncPreviews = (): void => {
 			if (typeof win.URL.createObjectURL !== 'function') return
+
 			const images = owner.items.filter(({ file }) => file.type.startsWith('image/'))
 			const ids = new Set(images.map(({ id }) => id))
 			let changed = false
@@ -63,13 +70,16 @@ export class TFileUploadNativePlugin extends TBasePlugin<IFileUpload, TEvents> {
 				urls.delete(id)
 				changed = true
 			}
+
 			for (const { id, file } of images) {
 				if (urls.has(id)) continue
 				urls.set(id, win.URL.createObjectURL(file))
 				changed = true
 			}
+
 			if (changed) this._setPreviews(Object.fromEntries(urls))
 		}
+
 		const sync = (): void => {
 			const files = owner.files
 			const nativeFiles = Array.from(input.files ?? [])
@@ -85,23 +95,31 @@ export class TFileUploadNativePlugin extends TBasePlugin<IFileUpload, TEvents> {
 					input.files = transfer.files
 				}
 			}
+
 			syncPreviews()
 		}
+
 		const pick = (): void => {
 			if (!owner.disabled && !input.matches(':disabled')) input.click()
 		}
+
 		const change = (): void => {
 			if (owner.disabled || input.matches(':disabled')) {
 				sync()
 				return
 			}
+
 			const files = Array.from(input.files ?? [])
+
 			if (files.length) owner.addFiles(files)
 			else sync()
 		}
+
 		const remove = (event: Event): void => {
 			if (!(event.target instanceof win.Element)) return
+
 			const button = event.target.closest<HTMLButtonElement>('.so-file-upload__remove')
+
 			if (
 				button?.closest('.so-file-upload') !== root ||
 				owner.disabled ||
@@ -110,16 +128,20 @@ export class TFileUploadNativePlugin extends TBasePlugin<IFileUpload, TEvents> {
 				return
 
 			const focused = doc.activeElement === button
+
 			owner.removeFile(Number(button.dataset.fileId))
 			if (focused) choose.focus()
 		}
+
 		const reset = (event: Event): void => {
 			if (event.target !== input.form) return
+
 			// The reset event is cancelable and precedes native input clearing.
 			queueMicrotask(() => {
 				if (active && !event.defaultPrevented) owner.resetFiles()
 			})
 		}
+
 		const invalid = (): void => {
 			queueMicrotask(() => {
 				if (active && doc.activeElement === input) choose.focus()
@@ -127,16 +149,19 @@ export class TFileUploadNativePlugin extends TBasePlugin<IFileUpload, TEvents> {
 		}
 
 		owner.events.on('selection', sync)
+
 		choose.addEventListener('click', pick)
 		browse?.addEventListener('click', pick)
 		input.addEventListener('change', change)
 		input.addEventListener('invalid', invalid)
 		root.addEventListener('click', remove)
 		doc.addEventListener('reset', reset, true)
+
 		sync()
 
 		return () => {
 			active = false
+
 			owner.events.off('selection', sync)
 			choose.removeEventListener('click', pick)
 			browse?.removeEventListener('click', pick)
@@ -144,6 +169,7 @@ export class TFileUploadNativePlugin extends TBasePlugin<IFileUpload, TEvents> {
 			input.removeEventListener('invalid', invalid)
 			root.removeEventListener('click', remove)
 			doc.removeEventListener('reset', reset, true)
+
 			for (const url of urls.values()) win.URL.revokeObjectURL(url)
 			if (urls.size) this._setPreviews({})
 		}
@@ -151,6 +177,7 @@ export class TFileUploadNativePlugin extends TBasePlugin<IFileUpload, TEvents> {
 
 	private _setPreviews(previews: TPreviews): void {
 		this._previews = previews
+
 		this.events.emit('change:previews')
 	}
 }

@@ -35,6 +35,7 @@ export class TFileUploadNamesPlugin extends TNamesPlugin<IFileUpload, TEvents> {
 
 	get hint(): string {
 		const limit = this._owner?.maxFileSize ?? Infinity
+
 		return Number.isFinite(limit)
 			? this._names.limit.replace('{size}', this._format(limit))
 			: ''
@@ -55,9 +56,12 @@ export class TFileUploadNamesPlugin extends TNamesPlugin<IFileUpload, TEvents> {
 	override install(ctx: IPluginContext): void {
 		this._locale = ctx.locale.locale.tag
 		super.install(ctx)
+
 		this._listenTo(ctx.locale.events, 'change', () => {
 			this._locale = ctx.locale.locale.tag
+
 			if (this._owner) this._updateRows(this._owner)
+
 			this.events.emit('change:presentation')
 		})
 	}
@@ -65,7 +69,9 @@ export class TFileUploadNamesPlugin extends TNamesPlugin<IFileUpload, TEvents> {
 	protected override _name(owner: IFileUpload, translations: TTranslations): void {
 		this._owner = owner
 		this._names = translations.fileUpload ?? FILE_UPLOAD_NAMES
+
 		this._updateRows(owner)
+
 		this.events.emit('change:presentation')
 	}
 
@@ -77,12 +83,15 @@ export class TFileUploadNamesPlugin extends TNamesPlugin<IFileUpload, TEvents> {
 
 	private _updateRows(owner: IFileUpload): void {
 		const previous = new Map(this._rows.map((row) => [row.id, row]))
+
 		this._rows = owner.items.map(({ id, file }) => {
 			const dot = file.name.lastIndexOf('.')
 			const extension = dot > 0 ? file.name.slice(dot + 1, dot + 6).toUpperCase() : ''
 			const sizeText = this._format(file.size)
 			const removeLabel = this._names.remove.replace('{name}', () => file.name)
+
 			const row = previous.get(id)
+
 			return row?.file === file &&
 				row.sizeText === sizeText &&
 				row.removeLabel === removeLabel
@@ -94,6 +103,7 @@ export class TFileUploadNamesPlugin extends TNamesPlugin<IFileUpload, TEvents> {
 	private _format(bytes: number): string {
 		const units = ['byte', 'kilobyte', 'megabyte', 'gigabyte'] as const
 		const scale = Math.min(units.length - 1, Math.floor(Math.log10(Math.max(1, bytes)) / 3))
+
 		return new Intl.NumberFormat(this._locale, {
 			style: 'unit',
 			unit: units[scale],

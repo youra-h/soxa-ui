@@ -12,6 +12,7 @@ const CLOSE = roleIcon('close')
 export function FileUpload(props: FileUploadProps): JSX.Element {
 	const binding = setupFileUpload(props)
 	const state = binding.state
+
 	const root = createRootProps(() => ({
 		state,
 		sets: [state.attrs, state.aria, state.dataset],

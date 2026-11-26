@@ -8,8 +8,10 @@
 
 	let { ref = $bindable(), ...props }: FileUploadProps = $props()
 	const mountId = $props.id()
+
 	const binding = setupFileUpload(() => props, mountId, (node) => (ref = node))
 	const state = binding.state
+
 	const uploadIcon = roleIcon(hasIcon('upload') ? 'upload' : 'arrowUpward')
 	const removeIcon = roleIcon('close')
 </script>

@@ -15,6 +15,7 @@ export default {
 	expose: useExpose(),
 	setup(props: FileUploadProps, { emit }: SetupContext) {
 		const adapter = createVueAdapterContext(FileUploadDescriptor(), { ctrl: props.ctrl, props })
+
 		return extendBinding(useAdapter(adapter, props, emit), {
 			uploadIcon: roleIcon(hasIcon('upload') ? 'upload' : 'arrowUpward'),
 			removeIcon: roleIcon('close'),
