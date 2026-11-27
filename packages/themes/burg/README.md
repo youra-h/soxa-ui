@@ -55,6 +55,14 @@ collection panels. Dialog and AlertDialog use a 14px radius by default at a
 modal components share the `dim`, `blur`, and `none` backdrop views. The
 `--so-backdrop-blur` variable defaults to 3px.
 
+### Chat content and attachments
+
+CodeBlock uses a muted code surface and a 34px toolbar at normal size.
+FileUpload pairs a dashed drop target with compact file rows. Use its
+`item-progress` slot with ProgressLinear for per-file progress.
+Tags use a 24px pill and 12px text at normal size. Avatar and AvatarGroup
+keep the shared size scale. Separator uses the shared line thickness.
+
 Set `data-so-theme="burg"` or `data-so-theme="burg-dark"` on the document root
 or the container of the themed components. Load the stylesheet and register
 the layout plugins at the application entry point.

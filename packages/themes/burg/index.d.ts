@@ -6,6 +6,12 @@ declare module '@soxa-ui/core' {
 		negative: true
 	}
 
+	interface IAvatarShapes {
+		circle: true
+		rounded: true
+		rect: true
+	}
+
 	interface IButtonViews {
 		filled: true
 		outlined: true
