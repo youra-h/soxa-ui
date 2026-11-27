@@ -2,7 +2,7 @@
 @let branch = !!aria?.['aria-expanded'];
 @let expanded = aria?.['aria-expanded'] === 'true';
 @let loading = aria?.['aria-busy'] === 'true';
-@let indicatorSide = state()['dataset']?.['data-indicator'];
+@let indicatorSide = state()['dataset']?.[selectionIndicatorAttribute];
 @let scope = { item: ctrl, branch, expanded, loading };
 @if (row) {
 	<div

@@ -1,4 +1,5 @@
 import type { ElementType, ReactElement } from 'react'
+import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
 import type { TTreeRenderEntry } from '@soxa-ui/core'
 import {
 	Elevate,
@@ -30,7 +31,7 @@ const TreeRow = withRenderBoundary(function TreeRow({
 	const link = branch ? undefined : href
 	const Tag = (link ? 'a' : tag) as ElementType
 	const scope = { item: ctrl, branch, expanded, loading }
-	const indicatorSide = dataset?.['data-indicator']
+	const indicatorSide = dataset?.[`data-${LIST_INDICATOR_ATTRIBUTE}`]
 	const selectionMark =
 		indicatorSide === 'start' || indicatorSide === 'end' ? (
 			<span className="so-tree-item__selection-indicator" aria-hidden="true">

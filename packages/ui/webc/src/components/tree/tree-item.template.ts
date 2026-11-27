@@ -1,3 +1,4 @@
+import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
 import type { TTreeItem, TTreeItemCollectionFacade } from '@soxa-ui/core'
 import { DEFAULT_SLOT } from '@soxa-ui/setup'
 import {
@@ -61,7 +62,7 @@ export const treeItemTemplate: ITemplate<TTreeItem, TTreeItemCollectionFacade> =
 			if (!current) return
 
 			const { row, selectionMark, selectionAnchor } = current
-			const side = state.dataset?.['data-indicator']
+			const side = state.dataset?.[`data-${LIST_INDICATOR_ATTRIBUTE}`]
 			if (side === 'start') {
 				if (selectionAnchor.previousSibling !== selectionMark)
 					lendBefore(selectionAnchor, selectionMark)

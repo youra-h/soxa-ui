@@ -1,4 +1,5 @@
 import type { Accessor, JSX } from 'solid-js'
+import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
 import type { TTreeRenderEntry, TTreeRenderItem } from '@soxa-ui/core'
 import { Elevate, KeyedFor, Root, createRootProps, resolveSlot, roleIcon } from '../../adapter'
 import { Show } from '../../adapter/runtime/flow'
@@ -30,7 +31,7 @@ function TreeRow(props: TreeRowProps): JSX.Element {
 		sets: [state.attrs, state.aria, state.dataset, { href: link() ?? null }],
 		forward: {},
 	}))
-	const indicatorSide = () => state.dataset?.['data-indicator']
+	const indicatorSide = () => state.dataset?.[`data-${LIST_INDICATOR_ATTRIBUTE}`]
 	const selectionMark = () => (
 		<span class="so-tree-item__selection-indicator" aria-hidden="true">
 			<Show when={state.selected}>

@@ -6,10 +6,12 @@ const items = [
 ]
 
 describe('Tree', () => {
-	it('puts icon samples on data items and keeps groups nested during updates', async () => {
+	it('keeps the selection indicator beside disclosure and applies icon samples to nested items', async () => {
 		const root = new TTreeElement()
 		root.items = items
 		root.mode = 'multiple'
+		root.indicator = 'start'
+		root.value = ['files']
 		root.innerHTML = '<template slot="item-icon"><span data-icon></span></template>'
 		document.body.append(root)
 
@@ -28,6 +30,15 @@ describe('Tree', () => {
 				)
 				expect(branch.getAttribute('aria-expanded')).toBe('true')
 			})
+
+			const row = branch.querySelector('.so-tree-item__row')
+			if (!row) throw new Error('Tree row missing')
+			const mark = row.querySelector('.so-tree-item__selection-indicator')
+			expect(mark?.querySelector('svg')).toBeInstanceOf(SVGElement)
+			expect(mark?.previousElementSibling).toBe(row.querySelector('.so-tree-item__toggle'))
+
+			root.indicator = 'end'
+			await vi.waitFor(() => expect(row.lastElementChild).toBe(mark))
 
 			const child = branch.querySelector('[role="group"]:not([hidden]) [role="treeitem"]')
 			expect(child?.querySelector('[data-icon]')).not.toBeNull()

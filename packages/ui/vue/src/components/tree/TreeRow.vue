@@ -4,6 +4,7 @@ import {
 	TreeItemCollectionDescriptor,
 	TreeItemDescriptor,
 } from '@soxa-ui/setup'
+import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
 import type { TTreeItem, TTreeRenderItem } from '@soxa-ui/core'
 import {
 	createVueAdapterContext,
@@ -53,6 +54,7 @@ export default {
 
 		return extendBinding(joinBindings(itemBinding, collectionBinding), {
 			selectionIconTag: roleIcon('check'),
+			selectionIndicatorAttribute: `data-${LIST_INDICATOR_ATTRIBUTE}`,
 		})
 	},
 }
@@ -92,7 +94,7 @@ export default {
 					</slot>
 				</span>
 				<span
-					v-if="dataset['data-indicator'] === 'start'"
+					v-if="dataset[selectionIndicatorAttribute] === 'start'"
 					class="so-tree-item__selection-indicator"
 					aria-hidden="true"
 				>
@@ -120,7 +122,7 @@ export default {
 				:loading="aria['aria-busy'] === 'true'"
 				>{{ text }}</slot
 			>
-			<template v-if="dataset['data-indicator'] === 'end'" #trailing>
+			<template v-if="dataset[selectionIndicatorAttribute] === 'end'" #trailing>
 				<span class="so-tree-item__selection-indicator" aria-hidden="true">
 					<Icon
 						v-if="selected"

@@ -294,7 +294,7 @@ export class TTreeExtension extends TBaseExtension<
 		if (oldValue !== item) this.events.emit('change:tabStop', { oldValue, newValue: item })
 	}
 
-	private _inheritStyle(item: TTreeItem, owner = this._ctx.options.get('owner')): void {
+	private _inheritStyle(item: Partial<TTreeItem>, owner = this._ctx.options.get('owner')): void {
 		if (!owner) return
 
 		item.size = owner.size

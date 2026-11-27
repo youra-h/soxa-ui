@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
 	import type { TTreeItem, TTreeRenderItem } from '@soxa-ui/core'
 	import type { Snippet } from 'svelte'
 	import { Dynamic, roleIcon, toRootProps } from '../../adapter'
@@ -20,7 +21,7 @@
 	const binding = setupTreeRow(() => ({ ctrl }), mountId, () => {})
 	const state = binding.state
 	const CHECK = roleIcon('check')
-	const indicatorSide = $derived(state.dataset?.['data-indicator'])
+	const indicatorSide = $derived(state.dataset?.[`data-${LIST_INDICATOR_ATTRIBUTE}`])
 
 	function scope(): TreeIconScope {
 		return {
