@@ -1,7 +1,6 @@
 <script lang="ts">
 import { Icon } from '../../icon'
 import { ItemRow } from '../../item-row'
-import type { TreeItemIconScope, TreeItemScope } from './base.component'
 import SetupTreeItem from './setup.component'
 
 export default { ...SetupTreeItem, components: { Icon, ItemRow } }
@@ -17,7 +16,7 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 	>
 		<!-- Virtual can keep the item and its group outside the visible row window. -->
 		<ItemRow
-			v-if="entry.row"
+			v-if="itemProps.entry.row"
 			tag="div"
 			embedded="tree.row"
 			class="so-tree-item__row"
@@ -33,7 +32,7 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 					<slot
 						v-if="aria['aria-expanded']"
 						name="indicator-icon"
-						:item="entry.item"
+						:item="itemProps.entry.item"
 						:branch="true"
 						:expanded="aria['aria-expanded'] === 'true'"
 						:loading="aria['aria-busy'] === 'true'"
@@ -55,14 +54,14 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 				</span>
 				<slot
 					name="icon"
-					:item="entry.item"
+					:item="itemProps.entry.item"
 					:branch="Boolean(aria['aria-expanded'])"
 					:expanded="aria['aria-expanded'] === 'true'"
 					:loading="aria['aria-busy'] === 'true'"
 				/>
 			</template>
 			<slot
-				:item="entry.item"
+				:item="itemProps.entry.item"
 				:text="text"
 				:selected="selected"
 				:branch="Boolean(aria['aria-expanded'])"
@@ -83,7 +82,7 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 		</ItemRow>
 		<span v-else class="so-tree-item__accessible-name">{{ text }}</span>
 		<div v-if="aria['aria-expanded'] === 'true'" role="group" class="so-tree-item__group">
-			<template v-for="child in entry.children" :key="child.key">
+			<template v-for="child in itemProps.entry.children" :key="child.key">
 				<div
 					v-if="child.kind === 'filler'"
 					class="so-tree__filler"
@@ -92,7 +91,7 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 				></div>
 				<!-- Forward consumer slots to data-backed descendants at every depth. -->
 				<TreeItem v-else :ctrl="child.item" :entry="child">
-					<template v-if="$slots.default" #default="scope: TreeItemScope">
+					<template v-if="$slots.default" #default="scope">
 						<slot
 							:item="scope.item"
 							:branch="scope.branch"
@@ -102,7 +101,7 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 							:selected="scope.selected"
 						/>
 					</template>
-					<template v-if="$slots['icon']" #icon="scope: TreeItemIconScope">
+					<template v-if="$slots['icon']" #icon="scope">
 						<slot
 							name="icon"
 							:item="scope.item"
@@ -111,10 +110,7 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 							:loading="scope.loading"
 						/>
 					</template>
-					<template
-						v-if="$slots['indicator-icon']"
-						#indicator-icon="scope: TreeItemIconScope"
-					>
+					<template v-if="$slots['indicator-icon']" #indicator-icon="scope">
 						<slot
 							name="indicator-icon"
 							:item="scope.item"

@@ -1,11 +1,9 @@
-import { toRef } from 'vue'
 import {
 	TCollectionItemExtension,
 	TreeItemCollectionDescriptor,
 	TreeItemDescriptor,
 } from '@soxa-ui/setup'
 import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
-import type { TAriaAttributes, TDatasetAttributes } from '@soxa-ui/core'
 import {
 	createVueAdapterContext,
 	extendBinding,
@@ -35,16 +33,10 @@ export default {
 		const collectionBinding = useCollectionAdapter(collectionAdapter, props, emit)
 		const itemBinding = useAdapter(adapter, props, emit)
 
-		const binding = extendBinding(joinBindings(itemBinding, collectionBinding), {
-			entry: toRef(props, 'entry'),
+		return extendBinding(joinBindings(itemBinding, collectionBinding), {
+			itemProps: props,
 			selectionIconTag: roleIcon('check'),
 			selectionIndicatorAttribute: `data-${LIST_INDICATOR_ATTRIBUTE}`,
 		})
-
-		// The adapter exposes attribute snapshots for the template.
-		return binding as unknown as Omit<typeof binding, 'aria' | 'dataset'> & {
-			aria: TAriaAttributes
-			dataset: TDatasetAttributes
-		}
 	},
 }

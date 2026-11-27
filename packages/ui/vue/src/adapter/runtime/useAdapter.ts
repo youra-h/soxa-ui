@@ -34,17 +34,18 @@ import {
 	type IAdapterContext,
 	type IComponentContract,
 	type TInstanceState,
+	type TSnapshotOf,
 } from '@soxa-ui/setup'
 import type { IPluginBundle } from '@soxa-ui/plugins'
 import { VueProfile } from '../common'
 import { bindingOf } from './view'
 import { useHydratedAttributes } from './hydrated-attributes'
 
-/** The public properties and getters of the controller (`TInstance`), without its methods. */
+/** The controller properties as exchanged with the template, including attribute snapshots. */
 export type TExtractControllerState<TInstance> = {
 	[
 		K in keyof TInstance as TInstance[K] extends (...args: never[]) => unknown ? never : K
-	]: TInstance[K]
+	]: TSnapshotOf<TInstance[K]>
 }
 
 /** Props as the template sees them: refs among them are unwrapped, as a `setup()` result's are. */
