@@ -1,0 +1,73 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-date-picker--mode-range) > :where(.so-date-input) {
+		border-width: 0;
+		background-color: transparent;
+		outline: none;
+	}
+
+	:where(.so-date-input__segments) {
+		caret-color: transparent;
+		outline: none;
+	}
+
+	:where(
+		.so-date-input--size-normal .so-date-input__segments,
+		.so-date-picker--mode-range.so-date-picker--size-normal > .so-date-picker__dash
+	) {
+		font-size: var(--so-burg-button-font-size-normal);
+	}
+
+	:where(.so-date-input__segment) {
+		outline: none;
+		border-radius: var(--so-date-input-segment-radius, calc(var(--so-radius) * 0.5));
+	}
+
+	:where(
+		.so-date-input__segment[data-placeholder='true'],
+		.so-date-input__literal,
+		.so-date-picker__dash
+	) {
+		color: var(--so-burg-muted);
+	}
+
+	:where(.so-date-input__segment:focus) {
+		background-color: var(--so-burg-row-highlight);
+		color: var(--so-burg-text);
+	}
+
+	:where(.so-date-input__segment, .so-date-input__literal)::selection {
+		background-color: var(--so-burg-row-highlight);
+		color: var(--so-burg-text);
+	}
+
+	:where(
+		.so-date-input__clear,
+		.so-date-picker__clear,
+		.so-date-picker__trigger,
+		.so-date-picker__cancel
+	) {
+		--so-burg-button-fill: transparent;
+		--so-burg-button-ink: var(--so-burg-muted);
+	}
+
+	&:where(.so-date-picker__panel),
+	:where(.so-date-picker__panel) {
+		border-radius: var(--so-date-picker-radius, var(--so-radius));
+	}
+
+	@media (forced-colors: active) {
+		:where(
+			.so-date-input__segment[data-placeholder='true'],
+			.so-date-input__literal,
+			.so-date-picker__dash
+		) {
+			color: GrayText;
+		}
+
+		:where(.so-date-input__segment:focus) {
+			forced-color-adjust: none;
+			background-color: Highlight;
+			color: HighlightText;
+		}
+	}
+}

@@ -1,4 +1,4 @@
-:where(.so-popover__panel, .so-dialog, .so-alert-dialog, .so-drawer):where(
+:where(.so-popover__panel, .so-date-picker__panel, .so-dialog, .so-alert-dialog, .so-drawer):where(
 	[data-so-theme='burg'],
 	[data-so-theme='burg-dark'],
 	[data-so-theme='burg'] *,
@@ -100,13 +100,13 @@
 		--so-burg-button-tone: var(--so-burg-danger);
 	}
 
-	:where(.so-popover__handle, .so-drawer__handle)::before {
+	:where(.so-popover__handle, .so-date-picker__handle, .so-drawer__handle)::before {
 		border-radius: 9999px;
 		background-color: var(--so-burg-border);
 	}
 
 	@media (forced-colors: active) {
-		:where(.so-popover__handle, .so-drawer__handle)::before {
+		:where(.so-popover__handle, .so-date-picker__handle, .so-drawer__handle)::before {
 			forced-color-adjust: none;
 			background-color: CanvasText;
 		}
@@ -128,6 +128,7 @@
 
 :where(
 	.so-popover__panel,
+	.so-date-picker__panel,
 	.so-dialog,
 	.so-alert-dialog,
 	.so-drawer,

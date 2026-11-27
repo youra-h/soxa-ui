@@ -11,6 +11,12 @@
 	--so-tooltip-line: 1rem;
 	--so-toasts-width: 20rem;
 	--so-toasts-line: 1.125rem;
+	--so-calendar-bleed: 3px;
+	--so-calendar-day-font-size-sm: var(--so-button-font-size-sm);
+	--so-calendar-day-font-size-normal: var(--so-burg-button-font-size-normal);
+	--so-calendar-day-font-size-lg: var(--so-button-font-size-lg);
+	--so-calendar-day-font-size-xl: var(--so-button-font-size-xl);
+	--so-calendar-day-font-size-2xl: var(--so-button-font-size-2xl);
 	--so-burg-positive: light-dark(#2c6846, #8dcca6);
 	--so-burg-caution: light-dark(#805419, #e1ba76);
 

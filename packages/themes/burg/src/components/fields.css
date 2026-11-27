@@ -19,7 +19,7 @@
 		--so-icon-color: currentColor;
 	}
 
-	:where(.so-input, .so-textarea, .so-number-input) {
+	:where(.so-input, .so-textarea, .so-number-input, .so-date-input, .so-date-picker--mode-range) {
 		--so-burg-field-border: var(--so-burg-border);
 		background-color: var(--so-burg-surface);
 		color: var(--so-burg-text);
@@ -37,6 +37,18 @@
 		border-radius: var(--so-number-input-radius, var(--so-radius));
 	}
 
+	:where(.so-date-input) {
+		--so-date-input-border: 1px;
+		border: var(--so-date-input-border) solid var(--so-burg-field-border);
+		border-radius: var(--so-date-input-radius, var(--so-radius));
+	}
+
+	:where(.so-date-picker--mode-range) {
+		--so-date-picker-border: 1px;
+		border: var(--so-date-picker-border) solid var(--so-burg-field-border);
+		border-radius: var(--so-date-input-radius, var(--so-radius));
+	}
+
 	:where(.so-textarea) {
 		--so-textarea-border: 1px;
 		border: var(--so-textarea-border) solid var(--so-burg-field-border);
@@ -45,12 +57,20 @@
 
 	@media (hover: hover) {
 		:where(.so-input:hover:not(:has(> input:is(:disabled, [readonly])))),
-		:where(.so-number-input:hover:not([data-disabled='true'], [data-readonly='true'])) {
+		:where(.so-number-input, .so-date-input, .so-date-picker--mode-range):where(
+			:hover:not([data-disabled='true'], [data-readonly='true'])
+		) {
 			--so-burg-field-border: var(--so-burg-focus-edge);
 		}
 	}
 
 	:where(.so-select[data-open='true']) > :where(.so-select__field),
+	:where(.so-date-picker[data-open='true']) > :where(.so-date-picker__field),
+	:where(.so-date-input:has(.so-date-input__segment:focus)),
+	:where(.so-date-picker--mode-range):where(
+		[data-open='true'],
+		:has(> .so-date-input .so-date-input__segment:focus)
+	),
 	:where(.so-input, .so-textarea, .so-number-input):where(:has(> :is(input, textarea):focus)) {
 		--so-burg-field-border: var(--so-burg-focus-edge);
 		outline: var(--so-burg-focus-ring);
@@ -58,9 +78,17 @@
 	}
 
 	:where(.so-select[data-invalid='true']) > :where(.so-select__field),
+	:where(.so-date-picker[data-invalid='true']) > :where(.so-date-picker__field),
+	:where(.so-date-picker--mode-range):where(
+		[data-invalid='true'],
+		:has(> .so-date-input[data-invalid='true'])
+	),
 	:where(
 		.so-input--variant-negative,
 		.so-input[data-invalid='true'],
+		.so-date-input--variant-negative,
+		.so-date-input[data-invalid='true'],
+		.so-date-picker--mode-range.so-date-picker--variant-negative,
 		.so-number-input--variant-negative,
 		.so-number-input[data-invalid='true'],
 		.so-textarea[data-invalid='true']
@@ -68,9 +96,14 @@
 		--so-burg-field-border: var(--so-burg-danger);
 	}
 
-	:where(.so-input, .so-textarea, .so-switch, .so-number-input):where(
-			[data-required='true']
-		)::after,
+	:where(
+			.so-input,
+			.so-textarea,
+			.so-switch,
+			.so-number-input,
+			.so-date-input,
+			.so-date-picker--mode-range
+		):where([data-required='true'])::after,
 	:where(.so-file-upload:has(> .so-file-upload__input:required))::after,
 	:where(.so-check-box[data-required='true']) > :where(.so-check-box__container)::after,
 	:where(.so-field:has(> .so-field__control > [data-required='true']))
@@ -84,6 +117,20 @@
 			> :where(.so-field__label)::after {
 			forced-color-adjust: none;
 			background-color: CanvasText;
+		}
+
+		:where(
+			.so-date-input[data-invalid='true'],
+			.so-date-picker[data-invalid='true'] > .so-date-picker__field
+		) {
+			--so-date-input-border: 2px;
+		}
+
+		:where(.so-date-picker--mode-range):where(
+			[data-invalid='true'],
+			:has(> .so-date-input[data-invalid='true'])
+		) {
+			--so-date-picker-border: 2px;
 		}
 
 		:where(.so-number-input[data-invalid='true']) {
