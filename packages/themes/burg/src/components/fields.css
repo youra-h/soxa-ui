@@ -11,7 +11,7 @@
 		color: var(--so-burg-muted);
 	}
 
-	:where(.so-field__error, .so-label--variant-negative > .so-label__text) {
+	:where(.so-field__error) {
 		color: var(--so-burg-danger);
 	}
 
@@ -20,9 +20,30 @@
 	}
 
 	:where(.so-input, .so-textarea, .so-number-input, .so-date-input, .so-date-picker--mode-range) {
-		--so-burg-field-border: var(--so-burg-border);
+		--so-burg-field-tone: initial;
+		--so-burg-field-border: var(--so-burg-field-tone, var(--so-burg-border));
 		background-color: var(--so-burg-surface);
 		color: var(--so-burg-text);
+	}
+
+	:where(
+		.so-input--variant-negative,
+		.so-textarea--variant-negative,
+		.so-number-input--variant-negative,
+		.so-date-input--variant-negative,
+		.so-date-picker--mode-range.so-date-picker--variant-negative
+	) {
+		--so-burg-field-tone: var(--so-burg-danger);
+	}
+
+	:where(
+		.so-input--variant-positive,
+		.so-textarea--variant-positive,
+		.so-number-input--variant-positive,
+		.so-date-input--variant-positive,
+		.so-date-picker--mode-range.so-date-picker--variant-positive
+	) {
+		--so-burg-field-tone: var(--so-burg-positive);
 	}
 
 	:where(.so-input) {
@@ -60,7 +81,7 @@
 		:where(.so-number-input, .so-date-input, .so-date-picker--mode-range):where(
 			:hover:not([data-disabled='true'], [data-readonly='true'])
 		) {
-			--so-burg-field-border: var(--so-burg-focus-edge);
+			--so-burg-field-border: var(--so-burg-field-tone, var(--so-burg-focus-edge));
 		}
 	}
 
@@ -72,7 +93,7 @@
 		:has(> .so-date-input .so-date-input__segment:focus)
 	),
 	:where(.so-input, .so-textarea, .so-number-input):where(:has(> :is(input, textarea):focus)) {
-		--so-burg-field-border: var(--so-burg-focus-edge);
+		--so-burg-field-border: var(--so-burg-field-tone, var(--so-burg-focus-edge));
 		outline: var(--so-burg-focus-ring);
 		outline-offset: 0;
 	}
@@ -84,12 +105,8 @@
 		:has(> .so-date-input[data-invalid='true'])
 	),
 	:where(
-		.so-input--variant-negative,
 		.so-input[data-invalid='true'],
-		.so-date-input--variant-negative,
 		.so-date-input[data-invalid='true'],
-		.so-date-picker--mode-range.so-date-picker--variant-negative,
-		.so-number-input--variant-negative,
 		.so-number-input[data-invalid='true'],
 		.so-textarea[data-invalid='true']
 	) {

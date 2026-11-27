@@ -9,22 +9,6 @@
 		min-inline-size: 0;
 	}
 
-	:where(.so-tabs--variant-accent) {
-		--so-burg-tabs-marker: var(--so-burg-progress-accent);
-	}
-
-	:where(.so-tabs--variant-positive) {
-		--so-burg-tabs-marker: var(--so-burg-positive);
-	}
-
-	:where(.so-tabs--variant-caution) {
-		--so-burg-tabs-marker: var(--so-burg-caution);
-	}
-
-	:where(.so-tabs--variant-negative) {
-		--so-burg-tabs-marker: var(--so-burg-danger);
-	}
-
 	:where(.so-tabs:not(.so-code-block__tabs)) > :where(.so-tabs__bar) {
 		&:focus-visible {
 			outline: var(--so-burg-focus-ring);

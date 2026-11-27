@@ -4,14 +4,20 @@
 	}
 
 	:where(.so-radio-group-item__control) {
-		--so-burg-radio-border: var(--so-burg-focus-edge);
+		--so-burg-radio-tone: initial;
+		--so-burg-radio-border: var(--so-burg-radio-tone, var(--so-burg-focus-edge));
 		border: 1px solid var(--so-burg-radio-border);
 		border-radius: 50%;
 		background-color: var(--so-burg-surface);
+		color: var(--so-burg-radio-tone, currentColor);
 	}
 
 	:where(.so-radio-group-item--variant-negative) > :where(.so-radio-group-item__control) {
-		color: var(--so-burg-danger);
+		--so-burg-radio-tone: var(--so-burg-danger);
+	}
+
+	:where(.so-radio-group-item--variant-positive) > :where(.so-radio-group-item__control) {
+		--so-burg-radio-tone: var(--so-burg-positive);
 	}
 
 	:where(.so-radio-group-item__indicator) {
@@ -40,7 +46,7 @@
 				:is(:hover, :where(.so-label:hover > .so-label__control *))
 			)
 			> :where(.so-radio-group-item__control) {
-			--so-burg-radio-border: var(--so-burg-muted);
+			--so-burg-radio-border: var(--so-burg-radio-tone, var(--so-burg-muted));
 		}
 	}
 

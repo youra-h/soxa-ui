@@ -5,16 +5,8 @@
 		--so-burg-slider-rail: var(--so-burg-border);
 	}
 
-	:where(.so-slider--variant-accent) {
-		--so-burg-slider-fill: var(--so-burg-progress-accent);
-	}
-
 	:where(.so-slider--variant-positive) {
 		--so-burg-slider-fill: var(--so-burg-positive);
-	}
-
-	:where(.so-slider--variant-caution) {
-		--so-burg-slider-fill: var(--so-burg-caution);
 	}
 
 	:where(.so-slider--variant-negative) {

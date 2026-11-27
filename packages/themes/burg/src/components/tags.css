@@ -1,19 +1,11 @@
 :where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
-	:where(.so-tags--variant-negative .so-tags-item, .so-tags-item--variant-negative) {
-		--so-burg-tag-ink: var(--so-burg-danger);
-	}
-
-	:where(.so-tags-item--variant-normal) {
-		--so-burg-tag-ink: var(--so-burg-text);
-	}
-
 	:where(.so-tags-item) {
 		--so-burg-tag-fill: var(--so-burg-row-highlight);
 		--so-burg-tag-border: transparent;
 		border-radius: calc(var(--so-radius) * 0.75);
 		border: 1px solid var(--so-burg-tag-border);
 		background-color: var(--so-burg-tag-fill);
-		color: var(--so-burg-tag-ink, var(--so-burg-text));
+		color: var(--so-burg-text);
 	}
 
 	:where(:is(.so-tags--view-plain, .so-tags--view-outlined) .so-tags-item) {
@@ -40,7 +32,7 @@
 	}
 
 	:where(.so-tags-item > .so-button) {
-		--so-burg-button-ink: var(--so-burg-tag-ink, var(--so-burg-text));
+		--so-burg-button-ink: var(--so-burg-text);
 		--so-burg-button-fill: transparent;
 	}
 

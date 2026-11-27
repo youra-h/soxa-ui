@@ -1,12 +1,17 @@
 :where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
 	:where(.so-file-upload) {
-		--so-burg-upload-tone: var(--so-burg-text);
+		--so-burg-upload-variant: initial;
+		--so-burg-upload-tone: var(--so-burg-upload-variant, var(--so-burg-text));
 		gap: calc(var(--so-spacing) * 2);
 		color: var(--so-burg-text);
 	}
 
 	:where(.so-file-upload--variant-negative) {
-		--so-burg-upload-tone: var(--so-burg-danger);
+		--so-burg-upload-variant: var(--so-burg-danger);
+	}
+
+	:where(.so-file-upload--variant-positive) {
+		--so-burg-upload-variant: var(--so-burg-positive);
 	}
 
 	:where(.so-file-upload__dropzone, .so-file-upload__item) {
@@ -17,6 +22,7 @@
 
 	:where(.so-file-upload__dropzone) {
 		border-style: dashed;
+		border-color: var(--so-burg-upload-variant, var(--so-burg-border));
 		padding: calc(var(--so-spacing) * 4) calc(var(--so-spacing) * 3);
 	}
 

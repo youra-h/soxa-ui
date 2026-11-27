@@ -16,6 +16,18 @@ These values use `rem` and assume a 16px root font size. To give a button fully
 rounded ends, set `--so-button-radius: 9999px` on the button or its container.
 This setting overrides the shared `--so-radius`.
 
+### Color variants
+
+Alert supports `normal`, `accent`, `positive`, `caution`, and `negative`.
+Toasts use the message type to choose the matching color and icon. Omit
+`type` for the neutral toast, or pass `info`, `success`, `warning`, or `error`.
+
+Button, ToggleButton, ToggleGroup, Input, NumberInput, Textarea, Select,
+DateInput, DatePicker, Calendar, CheckBox, Switch, RadioGroup, Slider, Rating,
+and FileUpload support `normal`, `negative`, and `positive`. Other Burg
+components use their default palette. The shared Soxa UI prop types list
+theme variant names across components.
+
 ### Button press effect
 
 Set `--so-button-press-effect` on a button, container, or theme boundary.

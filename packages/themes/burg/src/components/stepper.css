@@ -25,22 +25,6 @@
 		--so-burg-stepper-height: var(--so-button-height-2xl);
 	}
 
-	:where(.so-stepper-item--variant-normal) {
-		--so-burg-stepper-tone: var(--so-burg-focus-edge);
-	}
-
-	:where(.so-stepper-item--variant-negative) {
-		--so-burg-stepper-tone: var(--so-burg-danger);
-	}
-
-	:where(.so-stepper-item--variant-positive) {
-		--so-burg-stepper-tone: var(--so-burg-positive);
-	}
-
-	:where(.so-stepper-item--variant-caution) {
-		--so-burg-stepper-tone: var(--so-burg-caution);
-	}
-
 	:where(.so-stepper__list) {
 		gap: calc(var(--so-spacing) * 2);
 	}

@@ -6,11 +6,6 @@
 		font-weight: 550;
 	}
 
-	:where(.so-avatar--variant-negative) {
-		background-color: color-mix(in oklab, var(--so-burg-surface), var(--so-burg-danger) 10%);
-		color: var(--so-burg-danger);
-	}
-
 	:where(.so-avatar--shape-rounded) {
 		border-radius: var(--so-avatar-radius, var(--so-radius));
 	}

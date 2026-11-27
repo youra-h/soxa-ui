@@ -10,20 +10,12 @@
 		color: var(--so-burg-text);
 	}
 
-	:where(.so-calendar--variant-accent) {
-		--so-burg-calendar-tone: var(--so-burg-progress-accent);
-	}
-
 	:where(.so-calendar--variant-positive) {
 		--so-burg-calendar-tone: var(--so-burg-positive);
 	}
 
 	:where(.so-calendar--variant-negative) {
 		--so-burg-calendar-tone: var(--so-burg-danger);
-	}
-
-	:where(.so-calendar--variant-caution) {
-		--so-burg-calendar-tone: var(--so-burg-caution);
 	}
 
 	:where(

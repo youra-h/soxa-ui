@@ -1,14 +1,19 @@
 :where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
 	:where(.so-check-box, .so-switch) {
-		--so-burg-toggle-ink: var(--so-burg-text);
+		--so-burg-toggle-tone: initial;
+		--so-burg-toggle-ink: var(--so-burg-toggle-tone, var(--so-burg-text));
 	}
 
 	:where(.so-check-box--variant-negative, .so-switch--variant-negative) {
-		--so-burg-toggle-ink: var(--so-burg-danger);
+		--so-burg-toggle-tone: var(--so-burg-danger);
+	}
+
+	:where(.so-check-box--variant-positive, .so-switch--variant-positive) {
+		--so-burg-toggle-tone: var(--so-burg-positive);
 	}
 
 	:where(.so-check-box__container) {
-		--so-burg-toggle-border: var(--so-burg-focus-edge);
+		--so-burg-toggle-border: var(--so-burg-toggle-tone, var(--so-burg-focus-edge));
 		border: 1px solid var(--so-burg-toggle-border);
 		border-radius: var(--so-check-box-radius, calc(var(--so-radius) / 2));
 		background-color: var(--so-burg-surface);
@@ -42,6 +47,7 @@
 
 	:where(.so-switch__track) {
 		background-color: var(--so-burg-focus-edge);
+		box-shadow: inset 0 0 0 1px var(--so-burg-toggle-tone, transparent);
 		border-radius: 9999px;
 	}
 
@@ -73,7 +79,7 @@
 					)
 			)
 			+ :where(.so-check-box__container) {
-			--so-burg-toggle-border: var(--so-burg-muted);
+			--so-burg-toggle-border: var(--so-burg-toggle-tone, var(--so-burg-muted));
 		}
 
 		:where(.so-switch:not([data-readonly='true']))

@@ -8,10 +8,6 @@
 		color: inherit;
 	}
 
-	:where(.so-progress-linear--variant-negative, .so-progress-spinner--variant-negative) {
-		color: var(--so-burg-danger);
-	}
-
 	:where(.so-progress-linear) {
 		background-color: var(--so-burg-progress-track);
 		border-radius: 9999px;
