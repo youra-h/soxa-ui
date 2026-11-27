@@ -1,0 +1,74 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-radio-group-item) {
+		color: var(--so-burg-text);
+	}
+
+	:where(.so-radio-group-item__control) {
+		--so-burg-radio-border: var(--so-burg-focus-edge);
+		border: 1px solid var(--so-burg-radio-border);
+		border-radius: 50%;
+		background-color: var(--so-burg-surface);
+	}
+
+	:where(.so-radio-group-item--variant-negative) > :where(.so-radio-group-item__control) {
+		color: var(--so-burg-danger);
+	}
+
+	:where(.so-radio-group-item__indicator) {
+		visibility: hidden;
+		border-radius: 50%;
+		background-color: currentColor;
+	}
+
+	:where(.so-radio-group-item[data-selected='true']) > :where(.so-radio-group-item__control) {
+		--so-burg-radio-border: currentColor;
+	}
+
+	:where(.so-radio-group-item[data-selected='true']:not(.so-radio-group-item--view-ring))
+		> :where(.so-radio-group-item__control)
+		> :where(.so-radio-group-item__indicator) {
+		visibility: visible;
+	}
+
+	:where(.so-radio-group-item--view-ring[data-selected='true'])
+		> :where(.so-radio-group-item__control) {
+		border-width: calc(var(--so-radio-control-size) / 4);
+	}
+
+	@media (hover: hover) {
+		:where(.so-radio-group-item:not([data-selected='true'], [data-disabled='true'])):where(
+				:is(:hover, :where(.so-label:hover > .so-label__control *))
+			)
+			> :where(.so-radio-group-item__control) {
+			--so-burg-radio-border: var(--so-burg-muted);
+		}
+	}
+
+	:where(.so-radio-group[data-invalid='true'])
+		:where(.so-radio-group-item:not([data-selected='true']))
+		> :where(.so-radio-group-item__control) {
+		--so-burg-radio-border: var(--so-burg-danger);
+	}
+
+	:where(.so-radio-group-item__input:focus-visible) + :where(.so-radio-group-item__control) {
+		outline: 2px solid var(--so-burg-focus-edge);
+		outline-offset: 2px;
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-radio-group-item__indicator) {
+			forced-color-adjust: none;
+			background-color: CanvasText;
+		}
+
+		:where(.so-radio-group[data-invalid='true'])
+			:where(.so-radio-group-item:not([data-selected='true']))
+			> :where(.so-radio-group-item__control) {
+			border-width: 2px;
+		}
+
+		:where(.so-radio-group-item__input:focus-visible) + :where(.so-radio-group-item__control) {
+			outline-color: Highlight;
+		}
+	}
+}

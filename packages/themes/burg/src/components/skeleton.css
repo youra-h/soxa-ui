@@ -1,0 +1,93 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-skeleton__placeholder) {
+		border-radius: var(--so-skeleton-radius, var(--so-radius));
+		background-color: color-mix(
+			in oklab,
+			var(--so-place-surface),
+			var(--so-burg-message-on-color, var(--so-burg-signal)) 22%
+		);
+		animation: so-burg-skeleton-pulse 1.8s ease-in-out infinite;
+	}
+
+	:where(.so-skeleton--shape-circle) :where(.so-skeleton__placeholder) {
+		border-radius: 50%;
+	}
+
+	:where(.so-skeleton--shape-rect) :where(.so-skeleton__placeholder) {
+		border-radius: 0;
+	}
+
+	:where(.so-skeleton--animation-none) :where(.so-skeleton__placeholder) {
+		animation: none;
+	}
+
+	:where(.so-skeleton--animation-wave) :where(.so-skeleton__placeholder) {
+		overflow: hidden;
+
+		&::after {
+			position: absolute;
+			inset: 0;
+			background: linear-gradient(90deg, transparent, rgb(255 255 255 / 18%), transparent);
+		}
+	}
+}
+
+@keyframes so-burg-skeleton-pulse {
+	50% {
+		opacity: 0.55;
+	}
+}
+
+@keyframes so-burg-skeleton-wave {
+	from {
+		translate: calc(-100% * var(--so-dir-sign)) 0;
+	}
+	to {
+		translate: calc(100% * var(--so-dir-sign)) 0;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:where(:root:not([data-so-motion='reduce']))
+		:where(.so-skeleton--animation-wave .so-skeleton__placeholder):where(
+			[data-so-theme='burg'] *,
+			[data-so-theme='burg-dark'] *
+		) {
+		animation: none;
+
+		&::after {
+			content: '';
+			animation: so-burg-skeleton-wave 1.6s ease-in-out infinite;
+		}
+	}
+}
+
+:where(:root[data-so-motion='full'])
+	:where(.so-skeleton--animation-wave .so-skeleton__placeholder):where(
+		[data-so-theme='burg'] *,
+		[data-so-theme='burg-dark'] *
+	) {
+	animation: none;
+
+	&::after {
+		content: '';
+		animation: so-burg-skeleton-wave 1.6s ease-in-out infinite;
+	}
+}
+
+@media (forced-colors: active) {
+	:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+		:where(.so-skeleton__placeholder) {
+			forced-color-adjust: none;
+			background-color: GrayText;
+		}
+
+		:where(.so-skeleton--animation-wave .so-skeleton__placeholder) {
+			animation: so-burg-skeleton-pulse 1.8s ease-in-out infinite;
+
+			&::after {
+				content: none;
+			}
+		}
+	}
+}

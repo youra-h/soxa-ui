@@ -14,37 +14,11 @@
 	--so-accent-400: var(--so-burg-progress-accent);
 	--so-negative-500: var(--so-burg-danger);
 	--so-negative-700: var(--so-burg-danger);
-	--so-positive-500: light-dark(#2c6846, #8dcca6);
+	--so-positive-500: var(--so-burg-positive);
 	--so-positive-700: var(--so-positive-500);
-	--so-caution-500: light-dark(#805419, #e1ba76);
+	--so-caution-500: var(--so-burg-caution);
 	--so-caution-700: var(--so-caution-500);
 	--so-negative-100: color-mix(in srgb, var(--so-burg-surface), var(--so-negative-500) 12%);
 	--so-positive-100: color-mix(in srgb, var(--so-burg-surface), var(--so-positive-500) 12%);
 	--so-caution-100: color-mix(in srgb, var(--so-burg-surface), var(--so-caution-500) 12%);
-}
-
-/* Switch and Drawer appear in the shell before Burg has component styles for them. */
-.pg__settings .so-switch__track {
-	background: var(--so-neutral-400);
-	border-radius: 9999px;
-}
-
-.pg__settings .so-switch input:checked + .so-switch__track {
-	background: var(--so-component-text);
-}
-
-.pg__settings .so-switch input:focus-visible + .so-switch__track {
-	outline: 2px solid var(--so-neutral-400);
-	outline-offset: 2px;
-}
-
-.pg__settings .so-switch__track--thumb {
-	background: var(--so-component-surface);
-	border-radius: 50%;
-}
-
-.pg__drawer {
-	background: var(--so-component-surface);
-	color: var(--so-component-text);
-	box-shadow: 0 0 16px #0003;
 }

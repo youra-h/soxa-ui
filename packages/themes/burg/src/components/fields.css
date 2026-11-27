@@ -1,4 +1,24 @@
 :where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-field__label, .so-label__text) {
+		color: var(--so-burg-text);
+	}
+
+	:where(.so-field:not(.so-field--position-end)) > :where(.so-field__label) {
+		font-weight: 500;
+	}
+
+	:where(.so-field__helper) {
+		color: var(--so-burg-muted);
+	}
+
+	:where(.so-field__error, .so-label--variant-negative > .so-label__text) {
+		color: var(--so-burg-danger);
+	}
+
+	:where(.so-field__error-icon) {
+		--so-icon-color: currentColor;
+	}
+
 	:where(.so-input, .so-textarea) {
 		--so-burg-field-border: var(--so-burg-border);
 		background-color: var(--so-burg-surface);
@@ -17,16 +37,47 @@
 		border-radius: var(--so-textarea-radius, var(--so-radius));
 	}
 
+	@media (hover: hover) {
+		:where(.so-input:hover:not(:has(> input:is(:disabled, [readonly])))) {
+			--so-burg-field-border: var(--so-burg-focus-edge);
+		}
+	}
+
 	:where(.so-select[data-open='true']) > :where(.so-select__field),
 	:where(.so-input, .so-textarea):where(:has(> :is(input, textarea):focus)) {
 		--so-burg-field-border: var(--so-burg-focus-edge);
-		outline: 3px solid var(--so-burg-focus);
+		outline: var(--so-burg-focus-ring);
 		outline-offset: 0;
 	}
 
 	:where(.so-select[data-invalid='true']) > :where(.so-select__field),
-	:where(.so-input[data-invalid='true'], .so-textarea[data-invalid='true']) {
+	:where(
+		.so-input--variant-negative,
+		.so-input[data-invalid='true'],
+		.so-textarea[data-invalid='true']
+	) {
 		--so-burg-field-border: var(--so-burg-danger);
+	}
+
+	:where(.so-input, .so-textarea, .so-switch):where([data-required='true'])::after,
+	:where(.so-file-upload:has(> .so-file-upload__input:required))::after,
+	:where(.so-check-box[data-required='true']) > :where(.so-check-box__container)::after,
+	:where(.so-field:has(> .so-field__control > [data-required='true']))
+		> :where(.so-field__label)::after {
+		background-color: var(--so-burg-danger);
+		border-radius: 50%;
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-field:has(> .so-field__control > [data-required='true']))
+			> :where(.so-field__label)::after {
+			forced-color-adjust: none;
+			background-color: CanvasText;
+		}
+
+		:where(.so-input[data-invalid='true']) {
+			--so-input-border: 2px;
+		}
 	}
 
 	:where(.so-input) > :where(input),
@@ -57,18 +108,8 @@
 		rotate: 180deg;
 	}
 
-	:where(.so-input__clear, .so-select__field .so-tags-item__close) {
+	:where(.so-input__clear) {
 		--so-burg-button-fill: transparent;
 		--so-burg-button-ink: var(--so-burg-muted);
-	}
-
-	:where(.so-select__tags) :where(.so-tags-item) {
-		background: var(--so-burg-row-highlight);
-		border-radius: calc(var(--so-radius) * 0.75);
-	}
-
-	:where(.so-select__tags) :where(.so-tags-item) > :where(.so-button:not(.so-tags-item__close)) {
-		--so-burg-button-fill: transparent;
-		--so-burg-button-ink: var(--so-burg-text);
 	}
 }

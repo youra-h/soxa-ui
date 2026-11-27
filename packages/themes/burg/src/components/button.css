@@ -63,8 +63,12 @@
 	}
 
 	:where(.so-button:focus-visible) {
-		outline: 2px solid var(--so-burg-focus-edge);
-		outline-offset: 2px;
+		outline: var(--so-burg-focus-ring);
+		outline-offset: 0;
+	}
+
+	:where(.so-button:focus-visible)::after {
+		border-color: var(--so-burg-focus-edge);
 	}
 }
 

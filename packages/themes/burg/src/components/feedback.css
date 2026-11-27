@@ -1,0 +1,156 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-alert, .so-badge, .so-skeleton, .so-toasts-item) {
+		--so-burg-signal: var(--so-burg-muted);
+		--so-burg-signal-soft: color-mix(
+			in oklab,
+			var(--so-burg-surface),
+			var(--so-burg-signal) 9%
+		);
+	}
+
+	:where(
+		.so-alert--variant-accent,
+		.so-badge--variant-accent,
+		.so-skeleton--variant-accent,
+		.so-toasts-item--type-info
+	) {
+		--so-burg-signal: var(--so-burg-progress-accent);
+	}
+
+	:where(
+		.so-alert--variant-positive,
+		.so-badge--variant-positive,
+		.so-skeleton--variant-positive,
+		.so-toasts-item--type-success
+	) {
+		--so-burg-signal: var(--so-burg-positive);
+	}
+
+	:where(
+		.so-alert--variant-caution,
+		.so-badge--variant-caution,
+		.so-skeleton--variant-caution,
+		.so-toasts-item--type-warning
+	) {
+		--so-burg-signal: var(--so-burg-caution);
+	}
+
+	:where(
+		.so-alert--variant-negative,
+		.so-badge--variant-negative,
+		.so-skeleton--variant-negative,
+		.so-toasts-item--type-error
+	) {
+		--so-burg-signal: var(--so-burg-danger);
+	}
+
+	:where(.so-alert, .so-toasts-item) {
+		--so-burg-message-on-color: initial;
+		--so-burg-message-action-ink: initial;
+	}
+
+	:where(.so-alert__close, .so-toasts-item__close) {
+		--so-burg-button-fill: transparent;
+		--so-burg-button-ink: var(--so-burg-message-on-color, var(--so-burg-muted));
+	}
+
+	:where(.so-alert__action, .so-toasts-item__content)
+		> :where(.so-button:not(.so-button--variant-negative)) {
+		--so-burg-button-tone: var(--so-burg-message-on-color, var(--so-burg-text));
+	}
+
+	:where(.so-alert__action, .so-toasts-item__content)
+		> :where(
+			.so-button:not(
+				.so-button--view-plain,
+				.so-button--view-outlined,
+				.so-button--variant-negative
+			)
+		) {
+		--so-burg-button-ink: var(--so-burg-message-action-ink, var(--so-burg-surface));
+	}
+
+	:where(
+		.so-alert__close,
+		.so-alert__action > .so-button,
+		.so-toasts-item__close,
+		.so-toasts-item__content > .so-button
+	):where(:focus-visible) {
+		outline-color: var(--so-burg-message-on-color, var(--so-burg-focus));
+
+		&::after {
+			border-color: var(--so-burg-message-on-color, var(--so-burg-focus-edge));
+		}
+	}
+
+	:where(.so-alert) {
+		--so-burg-alert-fill: var(--so-burg-signal-soft);
+		--so-burg-alert-edge: color-mix(
+			in oklab,
+			var(--so-burg-signal-soft),
+			var(--so-burg-signal) 25%
+		);
+		border: 1px solid var(--so-burg-alert-edge);
+		border-inline-start: 2px solid var(--so-burg-signal);
+		border-radius: var(--so-alert-radius, var(--so-radius));
+		--so-place-surface: var(--so-burg-alert-fill);
+		background-color: var(--so-burg-alert-fill);
+		color: var(--so-burg-message-on-color, var(--so-burg-text));
+	}
+
+	:where(.so-alert--size-normal) {
+		font-size: var(--so-burg-button-font-size-normal);
+	}
+
+	:where(.so-alert--view-outlined) {
+		--so-burg-alert-fill: var(--so-burg-surface);
+		--so-burg-alert-edge: var(--so-burg-border);
+	}
+
+	:where(.so-alert--view-filled) {
+		--so-burg-message-on-color: var(--so-burg-surface);
+		--so-burg-message-action-ink: var(--so-burg-signal);
+		--so-burg-alert-fill: var(--so-burg-signal);
+		--so-burg-alert-edge: var(--so-burg-signal);
+	}
+
+	:where(.so-alert__icon) {
+		--so-icon-color: currentColor;
+		color: var(--so-burg-message-on-color, var(--so-burg-signal));
+	}
+
+	:where(.so-alert__title) {
+		font-weight: 600;
+	}
+
+	:where(.so-badge__indicator) {
+		border: 1px solid transparent;
+		border-radius: 9999px;
+		background-color: var(--so-burg-signal-soft);
+		color: var(--so-burg-signal);
+		font-weight: 550;
+	}
+
+	:where(.so-badge--view-filled, .so-badge[data-dot='true']) > :where(.so-badge__indicator) {
+		background-color: var(--so-burg-signal);
+		color: var(--so-burg-surface);
+	}
+
+	:where(.so-badge--view-outlined) > :where(.so-badge__indicator) {
+		border-color: currentColor;
+		background-color: var(--so-burg-surface);
+		color: var(--so-burg-signal);
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-alert, .so-badge__indicator) {
+			border-color: CanvasText;
+		}
+
+		:where(.so-badge[data-dot='true']:not(.so-badge--view-outlined))
+			> :where(.so-badge__indicator) {
+			forced-color-adjust: none;
+			background-color: CanvasText;
+		}
+	}
+}

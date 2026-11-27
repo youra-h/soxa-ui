@@ -1,0 +1,131 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-toasts-item) {
+		--so-burg-toast-surface: var(--so-burg-surface);
+		--so-burg-toast-border: var(--so-burg-border);
+		outline: none;
+	}
+
+	/* Only items without their own view follow the manager's live setting. */
+	:where(
+		.so-toasts-item--view-soft,
+		.so-toasts--view-soft
+			> .so-toasts__list
+			> .so-toasts-item:not([class*='so-toasts-item--view-'])
+	) {
+		--so-burg-toast-surface: var(--so-burg-signal-soft);
+	}
+
+	:where(
+		.so-toasts-item--view-filled,
+		.so-toasts--view-filled
+			> .so-toasts__list
+			> .so-toasts-item:not([class*='so-toasts-item--view-'])
+	) {
+		--so-burg-message-on-color: var(--so-burg-surface);
+		--so-burg-message-action-ink: var(--so-burg-signal);
+		--so-burg-toast-surface: var(--so-burg-signal);
+		--so-burg-toast-border: transparent;
+	}
+
+	:where(.so-toasts-item__card) {
+		--so-panel-surface: var(--so-burg-toast-surface);
+		border: 1px solid var(--so-burg-toast-border);
+		border-radius: var(--so-toasts-radius, calc(var(--so-radius) * 1.25));
+		background-color: var(--so-panel-surface);
+		color: var(--so-burg-message-on-color, var(--so-burg-text));
+		box-shadow: 0 2px 8px rgb(0 0 0 / 16%);
+	}
+
+	:where(.so-toasts-item:focus-visible) > :where(.so-toasts-item__card) {
+		border-color: var(--so-burg-focus-edge);
+		outline: var(--so-burg-focus-ring);
+		outline-offset: 0;
+	}
+
+	:where(.so-toasts-item__icon) {
+		--so-icon-color: currentColor;
+		color: var(--so-burg-message-on-color, var(--so-burg-signal));
+	}
+
+	:where(.so-toasts-item__icon > .so-progress-spinner) {
+		color: inherit;
+	}
+
+	:where(.so-toasts-item__body) {
+		font-size: var(--so-burg-button-font-size-normal);
+	}
+
+	:where(.so-toasts-item__text) {
+		font-weight: 600;
+	}
+
+	:where(.so-toasts-item__description) {
+		color: var(--so-burg-message-on-color, var(--so-burg-muted));
+	}
+
+	/* Rear cards show their surface while keeping their text in the toast list. */
+	:where(.so-toasts--layout-cascade > .so-toasts__list) {
+		> :where(.so-toasts-item) > :where(.so-toasts-item__card) > * {
+			opacity: 0;
+		}
+
+		> :where(
+				.so-toasts-item:focus-within,
+				.so-toasts-item:first-child:not(:has(~ .so-toasts-item:focus-within)),
+				.so-toasts-item[data-open='false']:first-child
+					+ .so-toasts-item:not(:has(~ .so-toasts-item:focus-within))
+			)
+			> :where(.so-toasts-item__card)
+			> * {
+			opacity: 1;
+		}
+	}
+
+	:where(.so-toasts-item[data-open='false']) {
+		opacity: 0;
+	}
+
+	:where(.so-toasts-item:not([data-swiping='true'])) {
+		transition: opacity 150ms ease-out;
+	}
+
+	@starting-style {
+		:where(.so-toasts-item[data-open='true']) {
+			opacity: 0;
+		}
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-toasts-item__card) {
+			border-color: CanvasText;
+		}
+
+		:where(.so-toasts-item:focus-visible) > :where(.so-toasts-item__card) {
+			outline-color: Highlight;
+		}
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:where(:root:not([data-so-motion='reduce']))
+		:where(.so-toasts-item:not([data-swiping='true'])):where(
+			[data-so-theme='burg'] *,
+			[data-so-theme='burg-dark'] *
+		) {
+		transition:
+			opacity 150ms ease-out,
+			translate 180ms ease-out,
+			scale 180ms ease-out;
+	}
+}
+
+:where(:root[data-so-motion='full'])
+	:where(.so-toasts-item:not([data-swiping='true'])):where(
+		[data-so-theme='burg'] *,
+		[data-so-theme='burg-dark'] *
+	) {
+	transition:
+		opacity 150ms ease-out,
+		translate 180ms ease-out,
+		scale 180ms ease-out;
+}

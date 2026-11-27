@@ -1,0 +1,40 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-avatar, .so-avatar-group__count) {
+		border-radius: 50%;
+		background-color: var(--so-burg-subtle-surface);
+		color: var(--so-burg-muted);
+		font-weight: 550;
+	}
+
+	:where(.so-avatar--variant-negative) {
+		background-color: color-mix(in oklab, var(--so-burg-surface), var(--so-burg-danger) 10%);
+		color: var(--so-burg-danger);
+	}
+
+	:where(.so-avatar--shape-rounded) {
+		border-radius: var(--so-avatar-radius, var(--so-radius));
+	}
+
+	:where(.so-avatar--shape-rect) {
+		border-radius: 0;
+	}
+
+	:where(.so-avatar-group__count) {
+		border-radius: 9999px;
+		font-variant-numeric: tabular-nums;
+	}
+
+	:where(
+		.so-avatar-group > .so-avatar,
+		.so-avatar-group__overflow > :is(.so-avatar, .so-avatar-group__count)
+	) {
+		outline: 2px solid var(--so-place-surface);
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-avatar, .so-avatar-group__count) {
+			outline: 1px solid CanvasText;
+			outline-offset: -1px;
+		}
+	}
+}

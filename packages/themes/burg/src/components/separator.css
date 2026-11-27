@@ -1,0 +1,13 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-separator) {
+		border: 0 solid var(--so-burg-border);
+	}
+
+	:where(.so-separator--orientation-horizontal) {
+		border-block-start-width: var(--so-separator-width, 1px);
+	}
+
+	:where(.so-separator--orientation-vertical) {
+		border-inline-start-width: var(--so-separator-width, 1px);
+	}
+}

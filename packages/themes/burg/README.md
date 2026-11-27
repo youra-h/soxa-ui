@@ -31,9 +31,45 @@ The face returns to rest on release. The effect follows the Soxa motion policy.
 ### Lists, fields, and progress
 
 ListBox, Select, and Menu share row colors for highlighting and selection.
-Input, Select, and Textarea use the same size scale as Button and a shared
-neutral focus ring flush with the field border. ProgressLinear and ProgressSpinner use the same indicator
-color and follow the Soxa motion policy while progress is unknown.
+The shared Input height scale runs from 26px to 34px in 2px steps. Input is
+28px tall with 13px text at normal size. Input, Select, and Textarea share a
+neutral focus ring flush with the field border. ProgressLinear and
+ProgressSpinner share an indicator color and follow the Soxa motion policy
+while progress is unknown.
+
+CheckBox has a 16px square box at normal size and fills checked and mixed
+states by default. Use `outlined` for a visible border and unfilled box, or
+`plain` for the mark alone. Switch uses a 29px × 18px track at normal size and
+follows the Soxa motion policy.
+
+Label and Field follow the shared caption scale. Field uses muted helper text
+and the error color for validation messages. RadioGroup takes its ring size
+from the CheckBox scale. Its `dot` view marks selection with a center dot and
+`ring` uses a thicker border.
+
+### Overlays
+
+Tooltip uses a compact inverse surface. Popover follows the radius of the
+collection panels. Dialog and AlertDialog use a 14px radius by default at a
+16px root font size. Drawer rounds the corners facing the page. All three
+modal components share the `dim`, `blur`, and `none` backdrop views. The
+`--so-backdrop-blur` variable defaults to 3px.
+
+### Chat content and attachments
+
+CodeBlock uses a muted code surface and a 34px toolbar at normal size.
+FileUpload pairs a dashed drop target with compact file rows. Use its
+`item-progress` slot with ProgressLinear for per-file progress.
+Tags use a 24px pill and 12px text at normal size. Avatar and AvatarGroup
+keep the shared size scale. Separator uses the shared line thickness.
+
+### Messages and loading states
+
+Alert defaults to a soft tint with a thin semantic edge. Toasts default to
+an outlined surface. Both offer `soft`, `outlined`, and `filled`; a toast
+can override the manager view. Badge keeps the shared size scale and offers
+filled and outlined treatments. Skeleton uses a subtle pulse by default.
+The `wave` animation falls back to a pulse when motion is reduced.
 
 Set `data-so-theme="burg"` or `data-so-theme="burg-dark"` on the document root
 or the container of the themed components. Load the stylesheet and register
