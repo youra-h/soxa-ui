@@ -28,6 +28,9 @@ import {
 	TToggleGroupCollectionFacade,
 	TAccordionItemCollectionFacade,
 	TToggleGroupItemCollectionFacade,
+	TStepper,
+	TStepperCollectionFacade,
+	TStepperItemCollectionFacade,
 	TBreadcrumbs,
 	TBreadcrumbsCollectionFacade,
 	TBreadcrumbsItemCollectionFacade,
@@ -171,6 +174,16 @@ const COLLECTIONS: Readonly<Record<string, readonly [string | null, () => TMount
 	],
 	// Состав дней кладёт вид календаря сам, а выбор и фокус дню пишут
 	// расширения — у фасада дня входов нет
+	StepperCollectionDescriptor: [
+		null,
+		() => {
+			const facade = new TStepperCollectionFacade({}, { owner: new TStepper() })
+
+			facade.items = SOURCES
+
+			return withItem(facade, new TStepperItemCollectionFacade())
+		},
+	],
 	BreadcrumbsCollectionDescriptor: [
 		'BreadcrumbsCollectionItemDescriptor',
 		() => {

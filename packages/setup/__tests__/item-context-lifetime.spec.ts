@@ -44,6 +44,10 @@ import {
 import type { TCollectionEngine } from '@soxa-ui/core'
 import { TCollectionBundlesPlugin } from '@soxa-ui/plugins'
 import {
+	StepperDescriptor,
+	StepperCollectionDescriptor,
+	StepperItemDescriptor,
+	StepperCollectionItemDescriptor,
 	BreadcrumbsDescriptor,
 	BreadcrumbsCollectionDescriptor,
 	BreadcrumbsItemDescriptor,
@@ -242,6 +246,11 @@ type TCollectionKit = {
 
 /** Коллекции экспорта — ключ по дескриптору фасада элемента. */
 const COLLECTIONS: Readonly<Record<string, TCollectionKit>> = {
+	StepperCollectionItemDescriptor: {
+		list: (items) => mountList(StepperDescriptor(), StepperCollectionDescriptor(), items),
+		item: (elevator, source) =>
+			mountItem(StepperItemDescriptor(), StepperCollectionItemDescriptor(), elevator, source),
+	},
 	BreadcrumbsCollectionItemDescriptor: {
 		list: (items) =>
 			mountList(BreadcrumbsDescriptor(), BreadcrumbsCollectionDescriptor(), items),

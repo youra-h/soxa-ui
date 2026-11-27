@@ -57,6 +57,9 @@ function sink(column: 'props' | 'instance'): TPreviewEventSink {
 <template>
 	<template v-if="entry && groups">
 		<h1 class="pg__page-title">{{ entry.label }}</h1>
+		<RouterLink v-if="framework === 'vue' && entry.id === 'stepper'" to="/vue/stepper/examples">
+			Маршрут доставки и этапы устранения инцидента
+		</RouterLink>
 		<p class="pg__page-lead">
 			{{ entry.description }} · события идут в консоль браузера с пометкой источника
 		</p>

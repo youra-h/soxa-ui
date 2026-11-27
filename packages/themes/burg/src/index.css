@@ -7,6 +7,7 @@
 @import './components/toggles.css' layer(so.burg);
 @import './components/radio-group.css' layer(so.burg);
 @import './components/progress.css' layer(so.burg);
+@import './components/stepper.css' layer(so.burg);
 @import './components/code-block.css' layer(so.burg);
 @import './components/file-upload.css' layer(so.burg);
 @import './components/tags.css' layer(so.burg);
