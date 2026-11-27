@@ -93,6 +93,13 @@ uses one frame for both fields. The calendar uses 30px day tiles with 13px
 text and a 3px focus allowance at normal size. A dashed border distinguishes
 a range preview from a committed range.
 
+### Data and workspace
+
+Table uses thin horizontal rules, tabular figures, and a compact 36px body
+row with 13px text at normal size. Scroller adds a 12px fade at edges with
+more content. Splitter draws a 1px divider and preserves a wider handle for
+resizing. DragAndDrop marks the item being moved with an outline and shadow.
+
 Set `data-so-theme="burg"` or `data-so-theme="burg-dark"` on the document root
 or the container of the themed components. Load the stylesheet and register
 the layout plugins at the application entry point.

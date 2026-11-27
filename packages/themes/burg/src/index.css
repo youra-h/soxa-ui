@@ -25,3 +25,7 @@
 @import './components/pagination.css' layer(so.burg);
 @import './components/calendar.css' layer(so.burg);
 @import './components/date-fields.css' layer(so.burg);
+@import './components/table.css' layer(so.burg);
+@import './components/scroller.css' layer(so.burg);
+@import './components/splitter.css' layer(so.burg);
+@import './components/drag-and-drop.css' layer(so.burg);
