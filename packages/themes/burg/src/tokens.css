@@ -4,6 +4,7 @@
 	--so-spacing: 0.25rem;
 	--so-place-surface: var(--so-panel-surface, var(--so-burg-surface));
 	--so-burg-focus-edge: oklch(0.66 0 0);
+	--so-burg-focus-ring: 3px solid var(--so-burg-focus);
 	--so-backdrop-blur: 3px;
 	--so-tooltip-line: 1rem;
 

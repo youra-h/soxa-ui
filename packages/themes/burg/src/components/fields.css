@@ -46,7 +46,7 @@
 	:where(.so-select[data-open='true']) > :where(.so-select__field),
 	:where(.so-input, .so-textarea):where(:has(> :is(input, textarea):focus)) {
 		--so-burg-field-border: var(--so-burg-focus-edge);
-		outline: 3px solid var(--so-burg-focus);
+		outline: var(--so-burg-focus-ring);
 		outline-offset: 0;
 	}
 
