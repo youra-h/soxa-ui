@@ -1,11 +1,13 @@
-import { afterEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { defineComponent, h, nextTick, ref } from 'vue'
 import { Stepper } from '@soxa-ui/vue'
+import { userEvent } from 'vitest/browser'
 import { COMPONENT_SIZES, COMPONENT_VARIANTS } from '@soxa-ui/playground-shared'
 import type { IStepperProps } from '@soxa-ui/core'
 import { render, cleanup } from './render'
 import { find } from './colors'
-import '@soxa-ui/theme-oren'
+import orenStyles from '../src/themes/oren.css?inline'
+import burgStyles from '../src/themes/burg.css?inline'
 
 const items = [
 	{ value: 'contact', text: 'Contact', completed: true },
@@ -23,7 +25,20 @@ function iconOf(selector: string): SVGSVGElement {
 	return icon
 }
 
+const stylesheet = document.createElement('style')
+
+function applyScheme(scheme: string): void {
+	document.documentElement.dataset.soTheme = scheme
+	stylesheet.textContent = scheme.startsWith('burg') ? burgStyles : orenStyles
+}
+
+beforeEach(() => {
+	applyScheme('oren')
+	document.head.append(stylesheet)
+})
+
 afterEach(() => {
+	stylesheet.remove()
 	cleanup()
 	document.documentElement.removeAttribute('dir')
 	document.documentElement.removeAttribute('data-so-theme')
@@ -55,10 +70,10 @@ describe('Stepper indicators', () => {
 		expect(getComputedStyle(iconOf(completedIcon)).rotate).toBe('none')
 	})
 
-	it.each(['oren', 'oren-dark'])(
+	it.each(['oren', 'oren-dark', 'burg', 'burg-dark'])(
 		'%s scales circular markers and applies variants to the current step',
 		async (scheme) => {
-			document.documentElement.dataset.soTheme = scheme
+			applyScheme(scheme)
 			const size = ref<IStepperProps['size']>('normal')
 			const variant = ref<IStepperProps['variant']>()
 			render(
@@ -127,4 +142,39 @@ describe('Stepper indicators', () => {
 			expect(getComputedStyle(completed).backgroundColor).toBe(fills[0])
 		},
 	)
+
+	describe.each(['burg', 'burg-dark'])('%s', (scheme) => {
+		it('keeps the compact scale, focus ring, and unavailable step in a linear flow', async () => {
+			const root = document.documentElement
+			applyScheme(scheme)
+
+			render({
+				render: () => h(Stepper, { items, value: 'shipping', linear: true }),
+			})
+			await nextTick()
+
+			const active = find(
+				'.so-stepper-item[data-selected="true"] > .so-stepper-item__trigger',
+			)
+			const label = find('.so-stepper-item__label', active)
+			const marker = find('.so-stepper-item__indicator', active)
+			const pending = find('.so-stepper-item:last-child > .so-stepper-item__trigger')
+
+			expect(getComputedStyle(label).fontSize).toBe('13px')
+			expect(marker.getBoundingClientRect().width).toBe(22)
+			expect(active.getBoundingClientRect().height).toBe(28)
+			expect(pending.matches(':disabled')).toBe(true)
+			expect(
+				getComputedStyle(find('.so-stepper-item__indicator', pending)).backgroundColor,
+			).toBe('rgba(0, 0, 0, 0)')
+
+			await userEvent.keyboard('{Tab}{Tab}')
+			expect(document.activeElement).toBe(active)
+			expect(getComputedStyle(active).outlineWidth).toBe('3px')
+			expect(getComputedStyle(active).outlineOffset).toBe('0px')
+			expect(getComputedStyle(active).outlineColor).toBe(
+				getComputedStyle(root).getPropertyValue('--so-burg-focus').trim(),
+			)
+		})
+	})
 })
