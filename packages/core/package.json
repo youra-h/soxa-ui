@@ -9,7 +9,7 @@
     "components",
     "framework-agnostic"
   ],
-  "license": "SEE LICENSE IN LICENSE-SOXA-RUNTIME",
+  "license": "SEE LICENSE IN LICENSE",
   "author": "Yuri Soldatov",
   "repository": {
     "type": "git",
@@ -35,7 +35,6 @@
   },
   "files": [
     "dist",
-    "LICENSE-SOXA-RUNTIME",
     "LICENSE-Unicode-3.0",
     "LICENSE-Apache-2.0"
   ],

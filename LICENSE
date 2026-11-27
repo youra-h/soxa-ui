@@ -2,7 +2,7 @@ MIT License
 
 Scope: This license applies to Soxa-owned material in this repository outside
 packages/core and packages/plugins, subject to any more specific license
-notices. See LICENSE-SOXA-RUNTIME in those two directories for their terms.
+notices. See the LICENSE files in those two directories for their terms.
 
 Copyright (c) 2026 Yuri Soldatov
 

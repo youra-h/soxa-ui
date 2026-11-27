@@ -8,7 +8,7 @@
     "ui",
     "plugins"
   ],
-  "license": "SEE LICENSE IN LICENSE-SOXA-RUNTIME",
+  "license": "SEE LICENSE IN LICENSE",
   "author": "Yuri Soldatov",
   "repository": {
     "type": "git",
@@ -33,8 +33,7 @@
     }
   },
   "files": [
-    "dist",
-    "LICENSE-SOXA-RUNTIME"
+    "dist"
   ],
   "dependencies": {
     "@soxa-ui/core": "0.6.0"

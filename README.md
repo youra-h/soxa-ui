@@ -414,8 +414,8 @@ On the way there:
 ## License
 
 The UI adapters, `@soxa-ui/setup`, and theme CSS are under [MIT](LICENSE).
-Soxa-owned code in [`@soxa-ui/core`](packages/core/LICENSE-SOXA-RUNTIME) and
-[`@soxa-ui/plugins`](packages/plugins/LICENSE-SOXA-RUNTIME) is under the Soxa Runtime License.
+Soxa-owned code in [`@soxa-ui/core`](packages/core/LICENSE) and
+[`@soxa-ui/plugins`](packages/plugins/LICENSE) is under the Soxa Runtime License.
 It allows free commercial use and redistribution in applications. Changes to the
 covered implementation require written permission. Third-party materials are
 covered by their respective licenses.
