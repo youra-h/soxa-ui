@@ -1,4 +1,5 @@
 .so-tree {
+	inline-size: 100%;
 	min-inline-size: 0;
 }
 
@@ -12,7 +13,15 @@
 	display: flex;
 	inline-size: 100%;
 	justify-content: start;
+}
+
+.so-tree-item > .so-tree-item__row > .so-button__text {
+	min-inline-size: 0;
 	text-align: start;
+}
+
+:where(.so-tree-item > .so-tree-item__row > .so-button__text > *) {
+	margin-inline: 0 auto;
 }
 
 .so-tree-item__group {

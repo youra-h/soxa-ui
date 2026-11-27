@@ -198,15 +198,7 @@ export class TTreeKeyboardPlugin extends TBasePlugin<TTree, TPluginEvents> {
 
 		this._focus(item)
 
-		if (
-			target.closest('.so-tree-item__toggle') ||
-			(this._engine?.extensions.selection.mode === 'none' && tree.isBranch(item))
-		) {
-			event.preventDefault()
-			tree.toggle(item)
-		} else {
-			tree.choose(item)
-		}
+		if (tree.activate(item)) event.preventDefault()
 	}
 
 	private readonly _onKey = (event: KeyboardEvent): void => {
@@ -265,7 +257,7 @@ export class TTreeKeyboardPlugin extends TBasePlugin<TTree, TPluginEvents> {
 				break
 			case 'Enter':
 				if (item.href && !tree.isBranch(item)) return
-				if (!tree.choose(item)) tree.toggle(item)
+				tree.activate(item)
 				break
 			case ' ':
 				if (this._typeahead.typing())

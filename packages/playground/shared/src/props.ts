@@ -703,6 +703,7 @@ export const PREVIEW_PROPS: Readonly<Record<string, Readonly<Record<string, unkn
 	'date-picker': { aria_label: 'Дата' },
 	popover: { aria_label: 'Пример поповера' },
 	breadcrumbs: { maxItems: 4 },
+	tree: { mode: 'none' },
 	// Сотня элементов по десять на странице, текущая — пятая: пропуски по обе
 	// стороны видны с первой отрисовки. Имени у ряда без приложения нет
 	pagination: { total: 100, value: 5, aria_label: 'Страницы' },

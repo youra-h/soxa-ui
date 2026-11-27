@@ -30,6 +30,7 @@ export class TTreeExtension extends TBaseExtension<
 	private readonly _loading = new Map<TTreeItem, AbortController>()
 	private _index: TIndex | undefined
 	private _revision = -1
+	private _current: TTreeItem | undefined
 	private _tabStop: TTreeItem | undefined
 	private _hasFocusHistory = false
 
@@ -44,6 +45,10 @@ export class TTreeExtension extends TBaseExtension<
 
 		ctx.driver.events.on('item:removed', ({ item }) => {
 			this.cancelLoad(item)
+			if (item === this._current) {
+				item.dataset.remove('highlighted')
+				this._current = undefined
+			}
 		})
 		ctx.driver.events.on('items:query:before', this._query)
 		batch.events.on('change:shown', this._syncShown)
@@ -209,6 +214,22 @@ export class TTreeExtension extends TBaseExtension<
 		for (const item of this._loading.keys()) this.cancelLoad(item)
 	}
 
+	/** Activate the whole row and report whether a branch was toggled. */
+	activate(item: TTreeItem): boolean {
+		if (!this.isNavigable(item)) return false
+
+		if (this._current !== item) {
+			this._current?.dataset.remove('highlighted')
+			this._current = item
+			this._syncCurrent()
+		}
+
+		const toggled = this.toggle(item)
+		this.choose(item)
+
+		return toggled
+	}
+
 	toggle(item: TTreeItem): boolean {
 		if (!this.isNavigable(item) || !this.isBranch(item)) return false
 
@@ -265,6 +286,11 @@ export class TTreeExtension extends TBaseExtension<
 		if (oldValue !== item) this.events.emit('change:tabStop', { oldValue, newValue: item })
 	}
 
+	private _syncCurrent(): void {
+		const current = selectionOf(this._ctx)?.mode === 'none'
+		this._current?.dataset.add('highlighted', current ? true : null)
+	}
+
 	private _syncSelected(item: TTreeItem): void {
 		const selection = selectionOf(this._ctx)
 
@@ -310,6 +336,7 @@ export class TTreeExtension extends TBaseExtension<
 			.get('owner')
 			?.aria.add('aria-multiselectable', selection?.multiple ? 'true' : null)
 
+		this._syncCurrent()
 		this._syncTabStop(shown)
 	}
 

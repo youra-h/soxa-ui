@@ -98,6 +98,56 @@ describe('Tree', () => {
 		}
 	})
 
+	it.each(['single', 'multiple'] as const)(
+		'toggles a branch across its row in %s mode',
+		async (mode) => {
+			const wrapper = mount(Tree, { attachTo: document.body, props: { items, mode } })
+
+			try {
+				const branch = wrapper.get('[aria-expanded]')
+
+				await vi.waitFor(async () => {
+					await branch.get('.so-button__text').trigger('click')
+					expect(branch.attributes('aria-expanded')).toBe('true')
+				})
+				expect(branch.attributes('aria-selected')).toBe('true')
+
+				await branch.get('.so-tree-item__chevron').trigger('click')
+				expect(branch.attributes('aria-expanded')).toBe('false')
+			} finally {
+				wrapper.unmount()
+			}
+		},
+	)
+
+	it('highlights the last activated row in none mode independently of focus and selection', async () => {
+		const wrapper = mount(Tree, { attachTo: document.body, props: { items, mode: 'none' } })
+
+		try {
+			const branch = wrapper.get('[aria-expanded]')
+			await vi.waitFor(async () => {
+				await branch.get('.so-button__text').trigger('click')
+				expect(branch.attributes('aria-expanded')).toBe('true')
+			})
+
+			const child = wrapper.get('[role="group"] [role="treeitem"]')
+			await child.get('.so-tree-item__row').trigger('click')
+			await child.get('.so-tree-item__row').trigger('click')
+			await child.trigger('keydown', { key: 'ArrowUp' })
+
+			expect(branch.attributes('tabindex')).toBe('0')
+			expect(branch.attributes('data-highlighted')).not.toBe('true')
+			expect(child.attributes('data-highlighted')).toBe('true')
+			expect(wrapper.find('[aria-selected]').exists()).toBe(false)
+			expect(wrapper.emitted('update:value')).toBeUndefined()
+
+			await wrapper.setProps({ mode: 'single' })
+			expect(child.attributes('data-highlighted')).not.toBe('true')
+		} finally {
+			wrapper.unmount()
+		}
+	})
+
 	it('loads a deferred branch once and exposes loading state', async () => {
 		let complete: (value: typeof items) => void = () => {}
 		const loadChildren = vi.fn(

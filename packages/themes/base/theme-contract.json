@@ -4002,10 +4002,11 @@
       "name": "data-highlighted",
       "sources": [
         "packages/core/src/components/custom/code-block/code-block.class.ts",
+        "packages/core/src/components/custom/tree/collection/extensions/tree/tree.extension.ts",
         "packages/plugins/src/custom/list/item/item.plugin.ts"
       ],
-      "description": "Current keyboard or pointer navigation target.",
-      "scope": "ListBox/Select item row and Menu item root; CodeBlock logical source lines",
+      "description": "Current navigation target or last activated Tree item in none mode.",
+      "scope": "ListBox/Select item row and Menu item root; CodeBlock logical source lines; Tree item and row",
       "values": "true | false",
       "presence": "TDataset serializes false as \"false\"; null/undefined removes the attribute. See scope for the bound DOM node."
     },

@@ -33,7 +33,10 @@ const items: readonly ITreeNode[] = [
 ```
 
 - `expanded` contains the keys of open branches. Focus returns to an ancestor
-  when its branch closes around the focused item.
+  when its branch closes around the focused item. Click anywhere on a branch
+  row or press Enter on it to open or close the branch.
+- In `none` mode, activating a node highlights it until another node is
+  activated. It keeps its highlight on repeated clicks and leaves `value` alone.
 - In `single` mode, `value` is one key. In `multiple` mode, it is an array of
   independently selected keys. Closing a branch preserves its selected nodes.
 - `item-icon` supplies a node icon or avatar. `item-indicator-icon` replaces
