@@ -56,11 +56,11 @@ describe('Stepper indicators', () => {
 	})
 
 	it.each(['oren', 'oren-dark'])(
-		'%s scales markers and applies variant colors live',
+		'%s scales circular markers and applies variants to the current step',
 		async (scheme) => {
 			document.documentElement.dataset.soTheme = scheme
 			const size = ref<IStepperProps['size']>('normal')
-			const variant = ref<IStepperProps['variant']>('normal')
+			const variant = ref<IStepperProps['variant']>()
 			render(
 				defineComponent({
 					render: () =>
@@ -75,6 +75,23 @@ describe('Stepper indicators', () => {
 			await nextTick()
 
 			const activeIcon = iconOf(currentIcon)
+			const active = find(
+				'.so-stepper-item[data-selected="true"] .so-stepper-item__indicator',
+			)
+			const completed = find(
+				'.so-stepper-item[data-completed="true"] .so-stepper-item__indicator',
+			)
+			const pending = find('.so-stepper-item:last-child .so-stepper-item__indicator')
+			const fills = [completed, active, pending].map(
+				(marker) => getComputedStyle(marker).backgroundColor,
+			)
+
+			expect(new Set(fills).size).toBe(3)
+			for (const marker of [completed, active, pending]) {
+				expect(getComputedStyle(marker).borderRadius).toBe('50%')
+				expect(getComputedStyle(marker).backgroundColor).not.toBe('rgba(0, 0, 0, 0)')
+			}
+
 			const widths: number[] = []
 			const fontSizes: number[] = []
 
@@ -96,11 +113,18 @@ describe('Stepper indicators', () => {
 				variant.value = selected
 				await nextTick()
 
-				const color = getComputedStyle(activeIcon).color
+				const color = getComputedStyle(active).backgroundColor
 				colors.add(color)
-				expect(getComputedStyle(iconOf(completedIcon)).color).toBe(color)
+				expect(color).not.toBe(fills[0])
+				expect(getComputedStyle(completed).backgroundColor).toBe(fills[0])
+				expect(getComputedStyle(pending).backgroundColor).toBe(fills[2])
 			}
 			expect(colors.size).toBe(COMPONENT_VARIANTS.length)
+
+			variant.value = undefined
+			await nextTick()
+			expect(getComputedStyle(active).backgroundColor).toBe(fills[1])
+			expect(getComputedStyle(completed).backgroundColor).toBe(fills[0])
 		},
 	)
 })
