@@ -181,6 +181,19 @@ function write(next: unknown): void {
 
 watch(value, write)
 
+watch(
+	() => props.control.options,
+	(options) => {
+		if (
+			props.control.name === 'variant' &&
+			typeof value.value === 'string' &&
+			!options?.includes(value.value)
+		) {
+			value.value = props.control.default
+		}
+	},
+)
+
 onUnmounted(() => instance.value.destroy?.())
 
 /** Приёмники событий колонок — по одному на строку, а не на каждую отрисовку. */
