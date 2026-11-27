@@ -1,0 +1,77 @@
+@let aria = state()['aria'];
+@let branch = !!aria?.['aria-expanded'];
+@let expanded = aria?.['aria-expanded'] === 'true';
+@let loading = aria?.['aria-busy'] === 'true';
+@let indicatorSide = state()['dataset']?.[selectionIndicatorAttribute];
+@let scope = { item: ctrl, branch, expanded, loading };
+@if (row) {
+	<div
+		so-item-row
+		embedded="tree.row"
+		class="so-tree-item__row"
+		[size]="state()['size']"
+		[variant]="state()['variant']"
+		[so-attributes]="state()['dataset']"
+	>
+		<ng-container ngProjectAs="[slot=leading]">
+			<span
+				[class]="branch ? 'so-tree-item__toggle' : 'so-tree-item__spacer'"
+				aria-hidden="true"
+			>
+				@if (branch) {
+					@if (indicatorSlot) {
+						<ng-container
+							[ngTemplateOutlet]="indicatorSlot"
+							[ngTemplateOutletContext]="scope"
+						/>
+					} @else {
+						<span class="so-tree-item__chevron"></span>
+					}
+				}
+			</span>
+			@if (indicatorSide === 'start') {
+				<ng-container [ngTemplateOutlet]="selectionMark" />
+			}
+			<ng-container [ngTemplateOutlet]="iconSlot ?? null" [ngTemplateOutletContext]="scope" />
+		</ng-container>
+		@if (contentSlot) {
+			<ng-container
+				[ngTemplateOutlet]="contentSlot"
+				[ngTemplateOutletContext]="{
+					...scope,
+					text: state()['text'] ?? '',
+					selected: state()['selected'] ?? false,
+				}"
+			/>
+		} @else {
+			{{ state()['text'] }}
+		}
+		<ng-container ngProjectAs="[slot=trailing]">
+			@if (indicatorSide === 'end') {
+				<ng-container [ngTemplateOutlet]="selectionMark" />
+			}
+		</ng-container>
+	</div>
+} @else {
+	<span class="so-tree-item__accessible-name">{{ state()['text'] }}</span>
+}
+@if (expanded) {
+	<div role="group" class="so-tree-item__group">
+		<ng-container
+			[ngTemplateOutlet]="group ?? null"
+			[ngTemplateOutletContext]="{ $implicit: descendants }"
+		/>
+	</div>
+}
+<ng-template #selectionMark>
+	<span class="so-tree-item__selection-indicator" aria-hidden="true">
+		@if (state()['selected']) {
+			<svg
+				so-icon
+				embedded="tree.selection-indicator"
+				so-role-icon="check"
+				[size]="state()['size']"
+			></svg>
+		}
+	</span>
+</ng-template>

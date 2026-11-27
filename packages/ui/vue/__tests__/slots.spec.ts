@@ -103,6 +103,8 @@ import {
 	ToastsDescriptor,
 	ToastsItemDescriptor,
 	TooltipDescriptor,
+	TreeDescriptor,
+	TreeItemDescriptor,
 	VirtualDescriptor,
 } from '@soxa-ui/setup'
 import type { IComponentDescriptor } from '@soxa-ui/setup'
@@ -203,6 +205,8 @@ const DESCRIPTORS: Readonly<Record<string, () => IComponentDescriptor>> = {
 	// Тост — внутренняя часть менеджера, но слоты у него свои
 	'toasts/item/Item.vue': ToastsItemDescriptor,
 	'tooltip/Tooltip.vue': TooltipDescriptor,
+	'tree/Tree.vue': TreeDescriptor,
+	'tree/TreeRow.vue': TreeItemDescriptor,
 	'virtual/Virtual.vue': VirtualDescriptor,
 }
 

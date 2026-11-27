@@ -236,3 +236,4 @@ export type { SplitterProps, SplitterPanelProps, SplitterHandleProps } from './c
 export { Stepper, StepperItem, StepperContent } from './components/stepper'
 export type { StepperProps, StepperItemProps, StepperContentProps } from './components/stepper'
 export { Guide, type GuideProps } from './components/guide'
+export { Tree, type TreeProps } from './components/tree'

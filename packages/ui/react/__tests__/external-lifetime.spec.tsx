@@ -89,6 +89,8 @@ import {
 	createEngineToggleGroup,
 	createEngineCalendar,
 	createEngineListBox,
+	createEngineTree,
+	TTree,
 	createEngineMenu,
 	createEnginePagination,
 	createEngineRadioGroup,
@@ -155,6 +157,7 @@ import {
 	Textarea,
 	Toasts,
 	Tooltip,
+	Tree,
 	Virtual,
 } from '@soxa-ui/react'
 import { BreadcrumbsOverflowItem } from '../src/components/breadcrumbs/overflow-item'
@@ -1100,6 +1103,17 @@ const COMPONENTS: Readonly<Record<string, Readonly<Record<string, TCase>>>> = {
 		},
 	},
 	/** Открытая подсказка — как поповер: показ ведёт плагин наведения. */
+	Tree: {
+		'ctrl and external engine': () => {
+			const ctrl = new TTree()
+			const engine = createEngineTree([{ value: 'files', text: 'Files', children: ITEMS }])
+
+			return {
+				node: <Tree ctrl={ctrl} engine={engine} expanded={['files']} />,
+				buses: [ctrl.events, ...engineBuses(engine)],
+			}
+		},
+	},
 	Tooltip: {
 		'ctrl открыт': overCtrl(
 			() => new TTooltip({ open: true }),

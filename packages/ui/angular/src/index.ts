@@ -107,3 +107,4 @@ export {
 	TStepperItemComponent,
 	TStepperContentComponent,
 } from './components/stepper'
+export { TTreeComponent } from './components/tree'

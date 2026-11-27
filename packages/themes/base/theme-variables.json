@@ -414,7 +414,10 @@
     "--so-avatar-spacing-scale": "Optional component spacing multiplier for avatar; overrides its surface family size multiplier.",
     "--so-avatar-group-spacing-scale": "Optional component spacing multiplier for avatar-group; overrides its surface family size multiplier.",
     "--so-badge-spacing-scale": "Optional component spacing multiplier for badge; overrides its surface family size multiplier.",
-    "--so-alert-body-gap": "Optional final gap between the Alert title and description; otherwise uses the Toasts body-gap reference: 0.125rem at the normal message scale."
+    "--so-alert-body-gap": "Optional final gap between the Alert title and description; otherwise uses the Toasts body-gap reference: 0.125rem at the normal message scale.",
+    "--so-tree-spacing-unit": "Optional base unit for Tree row gaps, multiplied by the collection scale for the Tree size. Defaults to 0px.",
+    "--so-tree-indent": "Logical indentation of each visible level. Defaults to 1.25rem.",
+    "--so-tree-guide-color": "Color of the optional vertical branch guides. Falls back to the current color."
   },
   "theme-reads": {
     "--so-dir-sign": "Writing direction sign from the nearest dir: 1 for left-to-right, -1 for right-to-left. Written by the base layer dir rules; themes multiply mirroring transforms (scale, gradient angle or offset) by it.",

@@ -18,6 +18,7 @@ import {
 import type { TToastsItemType, TValuePayload } from '@soxa-ui/core'
 import {
 	COLLECTION_ITEMS,
+	TREE_PREVIEW_PROPS,
 	COLLECTION_MANY_ITEMS,
 	TABLE_COLUMNS,
 	TABLE_MANY_ROWS,
@@ -45,6 +46,7 @@ import {
 	DatePicker,
 	Dialog,
 	Guide,
+	Tree,
 	AlertDialog,
 	DragAndDrop,
 	Drawer,
@@ -621,6 +623,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 	'alert-dialog': (bind) => <AlertDialogPreview bind={bind} />,
 	dialog: (bind) => <DialogPreview bind={bind} />,
 	guide: (bind) => <GuidePreview bind={bind} />,
+	tree: (bind) => <Tree {...TREE_PREVIEW_PROPS} {...bind()} />,
 
 	// A button opens the drawer, which runs on its own state (see `DrawerPreview`)
 	drawer: (bind) => <DrawerPreview bind={bind} />,

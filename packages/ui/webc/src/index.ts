@@ -192,3 +192,4 @@ export type {
 	TStepperItemElementProps,
 	TStepperContentElementProps,
 } from './components/stepper'
+export { TTreeElement, type TTreeElementProps } from './components/tree'

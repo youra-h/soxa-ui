@@ -1,3 +1,4 @@
+import TreePreview from './TreePreview.svelte'
 import AlertPreview from './AlertPreview.svelte'
 import AvatarPreview from './AvatarPreview.svelte'
 import AvatarGroupPreview from './AvatarGroupPreview.svelte'
@@ -117,6 +118,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 	'alert-dialog': AlertDialogPreview,
 	dialog: DialogPreview,
 	guide: GuidePreview,
+	tree: TreePreview,
 	drawer: DrawerPreview,
 	toasts: ToastsPreview,
 }

@@ -66,6 +66,10 @@ import {
 	CalendarItemDescriptor,
 	ListBoxCollectionDescriptor,
 	ListBoxCollectionItemDescriptor,
+	TreeCollectionDescriptor,
+	TreeItemCollectionDescriptor,
+	TreeDescriptor,
+	TreeItemDescriptor,
 	ListBoxDescriptor,
 	ListBoxItemDescriptor,
 	MenuCheckboxItemDescriptor,
@@ -282,6 +286,11 @@ const COLLECTIONS: Readonly<Record<string, TCollectionKit>> = {
 				elevator,
 				source,
 			),
+	},
+	TreeItemCollectionDescriptor: {
+		list: (items) => mountList(TreeDescriptor(), TreeCollectionDescriptor(), items),
+		item: (elevator, source) =>
+			mountItem(TreeItemDescriptor(), TreeItemCollectionDescriptor(), elevator, source),
 	},
 	ListBoxCollectionItemDescriptor: {
 		list: (items) => mountList(ListBoxDescriptor(), ListBoxCollectionDescriptor(), items),

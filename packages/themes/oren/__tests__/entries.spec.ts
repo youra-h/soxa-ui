@@ -175,6 +175,11 @@ describe('общая часть — порядок слоёв до первог�
 })
 
 describe('часть пишет только в свои слои', () => {
+	it('keeps Tree styles in the Tree sheet', () => {
+		expect(sheetOf('parts/list-box.css')).not.toContain('.so-tree')
+		expect(sheetOf('parts/tree.css')).toContain('components.so.tree')
+	})
+
 	it.each(partFiles)('%s', (file) => {
 		const strays: string[] = []
 

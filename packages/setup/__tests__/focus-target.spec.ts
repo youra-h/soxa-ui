@@ -24,6 +24,7 @@ const ROOT_HOLDS_FOCUS = new Set([
 	'ToggleGroupItemDescriptor',
 	// Строка элемента коллекции — корень кнопки, фокус ставят на неё элементы
 	'ItemRowDescriptor',
+	'TreeItemDescriptor',
 	// Остановка сетки — сама таблица: фокус по ячейкам водит её плагин сетки
 	'TableDescriptor',
 ])
@@ -136,6 +137,7 @@ describe('узел фокуса у дескрипторов с TActionPlugin', (
 				'TagsDescriptor',
 				'TagsItemDescriptor',
 				'TextareaDescriptor',
+				'TreeDescriptor',
 			].sort(),
 		)
 	})

@@ -282,3 +282,4 @@ export { Guide, type GuideProps, type GuideEventProps } from './components/guide
 
 export { Stepper, StepperItem, StepperContent } from './components/stepper'
 export type { StepperProps, StepperItemProps, StepperContentProps } from './components/stepper'
+export { Tree, type TreeProps, type TreeAttributes, type TreeEventProps } from './components/tree'
