@@ -1,0 +1,154 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-tabs) {
+		--so-burg-tabs-marker: var(--so-burg-text);
+		--so-burg-tabs-radius: var(--so-tabs-radius, var(--so-radius));
+	}
+
+	:where(.so-tabs) > :where(.so-tabs-content) {
+		min-inline-size: 0;
+	}
+
+	:where(.so-tabs--variant-accent) {
+		--so-burg-tabs-marker: var(--so-burg-progress-accent);
+	}
+
+	:where(.so-tabs--variant-positive) {
+		--so-burg-tabs-marker: var(--so-burg-positive);
+	}
+
+	:where(.so-tabs--variant-caution) {
+		--so-burg-tabs-marker: var(--so-burg-caution);
+	}
+
+	:where(.so-tabs--variant-negative) {
+		--so-burg-tabs-marker: var(--so-burg-danger);
+	}
+
+	:where(.so-tabs:not(.so-code-block__tabs)) > :where(.so-tabs__bar) {
+		&:focus-visible {
+			outline: var(--so-burg-focus-ring);
+			outline-color: var(--so-burg-focus-edge);
+			outline-offset: -3px;
+		}
+
+		& > :where(.so-tabs__list) > :where(.so-tabs-item) {
+			& > :where(.so-button) {
+				--so-burg-button-fill: transparent;
+				--so-burg-button-ink: var(--so-burg-muted);
+				border-radius: var(--so-burg-tabs-radius);
+			}
+
+			&:where([data-selected='true']) > :where(.so-button) {
+				--so-burg-button-ink: var(--so-burg-tabs-marker);
+			}
+
+			& > :where(.so-button:focus-visible) {
+				outline-color: var(--so-burg-focus-edge);
+				outline-offset: -3px;
+			}
+		}
+	}
+
+	:where(.so-tabs--orientation-horizontal:not(.so-code-block__tabs))
+		> :where(.so-tabs__bar)
+		> :where(.so-tabs__list) {
+		min-inline-size: max-content;
+	}
+
+	:where(.so-tabs:not(.so-code-block__tabs, .so-tabs--view-contained, .so-tabs--view-outline)) {
+		&:where(.so-tabs--orientation-horizontal) > :where(.so-tabs__bar) {
+			border-block-end: 1px solid var(--so-burg-border);
+		}
+
+		&:where(.so-tabs--orientation-vertical) > :where(.so-tabs__bar) {
+			border-inline-end: 1px solid var(--so-burg-border);
+		}
+
+		&:where(.so-tabs--orientation-vertical.so-tabs--position-end) > :where(.so-tabs__bar) {
+			border-inline-start: 1px solid var(--so-burg-border);
+			border-inline-end-width: 0;
+		}
+
+		&
+			> :where(.so-tabs__bar)
+			> :where(.so-tabs__list)
+			> :where(.so-tabs-item[data-selected='true'])::after {
+			content: '';
+			position: absolute;
+			pointer-events: none;
+			background-color: var(--so-burg-tabs-marker);
+		}
+
+		&:where(.so-tabs--orientation-horizontal)
+			> :where(.so-tabs__bar)
+			> :where(.so-tabs__list)
+			> :where(.so-tabs-item[data-selected='true'])::after {
+			inset-inline: 0;
+			inset-block-end: 0;
+			block-size: 2px;
+		}
+
+		&:where(.so-tabs--orientation-vertical)
+			> :where(.so-tabs__bar)
+			> :where(.so-tabs__list)
+			> :where(.so-tabs-item[data-selected='true'])::after {
+			inset-block: 0;
+			inset-inline-end: 0;
+			inline-size: 2px;
+		}
+
+		&:where(.so-tabs--orientation-vertical.so-tabs--position-end)
+			> :where(.so-tabs__bar)
+			> :where(.so-tabs__list)
+			> :where(.so-tabs-item[data-selected='true'])::after {
+			inset-inline: 0 auto;
+		}
+	}
+
+	:where(.so-tabs--view-contained:not(.so-code-block__tabs)) > :where(.so-tabs__bar) {
+		padding: var(--so-spacing);
+		border-radius: var(--so-burg-tabs-radius);
+		background-color: var(--so-burg-subtle-surface);
+	}
+
+	:where(.so-tabs:is(.so-tabs--view-outline, .so-tabs--view-contained):not(.so-code-block__tabs))
+		> :where(.so-tabs__bar)
+		> :where(.so-tabs__list)
+		> :where(.so-tabs-item) {
+		border: 1px solid transparent;
+		border-radius: var(--so-burg-tabs-radius);
+	}
+
+	:where(.so-tabs--view-outline:not(.so-code-block__tabs))
+		> :where(.so-tabs__bar)
+		> :where(.so-tabs__list)
+		> :where(.so-tabs-item) {
+		border-color: var(--so-burg-border);
+	}
+
+	:where(.so-tabs:is(.so-tabs--view-outline, .so-tabs--view-contained):not(.so-code-block__tabs))
+		> :where(.so-tabs__bar)
+		> :where(.so-tabs__list)
+		> :where(.so-tabs-item[data-selected='true']) {
+		border-color: var(--so-burg-tabs-marker);
+		background-color: var(--so-burg-surface);
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-tabs:not(.so-code-block__tabs)) > :where(.so-tabs__bar) {
+			&:focus-visible,
+			& > :where(.so-tabs__list) > :where(.so-tabs-item) > :where(.so-button:focus-visible) {
+				outline-color: Highlight;
+			}
+
+			& > :where(.so-tabs__list) > :where(.so-tabs-item[data-selected='true']) {
+				border-color: Highlight;
+
+				&::after {
+					forced-color-adjust: none;
+					background-color: Highlight;
+				}
+			}
+		}
+	}
+}

@@ -65,6 +65,7 @@
 	--so-switch-height-2xl: 1.8125rem;
 
 	--so-toggle-group-bleed: 3px;
+	--so-tabs-gap: var(--so-spacing);
 
 	--so-slider-thumb-size-normal: 1.0625rem;
 	--so-slider-thumb-size-sm: calc(var(--so-slider-thumb-size-normal) - 0.125rem);
