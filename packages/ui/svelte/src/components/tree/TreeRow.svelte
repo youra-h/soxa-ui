@@ -21,7 +21,7 @@
 	const binding = setupTreeRow(() => ({ ctrl }), mountId, () => {})
 	const state = binding.state
 	const CHECK = roleIcon('check')
-	const indicatorSide = $derived(state.dataset?.[`data-${LIST_INDICATOR_ATTRIBUTE}`])
+	const indicatorSide = () => state.dataset?.[`data-${LIST_INDICATOR_ATTRIBUTE}`]
 
 	function scope(): TreeIconScope {
 		return {
@@ -62,7 +62,7 @@
 						{#if indicator}{@render indicator(scope())}{:else}<span class="so-tree-item__chevron"></span>{/if}
 					{/if}
 				</span>
-				{#if indicatorSide === 'start'}{@render selectionMark()}{/if}
+				{#if indicatorSide() === 'start'}{@render selectionMark()}{/if}
 				{@render icon?.(scope())}
 			{/snippet}
 			{#if item}
@@ -71,7 +71,7 @@
 				{state.text}
 			{/if}
 			{#snippet trailing()}
-				{#if indicatorSide === 'end'}{@render selectionMark()}{/if}
+				{#if indicatorSide() === 'end'}{@render selectionMark()}{/if}
 			{/snippet}
 		</ItemRow>
 	{:else}

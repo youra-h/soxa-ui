@@ -1,0 +1,8 @@
+@if (state()['active']) {
+	@if (slot('default'); as content) {
+		<ng-container [ngTemplateOutlet]="content" />
+	} @else {
+		<ng-content />
+	}
+}
+<ng-content select="ng-template[slot]" />

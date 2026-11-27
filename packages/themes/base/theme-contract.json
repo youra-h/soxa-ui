@@ -2998,61 +2998,131 @@
     },
     {
       "name": "so-stepper__list",
-      "sources": ["packages/ui/vue/src/components/stepper/Stepper.vue"],
+      "sources": [
+        "packages/ui/angular/src/components/stepper/stepper.component.html",
+        "packages/ui/react/src/components/stepper/Stepper.tsx",
+        "packages/ui/solid/src/components/stepper/Stepper.tsx",
+        "packages/ui/svelte/src/components/stepper/Stepper.svelte",
+        "packages/ui/vue/src/components/stepper/Stepper.vue",
+        "packages/ui/webc/src/components/stepper/stepper.template.ts"
+      ],
       "description": "Ordered list of the process steps.",
       "scope": "so-stepper"
     },
     {
       "name": "so-stepper-item__body",
-      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "sources": [
+        "packages/ui/angular/src/components/stepper/item/stepper-item.component.html",
+        "packages/ui/react/src/components/stepper/item/Item.tsx",
+        "packages/ui/solid/src/components/stepper/item/Item.tsx",
+        "packages/ui/svelte/src/components/stepper/item/Item.svelte",
+        "packages/ui/vue/src/components/stepper/item/Item.vue",
+        "packages/ui/webc/src/components/stepper/item/stepper-item.template.ts"
+      ],
       "description": "Wrapper around the label and description.",
       "scope": "so-stepper"
     },
     {
       "name": "so-stepper-item__description",
-      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "sources": [
+        "packages/ui/angular/src/components/stepper/item/stepper-item.component.html",
+        "packages/ui/react/src/components/stepper/item/Item.tsx",
+        "packages/ui/solid/src/components/stepper/item/Item.tsx",
+        "packages/ui/svelte/src/components/stepper/item/Item.svelte",
+        "packages/ui/vue/src/components/stepper/item/Item.vue",
+        "packages/ui/webc/src/components/stepper/item/stepper-item.template.ts"
+      ],
       "description": "Optional description under the name.",
       "scope": "so-stepper"
     },
     {
       "name": "so-stepper-item__details",
-      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "sources": [
+        "packages/ui/angular/src/components/stepper/item/stepper-item.component.html",
+        "packages/ui/react/src/components/stepper/item/Item.tsx",
+        "packages/ui/solid/src/components/stepper/item/Item.tsx",
+        "packages/ui/svelte/src/components/stepper/item/Item.svelte",
+        "packages/ui/vue/src/components/stepper/item/Item.vue",
+        "packages/ui/webc/src/components/stepper/item/stepper-item.template.ts"
+      ],
       "description": "Optional metadata or controls outside the header.",
       "scope": "so-stepper"
     },
     {
       "name": "so-stepper-item__indicator",
-      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "sources": [
+        "packages/ui/angular/src/components/stepper/item/stepper-item.component.html",
+        "packages/ui/react/src/components/stepper/item/Item.tsx",
+        "packages/ui/solid/src/components/stepper/item/Item.tsx",
+        "packages/ui/svelte/src/components/stepper/item/Item.svelte",
+        "packages/ui/vue/src/components/stepper/item/Item.vue",
+        "packages/ui/webc/src/components/stepper/item/stepper-item.template.ts"
+      ],
       "description": "Decorative slot for the default status icon, a step number, or custom markup.",
       "scope": "so-stepper"
     },
     {
       "name": "so-stepper-item__label",
-      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "sources": [
+        "packages/ui/angular/src/components/stepper/item/stepper-item.component.html",
+        "packages/ui/react/src/components/stepper/item/Item.tsx",
+        "packages/ui/solid/src/components/stepper/item/Item.tsx",
+        "packages/ui/svelte/src/components/stepper/item/Item.svelte",
+        "packages/ui/vue/src/components/stepper/item/Item.vue",
+        "packages/ui/webc/src/components/stepper/item/stepper-item.template.ts"
+      ],
       "description": "Visible name of the step.",
       "scope": "so-stepper"
     },
     {
       "name": "so-stepper-item__leading",
-      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "sources": [
+        "packages/ui/angular/src/components/stepper/item/stepper-item.component.html",
+        "packages/ui/react/src/components/stepper/item/Item.tsx",
+        "packages/ui/solid/src/components/stepper/item/Item.tsx",
+        "packages/ui/svelte/src/components/stepper/item/Item.svelte",
+        "packages/ui/vue/src/components/stepper/item/Item.vue",
+        "packages/ui/webc/src/components/stepper/item/stepper-item.template.ts"
+      ],
       "description": "Optional metadata preceding the header.",
       "scope": "so-stepper"
     },
     {
       "name": "so-stepper-item__separator",
-      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "sources": [
+        "packages/ui/angular/src/components/stepper/item/stepper-item.component.html",
+        "packages/ui/react/src/components/stepper/item/Item.tsx",
+        "packages/ui/solid/src/components/stepper/item/Item.tsx",
+        "packages/ui/svelte/src/components/stepper/item/Item.svelte",
+        "packages/ui/vue/src/components/stepper/item/Item.vue",
+        "packages/ui/webc/src/components/stepper/item/stepper-item.template.ts"
+      ],
       "description": "Decorative connector from the current item to its successor.",
       "scope": "so-stepper"
     },
     {
       "name": "so-stepper-item__step-icon",
-      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "sources": [
+        "packages/ui/angular/src/components/stepper/item/stepper-item.component.html",
+        "packages/ui/react/src/components/stepper/item/Item.tsx",
+        "packages/ui/solid/src/components/stepper/item/Item.tsx",
+        "packages/ui/svelte/src/components/stepper/item/Item.svelte",
+        "packages/ui/vue/src/components/stepper/item/Item.vue",
+        "packages/ui/webc/src/components/stepper/item/stepper-item.template.ts"
+      ],
       "description": "Fallback icon for the current step. The base layer aligns it with orientation and writing direction.",
       "scope": "so-stepper"
     },
     {
       "name": "so-stepper-item__trigger",
-      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "sources": [
+        "packages/ui/angular/src/components/stepper/item/stepper-item.component.html",
+        "packages/ui/react/src/components/stepper/item/Item.tsx",
+        "packages/ui/solid/src/components/stepper/item/Item.tsx",
+        "packages/ui/svelte/src/components/stepper/item/Item.svelte",
+        "packages/ui/vue/src/components/stepper/item/Item.vue",
+        "packages/ui/webc/src/components/stepper/item/stepper-item.template.ts"
+      ],
       "description": "Native button or passive header identifying the step.",
       "scope": "so-stepper"
     },

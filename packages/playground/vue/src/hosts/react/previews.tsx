@@ -1,4 +1,4 @@
-import { ALERT_SAMPLE } from '@soxa-ui/playground-shared'
+import { STEPPER_ITEMS, ALERT_SAMPLE } from '@soxa-ui/playground-shared'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -51,6 +51,7 @@ import {
 	CodeBlock,
 	FileUpload,
 	Splitter,
+	Stepper,
 	Label,
 	ListBox,
 	Menu,
@@ -428,6 +429,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 			{ALERT_SAMPLE.message}
 		</Alert>
 	),
+	stepper: (bind) => <Stepper items={STEPPER_ITEMS} {...bind} />,
 	splitter: (bind) => (
 		<Splitter {...bind} className="pg-splitter-preview">
 			<Splitter.Panel panel="files">

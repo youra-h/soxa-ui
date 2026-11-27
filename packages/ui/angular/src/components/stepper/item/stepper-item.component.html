@@ -1,0 +1,74 @@
+@if (slot('leading'); as leading) {
+	<div class="so-stepper-item__leading">
+		<ng-container [ngTemplateOutlet]="leading" [ngTemplateOutletContext]="scope" />
+	</div>
+}
+@if (state()['stepper_interactive']) {
+	<button
+		#control
+		type="button"
+		class="so-stepper-item__trigger"
+		[so-attributes]="state()['aria']"
+		[disabled]="state()['stepper_canActivate'] !== true"
+		(click)="activate($event)"
+	>
+		<ng-container [ngTemplateOutlet]="body" />
+	</button>
+} @else {
+	<span #control class="so-stepper-item__trigger" [so-attributes]="state()['aria']">
+		<ng-container [ngTemplateOutlet]="body" />
+	</span>
+}
+@if (state()['stepper_hasSeparator']) {
+	<span class="so-stepper-item__separator" aria-hidden="true">
+		@if (slot('separator'); as separator) {
+			<ng-container [ngTemplateOutlet]="separator" [ngTemplateOutletContext]="scope" />
+		}
+	</span>
+}
+@if (slot('details'); as details) {
+	<div class="so-stepper-item__details">
+		<ng-container [ngTemplateOutlet]="details" [ngTemplateOutletContext]="scope" />
+	</div>
+}
+<ng-content select="ng-template[slot]" />
+<ng-template #body>
+	<span class="so-stepper-item__indicator" aria-hidden="true">
+		@if (slot('indicator'); as indicator) {
+			<ng-container [ngTemplateOutlet]="indicator" [ngTemplateOutletContext]="scope" />
+		} @else if (state()['active']) {
+			<svg
+				so-icon
+				embedded="stepper.step-icon"
+				class="so-stepper-item__step-icon"
+				[so-role-icon]="stepIcon"
+				[size]="state()['size']"
+			></svg>
+		} @else if (state()['error'] || state()['completed']) {
+			<svg
+				so-icon
+				embedded="stepper.status-icon"
+				[so-role-icon]="state()['error'] ? 'error' : 'check'"
+				[size]="state()['size']"
+			></svg>
+		} @else {
+			{{ state()['stepper_number'] }}
+		}
+	</span>
+	<span class="so-stepper-item__body">
+		<span class="so-stepper-item__label">
+			@if (slot('default'); as label) {
+				<ng-container [ngTemplateOutlet]="label" [ngTemplateOutletContext]="scope" />
+			} @else {
+				<ng-content>{{ state()['text'] }}</ng-content>
+			}
+		</span>
+		@if (slot('subtitle'); as subtitle) {
+			<span class="so-stepper-item__description">
+				<ng-container [ngTemplateOutlet]="subtitle" [ngTemplateOutletContext]="scope" />
+			</span>
+		} @else if (state()['description']) {
+			<span class="so-stepper-item__description">{{ state()['description'] }}</span>
+		}
+	</span>
+</ng-template>

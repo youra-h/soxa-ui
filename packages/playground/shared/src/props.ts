@@ -635,6 +635,12 @@ const OPTIONS: Record<string, Record<string, readonly string[]>> = {
 	frame: { strategy: FRAME_STRATEGIES },
 }
 
+export const STEPPER_ITEMS = [
+	{ value: 'cart', text: 'Review', completed: true },
+	{ value: 'shipping', text: 'Shipping' },
+	{ value: 'payment', text: 'Payment' },
+]
+
 const SPLITTER_PANELS = [
 	{ id: 'files', defaultSize: 25, minSize: 15, maxSize: 45 },
 	{ id: 'editor', defaultSize: 50, minSize: 20, maxSize: 75 },
@@ -664,6 +670,7 @@ const SPLITTER_PANELS = [
  * Icon её снимает `NON_EDITABLE_BY_COMPONENT`), а глиф — компонент фреймворка.
  */
 export const PREVIEW_PROPS: Readonly<Record<string, Readonly<Record<string, unknown>>>> = {
+	stepper: { value: 'shipping' },
 	guide: { steps: GUIDE_STEPS, backdrop: 'dim' },
 	'toggle-button': { text: 'Жирный' },
 	'toggle-group': {

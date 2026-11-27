@@ -10,6 +10,7 @@ import {
 	SelectItemsPreview,
 	SelectPreview,
 	TablePreview,
+	StepperPreview,
 	TabsPreview,
 	TagsPreview,
 } from './collections'
@@ -117,6 +118,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 	'date-picker': { template: DatePickerPreview },
 	tags: { template: TagsPreview },
 	table: { template: TablePreview },
+	stepper: { template: StepperPreview },
 	tabs: { template: TabsPreview },
 	accordion: { template: AccordionPreview },
 	scroller: { template: ScrollerPreview },

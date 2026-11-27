@@ -1,4 +1,4 @@
-import { ALERT_SAMPLE } from '@soxa-ui/playground-shared'
+import { STEPPER_ITEMS, ALERT_SAMPLE } from '@soxa-ui/playground-shared'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -467,16 +467,7 @@ const layer =
 		h(ComponentView, bind, { default: () => label })
 
 export const PREVIEWS: Record<string, TPreview> = {
-	stepper: (bind) =>
-		h(Stepper, {
-			items: [
-				{ value: 'cart', text: 'Review', completed: true },
-				{ value: 'shipping', text: 'Shipping' },
-				{ value: 'payment', text: 'Payment' },
-			],
-			value: 'shipping',
-			...bind,
-		}),
+	stepper: (bind) => h(Stepper, { items: STEPPER_ITEMS, ...bind }),
 	// The label is the `text` prop from the preview props, not a slot: a given
 	// `default` slot overrides the prop, and the `text` row would change nothing
 	// visible

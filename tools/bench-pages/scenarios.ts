@@ -672,6 +672,11 @@ export const SCENARIOS: Record<string, TScenario> = {
 
 		return (await press(tabs[1])) + (await press(tabs[2]))
 	}),
+	stepper: each('.so-stepper', async (copy) => {
+		const steps = copy.querySelectorAll('button.so-stepper-item__trigger')
+
+		return (await press(steps[0])) + (await press(steps[2]))
+	}),
 	tags: each('.so-tags', async (copy) => {
 		const tags = copy.querySelectorAll('[role="listitem"]')
 

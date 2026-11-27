@@ -101,4 +101,10 @@ export {
 	TSplitterHandleComponent,
 } from './components/splitter'
 export { TGuideComponent } from './components/guide'
+
+export {
+	TStepperComponent,
+	TStepperItemComponent,
+	TStepperContentComponent,
+} from './components/stepper'
 export { TTreeComponent } from './components/tree'

@@ -52,13 +52,12 @@ describe('mandatory axe inventory', () => {
 		expect(auditInventoryErrors(host, ids, 'vue')).toEqual([])
 		expect(auditInventoryErrors(host, [...ids, 'new-component'], 'vue')).not.toEqual([])
 	})
-	it('requires the Stepper preview in Vue', () => {
+	it('requires the Stepper preview in every adapter', () => {
 		const withoutStepper = { ...host, previews: host.previews.filter((id) => id !== 'stepper') }
-		expect(auditInventoryErrors(withoutStepper, ids, 'vue')).toEqual([
-			'stepper/current-step: missing consumer stepper',
-		])
-		for (const adapter of A11Y_ADAPTERS.filter((id) => id !== 'vue'))
-			expect(auditInventoryErrors(withoutStepper, ids, adapter)).toEqual([])
+		for (const adapter of A11Y_ADAPTERS)
+			expect(auditInventoryErrors(withoutStepper, ids, adapter)).toEqual([
+				'stepper/current-step: missing consumer stepper',
+			])
 	})
 	it('rejects a missing consumer or named fixture in a host', () => {
 		expect(

@@ -1436,6 +1436,88 @@
       }
     },
     {
+      "id": "stepper-content",
+      "name": "StepperContent",
+      "contract": "stepper-content",
+      "sources": [
+        {
+          "role": "descriptor",
+          "descriptor": "StepperContentDescriptor",
+          "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts"
+        }
+      ],
+      "frameworks": {
+        "vue": { "exportName": "StepperContent" },
+        "react": { "exportName": "StepperContent" },
+        "angular": {
+          "exportName": "TStepperContentComponent",
+          "selector": "div[so-stepper-content], [so-stepper-content]"
+        },
+        "solid": { "exportName": "StepperContent" },
+        "svelte": { "exportName": "StepperContent" },
+        "webc": {
+          "exportName": "TStepperContentElement",
+          "selector": "div[is=\"so-stepper-content\"]"
+        }
+      }
+    },
+    {
+      "id": "stepper-item",
+      "name": "StepperItem",
+      "contract": "stepper-item",
+      "sources": [
+        {
+          "role": "descriptor",
+          "descriptor": "StepperItemDescriptor",
+          "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts"
+        },
+        {
+          "role": "facade",
+          "descriptor": "StepperCollectionItemDescriptor",
+          "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts"
+        }
+      ],
+      "frameworks": {
+        "vue": { "exportName": "StepperItem" },
+        "react": { "exportName": "StepperItem" },
+        "angular": {
+          "exportName": "TStepperItemComponent",
+          "selector": "li[so-stepper-item], [so-stepper-item]"
+        },
+        "solid": { "exportName": "StepperItem" },
+        "svelte": { "exportName": "StepperItem" },
+        "webc": { "exportName": "TStepperItemElement", "selector": "li[is=\"so-stepper-item\"]" }
+      }
+    },
+    {
+      "id": "stepper",
+      "name": "Stepper",
+      "contract": "stepper",
+      "sources": [
+        {
+          "role": "descriptor",
+          "descriptor": "StepperDescriptor",
+          "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts"
+        },
+        {
+          "role": "facade",
+          "descriptor": "StepperCollectionDescriptor",
+          "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts"
+        }
+      ],
+      "frameworks": {
+        "vue": { "exportName": "Stepper" },
+        "react": { "exportName": "Stepper" },
+        "angular": {
+          "exportName": "TStepperComponent",
+          "selector": "div[so-stepper], [so-stepper]"
+        },
+        "solid": { "exportName": "Stepper" },
+        "svelte": { "exportName": "Stepper" },
+        "webc": { "exportName": "TStepperElement", "selector": "div[is=\"so-stepper\"]" }
+      }
+    },
+    {
       "id": "switch",
       "name": "Switch",
       "contract": "switch",
@@ -1862,55 +1944,6 @@
         "svelte": { "exportName": "Virtual" },
         "webc": { "exportName": "TVirtualElement" }
       }
-    },
-    {
-      "id": "stepper-content",
-      "name": "StepperContent",
-      "contract": "stepper-content",
-      "sources": [
-        {
-          "role": "descriptor",
-          "descriptor": "StepperContentDescriptor",
-          "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts"
-        }
-      ],
-      "frameworks": { "vue": { "exportName": "StepperContent" } }
-    },
-    {
-      "id": "stepper-item",
-      "name": "StepperItem",
-      "contract": "stepper-item",
-      "sources": [
-        {
-          "role": "descriptor",
-          "descriptor": "StepperItemDescriptor",
-          "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts"
-        },
-        {
-          "role": "facade",
-          "descriptor": "StepperCollectionItemDescriptor",
-          "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts"
-        }
-      ],
-      "frameworks": { "vue": { "exportName": "StepperItem" } }
-    },
-    {
-      "id": "stepper",
-      "name": "Stepper",
-      "contract": "stepper",
-      "sources": [
-        {
-          "role": "descriptor",
-          "descriptor": "StepperDescriptor",
-          "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts"
-        },
-        {
-          "role": "facade",
-          "descriptor": "StepperCollectionDescriptor",
-          "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts"
-        }
-      ],
-      "frameworks": { "vue": { "exportName": "Stepper" } }
     }
   ],
   "contracts": {
@@ -40717,6 +40750,2090 @@
         }
       }
     },
+    "stepper-content": {
+      "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts",
+      "props": [
+        {
+          "name": "ctrl",
+          "canonicalName": "ctrl",
+          "type": "import(\"@soxa-ui/core\").TStepperContent | undefined",
+          "declaredType": "TInstance",
+          "required": false,
+          "description": "Готовый инстанс ядра вместо собранного по пропсам. Только сам объект:\nреактивная обёртка фреймворка ему не нужна — ядро шлёт события само.",
+          "hasDefault": false
+        },
+        {
+          "name": "embedded",
+          "canonicalName": "embedded",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "description": "Имя места, если компонент — деталь разметки другого компонента soxa\n(`tags.close`). Ставит разметка библиотеки, а не потребитель: по нему\n`usePlugins` со `scope: 'own'` пропускает вложенный компонент.",
+          "hasDefault": false
+        },
+        {
+          "name": "pluginProps",
+          "canonicalName": "pluginProps",
+          "type": "import(\"@soxa-ui/setup\").TExternalPluginProps | undefined",
+          "declaredType": "TExternalPluginProps",
+          "required": false,
+          "description": "Значения пропсов плагинов, поставленных снаружи (`usePlugins`,\n`bundle.use`), по имени пропа: `{ timer_ms: 500 }`. Типы ключей\nприложение дописывает в `IExternalPluginProps`.",
+          "hasDefault": false
+        },
+        {
+          "name": "rendered",
+          "canonicalName": "rendered",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Отрисован ли компонент (аналог v-if)",
+          "hasDefault": true,
+          "default": "true"
+        },
+        {
+          "name": "visible",
+          "canonicalName": "visible",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Виден ли компонент (логическая видимость)",
+          "hasDefault": true,
+          "default": "true"
+        },
+        {
+          "name": "tag",
+          "canonicalName": "tag",
+          "type": "string | object | undefined",
+          "declaredType": "string | object",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"div\""
+        },
+        {
+          "name": "direction",
+          "canonicalName": "direction",
+          "type": "import(\"@soxa-ui/core\").TDirection | undefined",
+          "declaredType": "TDirection",
+          "values": ["ltr", "rtl", "inherit"],
+          "required": false,
+          "description": "Направление письма; по умолчанию `'inherit'` — наследуется от предка",
+          "hasDefault": true,
+          "default": "\"inherit\""
+        },
+        {
+          "name": "value",
+          "canonicalName": "value",
+          "type": "string | number | undefined",
+          "declaredType": "string | number",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"\""
+        }
+      ],
+      "events": [
+        {
+          "name": "bundle:create",
+          "type": "(bundle: unknown) => void",
+          "description": "Плагины компонента созданы при монтировании; аргумент — их bundle."
+        },
+        {
+          "name": "plugin:event",
+          "type": "(event: import(\"@soxa-ui/core\").TPluginEvent) => void",
+          "description": "Событие внешнего плагина: полное имя (`timer:tick`) и аргументы."
+        },
+        { "name": "show", "type": "() => void", "description": "show" },
+        { "name": "hide", "type": "() => void", "description": "hide" },
+        {
+          "name": "show:before",
+          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
+          "description": "show:before — вызов e.preventDefault() отменяет показ"
+        },
+        {
+          "name": "hide:before",
+          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
+          "description": "hide:before — вызов e.preventDefault() отменяет скрытие"
+        },
+        {
+          "name": "ready",
+          "type": "(value: boolean) => void",
+          "description": "Component availability changed: true when the instance has an announced\nroot DOM element, false when that root is removed or replaced.\nDoes not wait for other plugins' DOM handlers or asynchronous work."
+        },
+        {
+          "name": "change:rendered",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
+          "description": "change:rendered"
+        },
+        {
+          "name": "change:visible",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
+          "description": "change:visible"
+        },
+        {
+          "name": "change:tag",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | object>) => void",
+          "description": "change:tag"
+        },
+        {
+          "name": "change:direction",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TDirection>) => void",
+          "description": "change:direction"
+        },
+        {
+          "name": "change:value",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | number>) => void"
+        },
+        { "name": "element:ready", "type": "(element: Element) => void" },
+        { "name": "element:removed", "type": "() => void" }
+      ],
+      "slots": [
+        {
+          "name": "default",
+          "description": "Content of the corresponding active step",
+          "scope": {}
+        }
+      ],
+      "frameworks": {
+        "vue": {
+          "props": {
+            "ctrl": ":ctrl",
+            "embedded": ":embedded",
+            "pluginProps": ":pluginProps",
+            "rendered": ":rendered",
+            "visible": ":visible",
+            "tag": ":tag",
+            "direction": ":direction",
+            "value": ":value"
+          },
+          "events": {
+            "bundle:create": "@bundle:create",
+            "plugin:event": "@plugin:event",
+            "show": "@show",
+            "hide": "@hide",
+            "show:before": "@show:before",
+            "hide:before": "@hide:before",
+            "ready": "@ready",
+            "change:rendered": "@change:rendered",
+            "change:visible": "@change:visible",
+            "change:tag": "@change:tag",
+            "change:direction": "@change:direction",
+            "change:value": "@change:value",
+            "element:ready": "@element:ready",
+            "element:removed": "@element:removed"
+          },
+          "models": {
+            "rendered": "@update:rendered",
+            "visible": "@update:visible",
+            "tag": "@update:tag",
+            "direction": "@update:direction",
+            "value": "@update:value"
+          },
+          "slots": { "default": { "name": "default", "syntax": "<template #default>" } }
+        },
+        "react": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "value": "value"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:value": "onChangeValue",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved"
+          },
+          "models": {},
+          "slots": { "default": { "name": "children", "syntax": "children" } }
+        },
+        "angular": {
+          "props": {
+            "ctrl": "[ctrl]",
+            "embedded": "[embedded]",
+            "pluginProps": "[pluginProps]",
+            "rendered": "[rendered]",
+            "visible": "[visible]",
+            "direction": "[direction]",
+            "value": "[value]"
+          },
+          "events": {
+            "bundle:create": "(soBundleCreate)",
+            "plugin:event": "(soPluginEvent)",
+            "show": "(soShow)",
+            "hide": "(soHide)",
+            "show:before": "(soShowBefore)",
+            "hide:before": "(soHideBefore)",
+            "ready": "(soReady)",
+            "change:rendered": "(soChangeRendered)",
+            "change:visible": "(soChangeVisible)",
+            "change:tag": "(soChangeTag)",
+            "change:direction": "(soChangeDirection)",
+            "change:value": "(soChangeValue)",
+            "element:ready": "(soElementReady)",
+            "element:removed": "(soElementRemoved)"
+          },
+          "models": {
+            "rendered": "(renderedChange)",
+            "visible": "(visibleChange)",
+            "tag": "(tagChange)",
+            "direction": "(directionChange)",
+            "value": "(valueChange)"
+          },
+          "slots": { "default": { "name": "default", "syntax": "<ng-content>" } }
+        },
+        "solid": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "value": "value"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:value": "onChangeValue",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved"
+          },
+          "models": {},
+          "slots": { "default": { "name": "children", "syntax": "children" } }
+        },
+        "svelte": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "value": "value"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:value": "onChangeValue",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved"
+          },
+          "models": {},
+          "slots": { "default": { "name": "children", "syntax": "{#snippet children()}" } }
+        },
+        "webc": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "value": "value"
+          },
+          "events": {
+            "bundle:create": "addEventListener('so:bundle:create', handler)",
+            "plugin:event": "addEventListener('so:plugin:event', handler)",
+            "show": "addEventListener('so:show', handler)",
+            "hide": "addEventListener('so:hide', handler)",
+            "show:before": "addEventListener('so:show:before', handler)",
+            "hide:before": "addEventListener('so:hide:before', handler)",
+            "ready": "addEventListener('so:ready', handler)",
+            "change:rendered": "addEventListener('so:change:rendered', handler)",
+            "change:visible": "addEventListener('so:change:visible', handler)",
+            "change:tag": "addEventListener('so:change:tag', handler)",
+            "change:direction": "addEventListener('so:change:direction', handler)",
+            "change:value": "addEventListener('so:change:value', handler)",
+            "element:ready": "addEventListener('so:element:ready', handler)",
+            "element:removed": "addEventListener('so:element:removed', handler)"
+          },
+          "models": {},
+          "slots": { "default": { "name": "default", "syntax": "(unnamed slot)" } }
+        }
+      }
+    },
+    "stepper-item": {
+      "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts",
+      "props": [
+        {
+          "name": "ctrl",
+          "canonicalName": "ctrl",
+          "type": "import(\"@soxa-ui/core\").TStepperItem | undefined",
+          "declaredType": "TInstance",
+          "required": false,
+          "description": "Готовый инстанс ядра вместо собранного по пропсам. Только сам объект:\nреактивная обёртка фреймворка ему не нужна — ядро шлёт события само.",
+          "hasDefault": false
+        },
+        {
+          "name": "embedded",
+          "canonicalName": "embedded",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "description": "Имя места, если компонент — деталь разметки другого компонента soxa\n(`tags.close`). Ставит разметка библиотеки, а не потребитель: по нему\n`usePlugins` со `scope: 'own'` пропускает вложенный компонент.",
+          "hasDefault": false
+        },
+        {
+          "name": "pluginProps",
+          "canonicalName": "pluginProps",
+          "type": "import(\"@soxa-ui/setup\").TExternalPluginProps | undefined",
+          "declaredType": "TExternalPluginProps",
+          "required": false,
+          "description": "Значения пропсов плагинов, поставленных снаружи (`usePlugins`,\n`bundle.use`), по имени пропа: `{ timer_ms: 500 }`. Типы ключей\nприложение дописывает в `IExternalPluginProps`.",
+          "hasDefault": false
+        },
+        {
+          "name": "rendered",
+          "canonicalName": "rendered",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Отрисован ли компонент (аналог v-if)",
+          "hasDefault": true,
+          "default": "true"
+        },
+        {
+          "name": "visible",
+          "canonicalName": "visible",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Виден ли компонент (логическая видимость)",
+          "hasDefault": true,
+          "default": "true"
+        },
+        {
+          "name": "tag",
+          "canonicalName": "tag",
+          "type": "string | object | undefined",
+          "declaredType": "string | object",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"li\""
+        },
+        {
+          "name": "direction",
+          "canonicalName": "direction",
+          "type": "import(\"@soxa-ui/core\").TDirection | undefined",
+          "declaredType": "TDirection",
+          "values": ["ltr", "rtl", "inherit"],
+          "required": false,
+          "description": "Направление письма; по умолчанию `'inherit'` — наследуется от предка",
+          "hasDefault": true,
+          "default": "\"inherit\""
+        },
+        {
+          "name": "disabled",
+          "canonicalName": "disabled",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "focused",
+          "canonicalName": "focused",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "value",
+          "canonicalName": "value",
+          "type": "string | number | undefined",
+          "declaredType": "TValue",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"\""
+        },
+        {
+          "name": "name",
+          "canonicalName": "name",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"\""
+        },
+        {
+          "name": "text",
+          "canonicalName": "text",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"\""
+        },
+        {
+          "name": "description",
+          "canonicalName": "description",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"\""
+        },
+        {
+          "name": "completed",
+          "canonicalName": "completed",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "error",
+          "canonicalName": "error",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "aria_label",
+          "canonicalName": "aria:label",
+          "type": "string | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "aria_labelledBy",
+          "canonicalName": "aria:labelledBy",
+          "type": "string | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "aria_describedBy",
+          "canonicalName": "aria:describedBy",
+          "type": "string | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "initial",
+          "canonicalName": "initial",
+          "type": "number | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        }
+      ],
+      "events": [
+        {
+          "name": "bundle:create",
+          "type": "(bundle: unknown) => void",
+          "description": "Плагины компонента созданы при монтировании; аргумент — их bundle."
+        },
+        {
+          "name": "plugin:event",
+          "type": "(event: import(\"@soxa-ui/core\").TPluginEvent) => void",
+          "description": "Событие внешнего плагина: полное имя (`timer:tick`) и аргументы."
+        },
+        { "name": "show", "type": "() => void", "description": "show" },
+        { "name": "hide", "type": "() => void", "description": "hide" },
+        {
+          "name": "show:before",
+          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
+          "description": "show:before — вызов e.preventDefault() отменяет показ"
+        },
+        {
+          "name": "hide:before",
+          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
+          "description": "hide:before — вызов e.preventDefault() отменяет скрытие"
+        },
+        {
+          "name": "ready",
+          "type": "(value: boolean) => void",
+          "description": "Component availability changed: true when the instance has an announced\nroot DOM element, false when that root is removed or replaced.\nDoes not wait for other plugins' DOM handlers or asynchronous work."
+        },
+        {
+          "name": "change:rendered",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
+          "description": "change:rendered"
+        },
+        {
+          "name": "change:visible",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
+          "description": "change:visible"
+        },
+        {
+          "name": "change:tag",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | object>) => void",
+          "description": "change:tag"
+        },
+        {
+          "name": "change:direction",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TDirection>) => void",
+          "description": "change:direction"
+        },
+        {
+          "name": "change:size",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TComponentSize>) => void",
+          "description": "change:size"
+        },
+        {
+          "name": "change:variant",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TComponentVariant | undefined>) => void",
+          "description": "change:variant"
+        },
+        {
+          "name": "change:disabled",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        },
+        {
+          "name": "change:focused",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        },
+        {
+          "name": "change:value",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | number>) => void",
+          "description": "change:value"
+        },
+        {
+          "name": "change:name",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string>) => void",
+          "description": "change:name"
+        },
+        {
+          "name": "change:text",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string>) => void"
+        },
+        {
+          "name": "change:description",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string>) => void"
+        },
+        {
+          "name": "change:completed",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        },
+        {
+          "name": "change:error",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        },
+        { "name": "element:ready", "type": "(element: Element) => void" },
+        { "name": "element:removed", "type": "() => void" },
+        { "name": "action:press", "type": "(event: MouseEvent) => void" },
+        { "name": "action:click", "type": "(event: MouseEvent) => void" },
+        { "name": "action:focus", "type": "(event: FocusEvent) => void" },
+        { "name": "action:blur", "type": "(event: FocusEvent) => void" },
+        {
+          "name": "aria:change:label",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
+        },
+        {
+          "name": "aria:change:labelledBy",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
+        },
+        {
+          "name": "aria:change:describedBy",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
+        }
+      ],
+      "slots": [
+        {
+          "name": "leading",
+          "description": "Metadata before the step header",
+          "scope": {
+            "value": { "type": "string | number", "required": true },
+            "number": { "type": "number", "required": true },
+            "active": { "type": "boolean", "required": true },
+            "completed": { "type": "boolean", "required": true },
+            "error": { "type": "boolean", "required": true }
+          }
+        },
+        {
+          "name": "indicator",
+          "description": "Replace the default status icon or step number",
+          "scope": {
+            "value": { "type": "string | number", "required": true },
+            "number": { "type": "number", "required": true },
+            "active": { "type": "boolean", "required": true },
+            "completed": { "type": "boolean", "required": true },
+            "error": { "type": "boolean", "required": true }
+          }
+        },
+        {
+          "name": "default",
+          "description": "Replace the step label",
+          "scope": {
+            "value": { "type": "string | number", "required": true },
+            "number": { "type": "number", "required": true },
+            "active": { "type": "boolean", "required": true },
+            "completed": { "type": "boolean", "required": true },
+            "error": { "type": "boolean", "required": true }
+          }
+        },
+        {
+          "name": "subtitle",
+          "description": "Replace the description",
+          "scope": {
+            "value": { "type": "string | number", "required": true },
+            "number": { "type": "number", "required": true },
+            "active": { "type": "boolean", "required": true },
+            "completed": { "type": "boolean", "required": true },
+            "error": { "type": "boolean", "required": true }
+          }
+        },
+        {
+          "name": "separator",
+          "description": "Decorative connector to the next step",
+          "scope": {
+            "value": { "type": "string | number", "required": true },
+            "number": { "type": "number", "required": true },
+            "active": { "type": "boolean", "required": true },
+            "completed": { "type": "boolean", "required": true },
+            "error": { "type": "boolean", "required": true }
+          }
+        },
+        {
+          "name": "details",
+          "description": "Metadata or controls after the step header",
+          "scope": {
+            "value": { "type": "string | number", "required": true },
+            "number": { "type": "number", "required": true },
+            "active": { "type": "boolean", "required": true },
+            "completed": { "type": "boolean", "required": true },
+            "error": { "type": "boolean", "required": true }
+          }
+        }
+      ],
+      "frameworks": {
+        "vue": {
+          "props": {
+            "ctrl": ":ctrl",
+            "embedded": ":embedded",
+            "pluginProps": ":pluginProps",
+            "rendered": ":rendered",
+            "visible": ":visible",
+            "tag": ":tag",
+            "direction": ":direction",
+            "disabled": ":disabled",
+            "focused": ":focused",
+            "value": ":value",
+            "name": ":name",
+            "text": ":text",
+            "description": ":description",
+            "completed": ":completed",
+            "error": ":error",
+            "aria_label": ":aria_label",
+            "aria_labelledBy": ":aria_labelledBy",
+            "aria_describedBy": ":aria_describedBy",
+            "initial": ":initial"
+          },
+          "events": {
+            "bundle:create": "@bundle:create",
+            "plugin:event": "@plugin:event",
+            "show": "@show",
+            "hide": "@hide",
+            "show:before": "@show:before",
+            "hide:before": "@hide:before",
+            "ready": "@ready",
+            "change:rendered": "@change:rendered",
+            "change:visible": "@change:visible",
+            "change:tag": "@change:tag",
+            "change:direction": "@change:direction",
+            "change:size": "@change:size",
+            "change:variant": "@change:variant",
+            "change:disabled": "@change:disabled",
+            "change:focused": "@change:focused",
+            "change:value": "@change:value",
+            "change:name": "@change:name",
+            "change:text": "@change:text",
+            "change:description": "@change:description",
+            "change:completed": "@change:completed",
+            "change:error": "@change:error",
+            "element:ready": "@element:ready",
+            "element:removed": "@element:removed",
+            "action:press": "@action:press",
+            "action:click": "@action:click",
+            "action:focus": "@action:focus",
+            "action:blur": "@action:blur",
+            "aria:change:label": "@aria:change:label",
+            "aria:change:labelledBy": "@aria:change:labelledBy",
+            "aria:change:describedBy": "@aria:change:describedBy"
+          },
+          "models": {
+            "rendered": "@update:rendered",
+            "visible": "@update:visible",
+            "tag": "@update:tag",
+            "direction": "@update:direction",
+            "disabled": "@update:disabled",
+            "focused": "@update:focused",
+            "value": "@update:value",
+            "name": "@update:name",
+            "text": "@update:text",
+            "description": "@update:description",
+            "completed": "@update:completed",
+            "error": "@update:error",
+            "aria_label": "@update:aria_label",
+            "aria_labelledBy": "@update:aria_labelledBy",
+            "aria_describedBy": "@update:aria_describedBy"
+          },
+          "slots": {
+            "leading": { "name": "leading", "syntax": "<template #leading>" },
+            "indicator": { "name": "indicator", "syntax": "<template #indicator>" },
+            "default": { "name": "default", "syntax": "<template #default>" },
+            "subtitle": { "name": "subtitle", "syntax": "<template #subtitle>" },
+            "separator": { "name": "separator", "syntax": "<template #separator>" },
+            "details": { "name": "details", "syntax": "<template #details>" }
+          }
+        },
+        "react": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "disabled": "disabled",
+            "focused": "focused",
+            "value": "value",
+            "name": "name",
+            "text": "text",
+            "description": "description",
+            "completed": "completed",
+            "error": "error",
+            "aria_label": "aria_label",
+            "aria_labelledBy": "aria_labelledBy",
+            "aria_describedBy": "aria_describedBy",
+            "initial": "initial"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:size": "onChangeSize",
+            "change:variant": "onChangeVariant",
+            "change:disabled": "onChangeDisabled",
+            "change:focused": "onChangeFocused",
+            "change:value": "onChangeValue",
+            "change:name": "onChangeName",
+            "change:text": "onChangeText",
+            "change:description": "onChangeDescription",
+            "change:completed": "onChangeCompleted",
+            "change:error": "onChangeError",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved",
+            "action:press": "onActionPress",
+            "action:click": "onActionClick",
+            "action:focus": "onActionFocus",
+            "action:blur": "onActionBlur",
+            "aria:change:label": "onAriaChangeLabel",
+            "aria:change:labelledBy": "onAriaChangeLabelledBy",
+            "aria:change:describedBy": "onAriaChangeDescribedBy"
+          },
+          "models": {},
+          "slots": {
+            "leading": { "name": "leading", "syntax": "leading" },
+            "indicator": { "name": "indicator", "syntax": "indicator" },
+            "default": { "name": "children", "syntax": "children" },
+            "subtitle": { "name": "subtitle", "syntax": "subtitle" },
+            "separator": { "name": "separator", "syntax": "separator" },
+            "details": { "name": "details", "syntax": "details" }
+          }
+        },
+        "angular": {
+          "props": {
+            "ctrl": "[ctrl]",
+            "embedded": "[embedded]",
+            "pluginProps": "[pluginProps]",
+            "rendered": "[rendered]",
+            "visible": "[visible]",
+            "direction": "[direction]",
+            "disabled": "[disabled]",
+            "focused": "[focused]",
+            "value": "[value]",
+            "name": "[name]",
+            "text": "[text]",
+            "description": "[description]",
+            "completed": "[completed]",
+            "error": "[error]",
+            "aria_label": "[aria_label]",
+            "aria_labelledBy": "[aria_labelledBy]",
+            "aria_describedBy": "[aria_describedBy]",
+            "initial": "[initial]"
+          },
+          "events": {
+            "bundle:create": "(soBundleCreate)",
+            "plugin:event": "(soPluginEvent)",
+            "show": "(soShow)",
+            "hide": "(soHide)",
+            "show:before": "(soShowBefore)",
+            "hide:before": "(soHideBefore)",
+            "ready": "(soReady)",
+            "change:rendered": "(soChangeRendered)",
+            "change:visible": "(soChangeVisible)",
+            "change:tag": "(soChangeTag)",
+            "change:direction": "(soChangeDirection)",
+            "change:size": "(soChangeSize)",
+            "change:variant": "(soChangeVariant)",
+            "change:disabled": "(soChangeDisabled)",
+            "change:focused": "(soChangeFocused)",
+            "change:value": "(soChangeValue)",
+            "change:name": "(soChangeName)",
+            "change:text": "(soChangeText)",
+            "change:description": "(soChangeDescription)",
+            "change:completed": "(soChangeCompleted)",
+            "change:error": "(soChangeError)",
+            "element:ready": "(soElementReady)",
+            "element:removed": "(soElementRemoved)",
+            "action:press": "(soActionPress)",
+            "action:click": "(soActionClick)",
+            "action:focus": "(soActionFocus)",
+            "action:blur": "(soActionBlur)",
+            "aria:change:label": "(soAriaChangeLabel)",
+            "aria:change:labelledBy": "(soAriaChangeLabelledBy)",
+            "aria:change:describedBy": "(soAriaChangeDescribedBy)"
+          },
+          "models": {
+            "rendered": "(renderedChange)",
+            "visible": "(visibleChange)",
+            "tag": "(tagChange)",
+            "direction": "(directionChange)",
+            "disabled": "(disabledChange)",
+            "focused": "(focusedChange)",
+            "value": "(valueChange)",
+            "name": "(nameChange)",
+            "text": "(textChange)",
+            "description": "(descriptionChange)",
+            "completed": "(completedChange)",
+            "error": "(errorChange)",
+            "aria_label": "(aria_labelChange)",
+            "aria_labelledBy": "(aria_labelledByChange)",
+            "aria_describedBy": "(aria_describedByChange)"
+          },
+          "slots": {
+            "leading": { "name": "leading", "syntax": "<ng-template slot=\"leading\">" },
+            "indicator": { "name": "indicator", "syntax": "<ng-template slot=\"indicator\">" },
+            "default": { "name": "default", "syntax": "<ng-template slot=\"default\">" },
+            "subtitle": { "name": "subtitle", "syntax": "<ng-template slot=\"subtitle\">" },
+            "separator": { "name": "separator", "syntax": "<ng-template slot=\"separator\">" },
+            "details": { "name": "details", "syntax": "<ng-template slot=\"details\">" }
+          }
+        },
+        "solid": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "disabled": "disabled",
+            "focused": "focused",
+            "value": "value",
+            "name": "name",
+            "text": "text",
+            "description": "description",
+            "completed": "completed",
+            "error": "error",
+            "aria_label": "aria_label",
+            "aria_labelledBy": "aria_labelledBy",
+            "aria_describedBy": "aria_describedBy",
+            "initial": "initial"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:size": "onChangeSize",
+            "change:variant": "onChangeVariant",
+            "change:disabled": "onChangeDisabled",
+            "change:focused": "onChangeFocused",
+            "change:value": "onChangeValue",
+            "change:name": "onChangeName",
+            "change:text": "onChangeText",
+            "change:description": "onChangeDescription",
+            "change:completed": "onChangeCompleted",
+            "change:error": "onChangeError",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved",
+            "action:press": "onActionPress",
+            "action:click": "onActionClick",
+            "action:focus": "onActionFocus",
+            "action:blur": "onActionBlur",
+            "aria:change:label": "onAriaChangeLabel",
+            "aria:change:labelledBy": "onAriaChangeLabelledBy",
+            "aria:change:describedBy": "onAriaChangeDescribedBy"
+          },
+          "models": {},
+          "slots": {
+            "leading": { "name": "leading", "syntax": "leading" },
+            "indicator": { "name": "indicator", "syntax": "indicator" },
+            "default": { "name": "children", "syntax": "children" },
+            "subtitle": { "name": "subtitle", "syntax": "subtitle" },
+            "separator": { "name": "separator", "syntax": "separator" },
+            "details": { "name": "details", "syntax": "details" }
+          }
+        },
+        "svelte": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "disabled": "disabled",
+            "focused": "focused",
+            "value": "value",
+            "name": "name",
+            "text": "text",
+            "description": "description",
+            "completed": "completed",
+            "error": "error",
+            "aria_label": "aria_label",
+            "aria_labelledBy": "aria_labelledBy",
+            "aria_describedBy": "aria_describedBy",
+            "initial": "initial"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:size": "onChangeSize",
+            "change:variant": "onChangeVariant",
+            "change:disabled": "onChangeDisabled",
+            "change:focused": "onChangeFocused",
+            "change:value": "onChangeValue",
+            "change:name": "onChangeName",
+            "change:text": "onChangeText",
+            "change:description": "onChangeDescription",
+            "change:completed": "onChangeCompleted",
+            "change:error": "onChangeError",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved",
+            "action:press": "onActionPress",
+            "action:click": "onActionClick",
+            "action:focus": "onActionFocus",
+            "action:blur": "onActionBlur",
+            "aria:change:label": "onAriaChangeLabel",
+            "aria:change:labelledBy": "onAriaChangeLabelledBy",
+            "aria:change:describedBy": "onAriaChangeDescribedBy"
+          },
+          "models": {},
+          "slots": {
+            "leading": { "name": "leading", "syntax": "{#snippet leading(scope)}" },
+            "indicator": { "name": "indicator", "syntax": "{#snippet indicator(scope)}" },
+            "default": { "name": "children", "syntax": "{#snippet children(scope)}" },
+            "subtitle": { "name": "subtitle", "syntax": "{#snippet subtitle(scope)}" },
+            "separator": { "name": "separator", "syntax": "{#snippet separator(scope)}" },
+            "details": { "name": "details", "syntax": "{#snippet details(scope)}" }
+          }
+        },
+        "webc": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "disabled": "disabled",
+            "focused": "focused",
+            "value": "value",
+            "name": "name",
+            "text": "text",
+            "description": "description",
+            "completed": "completed",
+            "error": "error",
+            "aria_label": "aria_label",
+            "aria_labelledBy": "aria_labelledBy",
+            "aria_describedBy": "aria_describedBy",
+            "initial": "initial"
+          },
+          "events": {
+            "bundle:create": "addEventListener('so:bundle:create', handler)",
+            "plugin:event": "addEventListener('so:plugin:event', handler)",
+            "show": "addEventListener('so:show', handler)",
+            "hide": "addEventListener('so:hide', handler)",
+            "show:before": "addEventListener('so:show:before', handler)",
+            "hide:before": "addEventListener('so:hide:before', handler)",
+            "ready": "addEventListener('so:ready', handler)",
+            "change:rendered": "addEventListener('so:change:rendered', handler)",
+            "change:visible": "addEventListener('so:change:visible', handler)",
+            "change:tag": "addEventListener('so:change:tag', handler)",
+            "change:direction": "addEventListener('so:change:direction', handler)",
+            "change:size": "addEventListener('so:change:size', handler)",
+            "change:variant": "addEventListener('so:change:variant', handler)",
+            "change:disabled": "addEventListener('so:change:disabled', handler)",
+            "change:focused": "addEventListener('so:change:focused', handler)",
+            "change:value": "addEventListener('so:change:value', handler)",
+            "change:name": "addEventListener('so:change:name', handler)",
+            "change:text": "addEventListener('so:change:text', handler)",
+            "change:description": "addEventListener('so:change:description', handler)",
+            "change:completed": "addEventListener('so:change:completed', handler)",
+            "change:error": "addEventListener('so:change:error', handler)",
+            "element:ready": "addEventListener('so:element:ready', handler)",
+            "element:removed": "addEventListener('so:element:removed', handler)",
+            "action:press": "addEventListener('so:action:press', handler)",
+            "action:click": "addEventListener('so:action:click', handler)",
+            "action:focus": "addEventListener('so:action:focus', handler)",
+            "action:blur": "addEventListener('so:action:blur', handler)",
+            "aria:change:label": "addEventListener('so:aria:change:label', handler)",
+            "aria:change:labelledBy": "addEventListener('so:aria:change:labelledBy', handler)",
+            "aria:change:describedBy": "addEventListener('so:aria:change:describedBy', handler)"
+          },
+          "models": {},
+          "slots": {
+            "leading": { "name": "leading", "syntax": "slot=\"leading\"" },
+            "indicator": { "name": "indicator", "syntax": "slot=\"indicator\"" },
+            "default": { "name": "default", "syntax": "(unnamed slot)" },
+            "subtitle": { "name": "subtitle", "syntax": "slot=\"subtitle\"" },
+            "separator": { "name": "separator", "syntax": "slot=\"separator\"" },
+            "details": { "name": "details", "syntax": "slot=\"details\"" }
+          }
+        }
+      }
+    },
+    "stepper": {
+      "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts",
+      "props": [
+        {
+          "name": "ctrl",
+          "canonicalName": "ctrl",
+          "type": "import(\"@soxa-ui/core\").TStepper | undefined",
+          "declaredType": "TInstance",
+          "required": false,
+          "description": "Готовый инстанс ядра вместо собранного по пропсам. Только сам объект:\nреактивная обёртка фреймворка ему не нужна — ядро шлёт события само.",
+          "hasDefault": false
+        },
+        {
+          "name": "embedded",
+          "canonicalName": "embedded",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "description": "Имя места, если компонент — деталь разметки другого компонента soxa\n(`tags.close`). Ставит разметка библиотеки, а не потребитель: по нему\n`usePlugins` со `scope: 'own'` пропускает вложенный компонент.",
+          "hasDefault": false
+        },
+        {
+          "name": "pluginProps",
+          "canonicalName": "pluginProps",
+          "type": "import(\"@soxa-ui/setup\").TExternalPluginProps | undefined",
+          "declaredType": "TExternalPluginProps",
+          "required": false,
+          "description": "Значения пропсов плагинов, поставленных снаружи (`usePlugins`,\n`bundle.use`), по имени пропа: `{ timer_ms: 500 }`. Типы ключей\nприложение дописывает в `IExternalPluginProps`.",
+          "hasDefault": false
+        },
+        {
+          "name": "rendered",
+          "canonicalName": "rendered",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Отрисован ли компонент (аналог v-if)",
+          "hasDefault": true,
+          "default": "true"
+        },
+        {
+          "name": "visible",
+          "canonicalName": "visible",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Виден ли компонент (логическая видимость)",
+          "hasDefault": true,
+          "default": "true"
+        },
+        {
+          "name": "tag",
+          "canonicalName": "tag",
+          "type": "string | object | undefined",
+          "declaredType": "string | object",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"div\""
+        },
+        {
+          "name": "direction",
+          "canonicalName": "direction",
+          "type": "import(\"@soxa-ui/core\").TDirection | undefined",
+          "declaredType": "TDirection",
+          "values": ["ltr", "rtl", "inherit"],
+          "required": false,
+          "description": "Направление письма; по умолчанию `'inherit'` — наследуется от предка",
+          "hasDefault": true,
+          "default": "\"inherit\""
+        },
+        {
+          "name": "size",
+          "canonicalName": "size",
+          "type": "\"sm\" | \"normal\" | \"lg\" | \"xl\" | \"2xl\" | undefined",
+          "declaredType": "TComponentSize",
+          "values": ["sm", "normal", "lg", "xl", "2xl"],
+          "required": false,
+          "hasDefault": true,
+          "default": "\"normal\""
+        },
+        {
+          "name": "variant",
+          "canonicalName": "variant",
+          "type": "undefined",
+          "declaredType": "TComponentVariant",
+          "required": false,
+          "description": "Вариант темы. Не задан — модификатора нет, компонент выглядит вариантом темы по умолчанию",
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "disabled",
+          "canonicalName": "disabled",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "focused",
+          "canonicalName": "focused",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "value",
+          "canonicalName": "value",
+          "type": "string | number | undefined",
+          "declaredType": "TValue",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "name",
+          "canonicalName": "name",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"\""
+        },
+        {
+          "name": "linear",
+          "canonicalName": "linear",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Constrain forward navigation to the first incomplete step.",
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "interactive",
+          "canonicalName": "interactive",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Whether step headers are buttons. Explicit Previous and Next actions still work.",
+          "hasDefault": true,
+          "default": "true"
+        },
+        {
+          "name": "orientation",
+          "canonicalName": "orientation",
+          "type": "import(\"@soxa-ui/core\").TOrientation | undefined",
+          "declaredType": "TOrientation",
+          "values": ["horizontal", "vertical"],
+          "required": false,
+          "hasDefault": true,
+          "default": "\"horizontal\""
+        },
+        {
+          "name": "aria_label",
+          "canonicalName": "aria:label",
+          "type": "string | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "aria_labelledBy",
+          "canonicalName": "aria:labelledBy",
+          "type": "string | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "aria_describedBy",
+          "canonicalName": "aria:describedBy",
+          "type": "string | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "initial",
+          "canonicalName": "initial",
+          "type": "import(\"@soxa-ui/setup\").ICollectionInitialSource | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "engine",
+          "canonicalName": "engine",
+          "type": "import(\"@soxa-ui/core\").TStepperCollectionEngine | undefined",
+          "declaredType": "TCollectionEngine",
+          "required": false,
+          "hasDefault": false
+        },
+        {
+          "name": "items",
+          "canonicalName": "items",
+          "type": "readonly (import(\"@soxa-ui/core\").IStepperItem | import(\"@soxa-ui/core\").TCollectionEngineItemSource<import(\"@soxa-ui/core\").IStepperItemProps>)[] | undefined",
+          "declaredType": "ReadonlyArray<TCollectionEngineItemSource<TItemProps> | TItem>",
+          "required": false,
+          "description": "Данные для наполнения коллекции: сырые props (+ meta `_`) или готовые\nинстансы. Массив только для чтения: коллекция его не меняет.",
+          "hasDefault": false
+        },
+        {
+          "name": "trackBy",
+          "canonicalName": "trackBy",
+          "type": "((item: import(\"@soxa-ui/core\").IStepperItem | import(\"@soxa-ui/core\").TCollectionEngineItemSource<import(\"@soxa-ui/core\").IStepperItem>) => unknown) | undefined",
+          "declaredType": "(item: TCollectionEngineItemSource<TItem> | TItem) => unknown",
+          "required": false,
+          "description": "Функция идентификации элемента для патчинга (принимает источник или инстанс).",
+          "hasDefault": true,
+          "default": "undefined"
+        }
+      ],
+      "events": [
+        {
+          "name": "bundle:create",
+          "type": "(bundle: unknown) => void",
+          "description": "Плагины компонента созданы при монтировании; аргумент — их bundle."
+        },
+        {
+          "name": "plugin:event",
+          "type": "(event: import(\"@soxa-ui/core\").TPluginEvent) => void",
+          "description": "Событие внешнего плагина: полное имя (`timer:tick`) и аргументы."
+        },
+        { "name": "show", "type": "() => void", "description": "show" },
+        { "name": "hide", "type": "() => void", "description": "hide" },
+        {
+          "name": "show:before",
+          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
+          "description": "show:before — вызов e.preventDefault() отменяет показ"
+        },
+        {
+          "name": "hide:before",
+          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
+          "description": "hide:before — вызов e.preventDefault() отменяет скрытие"
+        },
+        {
+          "name": "ready",
+          "type": "(value: boolean) => void",
+          "description": "Component availability changed: true when the instance has an announced\nroot DOM element, false when that root is removed or replaced.\nDoes not wait for other plugins' DOM handlers or asynchronous work."
+        },
+        {
+          "name": "change:rendered",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
+          "description": "change:rendered"
+        },
+        {
+          "name": "change:visible",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
+          "description": "change:visible"
+        },
+        {
+          "name": "change:tag",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | object>) => void",
+          "description": "change:tag"
+        },
+        {
+          "name": "change:direction",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TDirection>) => void",
+          "description": "change:direction"
+        },
+        {
+          "name": "change:size",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TComponentSize>) => void",
+          "description": "change:size"
+        },
+        {
+          "name": "change:variant",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TComponentVariant | undefined>) => void",
+          "description": "change:variant"
+        },
+        {
+          "name": "change:disabled",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        },
+        {
+          "name": "change:focused",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        },
+        {
+          "name": "change:value",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TStepperValue>) => void",
+          "description": "change:value"
+        },
+        {
+          "name": "change:name",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string>) => void",
+          "description": "change:name"
+        },
+        {
+          "name": "change:linear",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        },
+        {
+          "name": "change:interactive",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        },
+        {
+          "name": "change:orientation",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TOrientation>) => void"
+        },
+        { "name": "element:ready", "type": "(element: Element) => void" },
+        { "name": "element:removed", "type": "() => void" },
+        { "name": "action:press", "type": "(event: MouseEvent) => void" },
+        { "name": "action:click", "type": "(event: MouseEvent) => void" },
+        { "name": "action:focus", "type": "(event: FocusEvent) => void" },
+        { "name": "action:blur", "type": "(event: FocusEvent) => void" },
+        {
+          "name": "aria:change:label",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
+        },
+        {
+          "name": "aria:change:labelledBy",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
+        },
+        {
+          "name": "aria:change:describedBy",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
+        },
+        {
+          "name": "engine:create",
+          "type": "(engine: import(\"@soxa-ui/core\").TCollectionEngine<import(\"@soxa-ui/core\").IStepperItem, any, any>) => void",
+          "description": "Движок создан и готов к использованию. Передаётся сам движок."
+        },
+        {
+          "name": "item:add:before",
+          "type": "(e: import(\"@soxa-ui/core\").TInsertEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
+          "description": "Вызывается ПЕРЕД добавлением элемента (до мутации хранилища).\n- Изменить `e.item` — подменить элемент (например, item factory).\n- Вызвать `e.preventDefault()` — отменить вставку."
+        },
+        {
+          "name": "item:added",
+          "type": "(e: import(\"@soxa-ui/core\").TInsertEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
+          "description": "Вызывается при добавлении одного элемента"
+        },
+        {
+          "name": "item:remove:before",
+          "type": "(e: import(\"@soxa-ui/core\").TRemoveEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
+          "description": "Вызывается ПЕРЕД удалением элемента (до мутации хранилища).\nВызвать `e.preventDefault()` — отменить удаление."
+        },
+        {
+          "name": "item:removed",
+          "type": "(e: import(\"@soxa-ui/core\").TRemoveEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
+          "description": "Вызывается при удалении одного элемента"
+        },
+        {
+          "name": "item:update:before",
+          "type": "(e: import(\"@soxa-ui/core\").TUpdateEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
+          "description": "Вызывается ПЕРЕД изменением элемента (до мутации). Можно подменить `e.item`/`e.changes` или `preventDefault()`."
+        },
+        {
+          "name": "item:updated",
+          "type": "(e: import(\"@soxa-ui/core\").TUpdateEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
+          "description": "Вызывается при изменении одного элемента"
+        },
+        {
+          "name": "item:move:before",
+          "type": "(e: import(\"@soxa-ui/core\").TMoveEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
+          "description": "Вызывается ПЕРЕД перемещением элемента (до мутации хранилища).\nМожно подменить `e.newIndex` или вызвать `e.preventDefault()`."
+        },
+        {
+          "name": "item:moved",
+          "type": "(e: import(\"@soxa-ui/core\").TMoveEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
+          "description": "Вызывается при перемещении элемента"
+        },
+        {
+          "name": "items:clear:before",
+          "type": "(e: import(\"@soxa-ui/core\").TClearEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
+          "description": "Вызывается ПЕРЕД полной очисткой коллекции (до мутации хранилища).\nОдин хук на всю операцию — `e.items` снимок состава, `e.preventDefault()`\nотменяет очистку целиком."
+        },
+        {
+          "name": "change:count",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<number>) => void",
+          "description": "Изменение количества элементов"
+        },
+        {
+          "name": "reset",
+          "type": "() => void",
+          "description": "Полный сброс или очистка коллекции"
+        },
+        {
+          "name": "items:added",
+          "type": "(items: readonly import(\"@soxa-ui/core\").TCollectionEngineItemSource<import(\"@soxa-ui/core\").IStepperItem>[]) => void",
+          "description": "Уходит вход — источники (сырые props + meta `_`) или готовые инстансы, не\nто, что легло в хранилище. Тот же массив, что дали операции, поэтому\nтолько для чтения."
+        },
+        {
+          "name": "items:removed",
+          "type": "(items: readonly import(\"@soxa-ui/core\").IStepperItem[]) => void",
+          "description": "Уходит вход `remove` — тот же массив, только для чтения; у `clear` — пустой."
+        },
+        {
+          "name": "change:shown",
+          "type": "() => void",
+          "description": "Показанное изменилось — из-за состава или из-за условий отбора.\nБез аргументов: читателю нужно перечитать `shown`."
+        },
+        {
+          "name": "change:items",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<readonly import(\"@soxa-ui/core\").IStepperItem[]>) => void",
+          "description": "The storage composition changed. `items` is a snapshot: a listener may\nkeep it, and the next change does not alter it."
+        },
+        {
+          "name": "change:trackBy",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<((item: import(\"@soxa-ui/core\").IStepperItem | import(\"@soxa-ui/core\").TCollectionEngineItemSource<import(\"@soxa-ui/core\").IStepperItem>) => unknown) | undefined>) => void"
+        },
+        {
+          "name": "item:activate:before",
+          "type": "(e: import(\"@soxa-ui/core\").TActivateEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
+          "description": "Элемент вот-вот станет активным; `preventDefault()` отменяет активацию"
+        },
+        {
+          "name": "change:activation",
+          "type": "(item: import(\"@soxa-ui/core\").IStepperItem | undefined, previous: import(\"@soxa-ui/core\").IStepperItem | undefined) => void",
+          "description": "Активный сменился. `item` — новый активный, `previous` — прежний;\n`undefined` — активного нет (сняли) или не было. Сменилась активность\nровно у этих двух: item-адаптер по ним решает, касается ли смена его\nэлемента."
+        }
+      ],
+      "slots": [
+        { "name": "default", "description": "Declarative steps in list order", "scope": {} },
+        {
+          "name": "item",
+          "description": "Replace the default rendering of a data item",
+          "scope": {
+            "item": { "type": "import(\"@soxa-ui/core\").IStepperItem", "required": true }
+          }
+        },
+        {
+          "name": "content",
+          "description": "Panels and controls outside the list",
+          "scope": {
+            "value": { "type": "string | number | undefined", "required": true },
+            "canNext": { "type": "boolean", "required": true },
+            "canPrevious": { "type": "boolean", "required": true },
+            "next": { "type": "() => boolean", "required": true },
+            "previous": { "type": "() => boolean", "required": true }
+          }
+        }
+      ],
+      "frameworks": {
+        "vue": {
+          "props": {
+            "ctrl": ":ctrl",
+            "embedded": ":embedded",
+            "pluginProps": ":pluginProps",
+            "rendered": ":rendered",
+            "visible": ":visible",
+            "tag": ":tag",
+            "direction": ":direction",
+            "size": ":size",
+            "variant": ":variant",
+            "disabled": ":disabled",
+            "focused": ":focused",
+            "value": ":value",
+            "name": ":name",
+            "linear": ":linear",
+            "interactive": ":interactive",
+            "orientation": ":orientation",
+            "aria_label": ":aria_label",
+            "aria_labelledBy": ":aria_labelledBy",
+            "aria_describedBy": ":aria_describedBy",
+            "initial": ":initial",
+            "engine": ":engine",
+            "items": ":items",
+            "trackBy": ":trackBy"
+          },
+          "events": {
+            "bundle:create": "@bundle:create",
+            "plugin:event": "@plugin:event",
+            "show": "@show",
+            "hide": "@hide",
+            "show:before": "@show:before",
+            "hide:before": "@hide:before",
+            "ready": "@ready",
+            "change:rendered": "@change:rendered",
+            "change:visible": "@change:visible",
+            "change:tag": "@change:tag",
+            "change:direction": "@change:direction",
+            "change:size": "@change:size",
+            "change:variant": "@change:variant",
+            "change:disabled": "@change:disabled",
+            "change:focused": "@change:focused",
+            "change:value": "@change:value",
+            "change:name": "@change:name",
+            "change:linear": "@change:linear",
+            "change:interactive": "@change:interactive",
+            "change:orientation": "@change:orientation",
+            "element:ready": "@element:ready",
+            "element:removed": "@element:removed",
+            "action:press": "@action:press",
+            "action:click": "@action:click",
+            "action:focus": "@action:focus",
+            "action:blur": "@action:blur",
+            "aria:change:label": "@aria:change:label",
+            "aria:change:labelledBy": "@aria:change:labelledBy",
+            "aria:change:describedBy": "@aria:change:describedBy",
+            "engine:create": "@engine:create",
+            "item:add:before": "@item:add:before",
+            "item:added": "@item:added",
+            "item:remove:before": "@item:remove:before",
+            "item:removed": "@item:removed",
+            "item:update:before": "@item:update:before",
+            "item:updated": "@item:updated",
+            "item:move:before": "@item:move:before",
+            "item:moved": "@item:moved",
+            "items:clear:before": "@items:clear:before",
+            "change:count": "@change:count",
+            "reset": "@reset",
+            "items:added": "@items:added",
+            "items:removed": "@items:removed",
+            "change:shown": "@change:shown",
+            "change:items": "@change:items",
+            "change:trackBy": "@change:trackBy",
+            "item:activate:before": "@item:activate:before",
+            "change:activation": "@change:activation"
+          },
+          "models": {
+            "rendered": "@update:rendered",
+            "visible": "@update:visible",
+            "tag": "@update:tag",
+            "direction": "@update:direction",
+            "size": "@update:size",
+            "variant": "@update:variant",
+            "disabled": "@update:disabled",
+            "focused": "@update:focused",
+            "value": "@update:value",
+            "name": "@update:name",
+            "linear": "@update:linear",
+            "interactive": "@update:interactive",
+            "orientation": "@update:orientation",
+            "aria_label": "@update:aria_label",
+            "aria_labelledBy": "@update:aria_labelledBy",
+            "aria_describedBy": "@update:aria_describedBy",
+            "items": "@update:items",
+            "trackBy": "@update:trackBy"
+          },
+          "slots": {
+            "default": { "name": "default", "syntax": "<template #default>" },
+            "item": { "name": "item", "syntax": "<template #item>" },
+            "content": { "name": "content", "syntax": "<template #content>" }
+          }
+        },
+        "react": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "size": "size",
+            "variant": "variant",
+            "disabled": "disabled",
+            "focused": "focused",
+            "value": "value",
+            "name": "name",
+            "linear": "linear",
+            "interactive": "interactive",
+            "orientation": "orientation",
+            "aria_label": "aria_label",
+            "aria_labelledBy": "aria_labelledBy",
+            "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
+            "engine": "engine",
+            "items": "items",
+            "trackBy": "trackBy"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:size": "onChangeSize",
+            "change:variant": "onChangeVariant",
+            "change:disabled": "onChangeDisabled",
+            "change:focused": "onChangeFocused",
+            "change:value": "onChangeValue",
+            "change:name": "onChangeName",
+            "change:linear": "onChangeLinear",
+            "change:interactive": "onChangeInteractive",
+            "change:orientation": "onChangeOrientation",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved",
+            "action:press": "onActionPress",
+            "action:click": "onActionClick",
+            "action:focus": "onActionFocus",
+            "action:blur": "onActionBlur",
+            "aria:change:label": "onAriaChangeLabel",
+            "aria:change:labelledBy": "onAriaChangeLabelledBy",
+            "aria:change:describedBy": "onAriaChangeDescribedBy",
+            "engine:create": "onEngineCreate",
+            "item:add:before": "onItemAddBefore",
+            "item:added": "onItemAdded",
+            "item:remove:before": "onItemRemoveBefore",
+            "item:removed": "onItemRemoved",
+            "item:update:before": "onItemUpdateBefore",
+            "item:updated": "onItemUpdated",
+            "item:move:before": "onItemMoveBefore",
+            "item:moved": "onItemMoved",
+            "items:clear:before": "onItemsClearBefore",
+            "change:count": "onChangeCount",
+            "reset": "onReset",
+            "items:added": "onItemsAdded",
+            "items:removed": "onItemsRemoved",
+            "change:shown": "onChangeShown",
+            "change:items": "onChangeItems",
+            "change:trackBy": "onChangeTrackBy",
+            "item:activate:before": "onItemActivateBefore",
+            "change:activation": "onChangeActivation"
+          },
+          "models": {},
+          "slots": {
+            "default": { "name": "children", "syntax": "children" },
+            "item": { "name": "item", "syntax": "item" },
+            "content": { "name": "content", "syntax": "content" }
+          }
+        },
+        "angular": {
+          "props": {
+            "ctrl": "[ctrl]",
+            "embedded": "[embedded]",
+            "pluginProps": "[pluginProps]",
+            "rendered": "[rendered]",
+            "visible": "[visible]",
+            "direction": "[direction]",
+            "size": "[size]",
+            "variant": "[variant]",
+            "disabled": "[disabled]",
+            "focused": "[focused]",
+            "value": "[value]",
+            "name": "[name]",
+            "linear": "[linear]",
+            "interactive": "[interactive]",
+            "orientation": "[orientation]",
+            "aria_label": "[aria_label]",
+            "aria_labelledBy": "[aria_labelledBy]",
+            "aria_describedBy": "[aria_describedBy]",
+            "initial": "[initial]",
+            "engine": "[engine]",
+            "items": "[items]",
+            "trackBy": "[trackBy]"
+          },
+          "events": {
+            "bundle:create": "(soBundleCreate)",
+            "plugin:event": "(soPluginEvent)",
+            "show": "(soShow)",
+            "hide": "(soHide)",
+            "show:before": "(soShowBefore)",
+            "hide:before": "(soHideBefore)",
+            "ready": "(soReady)",
+            "change:rendered": "(soChangeRendered)",
+            "change:visible": "(soChangeVisible)",
+            "change:tag": "(soChangeTag)",
+            "change:direction": "(soChangeDirection)",
+            "change:size": "(soChangeSize)",
+            "change:variant": "(soChangeVariant)",
+            "change:disabled": "(soChangeDisabled)",
+            "change:focused": "(soChangeFocused)",
+            "change:value": "(soChangeValue)",
+            "change:name": "(soChangeName)",
+            "change:linear": "(soChangeLinear)",
+            "change:interactive": "(soChangeInteractive)",
+            "change:orientation": "(soChangeOrientation)",
+            "element:ready": "(soElementReady)",
+            "element:removed": "(soElementRemoved)",
+            "action:press": "(soActionPress)",
+            "action:click": "(soActionClick)",
+            "action:focus": "(soActionFocus)",
+            "action:blur": "(soActionBlur)",
+            "aria:change:label": "(soAriaChangeLabel)",
+            "aria:change:labelledBy": "(soAriaChangeLabelledBy)",
+            "aria:change:describedBy": "(soAriaChangeDescribedBy)",
+            "engine:create": "(soEngineCreate)",
+            "item:add:before": "(soItemAddBefore)",
+            "item:added": "(soItemAdded)",
+            "item:remove:before": "(soItemRemoveBefore)",
+            "item:removed": "(soItemRemoved)",
+            "item:update:before": "(soItemUpdateBefore)",
+            "item:updated": "(soItemUpdated)",
+            "item:move:before": "(soItemMoveBefore)",
+            "item:moved": "(soItemMoved)",
+            "items:clear:before": "(soItemsClearBefore)",
+            "change:count": "(soChangeCount)",
+            "reset": "(soReset)",
+            "items:added": "(soItemsAdded)",
+            "items:removed": "(soItemsRemoved)",
+            "change:shown": "(soChangeShown)",
+            "change:items": "(soChangeItems)",
+            "change:trackBy": "(soChangeTrackBy)",
+            "item:activate:before": "(soItemActivateBefore)",
+            "change:activation": "(soChangeActivation)"
+          },
+          "models": {
+            "rendered": "(renderedChange)",
+            "visible": "(visibleChange)",
+            "tag": "(tagChange)",
+            "direction": "(directionChange)",
+            "size": "(sizeChange)",
+            "variant": "(variantChange)",
+            "disabled": "(disabledChange)",
+            "focused": "(focusedChange)",
+            "value": "(valueChange)",
+            "name": "(nameChange)",
+            "linear": "(linearChange)",
+            "interactive": "(interactiveChange)",
+            "orientation": "(orientationChange)",
+            "aria_label": "(aria_labelChange)",
+            "aria_labelledBy": "(aria_labelledByChange)",
+            "aria_describedBy": "(aria_describedByChange)",
+            "items": "(itemsChange)",
+            "trackBy": "(trackByChange)"
+          },
+          "slots": {
+            "default": { "name": "default", "syntax": "<ng-content>" },
+            "item": { "name": "item", "syntax": "<ng-template slot=\"item\">" },
+            "content": { "name": "content", "syntax": "<ng-template slot=\"content\">" }
+          }
+        },
+        "solid": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "size": "size",
+            "variant": "variant",
+            "disabled": "disabled",
+            "focused": "focused",
+            "value": "value",
+            "name": "name",
+            "linear": "linear",
+            "interactive": "interactive",
+            "orientation": "orientation",
+            "aria_label": "aria_label",
+            "aria_labelledBy": "aria_labelledBy",
+            "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
+            "engine": "engine",
+            "items": "items",
+            "trackBy": "trackBy"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:size": "onChangeSize",
+            "change:variant": "onChangeVariant",
+            "change:disabled": "onChangeDisabled",
+            "change:focused": "onChangeFocused",
+            "change:value": "onChangeValue",
+            "change:name": "onChangeName",
+            "change:linear": "onChangeLinear",
+            "change:interactive": "onChangeInteractive",
+            "change:orientation": "onChangeOrientation",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved",
+            "action:press": "onActionPress",
+            "action:click": "onActionClick",
+            "action:focus": "onActionFocus",
+            "action:blur": "onActionBlur",
+            "aria:change:label": "onAriaChangeLabel",
+            "aria:change:labelledBy": "onAriaChangeLabelledBy",
+            "aria:change:describedBy": "onAriaChangeDescribedBy",
+            "engine:create": "onEngineCreate",
+            "item:add:before": "onItemAddBefore",
+            "item:added": "onItemAdded",
+            "item:remove:before": "onItemRemoveBefore",
+            "item:removed": "onItemRemoved",
+            "item:update:before": "onItemUpdateBefore",
+            "item:updated": "onItemUpdated",
+            "item:move:before": "onItemMoveBefore",
+            "item:moved": "onItemMoved",
+            "items:clear:before": "onItemsClearBefore",
+            "change:count": "onChangeCount",
+            "reset": "onReset",
+            "items:added": "onItemsAdded",
+            "items:removed": "onItemsRemoved",
+            "change:shown": "onChangeShown",
+            "change:items": "onChangeItems",
+            "change:trackBy": "onChangeTrackBy",
+            "item:activate:before": "onItemActivateBefore",
+            "change:activation": "onChangeActivation"
+          },
+          "models": {},
+          "slots": {
+            "default": { "name": "children", "syntax": "children" },
+            "item": { "name": "item", "syntax": "item" },
+            "content": { "name": "content", "syntax": "content" }
+          }
+        },
+        "svelte": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "size": "size",
+            "variant": "variant",
+            "disabled": "disabled",
+            "focused": "focused",
+            "value": "value",
+            "name": "name",
+            "linear": "linear",
+            "interactive": "interactive",
+            "orientation": "orientation",
+            "aria_label": "aria_label",
+            "aria_labelledBy": "aria_labelledBy",
+            "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
+            "engine": "engine",
+            "items": "items",
+            "trackBy": "trackBy"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:size": "onChangeSize",
+            "change:variant": "onChangeVariant",
+            "change:disabled": "onChangeDisabled",
+            "change:focused": "onChangeFocused",
+            "change:value": "onChangeValue",
+            "change:name": "onChangeName",
+            "change:linear": "onChangeLinear",
+            "change:interactive": "onChangeInteractive",
+            "change:orientation": "onChangeOrientation",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved",
+            "action:press": "onActionPress",
+            "action:click": "onActionClick",
+            "action:focus": "onActionFocus",
+            "action:blur": "onActionBlur",
+            "aria:change:label": "onAriaChangeLabel",
+            "aria:change:labelledBy": "onAriaChangeLabelledBy",
+            "aria:change:describedBy": "onAriaChangeDescribedBy",
+            "engine:create": "onEngineCreate",
+            "item:add:before": "onItemAddBefore",
+            "item:added": "onItemAdded",
+            "item:remove:before": "onItemRemoveBefore",
+            "item:removed": "onItemRemoved",
+            "item:update:before": "onItemUpdateBefore",
+            "item:updated": "onItemUpdated",
+            "item:move:before": "onItemMoveBefore",
+            "item:moved": "onItemMoved",
+            "items:clear:before": "onItemsClearBefore",
+            "change:count": "onChangeCount",
+            "reset": "onReset",
+            "items:added": "onItemsAdded",
+            "items:removed": "onItemsRemoved",
+            "change:shown": "onChangeShown",
+            "change:items": "onChangeItems",
+            "change:trackBy": "onChangeTrackBy",
+            "item:activate:before": "onItemActivateBefore",
+            "change:activation": "onChangeActivation"
+          },
+          "models": {},
+          "slots": {
+            "default": { "name": "children", "syntax": "{#snippet children()}" },
+            "item": { "name": "item", "syntax": "{#snippet item(scope)}" },
+            "content": { "name": "content", "syntax": "{#snippet content(scope)}" }
+          }
+        },
+        "webc": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "size": "size",
+            "variant": "variant",
+            "disabled": "disabled",
+            "focused": "focused",
+            "value": "value",
+            "name": "name",
+            "linear": "linear",
+            "interactive": "interactive",
+            "orientation": "orientation",
+            "aria_label": "aria_label",
+            "aria_labelledBy": "aria_labelledBy",
+            "aria_describedBy": "aria_describedBy",
+            "initial": "initial",
+            "engine": "engine",
+            "items": "items",
+            "trackBy": "trackBy"
+          },
+          "events": {
+            "bundle:create": "addEventListener('so:bundle:create', handler)",
+            "plugin:event": "addEventListener('so:plugin:event', handler)",
+            "show": "addEventListener('so:show', handler)",
+            "hide": "addEventListener('so:hide', handler)",
+            "show:before": "addEventListener('so:show:before', handler)",
+            "hide:before": "addEventListener('so:hide:before', handler)",
+            "ready": "addEventListener('so:ready', handler)",
+            "change:rendered": "addEventListener('so:change:rendered', handler)",
+            "change:visible": "addEventListener('so:change:visible', handler)",
+            "change:tag": "addEventListener('so:change:tag', handler)",
+            "change:direction": "addEventListener('so:change:direction', handler)",
+            "change:size": "addEventListener('so:change:size', handler)",
+            "change:variant": "addEventListener('so:change:variant', handler)",
+            "change:disabled": "addEventListener('so:change:disabled', handler)",
+            "change:focused": "addEventListener('so:change:focused', handler)",
+            "change:value": "addEventListener('so:change:value', handler)",
+            "change:name": "addEventListener('so:change:name', handler)",
+            "change:linear": "addEventListener('so:change:linear', handler)",
+            "change:interactive": "addEventListener('so:change:interactive', handler)",
+            "change:orientation": "addEventListener('so:change:orientation', handler)",
+            "element:ready": "addEventListener('so:element:ready', handler)",
+            "element:removed": "addEventListener('so:element:removed', handler)",
+            "action:press": "addEventListener('so:action:press', handler)",
+            "action:click": "addEventListener('so:action:click', handler)",
+            "action:focus": "addEventListener('so:action:focus', handler)",
+            "action:blur": "addEventListener('so:action:blur', handler)",
+            "aria:change:label": "addEventListener('so:aria:change:label', handler)",
+            "aria:change:labelledBy": "addEventListener('so:aria:change:labelledBy', handler)",
+            "aria:change:describedBy": "addEventListener('so:aria:change:describedBy', handler)",
+            "engine:create": "addEventListener('so:engine:create', handler)",
+            "item:add:before": "addEventListener('so:item:add:before', handler)",
+            "item:added": "addEventListener('so:item:added', handler)",
+            "item:remove:before": "addEventListener('so:item:remove:before', handler)",
+            "item:removed": "addEventListener('so:item:removed', handler)",
+            "item:update:before": "addEventListener('so:item:update:before', handler)",
+            "item:updated": "addEventListener('so:item:updated', handler)",
+            "item:move:before": "addEventListener('so:item:move:before', handler)",
+            "item:moved": "addEventListener('so:item:moved', handler)",
+            "items:clear:before": "addEventListener('so:items:clear:before', handler)",
+            "change:count": "addEventListener('so:change:count', handler)",
+            "reset": "addEventListener('so:reset', handler)",
+            "items:added": "addEventListener('so:items:added', handler)",
+            "items:removed": "addEventListener('so:items:removed', handler)",
+            "change:shown": "addEventListener('so:change:shown', handler)",
+            "change:items": "addEventListener('so:change:items', handler)",
+            "change:trackBy": "addEventListener('so:change:trackBy', handler)",
+            "item:activate:before": "addEventListener('so:item:activate:before', handler)",
+            "change:activation": "addEventListener('so:change:activation', handler)"
+          },
+          "models": {},
+          "slots": {
+            "default": { "name": "default", "syntax": "(unnamed slot)" },
+            "item": { "name": "item", "syntax": "slot=\"item\"" },
+            "content": { "name": "content", "syntax": "slot=\"content\"" }
+          }
+        }
+      }
+    },
     "switch": {
       "source": "packages/setup/content/descriptors/components/switch.descriptor.ts",
       "props": [
@@ -52624,2090 +54741,6 @@
           },
           "models": {},
           "slots": { "default": { "name": "default", "syntax": "(unnamed slot)" } }
-        }
-      }
-    },
-    "stepper-content": {
-      "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts",
-      "props": [
-        {
-          "name": "ctrl",
-          "canonicalName": "ctrl",
-          "type": "import(\"@soxa-ui/core\").TStepperContent | undefined",
-          "declaredType": "TInstance",
-          "required": false,
-          "description": "Готовый инстанс ядра вместо собранного по пропсам. Только сам объект:\nреактивная обёртка фреймворка ему не нужна — ядро шлёт события само.",
-          "hasDefault": false
-        },
-        {
-          "name": "embedded",
-          "canonicalName": "embedded",
-          "type": "string | undefined",
-          "declaredType": "string",
-          "required": false,
-          "description": "Имя места, если компонент — деталь разметки другого компонента soxa\n(`tags.close`). Ставит разметка библиотеки, а не потребитель: по нему\n`usePlugins` со `scope: 'own'` пропускает вложенный компонент.",
-          "hasDefault": false
-        },
-        {
-          "name": "pluginProps",
-          "canonicalName": "pluginProps",
-          "type": "import(\"@soxa-ui/setup\").TExternalPluginProps | undefined",
-          "declaredType": "TExternalPluginProps",
-          "required": false,
-          "description": "Значения пропсов плагинов, поставленных снаружи (`usePlugins`,\n`bundle.use`), по имени пропа: `{ timer_ms: 500 }`. Типы ключей\nприложение дописывает в `IExternalPluginProps`.",
-          "hasDefault": false
-        },
-        {
-          "name": "rendered",
-          "canonicalName": "rendered",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "description": "Отрисован ли компонент (аналог v-if)",
-          "hasDefault": true,
-          "default": "true"
-        },
-        {
-          "name": "visible",
-          "canonicalName": "visible",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "description": "Виден ли компонент (логическая видимость)",
-          "hasDefault": true,
-          "default": "true"
-        },
-        {
-          "name": "tag",
-          "canonicalName": "tag",
-          "type": "string | object | undefined",
-          "declaredType": "string | object",
-          "required": false,
-          "hasDefault": true,
-          "default": "\"div\""
-        },
-        {
-          "name": "direction",
-          "canonicalName": "direction",
-          "type": "import(\"@soxa-ui/core\").TDirection | undefined",
-          "declaredType": "TDirection",
-          "values": ["ltr", "rtl", "inherit"],
-          "required": false,
-          "description": "Направление письма; по умолчанию `'inherit'` — наследуется от предка",
-          "hasDefault": true,
-          "default": "\"inherit\""
-        },
-        {
-          "name": "value",
-          "canonicalName": "value",
-          "type": "string | number | undefined",
-          "declaredType": "string | number",
-          "required": false,
-          "hasDefault": true,
-          "default": "\"\""
-        }
-      ],
-      "events": [
-        {
-          "name": "bundle:create",
-          "type": "(bundle: unknown) => void",
-          "description": "Плагины компонента созданы при монтировании; аргумент — их bundle."
-        },
-        {
-          "name": "plugin:event",
-          "type": "(event: import(\"@soxa-ui/core\").TPluginEvent) => void",
-          "description": "Событие внешнего плагина: полное имя (`timer:tick`) и аргументы."
-        },
-        { "name": "show", "type": "() => void", "description": "show" },
-        { "name": "hide", "type": "() => void", "description": "hide" },
-        {
-          "name": "show:before",
-          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
-          "description": "show:before — вызов e.preventDefault() отменяет показ"
-        },
-        {
-          "name": "hide:before",
-          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
-          "description": "hide:before — вызов e.preventDefault() отменяет скрытие"
-        },
-        {
-          "name": "ready",
-          "type": "(value: boolean) => void",
-          "description": "Component availability changed: true when the instance has an announced\nroot DOM element, false when that root is removed or replaced.\nDoes not wait for other plugins' DOM handlers or asynchronous work."
-        },
-        {
-          "name": "change:rendered",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
-          "description": "change:rendered"
-        },
-        {
-          "name": "change:visible",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
-          "description": "change:visible"
-        },
-        {
-          "name": "change:tag",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | object>) => void",
-          "description": "change:tag"
-        },
-        {
-          "name": "change:direction",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TDirection>) => void",
-          "description": "change:direction"
-        },
-        {
-          "name": "change:value",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | number>) => void"
-        },
-        { "name": "element:ready", "type": "(element: Element) => void" },
-        { "name": "element:removed", "type": "() => void" }
-      ],
-      "slots": [
-        {
-          "name": "default",
-          "description": "Content of the corresponding active step",
-          "scope": {}
-        }
-      ],
-      "frameworks": {
-        "vue": {
-          "props": {
-            "ctrl": ":ctrl",
-            "embedded": ":embedded",
-            "pluginProps": ":pluginProps",
-            "rendered": ":rendered",
-            "visible": ":visible",
-            "tag": ":tag",
-            "direction": ":direction",
-            "value": ":value"
-          },
-          "events": {
-            "bundle:create": "@bundle:create",
-            "plugin:event": "@plugin:event",
-            "show": "@show",
-            "hide": "@hide",
-            "show:before": "@show:before",
-            "hide:before": "@hide:before",
-            "ready": "@ready",
-            "change:rendered": "@change:rendered",
-            "change:visible": "@change:visible",
-            "change:tag": "@change:tag",
-            "change:direction": "@change:direction",
-            "change:value": "@change:value",
-            "element:ready": "@element:ready",
-            "element:removed": "@element:removed"
-          },
-          "models": {
-            "rendered": "@update:rendered",
-            "visible": "@update:visible",
-            "tag": "@update:tag",
-            "direction": "@update:direction",
-            "value": "@update:value"
-          },
-          "slots": { "default": { "name": "default", "syntax": "<template #default>" } }
-        },
-        "react": {
-          "props": {
-            "ctrl": "ctrl",
-            "embedded": "embedded",
-            "pluginProps": "pluginProps",
-            "rendered": "rendered",
-            "visible": "visible",
-            "tag": "tag",
-            "direction": "direction",
-            "value": "value"
-          },
-          "events": {
-            "bundle:create": "onBundleCreate",
-            "plugin:event": "onPluginEvent",
-            "show": "onShow",
-            "hide": "onHide",
-            "show:before": "onShowBefore",
-            "hide:before": "onHideBefore",
-            "ready": "onReady",
-            "change:rendered": "onChangeRendered",
-            "change:visible": "onChangeVisible",
-            "change:tag": "onChangeTag",
-            "change:direction": "onChangeDirection",
-            "change:value": "onChangeValue",
-            "element:ready": "onElementReady",
-            "element:removed": "onElementRemoved"
-          },
-          "models": {},
-          "slots": { "default": { "name": "children", "syntax": "children" } }
-        },
-        "angular": {
-          "props": {
-            "ctrl": "[ctrl]",
-            "embedded": "[embedded]",
-            "pluginProps": "[pluginProps]",
-            "rendered": "[rendered]",
-            "visible": "[visible]",
-            "direction": "[direction]",
-            "value": "[value]"
-          },
-          "events": {
-            "bundle:create": "(soBundleCreate)",
-            "plugin:event": "(soPluginEvent)",
-            "show": "(soShow)",
-            "hide": "(soHide)",
-            "show:before": "(soShowBefore)",
-            "hide:before": "(soHideBefore)",
-            "ready": "(soReady)",
-            "change:rendered": "(soChangeRendered)",
-            "change:visible": "(soChangeVisible)",
-            "change:tag": "(soChangeTag)",
-            "change:direction": "(soChangeDirection)",
-            "change:value": "(soChangeValue)",
-            "element:ready": "(soElementReady)",
-            "element:removed": "(soElementRemoved)"
-          },
-          "models": {
-            "rendered": "(renderedChange)",
-            "visible": "(visibleChange)",
-            "tag": "(tagChange)",
-            "direction": "(directionChange)",
-            "value": "(valueChange)"
-          },
-          "slots": { "default": { "name": "default", "syntax": "<ng-content>" } }
-        },
-        "solid": {
-          "props": {
-            "ctrl": "ctrl",
-            "embedded": "embedded",
-            "pluginProps": "pluginProps",
-            "rendered": "rendered",
-            "visible": "visible",
-            "tag": "tag",
-            "direction": "direction",
-            "value": "value"
-          },
-          "events": {
-            "bundle:create": "onBundleCreate",
-            "plugin:event": "onPluginEvent",
-            "show": "onShow",
-            "hide": "onHide",
-            "show:before": "onShowBefore",
-            "hide:before": "onHideBefore",
-            "ready": "onReady",
-            "change:rendered": "onChangeRendered",
-            "change:visible": "onChangeVisible",
-            "change:tag": "onChangeTag",
-            "change:direction": "onChangeDirection",
-            "change:value": "onChangeValue",
-            "element:ready": "onElementReady",
-            "element:removed": "onElementRemoved"
-          },
-          "models": {},
-          "slots": { "default": { "name": "children", "syntax": "children" } }
-        },
-        "svelte": {
-          "props": {
-            "ctrl": "ctrl",
-            "embedded": "embedded",
-            "pluginProps": "pluginProps",
-            "rendered": "rendered",
-            "visible": "visible",
-            "tag": "tag",
-            "direction": "direction",
-            "value": "value"
-          },
-          "events": {
-            "bundle:create": "onBundleCreate",
-            "plugin:event": "onPluginEvent",
-            "show": "onShow",
-            "hide": "onHide",
-            "show:before": "onShowBefore",
-            "hide:before": "onHideBefore",
-            "ready": "onReady",
-            "change:rendered": "onChangeRendered",
-            "change:visible": "onChangeVisible",
-            "change:tag": "onChangeTag",
-            "change:direction": "onChangeDirection",
-            "change:value": "onChangeValue",
-            "element:ready": "onElementReady",
-            "element:removed": "onElementRemoved"
-          },
-          "models": {},
-          "slots": { "default": { "name": "children", "syntax": "{#snippet children()}" } }
-        },
-        "webc": {
-          "props": {
-            "ctrl": "ctrl",
-            "embedded": "embedded",
-            "pluginProps": "pluginProps",
-            "rendered": "rendered",
-            "visible": "visible",
-            "tag": "tag",
-            "direction": "direction",
-            "value": "value"
-          },
-          "events": {
-            "bundle:create": "addEventListener('so:bundle:create', handler)",
-            "plugin:event": "addEventListener('so:plugin:event', handler)",
-            "show": "addEventListener('so:show', handler)",
-            "hide": "addEventListener('so:hide', handler)",
-            "show:before": "addEventListener('so:show:before', handler)",
-            "hide:before": "addEventListener('so:hide:before', handler)",
-            "ready": "addEventListener('so:ready', handler)",
-            "change:rendered": "addEventListener('so:change:rendered', handler)",
-            "change:visible": "addEventListener('so:change:visible', handler)",
-            "change:tag": "addEventListener('so:change:tag', handler)",
-            "change:direction": "addEventListener('so:change:direction', handler)",
-            "change:value": "addEventListener('so:change:value', handler)",
-            "element:ready": "addEventListener('so:element:ready', handler)",
-            "element:removed": "addEventListener('so:element:removed', handler)"
-          },
-          "models": {},
-          "slots": { "default": { "name": "default", "syntax": "(unnamed slot)" } }
-        }
-      }
-    },
-    "stepper-item": {
-      "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts",
-      "props": [
-        {
-          "name": "ctrl",
-          "canonicalName": "ctrl",
-          "type": "import(\"@soxa-ui/core\").TStepperItem | undefined",
-          "declaredType": "TInstance",
-          "required": false,
-          "description": "Готовый инстанс ядра вместо собранного по пропсам. Только сам объект:\nреактивная обёртка фреймворка ему не нужна — ядро шлёт события само.",
-          "hasDefault": false
-        },
-        {
-          "name": "embedded",
-          "canonicalName": "embedded",
-          "type": "string | undefined",
-          "declaredType": "string",
-          "required": false,
-          "description": "Имя места, если компонент — деталь разметки другого компонента soxa\n(`tags.close`). Ставит разметка библиотеки, а не потребитель: по нему\n`usePlugins` со `scope: 'own'` пропускает вложенный компонент.",
-          "hasDefault": false
-        },
-        {
-          "name": "pluginProps",
-          "canonicalName": "pluginProps",
-          "type": "import(\"@soxa-ui/setup\").TExternalPluginProps | undefined",
-          "declaredType": "TExternalPluginProps",
-          "required": false,
-          "description": "Значения пропсов плагинов, поставленных снаружи (`usePlugins`,\n`bundle.use`), по имени пропа: `{ timer_ms: 500 }`. Типы ключей\nприложение дописывает в `IExternalPluginProps`.",
-          "hasDefault": false
-        },
-        {
-          "name": "rendered",
-          "canonicalName": "rendered",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "description": "Отрисован ли компонент (аналог v-if)",
-          "hasDefault": true,
-          "default": "true"
-        },
-        {
-          "name": "visible",
-          "canonicalName": "visible",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "description": "Виден ли компонент (логическая видимость)",
-          "hasDefault": true,
-          "default": "true"
-        },
-        {
-          "name": "tag",
-          "canonicalName": "tag",
-          "type": "string | object | undefined",
-          "declaredType": "string | object",
-          "required": false,
-          "hasDefault": true,
-          "default": "\"li\""
-        },
-        {
-          "name": "direction",
-          "canonicalName": "direction",
-          "type": "import(\"@soxa-ui/core\").TDirection | undefined",
-          "declaredType": "TDirection",
-          "values": ["ltr", "rtl", "inherit"],
-          "required": false,
-          "description": "Направление письма; по умолчанию `'inherit'` — наследуется от предка",
-          "hasDefault": true,
-          "default": "\"inherit\""
-        },
-        {
-          "name": "disabled",
-          "canonicalName": "disabled",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "hasDefault": true,
-          "default": "false"
-        },
-        {
-          "name": "focused",
-          "canonicalName": "focused",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "hasDefault": true,
-          "default": "false"
-        },
-        {
-          "name": "value",
-          "canonicalName": "value",
-          "type": "string | number | undefined",
-          "declaredType": "TValue",
-          "required": false,
-          "hasDefault": true,
-          "default": "\"\""
-        },
-        {
-          "name": "name",
-          "canonicalName": "name",
-          "type": "string | undefined",
-          "declaredType": "string",
-          "required": false,
-          "hasDefault": true,
-          "default": "\"\""
-        },
-        {
-          "name": "text",
-          "canonicalName": "text",
-          "type": "string | undefined",
-          "declaredType": "string",
-          "required": false,
-          "hasDefault": true,
-          "default": "\"\""
-        },
-        {
-          "name": "description",
-          "canonicalName": "description",
-          "type": "string | undefined",
-          "declaredType": "string",
-          "required": false,
-          "hasDefault": true,
-          "default": "\"\""
-        },
-        {
-          "name": "completed",
-          "canonicalName": "completed",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "hasDefault": true,
-          "default": "false"
-        },
-        {
-          "name": "error",
-          "canonicalName": "error",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "hasDefault": true,
-          "default": "false"
-        },
-        {
-          "name": "aria_label",
-          "canonicalName": "aria:label",
-          "type": "string | undefined",
-          "required": false,
-          "hasDefault": true,
-          "default": "undefined"
-        },
-        {
-          "name": "aria_labelledBy",
-          "canonicalName": "aria:labelledBy",
-          "type": "string | undefined",
-          "required": false,
-          "hasDefault": true,
-          "default": "undefined"
-        },
-        {
-          "name": "aria_describedBy",
-          "canonicalName": "aria:describedBy",
-          "type": "string | undefined",
-          "required": false,
-          "hasDefault": true,
-          "default": "undefined"
-        },
-        {
-          "name": "initial",
-          "canonicalName": "initial",
-          "type": "number | undefined",
-          "required": false,
-          "hasDefault": true,
-          "default": "undefined"
-        }
-      ],
-      "events": [
-        {
-          "name": "bundle:create",
-          "type": "(bundle: unknown) => void",
-          "description": "Плагины компонента созданы при монтировании; аргумент — их bundle."
-        },
-        {
-          "name": "plugin:event",
-          "type": "(event: import(\"@soxa-ui/core\").TPluginEvent) => void",
-          "description": "Событие внешнего плагина: полное имя (`timer:tick`) и аргументы."
-        },
-        { "name": "show", "type": "() => void", "description": "show" },
-        { "name": "hide", "type": "() => void", "description": "hide" },
-        {
-          "name": "show:before",
-          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
-          "description": "show:before — вызов e.preventDefault() отменяет показ"
-        },
-        {
-          "name": "hide:before",
-          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
-          "description": "hide:before — вызов e.preventDefault() отменяет скрытие"
-        },
-        {
-          "name": "ready",
-          "type": "(value: boolean) => void",
-          "description": "Component availability changed: true when the instance has an announced\nroot DOM element, false when that root is removed or replaced.\nDoes not wait for other plugins' DOM handlers or asynchronous work."
-        },
-        {
-          "name": "change:rendered",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
-          "description": "change:rendered"
-        },
-        {
-          "name": "change:visible",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
-          "description": "change:visible"
-        },
-        {
-          "name": "change:tag",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | object>) => void",
-          "description": "change:tag"
-        },
-        {
-          "name": "change:direction",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TDirection>) => void",
-          "description": "change:direction"
-        },
-        {
-          "name": "change:size",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TComponentSize>) => void",
-          "description": "change:size"
-        },
-        {
-          "name": "change:variant",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TComponentVariant | undefined>) => void",
-          "description": "change:variant"
-        },
-        {
-          "name": "change:disabled",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
-        },
-        {
-          "name": "change:focused",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
-        },
-        {
-          "name": "change:value",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | number>) => void",
-          "description": "change:value"
-        },
-        {
-          "name": "change:name",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string>) => void",
-          "description": "change:name"
-        },
-        {
-          "name": "change:text",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string>) => void"
-        },
-        {
-          "name": "change:description",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string>) => void"
-        },
-        {
-          "name": "change:completed",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
-        },
-        {
-          "name": "change:error",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
-        },
-        { "name": "element:ready", "type": "(element: Element) => void" },
-        { "name": "element:removed", "type": "() => void" },
-        { "name": "action:press", "type": "(event: MouseEvent) => void" },
-        { "name": "action:click", "type": "(event: MouseEvent) => void" },
-        { "name": "action:focus", "type": "(event: FocusEvent) => void" },
-        { "name": "action:blur", "type": "(event: FocusEvent) => void" },
-        {
-          "name": "aria:change:label",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
-        },
-        {
-          "name": "aria:change:labelledBy",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
-        },
-        {
-          "name": "aria:change:describedBy",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
-        }
-      ],
-      "slots": [
-        {
-          "name": "leading",
-          "description": "Metadata before the step header",
-          "scope": {
-            "value": { "type": "string | number", "required": true },
-            "number": { "type": "number", "required": true },
-            "active": { "type": "boolean", "required": true },
-            "completed": { "type": "boolean", "required": true },
-            "error": { "type": "boolean", "required": true }
-          }
-        },
-        {
-          "name": "indicator",
-          "description": "Replace the default status icon or step number",
-          "scope": {
-            "value": { "type": "string | number", "required": true },
-            "number": { "type": "number", "required": true },
-            "active": { "type": "boolean", "required": true },
-            "completed": { "type": "boolean", "required": true },
-            "error": { "type": "boolean", "required": true }
-          }
-        },
-        {
-          "name": "default",
-          "description": "Replace the step label",
-          "scope": {
-            "value": { "type": "string | number", "required": true },
-            "number": { "type": "number", "required": true },
-            "active": { "type": "boolean", "required": true },
-            "completed": { "type": "boolean", "required": true },
-            "error": { "type": "boolean", "required": true }
-          }
-        },
-        {
-          "name": "subtitle",
-          "description": "Replace the description",
-          "scope": {
-            "value": { "type": "string | number", "required": true },
-            "number": { "type": "number", "required": true },
-            "active": { "type": "boolean", "required": true },
-            "completed": { "type": "boolean", "required": true },
-            "error": { "type": "boolean", "required": true }
-          }
-        },
-        {
-          "name": "separator",
-          "description": "Decorative connector to the next step",
-          "scope": {
-            "value": { "type": "string | number", "required": true },
-            "number": { "type": "number", "required": true },
-            "active": { "type": "boolean", "required": true },
-            "completed": { "type": "boolean", "required": true },
-            "error": { "type": "boolean", "required": true }
-          }
-        },
-        {
-          "name": "details",
-          "description": "Metadata or controls after the step header",
-          "scope": {
-            "value": { "type": "string | number", "required": true },
-            "number": { "type": "number", "required": true },
-            "active": { "type": "boolean", "required": true },
-            "completed": { "type": "boolean", "required": true },
-            "error": { "type": "boolean", "required": true }
-          }
-        }
-      ],
-      "frameworks": {
-        "vue": {
-          "props": {
-            "ctrl": ":ctrl",
-            "embedded": ":embedded",
-            "pluginProps": ":pluginProps",
-            "rendered": ":rendered",
-            "visible": ":visible",
-            "tag": ":tag",
-            "direction": ":direction",
-            "disabled": ":disabled",
-            "focused": ":focused",
-            "value": ":value",
-            "name": ":name",
-            "text": ":text",
-            "description": ":description",
-            "completed": ":completed",
-            "error": ":error",
-            "aria_label": ":aria_label",
-            "aria_labelledBy": ":aria_labelledBy",
-            "aria_describedBy": ":aria_describedBy",
-            "initial": ":initial"
-          },
-          "events": {
-            "bundle:create": "@bundle:create",
-            "plugin:event": "@plugin:event",
-            "show": "@show",
-            "hide": "@hide",
-            "show:before": "@show:before",
-            "hide:before": "@hide:before",
-            "ready": "@ready",
-            "change:rendered": "@change:rendered",
-            "change:visible": "@change:visible",
-            "change:tag": "@change:tag",
-            "change:direction": "@change:direction",
-            "change:size": "@change:size",
-            "change:variant": "@change:variant",
-            "change:disabled": "@change:disabled",
-            "change:focused": "@change:focused",
-            "change:value": "@change:value",
-            "change:name": "@change:name",
-            "change:text": "@change:text",
-            "change:description": "@change:description",
-            "change:completed": "@change:completed",
-            "change:error": "@change:error",
-            "element:ready": "@element:ready",
-            "element:removed": "@element:removed",
-            "action:press": "@action:press",
-            "action:click": "@action:click",
-            "action:focus": "@action:focus",
-            "action:blur": "@action:blur",
-            "aria:change:label": "@aria:change:label",
-            "aria:change:labelledBy": "@aria:change:labelledBy",
-            "aria:change:describedBy": "@aria:change:describedBy"
-          },
-          "models": {
-            "rendered": "@update:rendered",
-            "visible": "@update:visible",
-            "tag": "@update:tag",
-            "direction": "@update:direction",
-            "disabled": "@update:disabled",
-            "focused": "@update:focused",
-            "value": "@update:value",
-            "name": "@update:name",
-            "text": "@update:text",
-            "description": "@update:description",
-            "completed": "@update:completed",
-            "error": "@update:error",
-            "aria_label": "@update:aria_label",
-            "aria_labelledBy": "@update:aria_labelledBy",
-            "aria_describedBy": "@update:aria_describedBy"
-          },
-          "slots": {
-            "leading": { "name": "leading", "syntax": "<template #leading>" },
-            "indicator": { "name": "indicator", "syntax": "<template #indicator>" },
-            "default": { "name": "default", "syntax": "<template #default>" },
-            "subtitle": { "name": "subtitle", "syntax": "<template #subtitle>" },
-            "separator": { "name": "separator", "syntax": "<template #separator>" },
-            "details": { "name": "details", "syntax": "<template #details>" }
-          }
-        },
-        "react": {
-          "props": {
-            "ctrl": "ctrl",
-            "embedded": "embedded",
-            "pluginProps": "pluginProps",
-            "rendered": "rendered",
-            "visible": "visible",
-            "tag": "tag",
-            "direction": "direction",
-            "disabled": "disabled",
-            "focused": "focused",
-            "value": "value",
-            "name": "name",
-            "text": "text",
-            "description": "description",
-            "completed": "completed",
-            "error": "error",
-            "aria_label": "aria_label",
-            "aria_labelledBy": "aria_labelledBy",
-            "aria_describedBy": "aria_describedBy",
-            "initial": "initial"
-          },
-          "events": {
-            "bundle:create": "onBundleCreate",
-            "plugin:event": "onPluginEvent",
-            "show": "onShow",
-            "hide": "onHide",
-            "show:before": "onShowBefore",
-            "hide:before": "onHideBefore",
-            "ready": "onReady",
-            "change:rendered": "onChangeRendered",
-            "change:visible": "onChangeVisible",
-            "change:tag": "onChangeTag",
-            "change:direction": "onChangeDirection",
-            "change:size": "onChangeSize",
-            "change:variant": "onChangeVariant",
-            "change:disabled": "onChangeDisabled",
-            "change:focused": "onChangeFocused",
-            "change:value": "onChangeValue",
-            "change:name": "onChangeName",
-            "change:text": "onChangeText",
-            "change:description": "onChangeDescription",
-            "change:completed": "onChangeCompleted",
-            "change:error": "onChangeError",
-            "element:ready": "onElementReady",
-            "element:removed": "onElementRemoved",
-            "action:press": "onActionPress",
-            "action:click": "onActionClick",
-            "action:focus": "onActionFocus",
-            "action:blur": "onActionBlur",
-            "aria:change:label": "onAriaChangeLabel",
-            "aria:change:labelledBy": "onAriaChangeLabelledBy",
-            "aria:change:describedBy": "onAriaChangeDescribedBy"
-          },
-          "models": {},
-          "slots": {
-            "leading": { "name": "leading", "syntax": "leading" },
-            "indicator": { "name": "indicator", "syntax": "indicator" },
-            "default": { "name": "children", "syntax": "children" },
-            "subtitle": { "name": "subtitle", "syntax": "subtitle" },
-            "separator": { "name": "separator", "syntax": "separator" },
-            "details": { "name": "details", "syntax": "details" }
-          }
-        },
-        "angular": {
-          "props": {
-            "ctrl": "[ctrl]",
-            "embedded": "[embedded]",
-            "pluginProps": "[pluginProps]",
-            "rendered": "[rendered]",
-            "visible": "[visible]",
-            "direction": "[direction]",
-            "disabled": "[disabled]",
-            "focused": "[focused]",
-            "value": "[value]",
-            "name": "[name]",
-            "text": "[text]",
-            "description": "[description]",
-            "completed": "[completed]",
-            "error": "[error]",
-            "aria_label": "[aria_label]",
-            "aria_labelledBy": "[aria_labelledBy]",
-            "aria_describedBy": "[aria_describedBy]",
-            "initial": "[initial]"
-          },
-          "events": {
-            "bundle:create": "(soBundleCreate)",
-            "plugin:event": "(soPluginEvent)",
-            "show": "(soShow)",
-            "hide": "(soHide)",
-            "show:before": "(soShowBefore)",
-            "hide:before": "(soHideBefore)",
-            "ready": "(soReady)",
-            "change:rendered": "(soChangeRendered)",
-            "change:visible": "(soChangeVisible)",
-            "change:tag": "(soChangeTag)",
-            "change:direction": "(soChangeDirection)",
-            "change:size": "(soChangeSize)",
-            "change:variant": "(soChangeVariant)",
-            "change:disabled": "(soChangeDisabled)",
-            "change:focused": "(soChangeFocused)",
-            "change:value": "(soChangeValue)",
-            "change:name": "(soChangeName)",
-            "change:text": "(soChangeText)",
-            "change:description": "(soChangeDescription)",
-            "change:completed": "(soChangeCompleted)",
-            "change:error": "(soChangeError)",
-            "element:ready": "(soElementReady)",
-            "element:removed": "(soElementRemoved)",
-            "action:press": "(soActionPress)",
-            "action:click": "(soActionClick)",
-            "action:focus": "(soActionFocus)",
-            "action:blur": "(soActionBlur)",
-            "aria:change:label": "(soAriaChangeLabel)",
-            "aria:change:labelledBy": "(soAriaChangeLabelledBy)",
-            "aria:change:describedBy": "(soAriaChangeDescribedBy)"
-          },
-          "models": {
-            "rendered": "(renderedChange)",
-            "visible": "(visibleChange)",
-            "tag": "(tagChange)",
-            "direction": "(directionChange)",
-            "disabled": "(disabledChange)",
-            "focused": "(focusedChange)",
-            "value": "(valueChange)",
-            "name": "(nameChange)",
-            "text": "(textChange)",
-            "description": "(descriptionChange)",
-            "completed": "(completedChange)",
-            "error": "(errorChange)",
-            "aria_label": "(aria_labelChange)",
-            "aria_labelledBy": "(aria_labelledByChange)",
-            "aria_describedBy": "(aria_describedByChange)"
-          },
-          "slots": {
-            "leading": { "name": "leading", "syntax": "<ng-template slot=\"leading\">" },
-            "indicator": { "name": "indicator", "syntax": "<ng-template slot=\"indicator\">" },
-            "default": { "name": "default", "syntax": "<ng-template slot=\"default\">" },
-            "subtitle": { "name": "subtitle", "syntax": "<ng-template slot=\"subtitle\">" },
-            "separator": { "name": "separator", "syntax": "<ng-template slot=\"separator\">" },
-            "details": { "name": "details", "syntax": "<ng-template slot=\"details\">" }
-          }
-        },
-        "solid": {
-          "props": {
-            "ctrl": "ctrl",
-            "embedded": "embedded",
-            "pluginProps": "pluginProps",
-            "rendered": "rendered",
-            "visible": "visible",
-            "tag": "tag",
-            "direction": "direction",
-            "disabled": "disabled",
-            "focused": "focused",
-            "value": "value",
-            "name": "name",
-            "text": "text",
-            "description": "description",
-            "completed": "completed",
-            "error": "error",
-            "aria_label": "aria_label",
-            "aria_labelledBy": "aria_labelledBy",
-            "aria_describedBy": "aria_describedBy",
-            "initial": "initial"
-          },
-          "events": {
-            "bundle:create": "onBundleCreate",
-            "plugin:event": "onPluginEvent",
-            "show": "onShow",
-            "hide": "onHide",
-            "show:before": "onShowBefore",
-            "hide:before": "onHideBefore",
-            "ready": "onReady",
-            "change:rendered": "onChangeRendered",
-            "change:visible": "onChangeVisible",
-            "change:tag": "onChangeTag",
-            "change:direction": "onChangeDirection",
-            "change:size": "onChangeSize",
-            "change:variant": "onChangeVariant",
-            "change:disabled": "onChangeDisabled",
-            "change:focused": "onChangeFocused",
-            "change:value": "onChangeValue",
-            "change:name": "onChangeName",
-            "change:text": "onChangeText",
-            "change:description": "onChangeDescription",
-            "change:completed": "onChangeCompleted",
-            "change:error": "onChangeError",
-            "element:ready": "onElementReady",
-            "element:removed": "onElementRemoved",
-            "action:press": "onActionPress",
-            "action:click": "onActionClick",
-            "action:focus": "onActionFocus",
-            "action:blur": "onActionBlur",
-            "aria:change:label": "onAriaChangeLabel",
-            "aria:change:labelledBy": "onAriaChangeLabelledBy",
-            "aria:change:describedBy": "onAriaChangeDescribedBy"
-          },
-          "models": {},
-          "slots": {
-            "leading": { "name": "leading", "syntax": "leading" },
-            "indicator": { "name": "indicator", "syntax": "indicator" },
-            "default": { "name": "children", "syntax": "children" },
-            "subtitle": { "name": "subtitle", "syntax": "subtitle" },
-            "separator": { "name": "separator", "syntax": "separator" },
-            "details": { "name": "details", "syntax": "details" }
-          }
-        },
-        "svelte": {
-          "props": {
-            "ctrl": "ctrl",
-            "embedded": "embedded",
-            "pluginProps": "pluginProps",
-            "rendered": "rendered",
-            "visible": "visible",
-            "tag": "tag",
-            "direction": "direction",
-            "disabled": "disabled",
-            "focused": "focused",
-            "value": "value",
-            "name": "name",
-            "text": "text",
-            "description": "description",
-            "completed": "completed",
-            "error": "error",
-            "aria_label": "aria_label",
-            "aria_labelledBy": "aria_labelledBy",
-            "aria_describedBy": "aria_describedBy",
-            "initial": "initial"
-          },
-          "events": {
-            "bundle:create": "onBundleCreate",
-            "plugin:event": "onPluginEvent",
-            "show": "onShow",
-            "hide": "onHide",
-            "show:before": "onShowBefore",
-            "hide:before": "onHideBefore",
-            "ready": "onReady",
-            "change:rendered": "onChangeRendered",
-            "change:visible": "onChangeVisible",
-            "change:tag": "onChangeTag",
-            "change:direction": "onChangeDirection",
-            "change:size": "onChangeSize",
-            "change:variant": "onChangeVariant",
-            "change:disabled": "onChangeDisabled",
-            "change:focused": "onChangeFocused",
-            "change:value": "onChangeValue",
-            "change:name": "onChangeName",
-            "change:text": "onChangeText",
-            "change:description": "onChangeDescription",
-            "change:completed": "onChangeCompleted",
-            "change:error": "onChangeError",
-            "element:ready": "onElementReady",
-            "element:removed": "onElementRemoved",
-            "action:press": "onActionPress",
-            "action:click": "onActionClick",
-            "action:focus": "onActionFocus",
-            "action:blur": "onActionBlur",
-            "aria:change:label": "onAriaChangeLabel",
-            "aria:change:labelledBy": "onAriaChangeLabelledBy",
-            "aria:change:describedBy": "onAriaChangeDescribedBy"
-          },
-          "models": {},
-          "slots": {
-            "leading": { "name": "leading", "syntax": "{#snippet leading(scope)}" },
-            "indicator": { "name": "indicator", "syntax": "{#snippet indicator(scope)}" },
-            "default": { "name": "children", "syntax": "{#snippet children(scope)}" },
-            "subtitle": { "name": "subtitle", "syntax": "{#snippet subtitle(scope)}" },
-            "separator": { "name": "separator", "syntax": "{#snippet separator(scope)}" },
-            "details": { "name": "details", "syntax": "{#snippet details(scope)}" }
-          }
-        },
-        "webc": {
-          "props": {
-            "ctrl": "ctrl",
-            "embedded": "embedded",
-            "pluginProps": "pluginProps",
-            "rendered": "rendered",
-            "visible": "visible",
-            "tag": "tag",
-            "direction": "direction",
-            "disabled": "disabled",
-            "focused": "focused",
-            "value": "value",
-            "name": "name",
-            "text": "text",
-            "description": "description",
-            "completed": "completed",
-            "error": "error",
-            "aria_label": "aria_label",
-            "aria_labelledBy": "aria_labelledBy",
-            "aria_describedBy": "aria_describedBy",
-            "initial": "initial"
-          },
-          "events": {
-            "bundle:create": "addEventListener('so:bundle:create', handler)",
-            "plugin:event": "addEventListener('so:plugin:event', handler)",
-            "show": "addEventListener('so:show', handler)",
-            "hide": "addEventListener('so:hide', handler)",
-            "show:before": "addEventListener('so:show:before', handler)",
-            "hide:before": "addEventListener('so:hide:before', handler)",
-            "ready": "addEventListener('so:ready', handler)",
-            "change:rendered": "addEventListener('so:change:rendered', handler)",
-            "change:visible": "addEventListener('so:change:visible', handler)",
-            "change:tag": "addEventListener('so:change:tag', handler)",
-            "change:direction": "addEventListener('so:change:direction', handler)",
-            "change:size": "addEventListener('so:change:size', handler)",
-            "change:variant": "addEventListener('so:change:variant', handler)",
-            "change:disabled": "addEventListener('so:change:disabled', handler)",
-            "change:focused": "addEventListener('so:change:focused', handler)",
-            "change:value": "addEventListener('so:change:value', handler)",
-            "change:name": "addEventListener('so:change:name', handler)",
-            "change:text": "addEventListener('so:change:text', handler)",
-            "change:description": "addEventListener('so:change:description', handler)",
-            "change:completed": "addEventListener('so:change:completed', handler)",
-            "change:error": "addEventListener('so:change:error', handler)",
-            "element:ready": "addEventListener('so:element:ready', handler)",
-            "element:removed": "addEventListener('so:element:removed', handler)",
-            "action:press": "addEventListener('so:action:press', handler)",
-            "action:click": "addEventListener('so:action:click', handler)",
-            "action:focus": "addEventListener('so:action:focus', handler)",
-            "action:blur": "addEventListener('so:action:blur', handler)",
-            "aria:change:label": "addEventListener('so:aria:change:label', handler)",
-            "aria:change:labelledBy": "addEventListener('so:aria:change:labelledBy', handler)",
-            "aria:change:describedBy": "addEventListener('so:aria:change:describedBy', handler)"
-          },
-          "models": {},
-          "slots": {
-            "leading": { "name": "leading", "syntax": "slot=\"leading\"" },
-            "indicator": { "name": "indicator", "syntax": "slot=\"indicator\"" },
-            "default": { "name": "default", "syntax": "(unnamed slot)" },
-            "subtitle": { "name": "subtitle", "syntax": "slot=\"subtitle\"" },
-            "separator": { "name": "separator", "syntax": "slot=\"separator\"" },
-            "details": { "name": "details", "syntax": "slot=\"details\"" }
-          }
-        }
-      }
-    },
-    "stepper": {
-      "source": "packages/setup/content/descriptors/components/stepper.descriptor.ts",
-      "props": [
-        {
-          "name": "ctrl",
-          "canonicalName": "ctrl",
-          "type": "import(\"@soxa-ui/core\").TStepper | undefined",
-          "declaredType": "TInstance",
-          "required": false,
-          "description": "Готовый инстанс ядра вместо собранного по пропсам. Только сам объект:\nреактивная обёртка фреймворка ему не нужна — ядро шлёт события само.",
-          "hasDefault": false
-        },
-        {
-          "name": "embedded",
-          "canonicalName": "embedded",
-          "type": "string | undefined",
-          "declaredType": "string",
-          "required": false,
-          "description": "Имя места, если компонент — деталь разметки другого компонента soxa\n(`tags.close`). Ставит разметка библиотеки, а не потребитель: по нему\n`usePlugins` со `scope: 'own'` пропускает вложенный компонент.",
-          "hasDefault": false
-        },
-        {
-          "name": "pluginProps",
-          "canonicalName": "pluginProps",
-          "type": "import(\"@soxa-ui/setup\").TExternalPluginProps | undefined",
-          "declaredType": "TExternalPluginProps",
-          "required": false,
-          "description": "Значения пропсов плагинов, поставленных снаружи (`usePlugins`,\n`bundle.use`), по имени пропа: `{ timer_ms: 500 }`. Типы ключей\nприложение дописывает в `IExternalPluginProps`.",
-          "hasDefault": false
-        },
-        {
-          "name": "rendered",
-          "canonicalName": "rendered",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "description": "Отрисован ли компонент (аналог v-if)",
-          "hasDefault": true,
-          "default": "true"
-        },
-        {
-          "name": "visible",
-          "canonicalName": "visible",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "description": "Виден ли компонент (логическая видимость)",
-          "hasDefault": true,
-          "default": "true"
-        },
-        {
-          "name": "tag",
-          "canonicalName": "tag",
-          "type": "string | object | undefined",
-          "declaredType": "string | object",
-          "required": false,
-          "hasDefault": true,
-          "default": "\"div\""
-        },
-        {
-          "name": "direction",
-          "canonicalName": "direction",
-          "type": "import(\"@soxa-ui/core\").TDirection | undefined",
-          "declaredType": "TDirection",
-          "values": ["ltr", "rtl", "inherit"],
-          "required": false,
-          "description": "Направление письма; по умолчанию `'inherit'` — наследуется от предка",
-          "hasDefault": true,
-          "default": "\"inherit\""
-        },
-        {
-          "name": "size",
-          "canonicalName": "size",
-          "type": "\"sm\" | \"normal\" | \"lg\" | \"xl\" | \"2xl\" | undefined",
-          "declaredType": "TComponentSize",
-          "values": ["sm", "normal", "lg", "xl", "2xl"],
-          "required": false,
-          "hasDefault": true,
-          "default": "\"normal\""
-        },
-        {
-          "name": "variant",
-          "canonicalName": "variant",
-          "type": "undefined",
-          "declaredType": "TComponentVariant",
-          "required": false,
-          "description": "Вариант темы. Не задан — модификатора нет, компонент выглядит вариантом темы по умолчанию",
-          "hasDefault": true,
-          "default": "undefined"
-        },
-        {
-          "name": "disabled",
-          "canonicalName": "disabled",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "hasDefault": true,
-          "default": "false"
-        },
-        {
-          "name": "focused",
-          "canonicalName": "focused",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "hasDefault": true,
-          "default": "false"
-        },
-        {
-          "name": "value",
-          "canonicalName": "value",
-          "type": "string | number | undefined",
-          "declaredType": "TValue",
-          "required": false,
-          "hasDefault": true,
-          "default": "undefined"
-        },
-        {
-          "name": "name",
-          "canonicalName": "name",
-          "type": "string | undefined",
-          "declaredType": "string",
-          "required": false,
-          "hasDefault": true,
-          "default": "\"\""
-        },
-        {
-          "name": "linear",
-          "canonicalName": "linear",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "description": "Constrain forward navigation to the first incomplete step.",
-          "hasDefault": true,
-          "default": "false"
-        },
-        {
-          "name": "interactive",
-          "canonicalName": "interactive",
-          "type": "boolean | undefined",
-          "declaredType": "boolean",
-          "required": false,
-          "description": "Whether step headers are buttons. Explicit Previous and Next actions still work.",
-          "hasDefault": true,
-          "default": "true"
-        },
-        {
-          "name": "orientation",
-          "canonicalName": "orientation",
-          "type": "import(\"@soxa-ui/core\").TOrientation | undefined",
-          "declaredType": "TOrientation",
-          "values": ["horizontal", "vertical"],
-          "required": false,
-          "hasDefault": true,
-          "default": "\"horizontal\""
-        },
-        {
-          "name": "aria_label",
-          "canonicalName": "aria:label",
-          "type": "string | undefined",
-          "required": false,
-          "hasDefault": true,
-          "default": "undefined"
-        },
-        {
-          "name": "aria_labelledBy",
-          "canonicalName": "aria:labelledBy",
-          "type": "string | undefined",
-          "required": false,
-          "hasDefault": true,
-          "default": "undefined"
-        },
-        {
-          "name": "aria_describedBy",
-          "canonicalName": "aria:describedBy",
-          "type": "string | undefined",
-          "required": false,
-          "hasDefault": true,
-          "default": "undefined"
-        },
-        {
-          "name": "initial",
-          "canonicalName": "initial",
-          "type": "import(\"@soxa-ui/setup\").ICollectionInitialSource | undefined",
-          "required": false,
-          "hasDefault": true,
-          "default": "undefined"
-        },
-        {
-          "name": "engine",
-          "canonicalName": "engine",
-          "type": "import(\"@soxa-ui/core\").TStepperCollectionEngine | undefined",
-          "declaredType": "TCollectionEngine",
-          "required": false,
-          "hasDefault": false
-        },
-        {
-          "name": "items",
-          "canonicalName": "items",
-          "type": "readonly (import(\"@soxa-ui/core\").IStepperItem | import(\"@soxa-ui/core\").TCollectionEngineItemSource<import(\"@soxa-ui/core\").IStepperItemProps>)[] | undefined",
-          "declaredType": "ReadonlyArray<TCollectionEngineItemSource<TItemProps> | TItem>",
-          "required": false,
-          "description": "Данные для наполнения коллекции: сырые props (+ meta `_`) или готовые\nинстансы. Массив только для чтения: коллекция его не меняет.",
-          "hasDefault": false
-        },
-        {
-          "name": "trackBy",
-          "canonicalName": "trackBy",
-          "type": "((item: import(\"@soxa-ui/core\").IStepperItem | import(\"@soxa-ui/core\").TCollectionEngineItemSource<import(\"@soxa-ui/core\").IStepperItem>) => unknown) | undefined",
-          "declaredType": "(item: TCollectionEngineItemSource<TItem> | TItem) => unknown",
-          "required": false,
-          "description": "Функция идентификации элемента для патчинга (принимает источник или инстанс).",
-          "hasDefault": true,
-          "default": "undefined"
-        }
-      ],
-      "events": [
-        {
-          "name": "bundle:create",
-          "type": "(bundle: unknown) => void",
-          "description": "Плагины компонента созданы при монтировании; аргумент — их bundle."
-        },
-        {
-          "name": "plugin:event",
-          "type": "(event: import(\"@soxa-ui/core\").TPluginEvent) => void",
-          "description": "Событие внешнего плагина: полное имя (`timer:tick`) и аргументы."
-        },
-        { "name": "show", "type": "() => void", "description": "show" },
-        { "name": "hide", "type": "() => void", "description": "hide" },
-        {
-          "name": "show:before",
-          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
-          "description": "show:before — вызов e.preventDefault() отменяет показ"
-        },
-        {
-          "name": "hide:before",
-          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
-          "description": "hide:before — вызов e.preventDefault() отменяет скрытие"
-        },
-        {
-          "name": "ready",
-          "type": "(value: boolean) => void",
-          "description": "Component availability changed: true when the instance has an announced\nroot DOM element, false when that root is removed or replaced.\nDoes not wait for other plugins' DOM handlers or asynchronous work."
-        },
-        {
-          "name": "change:rendered",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
-          "description": "change:rendered"
-        },
-        {
-          "name": "change:visible",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
-          "description": "change:visible"
-        },
-        {
-          "name": "change:tag",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | object>) => void",
-          "description": "change:tag"
-        },
-        {
-          "name": "change:direction",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TDirection>) => void",
-          "description": "change:direction"
-        },
-        {
-          "name": "change:size",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TComponentSize>) => void",
-          "description": "change:size"
-        },
-        {
-          "name": "change:variant",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TComponentVariant | undefined>) => void",
-          "description": "change:variant"
-        },
-        {
-          "name": "change:disabled",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
-        },
-        {
-          "name": "change:focused",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
-        },
-        {
-          "name": "change:value",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TStepperValue>) => void",
-          "description": "change:value"
-        },
-        {
-          "name": "change:name",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string>) => void",
-          "description": "change:name"
-        },
-        {
-          "name": "change:linear",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
-        },
-        {
-          "name": "change:interactive",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
-        },
-        {
-          "name": "change:orientation",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TOrientation>) => void"
-        },
-        { "name": "element:ready", "type": "(element: Element) => void" },
-        { "name": "element:removed", "type": "() => void" },
-        { "name": "action:press", "type": "(event: MouseEvent) => void" },
-        { "name": "action:click", "type": "(event: MouseEvent) => void" },
-        { "name": "action:focus", "type": "(event: FocusEvent) => void" },
-        { "name": "action:blur", "type": "(event: FocusEvent) => void" },
-        {
-          "name": "aria:change:label",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
-        },
-        {
-          "name": "aria:change:labelledBy",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
-        },
-        {
-          "name": "aria:change:describedBy",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | undefined>) => void"
-        },
-        {
-          "name": "engine:create",
-          "type": "(engine: import(\"@soxa-ui/core\").TCollectionEngine<import(\"@soxa-ui/core\").IStepperItem, any, any>) => void",
-          "description": "Движок создан и готов к использованию. Передаётся сам движок."
-        },
-        {
-          "name": "item:add:before",
-          "type": "(e: import(\"@soxa-ui/core\").TInsertEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
-          "description": "Вызывается ПЕРЕД добавлением элемента (до мутации хранилища).\n- Изменить `e.item` — подменить элемент (например, item factory).\n- Вызвать `e.preventDefault()` — отменить вставку."
-        },
-        {
-          "name": "item:added",
-          "type": "(e: import(\"@soxa-ui/core\").TInsertEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
-          "description": "Вызывается при добавлении одного элемента"
-        },
-        {
-          "name": "item:remove:before",
-          "type": "(e: import(\"@soxa-ui/core\").TRemoveEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
-          "description": "Вызывается ПЕРЕД удалением элемента (до мутации хранилища).\nВызвать `e.preventDefault()` — отменить удаление."
-        },
-        {
-          "name": "item:removed",
-          "type": "(e: import(\"@soxa-ui/core\").TRemoveEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
-          "description": "Вызывается при удалении одного элемента"
-        },
-        {
-          "name": "item:update:before",
-          "type": "(e: import(\"@soxa-ui/core\").TUpdateEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
-          "description": "Вызывается ПЕРЕД изменением элемента (до мутации). Можно подменить `e.item`/`e.changes` или `preventDefault()`."
-        },
-        {
-          "name": "item:updated",
-          "type": "(e: import(\"@soxa-ui/core\").TUpdateEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
-          "description": "Вызывается при изменении одного элемента"
-        },
-        {
-          "name": "item:move:before",
-          "type": "(e: import(\"@soxa-ui/core\").TMoveEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
-          "description": "Вызывается ПЕРЕД перемещением элемента (до мутации хранилища).\nМожно подменить `e.newIndex` или вызвать `e.preventDefault()`."
-        },
-        {
-          "name": "item:moved",
-          "type": "(e: import(\"@soxa-ui/core\").TMoveEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
-          "description": "Вызывается при перемещении элемента"
-        },
-        {
-          "name": "items:clear:before",
-          "type": "(e: import(\"@soxa-ui/core\").TClearEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
-          "description": "Вызывается ПЕРЕД полной очисткой коллекции (до мутации хранилища).\nОдин хук на всю операцию — `e.items` снимок состава, `e.preventDefault()`\nотменяет очистку целиком."
-        },
-        {
-          "name": "change:count",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<number>) => void",
-          "description": "Изменение количества элементов"
-        },
-        {
-          "name": "reset",
-          "type": "() => void",
-          "description": "Полный сброс или очистка коллекции"
-        },
-        {
-          "name": "items:added",
-          "type": "(items: readonly import(\"@soxa-ui/core\").TCollectionEngineItemSource<import(\"@soxa-ui/core\").IStepperItem>[]) => void",
-          "description": "Уходит вход — источники (сырые props + meta `_`) или готовые инстансы, не\nто, что легло в хранилище. Тот же массив, что дали операции, поэтому\nтолько для чтения."
-        },
-        {
-          "name": "items:removed",
-          "type": "(items: readonly import(\"@soxa-ui/core\").IStepperItem[]) => void",
-          "description": "Уходит вход `remove` — тот же массив, только для чтения; у `clear` — пустой."
-        },
-        {
-          "name": "change:shown",
-          "type": "() => void",
-          "description": "Показанное изменилось — из-за состава или из-за условий отбора.\nБез аргументов: читателю нужно перечитать `shown`."
-        },
-        {
-          "name": "change:items",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<readonly import(\"@soxa-ui/core\").IStepperItem[]>) => void",
-          "description": "The storage composition changed. `items` is a snapshot: a listener may\nkeep it, and the next change does not alter it."
-        },
-        {
-          "name": "change:trackBy",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<((item: import(\"@soxa-ui/core\").IStepperItem | import(\"@soxa-ui/core\").TCollectionEngineItemSource<import(\"@soxa-ui/core\").IStepperItem>) => unknown) | undefined>) => void"
-        },
-        {
-          "name": "item:activate:before",
-          "type": "(e: import(\"@soxa-ui/core\").TActivateEvent<import(\"@soxa-ui/core\").IStepperItem>) => void",
-          "description": "Элемент вот-вот станет активным; `preventDefault()` отменяет активацию"
-        },
-        {
-          "name": "change:activation",
-          "type": "(item: import(\"@soxa-ui/core\").IStepperItem | undefined, previous: import(\"@soxa-ui/core\").IStepperItem | undefined) => void",
-          "description": "Активный сменился. `item` — новый активный, `previous` — прежний;\n`undefined` — активного нет (сняли) или не было. Сменилась активность\nровно у этих двух: item-адаптер по ним решает, касается ли смена его\nэлемента."
-        }
-      ],
-      "slots": [
-        { "name": "default", "description": "Declarative steps in list order", "scope": {} },
-        {
-          "name": "item",
-          "description": "Replace the default rendering of a data item",
-          "scope": {
-            "item": { "type": "import(\"@soxa-ui/core\").IStepperItem", "required": true }
-          }
-        },
-        {
-          "name": "content",
-          "description": "Panels and controls outside the list",
-          "scope": {
-            "value": { "type": "string | number | undefined", "required": true },
-            "canNext": { "type": "boolean", "required": true },
-            "canPrevious": { "type": "boolean", "required": true },
-            "next": { "type": "() => boolean", "required": true },
-            "previous": { "type": "() => boolean", "required": true }
-          }
-        }
-      ],
-      "frameworks": {
-        "vue": {
-          "props": {
-            "ctrl": ":ctrl",
-            "embedded": ":embedded",
-            "pluginProps": ":pluginProps",
-            "rendered": ":rendered",
-            "visible": ":visible",
-            "tag": ":tag",
-            "direction": ":direction",
-            "size": ":size",
-            "variant": ":variant",
-            "disabled": ":disabled",
-            "focused": ":focused",
-            "value": ":value",
-            "name": ":name",
-            "linear": ":linear",
-            "interactive": ":interactive",
-            "orientation": ":orientation",
-            "aria_label": ":aria_label",
-            "aria_labelledBy": ":aria_labelledBy",
-            "aria_describedBy": ":aria_describedBy",
-            "initial": ":initial",
-            "engine": ":engine",
-            "items": ":items",
-            "trackBy": ":trackBy"
-          },
-          "events": {
-            "bundle:create": "@bundle:create",
-            "plugin:event": "@plugin:event",
-            "show": "@show",
-            "hide": "@hide",
-            "show:before": "@show:before",
-            "hide:before": "@hide:before",
-            "ready": "@ready",
-            "change:rendered": "@change:rendered",
-            "change:visible": "@change:visible",
-            "change:tag": "@change:tag",
-            "change:direction": "@change:direction",
-            "change:size": "@change:size",
-            "change:variant": "@change:variant",
-            "change:disabled": "@change:disabled",
-            "change:focused": "@change:focused",
-            "change:value": "@change:value",
-            "change:name": "@change:name",
-            "change:linear": "@change:linear",
-            "change:interactive": "@change:interactive",
-            "change:orientation": "@change:orientation",
-            "element:ready": "@element:ready",
-            "element:removed": "@element:removed",
-            "action:press": "@action:press",
-            "action:click": "@action:click",
-            "action:focus": "@action:focus",
-            "action:blur": "@action:blur",
-            "aria:change:label": "@aria:change:label",
-            "aria:change:labelledBy": "@aria:change:labelledBy",
-            "aria:change:describedBy": "@aria:change:describedBy",
-            "engine:create": "@engine:create",
-            "item:add:before": "@item:add:before",
-            "item:added": "@item:added",
-            "item:remove:before": "@item:remove:before",
-            "item:removed": "@item:removed",
-            "item:update:before": "@item:update:before",
-            "item:updated": "@item:updated",
-            "item:move:before": "@item:move:before",
-            "item:moved": "@item:moved",
-            "items:clear:before": "@items:clear:before",
-            "change:count": "@change:count",
-            "reset": "@reset",
-            "items:added": "@items:added",
-            "items:removed": "@items:removed",
-            "change:shown": "@change:shown",
-            "change:items": "@change:items",
-            "change:trackBy": "@change:trackBy",
-            "item:activate:before": "@item:activate:before",
-            "change:activation": "@change:activation"
-          },
-          "models": {
-            "rendered": "@update:rendered",
-            "visible": "@update:visible",
-            "tag": "@update:tag",
-            "direction": "@update:direction",
-            "size": "@update:size",
-            "variant": "@update:variant",
-            "disabled": "@update:disabled",
-            "focused": "@update:focused",
-            "value": "@update:value",
-            "name": "@update:name",
-            "linear": "@update:linear",
-            "interactive": "@update:interactive",
-            "orientation": "@update:orientation",
-            "aria_label": "@update:aria_label",
-            "aria_labelledBy": "@update:aria_labelledBy",
-            "aria_describedBy": "@update:aria_describedBy",
-            "items": "@update:items",
-            "trackBy": "@update:trackBy"
-          },
-          "slots": {
-            "default": { "name": "default", "syntax": "<template #default>" },
-            "item": { "name": "item", "syntax": "<template #item>" },
-            "content": { "name": "content", "syntax": "<template #content>" }
-          }
-        },
-        "react": {
-          "props": {
-            "ctrl": "ctrl",
-            "embedded": "embedded",
-            "pluginProps": "pluginProps",
-            "rendered": "rendered",
-            "visible": "visible",
-            "tag": "tag",
-            "direction": "direction",
-            "size": "size",
-            "variant": "variant",
-            "disabled": "disabled",
-            "focused": "focused",
-            "value": "value",
-            "name": "name",
-            "linear": "linear",
-            "interactive": "interactive",
-            "orientation": "orientation",
-            "aria_label": "aria_label",
-            "aria_labelledBy": "aria_labelledBy",
-            "aria_describedBy": "aria_describedBy",
-            "initial": "initial",
-            "engine": "engine",
-            "items": "items",
-            "trackBy": "trackBy"
-          },
-          "events": {
-            "bundle:create": "onBundleCreate",
-            "plugin:event": "onPluginEvent",
-            "show": "onShow",
-            "hide": "onHide",
-            "show:before": "onShowBefore",
-            "hide:before": "onHideBefore",
-            "ready": "onReady",
-            "change:rendered": "onChangeRendered",
-            "change:visible": "onChangeVisible",
-            "change:tag": "onChangeTag",
-            "change:direction": "onChangeDirection",
-            "change:size": "onChangeSize",
-            "change:variant": "onChangeVariant",
-            "change:disabled": "onChangeDisabled",
-            "change:focused": "onChangeFocused",
-            "change:value": "onChangeValue",
-            "change:name": "onChangeName",
-            "change:linear": "onChangeLinear",
-            "change:interactive": "onChangeInteractive",
-            "change:orientation": "onChangeOrientation",
-            "element:ready": "onElementReady",
-            "element:removed": "onElementRemoved",
-            "action:press": "onActionPress",
-            "action:click": "onActionClick",
-            "action:focus": "onActionFocus",
-            "action:blur": "onActionBlur",
-            "aria:change:label": "onAriaChangeLabel",
-            "aria:change:labelledBy": "onAriaChangeLabelledBy",
-            "aria:change:describedBy": "onAriaChangeDescribedBy",
-            "engine:create": "onEngineCreate",
-            "item:add:before": "onItemAddBefore",
-            "item:added": "onItemAdded",
-            "item:remove:before": "onItemRemoveBefore",
-            "item:removed": "onItemRemoved",
-            "item:update:before": "onItemUpdateBefore",
-            "item:updated": "onItemUpdated",
-            "item:move:before": "onItemMoveBefore",
-            "item:moved": "onItemMoved",
-            "items:clear:before": "onItemsClearBefore",
-            "change:count": "onChangeCount",
-            "reset": "onReset",
-            "items:added": "onItemsAdded",
-            "items:removed": "onItemsRemoved",
-            "change:shown": "onChangeShown",
-            "change:items": "onChangeItems",
-            "change:trackBy": "onChangeTrackBy",
-            "item:activate:before": "onItemActivateBefore",
-            "change:activation": "onChangeActivation"
-          },
-          "models": {},
-          "slots": {
-            "default": { "name": "children", "syntax": "children" },
-            "item": { "name": "item", "syntax": "item" },
-            "content": { "name": "content", "syntax": "content" }
-          }
-        },
-        "angular": {
-          "props": {
-            "ctrl": "[ctrl]",
-            "embedded": "[embedded]",
-            "pluginProps": "[pluginProps]",
-            "rendered": "[rendered]",
-            "visible": "[visible]",
-            "direction": "[direction]",
-            "size": "[size]",
-            "variant": "[variant]",
-            "disabled": "[disabled]",
-            "focused": "[focused]",
-            "value": "[value]",
-            "name": "[name]",
-            "linear": "[linear]",
-            "interactive": "[interactive]",
-            "orientation": "[orientation]",
-            "aria_label": "[aria_label]",
-            "aria_labelledBy": "[aria_labelledBy]",
-            "aria_describedBy": "[aria_describedBy]",
-            "initial": "[initial]",
-            "engine": "[engine]",
-            "items": "[items]",
-            "trackBy": "[trackBy]"
-          },
-          "events": {
-            "bundle:create": "(soBundleCreate)",
-            "plugin:event": "(soPluginEvent)",
-            "show": "(soShow)",
-            "hide": "(soHide)",
-            "show:before": "(soShowBefore)",
-            "hide:before": "(soHideBefore)",
-            "ready": "(soReady)",
-            "change:rendered": "(soChangeRendered)",
-            "change:visible": "(soChangeVisible)",
-            "change:tag": "(soChangeTag)",
-            "change:direction": "(soChangeDirection)",
-            "change:size": "(soChangeSize)",
-            "change:variant": "(soChangeVariant)",
-            "change:disabled": "(soChangeDisabled)",
-            "change:focused": "(soChangeFocused)",
-            "change:value": "(soChangeValue)",
-            "change:name": "(soChangeName)",
-            "change:linear": "(soChangeLinear)",
-            "change:interactive": "(soChangeInteractive)",
-            "change:orientation": "(soChangeOrientation)",
-            "element:ready": "(soElementReady)",
-            "element:removed": "(soElementRemoved)",
-            "action:press": "(soActionPress)",
-            "action:click": "(soActionClick)",
-            "action:focus": "(soActionFocus)",
-            "action:blur": "(soActionBlur)",
-            "aria:change:label": "(soAriaChangeLabel)",
-            "aria:change:labelledBy": "(soAriaChangeLabelledBy)",
-            "aria:change:describedBy": "(soAriaChangeDescribedBy)",
-            "engine:create": "(soEngineCreate)",
-            "item:add:before": "(soItemAddBefore)",
-            "item:added": "(soItemAdded)",
-            "item:remove:before": "(soItemRemoveBefore)",
-            "item:removed": "(soItemRemoved)",
-            "item:update:before": "(soItemUpdateBefore)",
-            "item:updated": "(soItemUpdated)",
-            "item:move:before": "(soItemMoveBefore)",
-            "item:moved": "(soItemMoved)",
-            "items:clear:before": "(soItemsClearBefore)",
-            "change:count": "(soChangeCount)",
-            "reset": "(soReset)",
-            "items:added": "(soItemsAdded)",
-            "items:removed": "(soItemsRemoved)",
-            "change:shown": "(soChangeShown)",
-            "change:items": "(soChangeItems)",
-            "change:trackBy": "(soChangeTrackBy)",
-            "item:activate:before": "(soItemActivateBefore)",
-            "change:activation": "(soChangeActivation)"
-          },
-          "models": {
-            "rendered": "(renderedChange)",
-            "visible": "(visibleChange)",
-            "tag": "(tagChange)",
-            "direction": "(directionChange)",
-            "size": "(sizeChange)",
-            "variant": "(variantChange)",
-            "disabled": "(disabledChange)",
-            "focused": "(focusedChange)",
-            "value": "(valueChange)",
-            "name": "(nameChange)",
-            "linear": "(linearChange)",
-            "interactive": "(interactiveChange)",
-            "orientation": "(orientationChange)",
-            "aria_label": "(aria_labelChange)",
-            "aria_labelledBy": "(aria_labelledByChange)",
-            "aria_describedBy": "(aria_describedByChange)",
-            "items": "(itemsChange)",
-            "trackBy": "(trackByChange)"
-          },
-          "slots": {
-            "default": { "name": "default", "syntax": "<ng-content>" },
-            "item": { "name": "item", "syntax": "<ng-template slot=\"item\">" },
-            "content": { "name": "content", "syntax": "<ng-template slot=\"content\">" }
-          }
-        },
-        "solid": {
-          "props": {
-            "ctrl": "ctrl",
-            "embedded": "embedded",
-            "pluginProps": "pluginProps",
-            "rendered": "rendered",
-            "visible": "visible",
-            "tag": "tag",
-            "direction": "direction",
-            "size": "size",
-            "variant": "variant",
-            "disabled": "disabled",
-            "focused": "focused",
-            "value": "value",
-            "name": "name",
-            "linear": "linear",
-            "interactive": "interactive",
-            "orientation": "orientation",
-            "aria_label": "aria_label",
-            "aria_labelledBy": "aria_labelledBy",
-            "aria_describedBy": "aria_describedBy",
-            "initial": "initial",
-            "engine": "engine",
-            "items": "items",
-            "trackBy": "trackBy"
-          },
-          "events": {
-            "bundle:create": "onBundleCreate",
-            "plugin:event": "onPluginEvent",
-            "show": "onShow",
-            "hide": "onHide",
-            "show:before": "onShowBefore",
-            "hide:before": "onHideBefore",
-            "ready": "onReady",
-            "change:rendered": "onChangeRendered",
-            "change:visible": "onChangeVisible",
-            "change:tag": "onChangeTag",
-            "change:direction": "onChangeDirection",
-            "change:size": "onChangeSize",
-            "change:variant": "onChangeVariant",
-            "change:disabled": "onChangeDisabled",
-            "change:focused": "onChangeFocused",
-            "change:value": "onChangeValue",
-            "change:name": "onChangeName",
-            "change:linear": "onChangeLinear",
-            "change:interactive": "onChangeInteractive",
-            "change:orientation": "onChangeOrientation",
-            "element:ready": "onElementReady",
-            "element:removed": "onElementRemoved",
-            "action:press": "onActionPress",
-            "action:click": "onActionClick",
-            "action:focus": "onActionFocus",
-            "action:blur": "onActionBlur",
-            "aria:change:label": "onAriaChangeLabel",
-            "aria:change:labelledBy": "onAriaChangeLabelledBy",
-            "aria:change:describedBy": "onAriaChangeDescribedBy",
-            "engine:create": "onEngineCreate",
-            "item:add:before": "onItemAddBefore",
-            "item:added": "onItemAdded",
-            "item:remove:before": "onItemRemoveBefore",
-            "item:removed": "onItemRemoved",
-            "item:update:before": "onItemUpdateBefore",
-            "item:updated": "onItemUpdated",
-            "item:move:before": "onItemMoveBefore",
-            "item:moved": "onItemMoved",
-            "items:clear:before": "onItemsClearBefore",
-            "change:count": "onChangeCount",
-            "reset": "onReset",
-            "items:added": "onItemsAdded",
-            "items:removed": "onItemsRemoved",
-            "change:shown": "onChangeShown",
-            "change:items": "onChangeItems",
-            "change:trackBy": "onChangeTrackBy",
-            "item:activate:before": "onItemActivateBefore",
-            "change:activation": "onChangeActivation"
-          },
-          "models": {},
-          "slots": {
-            "default": { "name": "children", "syntax": "children" },
-            "item": { "name": "item", "syntax": "item" },
-            "content": { "name": "content", "syntax": "content" }
-          }
-        },
-        "svelte": {
-          "props": {
-            "ctrl": "ctrl",
-            "embedded": "embedded",
-            "pluginProps": "pluginProps",
-            "rendered": "rendered",
-            "visible": "visible",
-            "tag": "tag",
-            "direction": "direction",
-            "size": "size",
-            "variant": "variant",
-            "disabled": "disabled",
-            "focused": "focused",
-            "value": "value",
-            "name": "name",
-            "linear": "linear",
-            "interactive": "interactive",
-            "orientation": "orientation",
-            "aria_label": "aria_label",
-            "aria_labelledBy": "aria_labelledBy",
-            "aria_describedBy": "aria_describedBy",
-            "initial": "initial",
-            "engine": "engine",
-            "items": "items",
-            "trackBy": "trackBy"
-          },
-          "events": {
-            "bundle:create": "onBundleCreate",
-            "plugin:event": "onPluginEvent",
-            "show": "onShow",
-            "hide": "onHide",
-            "show:before": "onShowBefore",
-            "hide:before": "onHideBefore",
-            "ready": "onReady",
-            "change:rendered": "onChangeRendered",
-            "change:visible": "onChangeVisible",
-            "change:tag": "onChangeTag",
-            "change:direction": "onChangeDirection",
-            "change:size": "onChangeSize",
-            "change:variant": "onChangeVariant",
-            "change:disabled": "onChangeDisabled",
-            "change:focused": "onChangeFocused",
-            "change:value": "onChangeValue",
-            "change:name": "onChangeName",
-            "change:linear": "onChangeLinear",
-            "change:interactive": "onChangeInteractive",
-            "change:orientation": "onChangeOrientation",
-            "element:ready": "onElementReady",
-            "element:removed": "onElementRemoved",
-            "action:press": "onActionPress",
-            "action:click": "onActionClick",
-            "action:focus": "onActionFocus",
-            "action:blur": "onActionBlur",
-            "aria:change:label": "onAriaChangeLabel",
-            "aria:change:labelledBy": "onAriaChangeLabelledBy",
-            "aria:change:describedBy": "onAriaChangeDescribedBy",
-            "engine:create": "onEngineCreate",
-            "item:add:before": "onItemAddBefore",
-            "item:added": "onItemAdded",
-            "item:remove:before": "onItemRemoveBefore",
-            "item:removed": "onItemRemoved",
-            "item:update:before": "onItemUpdateBefore",
-            "item:updated": "onItemUpdated",
-            "item:move:before": "onItemMoveBefore",
-            "item:moved": "onItemMoved",
-            "items:clear:before": "onItemsClearBefore",
-            "change:count": "onChangeCount",
-            "reset": "onReset",
-            "items:added": "onItemsAdded",
-            "items:removed": "onItemsRemoved",
-            "change:shown": "onChangeShown",
-            "change:items": "onChangeItems",
-            "change:trackBy": "onChangeTrackBy",
-            "item:activate:before": "onItemActivateBefore",
-            "change:activation": "onChangeActivation"
-          },
-          "models": {},
-          "slots": {
-            "default": { "name": "children", "syntax": "{#snippet children()}" },
-            "item": { "name": "item", "syntax": "{#snippet item(scope)}" },
-            "content": { "name": "content", "syntax": "{#snippet content(scope)}" }
-          }
-        },
-        "webc": {
-          "props": {
-            "ctrl": "ctrl",
-            "embedded": "embedded",
-            "pluginProps": "pluginProps",
-            "rendered": "rendered",
-            "visible": "visible",
-            "tag": "tag",
-            "direction": "direction",
-            "size": "size",
-            "variant": "variant",
-            "disabled": "disabled",
-            "focused": "focused",
-            "value": "value",
-            "name": "name",
-            "linear": "linear",
-            "interactive": "interactive",
-            "orientation": "orientation",
-            "aria_label": "aria_label",
-            "aria_labelledBy": "aria_labelledBy",
-            "aria_describedBy": "aria_describedBy",
-            "initial": "initial",
-            "engine": "engine",
-            "items": "items",
-            "trackBy": "trackBy"
-          },
-          "events": {
-            "bundle:create": "addEventListener('so:bundle:create', handler)",
-            "plugin:event": "addEventListener('so:plugin:event', handler)",
-            "show": "addEventListener('so:show', handler)",
-            "hide": "addEventListener('so:hide', handler)",
-            "show:before": "addEventListener('so:show:before', handler)",
-            "hide:before": "addEventListener('so:hide:before', handler)",
-            "ready": "addEventListener('so:ready', handler)",
-            "change:rendered": "addEventListener('so:change:rendered', handler)",
-            "change:visible": "addEventListener('so:change:visible', handler)",
-            "change:tag": "addEventListener('so:change:tag', handler)",
-            "change:direction": "addEventListener('so:change:direction', handler)",
-            "change:size": "addEventListener('so:change:size', handler)",
-            "change:variant": "addEventListener('so:change:variant', handler)",
-            "change:disabled": "addEventListener('so:change:disabled', handler)",
-            "change:focused": "addEventListener('so:change:focused', handler)",
-            "change:value": "addEventListener('so:change:value', handler)",
-            "change:name": "addEventListener('so:change:name', handler)",
-            "change:linear": "addEventListener('so:change:linear', handler)",
-            "change:interactive": "addEventListener('so:change:interactive', handler)",
-            "change:orientation": "addEventListener('so:change:orientation', handler)",
-            "element:ready": "addEventListener('so:element:ready', handler)",
-            "element:removed": "addEventListener('so:element:removed', handler)",
-            "action:press": "addEventListener('so:action:press', handler)",
-            "action:click": "addEventListener('so:action:click', handler)",
-            "action:focus": "addEventListener('so:action:focus', handler)",
-            "action:blur": "addEventListener('so:action:blur', handler)",
-            "aria:change:label": "addEventListener('so:aria:change:label', handler)",
-            "aria:change:labelledBy": "addEventListener('so:aria:change:labelledBy', handler)",
-            "aria:change:describedBy": "addEventListener('so:aria:change:describedBy', handler)",
-            "engine:create": "addEventListener('so:engine:create', handler)",
-            "item:add:before": "addEventListener('so:item:add:before', handler)",
-            "item:added": "addEventListener('so:item:added', handler)",
-            "item:remove:before": "addEventListener('so:item:remove:before', handler)",
-            "item:removed": "addEventListener('so:item:removed', handler)",
-            "item:update:before": "addEventListener('so:item:update:before', handler)",
-            "item:updated": "addEventListener('so:item:updated', handler)",
-            "item:move:before": "addEventListener('so:item:move:before', handler)",
-            "item:moved": "addEventListener('so:item:moved', handler)",
-            "items:clear:before": "addEventListener('so:items:clear:before', handler)",
-            "change:count": "addEventListener('so:change:count', handler)",
-            "reset": "addEventListener('so:reset', handler)",
-            "items:added": "addEventListener('so:items:added', handler)",
-            "items:removed": "addEventListener('so:items:removed', handler)",
-            "change:shown": "addEventListener('so:change:shown', handler)",
-            "change:items": "addEventListener('so:change:items', handler)",
-            "change:trackBy": "addEventListener('so:change:trackBy', handler)",
-            "item:activate:before": "addEventListener('so:item:activate:before', handler)",
-            "change:activation": "addEventListener('so:change:activation', handler)"
-          },
-          "models": {},
-          "slots": {
-            "default": { "name": "default", "syntax": "(unnamed slot)" },
-            "item": { "name": "item", "syntax": "slot=\"item\"" },
-            "content": { "name": "content", "syntax": "slot=\"content\"" }
-          }
         }
       }
     }

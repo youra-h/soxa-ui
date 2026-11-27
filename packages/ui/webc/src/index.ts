@@ -185,4 +185,11 @@ export type {
 	TSplitterHandleElementProps,
 } from './components/splitter'
 export { TGuideElement, type TGuideElementProps } from './components/guide'
+
+export { TStepperElement, TStepperItemElement, TStepperContentElement } from './components/stepper'
+export type {
+	TStepperElementProps,
+	TStepperItemElementProps,
+	TStepperContentElementProps,
+} from './components/stepper'
 export { TTreeElement, type TTreeElementProps } from './components/tree'

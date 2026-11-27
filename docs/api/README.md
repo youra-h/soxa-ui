@@ -168,8 +168,7 @@ npm run check:api-package        # verify packaged data and the current version
 ```
 
 The generator lives in [tools/api-docs](../../tools/api-docs). It discovers the existing
-Angular component manifests to reuse their descriptor/facade wiring. For components with no
-Angular adapter, it reads equivalent manifests from `tools/api-docs/manifests`. It checks exports
+Angular component manifests to reuse their descriptor/facade wiring, then checks exports
 of all six adapters without importing their UI runtime. Properties and event names come
 from the runtime descriptors; value types come from the inferred TypeScript contracts.
 Collection setters absent from a constructor props interface are read from the descriptor's
