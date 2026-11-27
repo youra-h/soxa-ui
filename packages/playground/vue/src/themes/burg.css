@@ -14,9 +14,9 @@
 	--so-accent-400: var(--so-burg-progress-accent);
 	--so-negative-500: var(--so-burg-danger);
 	--so-negative-700: var(--so-burg-danger);
-	--so-positive-500: light-dark(#2c6846, #8dcca6);
+	--so-positive-500: var(--so-burg-positive);
 	--so-positive-700: var(--so-positive-500);
-	--so-caution-500: light-dark(#805419, #e1ba76);
+	--so-caution-500: var(--so-burg-caution);
 	--so-caution-700: var(--so-caution-500);
 	--so-negative-100: color-mix(in srgb, var(--so-burg-surface), var(--so-negative-500) 12%);
 	--so-positive-100: color-mix(in srgb, var(--so-burg-surface), var(--so-positive-500) 12%);

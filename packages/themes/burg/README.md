@@ -63,6 +63,14 @@ FileUpload pairs a dashed drop target with compact file rows. Use its
 Tags use a 24px pill and 12px text at normal size. Avatar and AvatarGroup
 keep the shared size scale. Separator uses the shared line thickness.
 
+### Messages and loading states
+
+Alert defaults to a soft tint with a thin semantic edge. Toasts default to
+an outlined surface. Both offer `soft`, `outlined`, and `filled`; a toast
+can override the manager view. Badge keeps the shared size scale and offers
+filled and outlined treatments. Skeleton uses a subtle pulse by default.
+The `wave` animation falls back to a pulse when motion is reduced.
+
 Set `data-so-theme="burg"` or `data-so-theme="burg-dark"` on the document root
 or the container of the themed components. Load the stylesheet and register
 the layout plugins at the application entry point.
