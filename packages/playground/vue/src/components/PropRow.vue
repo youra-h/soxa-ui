@@ -2,7 +2,7 @@
 import { computed, onUnmounted, ref, shallowRef, watch } from 'vue'
 import { createEngine, isEventSource } from '@soxa-ui/core'
 import { TPluginBundle } from '@soxa-ui/plugins'
-import { Field } from '@soxa-ui/vue'
+import { CodeBlock, Field } from '@soxa-ui/vue'
 import {
 	createInstance,
 	isEmptyField,
@@ -264,6 +264,13 @@ const instanceBind = computed(() => ({
 
 			<PropControl :control="control" v-model="value" @update:error="controlError = $event" />
 		</Field>
+		<CodeBlock
+			v-if="control.sourceTitle"
+			:code="JSON.stringify(value, null, 2)"
+			:title="control.sourceTitle"
+			language="json"
+			maxHeight="22rem"
+		/>
 
 		<PreviewColumns
 			:host="host"

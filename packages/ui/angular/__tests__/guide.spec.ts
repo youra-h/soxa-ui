@@ -37,7 +37,7 @@ describe('Guide', () => {
 
 		const panel = find(document, '.so-guide', HTMLDivElement)
 		expect(panel.getAttribute('aria-modal')).toBe('true')
-		expect(panel.previousElementSibling?.querySelector('.so-guide__backdrop')).not.toBeNull()
+		expect(panel.previousElementSibling?.querySelector('.so-backdrop')).not.toBeNull()
 
 		const next = Array.from(panel.querySelectorAll('button')).find(
 			(button) => button.textContent?.trim() === 'Next',

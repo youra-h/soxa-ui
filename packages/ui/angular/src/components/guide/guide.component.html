@@ -1,14 +1,19 @@
 @if (placed()) {
 	@let view = state();
-	@if (view['visible'] && (view['modal'] || view['position_spotlight'])) {
+	@if (view['visible'] && (view['backdropRendered'] || view['position_spotlight'])) {
 		<div
 			#companion
 			class="so-guide__decoration"
 			[style]="view['position_layer']"
 			aria-hidden="true"
 		>
-			@if (view['modal']) {
-				<div class="so-guide__backdrop"></div>
+			@if (view['backdropRendered']) {
+				<div
+					[so-modal-backdrop]="{
+						backdropClasses: view['backdropClasses'],
+						layout_backdropStyles: view['position_backdrop'],
+					}"
+				></div>
 			}
 			@if (view['position_spotlight']; as spotlight) {
 				<div class="so-guide__spotlight" [style]="spotlight"></div>
@@ -37,14 +42,18 @@
 			<button so-button type="button" embedded="guide.next" (click)="instance()?.next()">
 				{{ labels?.forward }}
 			</button>
+		</div>
+		@if (view['closable']) {
 			<button
 				so-button
 				type="button"
+				class="so-guide__close"
 				embedded="guide.close"
+				[attr.aria-label]="labels?.close"
 				(click)="instance()?.requestClose('button')"
 			>
-				{{ labels?.close }}
+				<svg so-icon embedded="guide.close-icon" so-role-icon="close"></svg>
 			</button>
-		</div>
+		}
 	}
 }

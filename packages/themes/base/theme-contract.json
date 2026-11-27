@@ -1883,11 +1883,11 @@
         "packages/ui/vue/src/components/guide/Guide.vue",
         "packages/ui/webc/src/components/guide/guide.template.ts"
       ],
-      "description": "Navigation and dismissal controls.",
+      "description": "Previous and next step controls.",
       "scope": "Guide"
     },
     {
-      "name": "so-guide__backdrop",
+      "name": "so-guide__close",
       "sources": [
         "packages/ui/angular/src/components/guide/guide.component.html",
         "packages/ui/react/src/components/guide/Guide.tsx",
@@ -1896,7 +1896,7 @@
         "packages/ui/vue/src/components/guide/Guide.vue",
         "packages/ui/webc/src/components/guide/guide.template.ts"
       ],
-      "description": "Viewport backdrop shown by a modal guide step.",
+      "description": "Icon button that dismisses the guide.",
       "scope": "Guide"
     },
     {

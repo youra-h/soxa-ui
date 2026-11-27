@@ -5,6 +5,7 @@ import {
 	extendBinding,
 	useAdapter,
 	useExpose,
+	roleIcon,
 	type SetupContext,
 } from '../../adapter'
 import BaseGuide, { type GuideProps } from './base.component'
@@ -19,6 +20,6 @@ export default {
 
 		exposeRoot(expose, binding.rootElement)
 
-		return extendBinding(binding, { guide: adapter.instance })
+		return extendBinding(binding, { guide: adapter.instance, closeIcon: roleIcon('close') })
 	},
 }

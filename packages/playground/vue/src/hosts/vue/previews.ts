@@ -55,6 +55,7 @@ import {
 	AvatarGroup,
 	Badge,
 	CodeBlock,
+	Guide,
 	FileUpload,
 	Splitter,
 	Stepper,
@@ -267,6 +268,39 @@ const DialogPreview = defineComponent({
 						h(Button, { text: 'Сохранить', onClick: () => setShown(false) }),
 					],
 				},
+			),
+		]
+	},
+})
+
+const GuidePreview = defineComponent({
+	name: 'GuidePreview',
+	inheritAttrs: false,
+	props: { visible: Boolean },
+	setup(props, { attrs }) {
+		const shown = ref(props.visible)
+		watch(
+			() => props.visible,
+			(visible) => {
+				shown.value = visible
+			},
+		)
+
+		return () => [
+			h(Button, {
+				text: 'Запустить Guide',
+				onClick: () => {
+					shown.value = true
+				},
+			}),
+			h(
+				Guide as Component,
+				mergeProps(attrs, {
+					visible: shown.value,
+					'onUpdate:visible': (value: boolean) => {
+						shown.value = value
+					},
+				}),
 			),
 		]
 	},
@@ -625,6 +659,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 	// A button opens the dialog, which runs on local state (see `DialogPreview`)
 	'alert-dialog': (bind) => h(AlertDialogPreview, bind),
 	dialog: (bind) => h(DialogPreview, bind),
+	guide: (bind) => h(GuidePreview, bind),
 
 	// A button opens the drawer, which runs on local state (see `DrawerPreview`)
 	drawer: (bind) => h(DrawerPreview, bind),

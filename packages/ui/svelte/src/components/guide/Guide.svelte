@@ -1,8 +1,12 @@
 <script lang="ts">
-	import { clickAction, Dynamic, Teleport, toRootProps, toStyleText } from '../../adapter'
+	import { clickAction, Dynamic, Teleport, roleIcon, toRootProps, toStyleText } from '../../adapter'
+	import Backdrop from '../../adapter/backdrop/Backdrop.svelte'
 	import { Button } from '../button'
+	import { Icon } from '../icon'
 	import { setupGuide } from './setup.component'
 	import type { GuideProps } from './base.component'
+
+	const CLOSE = roleIcon('close')
 
 	let { ref = $bindable(), ...props }: GuideProps = $props()
 	const mountId = $props.id()
@@ -17,9 +21,17 @@
 
 {#if state.rendered}
 	<Teleport to={state.target}>
-		{#if state.visible && (state.modal || state.position_spotlight)}
+		{#if state.visible && (state.backdropRendered || state.position_spotlight)}
 			<div class="so-guide__decoration" style={toStyleText(state.position_layer)} aria-hidden="true">
-				{#if state.modal}<div class="so-guide__backdrop"></div>{/if}
+				{#if state.backdropRendered}
+					<Backdrop
+						state={{
+							backdropClasses: state.backdropClasses,
+							layout_backdropStyles: state.position_backdrop,
+							visible: true,
+						}}
+					/>
+				{/if}
 				{#if state.position_spotlight}
 					<div class="so-guide__spotlight" style={toStyleText(state.position_spotlight)}></div>
 				{/if}
@@ -44,8 +56,18 @@
 						{state.names_labels?.previous}
 					</Button>
 					<Button type="button" embedded="guide.next" {@attach next}>{state.names_labels?.forward}</Button>
-					<Button type="button" embedded="guide.close" {@attach close}>{state.names_labels?.close}</Button>
 				</div>
+				{#if state.closable}
+					<Button
+						type="button"
+						embedded="guide.close"
+						class="so-guide__close"
+						aria_label={state.names_labels?.close}
+						{@attach close}
+					>
+						<Icon embedded="guide.close-icon" tag={CLOSE} />
+					</Button>
+				{/if}
 			{/if}
 		</Dynamic>
 	</Teleport>

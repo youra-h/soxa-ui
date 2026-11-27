@@ -43,14 +43,14 @@ describe('Guide', () => {
 		const panel = document.querySelector('.so-guide')
 		expect(panel?.getAttribute('aria-modal')).toBe('true')
 		expect(panel?.getAttribute('aria-label')).toBe('Introduction')
-		expect(document.querySelector('.so-guide__backdrop')).not.toBeNull()
+		expect(document.querySelector('.so-guide__decoration > .so-backdrop')).not.toBeNull()
 
 		button('Next')?.click()
 		await tick()
 		expect(panel?.getAttribute('aria-modal')).toBeNull()
 		expect(panel?.hasAttribute('data-placement')).toBe(true)
 		expect(document.querySelector('.so-guide__spotlight')).not.toBeNull()
-		expect(document.querySelector('.so-guide__backdrop')).toBeNull()
+		expect(document.querySelector('.so-guide__decoration > .so-backdrop')).toBeNull()
 		expect(target.hasAttribute('aria-hidden')).toBe(false)
 
 		target.click()

@@ -17185,6 +17185,26 @@
           "default": "undefined"
         },
         {
+          "name": "backdrop",
+          "canonicalName": "backdrop",
+          "type": "undefined",
+          "declaredType": "TBackdropView",
+          "required": false,
+          "description": "Backdrop view. By default, only modal steps have a backdrop.",
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "closable",
+          "canonicalName": "closable",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Shows the close button at the top of the panel.",
+          "hasDefault": true,
+          "default": "true"
+        },
+        {
           "name": "hideOutside_enabled",
           "canonicalName": "hideOutside:enabled",
           "type": "boolean | undefined",
@@ -17268,6 +17288,14 @@
           "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").IGuideStep | undefined>) => void"
         },
         {
+          "name": "change:backdrop",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TBackdropView | undefined>) => void"
+        },
+        {
+          "name": "change:closable",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        },
+        {
           "name": "close:before",
           "type": "(event: import(\"@soxa-ui/core\").TCloseEvent) => void"
         },
@@ -17296,6 +17324,8 @@
             "direction": ":direction",
             "target": ":target",
             "steps": ":steps",
+            "backdrop": ":backdrop",
+            "closable": ":closable",
             "hideOutside_enabled": ":hideOutside_enabled",
             "scrollLock_enabled": ":scrollLock_enabled"
           },
@@ -17315,6 +17345,8 @@
             "change:target": "@change:target",
             "change:steps": "@change:steps",
             "change:step": "@change:step",
+            "change:backdrop": "@change:backdrop",
+            "change:closable": "@change:closable",
             "close:before": "@close:before",
             "complete": "@complete",
             "element:ready": "@element:ready",
@@ -17329,6 +17361,8 @@
             "direction": "@update:direction",
             "target": "@update:target",
             "steps": "@update:steps",
+            "backdrop": "@update:backdrop",
+            "closable": "@update:closable",
             "hideOutside_enabled": "@update:hideOutside_enabled",
             "scrollLock_enabled": "@update:scrollLock_enabled"
           },
@@ -17345,6 +17379,8 @@
             "direction": "direction",
             "target": "target",
             "steps": "steps",
+            "backdrop": "backdrop",
+            "closable": "closable",
             "hideOutside_enabled": "hideOutside_enabled",
             "scrollLock_enabled": "scrollLock_enabled"
           },
@@ -17364,6 +17400,8 @@
             "change:target": "onChangeTarget",
             "change:steps": "onChangeSteps",
             "change:step": "onChangeStep",
+            "change:backdrop": "onChangeBackdrop",
+            "change:closable": "onChangeClosable",
             "close:before": "onCloseBefore",
             "complete": "onComplete",
             "element:ready": "onElementReady",
@@ -17384,6 +17422,8 @@
             "direction": "[direction]",
             "target": "[target]",
             "steps": "[steps]",
+            "backdrop": "[backdrop]",
+            "closable": "[closable]",
             "hideOutside_enabled": "[hideOutside_enabled]",
             "scrollLock_enabled": "[scrollLock_enabled]"
           },
@@ -17403,6 +17443,8 @@
             "change:target": "(soChangeTarget)",
             "change:steps": "(soChangeSteps)",
             "change:step": "(soChangeStep)",
+            "change:backdrop": "(soChangeBackdrop)",
+            "change:closable": "(soChangeClosable)",
             "close:before": "(soCloseBefore)",
             "complete": "(soComplete)",
             "element:ready": "(soElementReady)",
@@ -17417,6 +17459,8 @@
             "direction": "(directionChange)",
             "target": "(targetChange)",
             "steps": "(stepsChange)",
+            "backdrop": "(backdropChange)",
+            "closable": "(closableChange)",
             "hideOutside_enabled": "(hideOutside_enabledChange)",
             "scrollLock_enabled": "(scrollLock_enabledChange)"
           },
@@ -17433,6 +17477,8 @@
             "direction": "direction",
             "target": "target",
             "steps": "steps",
+            "backdrop": "backdrop",
+            "closable": "closable",
             "hideOutside_enabled": "hideOutside_enabled",
             "scrollLock_enabled": "scrollLock_enabled"
           },
@@ -17452,6 +17498,8 @@
             "change:target": "onChangeTarget",
             "change:steps": "onChangeSteps",
             "change:step": "onChangeStep",
+            "change:backdrop": "onChangeBackdrop",
+            "change:closable": "onChangeClosable",
             "close:before": "onCloseBefore",
             "complete": "onComplete",
             "element:ready": "onElementReady",
@@ -17473,6 +17521,8 @@
             "direction": "direction",
             "target": "target",
             "steps": "steps",
+            "backdrop": "backdrop",
+            "closable": "closable",
             "hideOutside_enabled": "hideOutside_enabled",
             "scrollLock_enabled": "scrollLock_enabled"
           },
@@ -17492,6 +17542,8 @@
             "change:target": "onChangeTarget",
             "change:steps": "onChangeSteps",
             "change:step": "onChangeStep",
+            "change:backdrop": "onChangeBackdrop",
+            "change:closable": "onChangeClosable",
             "close:before": "onCloseBefore",
             "complete": "onComplete",
             "element:ready": "onElementReady",
@@ -17513,6 +17565,8 @@
             "direction": "direction",
             "target": "target",
             "steps": "steps",
+            "backdrop": "backdrop",
+            "closable": "closable",
             "hideOutside_enabled": "hideOutside_enabled",
             "scrollLock_enabled": "scrollLock_enabled"
           },
@@ -17532,6 +17586,8 @@
             "change:target": "addEventListener('so:change:target', handler)",
             "change:steps": "addEventListener('so:change:steps', handler)",
             "change:step": "addEventListener('so:change:step', handler)",
+            "change:backdrop": "addEventListener('so:change:backdrop', handler)",
+            "change:closable": "addEventListener('so:change:closable', handler)",
             "close:before": "addEventListener('so:close:before', handler)",
             "complete": "addEventListener('so:complete', handler)",
             "element:ready": "addEventListener('so:element:ready', handler)",

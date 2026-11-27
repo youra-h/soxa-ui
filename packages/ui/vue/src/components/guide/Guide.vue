@@ -1,19 +1,26 @@
 <script lang="ts">
+import Backdrop from '../../adapter/backdrop/Backdrop'
+import Icon from '../icon/Icon.vue'
 import Button from '../button/Button.vue'
 import SetupGuide from './setup.component'
 
-export default { ...SetupGuide, inheritAttrs: false, components: { Button } }
+export default { ...SetupGuide, inheritAttrs: false, components: { Backdrop, Button, Icon } }
 </script>
 
 <template>
 	<teleport :to="target">
 		<div
-			v-if="rendered && visible && (modal || position_spotlight)"
+			v-if="rendered && visible && (backdropRendered || position_spotlight)"
 			class="so-guide__decoration"
 			:style="position_layer"
 			aria-hidden="true"
 		>
-			<div v-if="modal" class="so-guide__backdrop" />
+			<Backdrop
+				v-if="backdropRendered"
+				visible
+				:classes="backdropClasses"
+				:styles="position_backdrop"
+			/>
 			<div
 				v-if="position_spotlight"
 				class="so-guide__spotlight"
@@ -49,14 +56,17 @@ export default { ...SetupGuide, inheritAttrs: false, components: { Button } }
 					<Button type="button" embedded="guide.next" @click="guide.next()">
 						{{ names_labels?.forward }}
 					</Button>
-					<Button
-						type="button"
-						embedded="guide.close"
-						@click="guide.requestClose('button')"
-					>
-						{{ names_labels?.close }}
-					</Button>
 				</div>
+				<Button
+					v-if="closable"
+					type="button"
+					embedded="guide.close"
+					class="so-guide__close"
+					:aria_label="names_labels?.close"
+					@click="guide.requestClose('button')"
+				>
+					<Icon embedded="guide.close-icon" :tag="closeIcon" />
+				</Button>
 			</template>
 		</component>
 	</teleport>

@@ -6,7 +6,6 @@ import { Guide } from '@soxa-ui/vue'
 import { render } from './render'
 import { renderStand } from './stand'
 import { router } from '../src/router'
-import { useTheme } from '../src/composables/useTheme'
 
 import '@soxa-ui/theme-oren'
 import '../src/styles.css'
@@ -93,75 +92,144 @@ describe('Guide', () => {
 	})
 })
 
-describe('Playground guide', () => {
-	const next = () => page.getByRole('dialog').getByRole('button', { name: /^(Next|Далее)$/ })
-	const spotlight = () => document.querySelector('.so-guide__spotlight')?.getBoundingClientRect()
-	const target = (name: string) =>
-		document.querySelector(`.pg__header [data-guide-anchor="${name}"]`)?.getBoundingClientRect()
-
-	async function open(width: number): Promise<void> {
-		await page.viewport(width, 800)
-		await router.push('/vue/button')
+describe('Guide properties in Playground', () => {
+	async function open(): Promise<void> {
+		await page.viewport(1440, 860)
+		await router.push('/vue')
 		renderStand()
-		await page.getByRole('button', { name: 'Обзор', exact: true }).click()
+		await page.getByRole('option', { name: 'Guide', exact: true }).click()
 		await expect
-			.element(page.getByRole('dialog', { name: 'Знакомство со стендом' }))
+			.element(page.getByRole('heading', { name: 'Guide', exact: true }))
 			.toBeVisible()
 	}
 
-	it('highlights the running stand and advances after its dark switch is clicked', async () => {
-		const { dark } = useTheme()
-		const initial = dark.value
+	function rowOf(name: string): HTMLElement {
+		const row = Array.from(document.querySelectorAll<HTMLElement>('.pg-prop')).find(
+			(section) => section.querySelector('.pg-prop__name')?.textContent?.trim() === name,
+		)
+		if (!row) throw new Error(`Missing Guide property ${name}`)
+		return row
+	}
 
-		try {
-			await open(1440)
-			await next().click()
-			await expect.element(page.getByRole('dialog', { name: 'Фреймворк' })).toBeVisible()
-			expect(target('framework')?.width).toBeGreaterThan(0)
-			await expect.poll(() => spotlight()?.left).toBe(target('framework')?.left)
-			await expect.poll(() => spotlight()?.width).toBe(target('framework')?.width)
-			await next().click()
-			await expect
-				.element(page.getByRole('dialog', { name: 'Анимация движения' }))
-				.toBeVisible()
-			await next().click()
-			await expect
-				.element(page.getByRole('dialog', { name: 'Язык компонентов' }))
-				.toBeVisible()
-			await next().click()
-			await expect.element(page.getByRole('dialog', { name: 'Тёмная схема' })).toBeVisible()
-			await page.getByRole('switch', { name: 'Тёмная' }).click()
+	it('edits the JSON used by both previews and closes via the top icon', async () => {
+		await open()
+		expect(document.querySelector('.pg__header button[aria-haspopup="dialog"]')).toBeNull()
+		const row = rowOf('steps')
+		const editor = page.elementLocator(row).getByRole('textbox')
+		const code = () => row.querySelector('.so-code-block code')?.textContent
+		await expect.poll(code).toContain('Знакомство с Playground')
+		const sample = [
+			{ id: 'test', title: 'Edited guide', anchor: { point: { x: 300, y: 240 } } },
+		]
+		await editor.fill(JSON.stringify(sample))
+		await expect.poll(code).toContain('Edited guide')
+		await editor.fill('[{')
+		await expect.poll(() => row.textContent).toContain('Введите корректный JSON')
+		await expect.poll(code).toContain('Edited guide')
 
+		const buttons = row.querySelectorAll<HTMLButtonElement>('.pg-col button')
+		const starters = Array.from(buttons).filter(
+			(button) => button.textContent?.trim() === 'Запустить Guide',
+		)
+		expect(starters).toHaveLength(2)
+
+		for (const starter of starters) {
+			await userEvent.click(page.elementLocator(starter))
+			const dialog = page.getByRole('dialog', { name: 'Edited guide' })
+			await expect.element(dialog).toBeVisible()
+			const spot = () =>
+				document.querySelector('.so-guide__spotlight')?.getBoundingClientRect()
+			await expect.poll(() => spot()?.left).toBe(296)
+			await expect.poll(() => spot()?.top).toBe(236)
 			await expect
-				.element(page.getByRole('dialog', { name: 'Точка в области превью' }))
-				.toBeVisible()
-			expect(dark.value).toBe(!initial)
-			const x = Math.round(document.documentElement.clientWidth * 0.58)
-			const y = Math.round(document.documentElement.clientHeight * 0.48)
-			await expect.poll(() => spotlight()?.left).toBe(x - 4)
-			await expect.poll(() => spotlight()?.top).toBe(y - 4)
-			await page
-				.getByRole('dialog')
-				.getByRole('button', { name: /^(Done|Готово)$/ })
-				.click()
-			await expect
-				.poll(() => document.querySelector<HTMLElement>('.so-guide')?.style.display)
-				.toBe('none')
-		} finally {
-			dark.value = initial
+				.poll(() => {
+					const marker = document.querySelector('.so-guide__spotlight')
+					return marker && getComputedStyle(marker).borderRadius
+				})
+				.toBe('50%')
+			const button = dialog.getByRole('button', { name: /^(Close|Закрыть)$/ })
+			await expect.element(button).toHaveClass('so-guide__close')
+			expect(button.element().querySelector('svg')).not.toBeNull()
+			const panel = dialog.element().getBoundingClientRect()
+			expect(button.element().getBoundingClientRect().top - panel.top).toBeLessThan(20)
+			await button.click()
+			await expect.poll(() => dialog.query()).toBeNull()
 		}
 	})
 
-	it('uses the visible settings button as the narrow-layout anchor', async () => {
-		await open(375)
-		await next().click()
+	it.each(['react', 'solid', 'svelte', 'angular', 'webc'])(
+		'opens and closes the steps preview on %s',
+		async (framework) => {
+			await router.push('/' + framework + '/guide')
+			renderStand()
+			const row = page.elementLocator(rowOf('steps'))
+			await row.getByRole('button', { name: 'Запустить Guide' }).first().click()
+			const dialog = page.getByRole('dialog', { name: 'Знакомство с Playground' })
+			await expect.element(dialog).toHaveAttribute('aria-modal', 'true')
+			const close = dialog.getByRole('button', { name: /^(Close|Закрыть)$/ })
+			await expect.element(close).toHaveClass('so-guide__close')
+			expect(close.element().querySelector('svg')).not.toBeNull()
+			await close.click()
+			await expect.poll(() => dialog.query()).toBeNull()
+		},
+	)
+
+	it('keeps the backdrop between steps when testing closable', async () => {
+		await open()
+		const row = page.elementLocator(rowOf('closable'))
+		const control = row.getByRole('switch')
+		await expect.element(control).toBeChecked()
+		await control.click()
+		await row.getByRole('button', { name: 'Запустить Guide' }).first().click()
+		const welcome = page.getByRole('dialog', { name: 'Знакомство с Playground' })
+		const backdrop = () => document.querySelector('.so-guide__decoration > .so-backdrop')
+		await expect.element(welcome).toBeVisible()
+		await expect.poll(() => backdrop()?.classList.contains('so-backdrop--view-dim')).toBe(true)
+		expect(welcome.element().querySelector('.so-guide__close')).toBeNull()
+		await welcome.getByRole('button', { name: /^(Next|Далее)$/ }).click()
+		const settings = page.getByRole('dialog', { name: 'Настройки стенда' })
+		await expect.element(settings).toBeVisible()
+		await expect.poll(() => backdrop()?.classList.contains('so-backdrop--view-dim')).toBe(true)
+		expect(settings.element().querySelector('.so-guide__close')).toBeNull()
+		await userEvent.keyboard('{Escape}')
+		await expect.poll(() => settings.query()).toBeNull()
+	})
+
+	it('changes the shared backdrop from the property row', async () => {
+		await open()
+		const row = page.elementLocator(rowOf('backdrop'))
+		const select = row.getByRole('combobox')
+		await select.click()
+		await page.getByRole('option', { name: 'blur', exact: true }).click()
+		await row.getByRole('button', { name: 'Запустить Guide' }).first().click()
+		const dialog = page.getByRole('dialog', { name: 'Знакомство с Playground' })
+		await expect.element(dialog).toBeVisible()
+		const backdrop = () =>
+			document.querySelector<HTMLElement>('.so-guide__decoration > .so-backdrop')
+		await expect.poll(() => backdrop()?.classList.contains('so-backdrop--view-blur')).toBe(true)
+		await dialog.getByRole('button', { name: /^(Next|Далее)$/ }).click()
 		await expect.element(page.getByRole('dialog', { name: 'Настройки стенда' })).toBeVisible()
-		expect(target('settings')?.width).toBeGreaterThan(0)
-		await expect.poll(() => spotlight()?.left).toBe(target('settings')?.left)
-		await expect.poll(() => spotlight()?.width).toBe(target('settings')?.width)
-		await next().click()
+		await expect.poll(() => backdrop()?.style.clipPath).toContain('polygon')
 		await expect
-			.element(page.getByRole('dialog', { name: 'Точка в области превью' }))
-			.toBeVisible()
+			.poll(() => {
+				const element = backdrop()
+				return element && getComputedStyle(element).pointerEvents
+			})
+			.toBe('none')
+
+		const layer = backdrop()
+		const target = document.querySelector('.pg__header [data-guide-anchor="framework"]')
+		if (!layer || !target) throw new Error('Missing backdrop or highlighted header control')
+
+		const rect = target.getBoundingClientRect()
+		layer.style.pointerEvents = 'auto'
+		try {
+			expect(document.elementFromPoint(rect.left - 3, rect.top - 3)).toBe(layer)
+			expect(document.elementFromPoint(rect.left + rect.width / 2, rect.top - 3)).not.toBe(
+				layer,
+			)
+		} finally {
+			layer.style.removeProperty('pointer-events')
+		}
 	})
 })

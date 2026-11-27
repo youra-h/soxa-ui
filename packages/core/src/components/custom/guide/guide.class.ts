@@ -1,6 +1,8 @@
 import { createEngineActivation } from '../../base/collection'
 import { TCloseEvent, type TCloseReason } from '../../base/layer'
 import { TFrame } from '../frame'
+import TBackdrop from '../../base/modal-layer/backdrop.class'
+import type { TBackdropView } from '../../base/modal-layer'
 import type { IGuide, IGuideProps, IGuideStep, TGuideEvents } from './types'
 
 type TItem = { id: string; step: IGuideStep }
@@ -12,12 +14,19 @@ export class TGuide extends TFrame<IGuideProps, TGuideEvents> implements IGuide 
 		width: 'min(22rem, calc(100% - 2rem))',
 		height: 'fit-content',
 		steps: undefined,
+		backdrop: undefined,
+		closable: true,
 	}
 
 	private readonly _engine = createEngineActivation<TItem>()
+	private readonly _backdrop: TBackdrop
+	private _closable: boolean
 
 	constructor(props: IGuideProps = {}) {
 		super({ ...props, visible: false })
+
+		this._backdrop = new TBackdrop(props.backdrop)
+		this._closable = props.closable ?? TGuide.defaultValues.closable
 
 		this._extensions.batch.trackBy = (item) => item.id
 		this._aria.add('role', 'dialog')
@@ -94,6 +103,38 @@ export class TGuide extends TFrame<IGuideProps, TGuideEvents> implements IGuide 
 		return this.step?.mode === 'modal'
 	}
 
+	get backdrop(): TBackdropView | undefined {
+		return this._backdrop.view
+	}
+
+	set backdrop(value: TBackdropView | undefined) {
+		const oldValue = this.backdrop
+		if (oldValue === value) return
+
+		this._backdrop.view = value
+		this.events.emit('change:backdrop', { oldValue, newValue: value })
+	}
+
+	get backdropClasses(): string[] {
+		return this._backdrop.classes.toArray()
+	}
+
+	get backdropRendered(): boolean {
+		return this.modal || this.backdrop !== undefined
+	}
+
+	get closable(): boolean {
+		return this._closable
+	}
+
+	set closable(value: boolean) {
+		const oldValue = this._closable
+		if (value === oldValue) return
+
+		this._closable = value
+		this.events.emit('change:closable', { oldValue, newValue: value })
+	}
+
 	override show(): void {
 		this.start()
 	}
@@ -152,7 +193,12 @@ export class TGuide extends TFrame<IGuideProps, TGuideEvents> implements IGuide 
 	}
 
 	override getProps(): IGuideProps {
-		return { ...super.getProps(), steps: this.steps }
+		return {
+			...super.getProps(),
+			steps: this.steps,
+			backdrop: this.backdrop,
+			closable: this.closable,
+		}
 	}
 
 	protected override afterHide(): void {

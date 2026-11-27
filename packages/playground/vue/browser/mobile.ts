@@ -36,6 +36,7 @@ export const MOBILE_COMPONENTS = [
 	'tooltip',
 	'dialog',
 	'alert-dialog',
+	'guide',
 	'drawer',
 	'toasts',
 	'scroller',

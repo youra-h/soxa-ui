@@ -1,15 +1,30 @@
 import type { ElementType, ReactElement } from 'react'
-import { Teleport, toReactStyle, toRootProps, useClickAction } from '../../adapter'
+import { Teleport, toReactStyle, toRootProps, useClickAction, roleIcon } from '../../adapter'
+import { Backdrop } from '../../adapter/backdrop/Backdrop'
 import { Button } from '../button'
+import { Icon } from '../icon'
 import { useSetupGuide } from './setup.component'
 import type { GuideProps } from './base.component'
+
+const CloseIcon = roleIcon('close')
 
 export function Guide(props: GuideProps): ReactElement | null {
 	const { ctrl, ref, forwardProps, state } = useSetupGuide(props)
 	const previous = useClickAction(() => ctrl.previous())
 	const next = useClickAction(() => ctrl.next())
 	const close = useClickAction(() => ctrl.requestClose('button'))
-	const { tag, rendered, target, visible, modal, step, stepNumber, attrs, aria, dataset } = state
+	const {
+		tag,
+		rendered,
+		target,
+		visible,
+		backdropRendered,
+		step,
+		stepNumber,
+		attrs,
+		aria,
+		dataset,
+	} = state
 	const spotlight = state.position_spotlight
 	const labels = state.names_labels
 
@@ -19,13 +34,21 @@ export function Guide(props: GuideProps): ReactElement | null {
 
 	return (
 		<Teleport to={target}>
-			{visible && (modal || spotlight) ? (
+			{visible && (backdropRendered || spotlight) ? (
 				<div
 					className="so-guide__decoration"
 					style={toReactStyle(state.position_layer)}
 					aria-hidden="true"
 				>
-					{modal ? <div className="so-guide__backdrop" /> : null}
+					{backdropRendered ? (
+						<Backdrop
+							state={{
+								backdropClasses: state.backdropClasses,
+								layout_backdropStyles: state.position_backdrop,
+								visible: true,
+							}}
+						/>
+					) : null}
 					{spotlight ? (
 						<div className="so-guide__spotlight" style={toReactStyle(spotlight)} />
 					) : null}
@@ -53,10 +76,18 @@ export function Guide(props: GuideProps): ReactElement | null {
 							<Button type="button" embedded="guide.next" ref={next}>
 								{labels?.forward}
 							</Button>
-							<Button type="button" embedded="guide.close" ref={close}>
-								{labels?.close}
-							</Button>
 						</div>
+						{state.closable ? (
+							<Button
+								type="button"
+								embedded="guide.close"
+								className="so-guide__close"
+								aria_label={labels?.close}
+								ref={close}
+							>
+								<Icon embedded="guide.close-icon" tag={CloseIcon} />
+							</Button>
+						) : null}
 					</>
 				) : null}
 			</Tag>

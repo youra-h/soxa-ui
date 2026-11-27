@@ -31,6 +31,7 @@ export const A11Y_COMPONENTS = [
 	'tooltip',
 	'dialog',
 	'alert-dialog',
+	'guide',
 	'drawer',
 	'toasts',
 	'scroller',
@@ -519,6 +520,13 @@ export const A11Y_CASES: readonly TAuditCase[] = [
 		'.so-alert-dialog__cancel',
 		'.so-alert-dialog__action',
 	]),
+	audit(
+		'guide',
+		'open',
+		'.so-guide',
+		{ visible: true, steps: [{ id: 'welcome', title: 'Welcome', mode: 'modal' }] },
+		['.so-guide[role="dialog"]', '.so-guide__close'],
+	),
 	...['dialog', 'drawer'].flatMap((id) => [
 		audit(id, 'closed', 'main button', { visible: false }, ['main button'], {
 			absent: ['.so-' + id],

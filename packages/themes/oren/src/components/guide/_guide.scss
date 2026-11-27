@@ -1,4 +1,6 @@
 @use '../../mixins/place';
+@use '../../mixins/modal';
+@use '../button/mixins' as button;
 
 .so-guide {
 	@include place.panel-surface(var(--so-component-surface));
@@ -7,8 +9,12 @@
 	@apply text-so-component shadow-md ring-1 ring-so-neutral-300;
 }
 
-.so-guide__backdrop {
-	background: rgb(0 0 0 / 0.45);
+.so-guide__decoration > .so-backdrop {
+	@include modal.backdrop-views;
+}
+
+:where(.so-guide__close) {
+	@include button.button-view('plain');
 }
 
 .so-guide__spotlight {

@@ -14,7 +14,7 @@ const guide = new TGuide({
     {
       id: 'toolbar',
       title: 'Editor toolbar',
-      anchor: { element: () => document.querySelector('#editor-toolbar') },
+      anchor: { element: '#editor-toolbar' },
       placement: 'bottom-start',
     },
     {
@@ -40,8 +40,9 @@ function cubeSelected() {
 ```
 
 - Give each step a unique `id`. `start(id?)` starts at the first step or an explicit step. While running, `previous()`, `next()`, and `goTo(id)` navigate. `next()` on the last step closes the guide and emits `complete`. `close()` dismisses the tour.
-- An `anchor.element` function resolves against the mounted page. A missing element leaves the panel centered until the target appears. The guide scrolls a resolved element into view.
+- Set `anchor.element` to a CSS selector or a function that returns an element from the mounted page. A missing element leaves the panel centered until the target appears. The guide scrolls a resolved element into view.
 - `anchor.point` takes viewport coordinates in CSS pixels. Project a WebGL object to the canvas and convert the projection to viewport coordinates. Replace the step in `guide.steps` with the same `id` to update its point while it is active. The current step and an unchanged `advanceOn` subscription are retained.
-- `advanceOn` is optional. It listens to an `EventTarget` only while that step is open and mounted. It accepts native DOM events and application events. The Back, Next, and Close actions stay available.
-- Steps are nonmodal by default so that the highlighted control remains usable. With `mode: 'modal'`, Guide shows a backdrop and traps focus inside the panel. Escape inside the panel requests dismissal and focus returns to the opening element when available.
+- `advanceOn` is optional. It listens to an `EventTarget` only while that step is open and mounted. It accepts native DOM events and application events. Back and Next remain available while the guide waits for an event.
+- Steps are nonmodal by default so that the highlighted control remains usable. With `mode: 'modal'`, Guide shows a backdrop and traps focus inside the panel. Set `backdrop` to `none`, `dim`, or `blur` to override the default appearance. An explicit `dim` or `blur` also displays a backdrop on nonmodal steps. The backdrop has a rounded cutout around an element and a circular cutout around a point. Nonmodal steps leave the page interactive.
+- The close button appears in the upper corner. Set `closable: false` to hide it. Escape inside the panel requests dismissal and restores focus to the opening element when available.
 - A guide can also be supplied declaratively with the `steps` prop and the layer's `visible` prop. With an external `ctrl`, write state through that instance.

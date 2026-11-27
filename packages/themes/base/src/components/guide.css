@@ -17,10 +17,17 @@
 	pointer-events: none;
 }
 
-:where(.so-guide__backdrop) {
-	position: fixed;
-	inset: 0;
-	pointer-events: auto;
+:where(.so-guide__close) {
+	position: absolute;
+	inset-block-start: 0.5rem;
+	inset-inline-end: 0.5rem;
+	inline-size: 2rem;
+	block-size: 2rem;
+	padding: 0;
+}
+
+:where(.so-guide:has(.so-guide__close) .so-guide__content) {
+	padding-inline-end: 2.25rem;
 }
 
 :where(.so-guide__spotlight) {

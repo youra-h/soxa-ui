@@ -32,6 +32,7 @@ const position = definePlugin({
 		props: {
 			spotlight: { type: Object, protected: true, triggers: ['change:position'] },
 			layer: { type: Object, protected: true, triggers: ['change:position'] },
+			backdrop: { type: Object, protected: true, triggers: ['change:position'] },
 		},
 	},
 })
@@ -62,6 +63,14 @@ export const GuideDescriptor = defineDescriptor(() =>
 		contribution: {
 			props: {
 				steps: { type: Array, triggers: ['change:steps'] },
+				backdrop: { type: String, triggers: ['change:backdrop'] },
+				closable: { type: Boolean, triggers: ['change:closable'] },
+				backdropClasses: { type: Array, protected: true, triggers: ['change:backdrop'] },
+				backdropRendered: {
+					type: Boolean,
+					protected: true,
+					triggers: ['change:backdrop', 'change:modal'],
+				},
 				step: { type: Object, protected: true, triggers: ['change:step'] },
 				stepNumber: {
 					type: Number,
@@ -71,7 +80,14 @@ export const GuideDescriptor = defineDescriptor(() =>
 				stepCount: { type: Number, protected: true, triggers: ['change:steps'] },
 				modal: { type: Boolean, protected: true, triggers: ['change:modal'] },
 			},
-			events: ['change:steps', 'change:step', 'close:before', 'complete'],
+			events: [
+				'change:steps',
+				'change:step',
+				'change:backdrop',
+				'change:closable',
+				'close:before',
+				'complete',
+			],
 		},
 	}),
 )

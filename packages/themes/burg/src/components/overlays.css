@@ -1,4 +1,11 @@
-:where(.so-popover__panel, .so-date-picker__panel, .so-dialog, .so-alert-dialog, .so-drawer):where(
+:where(
+	.so-popover__panel,
+	.so-date-picker__panel,
+	.so-dialog,
+	.so-alert-dialog,
+	.so-drawer,
+	.so-guide
+):where(
 	[data-so-theme='burg'],
 	[data-so-theme='burg-dark'],
 	[data-so-theme='burg'] *,
@@ -24,6 +31,31 @@
 	&:where(.so-popover__panel),
 	:where(.so-popover__panel) {
 		border-radius: var(--so-popover-radius, var(--so-radius));
+	}
+
+	&:where(.so-guide),
+	:where(.so-guide) {
+		border-radius: var(--so-radius);
+		padding: 1rem;
+	}
+
+	:where(.so-guide__title) {
+		margin: 0.25rem 0;
+		font-weight: 600;
+	}
+
+	:where(.so-guide__progress, .so-guide__description) {
+		margin: 0;
+	}
+
+	:where(.so-guide__actions) {
+		margin-block-start: 1rem;
+	}
+
+	:where(.so-guide__spotlight) {
+		border-radius: var(--so-radius);
+		outline: 2px solid var(--so-burg-focus-edge);
+		outline-offset: 3px;
 	}
 
 	&:where(.so-dialog, .so-alert-dialog, .so-drawer),
@@ -86,7 +118,8 @@
 		.so-dialog__maximize,
 		.so-alert-dialog__close,
 		.so-alert-dialog__cancel,
-		.so-drawer__close
+		.so-drawer__close,
+		.so-guide__close
 	) {
 		--so-burg-button-fill: transparent;
 		--so-burg-button-ink: var(--so-burg-button-tone);
@@ -113,7 +146,10 @@
 	}
 
 	/* The backdrop and panel share their teleport target. */
-	:where(.so-backdrop:has(+ :where(.so-dialog, .so-alert-dialog, .so-drawer))) {
+	:where(
+		.so-backdrop:has(+ :where(.so-dialog, .so-alert-dialog, .so-drawer)),
+		.so-guide__decoration > .so-backdrop
+	) {
 		background-color: var(--so-burg-backdrop-fill);
 
 		&:where(.so-backdrop--view-none) {

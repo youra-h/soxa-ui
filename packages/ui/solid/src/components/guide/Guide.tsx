@@ -1,9 +1,13 @@
 import type { JSX } from 'solid-js'
-import { Root, Teleport, clickAction, createRootProps } from '../../adapter'
+import { Root, Teleport, clickAction, createRootProps, roleIcon } from '../../adapter'
+import { Backdrop } from '../../adapter/backdrop/Backdrop'
 import { Show } from '../../adapter/runtime/flow'
 import { Button } from '../button'
+import { Icon } from '../icon'
 import { setupGuide } from './setup.component'
 import type { GuideProps } from './base.component'
+
+const CLOSE = roleIcon('close')
 
 export function Guide(props: GuideProps): JSX.Element {
 	const binding = setupGuide(props)
@@ -20,14 +24,20 @@ export function Guide(props: GuideProps): JSX.Element {
 	return (
 		<Show when={state.rendered}>
 			<Teleport to={state.target}>
-				<Show when={state.visible && (state.modal || state.position_spotlight)}>
+				<Show when={state.visible && (state.backdropRendered || state.position_spotlight)}>
 					<div
 						class="so-guide__decoration"
 						style={state.position_layer}
 						aria-hidden="true"
 					>
-						<Show when={state.modal}>
-							<div class="so-guide__backdrop" />
+						<Show when={state.backdropRendered}>
+							<Backdrop
+								state={{
+									backdropClasses: state.backdropClasses,
+									layout_backdropStyles: state.position_backdrop,
+									visible: true,
+								}}
+							/>
 						</Show>
 						<Show when={state.position_spotlight}>
 							{(spotlight) => <div class="so-guide__spotlight" style={spotlight()} />}
@@ -61,10 +71,18 @@ export function Guide(props: GuideProps): JSX.Element {
 									<Button type="button" embedded="guide.next" ref={next}>
 										{state.names_labels?.forward}
 									</Button>
-									<Button type="button" embedded="guide.close" ref={close}>
-										{state.names_labels?.close}
-									</Button>
 								</div>
+								<Show when={state.closable}>
+									<Button
+										type="button"
+										embedded="guide.close"
+										class="so-guide__close"
+										aria_label={state.names_labels?.close}
+										ref={close}
+									>
+										<Icon embedded="guide.close-icon" tag={CLOSE} />
+									</Button>
+								</Show>
 							</>
 						)}
 					</Show>

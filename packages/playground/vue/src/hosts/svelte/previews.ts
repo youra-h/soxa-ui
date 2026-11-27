@@ -17,6 +17,7 @@ import DateInputPreview from './DateInputPreview.svelte'
 import DatePickerPreview from './DatePickerPreview.svelte'
 import AlertDialogPreview from './AlertDialogPreview.svelte'
 import DialogPreview from './DialogPreview.svelte'
+import GuidePreview from './GuidePreview.svelte'
 import DragAndDropPreview from './DragAndDropPreview.svelte'
 import DrawerPreview from './DrawerPreview.svelte'
 import FieldPreview from './FieldPreview.svelte'
@@ -113,6 +114,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 	menu: MenuPreview,
 	'alert-dialog': AlertDialogPreview,
 	dialog: DialogPreview,
+	guide: GuidePreview,
 	drawer: DrawerPreview,
 	toasts: ToastsPreview,
 }

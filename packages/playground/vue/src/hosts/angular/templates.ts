@@ -16,6 +16,7 @@ import {
 	TButtonComponent,
 	TCalendarComponent,
 	TDialogComponent,
+	TGuideComponent,
 	TAlertDialogComponent,
 	TDragAndDropComponent,
 	TDrawerComponent,
@@ -484,6 +485,47 @@ export class DialogPreview implements TFixture {
 	readonly state = () => ({ shown: linkedSignal(() => this.visible() ?? false) })
 	readonly copy = viewChild.required(CopyDirective)
 	readonly subjects = viewChildren(TDialogComponent)
+}
+
+@Component({
+	selector: 'pg-guide-preview',
+	imports: [TGuideComponent, TButtonComponent, CopyDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: { style: 'display: contents' },
+	template: `
+		<ng-template pg-copy [pg-copy-state]="state" let-shown="shown">
+			<button so-button text="Запустить Guide" (click)="shown.set(true)"></button>
+			<div
+				so-guide
+				[ctrl]="ctrl()"
+				[rendered]="rendered()"
+				[visible]="shown()"
+				[direction]="direction()"
+				[target]="target()"
+				[steps]="steps()"
+				[backdrop]="backdrop()"
+				[closable]="closable()"
+				[hideOutside_enabled]="hideOutside_enabled()"
+				[scrollLock_enabled]="scrollLock_enabled()"
+				(soChangeVisible)="shown.set($event.newValue)"
+			></div>
+		</ng-template>
+	`,
+})
+export class GuidePreview implements TFixture {
+	readonly ctrl = input<TGuideComponent['ctrl']>()
+	readonly rendered = input<TGuideComponent['rendered']>()
+	readonly visible = input<TGuideComponent['visible']>()
+	readonly direction = input<TGuideComponent['direction']>()
+	readonly target = input<TGuideComponent['target']>()
+	readonly steps = input<TGuideComponent['steps']>()
+	readonly backdrop = input<TGuideComponent['backdrop']>()
+	readonly closable = input<TGuideComponent['closable']>()
+	readonly hideOutside_enabled = input<TGuideComponent['hideOutside_enabled']>()
+	readonly scrollLock_enabled = input<TGuideComponent['scrollLock_enabled']>()
+	readonly state = () => ({ shown: linkedSignal(() => this.visible() ?? false) })
+	readonly copy = viewChild.required(CopyDirective)
+	readonly subjects = viewChildren(TGuideComponent)
 }
 
 @Component({

@@ -870,6 +870,13 @@ export const PREVIEWS: Record<string, TPreview> = {
 		wrapper: { tag: 'div', style: () => 'display:contents' },
 	},
 
+	guide: {
+		tag: 'div',
+		is: 'so-guide',
+		opener: 'Запустить Guide',
+		wrapper: { tag: 'div', style: () => 'display:contents' },
+	},
+
 	// A button opens the drawer too. The button and the drawer sit in their own
 	// box with `position: relative`, as in Vue: with `contained` the drawer does
 	// not move out but sits in it, so the `contained` row shows it in the preview

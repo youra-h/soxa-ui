@@ -2,7 +2,6 @@
 import { Button, Drawer, Icon } from '@soxa-ui/vue'
 import { useSidebar } from '../composables/useSidebar'
 import { MENU_GLYPH, SETTINGS_GLYPH } from '../icons'
-import AppGuide from './AppGuide.vue'
 import AppSettings from './AppSettings.vue'
 import PageSwitch from './PageSwitch.vue'
 
@@ -37,8 +36,6 @@ const version = __SOXA_VERSION__
 			<div class="pg__name">soxa-ui <span>· playground</span></div>
 			<div class="pg__version">v{{ version }}</div>
 		</div>
-
-		<AppGuide :narrow="narrow" />
 
 		<template v-if="narrow">
 			<Button

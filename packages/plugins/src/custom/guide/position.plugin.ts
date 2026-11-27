@@ -1,11 +1,40 @@
-import type { IGuide } from '@soxa-ui/core'
+import type { IGuide, TGuideAnchor } from '@soxa-ui/core'
 import { TBasePlugin, type IPluginContext, type TPluginEvents } from '../../base'
 import { TElementPlugin } from '../element'
 import { TAnchorPlugin } from '../frame/anchor'
 import type { TAnchorRect } from '../frame/anchor/types'
 
 type TStyles = Record<string, number | string>
+type TElementAnchor = Extract<TGuideAnchor, { element: unknown }>['element']
 type TGuidePositionEvents = TPluginEvents & { 'change:position': () => void }
+
+const CORNER_SEGMENTS = 4
+
+/** Add a rounded hole to the viewport polygon. Both contours use the same origin. */
+function roundedCutout(rect: TAnchorRect): string {
+	const gap = rect.width === 0 && rect.bottom === rect.top ? 8 : 4
+	const left = rect.left - gap
+	const top = rect.top - gap
+	const right = rect.right + gap
+	const bottom = rect.bottom + gap
+	const radius = Math.min(8, (right - left) / 2, (bottom - top) / 2)
+	const centers = [
+		[right - radius, top + radius],
+		[right - radius, bottom - radius],
+		[left + radius, bottom - radius],
+		[left + radius, top + radius],
+	]
+	const points = centers.flatMap(([x, y], corner) =>
+		Array.from({ length: CORNER_SEGMENTS + 1 }, (_, segment) => {
+			const angle = (corner - 1 + segment / CORNER_SEGMENTS) * (Math.PI / 2)
+			const px = x + Math.cos(angle) * radius
+			const py = y + Math.sin(angle) * radius
+			return `${px.toFixed(2)}px ${py.toFixed(2)}px`
+		}),
+	)
+
+	return `polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0, ${points.join(', ')}, ${points[0]})`
+}
 
 export class TGuidePositionPlugin extends TBasePlugin<IGuide, TGuidePositionEvents> {
 	private _owner: IGuide | null = null
@@ -13,13 +42,22 @@ export class TGuidePositionPlugin extends TBasePlugin<IGuide, TGuidePositionEven
 	private _root: Element | null = null
 	private _observing: MutationObserver | null = null
 	private _spotlight: TStyles | null = null
+	private _rect: TAnchorRect | null = null
 
 	get spotlight(): TStyles | null {
 		return this._spotlight
 	}
 
 	get layer(): TStyles {
-		return { 'z-index': this._owner?.zIndex ?? 0 }
+		return {
+			'z-index': this._owner?.zIndex ?? 0,
+			'pointer-events': this._owner?.modal ? 'auto' : 'none',
+		}
+	}
+
+	/** Keep the highlighted area clear while the rest of the viewport is dimmed. */
+	get backdrop(): TStyles {
+		return this._rect ? { 'clip-path': roundedCutout(this._rect) } : {}
 	}
 
 	override install(ctx: IPluginContext): void {
@@ -38,6 +76,7 @@ export class TGuidePositionPlugin extends TBasePlugin<IGuide, TGuidePositionEven
 		})
 		this._listenTo(owner.events, 'change:step', () => this._sync())
 		this._listenTo(owner.events, 'change:visible', () => this._sync())
+		this._listenTo(owner.events, 'change:modal', () => this._publish(anchor.rect))
 		this._listenTo(owner.events, 'change:zIndex', () => this._publish(anchor.rect))
 		this._listenTo(anchor.rectEvents, 'change', ({ newValue }) => this._publish(newValue))
 		this._root = element.element
@@ -82,9 +121,19 @@ export class TGuidePositionPlugin extends TBasePlugin<IGuide, TGuidePositionEven
 		if (!anchor.point) this._center()
 	}
 
-	private _resolveElement(resolve: () => Element | null): void {
+	private _findElement(reference: TElementAnchor): Element | null {
+		if (typeof reference === 'function') return reference()
+
+		try {
+			return this._root?.ownerDocument.querySelector(reference) ?? null
+		} catch {
+			return null
+		}
+	}
+
+	private _resolveElement(reference: TElementAnchor): void {
 		const anchor = this._anchor
-		const target = resolve()
+		const target = this._findElement(reference)
 
 		if (target?.isConnected && target.ownerDocument === this._root?.ownerDocument) {
 			if (anchor?.anchor === target) return
@@ -108,6 +157,7 @@ export class TGuidePositionPlugin extends TBasePlugin<IGuide, TGuidePositionEven
 
 	private _publish(rect: TAnchorRect | null): void {
 		const owner = this._owner
+		this._rect = rect
 
 		this._spotlight =
 			rect && owner?.visible

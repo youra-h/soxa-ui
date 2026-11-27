@@ -22,6 +22,8 @@ export const GuideInputNames = [
 	'direction',
 	'target',
 	'steps',
+	'backdrop',
+	'closable',
 	'hideOutside_enabled',
 	'scrollLock_enabled',
 ] as const
@@ -30,6 +32,8 @@ export const GuideOutputNames = [
 	'soChangeTarget',
 	'soChangeSteps',
 	'soChangeStep',
+	'soChangeBackdrop',
+	'soChangeClosable',
 	'soCloseBefore',
 	'soComplete',
 	'soHideOutsideChangeEnabled',
@@ -40,6 +44,8 @@ export const GuideOutputNames = [
 	'directionChange',
 	'targetChange',
 	'stepsChange',
+	'backdropChange',
+	'closableChange',
 	'hideOutside_enabledChange',
 	'scrollLock_enabledChange',
 ] as const
@@ -53,6 +59,8 @@ export const GuideOutputNames = [
 		'direction',
 		'target',
 		'steps',
+		'backdrop',
+		{ name: 'closable', transform: booleanInput },
 		{ name: 'hideOutside_enabled', transform: booleanInput },
 		{ name: 'scrollLock_enabled', transform: booleanInput },
 	],
@@ -87,6 +95,8 @@ export abstract class TGuideSurface<TInstance extends IEntity> extends TViewSurf
 	declare direction: TInputValue<typeof descriptor, 'direction'>
 	declare target: TInputValue<typeof descriptor, 'target'>
 	declare steps: TInputValue<typeof descriptor, 'steps'>
+	declare backdrop: TInputValue<typeof descriptor, 'backdrop'>
+	declare closable: TInputValue<typeof descriptor, 'closable'>
 	declare hideOutside_enabled: TInputValue<typeof descriptor, 'hideOutside_enabled'>
 	declare scrollLock_enabled: TInputValue<typeof descriptor, 'scrollLock_enabled'>
 	declare readonly soBundleCreate: TOutputEmitter<typeof descriptor, 'bundle:create'>
@@ -104,6 +114,8 @@ export abstract class TGuideSurface<TInstance extends IEntity> extends TViewSurf
 	declare readonly soChangeTarget: TOutputEmitter<typeof descriptor, 'change:target'>
 	declare readonly soChangeSteps: TOutputEmitter<typeof descriptor, 'change:steps'>
 	declare readonly soChangeStep: TOutputEmitter<typeof descriptor, 'change:step'>
+	declare readonly soChangeBackdrop: TOutputEmitter<typeof descriptor, 'change:backdrop'>
+	declare readonly soChangeClosable: TOutputEmitter<typeof descriptor, 'change:closable'>
 	declare readonly soCloseBefore: TOutputEmitter<typeof descriptor, 'close:before'>
 	declare readonly soComplete: TOutputEmitter<typeof descriptor, 'complete'>
 	declare readonly soElementReady: TOutputEmitter<typeof descriptor, 'element:ready'>
@@ -122,6 +134,8 @@ export abstract class TGuideSurface<TInstance extends IEntity> extends TViewSurf
 	declare readonly directionChange: TModelEmitter<typeof descriptor, 'direction'>
 	declare readonly targetChange: TModelEmitter<typeof descriptor, 'target'>
 	declare readonly stepsChange: TModelEmitter<typeof descriptor, 'steps'>
+	declare readonly backdropChange: TModelEmitter<typeof descriptor, 'backdrop'>
+	declare readonly closableChange: TModelEmitter<typeof descriptor, 'closable'>
 	declare readonly hideOutside_enabledChange: TModelEmitter<
 		typeof descriptor,
 		'hideOutside_enabled'
