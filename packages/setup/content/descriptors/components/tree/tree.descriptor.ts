@@ -11,28 +11,33 @@ import {
 } from '../../../../protected/define'
 import { ValueControlDescriptor } from '../value-control.descriptor'
 import {
+	ActionPluginDescriptor,
 	CollectionBundlesPluginDescriptor,
 	CollectionElementsPluginDescriptor,
 } from '../../plugins'
-import { ActionPluginDescriptor } from '../../plugins'
 
-const item = defineType<TTreeItem>(Object)
+function treeSlotScopes() {
+	const icon = {
+		item: defineType<TTreeItem>(Object),
+		expanded: defineType<boolean>(Boolean),
+		branch: defineType<boolean>(Boolean),
+		loading: defineType<boolean>(Boolean),
+	}
 
-const treeIconScope = {
-	item,
-	expanded: defineType<boolean>(Boolean),
-	branch: defineType<boolean>(Boolean),
-	loading: defineType<boolean>(Boolean),
+	return {
+		icon,
+		row: {
+			...icon,
+			text: defineType<string>(String),
+			selected: defineType<boolean>(Boolean),
+		},
+	}
 }
 
-const treeItemScope = {
-	...treeIconScope,
-	text: defineType<string>(String),
-	selected: defineType<boolean>(Boolean),
-}
+export const TreeDescriptor = defineDescriptor(() => {
+	const { icon, row } = treeSlotScopes()
 
-export const TreeDescriptor = defineDescriptor(() =>
-	defineComponent({
+	return defineComponent({
 		ctor: TTree,
 		extends: ValueControlDescriptor(),
 		contribution: {
@@ -41,10 +46,10 @@ export const TreeDescriptor = defineDescriptor(() =>
 				guides: { type: Boolean, triggers: ['change:guides'] },
 			},
 			slots: {
-				item: { scope: treeItemScope, description: 'Content of a tree row' },
-				'item-icon': { scope: treeIconScope, description: 'Icon beside the node label' },
+				item: { scope: row, description: 'Content of a tree row' },
+				'item-icon': { scope: icon, description: 'Icon beside the node label' },
 				'item-indicator-icon': {
-					scope: treeIconScope,
+					scope: icon,
 					description: 'Branch disclosure indicator',
 				},
 				empty: { description: 'Content when the tree is empty' },
@@ -57,11 +62,13 @@ export const TreeDescriptor = defineDescriptor(() =>
 			CollectionElementsPluginDescriptor,
 			definePlugin({ ctor: TTreeKeyboardPlugin, namespace: 'treeKeyboard' }),
 		],
-	}),
-)
+	})
+})
 
-export const TreeItemDescriptor = defineDescriptor(() =>
-	defineComponent({
+export const TreeItemDescriptor = defineDescriptor(() => {
+	const { icon, row } = treeSlotScopes()
+
+	return defineComponent({
 		ctor: TTreeItem,
 		extends: ValueControlDescriptor(),
 		contribution: {
@@ -70,14 +77,14 @@ export const TreeItemDescriptor = defineDescriptor(() =>
 				href: { type: String, triggers: ['change:href'] },
 			},
 			slots: {
-				default: { scope: treeItemScope, description: 'Content of the row' },
-				icon: { scope: treeIconScope, description: 'Icon beside the node label' },
+				default: { scope: row, description: 'Content of the row' },
+				icon: { scope: icon, description: 'Icon beside the node label' },
 				'indicator-icon': {
-					scope: treeIconScope,
+					scope: icon,
 					description: 'Branch disclosure indicator',
 				},
 			},
 			events: ['change:text', 'change:href'],
 		},
-	}),
-)
+	})
+})

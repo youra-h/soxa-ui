@@ -250,6 +250,21 @@ test('compiler alias renumbering and object-property order do not create migrati
 	)
 })
 
+test('Angular collection facade aliases resolve to the imported descriptor', () => {
+	const declaration = (descriptor, alias) =>
+		'import { ' +
+		descriptor +
+		' as ' +
+		alias +
+		' } from "@soxa-ui/setup"; export type Facade = typeof ' +
+		alias
+	const before = declaration('ListBoxCollectionDescriptor', 'facade')
+
+	assert.equal(changed(before, declaration('ListBoxCollectionDescriptor', 'facade$1')).length, 0)
+	const changes = changed(before, declaration('TreeCollectionDescriptor', 'facade$1'))
+	assert.ok(changes.some((change) => change.key.endsWith(':Facade')))
+})
+
 test('package entry conditions and supported environment changes require review', () => {
 	fixture((root, put) => {
 		put('dist/index.d.ts', 'export interface Props {}')

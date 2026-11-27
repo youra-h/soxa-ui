@@ -69,11 +69,21 @@ const printer = ts.createPrinter({ removeComments: true, newLine: ts.NewLineKind
 function signature(node, source) {
 	const aliases = new Map()
 	for (const statement of source.statements) {
+		if (!ts.isImportDeclaration(statement)) continue
+
 		const bindings = statement.importClause?.namedBindings
-		if (bindings && ts.isNamedImports(bindings))
-			for (const binding of bindings.elements)
-				if (binding.propertyName && /\$\d+$/.test(binding.name.text))
-					aliases.set(binding.name.text, binding.propertyName.text)
+		if (!bindings || !ts.isNamedImports(bindings)) continue
+
+		const setupImport =
+			ts.isStringLiteral(statement.moduleSpecifier) &&
+			statement.moduleSpecifier.text === '@soxa-ui/setup'
+
+		for (const binding of bindings.elements) {
+			const name = binding.name.text
+			// Angular emits the first collection alias as facade and numbers the rest.
+			if (binding.propertyName && (/\$\d+$/.test(name) || (setupImport && name === 'facade')))
+				aliases.set(name, binding.propertyName.text)
+		}
 	}
 	const result = ts.transform(node, [
 		(context) => {
