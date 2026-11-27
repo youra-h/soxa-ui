@@ -40,7 +40,10 @@ export type TFrameEvents = TLayerEvents & {
 	'change:contained': (payload: TValuePayload<boolean>) => void
 }
 
-export interface IFrame extends ILayer<IFrameProps, TFrameEvents> {
+export interface IFrame<
+	TProps extends IFrameProps = IFrameProps,
+	TEvents extends TFrameEvents = TFrameEvents,
+> extends ILayer<TProps, TEvents> {
 	/** Позиция по оси X */
 	x: number
 	/** Позиция по оси Y */

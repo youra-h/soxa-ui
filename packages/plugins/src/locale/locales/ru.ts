@@ -4,6 +4,7 @@ import { freezeLocale } from '../locale'
 export const ruRU = freezeLocale({
 	tag: 'ru-RU',
 	translations: {
+		guide: { previous: 'Назад', next: 'Далее', done: 'Готово', progress: '{step} из {count}' },
 		fileUpload: {
 			choose: 'Выбрать файлы',
 			drop: 'Перетащите или',

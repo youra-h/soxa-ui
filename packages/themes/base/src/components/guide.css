@@ -1,0 +1,43 @@
+:where(.so-guide) {
+	position: fixed;
+	box-sizing: border-box;
+	max-block-size: calc(100% - 2rem);
+	overflow: auto;
+}
+
+:where(.so-guide:not([data-placement])) {
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+:where(.so-guide__decoration) {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+}
+
+:where(.so-guide__close) {
+	position: absolute;
+	inset-block-start: 0.5rem;
+	inset-inline-end: 0.5rem;
+	inline-size: 2rem;
+	block-size: 2rem;
+	padding: 0;
+}
+
+:where(.so-guide:has(.so-guide__close) .so-guide__content) {
+	padding-inline-end: 2.25rem;
+}
+
+:where(.so-guide__spotlight) {
+	position: fixed;
+	pointer-events: none;
+}
+
+:where(.so-guide__actions) {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: end;
+	gap: 0.5rem;
+}

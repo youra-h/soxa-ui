@@ -12,6 +12,7 @@ import {
 	AvatarDescriptor,
 	AvatarGroupDescriptor,
 	CodeBlockDescriptor,
+	GuideDescriptor,
 	ButtonDescriptor,
 	ToggleButtonDescriptor,
 	ToggleGroupDescriptor,
@@ -189,6 +190,14 @@ export const COMPONENTS: readonly TComponentEntry[] = [
 		group: 'forms',
 		span: 2,
 		description: 'Выбор и перетаскивание файлов с проверкой ограничений и превью',
+	},
+	{
+		id: 'guide',
+		label: 'Guide',
+		descriptor: GuideDescriptor,
+		group: 'display',
+		span: 2,
+		description: 'Пошаговый обзор интерфейса с подсветкой DOM-элемента или координаты окна.',
 	},
 	{
 		id: 'code-block',

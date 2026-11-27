@@ -87,6 +87,7 @@ export const COMPONENTS: Readonly<Record<string, readonly string[]>> = {
 	'number-input': ['icon', 'button', 'number-input'],
 	pagination: ['icon', 'button', 'pagination'],
 	popover: POPOVER,
+	guide: ['icon', 'button', 'modal', 'guide'],
 	'progress-linear': ['progress-linear'],
 	'progress-spinner': ['progress-spinner'],
 	'radio-group': ['radio-group'],

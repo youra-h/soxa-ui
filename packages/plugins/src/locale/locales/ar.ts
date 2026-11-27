@@ -7,6 +7,7 @@ import { freezeLocale } from '../locale'
 export const arEG = freezeLocale({
 	tag: 'ar-EG',
 	translations: {
+		guide: { previous: 'السابق', next: 'التالي', done: 'تم', progress: '{step} من {count}' },
 		fileUpload: {
 			choose: 'اختيار الملفات',
 			drop: 'اسحب الملفات إلى هنا أو',

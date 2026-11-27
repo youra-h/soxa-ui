@@ -79,3 +79,4 @@ export {
 	StepperCollectionItemDescriptor,
 	StepperContentDescriptor,
 } from './stepper.descriptor'
+export { GuideDescriptor } from './guide.descriptor'

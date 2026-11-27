@@ -35,6 +35,7 @@ import {
 	DateInput,
 	DatePicker,
 	Dialog,
+	Guide,
 	AlertDialog,
 	DragAndDrop,
 	Drawer,
@@ -243,6 +244,17 @@ function DialogPreview(bind: Readonly<Record<string, unknown>>): ReactNode {
 				<p style={{ margin: '0 0 8px' }}>Произвольное содержимое: текст, поля, кнопки</p>
 				<Input placeholder="Имя" />
 			</Dialog>
+		</>
+	)
+}
+
+function GuidePreview(bind: Readonly<Record<string, unknown>>): ReactNode {
+	const { shown, setShown, onChangeVisible } = useShown(bind)
+
+	return (
+		<>
+			<Button text="Запустить Guide" onClick={() => setShown(true)} />
+			<Guide {...bind} visible={shown} onChangeVisible={onChangeVisible} />
 		</>
 	)
 }
@@ -608,6 +620,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 	// A button opens the dialog, which runs on its own state (see `DialogPreview`)
 	'alert-dialog': (bind) => <AlertDialogPreview {...bind} />,
 	dialog: (bind) => <DialogPreview {...bind} />,
+	guide: (bind) => <GuidePreview {...bind} />,
 
 	// A button opens the drawer, which runs on its own state (see `DrawerPreview`)
 	drawer: (bind) => <DrawerPreview {...bind} />,

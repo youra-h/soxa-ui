@@ -4,6 +4,7 @@ import { freezeLocale } from '../locale'
 export const zhCN = freezeLocale({
 	tag: 'zh-CN',
 	translations: {
+		guide: { previous: '上一步', next: '下一步', done: '完成', progress: '{step} / {count}' },
 		fileUpload: {
 			choose: '选择文件',
 			drop: '将文件拖放到此处或',

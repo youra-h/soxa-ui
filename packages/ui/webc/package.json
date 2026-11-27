@@ -77,6 +77,10 @@
       "types": "./dist/components/field/index.d.ts",
       "default": "./dist/components/field/index.js"
     },
+    "./guide": {
+      "types": "./dist/components/guide/index.d.ts",
+      "default": "./dist/components/guide/index.js"
+    },
     "./frame": {
       "types": "./dist/components/frame/index.d.ts",
       "default": "./dist/components/frame/index.js"

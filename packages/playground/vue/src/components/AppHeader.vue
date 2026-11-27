@@ -44,6 +44,7 @@ const version = __SOXA_VERSION__
 				type="button"
 				class="pg__glyph-button"
 				aria_label="Настройки"
+				data-guide-anchor="settings"
 				@click="settingsOpen = true"
 			>
 				<Icon :tag="SETTINGS_GLYPH" />

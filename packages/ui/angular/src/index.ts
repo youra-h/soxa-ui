@@ -100,3 +100,4 @@ export {
 	TSplitterPanelComponent,
 	TSplitterHandleComponent,
 } from './components/splitter'
+export { TGuideComponent } from './components/guide'

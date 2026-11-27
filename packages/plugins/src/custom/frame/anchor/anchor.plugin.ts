@@ -1,4 +1,4 @@
-import type { IFrame, TDefaultValues } from '@soxa-ui/core'
+import { TEvented, type IFrame, type TDefaultValues, type TValuePayload } from '@soxa-ui/core'
 import { TBasePlugin } from '../../../base'
 import type { IPluginContext } from '../../../base'
 import { TElementPlugin } from '../../element'
@@ -200,6 +200,10 @@ const samePoint = (a: TPoint | null, b: TPoint | null): boolean =>
  * scroll/resize окна.
  */
 export class TAnchorPlugin extends TBasePlugin<any, TAnchorPluginEvents> {
+	/** Measurements report geometry independently of the anchor input events. */
+	readonly rectEvents = new TEvented<{
+		change: (payload: TValuePayload<TAnchorRect | null>) => void
+	}>()
 	/**
 	 * Умолчания пропов плагина. Из них стартуют поля плагина, и их же
 	 * `definePlugin` кладёт в декларации пропов: значение живёт в одном месте.
@@ -230,6 +234,7 @@ export class TAnchorPlugin extends TBasePlugin<any, TAnchorPluginEvents> {
 	private _anchor: Element | null = TAnchorPlugin.defaultValues.anchor
 	/** Точка в координатах окна — главнее якоря, пока задана. */
 	private _point: TPoint | null = TAnchorPlugin.defaultValues.point
+	private _rect: TAnchorRect | null = null
 	private _placement: TFramePlacement = TAnchorPlugin.defaultValues.placement
 	private _matchWidth = TAnchorPlugin.defaultValues.matchWidth
 	private _flip = TAnchorPlugin.defaultValues.flip
@@ -439,6 +444,26 @@ export class TAnchorPlugin extends TBasePlugin<any, TAnchorPluginEvents> {
 		super.destroy()
 	}
 
+	/** Last measured anchor rectangle in viewport coordinates. */
+	get rect(): TAnchorRect | null {
+		return this._rect
+	}
+
+	private _setRect(value: TAnchorRect | null): void {
+		const oldValue = this._rect
+		if (
+			oldValue?.left === value?.left &&
+			oldValue?.top === value?.top &&
+			oldValue?.right === value?.right &&
+			oldValue?.bottom === value?.bottom &&
+			oldValue?.width === value?.width
+		)
+			return
+
+		this._rect = value
+		this.rectEvents.emit('change', { oldValue, newValue: value })
+	}
+
 	/**
 	 * Место панели сменилось — якорь или точка. Сторону следующий расчёт
 	 * выбирает заново: прошлую выбрали у другого места. Места не осталось —
@@ -451,6 +476,7 @@ export class TAnchorPlugin extends TBasePlugin<any, TAnchorPluginEvents> {
 		this._heldSide = null
 
 		if (!this._anchor && !this._point) {
+			this._setRect(null)
 			this._unsubscribe()
 			this._actualPlacement = null
 			this._frame?.dataset.add(ANCHOR_PLACEMENT_ATTRIBUTE, null)
@@ -517,6 +543,7 @@ export class TAnchorPlugin extends TBasePlugin<any, TAnchorPluginEvents> {
 		const frame = this._frame
 
 		if (frame?.contained) {
+			this._setRect(null)
 			this._heldSide = null
 			this._applyPlacement(null)
 
@@ -547,6 +574,7 @@ export class TAnchorPlugin extends TBasePlugin<any, TAnchorPluginEvents> {
 					: rect.bottom + this._offset) - origin.y
 		}
 
+		this._setRect(rect)
 		this._applyPlacement(alignment === 'center' ? side : `${side}-${alignment}`)
 	}
 
@@ -851,6 +879,7 @@ export class TAnchorPlugin extends TBasePlugin<any, TAnchorPluginEvents> {
 		this._stopWaitingTransitions()
 		this._following = false
 		this._unsubscribe()
+		this._setRect(null)
 	}
 
 	/**

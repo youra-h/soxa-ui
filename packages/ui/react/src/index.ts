@@ -280,3 +280,4 @@ export type {
 	SplitterHandleProps,
 	SplitterHandleEventProps,
 } from './components/splitter'
+export { Guide, type GuideProps, type GuideEventProps } from './components/guide'

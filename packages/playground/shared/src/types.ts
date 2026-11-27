@@ -61,6 +61,7 @@ export type TPropControl = TPropOwner & {
 	values?: Readonly<Record<string, unknown>>
 	description: string
 	notice?: string
+	sourceTitle?: string
 	/**
 	 * The default from the prop spec (`TPropSpec.default`).
 	 *

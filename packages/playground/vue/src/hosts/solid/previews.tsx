@@ -44,6 +44,7 @@ import {
 	DateInput,
 	DatePicker,
 	Dialog,
+	Guide,
 	AlertDialog,
 	DragAndDrop,
 	Drawer,
@@ -267,6 +268,17 @@ function DialogPreview(props: { bind: Accessor<TPreviewProps> }): JSX.Element {
 				<p style={{ margin: '0 0 8px' }}>Произвольное содержимое: текст, поля, кнопки</p>
 				<Input placeholder="Имя" />
 			</Dialog>
+		</>
+	)
+}
+
+function GuidePreview({ bind }: { bind: Accessor<TPreviewProps> }): JSX.Element {
+	const { shown, setShown, onChangeVisible } = useShown(bind)
+
+	return (
+		<>
+			<Button text="Запустить Guide" onClick={() => setShown(true)} />
+			<Guide {...bind()} visible={shown()} onChangeVisible={onChangeVisible} />
 		</>
 	)
 }
@@ -606,6 +618,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 	// A button opens the dialog, which runs on its own state (see `DialogPreview`)
 	'alert-dialog': (bind) => <AlertDialogPreview bind={bind} />,
 	dialog: (bind) => <DialogPreview bind={bind} />,
+	guide: (bind) => <GuidePreview bind={bind} />,
 
 	// A button opens the drawer, which runs on its own state (see `DrawerPreview`)
 	drawer: (bind) => <DrawerPreview bind={bind} />,

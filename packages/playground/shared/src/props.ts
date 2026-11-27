@@ -53,6 +53,7 @@ import {
 	TOOLTIP_PLACEMENTS,
 	TOOLTIP_TYPES,
 } from './enums'
+import { GUIDE_STEPS, parseGuideSteps } from './guide'
 import { COLLECTION_VALUES, GROUPED_ITEMS, PRODUCE_GROUPS } from './items'
 import type {
 	TComponentEntry,
@@ -406,6 +407,12 @@ const OWN: Record<string, Record<string, string>> = {
 		groupSeparators:
 			'Линия между секциями групп пунктов из данных. По умолчанию есть; без неё на месте линии остаётся пустое место. Ручной Menu.Separator не трогает. Видна только у меню с группами',
 	},
+	guide: {
+		steps: 'Массив шагов Guide. Исправный JSON сразу обновляет обе колонки.',
+		backdrop:
+			'Подложка: none, dim или blur. Пустое значение включает стандартную подложку только в модальном шаге.',
+		closable: 'Показывать крестик в верхнем углу панели.',
+	},
 	'alert-dialog': {
 		visible: 'Открыто ли подтверждение. Программное скрытие не сообщает выбор',
 		closable: 'Показывать крестик, который отменяет действие',
@@ -645,6 +652,7 @@ const SPLITTER_PANELS = [
  * Icon её снимает `NON_EDITABLE_BY_COMPONENT`), а глиф — компонент фреймворка.
  */
 export const PREVIEW_PROPS: Readonly<Record<string, Readonly<Record<string, unknown>>>> = {
+	guide: { steps: GUIDE_STEPS, backdrop: 'dim' },
 	'toggle-button': { text: 'Жирный' },
 	'toggle-group': {
 		aria_label: 'Форматирование',
@@ -1002,8 +1010,14 @@ const parseSplitterPanels: TJsonPropParser = (text) => {
 
 const JSON_EDITORS: Record<
 	string,
-	Record<string, { parseJson: TJsonPropParser; initial?: unknown; notice?: string }>
+	Record<
+		string,
+		{ parseJson: TJsonPropParser; initial?: unknown; notice?: string; sourceTitle?: string }
+	>
 > = {
+	guide: {
+		steps: { parseJson: parseGuideSteps, sourceTitle: 'steps.json' },
+	},
 	splitter: {
 		panels: {
 			parseJson: parseSplitterPanels,
@@ -1114,6 +1128,7 @@ export function propControl(
 		parseJson: editor?.parseJson,
 		description: describeProp(componentId, name) ?? '',
 		notice: editor?.notice,
+		sourceTitle: editor?.sourceTitle,
 		preset: presetForProp(componentId, name),
 	}
 

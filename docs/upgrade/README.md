@@ -12,6 +12,7 @@ compatibility ranges in their manifests.
 | MCP 0.0.1 to 0.0.2                         | Adds Soxa UI 0.6.0 documentation            | [MCP upgrade instructions](./mcp-0.0.2.md) |
 | FileUpload                                 | Optional after publication                  | [FileUpload adoption](./file-upload.md)    |
 | Splitter and shared orientation            | Optional after publication                  | [Splitter adoption](./splitter.md)         |
+| Guide                                      | Optional after publication                  | [Guide adoption](./guide.md)               |
 | Toasts soft view                           | Optional since 0.6.0                        | [Toast appearance](./toasts-soft-view.md)  |
 | Previous npm scope to Soxa UI              | Historical package rename                   | [Scope migration](../migration-to-soxa.md) |
 
