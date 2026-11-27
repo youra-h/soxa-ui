@@ -116,11 +116,15 @@
     "changes": ["e3a5f905a31b659a4f19b58591d0614db43da1f579004705f699cbbca48e7d7c"]
   },
   {
-    "id": "stepper-angular-descriptor-alias",
+    "id": "tree-theme-attribute-scopes",
     "baseline": "48896a297de7fc62a1da6f6e4a0715e4e222117c3fb80af6d3a7d6d8b5dd3f7b",
     "impact": "compatible",
-    "reason": "Adding the Stepper Angular entry changes the bundled alias for ToggleGroupCollectionItemDescriptor from facade to facade$2. Both aliases import the same setup export. The normalized ToggleGroup item signatures are identical after resolving the alias.",
-    "guide": "docs/upgrade/stepper.md",
-    "changes": ["784dd648741f1d4aa55bbbfaf132fd055fc1bd61f093e362fd723d81cf300ccd"]
+    "reason": "Tree adds item and row scopes to data-highlighted, data-indicator and the LIST_INDICATOR_ATTRIBUTE emission. Existing scopes retain their runtime behavior, and the attribute names, values and emission pattern remain the same.",
+    "guide": "docs/upgrade/tree.md",
+    "changes": [
+      "ac987bb77ea1b8f7bd5dd9a2de2d3b1acbc088c166ebfb75765b3c6cabe17db0",
+      "aa1c1a58a24538f8c358e8e5669e941f925a39b4bbafb2626f7d80f8e284c623",
+      "017a178d483ae76284a4a134e4a8afa2971222a7968c5cc414c9fc2652c37f1e"
+    ]
   }
 ]

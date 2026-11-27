@@ -28,8 +28,6 @@ import { Stepper } from '@soxa-ui/react'
 ```
 
 See the [Stepper documentation](../components/stepper.md) for the entry points on each adapter.
-Existing Angular ToggleGroup usage needs no migration. Its declaration bundle renames an import
-alias for the same descriptor.
 
 ## Verification
 
