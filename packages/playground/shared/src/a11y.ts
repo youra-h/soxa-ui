@@ -20,6 +20,7 @@ export const A11Y_COMPONENTS = [
 	'field',
 	'slider',
 	'splitter',
+	'stepper',
 	'rating',
 	'radio-group',
 	'select',
@@ -67,6 +68,7 @@ export type TAuditCase = {
 	readonly state: string
 	readonly root: string
 	readonly fixture?: string
+	readonly adapters?: readonly (typeof A11Y_ADAPTERS)[number][]
 	readonly props: Readonly<Record<string, unknown>>
 	readonly visible: readonly string[]
 	readonly exists?: readonly string[]
@@ -83,7 +85,14 @@ function audit(
 	extra: Partial<
 		Pick<
 			TAuditCase,
-			'consumer' | 'fixture' | 'click' | 'absent' | 'count' | 'exists' | 'coverage'
+			| 'consumer'
+			| 'fixture'
+			| 'click'
+			| 'absent'
+			| 'count'
+			| 'exists'
+			| 'coverage'
+			| 'adapters'
 		>
 	> = {},
 ): TAuditCase {
@@ -179,6 +188,14 @@ export const A11Y_CASES: readonly TAuditCase[] = [
 		{ initials: 'AL', aria_label: 'Ada' },
 		['.so-avatar__fallback .so-icon'],
 		{ fixture: 'avatar-fallback' },
+	),
+	audit(
+		'stepper',
+		'current-step',
+		'.so-stepper',
+		{ aria_label: 'Checkout steps' },
+		['.so-stepper-item__trigger[aria-current="step"]'],
+		{ adapters: ['vue'] },
 	),
 	audit('splitter', 'initial', '.so-splitter', {}, ['.so-splitter__thumb']),
 	audit('file-upload', 'choose', '.so-file-upload', { required: true }, [
@@ -788,7 +805,15 @@ export const A11Y_CASES: readonly TAuditCase[] = [
 	),
 ]
 
-export function auditInventoryErrors(host: IPreviewHost, registryIds: readonly string[]): string[] {
+export function auditCasesFor(adapter: string): readonly TAuditCase[] {
+	return A11Y_CASES.filter((entry) => entry.adapters?.some((id) => id === adapter) ?? true)
+}
+
+export function auditInventoryErrors(
+	host: IPreviewHost,
+	registryIds: readonly string[],
+	adapter: string,
+): string[] {
 	const ids = [...registryIds].sort()
 	const covered = [...new Set(A11Y_CASES.map((entry) => entry.component))].sort()
 	const errors: string[] = []
@@ -798,7 +823,7 @@ export function auditInventoryErrors(host: IPreviewHost, registryIds: readonly s
 		errors.push('Audit cases do not cover every registry entry')
 	if (new Set(A11Y_CASES.map((entry) => entry.id)).size !== A11Y_CASES.length)
 		errors.push('Duplicate audit case id')
-	for (const entry of A11Y_CASES) {
+	for (const entry of auditCasesFor(adapter)) {
 		if (!host.previews.includes(entry.consumer))
 			errors.push(entry.id + ': missing consumer ' + entry.consumer)
 		if (entry.fixture && !host.fixtures.includes(entry.fixture))

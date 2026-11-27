@@ -5,7 +5,7 @@ import { commands, page, server, userEvent } from 'vitest/browser'
 import axe from 'axe-core'
 import {
 	A11Y_ADAPTERS,
-	A11Y_CASES,
+	auditCasesFor,
 	COMPONENTS,
 	PREVIEW_PROPS,
 	auditInventoryErrors,
@@ -253,10 +253,11 @@ export function auditSuite(adapter: string) {
 				auditInventoryErrors(
 					host,
 					COMPONENTS.map((entry) => entry.id),
+					adapter,
 				),
 			).toEqual([])
 		})
-		for (const entry of A11Y_CASES)
+		for (const entry of auditCasesFor(adapter))
 			it(
 				entry.id,
 				async () => {

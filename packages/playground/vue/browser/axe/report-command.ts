@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { execFileSync } from 'node:child_process'
 import { resolve } from 'node:path'
 import { defineBrowserCommand } from '@vitest/browser-playwright'
-import { A11Y_ADAPTERS, A11Y_CASES } from '../../../shared/src/a11y.ts'
+import { A11Y_ADAPTERS, A11Y_CASES, auditCasesFor } from '../../../shared/src/a11y.ts'
 
 const RUN_ID = randomUUID()
 const STARTED_AT = new Date().toISOString()
@@ -21,7 +21,8 @@ export const saveA11yReport = defineBrowserCommand<[report: Readonly<Record<stri
 			throw new Error('Unknown audit adapter')
 		if (
 			typeof auditCase !== 'string' ||
-			(!A11Y_CASES.some((entry) => entry.id === auditCase) && !GATE_CASES.includes(auditCase))
+			(!auditCasesFor(adapter).some((entry) => entry.id === auditCase) &&
+				!GATE_CASES.includes(auditCase))
 		)
 			throw new Error('Unknown audit case')
 
