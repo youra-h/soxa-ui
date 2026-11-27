@@ -27,6 +27,7 @@ import { describe, it, expect } from 'vitest'
 import {
 	TAccordion,
 	TToggleGroup,
+	TStepper,
 	TBreadcrumbs,
 	TCalendar,
 	TListBox,
@@ -41,6 +42,7 @@ import {
 	TToasts,
 	createEngineAccordion,
 	createEngineToggleGroup,
+	createEngineStepper,
 	createEngineBreadcrumbs,
 	createEngineCalendar,
 	createEngineListBox,
@@ -94,6 +96,11 @@ const ENGINES: Readonly<Record<string, () => TOwnedEngine>> = {
 		const owner = new TToggleGroup()
 
 		return { owner, engine: createEngineToggleGroup({ owner }) }
+	},
+	StepperDescriptor: () => {
+		const owner = new TStepper()
+
+		return { owner, engine: createEngineStepper({ owner }) }
 	},
 	BreadcrumbsDescriptor: () => {
 		const owner = new TBreadcrumbs()

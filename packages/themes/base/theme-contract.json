@@ -308,6 +308,24 @@
       "scope": "so-splitter"
     },
     {
+      "name": "so-stepper",
+      "sources": ["packages/core/src/components/custom/stepper/stepper.class.ts"],
+      "description": "Root of the step list, optional panels and navigation.",
+      "scope": "so-stepper"
+    },
+    {
+      "name": "so-stepper-content",
+      "sources": ["packages/core/src/components/custom/stepper/content/content.class.ts"],
+      "description": "Content shown while the corresponding step is active.",
+      "scope": "so-stepper-content"
+    },
+    {
+      "name": "so-stepper-item",
+      "sources": ["packages/core/src/components/custom/stepper/item/item.class.ts"],
+      "description": "Ordered-list item with a header and an optional connector.",
+      "scope": "so-stepper-item"
+    },
+    {
       "name": "so-switch",
       "sources": ["packages/core/src/components/custom/switch/switch.class.ts"],
       "description": "Root of switch. Inherited component classes use the concrete component's base name.",
@@ -2857,6 +2875,60 @@
       "scope": "so-splitter"
     },
     {
+      "name": "so-stepper__list",
+      "sources": ["packages/ui/vue/src/components/stepper/Stepper.vue"],
+      "description": "Ordered list of the process steps.",
+      "scope": "so-stepper"
+    },
+    {
+      "name": "so-stepper-item__body",
+      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "description": "Wrapper around the label and description.",
+      "scope": "so-stepper"
+    },
+    {
+      "name": "so-stepper-item__description",
+      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "description": "Optional description under the name.",
+      "scope": "so-stepper"
+    },
+    {
+      "name": "so-stepper-item__details",
+      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "description": "Optional metadata or controls outside the header.",
+      "scope": "so-stepper"
+    },
+    {
+      "name": "so-stepper-item__indicator",
+      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "description": "Decorative step number or custom marker.",
+      "scope": "so-stepper"
+    },
+    {
+      "name": "so-stepper-item__label",
+      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "description": "Visible name of the step.",
+      "scope": "so-stepper"
+    },
+    {
+      "name": "so-stepper-item__leading",
+      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "description": "Optional metadata preceding the header.",
+      "scope": "so-stepper"
+    },
+    {
+      "name": "so-stepper-item__separator",
+      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "description": "Decorative connector from the current item to its successor.",
+      "scope": "so-stepper"
+    },
+    {
+      "name": "so-stepper-item__trigger",
+      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "description": "Native button or passive header identifying the step.",
+      "scope": "so-stepper"
+    },
+    {
       "name": "so-switch__track",
       "sources": [
         "packages/ui/angular/src/components/switch/switch.component.html",
@@ -3535,6 +3607,14 @@
       "presence": "When the state applies"
     },
     {
+      "name": "data-completed",
+      "sources": ["packages/core/src/components/custom/stepper/item/item.class.ts"],
+      "description": "Whether the application marked the step complete.",
+      "scope": "so-stepper-item",
+      "values": "true | false",
+      "presence": "TDataset serializes both boolean states."
+    },
+    {
       "name": "data-contained",
       "sources": [
         "packages/core/src/components/custom/drawer/drawer.class.ts",
@@ -3633,6 +3713,14 @@
       "scope": "Select root",
       "values": "true | false",
       "presence": "Always present on applicable component instances, including the initial render; false is serialized as \"false\"."
+    },
+    {
+      "name": "data-error",
+      "sources": ["packages/core/src/components/custom/stepper/item/item.class.ts"],
+      "description": "Whether the step has an error. Independent of activation and completion.",
+      "scope": "so-stepper-item",
+      "values": "true | false",
+      "presence": "TDataset serializes both boolean states."
     },
     {
       "name": "data-file-id",
@@ -3818,10 +3906,13 @@
     },
     {
       "name": "data-orientation",
-      "sources": ["packages/core/src/components/custom/splitter/splitter.class.ts"],
-      "description": "Represents a named thickness of a Splitter handle.",
-      "scope": "so-splitter",
-      "values": "numeric index",
+      "sources": [
+        "packages/core/src/components/custom/splitter/splitter.class.ts",
+        "packages/core/src/components/custom/stepper/stepper.class.ts"
+      ],
+      "description": "Orientation of a Splitter or Stepper.",
+      "scope": "so-splitter, so-stepper",
+      "values": "horizontal | vertical",
       "presence": "When the state applies"
     },
     {

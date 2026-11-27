@@ -197,6 +197,10 @@
 	@include meta.load-css('components/badge/badge');
 }
 
+@layer components.so.stepper {
+	@include meta.load-css('components/stepper/stepper');
+}
+
 @layer components.so.splitter {
 	@include meta.load-css('components/splitter/splitter');
 }

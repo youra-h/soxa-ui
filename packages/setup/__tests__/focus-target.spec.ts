@@ -127,6 +127,8 @@ describe('узел фокуса у дескрипторов с TActionPlugin', (
 				'ScrollerDescriptor',
 				'SelectDescriptor',
 				'SliderDescriptor',
+				'StepperDescriptor',
+				'StepperItemDescriptor',
 				'SwitchDescriptor',
 				'TabsDescriptor',
 				'ToggleGroupDescriptor',

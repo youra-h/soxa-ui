@@ -233,3 +233,5 @@ export type { ListBoxSeparatorProps } from './components/list-box/separator'
 
 export { Splitter, SplitterPanel, SplitterHandle } from './components/splitter'
 export type { SplitterProps, SplitterPanelProps, SplitterHandleProps } from './components/splitter'
+export { Stepper, StepperItem, StepperContent } from './components/stepper'
+export type { StepperProps, StepperItemProps, StepperContentProps } from './components/stepper'

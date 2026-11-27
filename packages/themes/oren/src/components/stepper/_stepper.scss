@@ -1,0 +1,55 @@
+@use '../button/mixins' as button;
+@use '../../mixins/on-signal';
+
+.so-stepper-item__trigger {
+	border-radius: calc(var(--so-radius) * 0.5);
+	@apply text-so-neutral-800;
+
+	&:focus-visible {
+		@include button.button-focus-ring;
+	}
+
+	&:disabled {
+		@apply text-so-neutral-500;
+	}
+}
+
+.so-stepper-item__indicator {
+	border-radius: 50%;
+	@apply bg-so-neutral-200 text-so-neutral-800;
+	font-size: 0.75em;
+	font-weight: 600;
+}
+
+.so-stepper-item__description {
+	@apply text-so-neutral-600;
+	font-size: 0.875em;
+}
+
+.so-stepper-item__separator {
+	border-block-start: 1px solid;
+	@apply border-so-neutral-300;
+}
+
+.so-stepper[data-orientation='vertical']
+	> .so-stepper__list
+	> .so-stepper-item
+	> .so-stepper-item__separator {
+	border-block-start: 0;
+	border-inline-start: 1px solid;
+	@apply border-so-neutral-300;
+}
+
+.so-stepper-item[data-completed='true'] .so-stepper-item__indicator {
+	@apply bg-so-neutral-700 text-so-neutral-50;
+}
+
+.so-stepper-item[data-selected='true'] .so-stepper-item__indicator {
+	@apply bg-so-accent-500;
+	color: on-signal.$text;
+}
+
+.so-stepper-item[data-error='true'] .so-stepper-item__indicator {
+	@apply bg-so-negative-500;
+	color: on-signal.$text;
+}

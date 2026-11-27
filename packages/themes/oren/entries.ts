@@ -97,6 +97,7 @@ export const COMPONENTS: Readonly<Record<string, readonly string[]>> = {
 	skeleton: ['skeleton'],
 	slider: ['slider'],
 	splitter: ['splitter'],
+	stepper: ['stepper'],
 	switch: ['switch'],
 	table: ['icon', 'button', 'check-box', 'table'],
 	tabs: ['icon', 'button', 'tabs'],
