@@ -54,7 +54,7 @@ import {
 	TOOLTIP_TYPES,
 } from './enums'
 import { GUIDE_STEPS, parseGuideSteps } from './guide'
-import { COLLECTION_VALUES, GROUPED_ITEMS, PRODUCE_GROUPS } from './items'
+import { COLLECTION_VALUES, GROUPED_ITEMS, PRODUCE_GROUPS, TREE_PREVIEW_EXPANDED } from './items'
 import type {
 	TComponentEntry,
 	TControlKind,
@@ -474,6 +474,12 @@ const OWN: Record<string, Record<string, string>> = {
 			'Через сколько миллисекунд после ухода курсора подсказка прячется. Курсор на ней самой её держит',
 		type: 'Чем подсказка служит триггеру: описанием (aria-describedby) или именем (aria-labelledby) — для кнопки-иконки без текста',
 	},
+	tree: {
+		guides: 'Вертикальные линии показывают связь раскрытой ветки с её дочерними узлами',
+		loadChildren: 'Функция загрузки дочерних узлов при раскрытии отложенной ветки',
+		expanded:
+			'Ключи раскрытых веток. Список на стенде показывает готовые наборы для этого дерева.',
+	},
 	'list-box': {
 		view: 'Оформление списка',
 	},
@@ -698,6 +704,7 @@ export const PREVIEW_PROPS: Readonly<Record<string, Readonly<Record<string, unkn
 	'date-picker': { aria_label: 'Дата' },
 	popover: { aria_label: 'Пример поповера' },
 	breadcrumbs: { maxItems: 4 },
+	tree: { mode: 'none', expanded: TREE_PREVIEW_EXPANDED },
 	// Сотня элементов по десять на странице, текущая — пятая: пропуски по обе
 	// стороны видны с первой отрисовки. Имени у ряда без приложения нет
 	pagination: { total: 100, value: 5, aria_label: 'Страницы' },
@@ -811,6 +818,7 @@ export const PRESETS: Record<string, Record<string, Record<string, unknown>>> = 
 		// Линия стоит между секциями групп, а у опций превью групп нет
 		groupSeparators: GROUPED,
 	},
+	tree: { indicator: { mode: 'multiple', value: ['acme'] } },
 	'list-box': {
 		indicator: { mode: 'multiple' },
 		// Линия стоит между секциями групп, а у элементов превью групп нет
@@ -950,6 +958,7 @@ export const NON_EDITABLE = new Set([
  */
 const NON_EDITABLE_BY_COMPONENT: Readonly<Record<string, ReadonlySet<string>>> = {
 	icon: new Set(['tag']),
+	tree: new Set(['loadChildren']),
 }
 
 export function describeProp(componentId: string, prop: string): string | undefined {
@@ -964,6 +973,14 @@ export function describeProp(componentId: string, prop: string): string | undefi
  */
 
 const PRESET_VALUES: Record<string, Record<string, Readonly<Record<string, unknown>>>> = {
+	tree: {
+		expanded: {
+			'Все свёрнуты': [],
+			Accounts: TREE_PREVIEW_EXPANDED,
+			Support: ['support'],
+			'Все раскрыты': ['accounts', 'acme', 'support'],
+		},
+	},
 	'code-block': {
 		snippets: {
 			'npm / yarn / pnpm': INSTALL_SNIPPETS,

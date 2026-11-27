@@ -279,3 +279,4 @@ export type {
 	SplitterHandleEventProps,
 } from './components/splitter'
 export { Guide, type GuideProps, type GuideEventProps } from './components/guide'
+export { Tree, type TreeProps, type TreeAttributes, type TreeEventProps } from './components/tree'

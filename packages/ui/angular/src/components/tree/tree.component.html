@@ -1,0 +1,37 @@
+<ng-template #entries let-layout>
+	@for (entry of layout; track entry.key) {
+		@if (entry.kind === 'filler') {
+			<div class="so-tree__filler" aria-hidden="true" [style]="entry.style"></div>
+		} @else if (linkOf(entry); as link) {
+			<a
+				so-tree-item
+				[ctrl]="entry.item"
+				[attr.href]="link"
+				[row]="entry.row"
+				[iconSlot]="slot('item-icon')"
+				[indicatorSlot]="slot('item-indicator-icon')"
+				[contentSlot]="slot('item')"
+			></a>
+		} @else {
+			<div
+				so-tree-item
+				[ctrl]="entry.item"
+				[row]="entry.row"
+				[iconSlot]="slot('item-icon')"
+				[indicatorSlot]="slot('item-indicator-icon')"
+				[contentSlot]="slot('item')"
+				[group]="entries"
+				[descendants]="entry.children"
+			></div>
+		}
+	}
+</ng-template>
+@if (state()['layout']?.length) {
+	<ng-container
+		[ngTemplateOutlet]="entries"
+		[ngTemplateOutletContext]="{ $implicit: state()['layout'] }"
+	/>
+} @else {
+	<ng-content select="[slot=empty]" />
+}
+<ng-content select="ng-template[slot]" />

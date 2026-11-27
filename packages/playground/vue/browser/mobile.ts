@@ -41,6 +41,7 @@ export const MOBILE_COMPONENTS = [
 	'toasts',
 	'scroller',
 	'list-box',
+	'tree',
 	'breadcrumbs',
 	'pagination',
 	'table',

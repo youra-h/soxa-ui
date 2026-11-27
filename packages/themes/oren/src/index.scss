@@ -85,6 +85,10 @@
 	@include meta.load-css('components/list-box/list-box');
 }
 
+@layer components.so.tree {
+	@include meta.load-css('components/tree/tree');
+}
+
 @layer components.so.menu {
 	@include meta.load-css('components/menu/menu');
 }

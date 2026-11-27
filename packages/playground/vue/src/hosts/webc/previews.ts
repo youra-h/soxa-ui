@@ -8,6 +8,7 @@ import {
 import type { TToastsItemType } from '@soxa-ui/core'
 import {
 	COLLECTION_ITEMS,
+	TREE_PREVIEW_PROPS,
 	COLLECTION_MANY_ITEMS,
 	TABLE_COLUMNS,
 	TABLE_MANY_ROWS,
@@ -905,6 +906,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 	// (`<div is="so-item-row-div">`), built by the item's template. Unless they
 	// came as data (`items` from the page's groups block): markup would replace
 	// the data, and the list draws groups from data
+	tree: { tag: 'div', is: 'so-tree', props: TREE_PREVIEW_PROPS },
 	'list-box': {
 		tag: 'div',
 		is: 'so-list-box',

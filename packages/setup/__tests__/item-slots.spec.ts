@@ -31,6 +31,8 @@ import {
 	DatePickerDescriptor,
 	ListBoxDescriptor,
 	ListBoxItemDescriptor,
+	TreeDescriptor,
+	TreeItemDescriptor,
 	MenuDescriptor,
 	MenuItemDescriptor,
 	MenuSubmenuDescriptor,
@@ -55,6 +57,8 @@ import type { IComponentDescriptor } from '../protected/define'
 /** Дескрипторы по имени части — имена идут в заголовки тестов. */
 const DESCRIPTORS: Readonly<Record<string, () => IComponentDescriptor>> = {
 	ListBox: ListBoxDescriptor,
+	Tree: TreeDescriptor,
+	'Tree.Item': TreeItemDescriptor,
 	'ListBox.Item': ListBoxItemDescriptor,
 	Menu: MenuDescriptor,
 	// Из данных меню рисует действия и подменю: флажок ставят разметкой
@@ -99,6 +103,10 @@ type TRelay = readonly [
 ]
 
 const RELAYS: readonly TRelay[] = [
+	['Tree', 'item', 'Tree.Item', 'default', null],
+	['Tree', 'item-icon', 'Tree.Item', 'icon', null],
+	['Tree', 'item-indicator-icon', 'Tree.Item', 'indicator-icon', null],
+
 	['ListBox', 'item-leading', 'ListBox.Item', 'leading', 'item'],
 	['ListBox', 'item', 'ListBox.Item', 'default', 'item'],
 	['ListBox', 'item-trailing', 'ListBox.Item', 'trailing', 'item'],
@@ -180,6 +188,7 @@ const RELAYS: readonly TRelay[] = [
 /** Элементы коллекций: каждый их слот обязан стоять источником в `RELAYS`. */
 const ITEMS = [
 	'ListBox.Item',
+	'Tree.Item',
 	'Menu.Item',
 	'Menu.Submenu',
 	'Select.Item',

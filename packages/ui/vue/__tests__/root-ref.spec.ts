@@ -86,6 +86,7 @@ import {
 	Textarea,
 	Toasts,
 	Tooltip,
+	Tree,
 } from '@soxa-ui/vue'
 import ButtonTemplate from '../src/components/button/Button.vue'
 
@@ -163,6 +164,7 @@ const ROOTS: ReadonlyArray<readonly [string, (props: TProbeProps) => VNode, stri
 	],
 	['Popover', (props) => h(Popover, props), '.so-popover', '.so-popover'],
 	['Tooltip', (props) => h(Tooltip, props), '.so-tooltip', '.so-tooltip'],
+	['Tree', (props) => h(Tree, props), '.so-tree', '.so-tree'],
 	// Первый узел шаблона — приложение в слоте, корень — регион в телепорте
 	['Toasts', (props) => h(Toasts, props), '.so-toasts', '.so-toasts'],
 	['Icon', (props) => h(Icon, { tag: 'i', ...props }), '.so-icon', '.so-icon'],

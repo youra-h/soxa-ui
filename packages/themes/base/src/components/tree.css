@@ -1,0 +1,109 @@
+.so-tree {
+	--so-tree-spacing-factor: var(--so-collection-scale-normal, 1);
+	--so-tree-row-gap: calc(var(--so-tree-spacing-unit, 0px) * var(--so-tree-spacing-factor));
+	inline-size: 100%;
+	min-inline-size: 0;
+}
+
+.so-tree--size-sm {
+	--so-tree-spacing-factor: var(--so-collection-scale-sm, 1);
+}
+
+.so-tree--size-lg {
+	--so-tree-spacing-factor: var(--so-collection-scale-lg, 1);
+}
+
+.so-tree--size-xl {
+	--so-tree-spacing-factor: var(--so-collection-scale-xl, 1);
+}
+
+.so-tree--size-2xl {
+	--so-tree-spacing-factor: var(--so-collection-scale-2xl, 1);
+}
+
+.so-tree,
+.so-tree-item,
+.so-tree-item__group {
+	display: flex;
+	flex-direction: column;
+	gap: var(--so-tree-row-gap);
+}
+
+.so-tree-item {
+	flex-shrink: 0;
+	color: inherit;
+	text-decoration: none;
+}
+
+.so-tree-item > .so-tree-item__row {
+	display: flex;
+	inline-size: 100%;
+	justify-content: start;
+}
+
+.so-tree-item > .so-tree-item__row > .so-button__text {
+	min-inline-size: 0;
+	text-align: start;
+}
+
+:where(.so-tree-item > .so-tree-item__row > .so-button__text > *) {
+	margin-inline: 0 auto;
+}
+
+.so-tree-item__group {
+	padding-inline-start: var(--so-tree-indent, 1.25rem);
+}
+
+.so-tree-item__group:empty {
+	display: none;
+}
+
+.so-tree[data-guides='true'] .so-tree-item__group {
+	border-inline-start: 1px solid var(--so-tree-guide-color, currentColor);
+	margin-inline-start: calc(var(--so-tree-indent, 1.25rem) / 2);
+	padding-inline-start: calc(var(--so-tree-indent, 1.25rem) / 2 - 1px);
+}
+
+.so-tree-item__toggle,
+.so-tree-item__spacer {
+	display: inline-grid;
+	place-items: center;
+	inline-size: 1.25em;
+	flex: 0 0 auto;
+}
+
+.so-tree-item__selection-indicator {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	inline-size: 1em;
+	block-size: 1em;
+}
+
+.so-tree-item__chevron {
+	inline-size: 0.45em;
+	block-size: 0.45em;
+	border: solid currentColor;
+	border-width: 0 1px 1px 0;
+	transform: scaleX(var(--so-dir-sign, 1)) rotate(-45deg);
+}
+
+.so-tree-item[data-expanded='true'] > .so-tree-item__row .so-tree-item__chevron {
+	transform: rotate(45deg);
+}
+
+.so-tree-item__accessible-name,
+.so-tree-item[data-window-ancestor] > .so-tree-item__row {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+}
+
+.so-tree__filler {
+	flex-shrink: 0;
+	/* The adjacent gap is already included in the skipped rows' height. */
+	block-size: max(0px, calc(var(--so-filler-height) - var(--so-tree-row-gap)));
+}

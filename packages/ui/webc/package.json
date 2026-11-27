@@ -228,6 +228,10 @@
     "./alert-dialog": {
       "types": "./dist/components/alert-dialog/index.d.ts",
       "default": "./dist/components/alert-dialog/index.js"
+    },
+    "./tree": {
+      "types": "./dist/components/tree/index.d.ts",
+      "default": "./dist/components/tree/index.js"
     }
   },
   "files": [

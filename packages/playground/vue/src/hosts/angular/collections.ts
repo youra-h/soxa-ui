@@ -10,6 +10,7 @@ import {
 	TAccordionComponent,
 	TAccordionItemComponent,
 	TListBoxComponent,
+	TTreeComponent,
 	TListBoxItemComponent,
 	TRadioGroupComponent,
 	TRadioGroupItemComponent,
@@ -24,6 +25,7 @@ import {
 } from '@soxa-ui/angular'
 import {
 	COLLECTION_ITEMS,
+	TREE_PREVIEW_PROPS,
 	TABLE_COLUMNS,
 	TABLE_ROWS,
 	TABLE_SCROLL_ROWS,
@@ -691,4 +693,67 @@ export class ScrollerPreview implements TFixture {
 	readonly subjects = viewChildren(TScrollerComponent)
 	/** Collection content from the shared manifest, as in Vue and React. */
 	protected readonly entries = COLLECTION_ITEMS
+}
+
+@Component({
+	selector: 'pg-tree-preview',
+	imports: [TTreeComponent, CopyDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: { style: 'display: contents' },
+	template: `
+		<ng-template pg-copy>
+			<div
+				so-tree
+				[ctrl]="ctrl()"
+				[items]="items() ?? defaults.items"
+				[expanded]="expanded()"
+				[guides]="guides() ?? defaults.guides"
+				[indicator]="indicator()"
+				[mode]="mode()"
+				[value]="value()"
+				[disabled]="disabled()"
+				[focused]="focused()"
+				[visible]="visible()"
+				[rendered]="rendered()"
+				[direction]="direction()"
+				[size]="size()"
+				[variant]="variant()"
+				[aria_label]="aria_label() ?? defaults.aria_label"
+				[engine]="engine()"
+				[name]="name()"
+				[loadChildren]="loadChildren()"
+				[aria_labelledBy]="aria_labelledBy()"
+				[aria_describedBy]="aria_describedBy()"
+				[embedded]="embedded()"
+				[pluginProps]="pluginProps()"
+			></div>
+		</ng-template>
+	`,
+})
+export class TreePreview implements TFixture {
+	readonly ctrl = input<TTreeComponent['ctrl']>()
+	readonly items = input<TTreeComponent['items']>()
+	readonly expanded = input<TTreeComponent['expanded']>()
+	readonly guides = input<TTreeComponent['guides']>()
+	readonly indicator = input<TTreeComponent['indicator']>()
+	readonly mode = input<TTreeComponent['mode']>()
+	readonly value = input<TTreeComponent['value']>()
+	readonly disabled = input<TTreeComponent['disabled']>()
+	readonly focused = input<TTreeComponent['focused']>()
+	readonly visible = input<TTreeComponent['visible']>()
+	readonly rendered = input<TTreeComponent['rendered']>()
+	readonly direction = input<TTreeComponent['direction']>()
+	readonly size = input<TTreeComponent['size']>()
+	readonly variant = input<TTreeComponent['variant']>()
+	readonly aria_label = input<TTreeComponent['aria_label']>()
+	readonly engine = input<TTreeComponent['engine']>()
+	readonly name = input<TTreeComponent['name']>()
+	readonly loadChildren = input<TTreeComponent['loadChildren']>()
+	readonly aria_labelledBy = input<TTreeComponent['aria_labelledBy']>()
+	readonly aria_describedBy = input<TTreeComponent['aria_describedBy']>()
+	readonly embedded = input<TTreeComponent['embedded']>()
+	readonly pluginProps = input<TTreeComponent['pluginProps']>()
+	readonly copy = viewChild.required(CopyDirective)
+	readonly subjects = viewChildren(TTreeComponent)
+	protected readonly defaults = TREE_PREVIEW_PROPS
 }

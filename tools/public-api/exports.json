@@ -79,6 +79,7 @@
       "ToggleGroup",
       "ToggleGroupItem",
       "Tooltip",
+      "Tree",
       "Virtual",
       "roleIcon",
       "useToasts"
@@ -171,6 +172,7 @@
       "ToggleGroupItemProps",
       "ToggleGroupProps",
       "TooltipProps",
+      "TreeProps",
       "ValueControlProps",
       "VirtualProps"
     ]
@@ -252,6 +254,7 @@
       "ToggleGroup",
       "ToggleGroupItem",
       "Tooltip",
+      "Tree",
       "Virtual",
       "roleIcon",
       "useToasts"
@@ -441,6 +444,9 @@
       "ToggleGroupProps",
       "TooltipEventProps",
       "TooltipProps",
+      "TreeAttributes",
+      "TreeEventProps",
+      "TreeProps",
       "ValueControlEventProps",
       "ValueControlProps",
       "VirtualEventProps",
@@ -524,6 +530,7 @@
       "ToggleGroup",
       "ToggleGroupItem",
       "Tooltip",
+      "Tree",
       "Virtual",
       "roleIcon",
       "useToasts"
@@ -713,6 +720,9 @@
       "ToggleGroupProps",
       "TooltipEventProps",
       "TooltipProps",
+      "TreeAttributes",
+      "TreeEventProps",
+      "TreeProps",
       "ValueControlEventProps",
       "ValueControlProps",
       "VirtualEventProps",
@@ -796,6 +806,7 @@
       "ToggleGroup",
       "ToggleGroupItem",
       "Tooltip",
+      "Tree",
       "Virtual",
       "roleIcon",
       "useToasts"
@@ -984,6 +995,9 @@
       "ToggleGroupProps",
       "TooltipEventProps",
       "TooltipProps",
+      "TreeAttributes",
+      "TreeEventProps",
+      "TreeProps",
       "ValueControlEventProps",
       "ValueControlProps",
       "VirtualEventProps",
@@ -1067,6 +1081,7 @@
       "TToggleGroupElement",
       "TToggleGroupItemElement",
       "TTooltipElement",
+      "TTreeElement",
       "TVirtualElement",
       "registerItemRowTag",
       "registerPopoverTag",
@@ -1156,6 +1171,7 @@
       "TToggleGroupElementProps",
       "TToggleGroupItemElementProps",
       "TTooltipElementProps",
+      "TTreeElementProps",
       "TVirtualElementProps"
     ],
     "subpaths": {
@@ -1398,6 +1414,10 @@
       "./guide": {
         "values": ["TGuideElement"],
         "types": ["TGuideElementProps"]
+      },
+      "./tree": {
+        "values": ["TTreeElement"],
+        "types": ["TTreeElementProps"]
       }
     }
   },
@@ -1483,6 +1503,7 @@
       "TToggleGroupComponent",
       "TToggleGroupItemComponent",
       "TTooltipComponent",
+      "TTreeComponent",
       "TVirtualComponent",
       "TextPipe",
       "provideAttrs",

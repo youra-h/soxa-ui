@@ -170,10 +170,13 @@ describe('пропсы превью', () => {
 					continue
 				}
 
-				// Значение перечислимого пропа — из его же списка, как у пресетов
-				const options = optionsForProp(id, name)
+				// A preset exposes labels to the editor and values to the preview.
+				const presets = valuesForProp(id, name)
+				const options: readonly unknown[] | undefined = presets
+					? Object.values(presets)
+					: optionsForProp(id, name)
 
-				if (options && (typeof value !== 'string' || !options.includes(value))) {
+				if (options && !options.includes(value)) {
 					broken.push(`${name}=${String(value)}`)
 				}
 			}
