@@ -2,6 +2,7 @@ import {
 	StepperCollectionItemDescriptor,
 	StepperItemDescriptor,
 	TCollectionItemExtension,
+	hasIcon,
 } from '@soxa-ui/setup'
 import {
 	createVueAdapterContext,
@@ -38,7 +39,7 @@ export default {
 
 		return extendBinding(joinBindings(ownerBinding, itemBinding), {
 			...useSplitAttrs(),
-			stepIconTag: roleIcon('step'),
+			stepIconTag: roleIcon(hasIcon('step') ? 'step' : 'arrowRight'),
 			checkIconTag: roleIcon('check'),
 			errorIconTag: roleIcon('error'),
 			activate() {
