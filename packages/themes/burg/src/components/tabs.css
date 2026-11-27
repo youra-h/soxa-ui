@@ -2,6 +2,7 @@
 	:where(.so-tabs) {
 		--so-burg-tabs-marker: var(--so-burg-text);
 		--so-burg-tabs-radius: var(--so-tabs-radius, var(--so-radius));
+		--so-burg-tabs-space: calc(var(--so-spacing) * var(--so-tabs-spacing-factor, 1));
 	}
 
 	:where(.so-tabs) > :where(.so-tabs-content) {
@@ -56,17 +57,18 @@
 	}
 
 	:where(.so-tabs:not(.so-code-block__tabs, .so-tabs--view-contained, .so-tabs--view-outline)) {
-		&:where(.so-tabs--orientation-horizontal) > :where(.so-tabs__bar) {
-			border-block-end: 1px solid var(--so-burg-border);
+		&:where(.so-tabs--orientation-horizontal)
+			> :where(.so-tabs__bar)
+			> :where(.so-tabs__list)
+			> :where(.so-tabs-item) {
+			min-inline-size: 6.5rem;
 		}
 
-		&:where(.so-tabs--orientation-vertical) > :where(.so-tabs__bar) {
-			border-inline-end: 1px solid var(--so-burg-border);
-		}
-
-		&:where(.so-tabs--orientation-vertical.so-tabs--position-end) > :where(.so-tabs__bar) {
-			border-inline-start: 1px solid var(--so-burg-border);
-			border-inline-end-width: 0;
+		& > :where(.so-tabs__bar) > :where(.so-tabs__list) > :where(.so-tabs-item) {
+			& > :where(.so-button:not(.so-tabs-item__close)) {
+				min-block-size: calc(var(--so-tabs-row-height) + var(--so-burg-tabs-space));
+				padding-inline: calc(var(--so-burg-tabs-space) * 5);
+			}
 		}
 
 		&
@@ -106,32 +108,66 @@
 	}
 
 	:where(.so-tabs--view-contained:not(.so-code-block__tabs)) > :where(.so-tabs__bar) {
-		padding: var(--so-spacing);
-		border-radius: var(--so-burg-tabs-radius);
+		--so-burg-tabs-inset: calc(var(--so-burg-tabs-space) * 0.75);
+
+		padding: var(--so-burg-tabs-inset);
+		border-radius: var(--so-tabs-radius, calc(var(--so-radius) + var(--so-burg-tabs-inset)));
 		background-color: var(--so-burg-subtle-surface);
+
+		& > :where(.so-tabs__list) > :where(.so-tabs-item) {
+			border-radius: var(--so-burg-tabs-radius);
+
+			& > :where(.so-button:not(.so-tabs-item__close)) {
+				block-size: calc(var(--so-tabs-row-height) - var(--so-burg-tabs-space));
+				min-block-size: var(--so-target-size);
+				padding-block: var(--so-tabs-row-padding, 0px);
+				padding-inline: calc(var(--so-burg-tabs-space) * 2);
+			}
+
+			& > :where(.so-tabs-item__close) {
+				margin-block: var(--so-tabs-row-padding, 0px);
+			}
+
+			&:where([data-selected='true']) {
+				background-color: var(--so-burg-surface);
+				box-shadow: 0 1px 2px light-dark(rgb(0 0 0 / 12%), rgb(0 0 0 / 35%));
+			}
+		}
 	}
 
-	:where(.so-tabs:is(.so-tabs--view-outline, .so-tabs--view-contained):not(.so-code-block__tabs))
-		> :where(.so-tabs__bar)
-		> :where(.so-tabs__list)
-		> :where(.so-tabs-item) {
-		border: 1px solid transparent;
-		border-radius: var(--so-burg-tabs-radius);
+	/* Keep the tab bar as the scroll viewport and leave room for edge slots. */
+	:where(
+		.so-tabs--view-contained.so-tabs--orientation-horizontal:not(
+				.so-code-block__tabs,
+				.so-tabs--alignment-stretch
+			)
+	) {
+		& > :where(.so-tabs__bar:has(> .so-tabs__list:only-child)) {
+			max-inline-size: 100%;
+			align-self: flex-start;
+		}
+
+		&:where(.so-tabs--alignment-center)
+			> :where(.so-tabs__bar:has(> .so-tabs__list:only-child)) {
+			align-self: center;
+		}
+
+		&:where(.so-tabs--alignment-end) > :where(.so-tabs__bar:has(> .so-tabs__list:only-child)) {
+			align-self: flex-end;
+		}
 	}
 
 	:where(.so-tabs--view-outline:not(.so-code-block__tabs))
 		> :where(.so-tabs__bar)
 		> :where(.so-tabs__list)
 		> :where(.so-tabs-item) {
-		border-color: var(--so-burg-border);
-	}
+		border: 1px solid var(--so-burg-border);
+		border-radius: var(--so-burg-tabs-radius);
 
-	:where(.so-tabs:is(.so-tabs--view-outline, .so-tabs--view-contained):not(.so-code-block__tabs))
-		> :where(.so-tabs__bar)
-		> :where(.so-tabs__list)
-		> :where(.so-tabs-item[data-selected='true']) {
-		border-color: var(--so-burg-tabs-marker);
-		background-color: var(--so-burg-surface);
+		&:where([data-selected='true']) {
+			border-color: var(--so-burg-tabs-marker);
+			background-color: var(--so-burg-surface);
+		}
 	}
 
 	@media (forced-colors: active) {
@@ -149,6 +185,14 @@
 					background-color: Highlight;
 				}
 			}
+		}
+
+		:where(.so-tabs--view-contained:not(.so-code-block__tabs))
+			> :where(.so-tabs__bar)
+			> :where(.so-tabs__list)
+			> :where(.so-tabs-item[data-selected='true']) {
+			outline: 1px solid Highlight;
+			outline-offset: -1px;
 		}
 	}
 }
