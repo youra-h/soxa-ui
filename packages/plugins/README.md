@@ -123,7 +123,9 @@ formatName(ruRU.translations.tabs.close, 'Почта') // 'Закрыть Поч
 
 ## License
 
-[MIT](https://github.com/youra-h/soxa-ui/blob/main/LICENSE)
+Soxa-owned code in this package is under the [Soxa Runtime License](LICENSE).
+Use and redistribution in applications are free, including for commercial use.
+Changes to the covered implementation require written permission.
 
 ## Breadcrumbs
 

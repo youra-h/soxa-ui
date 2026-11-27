@@ -67,7 +67,9 @@ engine.extensions.plain.events.on('item:remove:before', (e) => e.preventDefault(
 
 ## License
 
-The code of the package is [MIT](https://github.com/youra-h/soxa-ui/blob/main/LICENSE).
+Soxa-owned code in this package is under the [Soxa Runtime License](LICENSE).
+Use and redistribution in applications are free, including for commercial use.
+Changes to the covered implementation require written permission.
 
 The first day of the week by region, which the calendar uses when a locale does not name it, is
 [Unicode CLDR](https://cldr.unicode.org/) data — CLDR 48, `weekData.firstDay` of

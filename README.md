@@ -11,7 +11,7 @@ render it in Vue, React, Angular, Svelte, Solid and Web Components.**
 
 [![CI](https://github.com/youra-h/soxa-ui/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/youra-h/soxa-ui/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/@soxa-ui/core?label=npm)](https://www.npmjs.com/org/soxa-ui)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[Licenses](#license)
 
 > **Status:** Stable `0.6.0` is the current release under npm `latest`.
 > Alert, AlertDialog, Avatar and Separator are included across all six adapters.
@@ -413,4 +413,9 @@ On the way there:
 
 ## License
 
-[MIT](LICENSE)
+The UI adapters, `@soxa-ui/setup`, and theme CSS are under [MIT](LICENSE).
+Soxa-owned code in [`@soxa-ui/core`](packages/core/LICENSE) and
+[`@soxa-ui/plugins`](packages/plugins/LICENSE) is under the Soxa Runtime License.
+It allows free commercial use and redistribution in applications. Changes to the
+covered implementation require written permission. Third-party materials are
+covered by their respective licenses.
