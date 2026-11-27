@@ -18,6 +18,12 @@ declare module '@soxa-ui/core' {
 		plain: true
 	}
 
+	interface IBackdropViews {
+		dim: true
+		blur: true
+		none: true
+	}
+
 	interface IRadioGroupViews {
 		dot: true
 		ring: true

@@ -37,6 +37,10 @@
 		--so-burg-button-ink: var(--so-burg-button-tone);
 		border-radius: var(--so-button-radius, calc(var(--so-radius) * 0.75));
 		font-weight: 450;
+	}
+
+	:where(.so-list-box-item, .so-select-item, .so-menu-item) > :where(.so-button:focus-visible) {
+		outline: 2px solid var(--so-burg-focus-edge);
 		outline-offset: -2px;
 	}
 
