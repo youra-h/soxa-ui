@@ -32,7 +32,9 @@ sets each item's `completed` and `error` state based on its own validation. Use
 `orientation="vertical"` to stack the steps.
 
 Provide a group name with `aria_label` or `aria_labelledby`. Interactive step headers are
-native buttons, and the current header exposes `aria-current="step"`.
+native buttons, and the current header exposes `aria-current="step"`. Both built-in
+icon packs include the `step` glyph. With an older or custom pack that omits `step`,
+Stepper uses `arrowRight`.
 
 The [generated API contract](../api/generated/contract.json) lists the props, events and slots
 for `stepper`, `stepper-item` and `stepper-content`.

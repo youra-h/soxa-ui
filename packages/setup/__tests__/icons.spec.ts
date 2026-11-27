@@ -94,6 +94,8 @@ const PACKS: { name: string; pack: Partial<Record<string, TIconSource>>; loaded:
 	{ name: 'lucide', pack: lucide, loaded: 'currentColor' },
 ]
 
+const PACK_ROLES = [...ICON_ROLES, 'step'] as const
+
 /** Покраска в рисунке: атрибут `fill` или `stroke` и его значение. */
 const PAINT = /\s(fill|stroke)="([^"]*)"/g
 
@@ -107,10 +109,15 @@ describe.each(PACKS)('conformance пакета $name', ({ pack, loaded }) => {
 		expect(missingIconRoles(pack)).toEqual([])
 	})
 
+	it('provides the optional Stepper role in the built-in pack', () => {
+		expect(pack.step).toBeDefined()
+		expect(missingIconRoles({ ...pack, step: undefined })).toEqual([])
+	})
+
 	it('каждая иконка — данные, а не разметка с корневым <svg>', () => {
 		// Корень строит адаптер: только так он может задать размер,
 		// `aria-hidden` и классы
-		for (const role of ICON_ROLES) {
+		for (const role of PACK_ROLES) {
 			expect(pack[role]?.viewBox).toMatch(/^-?\d/)
 			expect(pack[role]?.body).not.toContain('<svg')
 		}
@@ -123,7 +130,7 @@ describe.each(PACKS)('conformance пакета $name', ({ pack, loaded }) => {
 		// заливкой или линией. Цвет, записанный значением, прошёл бы мимо неё, а
 		// рисунок без покраски взял бы умолчание SVG — чёрный, а не цвет пакета.
 		// `none` — способ рисования, а не цвет: линия Lucide без заливки
-		for (const role of ICON_ROLES) {
+		for (const role of PACK_ROLES) {
 			const colors = [...(pack[role]?.body ?? '').matchAll(PAINT)]
 				.map(([, , value]) => value)
 				.filter((value) => value !== 'none')
@@ -142,7 +149,7 @@ describe.each(PACKS)('conformance пакета $name', ({ pack, loaded }) => {
 		// правило фигурам. `style` в разметке перебил бы такое правило, а
 		// политика безопасности без 'unsafe-inline' для стилей снимает его, и
 		// иконка осталась бы без цвета
-		for (const role of ICON_ROLES) {
+		for (const role of PACK_ROLES) {
 			expect(pack[role]?.body, role).not.toMatch(/\sstyle=|<style/)
 		}
 	})
