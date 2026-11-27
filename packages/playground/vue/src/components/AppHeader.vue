@@ -2,6 +2,7 @@
 import { Button, Drawer, Icon } from '@soxa-ui/vue'
 import { useSidebar } from '../composables/useSidebar'
 import { MENU_GLYPH, SETTINGS_GLYPH } from '../icons'
+import AppGuide from './AppGuide.vue'
 import AppSettings from './AppSettings.vue'
 import PageSwitch from './PageSwitch.vue'
 
@@ -37,6 +38,8 @@ const version = __SOXA_VERSION__
 			<div class="pg__version">v{{ version }}</div>
 		</div>
 
+		<AppGuide :narrow="narrow" />
+
 		<template v-if="narrow">
 			<Button
 				size="sm"
@@ -44,6 +47,7 @@ const version = __SOXA_VERSION__
 				type="button"
 				class="pg__glyph-button"
 				aria_label="Настройки"
+				data-guide-anchor="settings"
 				@click="settingsOpen = true"
 			>
 				<Icon :tag="SETTINGS_GLYPH" />

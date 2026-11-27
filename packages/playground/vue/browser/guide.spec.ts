@@ -4,8 +4,12 @@ import { h } from 'vue'
 import { TGuide, type IGuideStep } from '@soxa-ui/core'
 import { Guide } from '@soxa-ui/vue'
 import { render } from './render'
+import { renderStand } from './stand'
+import { router } from '../src/router'
+import { useTheme } from '../src/composables/useTheme'
 
 import '@soxa-ui/theme-oren'
+import '../src/styles.css'
 
 describe('Guide', () => {
 	it('centers the modal, leaves the DOM target clickable, and moves the WebGL spotlight', async () => {
@@ -86,5 +90,78 @@ describe('Guide', () => {
 			.poll(() => document.querySelector<HTMLElement>('.so-guide')?.style.display)
 			.toBe('none')
 		await expect.element(page.getByRole('button', { name: 'Start guide' })).toHaveFocus()
+	})
+})
+
+describe('Playground guide', () => {
+	const next = () => page.getByRole('dialog').getByRole('button', { name: /^(Next|Далее)$/ })
+	const spotlight = () => document.querySelector('.so-guide__spotlight')?.getBoundingClientRect()
+	const target = (name: string) =>
+		document.querySelector(`.pg__header [data-guide-anchor="${name}"]`)?.getBoundingClientRect()
+
+	async function open(width: number): Promise<void> {
+		await page.viewport(width, 800)
+		await router.push('/vue/button')
+		renderStand()
+		await page.getByRole('button', { name: 'Обзор', exact: true }).click()
+		await expect
+			.element(page.getByRole('dialog', { name: 'Знакомство со стендом' }))
+			.toBeVisible()
+	}
+
+	it('highlights the running stand and advances after its dark switch is clicked', async () => {
+		const { dark } = useTheme()
+		const initial = dark.value
+
+		try {
+			await open(1440)
+			await next().click()
+			await expect.element(page.getByRole('dialog', { name: 'Фреймворк' })).toBeVisible()
+			expect(target('framework')?.width).toBeGreaterThan(0)
+			await expect.poll(() => spotlight()?.left).toBe(target('framework')?.left)
+			await expect.poll(() => spotlight()?.width).toBe(target('framework')?.width)
+			await next().click()
+			await expect
+				.element(page.getByRole('dialog', { name: 'Анимация движения' }))
+				.toBeVisible()
+			await next().click()
+			await expect
+				.element(page.getByRole('dialog', { name: 'Язык компонентов' }))
+				.toBeVisible()
+			await next().click()
+			await expect.element(page.getByRole('dialog', { name: 'Тёмная схема' })).toBeVisible()
+			await page.getByRole('switch', { name: 'Тёмная' }).click()
+
+			await expect
+				.element(page.getByRole('dialog', { name: 'Точка в области превью' }))
+				.toBeVisible()
+			expect(dark.value).toBe(!initial)
+			const x = Math.round(document.documentElement.clientWidth * 0.58)
+			const y = Math.round(document.documentElement.clientHeight * 0.48)
+			await expect.poll(() => spotlight()?.left).toBe(x - 4)
+			await expect.poll(() => spotlight()?.top).toBe(y - 4)
+			await page
+				.getByRole('dialog')
+				.getByRole('button', { name: /^(Done|Готово)$/ })
+				.click()
+			await expect
+				.poll(() => document.querySelector<HTMLElement>('.so-guide')?.style.display)
+				.toBe('none')
+		} finally {
+			dark.value = initial
+		}
+	})
+
+	it('uses the visible settings button as the narrow-layout anchor', async () => {
+		await open(375)
+		await next().click()
+		await expect.element(page.getByRole('dialog', { name: 'Настройки стенда' })).toBeVisible()
+		expect(target('settings')?.width).toBeGreaterThan(0)
+		await expect.poll(() => spotlight()?.left).toBe(target('settings')?.left)
+		await expect.poll(() => spotlight()?.width).toBe(target('settings')?.width)
+		await next().click()
+		await expect
+			.element(page.getByRole('dialog', { name: 'Точка в области превью' }))
+			.toBeVisible()
 	})
 })

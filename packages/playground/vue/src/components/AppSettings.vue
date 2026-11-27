@@ -68,7 +68,13 @@ function chooseFramework(value: unknown): void {
 			Фреймворк — первым из контролов: он решает, чем нарисованы все
 			компоненты страницы. Плашка движения остаётся у своего переключателя
 		-->
-		<Field class="pg__control" position="start" size="sm" label="Фреймворк">
+		<Field
+			class="pg__control"
+			position="start"
+			size="sm"
+			label="Фреймворк"
+			data-guide-anchor="framework"
+		>
 			<Select :value="framework" size="sm" @update:value="chooseFramework($event)">
 				<Select.Item
 					v-for="item in FRAMEWORKS"
@@ -81,7 +87,13 @@ function chooseFramework(value: unknown): void {
 
 		<p v-if="motionOff" class="pg__motion-off" :title="motionOff">{{ motionOff }}</p>
 
-		<Field class="pg__control" position="start" size="sm" label="Анимация движения">
+		<Field
+			class="pg__control"
+			position="start"
+			size="sm"
+			label="Анимация движения"
+			data-guide-anchor="motion"
+		>
 			<Select :value="mode" size="sm" @update:value="choose($event)">
 				<Select.Item
 					v-for="(label, value) in modes"
@@ -92,7 +104,13 @@ function chooseFramework(value: unknown): void {
 			</Select>
 		</Field>
 
-		<Field class="pg__control" position="start" size="sm" label="Язык">
+		<Field
+			class="pg__control"
+			position="start"
+			size="sm"
+			label="Язык"
+			data-guide-anchor="language"
+		>
 			<Select :value="language" size="sm" @update:value="chooseLanguage($event)">
 				<Select.Item
 					v-for="(entry, value) in languages"
@@ -125,7 +143,13 @@ function chooseFramework(value: unknown): void {
 			</Select>
 		</Field>
 
-		<Field class="pg__control" position="start" size="sm" label="Тёмная">
+		<Field
+			class="pg__control"
+			position="start"
+			size="sm"
+			label="Тёмная"
+			data-guide-anchor="scheme"
+		>
 			<Switch :value="dark" size="sm" @update:value="dark = Boolean($event)" />
 		</Field>
 	</div>
