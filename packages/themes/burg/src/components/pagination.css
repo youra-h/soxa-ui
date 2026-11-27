@@ -1,0 +1,60 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-pagination) {
+		display: inline-flex;
+		inline-size: auto;
+		min-inline-size: 0;
+		max-inline-size: 100%;
+	}
+
+	:where(.so-pagination__list) {
+		min-inline-size: 0;
+		overflow-x: auto;
+		padding: 3px;
+		scroll-padding-inline: 3px;
+	}
+
+	:where(.so-pagination__prev, .so-pagination__next, .so-pagination-item > .so-button) {
+		--so-burg-button-fill: transparent;
+		--so-burg-button-ink: var(--so-burg-button-tone);
+	}
+
+	:where(.so-pagination-item[data-selected='true'] > .so-button) {
+		--so-burg-button-background: var(--so-burg-button-tone);
+		--so-burg-button-ink: var(--so-burg-surface);
+	}
+
+	:where(.so-pagination__ellipsis) {
+		inline-size: calc(var(--so-pagination-cell) * 0.6);
+		color: var(--so-burg-muted);
+	}
+
+	:where(.so-pagination--size-normal)
+		> :where(.so-pagination__list)
+		> :where(.so-pagination__ellipsis) {
+		font-size: var(--so-burg-button-font-size-normal);
+	}
+
+	:where(.so-pagination__prev) :where(.so-icon) {
+		scale: calc(-1 * var(--so-dir-sign)) 1;
+	}
+
+	:where(.so-pagination__next) :where(.so-icon) {
+		scale: var(--so-dir-sign) 1;
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-pagination-item[data-selected='true'] > .so-button) {
+			forced-color-adjust: none;
+			color: HighlightText;
+
+			&::after {
+				background-color: Highlight;
+				border-color: Highlight;
+			}
+
+			&:focus-visible {
+				outline-color: Highlight;
+			}
+		}
+	}
+}

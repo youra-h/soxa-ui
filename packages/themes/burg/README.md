@@ -79,6 +79,13 @@ selection. NumberInput uses the Input height, font size, and focus ring.
 At normal size, Slider uses a 3px rail and a 17px thumb. Rating uses a 20px
 star box and preserves fractional values.
 
+### Navigation
+
+Tabs defaults to a thin selection marker and also supports `contained`
+and `outline`. Accordion uses simple dividers between sections. Breadcrumbs
+keeps its overflow menu and wraps long trails. Pagination keeps its arrows
+visible beside a scrollable page list when space is tight.
+
 Set `data-so-theme="burg"` or `data-so-theme="burg-dark"` on the document root
 or the container of the themed components. Load the stylesheet and register
 the layout plugins at the application entry point.

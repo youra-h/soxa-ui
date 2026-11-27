@@ -1,0 +1,47 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-accordion-item) {
+		border-block-end: 1px solid var(--so-burg-border);
+	}
+
+	:where(.so-accordion-item__header:not(.so-button--view-filled)) {
+		--so-burg-button-fill: transparent;
+		--so-burg-button-ink: var(--so-burg-button-tone);
+	}
+
+	:where(.so-accordion-item[data-selected='true'])
+		> :where(.so-accordion-item__header:not(.so-button--view-filled)) {
+		--so-burg-button-background: var(--so-burg-row-highlight);
+	}
+
+	:where(.so-accordion-item__content) {
+		padding-inline: calc(var(--so-spacing) * 2.5);
+	}
+
+	:where(.so-accordion-item__arrow) {
+		transform: rotate(0deg) scaleX(var(--so-dir-sign));
+	}
+
+	:where(.so-accordion-item[data-selected='true'])
+		> :where(.so-accordion-item__header)
+		> :where(.so-accordion-item__arrow) {
+		transform: rotate(calc(90deg * var(--so-dir-sign))) scaleX(var(--so-dir-sign));
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:where(:root:not([data-so-motion='reduce']))
+		:where(.so-accordion-item__arrow):where(
+			[data-so-theme='burg'] *,
+			[data-so-theme='burg-dark'] *
+		) {
+		transition: transform 150ms ease-out;
+	}
+}
+
+:where(:root[data-so-motion='full'])
+	:where(.so-accordion-item__arrow):where(
+		[data-so-theme='burg'] *,
+		[data-so-theme='burg-dark'] *
+	) {
+	transition: transform 150ms ease-out;
+}

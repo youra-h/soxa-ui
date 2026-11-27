@@ -19,3 +19,7 @@
 @import './components/toggle-group.css' layer(so.burg);
 @import './components/slider.css' layer(so.burg);
 @import './components/rating.css' layer(so.burg);
+@import './components/tabs.css' layer(so.burg);
+@import './components/accordion.css' layer(so.burg);
+@import './components/breadcrumbs.css' layer(so.burg);
+@import './components/pagination.css' layer(so.burg);

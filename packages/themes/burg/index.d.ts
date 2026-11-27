@@ -44,6 +44,12 @@ declare module '@soxa-ui/core' {
 		rect: true
 	}
 
+	interface ITabsViews {
+		line: true
+		contained: true
+		outline: true
+	}
+
 	interface IButtonViews {
 		filled: true
 		outlined: true
