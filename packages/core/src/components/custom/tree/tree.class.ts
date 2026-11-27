@@ -2,14 +2,14 @@ import type { IValueControlProps, TValueControlEvents } from '../../base/value-c
 import { TValueControl } from '../../base/value-control'
 import type { TSelectionMode, TSelectionValue } from '../../base/collection'
 import type { TValuePayload } from '../../../common'
-import type { TTreeCollection } from './collection/factory'
+import type { TTreeCollectionFacadeEngine } from './collection/factory'
 import type { ITreeNode, TTreeKey, TTreeLoadChildren } from './types'
 
 export interface ITreeProps extends IValueControlProps<TSelectionValue> {
 	items?: readonly ITreeNode[]
 	expanded?: readonly TTreeKey[]
 	mode?: TSelectionMode
-	engine?: TTreeCollection
+	engine?: TTreeCollectionFacadeEngine
 	loadChildren?: TTreeLoadChildren
 	guides?: boolean
 }

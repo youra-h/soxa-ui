@@ -711,12 +711,20 @@ export class ScrollerPreview implements TFixture {
 				[mode]="mode()"
 				[value]="value()"
 				[disabled]="disabled()"
+				[focused]="focused()"
 				[visible]="visible()"
 				[rendered]="rendered()"
 				[direction]="direction()"
 				[size]="size()"
 				[variant]="variant()"
 				[aria_label]="aria_label() ?? defaults.aria_label"
+				[engine]="engine()"
+				[name]="name()"
+				[loadChildren]="loadChildren()"
+				[aria_labelledBy]="aria_labelledBy()"
+				[aria_describedBy]="aria_describedBy()"
+				[embedded]="embedded()"
+				[pluginProps]="pluginProps()"
 			></div>
 		</ng-template>
 	`,
@@ -729,12 +737,20 @@ export class TreePreview implements TFixture {
 	readonly mode = input<TTreeComponent['mode']>()
 	readonly value = input<TTreeComponent['value']>()
 	readonly disabled = input<TTreeComponent['disabled']>()
+	readonly focused = input<TTreeComponent['focused']>()
 	readonly visible = input<TTreeComponent['visible']>()
 	readonly rendered = input<TTreeComponent['rendered']>()
 	readonly direction = input<TTreeComponent['direction']>()
 	readonly size = input<TTreeComponent['size']>()
 	readonly variant = input<TTreeComponent['variant']>()
 	readonly aria_label = input<TTreeComponent['aria_label']>()
+	readonly engine = input<TTreeComponent['engine']>()
+	readonly name = input<TTreeComponent['name']>()
+	readonly loadChildren = input<TTreeComponent['loadChildren']>()
+	readonly aria_labelledBy = input<TTreeComponent['aria_labelledBy']>()
+	readonly aria_describedBy = input<TTreeComponent['aria_describedBy']>()
+	readonly embedded = input<TTreeComponent['embedded']>()
+	readonly pluginProps = input<TTreeComponent['pluginProps']>()
 	readonly copy = viewChild.required(CopyDirective)
 	readonly subjects = viewChildren(TTreeComponent)
 	protected readonly defaults = TREE_PREVIEW_PROPS

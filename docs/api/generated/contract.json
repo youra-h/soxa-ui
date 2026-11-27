@@ -51745,8 +51745,8 @@
         {
           "name": "engine",
           "canonicalName": "engine",
-          "type": "import(\"@soxa-ui/core\").TTreeCollection | undefined",
-          "declaredType": "TTreeCollection",
+          "type": "import(\"@soxa-ui/core\").TTreeCollectionFacadeEngine | undefined",
+          "declaredType": "TTreeCollectionFacadeEngine",
           "required": false,
           "hasDefault": false
         },

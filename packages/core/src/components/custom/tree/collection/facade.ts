@@ -7,8 +7,8 @@ import type {
 import type { TTreeItem } from '../item.class'
 import type { ITreeProps, TTree } from '../tree.class'
 import type { ITreeNode, TTreeKey } from '../types'
-import { createEngineTree } from './factory'
-import type { TTreeCollection, TTreeCollectionExtensions } from './factory'
+import { completeTreeEngine } from './factory'
+import type { TTreeCollectionExtensions, TTreeCollectionFacadeEngine } from './factory'
 import type { TTreeExtensionEvents } from './extensions/tree/tree.extension'
 import { treeLayout } from './layout'
 
@@ -28,9 +28,9 @@ export class TTreeCollectionFacade extends TSelectionCollectionFacade<
 
 	constructor(
 		props: Pick<ITreeProps, 'items' | 'expanded' | 'mode'> = {},
-		options: TCollectionFacadeOptions<TTreeCollection, TTree> = {},
+		options: TCollectionFacadeOptions<TTreeCollectionFacadeEngine, TTree> = {},
 	) {
-		super({}, { engine: options.engine ?? createEngineTree(), owner: options.owner })
+		super({}, { engine: completeTreeEngine(options.engine), owner: options.owner })
 
 		this.events.relayAll(this.extensions.tree.events)
 		this.events.relayAll(this.extensions.draw.events)

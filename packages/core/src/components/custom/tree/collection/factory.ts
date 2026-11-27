@@ -26,14 +26,21 @@ export type TTreeCollection = TCollectionEngine<
 	{ owner: TTree }
 >
 
-export function createEngineTree(nodes: readonly ITreeNode[] = []): TTreeCollection {
-	const engine: TTreeCollection = completeEngine<TTreeItem, { owner: TTree }>(undefined, {
+export type TTreeCollectionFacadeEngine = TCollectionEngine<any, any>
+
+/** Complete a supplied engine using the same composition as an owned tree. */
+export function completeTreeEngine(engine?: TTreeCollectionFacadeEngine): TTreeCollection {
+	return completeEngine<TTreeItem, { owner: TTree }>(engine, {
 		...selectionExtensions<TTreeItem>(TTreeItem),
 		tree: () => new TTreeExtension(),
 		value: () => new TValueSelectionExtension<TTree, TTreeItem>(),
 		memory: () => new TMemoryExtension<TTreeItem>(),
 		draw: () => new TDrawExtension<TTreeItem>(),
 	})
+}
+
+export function createEngineTree(nodes: readonly ITreeNode[] = []): TTreeCollection {
+	const engine = completeTreeEngine()
 
 	engine.extensions.tree.setNodes(nodes)
 

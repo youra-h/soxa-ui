@@ -36,6 +36,7 @@ export const A11Y_COMPONENTS = [
 	'toasts',
 	'scroller',
 	'list-box',
+	'tree',
 	'pagination',
 	'table',
 	'tabs',
@@ -587,6 +588,24 @@ export const A11Y_CASES: readonly TAuditCase[] = [
 		},
 	),
 	audit('scroller', 'content', '.so-scroller', {}, ['.so-scroller__viewport']),
+	audit('tree', 'collapsed', '.so-tree', { aria_label: 'Sections', expanded: [] }, [
+		'.so-tree [role="treeitem"][aria-expanded="false"]',
+	]),
+	audit('tree', 'expanded', '.so-tree', { aria_label: 'Sections', expanded: ['accounts'] }, [
+		'.so-tree [role="group"] [role="treeitem"][aria-level="2"]',
+	]),
+	audit(
+		'tree',
+		'multiple',
+		'.so-tree',
+		{
+			aria_label: 'Sections',
+			expanded: ['accounts'],
+			mode: 'multiple',
+			value: ['acme', 'globex'],
+		},
+		['.so-tree[aria-multiselectable="true"] [role="treeitem"][aria-selected="true"]'],
+	),
 	...['list-box', 'tags'].flatMap((id) => [
 		audit(id, 'unselected', '.so-' + id, { aria_label: 'Items', mode: 'single' }, [
 			'[role="option"][aria-selected="false"]',

@@ -9,7 +9,7 @@ import {
 } from '@soxa-ui/setup'
 import type {
 	TTree,
-	TTreeCollection,
+	TTreeCollectionFacadeEngine,
 	TTreeCollectionFacade,
 	TTreeItem,
 	TTreeItemCollectionFacade,
@@ -26,7 +26,7 @@ import {
 export function setupTree(
 	ctrl: TTree | undefined,
 	props: object,
-	engine: TTreeCollection | undefined,
+	engine: TTreeCollectionFacadeEngine | undefined,
 ): TBinding<TTree, TTreeCollectionFacade> {
 	const adapter = createAngularAdapterContext(TreeDescriptor(), { ctrl, props })
 	const owner = useAdapter(adapter)

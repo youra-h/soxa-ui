@@ -79,10 +79,10 @@
       "ToggleGroup",
       "ToggleGroupItem",
       "Tooltip",
+      "Tree",
       "Virtual",
       "roleIcon",
-      "useToasts",
-      "Tree"
+      "useToasts"
     ],
     "types": [
       "AccordionItemProps",
@@ -172,9 +172,9 @@
       "ToggleGroupItemProps",
       "ToggleGroupProps",
       "TooltipProps",
+      "TreeProps",
       "ValueControlProps",
-      "VirtualProps",
-      "TreeProps"
+      "VirtualProps"
     ]
   },
   "react": {
@@ -254,10 +254,10 @@
       "ToggleGroup",
       "ToggleGroupItem",
       "Tooltip",
+      "Tree",
       "Virtual",
       "roleIcon",
-      "useToasts",
-      "Tree"
+      "useToasts"
     ],
     "types": [
       "AccordionEventProps",
@@ -444,13 +444,13 @@
       "ToggleGroupProps",
       "TooltipEventProps",
       "TooltipProps",
+      "TreeAttributes",
+      "TreeEventProps",
+      "TreeProps",
       "ValueControlEventProps",
       "ValueControlProps",
       "VirtualEventProps",
-      "VirtualProps",
-      "TreeAttributes",
-      "TreeEventProps",
-      "TreeProps"
+      "VirtualProps"
     ]
   },
   "solid": {
@@ -530,10 +530,10 @@
       "ToggleGroup",
       "ToggleGroupItem",
       "Tooltip",
+      "Tree",
       "Virtual",
       "roleIcon",
-      "useToasts",
-      "Tree"
+      "useToasts"
     ],
     "types": [
       "AccordionEventProps",
@@ -720,13 +720,13 @@
       "ToggleGroupProps",
       "TooltipEventProps",
       "TooltipProps",
+      "TreeAttributes",
+      "TreeEventProps",
+      "TreeProps",
       "ValueControlEventProps",
       "ValueControlProps",
       "VirtualEventProps",
-      "VirtualProps",
-      "TreeAttributes",
-      "TreeEventProps",
-      "TreeProps"
+      "VirtualProps"
     ]
   },
   "svelte": {
@@ -806,10 +806,10 @@
       "ToggleGroup",
       "ToggleGroupItem",
       "Tooltip",
+      "Tree",
       "Virtual",
       "roleIcon",
-      "useToasts",
-      "Tree"
+      "useToasts"
     ],
     "types": [
       "AccordionEventProps",
@@ -995,13 +995,13 @@
       "ToggleGroupProps",
       "TooltipEventProps",
       "TooltipProps",
+      "TreeAttributes",
+      "TreeEventProps",
+      "TreeProps",
       "ValueControlEventProps",
       "ValueControlProps",
       "VirtualEventProps",
-      "VirtualProps",
-      "TreeAttributes",
-      "TreeEventProps",
-      "TreeProps"
+      "VirtualProps"
     ]
   },
   "webc": {
@@ -1081,12 +1081,12 @@
       "TToggleGroupElement",
       "TToggleGroupItemElement",
       "TTooltipElement",
+      "TTreeElement",
       "TVirtualElement",
       "registerItemRowTag",
       "registerPopoverTag",
       "roleIcon",
-      "toastsOf",
-      "TTreeElement"
+      "toastsOf"
     ],
     "types": [
       "ICollectionInitialPanel",
@@ -1171,8 +1171,8 @@
       "TToggleGroupElementProps",
       "TToggleGroupItemElementProps",
       "TTooltipElementProps",
-      "TVirtualElementProps",
-      "TTreeElementProps"
+      "TTreeElementProps",
+      "TVirtualElementProps"
     ],
     "subpaths": {
       "./accordion": {
@@ -1503,13 +1503,13 @@
       "TToggleGroupComponent",
       "TToggleGroupItemComponent",
       "TTooltipComponent",
+      "TTreeComponent",
       "TVirtualComponent",
       "TextPipe",
       "provideAttrs",
       "useToasts",
       "ɵSubtreeDirective",
-      "ɵValueAccessorDirective",
-      "TTreeComponent"
+      "ɵValueAccessorDirective"
     ],
     "types": ["ICollectionInitialPanel", "ICollectionInitialSource", "TToastRender"]
   }

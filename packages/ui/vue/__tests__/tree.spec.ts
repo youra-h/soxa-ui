@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils'
 import { createSSRApp, h } from 'vue'
 import { renderToString } from 'vue/server-renderer'
 import { describe, expect, it, vi } from 'vitest'
+import { createEngine } from '@soxa-ui/core'
 import type { TTreeItem } from '@soxa-ui/core'
 import { Tree } from '../src'
 
@@ -18,6 +19,18 @@ const items = [
 ]
 
 describe('Tree', () => {
+	it('completes an external collection engine with the same Tree extensions', () => {
+		const engine = createEngine()
+		const wrapper = mount(Tree, { props: { engine, items, expanded: ['accounts'] } })
+
+		try {
+			expect(engine.has('tree')).toBe(true)
+			expect(wrapper.findAll('[role="treeitem"]')).toHaveLength(4)
+		} finally {
+			wrapper.unmount()
+		}
+	})
+
 	it('renders groups and independent icon slots on the server', async () => {
 		const html = await renderToString(
 			createSSRApp({

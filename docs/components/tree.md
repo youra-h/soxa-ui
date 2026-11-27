@@ -38,7 +38,8 @@ const items: readonly ITreeNode[] = [
   independently selected keys. Closing a branch preserves its selected nodes.
 - `item-icon` supplies a node icon or avatar. `item-indicator-icon` replaces
   the disclosure chevron. Both receive `item`, `branch`, `expanded`, and
-  `loading`. Use `item` to replace the label or add secondary text.
+  `loading`. Use `item` to replace the label or add secondary text. In Web Components, use light DOM
+  samples such as `<template slot="item-icon">`. Each row receives its own copy.
 - Set `hasChildren: true` for a deferred branch and pass `loadChildren`. The
   loader receives `{ value, text, signal }` and returns the children. Replacing
   the input or unmounting aborts pending loads. A branch that finishes loading
