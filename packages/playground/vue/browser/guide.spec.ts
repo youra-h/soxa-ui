@@ -1,14 +1,26 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { page, userEvent } from 'vitest/browser'
 import { h } from 'vue'
 import { TGuide, type IGuideStep } from '@soxa-ui/core'
 import { Guide } from '@soxa-ui/vue'
-import { render } from './render'
+import { cleanup, render } from './render'
+import { find, style, systemColor } from './colors'
+import { forcedColors } from './media'
 import { renderStand } from './stand'
 import { router } from '../src/router'
 
-import '@soxa-ui/theme-oren'
+import orenStyles from '../src/themes/oren.css?inline'
+import burgStyles from '../src/themes/burg.css?inline'
 import '../src/styles.css'
+
+const stylesheet = document.createElement('style')
+
+beforeEach(() => {
+	stylesheet.textContent = orenStyles
+	document.head.append(stylesheet)
+})
+
+afterEach(() => stylesheet.remove())
 
 describe('Guide', () => {
 	it('centers the modal, leaves the DOM target clickable, and moves the WebGL spotlight', async () => {
@@ -89,6 +101,79 @@ describe('Guide', () => {
 			.poll(() => document.querySelector<HTMLElement>('.so-guide')?.style.display)
 			.toBe('none')
 		await expect.element(page.getByRole('button', { name: 'Start guide' })).toHaveFocus()
+	})
+})
+
+describe.each(['burg', 'burg-dark'])('Guide in %s', (scheme) => {
+	it('styles the teleported panel, navigation, and spotlight in the local scheme', async () => {
+		stylesheet.textContent = burgStyles
+		const target = document.createElement('div')
+		target.id = 'burg-guide-layer'
+		target.dataset.soTheme = scheme
+		document.body.append(target)
+
+		const ctrl = new TGuide({
+			target: '#burg-guide-layer',
+			steps: [
+				{ id: 'welcome', title: 'Welcome', description: 'Choose a source.', mode: 'modal' },
+				{ id: 'point', title: 'Saved sources', anchor: { point: { x: 120, y: 100 } } },
+			],
+		})
+		const origin = 'Open the guide'
+
+		try {
+			render({
+				render: () => [
+					h('button', { id: 'burg-guide-start', onClick: () => ctrl.start() }, origin),
+					h(Guide, { ctrl }),
+				],
+			})
+
+			const opener = page.getByRole('button', { name: origin })
+			const dialog = page.getByRole('dialog')
+			find('#burg-guide-start').focus()
+			await userEvent.keyboard('{Enter}')
+
+			await expect.element(dialog).toHaveAttribute('aria-modal', 'true')
+			const panel = dialog.element()
+			expect(panel.parentElement).toBe(target)
+			expect(style(panel).width).toBe('320px')
+			expect(style(panel).backgroundColor).toBe(
+				scheme === 'burg' ? 'rgb(255, 255, 255)' : 'rgb(32, 34, 38)',
+			)
+			expect(style(find('.so-guide__title', panel)).fontSize).toBe('16px')
+			expect(style(find('.so-guide__progress', panel)).fontSize).toBe('12px')
+			expect(style(find('.so-guide__description', panel)).fontSize).toBe('13px')
+
+			const back = dialog.getByRole('button', { name: 'Back' })
+			const next = dialog.getByRole('button', { name: 'Next' })
+			const close = dialog.getByRole('button', { name: 'Close' })
+			expect(style(close.element()).width).toBe('28px')
+			await expect.element(back).toBeDisabled()
+			expect(style(back.element(), '::after').backgroundColor).toBe('rgba(0, 0, 0, 0)')
+			await expect.element(next).toHaveFocus()
+			expect(style(next.element()).outlineWidth).toBe('3px')
+			expect(style(next.element()).outlineOffset).toBe('0px')
+			await userEvent.keyboard('{Tab}')
+			await expect.element(close).toHaveFocus()
+			await userEvent.keyboard('{Tab}')
+			await expect.element(next).toHaveFocus()
+
+			await userEvent.keyboard('{Enter}')
+			await expect.element(dialog).toHaveAccessibleName('Saved sources')
+			const spotlight = find('.so-guide__spotlight', target)
+			expect(style(spotlight).borderRadius).toBe('50%')
+			expect(style(spotlight).outlineWidth).toBe('1px')
+
+			await forcedColors('active')
+			expect(style(spotlight).outlineColor).toBe(systemColor('Highlight'))
+			await userEvent.keyboard('{Escape}')
+			await expect.element(opener).toHaveFocus()
+		} finally {
+			await forcedColors('none')
+			cleanup()
+			target.remove()
+		}
 	})
 })
 

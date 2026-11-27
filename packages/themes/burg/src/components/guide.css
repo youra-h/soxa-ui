@@ -1,0 +1,82 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	&:where(.so-guide),
+	:where(.so-guide) {
+		max-inline-size: min(20rem, calc(100% - 2rem));
+		padding: calc(var(--so-spacing) * 4);
+		border-radius: var(--so-radius);
+		font-size: var(--so-burg-button-font-size-normal);
+		overflow-wrap: anywhere;
+	}
+
+	:where(.so-guide__content) {
+		display: grid;
+		gap: var(--so-spacing);
+	}
+
+	:where(.so-guide:has(> .so-guide__close) > .so-guide__content) {
+		padding-inline-end: 0;
+
+		& > :where(.so-guide__progress, .so-guide__title) {
+			padding-inline-end: calc(var(--so-button-height-sm) - var(--so-spacing));
+		}
+	}
+
+	:where(.so-guide__progress, .so-guide__title, .so-guide__description) {
+		margin: 0;
+	}
+
+	:where(.so-guide__progress) {
+		color: var(--so-burg-muted);
+		font-size: var(--so-button-font-size-sm);
+		font-weight: 500;
+		font-variant-numeric: tabular-nums;
+		line-height: 1.3;
+	}
+
+	:where(.so-guide__title) {
+		font-size: 1rem;
+		font-weight: 600;
+		line-height: 1.25;
+	}
+
+	:where(.so-guide__description) {
+		color: var(--so-burg-muted);
+		line-height: 1.5;
+	}
+
+	:where(.so-guide__close) {
+		inline-size: var(--so-button-height-sm);
+		block-size: var(--so-button-height-sm);
+	}
+
+	:where(.so-guide__actions) {
+		gap: calc(var(--so-spacing) * 1.5);
+		margin-block-start: calc(var(--so-spacing) * 3);
+		padding-block-start: calc(var(--so-spacing) * 3);
+		border-block-start: 1px solid
+			color-mix(in oklab, var(--so-burg-border) 60%, var(--so-panel-surface));
+
+		& > :where(.so-button:first-child) {
+			--so-burg-button-fill: transparent;
+			--so-burg-button-ink: var(--so-burg-button-tone);
+			--so-burg-button-border: var(--so-burg-border);
+		}
+	}
+
+	:where(.so-guide__spotlight) {
+		border-radius: var(--so-radius);
+		outline: 1px solid var(--so-burg-focus-edge);
+		outline-offset: 1px;
+		box-shadow: 0 0 0 4px var(--so-burg-focus);
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-guide__spotlight) {
+			outline: 2px solid Highlight;
+		}
+
+		:where(.so-guide__close, .so-guide__actions > .so-button):focus-visible {
+			outline-color: Highlight;
+		}
+	}
+}
