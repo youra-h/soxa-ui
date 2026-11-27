@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { TTreeRenderEntry } from '@soxa-ui/core'
 	import { Dynamic, toRootProps, toStyleText } from '../../adapter'
-	import TreeRow from './TreeRow.svelte'
+	import { TreeItem } from './item'
 	import { setupTree } from './setup.component'
 	import type { TreeProps } from './base.component'
 
@@ -16,9 +16,9 @@
 		{#if entry.kind === 'filler'}
 			<div class="so-tree__filler" aria-hidden="true" style={toStyleText(entry.style)}></div>
 		{:else}
-			<TreeRow {entry} ctrl={entry.item} item={props.item} icon={props['item-icon']} indicator={props['item-indicator-icon']}>
+			<TreeItem {entry} ctrl={entry.item} item={props.item} icon={props['item-icon']} indicator={props['item-indicator-icon']}>
 				{@render entries(entry.children)}
-			</TreeRow>
+			</TreeItem>
 		{/if}
 	{/each}
 {/snippet}

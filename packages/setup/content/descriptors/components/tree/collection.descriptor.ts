@@ -13,6 +13,7 @@ export const TreeCollectionDescriptor = defineDescriptor(() =>
 				items: { type: Array, triggers: ['change:items'] },
 				mode: { type: String, triggers: ['change:mode'] },
 				expanded: { type: Array, triggers: ['change:expanded'] },
+				// Each adapter draws the same hierarchy and Virtual gaps.
 				layout: {
 					type: Array,
 					protected: true,

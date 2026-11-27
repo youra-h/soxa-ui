@@ -1,18 +1,10 @@
 import {
 	TCollectionExtension,
-	TCollectionItemExtension,
 	TVirtualCollectionExtension,
 	TreeCollectionDescriptor,
 	TreeDescriptor,
-	TreeItemCollectionDescriptor,
-	TreeItemDescriptor,
 } from '@soxa-ui/setup'
-import type {
-	TTree,
-	TTreeCollectionFacade,
-	TTreeItem,
-	TTreeItemCollectionFacade,
-} from '@soxa-ui/core'
+import type { TTree, TTreeCollectionFacade } from '@soxa-ui/core'
 import {
 	createWebcAdapterContext,
 	joinBindings,
@@ -39,24 +31,6 @@ export function setupTree(
 		.use(TCollectionExtension, { elevator })
 		.use(TVirtualCollectionExtension, { elevator })
 	const facade = useCollectionAdapter(collectionAdapter, host, onUpdate)
-
-	return joinBindings(useAdapter(adapter, host, onUpdate), facade)
-}
-
-export function setupTreeItem(
-	host: HTMLElement,
-	ctrl: TTreeItem | undefined,
-	props: Record<string, unknown>,
-	onUpdate: TUpdateListener,
-): TBinding<TTreeItem, TTreeItemCollectionFacade> {
-	const adapter = createWebcAdapterContext(host, TreeItemDescriptor(), { ctrl, props })
-	const item = createWebcAdapterContext(
-		host,
-		TreeItemCollectionDescriptor(),
-		{ props },
-		{ bundle: adapter.bundle },
-	).use(TCollectionItemExtension, { adapter, elevator: createWebcElevator(host) })
-	const facade = useCollectionAdapter(item, host, onUpdate)
 
 	return joinBindings(useAdapter(adapter, host, onUpdate), facade)
 }

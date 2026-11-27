@@ -4,6 +4,7 @@
 @let loading = aria?.['aria-busy'] === 'true';
 @let indicatorSide = state()['dataset']?.[selectionIndicatorAttribute];
 @let scope = { item: ctrl, branch, expanded, loading };
+<!-- A virtual ancestor can have a group and an accessible name without a visible row. -->
 @if (row) {
 	<div
 		so-item-row

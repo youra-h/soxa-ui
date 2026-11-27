@@ -53872,6 +53872,7 @@
           "type": "import(\"@soxa-ui/core\").TTreeLoadChildren | undefined",
           "declaredType": "TTreeLoadChildren",
           "required": false,
+          "description": "Fetch children when an unloaded branch opens.",
           "hasDefault": true,
           "default": "undefined"
         },
@@ -53881,6 +53882,7 @@
           "type": "boolean | undefined",
           "declaredType": "boolean",
           "required": false,
+          "description": "Show lines connecting a branch to its visible descendants.",
           "hasDefault": true,
           "default": "false"
         },
@@ -53925,6 +53927,7 @@
           "type": "import(\"@soxa-ui/core\").TTreeCollectionFacadeEngine | undefined",
           "declaredType": "TTreeCollectionFacadeEngine",
           "required": false,
+          "description": "Supply an engine to use a collection created outside the component.",
           "hasDefault": false
         },
         {
@@ -53933,6 +53936,7 @@
           "type": "readonly import(\"@soxa-ui/core\").ITreeNode[] | undefined",
           "declaredType": "readonly ITreeNode[]",
           "required": false,
+          "description": "Nested nodes reconciled by their values.",
           "hasDefault": false
         },
         {
@@ -53942,6 +53946,7 @@
           "declaredType": "TSelectionMode",
           "values": ["none", "single", "multiple"],
           "required": false,
+          "description": "Selection behavior. In none mode, clicking a branch row toggles disclosure.",
           "hasDefault": false
         },
         {
@@ -53950,6 +53955,7 @@
           "type": "readonly import(\"@soxa-ui/core\").TTreeKey[] | undefined",
           "declaredType": "readonly TTreeKey[]",
           "required": false,
+          "description": "Values of the branches that are open.",
           "hasDefault": true,
           "default": "undefined"
         }

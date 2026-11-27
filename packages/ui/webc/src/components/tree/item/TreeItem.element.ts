@@ -1,7 +1,7 @@
 import { TreeItemCollectionDescriptor, TreeItemDescriptor } from '@soxa-ui/setup'
 import type { TTreeItem, TTreeItemCollectionFacade } from '@soxa-ui/core'
-import { ElementBase, defineElement } from '../../adapter'
-import type { TElementClassOf } from '../../adapter'
+import { ElementBase, defineElement } from '../../../adapter'
+import type { TElementClassOf } from '../../../adapter'
 import { treeItemTemplate } from './tree-item.template'
 import { setupTreeItem } from './setup.component'
 

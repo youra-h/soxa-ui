@@ -9,11 +9,11 @@ import {
 	lendMark,
 	ownerAttributes,
 	patch,
-} from '../../adapter'
-import type { ITemplate } from '../../adapter'
-import { TIconElement, type TIconElementProps } from '../icon'
-import { registerItemRowTag } from '../item-row'
-import type { TItemRowElementProps } from '../item-row'
+} from '../../../adapter'
+import type { ITemplate } from '../../../adapter'
+import { TIconElement, type TIconElementProps } from '../../icon'
+import { registerItemRowTag } from '../../item-row'
+import type { TItemRowElementProps } from '../../item-row'
 
 const Row = registerItemRowTag('div')
 type TParts = {
@@ -43,6 +43,7 @@ export const treeItemTemplate: ITemplate<TTreeItem, TTreeItemCollectionFacade> =
 		}
 
 		lend(row, 'leading', toggle, 'start')
+		// Reserve the slot position between disclosure and a sampled item icon.
 		const selectionAnchor = lendMark(row, 'leading')
 		root.append(row)
 		parts.set(root, { row, toggle, selectionMark, selectionAnchor })

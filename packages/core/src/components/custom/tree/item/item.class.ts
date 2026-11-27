@@ -1,25 +1,8 @@
-import { TValueControl } from '../../base/value-control'
-import type { IValueControlProps, TValueControlEvents } from '../../base/value-control'
-import type { TValuePayload } from '../../../common'
-import type { TTreeKey } from './types'
+import { TValueControl } from '../../../base/value-control'
+import type { TTreeKey } from '../types'
+import type { ITreeItemPlacement, ITreeItemProps, TTreeItemEvents } from './types'
 
-export interface ITreeItemProps extends IValueControlProps<TTreeKey> {
-	text?: string
-	selected?: boolean
-	href?: string
-}
-
-export interface ITreeItemPlacement {
-	hasChildren?: boolean
-	parentValue?: TTreeKey | null
-	siblingOrder?: number
-}
-
-export type TTreeItemEvents = TValueControlEvents<TTreeKey> & {
-	'change:text': (payload: TValuePayload<string>) => void
-	'change:href': (payload: TValuePayload<string | undefined>) => void
-}
-
+/** A collection node whose identity survives collapsing, reordering, and Virtual unmounts. */
 export class TTreeItem extends TValueControl<TTreeKey, ITreeItemProps, TTreeItemEvents> {
 	static override baseClass = 'so-tree-item'
 	static override defaultValues = {

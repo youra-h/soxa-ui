@@ -1,14 +1,11 @@
 import {
 	TCollectionExtension,
-	TCollectionItemExtension,
 	TVirtualCollectionExtension,
 	TreeCollectionDescriptor,
 	TreeDescriptor,
-	TreeItemCollectionDescriptor,
-	TreeItemDescriptor,
 } from '@soxa-ui/setup'
 import { useAdapter, useAdapterContext, useCollectionAdapter } from '../../adapter'
-import type { TreeProps, TreeRowProps } from './base.component'
+import type { TreeProps } from './base.component'
 
 export function useSetupTree(props: TreeProps) {
 	const {
@@ -28,21 +25,4 @@ export function useSetupTree(props: TreeProps) {
 	})
 
 	return { ...useCollectionAdapter(useAdapter(adapter, props), collectionAdapter, props), layer }
-}
-
-export function useSetupTreeRow(props: Pick<TreeRowProps, 'ctrl'>) {
-	const {
-		contexts: [adapter, item],
-	} = useAdapterContext((create, elevator) => {
-		const adapter = create(TreeItemDescriptor(), { ctrl: props.ctrl, props })
-		const item = create(
-			TreeItemCollectionDescriptor(),
-			{ props },
-			{ bundle: adapter.bundle },
-		).use(TCollectionItemExtension, { adapter, elevator })
-
-		return [adapter, item] as const
-	})
-
-	return useCollectionAdapter(useAdapter(adapter, props), item, props)
 }

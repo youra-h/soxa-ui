@@ -1,8 +1,8 @@
 <script lang="ts">
-import TreeRow from './TreeRow.vue'
+import { TreeItem } from './item'
 import SetupTree from './setup.component'
 
-export default { ...SetupTree, components: { TreeRow } }
+export default { ...SetupTree, components: { TreeItem } }
 </script>
 
 <template>
@@ -21,7 +21,7 @@ export default { ...SetupTree, components: { TreeRow } }
 				aria-hidden="true"
 				:style="entry.style"
 			></div>
-			<TreeRow v-else :ctrl="entry.item" :entry="entry">
+			<TreeItem v-else :ctrl="entry.item" :entry="entry">
 				<template v-if="$slots.item" #default="scope">
 					<slot
 						name="item"
@@ -51,7 +51,7 @@ export default { ...SetupTree, components: { TreeRow } }
 						:loading="scope.loading"
 					/>
 				</template>
-			</TreeRow>
+			</TreeItem>
 		</template>
 		<slot v-if="!layout.length" name="empty" />
 	</component>

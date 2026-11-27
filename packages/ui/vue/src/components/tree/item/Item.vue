@@ -1,63 +1,10 @@
 <script lang="ts">
-import {
-	TCollectionItemExtension,
-	TreeItemCollectionDescriptor,
-	TreeItemDescriptor,
-} from '@soxa-ui/setup'
-import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
-import type { TTreeItem, TTreeRenderItem } from '@soxa-ui/core'
-import {
-	createVueAdapterContext,
-	extendBinding,
-	joinBindings,
-	roleIcon,
-	useAdapter,
-	useCollectionAdapter,
-	useEmits,
-	useExpose,
-	useProps,
-	VueElevatorFactory,
-	type SetupContext,
-} from '../../adapter'
-import type { TEmits, TProps, UseProps } from '../../types/common'
-import { Icon } from '../icon'
-import { ItemRow } from '../item-row'
+import { Icon } from '../../icon'
+import { ItemRow } from '../../item-row'
+import type { TreeItemIconScope, TreeItemScope } from './base.component'
+import SetupTreeItem from './setup.component'
 
-type IconScope = { item: TTreeItem; branch: boolean; expanded: boolean; loading: boolean }
-type _RowScope = IconScope & { text: string; selected: boolean }
-
-type TreeItemProps = UseProps<typeof TreeItemDescriptor, TTreeItem>
-
-export default {
-	name: 'TreeRow',
-	expose: useExpose(),
-	components: { Icon, ItemRow },
-	emits: [
-		...useEmits(TreeItemDescriptor()),
-		...useEmits(TreeItemCollectionDescriptor()),
-	] as TEmits,
-	props: {
-		...(useProps(TreeItemDescriptor()) as TProps),
-		...(useProps(TreeItemCollectionDescriptor()) as TProps),
-		entry: { type: Object as () => TTreeRenderItem, required: true },
-	},
-	setup(props: TreeItemProps, { emit }: SetupContext) {
-		const adapter = createVueAdapterContext(TreeItemDescriptor(), { ctrl: props.ctrl, props })
-		const collectionAdapter = createVueAdapterContext(
-			TreeItemCollectionDescriptor(),
-			{ props },
-			{ bundle: adapter.bundle },
-		).use(TCollectionItemExtension, { adapter, elevator: VueElevatorFactory })
-
-		const collectionBinding = useCollectionAdapter(collectionAdapter, props, emit)
-		const itemBinding = useAdapter(adapter, props, emit)
-
-		return extendBinding(joinBindings(itemBinding, collectionBinding), {
-			selectionIconTag: roleIcon('check'),
-			selectionIndicatorAttribute: `data-${LIST_INDICATOR_ATTRIBUTE}`,
-		})
-	},
-}
+export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 </script>
 
 <template>
@@ -68,6 +15,7 @@ export default {
 		:href="href && !aria['aria-expanded'] ? href : undefined"
 		v-bind="{ ...attrs, ...aria, ...dataset }"
 	>
+		<!-- Virtual can keep the item and its group outside the visible row window. -->
 		<ItemRow
 			v-if="entry.row"
 			tag="div"
@@ -142,8 +90,9 @@ export default {
 					aria-hidden="true"
 					:style="child.style"
 				></div>
-				<TreeRow v-else :ctrl="child.item" :entry="child">
-					<template v-if="$slots.default" #default="scope: _RowScope">
+				<!-- Forward consumer slots to data-backed descendants at every depth. -->
+				<TreeItem v-else :ctrl="child.item" :entry="child">
+					<template v-if="$slots.default" #default="scope: TreeItemScope">
 						<slot
 							:item="scope.item"
 							:branch="scope.branch"
@@ -153,7 +102,7 @@ export default {
 							:selected="scope.selected"
 						/>
 					</template>
-					<template v-if="$slots['icon']" #icon="scope: IconScope">
+					<template v-if="$slots['icon']" #icon="scope: TreeItemIconScope">
 						<slot
 							name="icon"
 							:item="scope.item"
@@ -162,7 +111,10 @@ export default {
 							:loading="scope.loading"
 						/>
 					</template>
-					<template v-if="$slots['indicator-icon']" #indicator-icon="scope: IconScope">
+					<template
+						v-if="$slots['indicator-icon']"
+						#indicator-icon="scope: TreeItemIconScope"
+					>
 						<slot
 							name="indicator-icon"
 							:item="scope.item"
@@ -171,7 +123,7 @@ export default {
 							:loading="scope.loading"
 						/>
 					</template>
-				</TreeRow>
+				</TreeItem>
 			</template>
 		</div>
 	</component>

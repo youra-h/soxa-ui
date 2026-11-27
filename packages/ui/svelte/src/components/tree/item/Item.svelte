@@ -1,29 +1,20 @@
 <script lang="ts">
 	import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
-	import type { TTreeItem, TTreeRenderItem } from '@soxa-ui/core'
-	import type { Snippet } from 'svelte'
-	import { Dynamic, roleIcon, toRootProps } from '../../adapter'
-	import { Icon } from '../icon'
-	import { ItemRow } from '../item-row'
-	import type { TreeProps, TreeIconScope } from './base.component'
-	import { setupTreeRow } from './setup.component'
+	import { Dynamic, roleIcon, toRootProps } from '../../../adapter'
+	import { Icon } from '../../icon'
+	import { ItemRow } from '../../item-row'
+	import type { TreeItemProps, TreeItemIconScope } from './base.component'
+	import { setupTreeItem } from './setup.component'
 
-	let { ctrl, entry, item, icon, indicator, children }: {
-		ctrl: TTreeItem
-		entry: TTreeRenderItem
-		item?: TreeProps['item']
-		icon?: TreeProps['item-icon']
-		indicator?: TreeProps['item-indicator-icon']
-		children?: Snippet
-	} = $props()
+	let { ctrl, entry, item, icon, indicator, children }: TreeItemProps = $props()
 
 	const mountId = $props.id()
-	const binding = setupTreeRow(() => ({ ctrl }), mountId, () => {})
+	const binding = setupTreeItem(() => ({ ctrl }), mountId, () => {})
 	const state = binding.state
 	const CHECK = roleIcon('check')
 	const indicatorSide = () => state.dataset?.[`data-${LIST_INDICATOR_ATTRIBUTE}`]
 
-	function scope(): TreeIconScope {
+	function scope(): TreeItemIconScope {
 		return {
 			item: ctrl,
 			branch: state.aria?.['aria-expanded'] !== undefined,
@@ -47,6 +38,7 @@
 	attributes={toRootProps(state, [state.attrs, state.aria, state.dataset, { href: scope().branch ? null : state.href ?? null }], {})}
 	attach={binding.attachElement}
 >
+	<!-- Keep the group and accessible name when Virtual omits this row. -->
 	{#if entry.row}
 		<ItemRow
 			embedded="tree.row"

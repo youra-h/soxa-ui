@@ -7,7 +7,7 @@ import {
 	TValueSelectionExtension,
 } from '../../../base/collection'
 import type { TCollectionEngine } from '../../../base/collection'
-import { TTreeItem } from '../item.class'
+import { TTreeItem } from '../item/item.class'
 import type { ITreeNode } from '../types'
 import type { TTree } from '../tree.class'
 import { TTreeExtension } from './extensions/tree/tree.extension'
@@ -39,6 +39,7 @@ export function completeTreeEngine(engine?: TTreeCollectionFacadeEngine): TTreeC
 	})
 }
 
+/** Create and populate a Tree engine before attaching it to a component. */
 export function createEngineTree(nodes: readonly ITreeNode[] = []): TTreeCollection {
 	const engine = completeTreeEngine()
 

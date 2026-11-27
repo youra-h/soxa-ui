@@ -435,7 +435,7 @@
     },
     {
       "name": "so-tree-item",
-      "sources": ["packages/core/src/components/custom/tree/item.class.ts"],
+      "sources": ["packages/core/src/components/custom/tree/item/item.class.ts"],
       "description": "Tree item shell containing the row and the group of revealed children.",
       "scope": "so-tree-item"
     }
@@ -3601,7 +3601,7 @@
         "packages/ui/solid/src/components/tree/Tree.tsx",
         "packages/ui/svelte/src/components/tree/Tree.svelte",
         "packages/ui/vue/src/components/tree/Tree.vue",
-        "packages/ui/vue/src/components/tree/TreeRow.vue",
+        "packages/ui/vue/src/components/tree/item/Item.vue",
         "packages/ui/webc/src/components/tree/tree.template.ts"
       ],
       "description": "Space reserved for rows omitted by Virtual.",
@@ -3610,11 +3610,11 @@
     {
       "name": "so-tree-item__accessible-name",
       "sources": [
-        "packages/ui/angular/src/components/tree/row/tree-item.component.html",
-        "packages/ui/react/src/components/tree/Tree.tsx",
-        "packages/ui/solid/src/components/tree/Tree.tsx",
-        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
-        "packages/ui/vue/src/components/tree/TreeRow.vue"
+        "packages/ui/angular/src/components/tree/item/tree-item.component.html",
+        "packages/ui/react/src/components/tree/item/Item.tsx",
+        "packages/ui/solid/src/components/tree/item/Item.tsx",
+        "packages/ui/svelte/src/components/tree/item/Item.svelte",
+        "packages/ui/vue/src/components/tree/item/Item.vue"
       ],
       "description": "Accessible label for an ancestor whose row is outside the virtual window.",
       "scope": "so-tree-item"
@@ -3622,12 +3622,12 @@
     {
       "name": "so-tree-item__chevron",
       "sources": [
-        "packages/ui/angular/src/components/tree/row/tree-item.component.html",
-        "packages/ui/react/src/components/tree/Tree.tsx",
-        "packages/ui/solid/src/components/tree/Tree.tsx",
-        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
-        "packages/ui/vue/src/components/tree/TreeRow.vue",
-        "packages/ui/webc/src/components/tree/tree-item.template.ts"
+        "packages/ui/angular/src/components/tree/item/tree-item.component.html",
+        "packages/ui/react/src/components/tree/item/Item.tsx",
+        "packages/ui/solid/src/components/tree/item/Item.tsx",
+        "packages/ui/svelte/src/components/tree/item/Item.svelte",
+        "packages/ui/vue/src/components/tree/item/Item.vue",
+        "packages/ui/webc/src/components/tree/item/tree-item.template.ts"
       ],
       "description": "Default disclosure indicator when no indicator icon is provided.",
       "scope": "so-tree-item"
@@ -3635,11 +3635,11 @@
     {
       "name": "so-tree-item__group",
       "sources": [
-        "packages/ui/angular/src/components/tree/row/tree-item.component.html",
-        "packages/ui/react/src/components/tree/Tree.tsx",
-        "packages/ui/solid/src/components/tree/Tree.tsx",
-        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
-        "packages/ui/vue/src/components/tree/TreeRow.vue",
+        "packages/ui/angular/src/components/tree/item/tree-item.component.html",
+        "packages/ui/react/src/components/tree/item/Item.tsx",
+        "packages/ui/solid/src/components/tree/item/Item.tsx",
+        "packages/ui/svelte/src/components/tree/item/Item.svelte",
+        "packages/ui/vue/src/components/tree/item/Item.vue",
         "packages/ui/webc/src/components/tree/tree.template.ts"
       ],
       "description": "Group of children with a logical indentation and optional guide.",
@@ -3648,12 +3648,12 @@
     {
       "name": "so-tree-item__row",
       "sources": [
-        "packages/ui/angular/src/components/tree/row/tree-item.component.html",
-        "packages/ui/react/src/components/tree/Tree.tsx",
-        "packages/ui/solid/src/components/tree/Tree.tsx",
-        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
-        "packages/ui/vue/src/components/tree/TreeRow.vue",
-        "packages/ui/webc/src/components/tree/tree-item.template.ts"
+        "packages/ui/angular/src/components/tree/item/tree-item.component.html",
+        "packages/ui/react/src/components/tree/item/Item.tsx",
+        "packages/ui/solid/src/components/tree/item/Item.tsx",
+        "packages/ui/svelte/src/components/tree/item/Item.svelte",
+        "packages/ui/vue/src/components/tree/item/Item.vue",
+        "packages/ui/webc/src/components/tree/item/tree-item.template.ts"
       ],
       "description": "Row with disclosure, selection mark, optional icon and label.",
       "scope": "so-tree-item"
@@ -3661,12 +3661,12 @@
     {
       "name": "so-tree-item__selection-indicator",
       "sources": [
-        "packages/ui/angular/src/components/tree/row/tree-item.component.html",
-        "packages/ui/react/src/components/tree/Tree.tsx",
-        "packages/ui/solid/src/components/tree/Tree.tsx",
-        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
-        "packages/ui/vue/src/components/tree/TreeRow.vue",
-        "packages/ui/webc/src/components/tree/tree-item.template.ts"
+        "packages/ui/angular/src/components/tree/item/tree-item.component.html",
+        "packages/ui/react/src/components/tree/item/Item.tsx",
+        "packages/ui/solid/src/components/tree/item/Item.tsx",
+        "packages/ui/svelte/src/components/tree/item/Item.svelte",
+        "packages/ui/vue/src/components/tree/item/Item.vue",
+        "packages/ui/webc/src/components/tree/item/tree-item.template.ts"
       ],
       "description": "Space for the selection mark at the configured side of the row.",
       "scope": "so-tree-item"
@@ -3674,10 +3674,10 @@
     {
       "name": "so-tree-item__spacer",
       "sources": [
-        "packages/ui/react/src/components/tree/Tree.tsx",
-        "packages/ui/solid/src/components/tree/Tree.tsx",
-        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
-        "packages/ui/webc/src/components/tree/tree-item.template.ts"
+        "packages/ui/react/src/components/tree/item/Item.tsx",
+        "packages/ui/solid/src/components/tree/item/Item.tsx",
+        "packages/ui/svelte/src/components/tree/item/Item.svelte",
+        "packages/ui/webc/src/components/tree/item/tree-item.template.ts"
       ],
       "description": "Space aligning the labels of leaves and branches.",
       "scope": "so-tree-item"
@@ -3685,10 +3685,10 @@
     {
       "name": "so-tree-item__toggle",
       "sources": [
-        "packages/ui/react/src/components/tree/Tree.tsx",
-        "packages/ui/solid/src/components/tree/Tree.tsx",
-        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
-        "packages/ui/webc/src/components/tree/tree-item.template.ts"
+        "packages/ui/react/src/components/tree/item/Item.tsx",
+        "packages/ui/solid/src/components/tree/item/Item.tsx",
+        "packages/ui/svelte/src/components/tree/item/Item.svelte",
+        "packages/ui/webc/src/components/tree/item/tree-item.template.ts"
       ],
       "description": "Click target for expanding or collapsing an available branch.",
       "scope": "so-tree-item"

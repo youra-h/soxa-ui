@@ -1,38 +1,13 @@
-/**
- * Descriptors for the tree widget and its rendered item, including scoped icons.
- */
-import { TTree, TTreeItem } from '@soxa-ui/core'
+import { TTree } from '@soxa-ui/core'
 import { TTreeKeyboardPlugin, treeFocusTarget } from '@soxa-ui/plugins'
-import {
-	defineComponent,
-	defineDescriptor,
-	definePlugin,
-	defineType,
-} from '../../../../protected/define'
+import { defineComponent, defineDescriptor, definePlugin } from '../../../../protected/define'
 import { ValueControlDescriptor } from '../value-control.descriptor'
 import {
 	ActionPluginDescriptor,
 	CollectionBundlesPluginDescriptor,
 	CollectionElementsPluginDescriptor,
 } from '../../plugins'
-
-function treeSlotScopes() {
-	const icon = {
-		item: defineType<TTreeItem>(Object),
-		expanded: defineType<boolean>(Boolean),
-		branch: defineType<boolean>(Boolean),
-		loading: defineType<boolean>(Boolean),
-	}
-
-	return {
-		icon,
-		row: {
-			...icon,
-			text: defineType<string>(String),
-			selected: defineType<boolean>(Boolean),
-		},
-	}
-}
+import { treeSlotScopes } from './slot-scopes'
 
 export const TreeDescriptor = defineDescriptor(() => {
 	const { icon, row } = treeSlotScopes()
@@ -63,29 +38,5 @@ export const TreeDescriptor = defineDescriptor(() => {
 			CollectionElementsPluginDescriptor,
 			definePlugin({ ctor: TTreeKeyboardPlugin, namespace: 'treeKeyboard' }),
 		],
-	})
-})
-
-export const TreeItemDescriptor = defineDescriptor(() => {
-	const { icon, row } = treeSlotScopes()
-
-	return defineComponent({
-		ctor: TTreeItem,
-		extends: ValueControlDescriptor(),
-		contribution: {
-			props: {
-				text: { type: String, triggers: ['change:text'] },
-				href: { type: String, triggers: ['change:href'] },
-			},
-			slots: {
-				default: { scope: row, description: 'Content of the row' },
-				icon: { scope: icon, description: 'Icon beside the node label' },
-				'indicator-icon': {
-					scope: icon,
-					description: 'Branch disclosure indicator',
-				},
-			},
-			events: ['change:text', 'change:href'],
-		},
 	})
 })
