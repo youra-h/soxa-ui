@@ -2,7 +2,7 @@ import { batchOf, selectionOf, TBaseExtension } from '../../../../../base/collec
 import type { IExtensionContext, TQueryEvent } from '../../../../../base/collection'
 import type { TValuePayload } from '../../../../../../common'
 import { LIST_DEFAULTS, LIST_INDICATOR_ATTRIBUTE } from '../../../../list'
-import type { TTreeItem } from '../../../item.class'
+import type { TTreeItem } from '../../../item/item.class'
 import type { TTree } from '../../../tree.class'
 import type { ITreeNode, TTreeKey, TTreeLoadChildren } from '../../../types'
 import { normalizeNodes } from './normalize'
@@ -42,6 +42,7 @@ export class TTreeExtension extends TBaseExtension<
 
 		if (!batch) throw new Error('Tree requires the batch extension')
 
+		// Source keys keep the same item UID when a batch patch moves a node.
 		batch.trackBy = (item) => item.value
 		ctx.driver.events.on('item:added', ({ item }) => this._inheritStyle(item))
 		ctx.driver.events.on('item:updated', ({ item }) => this._inheritStyle(item))
@@ -53,6 +54,8 @@ export class TTreeExtension extends TBaseExtension<
 				this._current = undefined
 			}
 		})
+
+		// Filter the query by disclosure. The engine still stores the full hierarchy.
 		ctx.driver.events.on('items:query:before', this._query)
 		batch.events.on('change:shown', this._syncShown)
 
@@ -150,6 +153,7 @@ export class TTreeExtension extends TBaseExtension<
 
 		if (!batch) return false
 
+		// Reserve keys outside the replaced subtree before validating the fetched nodes.
 		const preserved = batch.items.filter((item) => !replaceable.has(item))
 		const known = new Set(preserved.map((item) => item.value))
 		const sources = normalizeNodes(nodes, parent.value, known)
@@ -200,6 +204,7 @@ export class TTreeExtension extends TBaseExtension<
 		} catch (error) {
 			if (!request.signal.aborted) this.events.emit('load:error', item, error)
 		} finally {
+			// A cancelled request can finish after a new request for the same item starts.
 			if (this._loading.get(item) === request) {
 				this._loading.delete(item)
 				item.aria.add('aria-busy', null)
@@ -225,7 +230,10 @@ export class TTreeExtension extends TBaseExtension<
 		for (const item of this._loading.keys()) this.cancelLoad(item)
 	}
 
-	/** Activate the row according to the selection mode. Return true on disclosure. */
+	/**
+	 * A row click selects in selection modes and toggles the branch in none mode.
+	 * Return true when disclosure consumes the activation.
+	 */
 	activate(item: TTreeItem): boolean {
 		if (!this.isNavigable(item)) return false
 
@@ -315,6 +323,7 @@ export class TTreeExtension extends TBaseExtension<
 		)
 	}
 
+	/** Compute ARIA positions from the disclosed siblings, including items outside Virtual. */
 	private readonly _syncShown = (): void => {
 		const shown = batchOf(this._ctx)?.shown ?? []
 		const owner = this._ctx.options.get('owner')
@@ -362,6 +371,7 @@ export class TTreeExtension extends TBaseExtension<
 	private _syncTabStop(shown = batchOf(this._ctx)?.shown ?? []): void {
 		const selection = selectionOf(this._ctx)
 		const visible = new Set(shown)
+		// Prefer the initial selection until the user establishes a roving tab stop.
 		let stop = this._hasFocusHistory
 			? this._tabStop
 			: shown.find((item) => this.isNavigable(item) && selection?.isSelected(item))
@@ -393,6 +403,7 @@ export class TTreeExtension extends TBaseExtension<
 		event.items = shown
 	}
 
+	/** Cache parent and sibling lookups until the collection revision changes. */
 	private _readIndex(): TIndex {
 		const { driver } = this._ctx
 

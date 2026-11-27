@@ -1,10 +1,10 @@
-import { TSelectionCollectionFacade, TSelectionItemFacade } from '../../../base/collection'
+import { TSelectionCollectionFacade } from '../../../base/collection'
 import type {
 	TCollectionFacadeOptions,
 	TDrawEvents,
 	TSelectionCollectionFacadeEvents,
 } from '../../../base/collection'
-import type { TTreeItem } from '../item.class'
+import type { TTreeItem } from '../item/item.class'
 import type { ITreeProps, TTree } from '../tree.class'
 import type { ITreeNode, TTreeKey } from '../types'
 import { completeTreeEngine } from './factory'
@@ -16,6 +16,7 @@ type TTreeCollectionFacadeEvents = TSelectionCollectionFacadeEvents<TTreeItem> &
 	TTreeExtensionEvents &
 	TDrawEvents<TTreeItem>
 
+/** Projects the shared collection as nested Tree render entries. */
 export class TTreeCollectionFacade extends TSelectionCollectionFacade<
 	TTreeItem,
 	TTreeCollectionExtensions,
@@ -35,6 +36,7 @@ export class TTreeCollectionFacade extends TSelectionCollectionFacade<
 		this.events.relayAll(this.extensions.tree.events)
 		this.events.relayAll(this.extensions.draw.events)
 
+		// The adapter binds supplied engines for the lifetime of the mounted Tree.
 		if (!options.engine) this.bindOwner()
 
 		if (props.mode !== undefined) this.mode = props.mode
@@ -47,6 +49,7 @@ export class TTreeCollectionFacade extends TSelectionCollectionFacade<
 	}
 
 	override set items(value: readonly ITreeNode[]) {
+		// Reading and writing back the stored models must preserve lazy-loaded branches.
 		const stored = this.items
 
 		if (value.length === stored.length && value.every((item, index) => item === stored[index]))
@@ -67,8 +70,3 @@ export class TTreeCollectionFacade extends TSelectionCollectionFacade<
 		return treeLayout(this.extensions.draw.drawn, this.extensions.tree)
 	}
 }
-
-export class TTreeItemCollectionFacade extends TSelectionItemFacade<
-	TTreeItem,
-	TTreeCollectionExtensions
-> {}

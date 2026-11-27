@@ -6,8 +6,8 @@ import type { TTreeItem, TTreeRenderEntry } from '@soxa-ui/core'
 import { AttributesDirective, RoleIconDirective } from '../../../adapter'
 import { TItemRowComponent } from '../../item-row'
 import { TIconComponent } from '../../icon'
-import { TTreeRowSurface } from '../../../generated/tree-row.metadata'
-import { setupTreeItem } from '../setup.component'
+import { TTreeItemSurface } from '../../../generated/tree-item.metadata'
+import { setupTreeItem } from './setup.component'
 
 @Component({
 	selector: '[so-tree-item]',
@@ -21,7 +21,7 @@ import { setupTreeItem } from '../setup.component'
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './tree-item.component.html',
 })
-export class TTreeItemComponent extends TTreeRowSurface<TTreeItem> {
+export class TTreeItemComponent extends TTreeItemSurface<TTreeItem> {
 	@Input() row = true
 	@Input() iconSlot: TemplateRef<unknown> | null = null
 	@Input() indicatorSlot: TemplateRef<unknown> | null = null

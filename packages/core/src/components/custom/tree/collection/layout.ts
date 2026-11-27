@@ -1,5 +1,5 @@
 import type { TDrawnEntry, TDrawnFiller } from '../../../base/collection'
-import type { TTreeItem } from '../item.class'
+import type { TTreeItem } from '../item/item.class'
 import type { TTreeExtension } from './extensions/tree/tree.extension'
 
 export type TTreeRenderEntry = TTreeRenderItem | TDrawnFiller
@@ -8,6 +8,7 @@ export interface TTreeRenderItem {
 	kind: 'item'
 	key: number
 	item: TTreeItem
+	/** False for an ancestor retained only to own a group of drawn descendants. */
 	row: boolean
 	children: TTreeRenderEntry[]
 }
@@ -31,6 +32,7 @@ export function treeLayout(
 			continue
 		}
 
+		// A virtual window can begin inside a branch whose ancestors are outside it.
 		const missing: TTreeItem[] = []
 		let parent: TTreeItem | undefined = entry.item
 
@@ -41,6 +43,7 @@ export function treeLayout(
 
 		let group = (parent ? registered.get(parent)?.children : undefined) ?? roots
 
+		// Place the gap before the next item in the nearest group already drawn.
 		if (filler) {
 			group.push(filler)
 			filler = undefined

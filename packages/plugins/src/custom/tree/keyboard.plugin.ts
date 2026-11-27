@@ -27,6 +27,7 @@ export function treeFocusTarget(root: Element): Element {
 	return root
 }
 
+/** Delegates DOM input to the Tree extension and restores focus after layout changes. */
 export class TTreeKeyboardPlugin extends TBasePlugin<TTree, TPluginEvents> {
 	private _root: Element | undefined
 	private _owner: TTree | undefined
@@ -64,6 +65,7 @@ export class TTreeKeyboardPlugin extends TBasePlugin<TTree, TPluginEvents> {
 
 		this._engine = engine?.extensions.tree instanceof TTreeExtension ? engine : undefined
 
+		// Pin the tab stop so it stays mounted as the virtual window moves.
 		const next = this._engine?.extensions
 		next?.tree.events.on('change:tabStop', this._onTabStop)
 		next?.tree.events.on('change:expanded', this._onExpanded)
@@ -97,6 +99,7 @@ export class TTreeKeyboardPlugin extends TBasePlugin<TTree, TPluginEvents> {
 		this._typeahead.reset()
 	}
 
+	/** Defer lazy loading until the tree root exists, including for initially open branches. */
 	private _loadOpened(previous: readonly (string | number)[] = []): void {
 		const extensions = this._engine?.extensions
 		const load = this._owner?.loadChildren
@@ -128,6 +131,7 @@ export class TTreeKeyboardPlugin extends TBasePlugin<TTree, TPluginEvents> {
 	}: TValuePayload<TTreeItem | undefined>): void => {
 		this._engine?.extensions.draw.pin(PIN, newValue)
 
+		// Move DOM focus only if the item that held it has become unavailable.
 		const focused = oldValue && this._elements?.getElementByItem(oldValue)
 
 		if (
@@ -164,9 +168,11 @@ export class TTreeKeyboardPlugin extends TBasePlugin<TTree, TPluginEvents> {
 			return true
 		}
 
+		// A newly pinned item may mount on the next adapter update.
 		if (!target()) this._cancelFocus = this._elements?.waitFor(target)
 	}
 
+	/** Resolve an event against the nearest Tree, including Trees mounted inside slots. */
 	private _itemOf(target: EventTarget | null): TTreeItem | undefined {
 		if (!(target instanceof Element) || target.closest('.so-tree') !== this._root) return
 
@@ -200,10 +206,12 @@ export class TTreeKeyboardPlugin extends TBasePlugin<TTree, TPluginEvents> {
 
 		this._focus(item)
 
+		// In selection modes the disclosure control changes only expansion.
 		const disclosure = selection.mode !== 'none' && target.closest(DISCLOSURE)
 		if (disclosure ? tree.toggle(item) : tree.activate(item)) event.preventDefault()
 	}
 
+	/** Handle navigation on the treeitem root so embedded controls keep their own keys. */
 	private readonly _onKey = (event: KeyboardEvent): void => {
 		const extensions = this._engine?.extensions
 		const item = this._itemOf(event.target)

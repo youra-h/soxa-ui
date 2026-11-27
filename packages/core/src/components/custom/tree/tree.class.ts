@@ -8,11 +8,17 @@ import type { TTreeCollectionFacadeEngine } from './collection/factory'
 import type { ITreeNode, TTreeKey, TTreeLoadChildren } from './types'
 
 export interface ITreeProps extends IValueControlProps<TSelectionValue> {
+	/** Nested nodes reconciled by their values. */
 	items?: readonly ITreeNode[]
+	/** Values of the branches that are open. */
 	expanded?: readonly TTreeKey[]
+	/** Selection behavior. In none mode, clicking a branch row toggles disclosure. */
 	mode?: TSelectionMode
+	/** Supply an engine to use a collection created outside the component. */
 	engine?: TTreeCollectionFacadeEngine
+	/** Fetch children when an unloaded branch opens. */
 	loadChildren?: TTreeLoadChildren
+	/** Show lines connecting a branch to its visible descendants. */
 	guides?: boolean
 	/** Logical side of the selection mark in single and multiple modes. */
 	indicator?: TListIndicator
@@ -24,6 +30,7 @@ export type TTreeEvents = TValueControlEvents<TSelectionValue> & {
 	'change:indicator': (payload: TValuePayload<TListIndicator>) => void
 }
 
+/** Owns the Tree value and presentation props. The collection facade owns node state. */
 export class TTree extends TValueControl<TSelectionValue, ITreeProps, TTreeEvents> {
 	static override baseClass = 'so-tree'
 	static override defaultValues = {

@@ -1,7 +1,7 @@
 import type { TTree, TTreeCollectionFacade, TTreeRenderEntry } from '@soxa-ui/core'
 import { bind, createItem, lendSamples, ownerStyles, TKeyedLoop } from '../../adapter'
 import type { ITemplate, ITemplateContext, TItemSlots } from '../../adapter'
-import { TTreeItemElement, TTreeLinkElement } from './TreeItem.element'
+import { TTreeItemElement, TTreeLinkElement } from './item'
 
 export const TREE_ITEM_SLOTS: TItemSlots = {
 	item: 'default',
@@ -21,6 +21,7 @@ function linkOf(entry: TTreeRenderEntry): string | undefined {
 		: undefined
 }
 
+// A leaf link and a branch use different native host tags. The key includes the tag.
 function makeLoop(parent: Node, end: Node | null): TLoop {
 	return new TKeyedLoop(parent, end, (entry) => `${entry.key}:${linkOf(entry) ? 'a' : 'div'}`)
 }
@@ -72,6 +73,7 @@ function updateEntry(node: HTMLElement, entry: TTreeRenderEntry, ctx: TRowsConte
 	const link = linkOf(entry)
 	if (link) node.setAttribute('href', link)
 
+	// Keep the item host as an ARIA parent when Virtual hides its row.
 	node.toggleAttribute('data-window-ancestor', !entry.row)
 	const group = groups.get(node)
 

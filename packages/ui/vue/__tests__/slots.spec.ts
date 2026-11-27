@@ -206,7 +206,7 @@ const DESCRIPTORS: Readonly<Record<string, () => IComponentDescriptor>> = {
 	'toasts/item/Item.vue': ToastsItemDescriptor,
 	'tooltip/Tooltip.vue': TooltipDescriptor,
 	'tree/Tree.vue': TreeDescriptor,
-	'tree/TreeRow.vue': TreeItemDescriptor,
+	'tree/item/Item.vue': TreeItemDescriptor,
 	'virtual/Virtual.vue': VirtualDescriptor,
 }
 

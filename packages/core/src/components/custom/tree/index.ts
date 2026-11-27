@@ -1,6 +1,8 @@
 export * from './types'
 export * from './tree.class'
-export * from './item.class'
+export * from './item/types'
+export { TTreeItem } from './item/item.class'
+export { TTreeItemCollectionFacade } from './item/facade'
 export { createEngineTree } from './collection/factory'
 export type {
 	TTreeCollection,

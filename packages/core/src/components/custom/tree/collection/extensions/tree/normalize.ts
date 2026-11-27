@@ -1,8 +1,9 @@
-import type { ITreeItemPlacement, ITreeItemProps } from '../../../item.class'
+import type { ITreeItemPlacement, ITreeItemProps } from '../../../item/types'
 import type { ITreeNode, TTreeKey } from '../../../types'
 
 export type TTreeItemSource = ITreeItemProps & ITreeItemPlacement & { value: TTreeKey }
 
+/** Validate the subtree and flatten it in sibling order before patching the engine. */
 export function normalizeNodes(
 	nodes: readonly ITreeNode[],
 	parentValue: TTreeKey | null = null,

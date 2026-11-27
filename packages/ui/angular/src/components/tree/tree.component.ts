@@ -3,7 +3,7 @@ import { NgTemplateOutlet } from '@angular/common'
 import type { TTree, TTreeRenderItem } from '@soxa-ui/core'
 import { provideElevator } from '../../adapter'
 import { TTreeSurface } from '../../generated/tree.metadata'
-import { TTreeItemComponent } from './row/tree-item.component'
+import { TTreeItemComponent } from './item'
 import { setupTree } from './setup.component'
 
 @Component({

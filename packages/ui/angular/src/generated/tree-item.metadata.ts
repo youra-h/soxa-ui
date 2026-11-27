@@ -16,9 +16,9 @@ import {
 } from '../adapter/runtime'
 import { booleanInput } from '../adapter/runtime/boolean-input'
 import { TViewSurface } from './view.metadata'
-import type { descriptor, facade } from '../components/tree/row/manifest'
+import type { descriptor, facade } from '../components/tree/item/manifest'
 
-export const TreeRowInputNames = [
+export const TreeItemInputNames = [
 	'embedded',
 	'pluginProps',
 	'rendered',
@@ -37,7 +37,7 @@ export const TreeRowInputNames = [
 	'aria_describedBy',
 	'selected',
 ] as const
-export const TreeRowOutputNames = [
+export const TreeItemOutputNames = [
 	'soChangeSize',
 	'soChangeVariant',
 	'soChangeDisabled',
@@ -92,10 +92,10 @@ export const TreeRowOutputNames = [
 		'aria_describedBy',
 		{ name: 'selected', transform: booleanInput },
 	],
-	outputs: [...TreeRowOutputNames],
+	outputs: [...TreeItemOutputNames],
 	hostDirectives: [ValueAccessorDirective],
 })
-export abstract class TTreeRowSurface<TInstance extends IEntity> extends TViewSurface<
+export abstract class TTreeItemSurface<TInstance extends IEntity> extends TViewSurface<
 	TInstance,
 	DescriptorInstance<typeof facade>,
 	DescriptorPluginProps<typeof descriptor> & DescriptorPluginOutputs<typeof descriptor>
@@ -108,7 +108,7 @@ export abstract class TTreeRowSurface<TInstance extends IEntity> extends TViewSu
 		>,
 		spec?: TRootSpec,
 	) {
-		super(TreeRowInputNames, TreeRowOutputNames, setup, spec)
+		super(TreeItemInputNames, TreeItemOutputNames, setup, spec)
 	}
 	declare embedded: TInputValue<typeof descriptor, 'embedded'>
 	declare pluginProps: TInputValue<typeof descriptor, 'pluginProps'>

@@ -1,19 +1,10 @@
 import {
 	TCollectionExtension,
-	TCollectionItemExtension,
 	TVirtualCollectionExtension,
 	TreeCollectionDescriptor,
 	TreeDescriptor,
-	TreeItemCollectionDescriptor,
-	TreeItemDescriptor,
 } from '@soxa-ui/setup'
-import type {
-	TTree,
-	TTreeCollectionFacadeEngine,
-	TTreeCollectionFacade,
-	TTreeItem,
-	TTreeItemCollectionFacade,
-} from '@soxa-ui/core'
+import type { TTree, TTreeCollectionFacadeEngine, TTreeCollectionFacade } from '@soxa-ui/core'
 import {
 	AngularElevatorFactory,
 	createAngularAdapterContext,
@@ -39,19 +30,4 @@ export function setupTree(
 		.use(TVirtualCollectionExtension, { elevator: AngularElevatorFactory })
 
 	return joinBindings(owner, useCollectionAdapter(collectionAdapter))
-}
-
-export function setupTreeItem(
-	ctrl: TTreeItem | undefined,
-	props: object,
-): TBinding<TTreeItem, TTreeItemCollectionFacade> {
-	const adapter = createAngularAdapterContext(TreeItemDescriptor(), { ctrl, props })
-	const owner = useAdapter(adapter)
-	const item = createAngularAdapterContext(
-		TreeItemCollectionDescriptor(),
-		{ props },
-		{ bundle: adapter.bundle },
-	).use(TCollectionItemExtension, { adapter, elevator: AngularElevatorFactory })
-
-	return joinBindings(owner, useCollectionAdapter(item))
 }
