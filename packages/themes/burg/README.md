@@ -31,9 +31,16 @@ The face returns to rest on release. The effect follows the Soxa motion policy.
 ### Lists, fields, and progress
 
 ListBox, Select, and Menu share row colors for highlighting and selection.
-Input, Select, and Textarea use the same size scale as Button and a shared
-neutral focus ring flush with the field border. ProgressLinear and ProgressSpinner use the same indicator
-color and follow the Soxa motion policy while progress is unknown.
+The shared Input height scale runs from 26px to 34px in 2px steps. Input is
+28px tall with 13px text at normal size. Input, Select, and Textarea share a
+neutral focus ring flush with the field border. ProgressLinear and
+ProgressSpinner share an indicator color and follow the Soxa motion policy
+while progress is unknown.
+
+CheckBox has a 16px square box at normal size and fills checked and mixed
+states by default. Use `outlined` for a visible border and unfilled box, or
+`plain` for the mark alone. Switch uses a 29px × 18px track at normal size and
+follows the Soxa motion policy.
 
 Set `data-so-theme="burg"` or `data-so-theme="burg-dark"` on the document root
 or the container of the themed components. Load the stylesheet and register

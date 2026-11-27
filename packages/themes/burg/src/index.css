@@ -3,4 +3,5 @@
 @import './components/button.css' layer(so.burg);
 @import './components/collections.css' layer(so.burg);
 @import './components/fields.css' layer(so.burg);
+@import './components/toggles.css' layer(so.burg);
 @import './components/progress.css' layer(so.burg);

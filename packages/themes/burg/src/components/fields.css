@@ -17,6 +17,12 @@
 		border-radius: var(--so-textarea-radius, var(--so-radius));
 	}
 
+	@media (hover: hover) {
+		:where(.so-input:hover:not(:has(> input:is(:disabled, [readonly])))) {
+			--so-burg-field-border: var(--so-burg-focus-edge);
+		}
+	}
+
 	:where(.so-select[data-open='true']) > :where(.so-select__field),
 	:where(.so-input, .so-textarea):where(:has(> :is(input, textarea):focus)) {
 		--so-burg-field-border: var(--so-burg-focus-edge);
@@ -25,8 +31,24 @@
 	}
 
 	:where(.so-select[data-invalid='true']) > :where(.so-select__field),
-	:where(.so-input[data-invalid='true'], .so-textarea[data-invalid='true']) {
+	:where(
+		.so-input--variant-negative,
+		.so-input[data-invalid='true'],
+		.so-textarea[data-invalid='true']
+	) {
 		--so-burg-field-border: var(--so-burg-danger);
+	}
+
+	:where(.so-input, .so-textarea, .so-switch):where([data-required='true'])::after,
+	:where(.so-check-box[data-required='true']) > :where(.so-check-box__container)::after {
+		background-color: var(--so-burg-danger);
+		border-radius: 50%;
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-input[data-invalid='true']) {
+			--so-input-border: 2px;
+		}
 	}
 
 	:where(.so-input) > :where(input),

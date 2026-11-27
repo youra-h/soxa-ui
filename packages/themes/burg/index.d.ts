@@ -11,4 +11,10 @@ declare module '@soxa-ui/core' {
 		outlined: true
 		plain: true
 	}
+
+	interface ICheckBoxViews {
+		filled: true
+		outlined: true
+		plain: true
+	}
 }
