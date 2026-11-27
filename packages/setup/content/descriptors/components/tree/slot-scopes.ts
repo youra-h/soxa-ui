@@ -1,7 +1,10 @@
+/**
+ * Builds matching slot scopes for the Tree and its items.
+ */
+
 import type { TTreeItem } from '@soxa-ui/core'
 import { defineType } from '../../../../protected/define'
 
-/** Build matching scope metadata for owner slots and the forwarded item slots. */
 export function treeSlotScopes() {
 	const icon = {
 		item: defineType<TTreeItem>(Object),

@@ -1,4 +1,3 @@
-import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
 import type { TTreeItem, TTreeItemCollectionFacade } from '@soxa-ui/core'
 import { DEFAULT_SLOT } from '@soxa-ui/setup'
 import {
@@ -58,12 +57,12 @@ export const treeItemTemplate: ITemplate<TTreeItem, TTreeItemCollectionFacade> =
 		}
 	},
 	bindings: [
-		bind(['dataset', 'selected', 'size'], ({ root, state }) => {
+		bind(['indicator', 'selected', 'size'], ({ root, state }) => {
 			const current = parts.get(root)
 			if (!current) return
 
 			const { row, selectionMark, selectionAnchor } = current
-			const side = state.dataset?.[`data-${LIST_INDICATOR_ATTRIBUTE}`]
+			const side = state.indicator
 			if (side === 'start') {
 				if (selectionAnchor.previousSibling !== selectionMark)
 					lendBefore(selectionAnchor, selectionMark)
@@ -85,14 +84,13 @@ export const treeItemTemplate: ITemplate<TTreeItem, TTreeItemCollectionFacade> =
 			patch(icon, { icon: 'check', size: state.size })
 			if (icon.parentNode !== selectionMark) selectionMark.append(icon)
 		}),
-		bind(['size', 'variant', 'dataset', 'aria', 'text'], ({ root, state, hasSlot }) => {
+		bind(['size', 'variant', 'dataset', 'branch', 'text'], ({ root, state, hasSlot }) => {
 			const current = parts.get(root)
 
 			if (!current) return
 
 			const { row, toggle } = current
-			const branch = state.aria?.['aria-expanded'] !== undefined
-			toggle.className = branch ? 'so-tree-item__toggle' : 'so-tree-item__spacer'
+			toggle.className = state.branch ? 'so-tree-item__toggle' : 'so-tree-item__spacer'
 			patch(row, { size: state.size, variant: state.variant })
 			ownerAttributes(row, state.dataset)
 			if (!hasSlot(DEFAULT_SLOT)) row.text = state.text ?? ''

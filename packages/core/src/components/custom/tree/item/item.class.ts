@@ -1,4 +1,6 @@
 import { TValueControl } from '../../../base/value-control'
+import { LIST_DEFAULTS, LIST_INDICATOR_ATTRIBUTE } from '../../list'
+import type { TListIndicator } from '../../list'
 import type { TTreeKey } from '../types'
 import type { ITreeItemPlacement, ITreeItemProps, TTreeItemEvents } from './types'
 
@@ -60,6 +62,25 @@ export class TTreeItem extends TValueControl<TTreeKey, ITreeItemProps, TTreeItem
 
 		this._href = value
 		this.events.emit('change:href', { oldValue, newValue: value })
+	}
+
+	/** The Tree extension marks branches and exposes disclosure and loading through ARIA. */
+	get branch(): boolean {
+		return this.aria.has('aria-expanded')
+	}
+
+	get expanded(): boolean {
+		return this.aria.get('aria-expanded') === 'true'
+	}
+
+	get loading(): boolean {
+		return this.aria.get('aria-busy') === 'true'
+	}
+
+	get indicator(): TListIndicator {
+		const side = this.dataset.get(LIST_INDICATOR_ATTRIBUTE)
+
+		return side === 'start' || side === 'end' ? side : LIST_DEFAULTS.indicator
 	}
 
 	override getProps(): ITreeItemProps {

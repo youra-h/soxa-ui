@@ -44,6 +44,7 @@ import {
 	Tags,
 	TagsItem,
 	Textarea,
+	Tree,
 	roleIcon,
 } from '@soxa-ui/vue'
 
@@ -196,6 +197,25 @@ const CASES: readonly TCase[] = [
 			]),
 		box: '.so-list-box',
 		parts: ['.so-list-box-item > .so-button'],
+	},
+	{
+		name: 'Tree',
+		markup: (props) =>
+			h(Tree, {
+				items: [
+					{
+						value: 'files',
+						text: 'Files',
+						children: [{ value: 'readme', text: 'Readme', disabled: true }],
+					},
+				],
+				expanded: ['files'],
+				guides: true,
+				aria_label: 'Files',
+				...props,
+			}),
+		box: '.so-tree',
+		parts: ['.so-tree-item__row', '.so-tree-item__group'],
 	},
 	{
 		name: 'Tabs',

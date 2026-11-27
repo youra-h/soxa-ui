@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
 	import { Dynamic, roleIcon, toRootProps } from '../../../adapter'
 	import { Icon } from '../../icon'
 	import { ItemRow } from '../../item-row'
@@ -12,14 +11,14 @@
 	const binding = setupTreeItem(() => ({ ctrl }), mountId, () => {})
 	const state = binding.state
 	const CHECK = roleIcon('check')
-	const indicatorSide = () => state.dataset?.[`data-${LIST_INDICATOR_ATTRIBUTE}`]
+	const indicatorSide = () => state.indicator
 
 	function scope(): TreeItemIconScope {
 		return {
 			item: ctrl,
-			branch: state.aria?.['aria-expanded'] !== undefined,
-			expanded: state.aria?.['aria-expanded'] === 'true',
-			loading: state.aria?.['aria-busy'] === 'true',
+			branch: state.branch ?? false,
+			expanded: state.expanded ?? false,
+			loading: state.loading ?? false,
 		}
 	}
 </script>

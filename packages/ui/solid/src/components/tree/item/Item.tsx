@@ -1,5 +1,4 @@
 import type { JSX } from 'solid-js'
-import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
 import { Root, createRootProps, resolveSlot, roleIcon } from '../../../adapter'
 import { Show } from '../../../adapter/runtime/flow'
 import { Icon } from '../../icon'
@@ -17,13 +16,13 @@ export function TreeItem(props: TreeItemProps): JSX.Element {
 		},
 	})
 	const state = binding.state
-	const branch = () => state.aria?.['aria-expanded'] !== undefined
-	const expanded = () => state.aria?.['aria-expanded'] === 'true'
+	const branch = () => state.branch ?? false
+	const expanded = () => state.expanded ?? false
 	const scope = () => ({
 		item: props.ctrl,
 		branch: branch(),
 		expanded: expanded(),
-		loading: state.aria?.['aria-busy'] === 'true',
+		loading: state.loading ?? false,
 	})
 	const link = () => (branch() ? undefined : state.href)
 	const root = createRootProps(() => ({
@@ -31,7 +30,7 @@ export function TreeItem(props: TreeItemProps): JSX.Element {
 		sets: [state.attrs, state.aria, state.dataset, { href: link() ?? null }],
 		forward: {},
 	}))
-	const indicatorSide = () => state.dataset?.[`data-${LIST_INDICATOR_ATTRIBUTE}`]
+	const indicatorSide = () => state.indicator
 	const selectionMark = () => (
 		<span class="so-tree-item__selection-indicator" aria-hidden="true">
 			<Show when={state.selected}>

@@ -1,9 +1,12 @@
+/**
+ * Describes the internal Tree item mounted by each adapter.
+ */
+
 import { TTreeItem } from '@soxa-ui/core'
 import { defineComponent, defineDescriptor } from '../../../../protected/define'
 import { ValueControlDescriptor } from '../value-control.descriptor'
 import { treeSlotScopes } from './slot-scopes'
 
-/** Describes the internal, data-backed item mounted by each adapter. */
 export const TreeItemDescriptor = defineDescriptor(() => {
 	const { icon, row } = treeSlotScopes()
 
@@ -12,6 +15,10 @@ export const TreeItemDescriptor = defineDescriptor(() => {
 		extends: ValueControlDescriptor(),
 		contribution: {
 			props: {
+				branch: { type: Boolean, protected: true, triggers: ['change:aria'] },
+				expanded: { type: Boolean, protected: true, triggers: ['change:aria'] },
+				loading: { type: Boolean, protected: true, triggers: ['change:aria'] },
+				indicator: { type: String, protected: true, triggers: ['change:dataset'] },
 				text: { type: String, triggers: ['change:text'] },
 				href: { type: String, triggers: ['change:href'] },
 			},

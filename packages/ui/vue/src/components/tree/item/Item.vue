@@ -1,7 +1,6 @@
 <script lang="ts">
 import { Icon } from '../../icon'
 import { ItemRow } from '../../item-row'
-import type { TreeItemIconScope, TreeItemScope } from './base.component'
 import SetupTreeItem from './setup.component'
 
 export default { ...SetupTreeItem, components: { Icon, ItemRow } }
@@ -9,11 +8,11 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 
 <template>
 	<component
-		:is="href && !aria['aria-expanded'] ? 'a' : tag"
+		:is="href && !branch ? 'a' : tag"
 		ref="rootElement"
 		:class="classes"
-		:href="href && !aria['aria-expanded'] ? href : undefined"
-		v-bind="{ ...attrs, ...aria, ...dataset }"
+		:href="href && !branch ? href : undefined"
+		v-bind="{ ...attrs, ...aria, ...dataset, ...containerAttrs, ...controlAttrs }"
 	>
 		<!-- Virtual can keep the item and its group outside the visible row window. -->
 		<ItemRow
@@ -27,22 +26,22 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 		>
 			<template #leading>
 				<span
-					:class="aria['aria-expanded'] ? 'so-tree-item__toggle' : 'so-tree-item__spacer'"
+					:class="branch ? 'so-tree-item__toggle' : 'so-tree-item__spacer'"
 					aria-hidden="true"
 				>
 					<slot
-						v-if="aria['aria-expanded']"
+						v-if="branch"
 						name="indicator-icon"
-						:item="entry.item"
+						:item="ctrl"
 						:branch="true"
-						:expanded="aria['aria-expanded'] === 'true'"
-						:loading="aria['aria-busy'] === 'true'"
+						:expanded="expanded"
+						:loading="loading"
 					>
 						<span class="so-tree-item__chevron"></span>
 					</slot>
 				</span>
 				<span
-					v-if="dataset[selectionIndicatorAttribute] === 'start'"
+					v-if="indicator === 'start'"
 					class="so-tree-item__selection-indicator"
 					aria-hidden="true"
 				>
@@ -55,22 +54,22 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 				</span>
 				<slot
 					name="icon"
-					:item="entry.item"
-					:branch="Boolean(aria['aria-expanded'])"
-					:expanded="aria['aria-expanded'] === 'true'"
-					:loading="aria['aria-busy'] === 'true'"
+					:item="ctrl"
+					:branch="branch"
+					:expanded="expanded"
+					:loading="loading"
 				/>
 			</template>
 			<slot
-				:item="entry.item"
+				:item="ctrl"
 				:text="text"
 				:selected="selected"
-				:branch="Boolean(aria['aria-expanded'])"
-				:expanded="aria['aria-expanded'] === 'true'"
-				:loading="aria['aria-busy'] === 'true'"
+				:branch="branch"
+				:expanded="expanded"
+				:loading="loading"
 				>{{ text }}</slot
 			>
-			<template v-if="dataset[selectionIndicatorAttribute] === 'end'" #trailing>
+			<template v-if="indicator === 'end'" #trailing>
 				<span class="so-tree-item__selection-indicator" aria-hidden="true">
 					<Icon
 						v-if="selected"
@@ -82,7 +81,7 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 			</template>
 		</ItemRow>
 		<span v-else class="so-tree-item__accessible-name">{{ text }}</span>
-		<div v-if="aria['aria-expanded'] === 'true'" role="group" class="so-tree-item__group">
+		<div v-if="expanded" role="group" class="so-tree-item__group">
 			<template v-for="child in entry.children" :key="child.key">
 				<div
 					v-if="child.kind === 'filler'"
@@ -92,7 +91,7 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 				></div>
 				<!-- Forward consumer slots to data-backed descendants at every depth. -->
 				<TreeItem v-else :ctrl="child.item" :entry="child">
-					<template v-if="$slots.default" #default="scope: TreeItemScope">
+					<template v-if="$slots.default" #default="scope">
 						<slot
 							:item="scope.item"
 							:branch="scope.branch"
@@ -102,7 +101,7 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 							:selected="scope.selected"
 						/>
 					</template>
-					<template v-if="$slots['icon']" #icon="scope: TreeItemIconScope">
+					<template v-if="$slots['icon']" #icon="scope">
 						<slot
 							name="icon"
 							:item="scope.item"
@@ -111,10 +110,7 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 							:loading="scope.loading"
 						/>
 					</template>
-					<template
-						v-if="$slots['indicator-icon']"
-						#indicator-icon="scope: TreeItemIconScope"
-					>
+					<template v-if="$slots['indicator-icon']" #indicator-icon="scope">
 						<slot
 							name="indicator-icon"
 							:item="scope.item"

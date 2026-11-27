@@ -5,6 +5,15 @@
 	min-inline-size: 0;
 }
 
+/* Dim the whole tree once, including open groups and disabled rows. */
+.so-tree[data-disabled='true'] {
+	opacity: var(--so-disabled-opacity);
+}
+
+.so-tree[data-disabled='true'] > * {
+	--so-disabled-opacity: 1;
+}
+
 .so-tree--size-sm {
 	--so-tree-spacing-factor: var(--so-collection-scale-sm, 1);
 }

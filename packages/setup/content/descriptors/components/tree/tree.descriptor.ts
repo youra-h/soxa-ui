@@ -1,3 +1,7 @@
+/**
+ * Describes the Tree control, its slots, and keyboard behavior.
+ */
+
 import { TTree } from '@soxa-ui/core'
 import { TTreeKeyboardPlugin, treeFocusTarget } from '@soxa-ui/plugins'
 import { defineComponent, defineDescriptor, definePlugin } from '../../../../protected/define'

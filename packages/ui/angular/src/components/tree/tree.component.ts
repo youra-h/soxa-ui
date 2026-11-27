@@ -22,6 +22,6 @@ export class TTreeComponent extends TTreeSurface<TTree> {
 	}
 
 	linkOf(entry: TTreeRenderItem): string | undefined {
-		return entry.item.aria.has('aria-expanded') ? undefined : entry.item.href
+		return entry.item.branch ? undefined : entry.item.href
 	}
 }

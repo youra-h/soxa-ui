@@ -1,5 +1,7 @@
 import { describe, expect, it, vi } from 'vitest'
+import type { ITreeProps } from '@soxa-ui/core'
 import { TTreeElement } from '@soxa-ui/webc'
+
 const items = [
 	{ value: 'files', text: 'Files', children: [{ value: 'readme', text: 'Readme' }] },
 	{ value: 'help', text: 'Help', href: '/help' },
@@ -8,10 +10,12 @@ const items = [
 describe('Tree', () => {
 	it('keeps the selection indicator beside disclosure and applies icon samples to nested items', async () => {
 		const root = new TTreeElement()
-		root.items = items
-		root.mode = 'multiple'
-		root.indicator = 'start'
-		root.value = ['files']
+		Object.assign(root, {
+			items,
+			mode: 'multiple',
+			indicator: 'start',
+			value: ['files'],
+		} satisfies ITreeProps)
 		root.innerHTML = '<template slot="item-icon"><span data-icon></span></template>'
 		document.body.append(root)
 
@@ -37,7 +41,7 @@ describe('Tree', () => {
 			expect(mark?.querySelector('svg')).toBeInstanceOf(SVGElement)
 			expect(mark?.previousElementSibling).toBe(row.querySelector('.so-tree-item__toggle'))
 
-			root.indicator = 'end'
+			Object.assign(root, { indicator: 'end' } satisfies ITreeProps)
 			await vi.waitFor(() => expect(row.lastElementChild).toBe(mark))
 
 			const child = branch.querySelector('[role="group"]:not([hidden]) [role="treeitem"]')
