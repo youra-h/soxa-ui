@@ -1,0 +1,91 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-splitter__thumb) {
+		--so-burg-splitter-line: var(--so-burg-border);
+		--so-burg-splitter-rule: 1px;
+		color: var(--so-burg-muted);
+
+		&::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			margin: auto;
+			inline-size: var(--so-splitter-width, var(--so-burg-splitter-rule));
+			block-size: 100%;
+			background-color: var(--so-burg-splitter-line);
+			pointer-events: none;
+		}
+	}
+
+	:where(.so-splitter__thumb--size-sm) {
+		--so-splitter-handle-size: 4px;
+	}
+
+	:where(.so-splitter__thumb--size-lg) {
+		--so-splitter-handle-size: 16px;
+	}
+
+	@media (pointer: coarse) {
+		:where(.so-splitter__thumb) {
+			--so-splitter-handle-size: var(--so-target-size);
+		}
+	}
+
+	:where(.so-splitter[data-orientation='vertical']) > :where(.so-splitter__thumb)::before {
+		inline-size: 100%;
+		block-size: var(--so-splitter-width, var(--so-burg-splitter-rule));
+	}
+
+	:where(.so-splitter__grip) {
+		min-inline-size: 6px;
+		min-block-size: 20px;
+		border: 1px solid var(--so-burg-splitter-line);
+		border-radius: 9999px;
+		background-color: var(--so-place-surface);
+	}
+
+	:where(.so-splitter__grip:not(:empty)) {
+		padding: 2px 3px;
+	}
+
+	:where(.so-splitter[data-orientation='vertical'])
+		> :where(.so-splitter__thumb)
+		> :where(.so-splitter__grip) {
+		min-inline-size: 20px;
+		min-block-size: 6px;
+	}
+
+	@media (hover: hover) {
+		:where(.so-splitter__thumb:not([data-disabled]):hover) {
+			--so-burg-splitter-line: var(--so-burg-focus-edge);
+		}
+	}
+
+	:where(.so-splitter__thumb:not([data-disabled]):is([data-dragging], :focus-visible)) {
+		--so-burg-splitter-line: var(--so-burg-text);
+		--so-burg-splitter-rule: 2px;
+	}
+
+	:where(.so-splitter__thumb:focus-visible) {
+		outline: var(--so-burg-focus-ring);
+		outline-offset: 0;
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-splitter__thumb) {
+			--so-burg-splitter-line: CanvasText;
+
+			&::before {
+				forced-color-adjust: none;
+			}
+		}
+
+		:where(.so-splitter__thumb:not([data-disabled]):is([data-dragging], :focus-visible)) {
+			--so-burg-splitter-line: Highlight;
+			outline-color: Highlight;
+		}
+
+		:where(.so-splitter__grip) {
+			border-color: CanvasText;
+		}
+	}
+}

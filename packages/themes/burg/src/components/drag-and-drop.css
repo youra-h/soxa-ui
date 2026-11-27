@@ -1,0 +1,15 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-drag-and-drop__item) {
+		border-radius: var(--so-drag-and-drop-radius, calc(var(--so-radius) * 0.75));
+		outline: 1px solid var(--so-burg-focus-edge);
+		outline-offset: -1px;
+		background-color: var(--so-burg-row-highlight);
+		box-shadow: var(--so-burg-overlay-shadow);
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-drag-and-drop__item) {
+			outline-color: Highlight;
+		}
+	}
+}
