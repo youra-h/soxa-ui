@@ -33,6 +33,7 @@ function part(root: HTMLElement, selector: string, index = 0): HTMLElement {
 describe.each(FRAMEWORKS)('Splitter · $id', ({ id }) => {
 	it('resizes adjacent panels and keeps independent layout, axis and ARIA', async () => {
 		const host = await loadHost(id)
+		const ready = new Set<TOrientation>()
 		const mount = (orientation: TOrientation): HTMLElement => {
 			const root = document.createElement('div')
 			root.style.width = '400px'
@@ -41,6 +42,9 @@ describe.each(FRAMEWORKS)('Splitter · $id', ({ id }) => {
 			const preview = host.mount(root, {
 				component: 'splitter',
 				props: { orientation, panels },
+				onEvent: (event, [value]) => {
+					if (event === 'ready' && value === true) ready.add(orientation)
+				},
 			})
 			mounts.push({ root, preview })
 			return root
@@ -48,6 +52,7 @@ describe.each(FRAMEWORKS)('Splitter · $id', ({ id }) => {
 
 		const horizontal = mount('horizontal')
 		const vertical = mount('vertical')
+		await expect.poll(() => ready.size).toBe(2)
 		await expect
 			.poll(() =>
 				horizontal.querySelector('[role="separator"]')?.getAttribute('aria-valuenow'),
@@ -81,8 +86,18 @@ describe.each(FRAMEWORKS)('Splitter · $id', ({ id }) => {
 		expect(panel.getBoundingClientRect().width).toBeCloseTo(quarter)
 		expect(untouched.getBoundingClientRect().width).toBeCloseTo(quarter)
 
-		await userEvent.dragAndDrop(handle, secondHandle)
-		await expect.poll(() => handle.getAttribute('aria-valuenow')).toBe('45')
+		// Resizing uses pointer capture. Check the grab and the move before releasing.
+		await userEvent.hover(handle)
+		await commands.mouseDown()
+		try {
+			await expect.poll(() => handle.hasAttribute('data-dragging')).toBe(true)
+			await userEvent.hover(secondHandle, { force: true })
+			await expect.poll(() => handle.getAttribute('aria-valuenow')).toBe('45')
+		} finally {
+			await commands.mouseUp()
+		}
+		await expect.poll(() => handle.hasAttribute('data-dragging')).toBe(false)
+		expect(handle.getAttribute('aria-valuenow')).toBe('45')
 		expect(untouched.getBoundingClientRect().width).toBeCloseTo(quarter)
 		expect(verticalHandle.getAttribute('aria-valuenow')).toBe('25')
 

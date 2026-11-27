@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { Stepper } from '@soxa-ui/vue'
-import { check, error, step } from '@soxa-ui/icons-material'
+import * as material from '@soxa-ui/icons-material'
+import { resetIcons, useIcons } from '@soxa-ui/setup'
 import { createEngineStepper } from '@soxa-ui/core'
 import { afterEach, describe, expect, it } from 'vitest'
 import { h, nextTick } from 'vue'
@@ -32,6 +33,8 @@ const content = ({ next, previous, canNext, canPrevious }: Navigation) =>
 		),
 	])
 
+const pathOf = (icon: { body: string }) => icon.body.match(/<path d="([^"]+)"/)?.[1]
+
 afterEach(unmountHydrated)
 
 describe('Stepper', () => {
@@ -43,13 +46,32 @@ describe('Stepper', () => {
 			},
 		})
 		const [completed, active, pending, failed] = wrapper.findAll('.so-stepper-item__indicator')
-		const pathOf = (icon: { body: string }) => icon.body.match(/<path d="([^"]+)"/)?.[1]
 
-		expect(completed.get('svg.so-icon path').attributes('d')).toBe(pathOf(check))
-		expect(active.get('svg.so-stepper-item__step-icon path').attributes('d')).toBe(pathOf(step))
+		expect(completed.get('svg.so-icon path').attributes('d')).toBe(pathOf(material.check))
+		expect(active.get('svg.so-stepper-item__step-icon path').attributes('d')).toBe(
+			pathOf(material.step),
+		)
 		expect(pending.text()).toBe('3')
-		expect(failed.get('svg.so-icon path').attributes('d')).toBe(pathOf(error))
+		expect(failed.get('svg.so-icon path').attributes('d')).toBe(pathOf(material.error))
 		wrapper.unmount()
+	})
+
+	it('uses the standard right arrow with an older icon pack', () => {
+		const { step, ...previousPack } = material
+		resetIcons()
+		useIcons(previousPack)
+		try {
+			const wrapper = mount(Stepper, { props: { items, value: 'shipping' } })
+			try {
+				expect(wrapper.get('svg.so-stepper-item__step-icon path').attributes('d')).toBe(
+					pathOf(material.arrowRight),
+				)
+			} finally {
+				wrapper.unmount()
+			}
+		} finally {
+			useIcons({ step })
+		}
 	})
 
 	it('blocks forward jumps in linear mode and preserves completed and error states', async () => {

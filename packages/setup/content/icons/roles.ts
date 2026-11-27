@@ -20,8 +20,6 @@ import type { TIconSource } from '../../protected/registry'
  */
 export const ICON_ROLES = [
 	'check',
-	// The active Stepper item uses a horizontal arrow and dot in every built-in pack.
-	'step',
 	'checkIndeterminate',
 	'close',
 	'copy',
@@ -58,9 +56,8 @@ export const ICON_ROLES = [
 
 export type TIconRole = (typeof ICON_ROLES)[number]
 
-/** Application packs keep their existing required roles and can add the Stepper glyph. */
-export type TIconPack = Record<Exclude<TIconRole, 'step'>, TIconSource> &
-	Record<string, TIconSource>
+/** An icon pack supplies every required role and can include additional roles. */
+export type TIconPack = Record<TIconRole, TIconSource> & Record<string, TIconSource>
 
 /**
  * Каких обязательных ролей не хватает в наборе.
