@@ -31,6 +31,8 @@
 
 import { describe, it, expect } from 'vitest'
 import {
+	TStepper,
+	createEngineStepper,
 	TBreadcrumbs,
 	createEngineBreadcrumbs,
 	TAccordion,
@@ -62,6 +64,8 @@ import {
 } from '@soxa-ui/core'
 import type { TCollectionEngine } from '@soxa-ui/core'
 import {
+	StepperDescriptor,
+	StepperCollectionDescriptor,
 	BreadcrumbsDescriptor,
 	BreadcrumbsCollectionDescriptor,
 	AccordionCollectionDescriptor,
@@ -174,6 +178,17 @@ function mountOver<TFacade extends TCollectionOwner, TPlugins extends IPluginsCo
 
 /** Коллекции экспорта — ключ по дескриптору фасада коллекции. */
 const COLLECTIONS: Readonly<Record<string, TCollectionKit>> = {
+	StepperCollectionDescriptor: () => {
+		const owner = new TStepper()
+		const engine = createEngineStepper()
+
+		return {
+			owner,
+			engine,
+			mount: (ctrl) =>
+				mountOver(StepperDescriptor(), StepperCollectionDescriptor(), ctrl, engine),
+		}
+	},
 	BreadcrumbsCollectionDescriptor: () => {
 		const owner = new TBreadcrumbs()
 		const engine = createEngineBreadcrumbs()

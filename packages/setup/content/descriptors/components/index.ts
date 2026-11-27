@@ -72,3 +72,10 @@ export {
 	SplitterPanelDescriptor,
 	SplitterHandleDescriptor,
 } from './splitter.descriptor'
+export {
+	StepperDescriptor,
+	StepperCollectionDescriptor,
+	StepperItemDescriptor,
+	StepperCollectionItemDescriptor,
+	StepperContentDescriptor,
+} from './stepper.descriptor'

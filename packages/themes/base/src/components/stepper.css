@@ -1,0 +1,114 @@
+.so-stepper__list {
+	display: flex;
+	gap: 0.75rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.so-stepper-item {
+	--so-stepper-indicator-size: calc(var(--so-button-height-normal) * 0.75);
+	display: grid;
+	grid-template-columns: minmax(0, max-content) minmax(1rem, 1fr);
+	gap: 0.5rem;
+	flex: 1 1 auto;
+	min-inline-size: 0;
+	align-content: start;
+}
+
+.so-stepper-item--size-sm {
+	--so-stepper-indicator-size: calc(var(--so-button-height-sm) * 0.75);
+	font-size: var(--so-button-font-size-sm);
+}
+
+.so-stepper-item--size-lg {
+	--so-stepper-indicator-size: calc(var(--so-button-height-lg) * 0.75);
+	font-size: var(--so-button-font-size-lg);
+}
+
+.so-stepper-item--size-xl {
+	--so-stepper-indicator-size: calc(var(--so-button-height-xl) * 0.75);
+	font-size: var(--so-button-font-size-xl);
+}
+
+.so-stepper-item--size-2xl {
+	--so-stepper-indicator-size: calc(var(--so-button-height-2xl) * 0.75);
+	font-size: var(--so-button-font-size-2xl);
+}
+
+.so-stepper-item__leading,
+.so-stepper-item__details {
+	grid-column: 1 / -1;
+}
+
+.so-stepper-item__trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	min-inline-size: 0;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: inherit;
+	font: inherit;
+	text-align: start;
+	overflow-wrap: anywhere;
+}
+
+button.so-stepper-item__trigger:enabled {
+	cursor: pointer;
+}
+
+.so-stepper-item__body {
+	display: grid;
+}
+
+.so-stepper-item__indicator {
+	display: inline-grid;
+	place-items: center;
+	flex: none;
+	inline-size: var(--so-stepper-indicator-size);
+	block-size: var(--so-stepper-indicator-size);
+}
+
+.so-stepper-item__step-icon {
+	scale: var(--so-dir-sign) 1;
+}
+
+.so-stepper[data-orientation='vertical']
+	> .so-stepper__list
+	> .so-stepper-item
+	> .so-stepper-item__trigger
+	> .so-stepper-item__indicator
+	> .so-stepper-item__step-icon {
+	rotate: 90deg;
+	scale: none;
+}
+
+.so-stepper-item__separator {
+	display: flex;
+	align-self: center;
+	pointer-events: none;
+}
+
+.so-stepper[data-orientation='vertical'] > .so-stepper__list {
+	flex-direction: column;
+}
+
+.so-stepper[data-orientation='vertical'] > .so-stepper__list > .so-stepper-item {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.so-stepper[data-orientation='vertical']
+	> .so-stepper__list
+	> .so-stepper-item
+	> .so-stepper-item__separator {
+	order: 1;
+	margin-inline-start: calc(var(--so-stepper-indicator-size) / 2);
+	min-block-size: 1rem;
+	justify-self: start;
+}
+
+.so-stepper-content {
+	min-inline-size: 0;
+}

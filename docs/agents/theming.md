@@ -8,7 +8,7 @@
 
 Пакет иконок — **реализация контракта**, а не мешок SVG. Контракт — список
 ролей в `packages/setup/content/icons/roles.ts` (`ICON_ROLES`): `check`,
-`checkIndeterminate`, `close`, `arrowDown`, `arrowRight`, `arrowsOutward` и
+`checkIndeterminate`, `step` (текущий шаг Stepper), `close`, `arrowDown`, `arrowRight`, `arrowsOutward` и
 `arrowsInward` (кнопка разворота модального окна), `calendar`
 (кнопка календаря DatePicker), `arrowUpward` (отметка сортировки в заголовке
 колонки Table: по убыванию её поворачивает тема), `star` (звезда Rating —

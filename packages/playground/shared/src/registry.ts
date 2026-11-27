@@ -72,6 +72,11 @@ import {
 	SplitterDescriptor,
 	SplitterPanelDescriptor,
 	SplitterHandleDescriptor,
+	StepperDescriptor,
+	StepperCollectionDescriptor,
+	StepperItemDescriptor,
+	StepperCollectionItemDescriptor,
+	StepperContentDescriptor,
 	StylableDescriptor,
 	SwitchDescriptor,
 	TableDescriptor,
@@ -126,6 +131,19 @@ export const COMPONENT_GROUPS: Readonly<Record<TComponentGroup, string>> = {
  * levels of the contract, not components.
  */
 export const COMPONENTS: readonly TComponentEntry[] = [
+	{
+		id: 'stepper',
+		label: 'Stepper',
+		descriptor: StepperDescriptor,
+		collectionDescriptor: StepperCollectionDescriptor,
+		parts: {
+			Item: () => [StepperItemDescriptor(), StepperCollectionItemDescriptor()],
+			Content: () => [StepperContentDescriptor()],
+		},
+		group: 'collections',
+		span: 2,
+		description: 'Шаги процесса с панелями, свободной и линейной навигацией',
+	},
 	{
 		id: 'alert',
 		label: 'Alert',

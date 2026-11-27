@@ -24,6 +24,14 @@ export const router = createRouter({
 	routes: [
 		{ path: '/', redirect: DEFAULT_ROUTE },
 		{
+			path: '/:framework(vue)/stepper/examples',
+			name: 'stepper-examples',
+			components: {
+				default: () => import('./views/StepperExamples.vue'),
+				sidebar: AppSidebar,
+			},
+		},
+		{
 			path: '/:framework',
 			name: 'overview',
 			components: { default: OverviewPage, sidebar: AppSidebar },
