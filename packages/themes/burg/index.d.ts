@@ -17,4 +17,9 @@ declare module '@soxa-ui/core' {
 		outlined: true
 		plain: true
 	}
+
+	interface IRadioGroupViews {
+		dot: true
+		ring: true
+	}
 }

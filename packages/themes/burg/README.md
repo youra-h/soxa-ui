@@ -42,6 +42,11 @@ states by default. Use `outlined` for a visible border and unfilled box, or
 `plain` for the mark alone. Switch uses a 29px × 18px track at normal size and
 follows the Soxa motion policy.
 
+Label and Field follow the shared caption scale. Field uses muted helper text
+and the error color for validation messages. RadioGroup takes its ring size
+from the CheckBox scale. Its `dot` view marks selection with a center dot and
+`ring` uses a thicker border.
+
 Set `data-so-theme="burg"` or `data-so-theme="burg-dark"` on the document root
 or the container of the themed components. Load the stylesheet and register
 the layout plugins at the application entry point.

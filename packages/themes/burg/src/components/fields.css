@@ -1,4 +1,24 @@
 :where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-field__label, .so-label__text) {
+		color: var(--so-burg-text);
+	}
+
+	:where(.so-field:not(.so-field--position-end)) > :where(.so-field__label) {
+		font-weight: 500;
+	}
+
+	:where(.so-field__helper) {
+		color: var(--so-burg-muted);
+	}
+
+	:where(.so-field__error, .so-label--variant-negative > .so-label__text) {
+		color: var(--so-burg-danger);
+	}
+
+	:where(.so-field__error-icon) {
+		--so-icon-color: currentColor;
+	}
+
 	:where(.so-input, .so-textarea) {
 		--so-burg-field-border: var(--so-burg-border);
 		background-color: var(--so-burg-surface);
@@ -40,12 +60,20 @@
 	}
 
 	:where(.so-input, .so-textarea, .so-switch):where([data-required='true'])::after,
-	:where(.so-check-box[data-required='true']) > :where(.so-check-box__container)::after {
+	:where(.so-check-box[data-required='true']) > :where(.so-check-box__container)::after,
+	:where(.so-field:has(> .so-field__control > [data-required='true']))
+		> :where(.so-field__label)::after {
 		background-color: var(--so-burg-danger);
 		border-radius: 50%;
 	}
 
 	@media (forced-colors: active) {
+		:where(.so-field:has(> .so-field__control > [data-required='true']))
+			> :where(.so-field__label)::after {
+			forced-color-adjust: none;
+			background-color: CanvasText;
+		}
+
 		:where(.so-input[data-invalid='true']) {
 			--so-input-border: 2px;
 		}
