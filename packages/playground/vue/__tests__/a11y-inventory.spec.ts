@@ -28,7 +28,7 @@ describe('mandatory axe inventory', () => {
 		const entries = [
 			...new Map(A11Y_CASES.map((entry) => [entry.component, entry.coverage])).entries(),
 		]
-		expect(entries.filter(([, coverage]) => coverage === 'direct')).toHaveLength(47)
+		expect(entries.filter(([, coverage]) => coverage === 'direct')).toHaveLength(48)
 		expect(entries.filter(([, coverage]) => coverage === 'consumer')).toHaveLength(7)
 		expect(entries.filter(([, coverage]) => coverage === 'semantic-reference')).toEqual([
 			['interactive', 'semantic-reference'],
@@ -48,16 +48,25 @@ describe('mandatory axe inventory', () => {
 			)
 	})
 	it('rejects new registry entries rather than silently intersecting them', () => {
-		expect(auditInventoryErrors(host, ids)).toEqual([])
-		expect(auditInventoryErrors(host, [...ids, 'new-component'])).not.toEqual([])
+		expect(auditInventoryErrors(host, ids, 'vue')).toEqual([])
+		expect(auditInventoryErrors(host, [...ids, 'new-component'], 'vue')).not.toEqual([])
+	})
+	it('requires the Stepper preview in Vue', () => {
+		const withoutStepper = { ...host, previews: host.previews.filter((id) => id !== 'stepper') }
+		expect(auditInventoryErrors(withoutStepper, ids, 'vue')).toEqual([
+			'stepper/current-step: missing consumer stepper',
+		])
+		for (const adapter of A11Y_ADAPTERS.filter((id) => id !== 'vue'))
+			expect(auditInventoryErrors(withoutStepper, ids, adapter)).toEqual([])
 	})
 	it('rejects a missing consumer or named fixture in a host', () => {
 		expect(
 			auditInventoryErrors(
 				{ ...host, previews: host.previews.filter((id) => id !== 'select') },
 				ids,
+				'vue',
 			),
 		).not.toEqual([])
-		expect(auditInventoryErrors({ ...host, fixtures: [] }, ids)).not.toEqual([])
+		expect(auditInventoryErrors({ ...host, fixtures: [] }, ids, 'vue')).not.toEqual([])
 	})
 })

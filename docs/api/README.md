@@ -168,7 +168,8 @@ npm run check:api-package        # verify packaged data and the current version
 ```
 
 The generator lives in [tools/api-docs](../../tools/api-docs). It discovers the existing
-Angular component manifests to reuse their descriptor/facade wiring, then checks exports
+Angular component manifests to reuse their descriptor/facade wiring. For components with no
+Angular adapter, it reads equivalent manifests from `tools/api-docs/manifests`. It checks exports
 of all six adapters without importing their UI runtime. Properties and event names come
 from the runtime descriptors; value types come from the inferred TypeScript contracts.
 Collection setters absent from a constructor props interface are read from the descriptor's
@@ -209,3 +210,7 @@ choosing VitePress, Nuxt or another renderer.
 
 - [Alert](alert.md): inline urgency, content slots and reversible dismissal.
 - [Separator](separator.md): horizontal and vertical semantic or decorative boundaries.
+- [Stepper](../components/stepper.md) displays progress and navigation through ordered steps.
+- [Splitter](../components/splitter.md) resizes adjacent panels.
+- [Guide](../components/guide.md) walks users through an interface.
+- [FileUpload](../components/file-upload.md) selects files and integrates with native forms.

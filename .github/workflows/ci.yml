@@ -8,6 +8,10 @@ on:
     branches: [main]
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   # Tests run as four jobs in parallel, the build and types as a fifth. As one
   # queue on a 4-core runner the test step grew to 24 minutes: the suites ran
