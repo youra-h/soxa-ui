@@ -66,7 +66,7 @@
 
 		& > :where(.so-tabs__bar) > :where(.so-tabs__list) > :where(.so-tabs-item) {
 			& > :where(.so-button:not(.so-tabs-item__close)) {
-				min-block-size: calc(var(--so-tabs-row-height) + var(--so-burg-tabs-space));
+				min-block-size: var(--so-tabs-row-height);
 				padding-inline: calc(var(--so-burg-tabs-space) * 5);
 			}
 		}
