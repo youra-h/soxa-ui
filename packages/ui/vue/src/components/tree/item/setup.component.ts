@@ -2,8 +2,11 @@ import {
 	TCollectionItemExtension,
 	TreeItemCollectionDescriptor,
 	TreeItemDescriptor,
+	toInstanceState,
+	type TContextContract,
+	type TInstanceState,
 } from '@soxa-ui/setup'
-import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
+import { LIST_INDICATOR_ATTRIBUTE, type TTreeItem } from '@soxa-ui/core'
 import {
 	createVueAdapterContext,
 	extendBinding,
@@ -32,9 +35,14 @@ export default {
 
 		const collectionBinding = useCollectionAdapter(collectionAdapter, props, emit)
 		const itemBinding = useAdapter(adapter, props, emit)
+		const itemState: Pick<
+			TInstanceState<TTreeItem>,
+			'attrs' | 'aria' | 'dataset'
+		> = toInstanceState<TContextContract<TTreeItem>>(itemBinding)
 
 		return extendBinding(joinBindings(itemBinding, collectionBinding), {
 			itemProps: props,
+			itemState,
 			selectionIconTag: roleIcon('check'),
 			selectionIndicatorAttribute: `data-${LIST_INDICATOR_ATTRIBUTE}`,
 		})

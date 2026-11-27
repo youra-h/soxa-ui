@@ -3,4 +3,4 @@
 '@soxa-ui/vue': patch
 ---
 
-Use attribute snapshot types in Vue bindings and follow the setup descriptor conventions for Tree.
+Read typed attribute snapshots in Vue TreeItem and follow the setup descriptor conventions for Tree.

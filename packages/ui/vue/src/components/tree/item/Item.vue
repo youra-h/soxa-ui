@@ -8,11 +8,11 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 
 <template>
 	<component
-		:is="href && !aria['aria-expanded'] ? 'a' : tag"
+		:is="href && !itemState.aria?.['aria-expanded'] ? 'a' : tag"
 		ref="rootElement"
 		:class="classes"
-		:href="href && !aria['aria-expanded'] ? href : undefined"
-		v-bind="{ ...attrs, ...aria, ...dataset }"
+		:href="href && !itemState.aria?.['aria-expanded'] ? href : undefined"
+		v-bind="{ ...itemState.attrs, ...itemState.aria, ...itemState.dataset }"
 	>
 		<!-- Virtual can keep the item and its group outside the visible row window. -->
 		<ItemRow
@@ -22,26 +22,30 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 			class="so-tree-item__row"
 			:size="size"
 			:variant="variant"
-			v-bind="dataset"
+			v-bind="itemState.dataset"
 		>
 			<template #leading>
 				<span
-					:class="aria['aria-expanded'] ? 'so-tree-item__toggle' : 'so-tree-item__spacer'"
+					:class="
+						itemState.aria?.['aria-expanded']
+							? 'so-tree-item__toggle'
+							: 'so-tree-item__spacer'
+					"
 					aria-hidden="true"
 				>
 					<slot
-						v-if="aria['aria-expanded']"
+						v-if="itemState.aria?.['aria-expanded']"
 						name="indicator-icon"
 						:item="itemProps.entry.item"
 						:branch="true"
-						:expanded="aria['aria-expanded'] === 'true'"
-						:loading="aria['aria-busy'] === 'true'"
+						:expanded="itemState.aria?.['aria-expanded'] === 'true'"
+						:loading="itemState.aria?.['aria-busy'] === 'true'"
 					>
 						<span class="so-tree-item__chevron"></span>
 					</slot>
 				</span>
 				<span
-					v-if="dataset[selectionIndicatorAttribute] === 'start'"
+					v-if="itemState.dataset?.[selectionIndicatorAttribute] === 'start'"
 					class="so-tree-item__selection-indicator"
 					aria-hidden="true"
 				>
@@ -55,21 +59,21 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 				<slot
 					name="icon"
 					:item="itemProps.entry.item"
-					:branch="Boolean(aria['aria-expanded'])"
-					:expanded="aria['aria-expanded'] === 'true'"
-					:loading="aria['aria-busy'] === 'true'"
+					:branch="Boolean(itemState.aria?.['aria-expanded'])"
+					:expanded="itemState.aria?.['aria-expanded'] === 'true'"
+					:loading="itemState.aria?.['aria-busy'] === 'true'"
 				/>
 			</template>
 			<slot
 				:item="itemProps.entry.item"
 				:text="text"
 				:selected="selected"
-				:branch="Boolean(aria['aria-expanded'])"
-				:expanded="aria['aria-expanded'] === 'true'"
-				:loading="aria['aria-busy'] === 'true'"
+				:branch="Boolean(itemState.aria?.['aria-expanded'])"
+				:expanded="itemState.aria?.['aria-expanded'] === 'true'"
+				:loading="itemState.aria?.['aria-busy'] === 'true'"
 				>{{ text }}</slot
 			>
-			<template v-if="dataset[selectionIndicatorAttribute] === 'end'" #trailing>
+			<template v-if="itemState.dataset?.[selectionIndicatorAttribute] === 'end'" #trailing>
 				<span class="so-tree-item__selection-indicator" aria-hidden="true">
 					<Icon
 						v-if="selected"
@@ -81,7 +85,11 @@ export default { ...SetupTreeItem, components: { Icon, ItemRow } }
 			</template>
 		</ItemRow>
 		<span v-else class="so-tree-item__accessible-name">{{ text }}</span>
-		<div v-if="aria['aria-expanded'] === 'true'" role="group" class="so-tree-item__group">
+		<div
+			v-if="itemState.aria?.['aria-expanded'] === 'true'"
+			role="group"
+			class="so-tree-item__group"
+		>
 			<template v-for="child in itemProps.entry.children" :key="child.key">
 				<div
 					v-if="child.kind === 'filler'"
