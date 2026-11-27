@@ -17,15 +17,32 @@
 	--so-button-font-size-xl: calc(var(--so-burg-button-font-size-normal) + 0.125rem);
 	--so-button-font-size-2xl: calc(var(--so-burg-button-font-size-normal) + 0.1875rem);
 
-	--so-input-height-sm: var(--so-button-height-sm);
-	--so-input-height-normal: var(--so-button-height-normal);
-	--so-input-height-lg: var(--so-button-height-lg);
-	--so-input-height-xl: var(--so-button-height-xl);
-	--so-input-height-2xl: var(--so-button-height-2xl);
+	--so-input-height-sm: calc(var(--so-button-height-sm) - 0.125rem);
+	--so-input-height-normal: calc(var(--so-button-height-normal) - 0.125rem);
+	--so-input-height-lg: calc(var(--so-button-height-lg) - 0.125rem);
+	--so-input-height-xl: calc(var(--so-button-height-xl) - 0.125rem);
+	--so-input-height-2xl: calc(var(--so-button-height-2xl) - 0.125rem);
 	--so-input-font-size-sm: var(--so-button-font-size-sm);
 	--so-input-font-size-lg: var(--so-button-font-size-lg);
 	--so-input-font-size-xl: var(--so-button-font-size-xl);
 	--so-input-font-size-2xl: var(--so-button-font-size-2xl);
+
+	--so-check-box-size-normal: 1rem;
+	--so-check-box-size-sm: calc(var(--so-check-box-size-normal) - 0.125rem);
+	--so-check-box-size-lg: calc(var(--so-check-box-size-normal) + 0.125rem);
+	--so-check-box-size-xl: calc(var(--so-check-box-size-normal) + 0.25rem);
+	--so-check-box-size-2xl: calc(var(--so-check-box-size-normal) + 0.375rem);
+
+	--so-switch-width-sm: 1.375rem;
+	--so-switch-width-normal: 1.8125rem;
+	--so-switch-width-lg: 2.25rem;
+	--so-switch-width-xl: 2.6875rem;
+	--so-switch-width-2xl: 3.125rem;
+	--so-switch-height-sm: 0.875rem;
+	--so-switch-height-normal: 1.125rem;
+	--so-switch-height-lg: 1.375rem;
+	--so-switch-height-xl: 1.5625rem;
+	--so-switch-height-2xl: 1.8125rem;
 }
 
 [data-so-theme='burg'] {

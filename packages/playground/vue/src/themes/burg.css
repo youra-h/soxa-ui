@@ -23,26 +23,6 @@
 	--so-caution-100: color-mix(in srgb, var(--so-burg-surface), var(--so-caution-500) 12%);
 }
 
-/* Switch and Drawer appear in the shell before Burg has component styles for them. */
-.pg__settings .so-switch__track {
-	background: var(--so-neutral-400);
-	border-radius: 9999px;
-}
-
-.pg__settings .so-switch input:checked + .so-switch__track {
-	background: var(--so-component-text);
-}
-
-.pg__settings .so-switch input:focus-visible + .so-switch__track {
-	outline: 2px solid var(--so-neutral-400);
-	outline-offset: 2px;
-}
-
-.pg__settings .so-switch__track--thumb {
-	background: var(--so-component-surface);
-	border-radius: 50%;
-}
-
 .pg__drawer {
 	background: var(--so-component-surface);
 	color: var(--so-component-text);
