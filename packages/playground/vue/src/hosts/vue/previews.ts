@@ -57,6 +57,7 @@ import {
 	CodeBlock,
 	FileUpload,
 	Splitter,
+	Stepper,
 	Label,
 	ListBox,
 	Menu,
@@ -430,6 +431,16 @@ const layer =
 		h(ComponentView, bind, { default: () => label })
 
 export const PREVIEWS: Record<string, TPreview> = {
+	stepper: (bind) =>
+		h(Stepper, {
+			items: [
+				{ value: 'cart', text: 'Review', completed: true },
+				{ value: 'shipping', text: 'Shipping' },
+				{ value: 'payment', text: 'Payment' },
+			],
+			value: 'shipping',
+			...bind,
+		}),
 	// The label is the `text` prop from the preview props, not a slot: a given
 	// `default` slot overrides the prop, and the `text` row would change nothing
 	// visible
