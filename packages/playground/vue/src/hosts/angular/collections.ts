@@ -17,12 +17,14 @@ import {
 	TSelectComponent,
 	TSelectItemComponent,
 	TTableComponent,
+	TStepperComponent,
 	TTabsComponent,
 	TTabsContentComponent,
 	TTabsItemComponent,
 	TTagsComponent,
 } from '@soxa-ui/angular'
 import {
+	STEPPER_ITEMS,
 	COLLECTION_ITEMS,
 	TABLE_COLUMNS,
 	TABLE_ROWS,
@@ -691,4 +693,63 @@ export class ScrollerPreview implements TFixture {
 	readonly subjects = viewChildren(TScrollerComponent)
 	/** Collection content from the shared manifest, as in Vue and React. */
 	protected readonly entries = COLLECTION_ITEMS
+}
+
+@Component({
+	selector: 'pg-stepper-preview',
+	imports: [TStepperComponent, CopyDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: { style: 'display: contents' },
+	template: `
+		<ng-template pg-copy>
+			<div
+				so-stepper
+				[ctrl]="ctrl()"
+				[rendered]="rendered()"
+				[visible]="visible()"
+				[direction]="direction()"
+				[size]="size()"
+				[variant]="variant()"
+				[disabled]="disabled()"
+				[focused]="focused()"
+				[value]="value()"
+				[linear]="linear()"
+				[interactive]="interactive()"
+				[orientation]="orientation()"
+				[engine]="engine()"
+				[items]="items() ?? sample"
+				[trackBy]="trackBy()"
+				[name]="name()"
+				[initial]="initial()"
+				[aria_label]="aria_label()"
+				[aria_labelledBy]="aria_labelledBy()"
+				[aria_describedBy]="aria_describedBy()"
+			></div>
+		</ng-template>
+	`,
+})
+export class StepperPreview implements TFixture {
+	protected readonly sample = STEPPER_ITEMS
+	readonly ctrl = input<TStepperComponent['ctrl']>()
+	readonly rendered = input<TStepperComponent['rendered']>()
+	readonly visible = input<TStepperComponent['visible']>()
+	readonly direction = input<TStepperComponent['direction']>()
+	readonly size = input<TStepperComponent['size']>()
+	readonly variant = input<TStepperComponent['variant']>()
+	readonly disabled = input<TStepperComponent['disabled']>()
+	readonly focused = input<TStepperComponent['focused']>()
+	readonly value = input<TStepperComponent['value']>()
+	readonly linear = input<TStepperComponent['linear']>()
+	readonly interactive = input<TStepperComponent['interactive']>()
+	readonly orientation = input<TStepperComponent['orientation']>()
+	readonly engine = input<TStepperComponent['engine']>()
+	readonly items = input<TStepperComponent['items']>()
+	readonly trackBy = input<TStepperComponent['trackBy']>()
+	readonly name = input<TStepperComponent['name']>()
+	readonly initial = input<TStepperComponent['initial']>()
+	readonly aria_label = input<TStepperComponent['aria_label']>()
+	readonly aria_labelledBy = input<TStepperComponent['aria_labelledBy']>()
+	readonly aria_describedBy = input<TStepperComponent['aria_describedBy']>()
+	readonly copy = viewChild.required(CopyDirective)
+	readonly subjects = viewChildren(TStepperComponent)
 }

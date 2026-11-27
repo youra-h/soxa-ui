@@ -189,14 +189,9 @@ export const A11Y_CASES: readonly TAuditCase[] = [
 		['.so-avatar__fallback .so-icon'],
 		{ fixture: 'avatar-fallback' },
 	),
-	audit(
-		'stepper',
-		'current-step',
-		'.so-stepper',
-		{ aria_label: 'Checkout steps' },
-		['.so-stepper-item__trigger[aria-current="step"]'],
-		{ adapters: ['vue'] },
-	),
+	audit('stepper', 'current-step', '.so-stepper', { aria_label: 'Checkout steps' }, [
+		'.so-stepper-item__trigger[aria-current="step"]',
+	]),
 	audit('splitter', 'initial', '.so-splitter', {}, ['.so-splitter__thumb']),
 	audit('file-upload', 'choose', '.so-file-upload', { required: true }, [
 		'.so-file-upload__choose',

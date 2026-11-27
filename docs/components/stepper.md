@@ -1,8 +1,8 @@
 # Stepper
 
-Use Stepper to show progress through an ordered workflow. The Vue component accepts step data
-through `items` or declarative `Stepper.Item` children. Give every step a stable string or
-number `value`. The active value selects the matching `Stepper.Content` panel.
+Use Stepper to show progress through an ordered workflow. Stepper accepts step data
+through `items` or declarative step children. Give every step a stable string or number
+`value`. The active value selects the matching content panel.
 
 ```vue
 <script setup lang="ts">
@@ -35,6 +35,14 @@ Provide a group name with `aria_label` or `aria_labelledby`. Interactive step he
 native buttons, and the current header exposes `aria-current="step"`. Both built-in
 icon packs include the `step` glyph. With an older or custom pack that omits `step`,
 Stepper uses `arrowRight`.
+
+Vue, React, Solid and Svelte export `Stepper` with `Stepper.Item` and `Stepper.Content`.
+Angular exports `TStepperComponent`, `TStepperItemComponent` and `TStepperContentComponent`
+for the `so-stepper`, `so-stepper-item` and `so-stepper-content` attribute selectors.
+In Web Components, import `@soxa-ui/webc/stepper` to register the customized built-ins
+`<div is="so-stepper">`, `<li is="so-stepper-item">` and `<div is="so-stepper-content">`.
+Set `items` as a JavaScript property or place step items inside the root.
+Assign content panels to the `content` slot with `slot="content"`.
 
 The [generated API contract](../api/generated/contract.json) lists the props, events and slots
 for `stepper`, `stepper-item` and `stepper-content`.

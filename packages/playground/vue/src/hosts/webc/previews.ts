@@ -1,4 +1,4 @@
-import { ALERT_SAMPLE } from '@soxa-ui/playground-shared'
+import { STEPPER_ITEMS, ALERT_SAMPLE } from '@soxa-ui/playground-shared'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -633,6 +633,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 			})),
 		},
 	},
+	stepper: { tag: 'div', is: 'so-stepper', props: { items: STEPPER_ITEMS } },
 	splitter: {
 		tag: 'div',
 		is: 'so-splitter',

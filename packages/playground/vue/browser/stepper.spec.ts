@@ -1,7 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { defineComponent, h, nextTick, ref } from 'vue'
 import { Stepper } from '@soxa-ui/vue'
-import { userEvent } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
+import { FRAMEWORKS, loadHost } from '../src/hosts'
 import { COMPONENT_SIZES, COMPONENT_VARIANTS } from '@soxa-ui/playground-shared'
 import type { IStepperProps } from '@soxa-ui/core'
 import { render, cleanup } from './render'
@@ -176,5 +177,39 @@ describe('Stepper indicators', () => {
 				getComputedStyle(root).getPropertyValue('--so-burg-focus').trim(),
 			)
 		})
+	})
+})
+
+describe.each(FRAMEWORKS)('Stepper navigation ? $id', ({ id }) => {
+	it('shares linear navigation, native activation and passive headers', async () => {
+		const host = await loadHost(id)
+		const root = document.createElement('div')
+		document.body.append(root)
+		const props = { items, value: 'shipping', linear: true, interactive: true }
+		const preview = host.mount(root, { component: 'stepper', props })
+
+		try {
+			const shipping = page.getByRole('button', { name: 'Shipping' })
+			const contact = page.getByRole('button', { name: 'Contact' })
+			const payment = page.getByRole('button', { name: 'Payment' })
+			await expect.element(shipping).toHaveAttribute('aria-current', 'step')
+			await expect.element(payment).toBeDisabled()
+
+			await contact.click()
+			await expect.element(contact).toHaveAttribute('aria-current', 'step')
+			const shippingButton = shipping.element() as HTMLButtonElement
+			shippingButton.focus()
+			await userEvent.keyboard('{Enter}')
+			await expect.element(shipping).toHaveAttribute('aria-current', 'step')
+
+			preview.update({ ...props, interactive: false })
+			await expect.poll(() => root.querySelectorAll('button').length).toBe(0)
+			await expect
+				.poll(() => root.querySelector('[aria-current="step"]')?.textContent)
+				.toContain('Shipping')
+		} finally {
+			preview.unmount()
+			root.remove()
+		}
 	})
 })

@@ -71,6 +71,9 @@ import {
 	TSeparator,
 	TSkeleton,
 	TSlider,
+	TStepper,
+	TStepperItem,
+	TStepperContent,
 	TSplitter,
 	TSplitterHandle,
 	TSplitterPanel,
@@ -143,6 +146,7 @@ import {
 	Separator,
 	Skeleton,
 	Slider,
+	Stepper,
 	Splitter,
 	Switch,
 	Table,
@@ -960,6 +964,25 @@ const COMPONENTS: Readonly<Record<string, Readonly<Record<string, TCase>>>> = {
 			() => new TSlider({ value: [20, 80] }),
 			(ctrl) => <Slider ctrl={ctrl} />,
 		),
+	},
+	Stepper: {
+		'owner, item and content with external ctrl': () => {
+			const ctrl = new TStepper({ value: 'first' })
+			const item = new TStepperItem({ value: 'first', text: 'First' })
+			const panel = new TStepperContent({ value: 'first' })
+
+			return {
+				node: (
+					<Stepper
+						ctrl={ctrl}
+						content={<Stepper.Content ctrl={panel}>First panel</Stepper.Content>}
+					>
+						<Stepper.Item ctrl={item} />
+					</Stepper>
+				),
+				buses: [ctrl.events, item.events, panel.events],
+			}
+		},
 	},
 	Splitter: {
 		'owner, panels and handle with external ctrl': () => {

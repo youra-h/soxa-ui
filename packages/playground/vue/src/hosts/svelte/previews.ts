@@ -3,6 +3,7 @@ import AvatarPreview from './AvatarPreview.svelte'
 import AvatarGroupPreview from './AvatarGroupPreview.svelte'
 import SeparatorPreview from './SeparatorPreview.svelte'
 import SplitterPreview from './SplitterPreview.svelte'
+import StepperPreview from './StepperPreview.svelte'
 import FileUploadPreview from './FileUploadPreview.svelte'
 import CodeBlockPreview from './CodeBlockPreview.svelte'
 import ToggleButtonPreview from './ToggleButtonPreview.svelte'
@@ -84,6 +85,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 	'avatar-group': AvatarGroupPreview,
 	'file-upload': FileUploadPreview,
 	splitter: SplitterPreview,
+	stepper: StepperPreview,
 	'code-block': CodeBlockPreview,
 	label: LabelPreview,
 	field: FieldPreview,

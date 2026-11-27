@@ -1,0 +1,29 @@
+<ol class="so-stepper__list" role="list">
+	<ng-content select="li[so-stepper-item]">
+		@for (item of state()['shown'] ?? []; track item.uid) {
+			@if (slot('item'); as replacement) {
+				<ng-container
+					[ngTemplateOutlet]="replacement"
+					[ngTemplateOutletContext]="{ item }"
+				/>
+			} @else {
+				<li so-stepper-item [ctrl]="item"></li>
+			}
+		}
+	</ng-content>
+</ol>
+@if (slot('content'); as content) {
+	<ng-container
+		[ngTemplateOutlet]="content"
+		[ngTemplateOutletContext]="{
+			value: state()['value'],
+			canNext: state()['stepper_canNext'],
+			canPrevious: state()['stepper_canPrevious'],
+			next: next,
+			previous: previous,
+		}"
+	/>
+} @else {
+	<ng-content select="[slot=content]" />
+}
+<ng-content select="ng-template[slot]" />

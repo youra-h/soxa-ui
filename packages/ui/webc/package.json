@@ -205,6 +205,10 @@
       "types": "./dist/components/toggle-group/index.d.ts",
       "default": "./dist/components/toggle-group/index.js"
     },
+    "./stepper": {
+      "types": "./dist/components/stepper/index.d.ts",
+      "default": "./dist/components/stepper/index.js"
+    },
     "./splitter": {
       "types": "./dist/components/splitter/index.d.ts",
       "default": "./dist/components/splitter/index.js"
