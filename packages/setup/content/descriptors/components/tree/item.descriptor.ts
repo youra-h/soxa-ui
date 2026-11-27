@@ -15,6 +15,10 @@ export const TreeItemDescriptor = defineDescriptor(() => {
 		extends: ValueControlDescriptor(),
 		contribution: {
 			props: {
+				branch: { type: Boolean, protected: true, triggers: ['change:aria'] },
+				expanded: { type: Boolean, protected: true, triggers: ['change:aria'] },
+				loading: { type: Boolean, protected: true, triggers: ['change:aria'] },
+				indicator: { type: String, protected: true, triggers: ['change:dataset'] },
 				text: { type: String, triggers: ['change:text'] },
 				href: { type: String, triggers: ['change:href'] },
 			},

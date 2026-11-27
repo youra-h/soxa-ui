@@ -1,5 +1,4 @@
 import type { ElementType } from 'react'
-import { LIST_INDICATOR_ATTRIBUTE } from '@soxa-ui/core'
 import {
 	renderSlot,
 	roleIcon,
@@ -22,16 +21,26 @@ export const TreeItem = withRenderBoundary(function TreeItem({
 	children,
 }: TreeItemProps) {
 	const { ref, state } = useSetupTreeItem({ ctrl })
-	const { aria, dataset, attrs, href, size, variant, tag, text, selected } = state
-	const branch = aria?.['aria-expanded'] !== undefined
-	const expanded = aria?.['aria-expanded'] === 'true'
-	const loading = aria?.['aria-busy'] === 'true'
+	const {
+		aria,
+		dataset,
+		attrs,
+		href,
+		size,
+		variant,
+		tag,
+		text,
+		selected,
+		branch = false,
+		expanded = false,
+		loading = false,
+		indicator,
+	} = state
 	const link = branch ? undefined : href
 	const Tag = (link ? 'a' : tag) as ElementType
 	const scope = { item: ctrl, branch, expanded, loading }
-	const indicatorSide = dataset?.[`data-${LIST_INDICATOR_ATTRIBUTE}`]
 	const selectionMark =
-		indicatorSide === 'start' || indicatorSide === 'end' ? (
+		indicator === 'start' || indicator === 'end' ? (
 			<span className="so-tree-item__selection-indicator" aria-hidden="true">
 				{selected && <Icon embedded="tree.selection-indicator" tag={CHECK} size={size} />}
 			</span>
@@ -47,7 +56,7 @@ export const TreeItem = withRenderBoundary(function TreeItem({
 					size={size}
 					variant={variant}
 					{...toAriaProps(dataset)}
-					trailing={indicatorSide === 'end' ? selectionMark : null}
+					trailing={indicator === 'end' ? selectionMark : null}
 					leading={
 						<>
 							<span
@@ -59,7 +68,7 @@ export const TreeItem = withRenderBoundary(function TreeItem({
 										<span className="so-tree-item__chevron" />
 									))}
 							</span>
-							{indicatorSide === 'start' ? selectionMark : null}
+							{indicator === 'start' ? selectionMark : null}
 							{renderSlot(slots['item-icon'], scope)}
 						</>
 					}

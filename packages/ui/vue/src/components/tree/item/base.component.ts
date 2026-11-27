@@ -16,6 +16,6 @@ export default {
 	props: {
 		...(useProps(TreeItemDescriptor()) as TProps),
 		...(useProps(TreeItemCollectionDescriptor()) as TProps),
-		entry: { type: Object, required: true as const },
+		entry: { type: Object as () => TTreeRenderItem, required: true as const },
 	},
 }

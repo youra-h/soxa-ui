@@ -1,8 +1,7 @@
-@let aria = state()['aria'];
-@let branch = !!aria?.['aria-expanded'];
-@let expanded = aria?.['aria-expanded'] === 'true';
-@let loading = aria?.['aria-busy'] === 'true';
-@let indicatorSide = state()['dataset']?.[selectionIndicatorAttribute];
+@let branch = state()['branch'] ?? false;
+@let expanded = state()['expanded'] ?? false;
+@let loading = state()['loading'] ?? false;
+@let indicatorSide = state()['indicator'];
 @let scope = { item: ctrl, branch, expanded, loading };
 <!-- A virtual ancestor can have a group and an accessible name without a visible row. -->
 @if (row) {

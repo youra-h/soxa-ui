@@ -16,9 +16,7 @@ const groups = new WeakMap<HTMLElement, TGroup>()
 const roots = new WeakMap<HTMLElement, TLoop>()
 
 function linkOf(entry: TTreeRenderEntry): string | undefined {
-	return entry.kind === 'item' && !entry.item.aria.has('aria-expanded')
-		? entry.item.href
-		: undefined
+	return entry.kind === 'item' && !entry.item.branch ? entry.item.href : undefined
 }
 
 // A leaf link and a branch use different native host tags. The key includes the tag.
@@ -78,7 +76,7 @@ function updateEntry(node: HTMLElement, entry: TTreeRenderEntry, ctx: TRowsConte
 	const group = groups.get(node)
 
 	if (group) {
-		group.node.hidden = entry.item.aria.get('aria-expanded') !== 'true'
+		group.node.hidden = !entry.item.expanded
 		renderEntries(group.loop, entry.children, ctx)
 	}
 }

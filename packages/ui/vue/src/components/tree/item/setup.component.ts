@@ -2,11 +2,7 @@ import {
 	TCollectionItemExtension,
 	TreeItemCollectionDescriptor,
 	TreeItemDescriptor,
-	toInstanceState,
-	type TContextContract,
-	type TInstanceState,
 } from '@soxa-ui/setup'
-import { LIST_INDICATOR_ATTRIBUTE, type TTreeItem } from '@soxa-ui/core'
 import {
 	createVueAdapterContext,
 	extendBinding,
@@ -15,6 +11,7 @@ import {
 	useAdapter,
 	useCollectionAdapter,
 	useExpose,
+	useSplitAttrs,
 	VueElevatorFactory,
 	type SetupContext,
 } from '../../../adapter'
@@ -22,29 +19,24 @@ import BaseTreeItem, { type TreeItemProps } from './base.component'
 
 export default {
 	name: 'TreeItem',
+	inheritAttrs: false,
 	extends: BaseTreeItem,
 	expose: useExpose(),
 	setup(props: TreeItemProps, { emit }: SetupContext) {
 		const adapter = createVueAdapterContext(TreeItemDescriptor(), { ctrl: props.ctrl, props })
-		// Bind the item facade to the same bundle and mounted element as the item model.
-		const collectionAdapter = createVueAdapterContext(
+
+		const itemAdapter = createVueAdapterContext(
 			TreeItemCollectionDescriptor(),
 			{ props },
 			{ bundle: adapter.bundle },
 		).use(TCollectionItemExtension, { adapter, elevator: VueElevatorFactory })
 
-		const collectionBinding = useCollectionAdapter(collectionAdapter, props, emit)
-		const itemBinding = useAdapter(adapter, props, emit)
-		const itemState: Pick<
-			TInstanceState<TTreeItem>,
-			'attrs' | 'aria' | 'dataset'
-		> = toInstanceState<TContextContract<TTreeItem>>(itemBinding)
+		const itemBinding = useCollectionAdapter(itemAdapter, props, emit)
+		const ownerBinding = useAdapter(adapter, props, emit)
 
-		return extendBinding(joinBindings(itemBinding, collectionBinding), {
-			itemProps: props,
-			itemState,
+		return extendBinding(joinBindings(ownerBinding, itemBinding), {
 			selectionIconTag: roleIcon('check'),
-			selectionIndicatorAttribute: `data-${LIST_INDICATOR_ATTRIBUTE}`,
+			...useSplitAttrs(),
 		})
 	},
 }
