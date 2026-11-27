@@ -1273,7 +1273,7 @@ function byName(a: TPropControl, b: TPropControl): number {
 	return a.name.localeCompare(b.name)
 }
 
-const BURG_VARIANT_CONTROLS = new Set([
+const BURG_VARIANT_COMPONENTS = new Set([
 	'button',
 	'toggle-button',
 	'toggle-group',
@@ -1290,9 +1290,16 @@ const BURG_VARIANT_CONTROLS = new Set([
 	'slider',
 	'rating',
 	'file-upload',
+	'avatar',
+	'badge',
+	'progress-linear',
+	'progress-spinner',
+	'skeleton',
+	'stepper',
+	'tags',
 ])
 
-const BURG_CONTROL_VARIANTS = [
+const BURG_STANDARD_VARIANTS = [
 	'normal',
 	'negative',
 	'positive',
@@ -1301,12 +1308,12 @@ const BURG_CONTROL_VARIANTS = [
 function burgControls(componentId: string, controls: TPropControl[]): TPropControl[] {
 	if (componentId === 'alert') return controls
 
-	if (!BURG_VARIANT_CONTROLS.has(componentId)) {
+	if (!BURG_VARIANT_COMPONENTS.has(componentId)) {
 		return controls.filter(({ name }) => name !== 'variant')
 	}
 
 	return controls.map((control) =>
-		control.name === 'variant' ? { ...control, options: BURG_CONTROL_VARIANTS } : control,
+		control.name === 'variant' ? { ...control, options: BURG_STANDARD_VARIANTS } : control,
 	)
 }
 

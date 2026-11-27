@@ -24,9 +24,10 @@ Toasts use the message type to choose the matching color and icon. Omit
 
 Button, ToggleButton, ToggleGroup, Input, NumberInput, Textarea, Select,
 DateInput, DatePicker, Calendar, CheckBox, Switch, RadioGroup, Slider, Rating,
-and FileUpload support `normal`, `negative`, and `positive`. Other Burg
-components use their default palette. The shared Soxa UI prop types list
-theme variant names across components.
+FileUpload, Avatar, Badge, ProgressLinear, ProgressSpinner, Skeleton, Stepper,
+and Tags support `normal`, `negative`, and `positive`. Other Burg components
+use their default palette. The shared Soxa UI prop types list theme variant
+names across components.
 
 ### Button press effect
 

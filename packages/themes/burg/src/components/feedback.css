@@ -12,7 +12,12 @@
 		--so-burg-signal: var(--so-burg-progress-accent);
 	}
 
-	:where(.so-alert--variant-positive, .so-toasts-item--type-success) {
+	:where(
+		.so-alert--variant-positive,
+		.so-badge--variant-positive,
+		.so-skeleton--variant-positive,
+		.so-toasts-item--type-success
+	) {
 		--so-burg-signal: var(--so-burg-positive);
 	}
 
@@ -20,7 +25,12 @@
 		--so-burg-signal: var(--so-burg-caution);
 	}
 
-	:where(.so-alert--variant-negative, .so-toasts-item--type-error) {
+	:where(
+		.so-alert--variant-negative,
+		.so-badge--variant-negative,
+		.so-skeleton--variant-negative,
+		.so-toasts-item--type-error
+	) {
 		--so-burg-signal: var(--so-burg-danger);
 	}
 

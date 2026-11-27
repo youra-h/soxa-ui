@@ -124,19 +124,21 @@ describe('Stepper indicators', () => {
 			expect(widths).toEqual([...new Set(widths)].sort((a, b) => a - b))
 			expect(fontSizes).toEqual([...new Set(fontSizes)].sort((a, b) => a - b))
 
+			const variants = scheme.startsWith('burg')
+				? (['normal', 'negative', 'positive'] as const)
+				: COMPONENT_VARIANTS
 			const colors = new Set<string>()
-			for (const selected of COMPONENT_VARIANTS) {
+			for (const selected of variants) {
 				variant.value = selected
 				await nextTick()
 
 				const color = getComputedStyle(active).backgroundColor
 				colors.add(color)
-				if (scheme.startsWith('burg')) expect(color).toBe(fills[1])
-				else expect(color).not.toBe(fills[0])
+				expect(color).not.toBe(fills[0])
 				expect(getComputedStyle(completed).backgroundColor).toBe(fills[0])
 				expect(getComputedStyle(pending).backgroundColor).toBe(fills[2])
 			}
-			expect(colors.size).toBe(scheme.startsWith('burg') ? 1 : COMPONENT_VARIANTS.length)
+			expect(colors.size).toBe(variants.length)
 
 			variant.value = undefined
 			await nextTick()

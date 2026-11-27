@@ -6,6 +6,23 @@
 		font-weight: 550;
 	}
 
+	:where(.so-avatar--variant-negative) {
+		--so-burg-avatar-tone: var(--so-burg-danger);
+	}
+
+	:where(.so-avatar--variant-positive) {
+		--so-burg-avatar-tone: var(--so-burg-positive);
+	}
+
+	:where(.so-avatar--variant-negative, .so-avatar--variant-positive) {
+		background-color: color-mix(
+			in oklab,
+			var(--so-burg-surface),
+			var(--so-burg-avatar-tone) 12%
+		);
+		color: var(--so-burg-avatar-tone);
+	}
+
 	:where(.so-avatar--shape-rounded) {
 		border-radius: var(--so-avatar-radius, var(--so-radius));
 	}
