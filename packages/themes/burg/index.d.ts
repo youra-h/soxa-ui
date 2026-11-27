@@ -4,6 +4,38 @@ declare module '@soxa-ui/core' {
 	interface IComponentVariants {
 		normal: true
 		negative: true
+		accent: true
+		positive: true
+		caution: true
+	}
+
+	interface IAlertViews {
+		soft: true
+		outlined: true
+		filled: true
+	}
+
+	interface IToastsItemViews {
+		soft: true
+		outlined: true
+		filled: true
+	}
+
+	interface IBadgeViews {
+		filled: true
+		outlined: true
+	}
+
+	interface ISkeletonShapes {
+		rounded: true
+		circle: true
+		rect: true
+	}
+
+	interface ISkeletonAnimations {
+		pulse: true
+		wave: true
+		none: true
 	}
 
 	interface IAvatarShapes {

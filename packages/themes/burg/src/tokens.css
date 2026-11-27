@@ -9,6 +9,10 @@
 
 	--so-backdrop-blur: 3px;
 	--so-tooltip-line: 1rem;
+	--so-toasts-width: 20rem;
+	--so-toasts-line: 1.125rem;
+	--so-burg-positive: light-dark(#2c6846, #8dcca6);
+	--so-burg-caution: light-dark(#805419, #e1ba76);
 
 	--so-button-height-normal: 1.875rem;
 	--so-button-height-sm: calc(var(--so-button-height-normal) - 0.125rem);
