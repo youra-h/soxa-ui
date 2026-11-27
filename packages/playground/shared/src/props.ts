@@ -1273,6 +1273,50 @@ function byName(a: TPropControl, b: TPropControl): number {
 	return a.name.localeCompare(b.name)
 }
 
+const BURG_VARIANT_COMPONENTS = new Set([
+	'button',
+	'toggle-button',
+	'toggle-group',
+	'input',
+	'number-input',
+	'textarea',
+	'select',
+	'date-input',
+	'date-picker',
+	'calendar',
+	'check-box',
+	'switch',
+	'radio-group',
+	'slider',
+	'rating',
+	'file-upload',
+	'avatar',
+	'badge',
+	'progress-linear',
+	'progress-spinner',
+	'skeleton',
+	'stepper',
+	'tags',
+])
+
+const BURG_STANDARD_VARIANTS = [
+	'normal',
+	'negative',
+	'positive',
+] as const satisfies readonly (typeof COMPONENT_VARIANTS)[number][]
+
+function burgControls(componentId: string, controls: TPropControl[]): TPropControl[] {
+	if (componentId === 'alert') return controls
+
+	if (!BURG_VARIANT_COMPONENTS.has(componentId)) {
+		return controls.filter(({ name }) => name !== 'variant')
+	}
+
+	return controls.map((control) =>
+		control.name === 'variant' ? { ...control, options: BURG_STANDARD_VARIANTS } : control,
+	)
+}
+
 /**
  * Строки страницы компонента по группам владельцев.
  *
@@ -1285,16 +1329,18 @@ function byName(a: TPropControl, b: TPropControl): number {
  * его записать. Плагины есть только у компонентного дескриптора: фасад
  * коллекции работает с bundle компонента.
  */
-export function propControls(entry: TComponentEntry): TPropControlGroups {
+export function propControls(entry: TComponentEntry, theme?: string): TPropControlGroups {
 	const descriptor = entry.descriptor()
 	const collectionProps = entry.collectionDescriptor?.().props ?? []
 	const editable = (prop: TPropSpec) => isEditable(entry.id, prop)
+	const componentControls = descriptor.props
+		.filter(editable)
+		.map((prop) => propControl(entry.id, prop))
+		.sort(byName)
 
 	return {
-		componentControls: descriptor.props
-			.filter(editable)
-			.map((prop) => propControl(entry.id, prop))
-			.sort(byName),
+		componentControls:
+			theme === 'burg' ? burgControls(entry.id, componentControls) : componentControls,
 		collectionControls: collectionProps
 			.filter(editable)
 			.map((prop) => propControl(entry.id, prop, { scope: 'collection' }))

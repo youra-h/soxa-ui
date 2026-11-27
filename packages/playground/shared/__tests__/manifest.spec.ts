@@ -199,3 +199,18 @@ describe('реестр', () => {
 		}
 	})
 })
+
+it('shows the supported variants for the selected theme', () => {
+	const variants = (id: string, theme: string) => {
+		const entry = COMPONENTS.find((entry) => entry.id === id)
+		if (!entry) throw new Error('Unknown component: ' + id)
+		return propControls(entry, theme).componentControls.find(({ name }) => name === 'variant')
+			?.options
+	}
+
+	expect(variants('alert', 'burg')).toEqual(variants('alert', 'oren'))
+	expect(variants('button', 'burg')).toEqual(['normal', 'negative', 'positive'])
+	expect(variants('date-picker', 'burg')).toEqual(['normal', 'negative', 'positive'])
+	expect(variants('tabs', 'burg')).toBeUndefined()
+	expect(variants('tabs', 'oren')).toHaveLength(5)
+})

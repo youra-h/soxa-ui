@@ -8,12 +8,7 @@
 		);
 	}
 
-	:where(
-		.so-alert--variant-accent,
-		.so-badge--variant-accent,
-		.so-skeleton--variant-accent,
-		.so-toasts-item--type-info
-	) {
+	:where(.so-alert--variant-accent, .so-toasts-item--type-info) {
 		--so-burg-signal: var(--so-burg-progress-accent);
 	}
 
@@ -26,12 +21,7 @@
 		--so-burg-signal: var(--so-burg-positive);
 	}
 
-	:where(
-		.so-alert--variant-caution,
-		.so-badge--variant-caution,
-		.so-skeleton--variant-caution,
-		.so-toasts-item--type-warning
-	) {
+	:where(.so-alert--variant-caution, .so-toasts-item--type-warning) {
 		--so-burg-signal: var(--so-burg-caution);
 	}
 
@@ -55,7 +45,7 @@
 	}
 
 	:where(.so-alert__action, .so-toasts-item__content)
-		> :where(.so-button:not(.so-button--variant-negative)) {
+		> :where(.so-button:not(.so-button--variant-negative, .so-button--variant-positive)) {
 		--so-burg-button-tone: var(--so-burg-message-on-color, var(--so-burg-text));
 	}
 
@@ -64,7 +54,8 @@
 			.so-button:not(
 				.so-button--view-plain,
 				.so-button--view-outlined,
-				.so-button--variant-negative
+				.so-button--variant-negative,
+				.so-button--variant-positive
 			)
 		) {
 		--so-burg-button-ink: var(--so-burg-message-action-ink, var(--so-burg-surface));

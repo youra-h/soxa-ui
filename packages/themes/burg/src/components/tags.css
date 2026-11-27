@@ -1,19 +1,36 @@
 :where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
-	:where(.so-tags--variant-negative .so-tags-item, .so-tags-item--variant-negative) {
-		--so-burg-tag-ink: var(--so-burg-danger);
+	:where(.so-tags) {
+		--so-burg-tags-tone: initial;
 	}
 
-	:where(.so-tags-item--variant-normal) {
-		--so-burg-tag-ink: var(--so-burg-text);
+	:where(.so-tags--variant-negative) {
+		--so-burg-tags-tone: var(--so-burg-danger);
+	}
+
+	:where(.so-tags--variant-positive) {
+		--so-burg-tags-tone: var(--so-burg-positive);
 	}
 
 	:where(.so-tags-item) {
-		--so-burg-tag-fill: var(--so-burg-row-highlight);
+		--so-burg-tag-ink: var(--so-burg-tags-tone);
+		--so-burg-tag-fill: color-mix(in oklab, var(--so-burg-surface), var(--so-burg-tag-ink) 12%);
 		--so-burg-tag-border: transparent;
 		border-radius: calc(var(--so-radius) * 0.75);
 		border: 1px solid var(--so-burg-tag-border);
-		background-color: var(--so-burg-tag-fill);
+		background-color: var(--so-burg-tag-fill, var(--so-burg-row-highlight));
 		color: var(--so-burg-tag-ink, var(--so-burg-text));
+	}
+
+	:where(.so-tags-item--variant-normal) {
+		--so-burg-tag-ink: initial;
+	}
+
+	:where(.so-tags-item--variant-negative) {
+		--so-burg-tag-ink: var(--so-burg-danger);
+	}
+
+	:where(.so-tags-item--variant-positive) {
+		--so-burg-tag-ink: var(--so-burg-positive);
 	}
 
 	:where(:is(.so-tags--view-plain, .so-tags--view-outlined) .so-tags-item) {
@@ -21,7 +38,7 @@
 	}
 
 	:where(.so-tags--view-outlined .so-tags-item) {
-		--so-burg-tag-border: var(--so-burg-border);
+		--so-burg-tag-border: var(--so-burg-tag-ink, var(--so-burg-border));
 	}
 
 	@media (hover: hover) {
@@ -30,7 +47,11 @@
 					> .so-button:not(.so-tags-item__close):hover
 				)
 		) {
-			background-color: color-mix(in oklab, var(--so-burg-tag-fill), currentColor 10%);
+			background-color: color-mix(
+				in oklab,
+				var(--so-burg-tag-fill, var(--so-burg-row-highlight)),
+				currentColor 10%
+			);
 		}
 	}
 

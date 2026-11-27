@@ -8,6 +8,7 @@ import {
 } from '@soxa-ui/playground-shared'
 import { findAvailable } from '../catalog'
 import { frameworkLabel, hostOf } from '../hosts'
+import { useTheme } from '../composables/useTheme'
 import PropRow from '../components/PropRow.vue'
 import GroupsDemo from '../components/GroupsDemo.vue'
 import ComponentScene from '../components/ComponentScene.vue'
@@ -33,7 +34,8 @@ const elsewhere = computed(() => (entry.value ? undefined : findComponent(props.
  * Какие пропы получают строку и в каком порядке, решает `propControls`: по тем
  * же группам строки считают проверка манифеста и дымовой тест.
  */
-const groups = computed(() => (entry.value ? propControls(entry.value) : null))
+const { theme } = useTheme()
+const groups = computed(() => (entry.value ? propControls(entry.value, theme.value) : null))
 
 /**
  * Строк нет ни в одной группе: править у компонента нечего, а показать есть

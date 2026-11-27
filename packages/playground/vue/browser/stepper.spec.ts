@@ -72,7 +72,7 @@ describe('Stepper indicators', () => {
 	})
 
 	it.each(['oren', 'oren-dark', 'burg', 'burg-dark'])(
-		'%s scales circular markers and applies variants to the current step',
+		'%s scales circular markers and uses the theme palette for the current step',
 		async (scheme) => {
 			applyScheme(scheme)
 			const size = ref<IStepperProps['size']>('normal')
@@ -124,8 +124,11 @@ describe('Stepper indicators', () => {
 			expect(widths).toEqual([...new Set(widths)].sort((a, b) => a - b))
 			expect(fontSizes).toEqual([...new Set(fontSizes)].sort((a, b) => a - b))
 
+			const variants = scheme.startsWith('burg')
+				? (['normal', 'negative', 'positive'] as const)
+				: COMPONENT_VARIANTS
 			const colors = new Set<string>()
-			for (const selected of COMPONENT_VARIANTS) {
+			for (const selected of variants) {
 				variant.value = selected
 				await nextTick()
 
@@ -135,7 +138,7 @@ describe('Stepper indicators', () => {
 				expect(getComputedStyle(completed).backgroundColor).toBe(fills[0])
 				expect(getComputedStyle(pending).backgroundColor).toBe(fills[2])
 			}
-			expect(colors.size).toBe(COMPONENT_VARIANTS.length)
+			expect(colors.size).toBe(variants.length)
 
 			variant.value = undefined
 			await nextTick()

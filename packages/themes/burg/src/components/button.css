@@ -1,6 +1,7 @@
 :where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
 	:where(.so-button) {
-		--so-burg-button-tone: var(--so-burg-text);
+		--so-burg-button-variant: initial;
+		--so-burg-button-tone: var(--so-burg-button-variant, var(--so-burg-text));
 		--so-burg-button-fill: var(--so-burg-button-tone);
 		--so-burg-button-ink: var(--so-burg-surface);
 		--so-burg-button-background: var(--so-burg-button-fill);
@@ -32,7 +33,11 @@
 	}
 
 	:where(.so-button--variant-negative) {
-		--so-burg-button-tone: var(--so-burg-danger);
+		--so-burg-button-variant: var(--so-burg-danger);
+	}
+
+	:where(.so-button--variant-positive) {
+		--so-burg-button-variant: var(--so-burg-positive);
 	}
 
 	:where(.so-button--view-outlined, .so-button--view-plain) {
@@ -41,7 +46,7 @@
 	}
 
 	:where(.so-button--view-outlined) {
-		--so-burg-button-border: var(--so-burg-border);
+		--so-burg-button-border: var(--so-burg-button-variant, var(--so-burg-border));
 	}
 
 	@media (hover: hover) {

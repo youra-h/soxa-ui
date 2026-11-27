@@ -8,8 +8,16 @@
 		color: inherit;
 	}
 
+	:where(.so-progress-linear--variant-normal, .so-progress-spinner--variant-normal) {
+		color: var(--so-burg-text);
+	}
+
 	:where(.so-progress-linear--variant-negative, .so-progress-spinner--variant-negative) {
 		color: var(--so-burg-danger);
+	}
+
+	:where(.so-progress-linear--variant-positive, .so-progress-spinner--variant-positive) {
+		color: var(--so-burg-positive);
 	}
 
 	:where(.so-progress-linear) {

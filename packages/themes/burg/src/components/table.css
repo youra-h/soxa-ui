@@ -6,50 +6,20 @@
 		--so-table-font-size-lg: var(--so-button-font-size-lg);
 		--so-table-font-size-xl: var(--so-button-font-size-xl);
 		--so-table-font-size-2xl: var(--so-button-font-size-2xl);
-		--so-burg-table-tone: var(--so-burg-text);
 		--so-burg-table-divider: color-mix(
 			in oklab,
 			var(--so-place-surface),
 			var(--so-burg-border) 60%
 		);
-		--so-burg-table-hover: color-mix(in oklab, var(--so-burg-table-tone) 3%, transparent);
+		--so-burg-table-hover: color-mix(in oklab, var(--so-burg-text) 3%, transparent);
 		--so-burg-table-selected: var(--so-burg-row-highlight);
 		--so-burg-table-active: color-mix(
 			in oklab,
-			var(--so-burg-table-tone) 10%,
+			var(--so-burg-text) 10%,
 			var(--so-place-surface)
 		);
 		color: var(--so-burg-text);
 		font-variant-numeric: tabular-nums;
-	}
-
-	:where(.so-table--variant-accent) {
-		--so-burg-table-tone: var(--so-burg-progress-accent);
-	}
-
-	:where(.so-table--variant-positive) {
-		--so-burg-table-tone: var(--so-burg-positive);
-	}
-
-	:where(.so-table--variant-negative) {
-		--so-burg-table-tone: var(--so-burg-danger);
-	}
-
-	:where(.so-table--variant-caution) {
-		--so-burg-table-tone: var(--so-burg-caution);
-	}
-
-	:where(
-		.so-table--variant-accent,
-		.so-table--variant-positive,
-		.so-table--variant-negative,
-		.so-table--variant-caution
-	) {
-		--so-burg-table-selected: color-mix(
-			in oklab,
-			var(--so-burg-table-tone) 7%,
-			var(--so-place-surface)
-		);
 	}
 
 	:where(.so-table__head-row) {

@@ -13,10 +13,6 @@
 		--so-burg-rating-fill: var(--so-burg-text);
 	}
 
-	:where(.so-rating--variant-accent) {
-		--so-burg-rating-fill: var(--so-burg-progress-accent);
-	}
-
 	:where(.so-rating--variant-positive) {
 		--so-burg-rating-fill: var(--so-burg-positive);
 	}

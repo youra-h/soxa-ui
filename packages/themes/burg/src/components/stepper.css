@@ -26,7 +26,7 @@
 	}
 
 	:where(.so-stepper-item--variant-normal) {
-		--so-burg-stepper-tone: var(--so-burg-focus-edge);
+		--so-burg-stepper-tone: var(--so-burg-muted);
 	}
 
 	:where(.so-stepper-item--variant-negative) {
@@ -35,10 +35,6 @@
 
 	:where(.so-stepper-item--variant-positive) {
 		--so-burg-stepper-tone: var(--so-burg-positive);
-	}
-
-	:where(.so-stepper-item--variant-caution) {
-		--so-burg-stepper-tone: var(--so-burg-caution);
 	}
 
 	:where(.so-stepper__list) {

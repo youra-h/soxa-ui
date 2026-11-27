@@ -19,7 +19,7 @@
 	}
 
 	:where(.so-toggle-button:not(.so-button--view-filled, .so-button--view-plain)) {
-		--so-burg-button-border: var(--so-burg-border);
+		--so-burg-button-border: var(--so-burg-button-variant, var(--so-burg-border));
 	}
 
 	:where(.so-toggle-button:not(.so-button--view-filled)[data-selected='true']) {
