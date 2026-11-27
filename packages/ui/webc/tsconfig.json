@@ -21,6 +21,7 @@
       "@soxa-ui/webc/drawer": ["./src/components/drawer/index.ts"],
       "@soxa-ui/webc/field": ["./src/components/field/index.ts"],
       "@soxa-ui/webc/frame": ["./src/components/frame/index.ts"],
+      "@soxa-ui/webc/guide": ["./src/components/guide/index.ts"],
       "@soxa-ui/webc/icon": ["./src/components/icon/index.ts"],
       "@soxa-ui/webc/input": ["./src/components/input/index.ts"],
       "@soxa-ui/webc/label": ["./src/components/label/index.ts"],

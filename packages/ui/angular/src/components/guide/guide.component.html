@@ -1,0 +1,50 @@
+@if (placed()) {
+	@let view = state();
+	@if (view['visible'] && (view['modal'] || view['position_spotlight'])) {
+		<div
+			#companion
+			class="so-guide__decoration"
+			[style]="view['position_layer']"
+			aria-hidden="true"
+		>
+			@if (view['modal']) {
+				<div class="so-guide__backdrop"></div>
+			}
+			@if (view['position_spotlight']; as spotlight) {
+				<div class="so-guide__spotlight" [style]="spotlight"></div>
+			}
+		</div>
+	}
+	@if (view['step']; as step) {
+		@let labels = view['names_labels'];
+		<div class="so-guide__content" aria-live="polite">
+			<p class="so-guide__progress">{{ labels?.progress }}</p>
+			<h2 class="so-guide__title">{{ step.title }}</h2>
+			@if (step.description) {
+				<p class="so-guide__description">{{ step.description }}</p>
+			}
+		</div>
+		<div class="so-guide__actions">
+			<button
+				so-button
+				type="button"
+				embedded="guide.previous"
+				[disabled]="(view['stepNumber'] ?? 0) <= 1"
+				(click)="instance()?.previous()"
+			>
+				{{ labels?.previous }}
+			</button>
+			<button so-button type="button" embedded="guide.next" (click)="instance()?.next()">
+				{{ labels?.forward }}
+			</button>
+			<button
+				so-button
+				type="button"
+				embedded="guide.close"
+				(click)="instance()?.requestClose('button')"
+			>
+				{{ labels?.close }}
+			</button>
+		</div>
+	}
+}

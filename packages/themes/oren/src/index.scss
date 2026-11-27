@@ -101,6 +101,10 @@
 	@include meta.load-css('components/pagination/pagination');
 }
 
+@layer components.so.guide {
+	@include meta.load-css('components/guide/guide');
+}
+
 @layer components.so.popover {
 	@include meta.load-css('components/popover/popover');
 }

@@ -146,6 +146,12 @@
       "scope": "so-frame"
     },
     {
+      "name": "so-guide",
+      "sources": ["packages/core/src/components/custom/guide/guide.class.ts"],
+      "description": "The guide panel and its overlay layer.",
+      "scope": "Guide"
+    },
+    {
       "name": "so-icon",
       "sources": ["packages/core/src/components/custom/icon/icon.class.ts"],
       "description": "Root of icon. Inherited component classes use the concrete component's base name.",
@@ -1866,6 +1872,110 @@
       ],
       "description": "FileUpload symbol part.",
       "scope": "so-file-upload"
+    },
+    {
+      "name": "so-guide__actions",
+      "sources": [
+        "packages/ui/angular/src/components/guide/guide.component.html",
+        "packages/ui/react/src/components/guide/Guide.tsx",
+        "packages/ui/solid/src/components/guide/Guide.tsx",
+        "packages/ui/svelte/src/components/guide/Guide.svelte",
+        "packages/ui/vue/src/components/guide/Guide.vue",
+        "packages/ui/webc/src/components/guide/guide.template.ts"
+      ],
+      "description": "Navigation and dismissal controls.",
+      "scope": "Guide"
+    },
+    {
+      "name": "so-guide__backdrop",
+      "sources": [
+        "packages/ui/angular/src/components/guide/guide.component.html",
+        "packages/ui/react/src/components/guide/Guide.tsx",
+        "packages/ui/solid/src/components/guide/Guide.tsx",
+        "packages/ui/svelte/src/components/guide/Guide.svelte",
+        "packages/ui/vue/src/components/guide/Guide.vue",
+        "packages/ui/webc/src/components/guide/guide.template.ts"
+      ],
+      "description": "Viewport backdrop shown by a modal guide step.",
+      "scope": "Guide"
+    },
+    {
+      "name": "so-guide__content",
+      "sources": [
+        "packages/ui/angular/src/components/guide/guide.component.html",
+        "packages/ui/react/src/components/guide/Guide.tsx",
+        "packages/ui/solid/src/components/guide/Guide.tsx",
+        "packages/ui/svelte/src/components/guide/Guide.svelte",
+        "packages/ui/vue/src/components/guide/Guide.vue",
+        "packages/ui/webc/src/components/guide/guide.template.ts"
+      ],
+      "description": "Current step content, announced on change.",
+      "scope": "Guide"
+    },
+    {
+      "name": "so-guide__decoration",
+      "sources": [
+        "packages/ui/angular/src/components/guide/guide.component.html",
+        "packages/ui/react/src/components/guide/Guide.tsx",
+        "packages/ui/solid/src/components/guide/Guide.tsx",
+        "packages/ui/svelte/src/components/guide/Guide.svelte",
+        "packages/ui/vue/src/components/guide/Guide.vue",
+        "packages/ui/webc/src/components/guide/guide.template.ts"
+      ],
+      "description": "Companion layer containing the optional backdrop and spotlight.",
+      "scope": "Guide"
+    },
+    {
+      "name": "so-guide__description",
+      "sources": [
+        "packages/ui/angular/src/components/guide/guide.component.html",
+        "packages/ui/react/src/components/guide/Guide.tsx",
+        "packages/ui/solid/src/components/guide/Guide.tsx",
+        "packages/ui/svelte/src/components/guide/Guide.svelte",
+        "packages/ui/vue/src/components/guide/Guide.vue",
+        "packages/ui/webc/src/components/guide/guide.template.ts"
+      ],
+      "description": "Optional text below the step heading.",
+      "scope": "Guide"
+    },
+    {
+      "name": "so-guide__progress",
+      "sources": [
+        "packages/ui/angular/src/components/guide/guide.component.html",
+        "packages/ui/react/src/components/guide/Guide.tsx",
+        "packages/ui/solid/src/components/guide/Guide.tsx",
+        "packages/ui/svelte/src/components/guide/Guide.svelte",
+        "packages/ui/vue/src/components/guide/Guide.vue",
+        "packages/ui/webc/src/components/guide/guide.template.ts"
+      ],
+      "description": "Localized step number and total.",
+      "scope": "Guide"
+    },
+    {
+      "name": "so-guide__spotlight",
+      "sources": [
+        "packages/ui/angular/src/components/guide/guide.component.html",
+        "packages/ui/react/src/components/guide/Guide.tsx",
+        "packages/ui/solid/src/components/guide/Guide.tsx",
+        "packages/ui/svelte/src/components/guide/Guide.svelte",
+        "packages/ui/vue/src/components/guide/Guide.vue",
+        "packages/ui/webc/src/components/guide/guide.template.ts"
+      ],
+      "description": "Highlight over the active DOM anchor or viewport point.",
+      "scope": "Guide"
+    },
+    {
+      "name": "so-guide__title",
+      "sources": [
+        "packages/ui/angular/src/components/guide/guide.component.html",
+        "packages/ui/react/src/components/guide/Guide.tsx",
+        "packages/ui/solid/src/components/guide/Guide.tsx",
+        "packages/ui/svelte/src/components/guide/Guide.svelte",
+        "packages/ui/vue/src/components/guide/Guide.vue",
+        "packages/ui/webc/src/components/guide/guide.template.ts"
+      ],
+      "description": "Current step heading.",
+      "scope": "Guide"
     },
     {
       "name": "so-input__clear",

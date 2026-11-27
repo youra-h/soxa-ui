@@ -4,6 +4,12 @@ import { freezeLocale } from '../locale'
 export const esES = freezeLocale({
 	tag: 'es-ES',
 	translations: {
+		guide: {
+			previous: 'Atrás',
+			next: 'Siguiente',
+			done: 'Listo',
+			progress: '{step} de {count}',
+		},
 		fileUpload: {
 			choose: 'Elegir archivos',
 			drop: 'Arrastra tus archivos aquí o',

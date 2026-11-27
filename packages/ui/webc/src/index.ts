@@ -184,3 +184,4 @@ export type {
 	TSplitterPanelElementProps,
 	TSplitterHandleElementProps,
 } from './components/splitter'
+export { TGuideElement, type TGuideElementProps } from './components/guide'

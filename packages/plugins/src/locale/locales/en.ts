@@ -9,6 +9,7 @@ import { FILE_UPLOAD_NAMES, freezeLocale } from '../locale'
 export const enUS = freezeLocale({
 	tag: 'en-US',
 	translations: {
+		guide: { previous: 'Back', next: 'Next', done: 'Done', progress: '{step} of {count}' },
 		fileUpload: FILE_UPLOAD_NAMES,
 		alertDialog: { confirm: 'Confirm', cancel: 'Cancel' },
 		alert: { close: 'Close' },

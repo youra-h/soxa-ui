@@ -1,0 +1,41 @@
+@use '../../mixins/place';
+
+.so-guide {
+	@include place.panel-surface(var(--so-component-surface));
+	border-radius: var(--so-radius);
+	padding: 1rem;
+	@apply text-so-component shadow-md ring-1 ring-so-neutral-300;
+}
+
+.so-guide__backdrop {
+	background: rgb(0 0 0 / 0.45);
+}
+
+.so-guide__spotlight {
+	border-radius: var(--so-radius);
+	outline: 2px solid;
+	@apply outline-so-component;
+	outline-offset: 3px;
+
+	@media (forced-colors: active) {
+		outline-color: Highlight;
+	}
+}
+
+.so-guide__progress,
+.so-guide__description {
+	margin: 0;
+}
+
+.so-guide__progress {
+	font-size: 0.875em;
+}
+
+.so-guide__title {
+	margin: 0.25rem 0;
+	font-weight: 600;
+}
+
+.so-guide__actions {
+	margin-block-start: 1rem;
+}

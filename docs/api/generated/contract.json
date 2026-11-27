@@ -553,6 +553,26 @@
       }
     },
     {
+      "id": "guide",
+      "name": "Guide",
+      "contract": "guide",
+      "sources": [
+        {
+          "role": "descriptor",
+          "descriptor": "GuideDescriptor",
+          "source": "packages/setup/content/descriptors/components/guide.descriptor.ts"
+        }
+      ],
+      "frameworks": {
+        "vue": { "exportName": "Guide" },
+        "react": { "exportName": "Guide" },
+        "angular": { "exportName": "TGuideComponent", "selector": "div[so-guide], [so-guide]" },
+        "solid": { "exportName": "Guide" },
+        "svelte": { "exportName": "Guide" },
+        "webc": { "exportName": "TGuideElement", "selector": "div[is=\"so-guide\"]" }
+      }
+    },
+    {
       "id": "icon",
       "name": "Icon",
       "contract": "icon",
@@ -16315,7 +16335,7 @@
         {
           "name": "ctrl",
           "canonicalName": "ctrl",
-          "type": "import(\"@soxa-ui/core\").TFrame | undefined",
+          "type": "import(\"@soxa-ui/core\").TFrame<import(\"@soxa-ui/core\").IFrameProps, import(\"@soxa-ui/core\").TFrameEvents> | undefined",
           "declaredType": "TInstance",
           "required": false,
           "description": "Готовый инстанс ядра вместо собранного по пропсам. Только сам объект:\nреактивная обёртка фреймворка ему не нужна — ядро шлёт события само.",
@@ -16469,20 +16489,20 @@
         {
           "name": "anchor_placement",
           "canonicalName": "anchor:placement",
-          "type": "import(\"@soxa-ui/plugins\").TFramePlacement | undefined",
+          "type": "import(\"@soxa-ui/core\").TFramePlacement | undefined",
           "values": [
             "start",
             "end",
             "top",
             "bottom",
-            "bottom-start",
-            "bottom-end",
-            "top-start",
-            "top-end",
+            "start-start",
+            "start-end",
             "end-start",
             "end-end",
-            "start-start",
-            "start-end"
+            "top-start",
+            "top-end",
+            "bottom-start",
+            "bottom-end"
           ],
           "required": false,
           "hasDefault": true,
@@ -16637,7 +16657,7 @@
         },
         {
           "name": "anchor:change:placement",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/plugins\").TFramePlacement>) => void"
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TFramePlacement>) => void"
         },
         {
           "name": "anchor:change:matchWidth",
@@ -17072,6 +17092,455 @@
           },
           "models": {},
           "slots": { "default": { "name": "default", "syntax": "(unnamed slot)" } }
+        }
+      }
+    },
+    "guide": {
+      "source": "packages/setup/content/descriptors/components/guide.descriptor.ts",
+      "props": [
+        {
+          "name": "ctrl",
+          "canonicalName": "ctrl",
+          "type": "import(\"@soxa-ui/core\").TGuide | undefined",
+          "declaredType": "TInstance",
+          "required": false,
+          "description": "Готовый инстанс ядра вместо собранного по пропсам. Только сам объект:\nреактивная обёртка фреймворка ему не нужна — ядро шлёт события само.",
+          "hasDefault": false
+        },
+        {
+          "name": "embedded",
+          "canonicalName": "embedded",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "description": "Имя места, если компонент — деталь разметки другого компонента soxa\n(`tags.close`). Ставит разметка библиотеки, а не потребитель: по нему\n`usePlugins` со `scope: 'own'` пропускает вложенный компонент.",
+          "hasDefault": false
+        },
+        {
+          "name": "pluginProps",
+          "canonicalName": "pluginProps",
+          "type": "import(\"@soxa-ui/setup\").TExternalPluginProps | undefined",
+          "declaredType": "TExternalPluginProps",
+          "required": false,
+          "description": "Значения пропсов плагинов, поставленных снаружи (`usePlugins`,\n`bundle.use`), по имени пропа: `{ timer_ms: 500 }`. Типы ключей\nприложение дописывает в `IExternalPluginProps`.",
+          "hasDefault": false
+        },
+        {
+          "name": "rendered",
+          "canonicalName": "rendered",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Отрисован ли компонент (аналог v-if)",
+          "hasDefault": true,
+          "default": "true"
+        },
+        {
+          "name": "visible",
+          "canonicalName": "visible",
+          "type": "boolean | undefined",
+          "declaredType": "boolean",
+          "required": false,
+          "description": "Виден ли компонент (логическая видимость)",
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "tag",
+          "canonicalName": "tag",
+          "type": "string | object | undefined",
+          "declaredType": "string | object",
+          "required": false,
+          "hasDefault": true,
+          "default": "\"div\""
+        },
+        {
+          "name": "direction",
+          "canonicalName": "direction",
+          "type": "import(\"@soxa-ui/core\").TDirection | undefined",
+          "declaredType": "TDirection",
+          "values": ["ltr", "rtl", "inherit"],
+          "required": false,
+          "description": "Направление письма; по умолчанию `'inherit'` — наследуется от предка",
+          "hasDefault": true,
+          "default": "\"inherit\""
+        },
+        {
+          "name": "target",
+          "canonicalName": "target",
+          "type": "string | undefined",
+          "declaredType": "string",
+          "required": false,
+          "description": "CSS-селектор для Teleport (по умолчанию body)",
+          "hasDefault": true,
+          "default": "\"body\""
+        },
+        {
+          "name": "steps",
+          "canonicalName": "steps",
+          "type": "readonly import(\"@soxa-ui/core\").IGuideStep[] | undefined",
+          "declaredType": "readonly IGuideStep[]",
+          "required": false,
+          "hasDefault": true,
+          "default": "undefined"
+        },
+        {
+          "name": "hideOutside_enabled",
+          "canonicalName": "hideOutside:enabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "false"
+        },
+        {
+          "name": "scrollLock_enabled",
+          "canonicalName": "scrollLock:enabled",
+          "type": "boolean | undefined",
+          "required": false,
+          "hasDefault": true,
+          "default": "false"
+        }
+      ],
+      "events": [
+        {
+          "name": "bundle:create",
+          "type": "(bundle: unknown) => void",
+          "description": "Плагины компонента созданы при монтировании; аргумент — их bundle."
+        },
+        {
+          "name": "plugin:event",
+          "type": "(event: import(\"@soxa-ui/core\").TPluginEvent) => void",
+          "description": "Событие внешнего плагина: полное имя (`timer:tick`) и аргументы."
+        },
+        { "name": "show", "type": "() => void", "description": "show" },
+        { "name": "hide", "type": "() => void", "description": "hide" },
+        {
+          "name": "show:before",
+          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
+          "description": "show:before — вызов e.preventDefault() отменяет показ"
+        },
+        {
+          "name": "hide:before",
+          "type": "(e: import(\"@soxa-ui/core\").TActionEvent) => void",
+          "description": "hide:before — вызов e.preventDefault() отменяет скрытие"
+        },
+        {
+          "name": "ready",
+          "type": "(value: boolean) => void",
+          "description": "Component availability changed: true when the instance has an announced\nroot DOM element, false when that root is removed or replaced.\nDoes not wait for other plugins' DOM handlers or asynchronous work."
+        },
+        {
+          "name": "change:rendered",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
+          "description": "change:rendered"
+        },
+        {
+          "name": "change:visible",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void",
+          "description": "change:visible"
+        },
+        {
+          "name": "change:tag",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string | object>) => void",
+          "description": "change:tag"
+        },
+        {
+          "name": "change:direction",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TDirection>) => void",
+          "description": "change:direction"
+        },
+        {
+          "name": "change:zIndex",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<number>) => void",
+          "description": "change:zIndex — номер слоя сменился: слой с узлом поднят над всеми, кого\nпоказали раньше, узел подключён (номер места открыт) или снят (`0`)"
+        },
+        {
+          "name": "change:target",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<string>) => void",
+          "description": "change:target"
+        },
+        {
+          "name": "change:steps",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<readonly import(\"@soxa-ui/core\").IGuideStep[]>) => void"
+        },
+        {
+          "name": "change:step",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").IGuideStep | undefined>) => void"
+        },
+        {
+          "name": "close:before",
+          "type": "(event: import(\"@soxa-ui/core\").TCloseEvent) => void"
+        },
+        { "name": "complete", "type": "() => void" },
+        { "name": "element:ready", "type": "(element: Element) => void" },
+        { "name": "element:removed", "type": "() => void" },
+        {
+          "name": "hideOutside:change:enabled",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        },
+        {
+          "name": "scrollLock:change:enabled",
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<boolean>) => void"
+        }
+      ],
+      "slots": [],
+      "frameworks": {
+        "vue": {
+          "props": {
+            "ctrl": ":ctrl",
+            "embedded": ":embedded",
+            "pluginProps": ":pluginProps",
+            "rendered": ":rendered",
+            "visible": ":visible",
+            "tag": ":tag",
+            "direction": ":direction",
+            "target": ":target",
+            "steps": ":steps",
+            "hideOutside_enabled": ":hideOutside_enabled",
+            "scrollLock_enabled": ":scrollLock_enabled"
+          },
+          "events": {
+            "bundle:create": "@bundle:create",
+            "plugin:event": "@plugin:event",
+            "show": "@show",
+            "hide": "@hide",
+            "show:before": "@show:before",
+            "hide:before": "@hide:before",
+            "ready": "@ready",
+            "change:rendered": "@change:rendered",
+            "change:visible": "@change:visible",
+            "change:tag": "@change:tag",
+            "change:direction": "@change:direction",
+            "change:zIndex": "@change:zIndex",
+            "change:target": "@change:target",
+            "change:steps": "@change:steps",
+            "change:step": "@change:step",
+            "close:before": "@close:before",
+            "complete": "@complete",
+            "element:ready": "@element:ready",
+            "element:removed": "@element:removed",
+            "hideOutside:change:enabled": "@hideOutside:change:enabled",
+            "scrollLock:change:enabled": "@scrollLock:change:enabled"
+          },
+          "models": {
+            "rendered": "@update:rendered",
+            "visible": "@update:visible",
+            "tag": "@update:tag",
+            "direction": "@update:direction",
+            "target": "@update:target",
+            "steps": "@update:steps",
+            "hideOutside_enabled": "@update:hideOutside_enabled",
+            "scrollLock_enabled": "@update:scrollLock_enabled"
+          },
+          "slots": {}
+        },
+        "react": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "target": "target",
+            "steps": "steps",
+            "hideOutside_enabled": "hideOutside_enabled",
+            "scrollLock_enabled": "scrollLock_enabled"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:zIndex": "onChangeZIndex",
+            "change:target": "onChangeTarget",
+            "change:steps": "onChangeSteps",
+            "change:step": "onChangeStep",
+            "close:before": "onCloseBefore",
+            "complete": "onComplete",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved",
+            "hideOutside:change:enabled": "onHideOutsideChangeEnabled",
+            "scrollLock:change:enabled": "onScrollLockChangeEnabled"
+          },
+          "models": {},
+          "slots": {}
+        },
+        "angular": {
+          "props": {
+            "ctrl": "[ctrl]",
+            "embedded": "[embedded]",
+            "pluginProps": "[pluginProps]",
+            "rendered": "[rendered]",
+            "visible": "[visible]",
+            "direction": "[direction]",
+            "target": "[target]",
+            "steps": "[steps]",
+            "hideOutside_enabled": "[hideOutside_enabled]",
+            "scrollLock_enabled": "[scrollLock_enabled]"
+          },
+          "events": {
+            "bundle:create": "(soBundleCreate)",
+            "plugin:event": "(soPluginEvent)",
+            "show": "(soShow)",
+            "hide": "(soHide)",
+            "show:before": "(soShowBefore)",
+            "hide:before": "(soHideBefore)",
+            "ready": "(soReady)",
+            "change:rendered": "(soChangeRendered)",
+            "change:visible": "(soChangeVisible)",
+            "change:tag": "(soChangeTag)",
+            "change:direction": "(soChangeDirection)",
+            "change:zIndex": "(soChangeZIndex)",
+            "change:target": "(soChangeTarget)",
+            "change:steps": "(soChangeSteps)",
+            "change:step": "(soChangeStep)",
+            "close:before": "(soCloseBefore)",
+            "complete": "(soComplete)",
+            "element:ready": "(soElementReady)",
+            "element:removed": "(soElementRemoved)",
+            "hideOutside:change:enabled": "(soHideOutsideChangeEnabled)",
+            "scrollLock:change:enabled": "(soScrollLockChangeEnabled)"
+          },
+          "models": {
+            "rendered": "(renderedChange)",
+            "visible": "(visibleChange)",
+            "tag": "(tagChange)",
+            "direction": "(directionChange)",
+            "target": "(targetChange)",
+            "steps": "(stepsChange)",
+            "hideOutside_enabled": "(hideOutside_enabledChange)",
+            "scrollLock_enabled": "(scrollLock_enabledChange)"
+          },
+          "slots": {}
+        },
+        "solid": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "target": "target",
+            "steps": "steps",
+            "hideOutside_enabled": "hideOutside_enabled",
+            "scrollLock_enabled": "scrollLock_enabled"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:zIndex": "onChangeZIndex",
+            "change:target": "onChangeTarget",
+            "change:steps": "onChangeSteps",
+            "change:step": "onChangeStep",
+            "close:before": "onCloseBefore",
+            "complete": "onComplete",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved",
+            "hideOutside:change:enabled": "onHideOutsideChangeEnabled",
+            "scrollLock:change:enabled": "onScrollLockChangeEnabled"
+          },
+          "models": {},
+          "slots": {}
+        },
+        "svelte": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "target": "target",
+            "steps": "steps",
+            "hideOutside_enabled": "hideOutside_enabled",
+            "scrollLock_enabled": "scrollLock_enabled"
+          },
+          "events": {
+            "bundle:create": "onBundleCreate",
+            "plugin:event": "onPluginEvent",
+            "show": "onShow",
+            "hide": "onHide",
+            "show:before": "onShowBefore",
+            "hide:before": "onHideBefore",
+            "ready": "onReady",
+            "change:rendered": "onChangeRendered",
+            "change:visible": "onChangeVisible",
+            "change:tag": "onChangeTag",
+            "change:direction": "onChangeDirection",
+            "change:zIndex": "onChangeZIndex",
+            "change:target": "onChangeTarget",
+            "change:steps": "onChangeSteps",
+            "change:step": "onChangeStep",
+            "close:before": "onCloseBefore",
+            "complete": "onComplete",
+            "element:ready": "onElementReady",
+            "element:removed": "onElementRemoved",
+            "hideOutside:change:enabled": "onHideOutsideChangeEnabled",
+            "scrollLock:change:enabled": "onScrollLockChangeEnabled"
+          },
+          "models": {},
+          "slots": {}
+        },
+        "webc": {
+          "props": {
+            "ctrl": "ctrl",
+            "embedded": "embedded",
+            "pluginProps": "pluginProps",
+            "rendered": "rendered",
+            "visible": "visible",
+            "tag": "tag",
+            "direction": "direction",
+            "target": "target",
+            "steps": "steps",
+            "hideOutside_enabled": "hideOutside_enabled",
+            "scrollLock_enabled": "scrollLock_enabled"
+          },
+          "events": {
+            "bundle:create": "addEventListener('so:bundle:create', handler)",
+            "plugin:event": "addEventListener('so:plugin:event', handler)",
+            "show": "addEventListener('so:show', handler)",
+            "hide": "addEventListener('so:hide', handler)",
+            "show:before": "addEventListener('so:show:before', handler)",
+            "hide:before": "addEventListener('so:hide:before', handler)",
+            "ready": "addEventListener('so:ready', handler)",
+            "change:rendered": "addEventListener('so:change:rendered', handler)",
+            "change:visible": "addEventListener('so:change:visible', handler)",
+            "change:tag": "addEventListener('so:change:tag', handler)",
+            "change:direction": "addEventListener('so:change:direction', handler)",
+            "change:zIndex": "addEventListener('so:change:zIndex', handler)",
+            "change:target": "addEventListener('so:change:target', handler)",
+            "change:steps": "addEventListener('so:change:steps', handler)",
+            "change:step": "addEventListener('so:change:step', handler)",
+            "close:before": "addEventListener('so:close:before', handler)",
+            "complete": "addEventListener('so:complete', handler)",
+            "element:ready": "addEventListener('so:element:ready', handler)",
+            "element:removed": "addEventListener('so:element:removed', handler)",
+            "hideOutside:change:enabled": "addEventListener('so:hideOutside:change:enabled', handler)",
+            "scrollLock:change:enabled": "addEventListener('so:scrollLock:change:enabled', handler)"
+          },
+          "models": {},
+          "slots": {}
         }
       }
     },
@@ -23636,7 +24105,7 @@
           "canonicalName": "placement",
           "type": "import(\"@soxa-ui/core\").TMenuPlacement | undefined",
           "declaredType": "TMenuPlacement",
-          "values": ["bottom-start", "bottom-end", "top-start", "top-end"],
+          "values": ["top-start", "top-end", "bottom-start", "bottom-end"],
           "required": false,
           "description": "Сторона и выравнивание панели у триггера",
           "hasDefault": true,
@@ -29562,7 +30031,7 @@
           "canonicalName": "placement",
           "type": "import(\"@soxa-ui/core\").TPopoverPlacement | undefined",
           "declaredType": "TPopoverPlacement",
-          "values": ["bottom-start", "bottom-end", "top-start", "top-end"],
+          "values": ["top-start", "top-end", "bottom-start", "bottom-end"],
           "required": false,
           "description": "Сторона и выравнивание панели у триггера",
           "hasDefault": true,
@@ -47597,7 +48066,7 @@
           "canonicalName": "placement",
           "type": "import(\"@soxa-ui/core\").TToastsPlacement | undefined",
           "declaredType": "TToastsPlacement",
-          "values": ["top", "bottom", "bottom-start", "bottom-end", "top-start", "top-end"],
+          "values": ["top", "bottom", "top-start", "top-end", "bottom-start", "bottom-end"],
           "required": false,
           "description": "Где регион тостов. По умолчанию `bottom-end`",
           "hasDefault": true,
@@ -50599,7 +51068,7 @@
           "canonicalName": "placement",
           "type": "import(\"@soxa-ui/core\").TTooltipPlacement | undefined",
           "declaredType": "TTooltipPlacement",
-          "values": ["top", "bottom", "bottom-start", "bottom-end", "top-start", "top-end"],
+          "values": ["top", "bottom", "top-start", "top-end", "bottom-start", "bottom-end"],
           "required": false,
           "description": "Сторона и выравнивание подсказки у триггера",
           "hasDefault": true,
@@ -51354,20 +51823,20 @@
         {
           "name": "anchor_placement",
           "canonicalName": "anchor:placement",
-          "type": "import(\"@soxa-ui/plugins\").TFramePlacement | undefined",
+          "type": "import(\"@soxa-ui/core\").TFramePlacement | undefined",
           "values": [
             "start",
             "end",
             "top",
             "bottom",
-            "bottom-start",
-            "bottom-end",
-            "top-start",
-            "top-end",
+            "start-start",
+            "start-end",
             "end-start",
             "end-end",
-            "start-start",
-            "start-end"
+            "top-start",
+            "top-end",
+            "bottom-start",
+            "bottom-end"
           ],
           "required": false,
           "hasDefault": true,
@@ -51409,7 +51878,7 @@
         },
         {
           "name": "anchor:change:placement",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/plugins\").TFramePlacement>) => void"
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TFramePlacement>) => void"
         },
         {
           "name": "anchor:change:matchWidth",

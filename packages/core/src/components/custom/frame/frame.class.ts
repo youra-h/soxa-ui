@@ -1,3 +1,4 @@
+import type { TEventSink } from '../../../common'
 import { TLayer } from '../../base/layer'
 import type { TDefaultValues } from '../../base/component'
 import type { IFrame, IFrameProps, TFrameEvents, TFrameStrategy } from './types'
@@ -16,7 +17,13 @@ import type { IFrame, IFrameProps, TFrameEvents, TFrameStrategy } from './types'
  * frame.show() // получает z-index, становится visible
  * frame.hide() // скрывается
  */
-export default class TFrame extends TLayer<IFrameProps, TFrameEvents> implements IFrame {
+export default class TFrame<
+	TProps extends IFrameProps = IFrameProps,
+	TEvents extends TFrameEvents = TFrameEvents,
+>
+	extends TLayer<TProps, TEvents>
+	implements IFrame<TProps, TEvents>
+{
 	static baseClass = 'so-frame'
 
 	static defaultValues: typeof TLayer.defaultValues &
@@ -38,7 +45,7 @@ export default class TFrame extends TLayer<IFrameProps, TFrameEvents> implements
 	protected _height: number | string
 	protected _contained!: boolean
 
-	constructor(props: Partial<IFrameProps> = {}) {
+	constructor(props: Partial<TProps> = {}) {
 		const ctor = new.target as typeof TFrame
 
 		super(props)
@@ -52,6 +59,10 @@ export default class TFrame extends TLayer<IFrameProps, TFrameEvents> implements
 		this._applyContained(props.contained ?? ctor.defaultValues.contained)
 	}
 
+	protected override get _sink(): TEventSink<TFrameEvents> {
+		return this.events
+	}
+
 	get x(): number {
 		return this._x
 	}
@@ -60,7 +71,7 @@ export default class TFrame extends TLayer<IFrameProps, TFrameEvents> implements
 
 		if (this._x === value) return
 		this._x = value
-		this.events.emit('change:x', { newValue: value, oldValue: oldX })
+		this._sink.emit('change:x', { newValue: value, oldValue: oldX })
 	}
 
 	get y(): number {
@@ -71,7 +82,7 @@ export default class TFrame extends TLayer<IFrameProps, TFrameEvents> implements
 
 		if (this._y === value) return
 		this._y = value
-		this.events.emit('change:y', { newValue: value, oldValue: oldY })
+		this._sink.emit('change:y', { newValue: value, oldValue: oldY })
 	}
 
 	get width(): number | string {
@@ -82,7 +93,7 @@ export default class TFrame extends TLayer<IFrameProps, TFrameEvents> implements
 
 		if (this._width === value) return
 		this._width = value
-		this.events.emit('change:width', { newValue: value, oldValue: oldWidth })
+		this._sink.emit('change:width', { newValue: value, oldValue: oldWidth })
 	}
 
 	get height(): number | string {
@@ -93,7 +104,7 @@ export default class TFrame extends TLayer<IFrameProps, TFrameEvents> implements
 
 		if (this._height === value) return
 		this._height = value
-		this.events.emit('change:height', { newValue: value, oldValue: oldHeight })
+		this._sink.emit('change:height', { newValue: value, oldValue: oldHeight })
 	}
 
 	get strategy(): TFrameStrategy {
@@ -104,7 +115,7 @@ export default class TFrame extends TLayer<IFrameProps, TFrameEvents> implements
 
 		if (this._strategy === value) return
 		this._strategy = value
-		this.events.emit('change:strategy', { newValue: value, oldValue: oldStrategy })
+		this._sink.emit('change:strategy', { newValue: value, oldValue: oldStrategy })
 	}
 
 	/**
@@ -124,10 +135,10 @@ export default class TFrame extends TLayer<IFrameProps, TFrameEvents> implements
 		if (this._contained === value) return
 
 		this._applyContained(value)
-		this.events.emit('change:contained', { newValue: value, oldValue: oldContained })
+		this._sink.emit('change:contained', { newValue: value, oldValue: oldContained })
 	}
 
-	getProps(): IFrameProps {
+	getProps(): TProps {
 		return {
 			...super.getProps(),
 			x: this.x,

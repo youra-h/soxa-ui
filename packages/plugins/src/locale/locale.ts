@@ -84,6 +84,13 @@ export function freezeLocale(locale: TLocale): TLocale {
  * Строки правки поверх строк `base`. Разделы перечислены поимённо: новый
  * раздел без строки здесь — ошибка компиляции, а не молча строки `base`.
  */
+export const GUIDE_NAMES = {
+	previous: 'Back',
+	next: 'Next',
+	done: 'Done',
+	progress: '{step} of {count}',
+} as const
+
 function overlay(base: TTranslations, patch: TPartialTranslations): TTranslations {
 	return Object.freeze({
 		alertDialog: Object.freeze({
@@ -109,6 +116,7 @@ function overlay(base: TTranslations, patch: TPartialTranslations): TTranslation
 		}),
 		modal: section(base, patch, 'modal'),
 		dialog: section(base, patch, 'dialog'),
+		guide: Object.freeze({ ...GUIDE_NAMES, ...base.guide, ...defined(patch.guide) }),
 		popover: section(base, patch, 'popover'),
 		tabs: section(base, patch, 'tabs'),
 		tags: section(base, patch, 'tags'),

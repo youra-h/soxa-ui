@@ -1,0 +1,36 @@
+:where(.so-guide) {
+	position: fixed;
+	box-sizing: border-box;
+	max-block-size: calc(100% - 2rem);
+	overflow: auto;
+}
+
+:where(.so-guide:not([data-placement])) {
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+:where(.so-guide__decoration) {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+}
+
+:where(.so-guide__backdrop) {
+	position: fixed;
+	inset: 0;
+	pointer-events: auto;
+}
+
+:where(.so-guide__spotlight) {
+	position: fixed;
+	pointer-events: none;
+}
+
+:where(.so-guide__actions) {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: end;
+	gap: 0.5rem;
+}

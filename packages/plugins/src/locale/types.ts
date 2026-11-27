@@ -16,6 +16,8 @@ import type { IListenable } from '../base/types'
  * языка свой, и склейка «слово + имя» навязала бы всем один (`formatName`).
  */
 export type TTranslations = {
+	/** Optional for existing application locales. */
+	readonly guide?: Readonly<Record<'previous' | 'next' | 'done' | 'progress', string>>
 	readonly fileUpload?: Readonly<
 		Record<'choose' | 'drop' | 'limit' | 'remove' | 'type' | 'size' | 'count', string> & {
 			browse?: string

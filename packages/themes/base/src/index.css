@@ -46,7 +46,7 @@
 @layer so.reset, so.settings, so.direction, so.disabled, so.caption, so.required, so.target, so.group,
 	so.anchored, so.swipe, so.place, so.icon, so.avatar, so.avatar-group, so.button, so.toggle-group, so.check-box, so.accordion, so.date-input,
 	so.modal, so.dialog, so.alert-dialog, so.drag-and-drop, so.drawer, so.input, so.badge, so.label, so.field, so.list-box,
-	so.menu, so.breadcrumbs, so.number-input, so.pagination, so.popover, so.calendar, so.date-picker,
+	so.menu, so.breadcrumbs, so.number-input, so.pagination, so.popover, so.guide, so.calendar, so.date-picker,
 	so.progress-linear, so.progress-spinner, so.radio-group, so.rating, so.scroller, so.select,
 	so.separator, so.skeleton, so.slider, so.splitter, so.stepper, so.switch, so.table, so.tabs, so.tags, so.textarea, so.toasts,
 	so.tooltip, so.code-block, so.file-upload, so.alert;
@@ -85,6 +85,7 @@
 @import './components/number-input.css' layer(so.number-input);
 @import './components/pagination.css' layer(so.pagination);
 @import './components/popover.css' layer(so.popover);
+@import './components/guide.css' layer(so.guide);
 @import './components/calendar.css' layer(so.calendar);
 @import './components/date-picker.css' layer(so.date-picker);
 @import './components/progress-linear.css' layer(so.progress-linear);

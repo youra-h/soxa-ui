@@ -53,6 +53,7 @@ import {
 	TEvented,
 	TField,
 	TFrame,
+	TGuide,
 	TIcon,
 	TInput,
 	TLabel,
@@ -124,6 +125,7 @@ import {
 	Drawer,
 	Field,
 	Frame,
+	Guide,
 	Icon,
 	Input,
 	Label,
@@ -698,6 +700,16 @@ const COMPONENTS: Readonly<Record<string, Readonly<Record<string, TCase>>>> = {
 		ctrl: overCtrl(
 			() => new TFrame(),
 			(ctrl) => <Frame ctrl={ctrl} />,
+		),
+	},
+	Guide: {
+		ctrl: overCtrl(
+			() =>
+				new TGuide({
+					steps: [{ id: 'welcome', title: 'Welcome', mode: 'modal' }],
+					visible: true,
+				}),
+			(ctrl) => <Guide ctrl={ctrl} />,
 		),
 	},
 	Icon: {

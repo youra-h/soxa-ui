@@ -3,6 +3,11 @@ import type { ILayer, ILayerProps, TLayerEvents } from '../../base/layer'
 
 export type TFrameStrategy = 'fixed' | 'absolute'
 
+type TFrameSide = 'top' | 'bottom' | 'start' | 'end'
+
+/** Logical side of the anchor with optional alignment on that side. */
+export type TFramePlacement = TFrameSide | `${TFrameSide}-${'start' | 'end'}`
+
 export interface IFrameProps extends ILayerProps {
 	/** Позиция по оси X (px) */
 	x?: number
@@ -40,7 +45,10 @@ export type TFrameEvents = TLayerEvents & {
 	'change:contained': (payload: TValuePayload<boolean>) => void
 }
 
-export interface IFrame extends ILayer<IFrameProps, TFrameEvents> {
+export interface IFrame<
+	TProps extends IFrameProps = IFrameProps,
+	TEvents extends TFrameEvents = TFrameEvents,
+> extends ILayer<TProps, TEvents> {
 	/** Позиция по оси X */
 	x: number
 	/** Позиция по оси Y */
