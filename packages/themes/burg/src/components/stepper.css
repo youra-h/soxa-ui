@@ -1,25 +1,141 @@
 :where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-stepper-item) {
+		--so-burg-stepper-tone: var(--so-burg-progress-accent);
+		--so-burg-stepper-height: var(--so-button-height-normal);
+		--so-stepper-indicator-size: calc(var(--so-burg-stepper-height) - 0.5rem);
+	}
+
+	:where(.so-stepper-item--size-normal) {
+		font-size: var(--so-burg-button-font-size-normal);
+	}
+
+	:where(.so-stepper-item--size-sm) {
+		--so-burg-stepper-height: var(--so-button-height-sm);
+	}
+
+	:where(.so-stepper-item--size-lg) {
+		--so-burg-stepper-height: var(--so-button-height-lg);
+	}
+
+	:where(.so-stepper-item--size-xl) {
+		--so-burg-stepper-height: var(--so-button-height-xl);
+	}
+
+	:where(.so-stepper-item--size-2xl) {
+		--so-burg-stepper-height: var(--so-button-height-2xl);
+	}
+
+	:where(.so-stepper-item--variant-normal) {
+		--so-burg-stepper-tone: var(--so-burg-focus-edge);
+	}
+
+	:where(.so-stepper-item--variant-negative) {
+		--so-burg-stepper-tone: var(--so-burg-danger);
+	}
+
+	:where(.so-stepper-item--variant-positive) {
+		--so-burg-stepper-tone: var(--so-burg-positive);
+	}
+
+	:where(.so-stepper-item--variant-caution) {
+		--so-burg-stepper-tone: var(--so-burg-caution);
+	}
+
+	:where(.so-stepper__list) {
+		gap: calc(var(--so-spacing) * 2);
+	}
+
+	:where(.so-stepper[data-orientation='horizontal']) > :where(.so-stepper__list) {
+		overflow-x: auto;
+		padding: 3px;
+		scroll-padding-inline: 3px;
+
+		& > :where(.so-stepper-item) {
+			flex-shrink: 0;
+			grid-template-columns: minmax(0, max-content) minmax(calc(var(--so-spacing) * 2), 1fr);
+		}
+
+		& > :where(.so-stepper-item:not(:has(> .so-stepper-item__separator))) {
+			grid-template-columns: minmax(0, max-content);
+		}
+
+		& > :where(.so-stepper-item) > :where(.so-stepper-item__trigger) {
+			max-inline-size: 18rem;
+		}
+	}
+
 	:where(.so-stepper-item__trigger) {
+		min-block-size: calc(var(--so-burg-stepper-height) - 2px);
+		padding-block: 3px;
+		padding-inline-end: var(--so-spacing);
+		border-radius: calc(var(--so-radius) * 0.75);
 		color: var(--so-burg-text);
-		border-radius: calc(var(--so-radius) * 0.5);
+		line-height: 1.3;
+	}
+
+	:where(
+		button.so-stepper-item__trigger:disabled,
+		.so-stepper-item[data-disabled='true'] > .so-stepper-item__trigger
+	) {
+		color: var(--so-burg-muted);
+	}
+
+	@media (hover: hover) {
+		:where(button.so-stepper-item__trigger:enabled:hover) {
+			background-color: var(--so-burg-row-highlight);
+		}
 	}
 
 	:where(.so-stepper-item__trigger:focus-visible) {
-		outline: 2px solid var(--so-burg-focus-edge);
-		outline-offset: 2px;
+		outline: var(--so-burg-focus-ring);
+		outline-offset: 0;
+		box-shadow: inset 0 0 0 1px var(--so-burg-focus-edge);
 	}
 
-	:where(.so-stepper-item__indicator, .so-stepper-item__description) {
+	:where(.so-stepper-item__body) {
+		min-inline-size: 0;
+	}
+
+	:where(.so-stepper-item__label) {
+		font-weight: 500;
+	}
+
+	:where(.so-stepper-item[data-selected='true'] > .so-stepper-item__trigger)
+		:where(.so-stepper-item__label) {
+		font-weight: 600;
+	}
+
+	:where(.so-stepper-item__description) {
+		font-size: 0.923em;
 		color: var(--so-burg-muted);
 	}
 
 	:where(.so-stepper-item__indicator) {
+		border: 1px solid transparent;
 		border-radius: 50%;
 		background-color: var(--so-burg-row-highlight);
+		color: var(--so-burg-muted);
+		font-weight: 600;
 	}
 
 	:where(.so-stepper-item__indicator .so-icon) {
 		--so-icon-color: currentColor;
+	}
+
+	:where(
+			.so-stepper-item:not(
+				[data-selected='true'],
+				[data-error='true'],
+				[data-completed='true']
+			)
+		)
+		> :where(
+			button.so-stepper-item__trigger:disabled,
+			.so-stepper-item__trigger[data-disabled='true']
+		)
+		> :where(.so-stepper-item__indicator) {
+		border-color: var(--so-burg-border);
+		background-color: transparent;
 	}
 
 	:where(.so-stepper-item[data-completed='true'])
@@ -32,14 +148,11 @@
 	:where(.so-stepper-item[data-selected='true'])
 		> :where(.so-stepper-item__trigger)
 		> :where(.so-stepper-item__indicator) {
-		background-color: var(--so-burg-progress-accent);
+		background-color: var(--so-burg-stepper-tone);
 		color: var(--so-burg-surface);
 	}
 
-	:where(
-			.so-stepper-item--variant-negative[data-selected='true'],
-			.so-stepper-item[data-error='true']
-		)
+	:where(.so-stepper-item[data-error='true'])
 		> :where(.so-stepper-item__trigger)
 		> :where(.so-stepper-item__indicator) {
 		background-color: var(--so-burg-danger);
@@ -50,11 +163,62 @@
 		border-block-start: 1px solid var(--so-burg-border);
 	}
 
-	:where(.so-stepper[data-orientation='vertical'])
-		> :where(.so-stepper__list)
-		> :where(.so-stepper-item)
-		> :where(.so-stepper-item__separator) {
-		border-block-start: 0;
-		border-inline-start: 1px solid var(--so-burg-border);
+	:where(.so-stepper[data-orientation='vertical']) > :where(.so-stepper__list) {
+		gap: 0;
+
+		& > :where(.so-stepper-item) {
+			row-gap: 0;
+
+			& > :where(.so-stepper-item__trigger) {
+				justify-self: start;
+			}
+
+			& > :where(.so-stepper-item__separator) {
+				min-block-size: calc(var(--so-spacing) * 3);
+				border-block-start: 0;
+				border-inline-start: 1px solid var(--so-burg-border);
+			}
+		}
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-stepper-item__trigger:focus-visible) {
+			outline-color: Highlight;
+		}
+
+		:where(.so-stepper-item__indicator) {
+			border-color: CanvasText;
+		}
+
+		:where(.so-stepper-item[data-selected='true'])
+			> :where(.so-stepper-item__trigger)
+			> :where(.so-stepper-item__indicator) {
+			forced-color-adjust: none;
+			border-color: Highlight;
+			background-color: Highlight;
+			color: HighlightText;
+		}
+
+		:where(.so-stepper-item[data-error='true'])
+			> :where(.so-stepper-item__trigger)
+			> :where(.so-stepper-item__indicator) {
+			forced-color-adjust: none;
+			border: 1px dashed CanvasText;
+			background-color: Canvas;
+			color: CanvasText;
+		}
+
+		:where(
+				.so-stepper-item:not(
+					[data-completed='true'],
+					[data-selected='true'],
+					[data-error='true']
+				)
+			)
+			> :where(button.so-stepper-item__trigger:disabled)
+			> :where(.so-stepper-item__indicator) {
+			border-color: GrayText;
+			color: GrayText;
+		}
 	}
 }

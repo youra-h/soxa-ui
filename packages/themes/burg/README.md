@@ -84,7 +84,9 @@ star box and preserves fractional values.
 Tabs defaults to a thin selection marker and also supports `contained`
 and `outline`. Accordion uses simple dividers between sections. Breadcrumbs
 keeps its overflow menu and wraps long trails. Pagination keeps its arrows
-visible beside a scrollable page list when space is tight.
+visible beside a scrollable page list when space is tight. Stepper uses
+22px circular markers and 13px labels at normal size, with distinct current,
+completed, error, and unavailable states.
 
 ### Date controls
 
