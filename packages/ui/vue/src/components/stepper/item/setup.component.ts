@@ -6,6 +6,7 @@ import {
 import {
 	createVueAdapterContext,
 	extendBinding,
+	roleIcon,
 	joinBindings,
 	useAdapter,
 	useCollectionAdapter,
@@ -37,6 +38,9 @@ export default {
 
 		return extendBinding(joinBindings(ownerBinding, itemBinding), {
 			...useSplitAttrs(),
+			stepIconTag: roleIcon('step'),
+			checkIconTag: roleIcon('check'),
+			errorIconTag: roleIcon('error'),
 			activate() {
 				item.instance.active = true
 			},

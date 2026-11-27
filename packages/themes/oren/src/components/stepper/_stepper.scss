@@ -1,5 +1,18 @@
 @use '../button/mixins' as button;
-@use '../../mixins/on-signal';
+
+.so-stepper-item {
+	--so-stepper-color: var(--so-accent-600);
+}
+
+.so-stepper-item--variant-normal {
+	--so-stepper-color: var(--so-neutral-700);
+}
+
+@each $variant in button.$variants {
+	.so-stepper-item--variant-#{$variant} {
+		--so-stepper-color: var(--so-#{$variant}-600);
+	}
+}
 
 .so-stepper-item__trigger {
 	border-radius: calc(var(--so-radius) * 0.5);
@@ -15,9 +28,7 @@
 }
 
 .so-stepper-item__indicator {
-	border-radius: 50%;
-	@apply bg-so-neutral-200 text-so-neutral-800;
-	font-size: 0.75em;
+	@apply text-so-neutral-600;
 	font-weight: 600;
 }
 
@@ -40,16 +51,12 @@
 	@apply border-so-neutral-300;
 }
 
-.so-stepper-item[data-completed='true'] .so-stepper-item__indicator {
-	@apply bg-so-neutral-700 text-so-neutral-50;
+.so-stepper-item:is([data-completed='true'], [data-selected='true'])
+	> .so-stepper-item__trigger
+	> .so-stepper-item__indicator {
+	color: var(--so-stepper-color);
 }
 
-.so-stepper-item[data-selected='true'] .so-stepper-item__indicator {
-	@apply bg-so-accent-500;
-	color: on-signal.$text;
-}
-
-.so-stepper-item[data-error='true'] .so-stepper-item__indicator {
-	@apply bg-so-negative-500;
-	color: on-signal.$text;
+.so-stepper-item[data-error='true'] > .so-stepper-item__trigger > .so-stepper-item__indicator {
+	@apply text-so-negative-600;
 }

@@ -59,6 +59,7 @@ export class TStepperExtension extends TBaseOwnerItemExtension<
 
 		const activation = activationOf(ctx)
 		const plain = plainOf(ctx)
+		const batch = batchOf(ctx)
 		const refresh = () => this._refresh()
 		const signals = [
 			'change:completed',
@@ -73,12 +74,16 @@ export class TStepperExtension extends TBaseOwnerItemExtension<
 			for (const signal of signals) item.events.off(signal, refresh)
 		}
 
-		batchOf(ctx)?.items.forEach(observe)
+		batch?.items.forEach(observe)
 		plain?.events.on('item:added', ({ item }) => {
-			if (item instanceof TStepperItem) observe(item)
+			if (!(item instanceof TStepperItem)) return
+
+			observe(item)
+			this._inheritStyle(item)
 		})
 		plain?.events.on('item:removed', (event) => unobserve(event.item))
-		batchOf(ctx)?.events.on('change:shown', refresh)
+		plain?.events.on('item:updated', ({ item }) => this._inheritStyle(item))
+		batch?.events.on('change:shown', refresh)
 
 		activation?.events.on('item:activate:before', (event) => {
 			if (!this.canActivate(event.item)) event.preventDefault()
@@ -92,6 +97,12 @@ export class TStepperExtension extends TBaseOwnerItemExtension<
 
 		ctx.options.watch('owner', (owner, scope) => {
 			if (owner) {
+				const inheritStyle = () => batch?.items.forEach((item) => this._inheritStyle(item))
+
+				inheritStyle()
+				scope.on(owner.events, 'change:size', inheritStyle)
+				scope.on(owner.events, 'change:variant', inheritStyle)
+
 				scope.on(owner.events, 'change:value:before', (event) => {
 					if (this._syncing) return
 
@@ -106,6 +117,14 @@ export class TStepperExtension extends TBaseOwnerItemExtension<
 
 			refresh()
 		})
+	}
+
+	private _inheritStyle(item: IStepperItem): void {
+		const owner = this._ctx.options.get('owner')
+		if (!owner) return
+
+		item.size = owner.size
+		item.variant = owner.variant
 	}
 
 	get interactive(): boolean {

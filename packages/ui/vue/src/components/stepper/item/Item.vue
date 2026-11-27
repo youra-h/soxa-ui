@@ -1,7 +1,8 @@
 <script lang="ts">
+import { Icon } from '../../icon'
 import SetupStepperItem from './setup.component'
 
-export default { ...SetupStepperItem }
+export default { ...SetupStepperItem, components: { Icon } }
 </script>
 
 <template>
@@ -39,7 +40,20 @@ export default { ...SetupStepperItem }
 					:completed="completed"
 					:error="error"
 				>
-					{{ error ? '!' : completed ? '✓' : stepper_number }}
+					<Icon
+						v-if="active"
+						embedded="stepper.step-icon"
+						class="so-stepper-item__step-icon"
+						:tag="stepIconTag"
+						:size="size"
+					/>
+					<Icon
+						v-else-if="error || completed"
+						embedded="stepper.status-icon"
+						:tag="error ? errorIconTag : checkIconTag"
+						:size="size"
+					/>
+					<template v-else>{{ stepper_number }}</template>
 				</slot>
 			</span>
 			<span class="so-stepper-item__body">

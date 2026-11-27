@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { Stepper } from '@soxa-ui/vue'
+import { check, error, step } from '@soxa-ui/icons-material'
 import { createEngineStepper } from '@soxa-ui/core'
 import { afterEach, describe, expect, it } from 'vitest'
 import { h, nextTick } from 'vue'
@@ -34,6 +35,23 @@ const content = ({ next, previous, canNext, canPrevious }: Navigation) =>
 afterEach(unmountHydrated)
 
 describe('Stepper', () => {
+	it('uses role icons for completed, current and failed steps and keeps the pending number', () => {
+		const wrapper = mount(Stepper, {
+			props: {
+				value: 'shipping',
+				items: [...items, { value: 'review', text: 'Review', error: true }],
+			},
+		})
+		const [completed, active, pending, failed] = wrapper.findAll('.so-stepper-item__indicator')
+		const pathOf = (icon: { body: string }) => icon.body.match(/<path d="([^"]+)"/)?.[1]
+
+		expect(completed.get('svg.so-icon path').attributes('d')).toBe(pathOf(check))
+		expect(active.get('svg.so-stepper-item__step-icon path').attributes('d')).toBe(pathOf(step))
+		expect(pending.text()).toBe('3')
+		expect(failed.get('svg.so-icon path').attributes('d')).toBe(pathOf(error))
+		wrapper.unmount()
+	})
+
 	it('blocks forward jumps in linear mode and preserves completed and error states', async () => {
 		const engine = createEngineStepper({ items })
 		const wrapper = mount(Stepper, {
@@ -98,6 +116,7 @@ describe('Stepper', () => {
 			'#3',
 		])
 		expect(wrapper.get('[aria-current="step"]').element.tagName).toBe('SPAN')
+		expect(wrapper.find('.so-stepper-item__indicator .so-icon').exists()).toBe(false)
 		await wrapper.get('.info').trigger('click')
 		expect(wrapper.get('.so-stepper-content').text()).toBe('Shipping panel')
 		await wrapper.get('.next').trigger('click')

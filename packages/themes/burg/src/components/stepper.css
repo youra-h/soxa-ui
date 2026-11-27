@@ -1,0 +1,46 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-stepper-item__trigger) {
+		color: var(--so-burg-text);
+		border-radius: calc(var(--so-radius) * 0.5);
+	}
+
+	:where(.so-stepper-item__trigger:focus-visible) {
+		outline: 2px solid var(--so-burg-focus-edge);
+		outline-offset: 2px;
+	}
+
+	:where(.so-stepper-item__indicator, .so-stepper-item__description) {
+		color: var(--so-burg-muted);
+	}
+
+	:where(.so-stepper-item__indicator .so-icon) {
+		--so-icon-color: currentColor;
+	}
+
+	:where(.so-stepper-item[data-selected='true'], .so-stepper-item[data-completed='true'])
+		> :where(.so-stepper-item__trigger)
+		> :where(.so-stepper-item__indicator) {
+		color: var(--so-burg-text);
+	}
+
+	:where(
+			.so-stepper-item--variant-negative:is([data-selected='true'], [data-completed='true']),
+			.so-stepper-item[data-error='true']
+		)
+		> :where(.so-stepper-item__trigger)
+		> :where(.so-stepper-item__indicator) {
+		color: var(--so-burg-danger);
+	}
+
+	:where(.so-stepper-item__separator) {
+		border-block-start: 1px solid var(--so-burg-border);
+	}
+
+	:where(.so-stepper[data-orientation='vertical'])
+		> :where(.so-stepper__list)
+		> :where(.so-stepper-item)
+		> :where(.so-stepper-item__separator) {
+		border-block-start: 0;
+		border-inline-start: 1px solid var(--so-burg-border);
+	}
+}

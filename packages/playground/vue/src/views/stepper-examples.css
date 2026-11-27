@@ -72,6 +72,7 @@
 }
 
 .route-steps .so-stepper-item__indicator {
+	border-radius: 50%;
 	inline-size: var(--route-marker);
 	block-size: var(--route-marker);
 	border: 1px solid var(--so-neutral-300);
@@ -173,6 +174,7 @@
 }
 
 .runbook-steps .so-stepper-item__indicator {
+	border-radius: 50%;
 	inline-size: 0.875rem;
 	block-size: 0.875rem;
 	border: 1px dashed var(--so-neutral-400);

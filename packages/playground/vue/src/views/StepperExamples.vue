@@ -204,10 +204,6 @@ function toggleInfo(id: string) {
 				:text="stage.name"
 				:completed="stage.done"
 			>
-				<template #indicator="{ completed }">
-					<span>{{ completed ? '✓' : '' }}</span>
-				</template>
-
 				<template #details>
 					<button
 						type="button"

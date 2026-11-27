@@ -2901,7 +2901,7 @@
     {
       "name": "so-stepper-item__indicator",
       "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
-      "description": "Decorative step number or custom marker.",
+      "description": "Decorative slot for the default status icon, a step number, or custom markup.",
       "scope": "so-stepper"
     },
     {
@@ -2920,6 +2920,12 @@
       "name": "so-stepper-item__separator",
       "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
       "description": "Decorative connector from the current item to its successor.",
+      "scope": "so-stepper"
+    },
+    {
+      "name": "so-stepper-item__step-icon",
+      "sources": ["packages/ui/vue/src/components/stepper/item/Item.vue"],
+      "description": "Fallback icon for the current step. The base layer aligns it with orientation and writing direction.",
       "scope": "so-stepper"
     },
     {

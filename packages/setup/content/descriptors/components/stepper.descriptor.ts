@@ -19,6 +19,7 @@ import {
 } from '../plugins'
 import { CollectionDescriptor } from './collection'
 import { ComponentViewDescriptor } from './component-view.descriptor'
+import { OWNER_STYLE_PROPS } from './stylable.descriptor'
 import { ValueControlDescriptor } from './value-control.descriptor'
 
 const stepScope = {
@@ -101,6 +102,7 @@ export const StepperItemDescriptor = defineDescriptor(() =>
 		contribution: {
 			props: {
 				value: { type: [String, Number], triggers: ['change:value'] },
+				...OWNER_STYLE_PROPS,
 				text: { type: String, triggers: ['change:text'] },
 				description: { type: String, triggers: ['change:description'] },
 				completed: { type: Boolean, triggers: ['change:completed'] },
@@ -108,7 +110,10 @@ export const StepperItemDescriptor = defineDescriptor(() =>
 			},
 			slots: {
 				leading: { scope: stepScope, description: 'Metadata before the step header' },
-				indicator: { scope: stepScope, description: 'Replace the visual step number' },
+				indicator: {
+					scope: stepScope,
+					description: 'Replace the default status icon or step number',
+				},
 				default: { scope: stepScope, description: 'Replace the step label' },
 				subtitle: { scope: stepScope, description: 'Replace the description' },
 				separator: {
