@@ -56,7 +56,7 @@
 		min-inline-size: max-content;
 	}
 
-	:where(.so-tabs:not(.so-code-block__tabs, .so-tabs--view-contained, .so-tabs--view-outline)) {
+	:where(.so-tabs:not(.so-code-block__tabs, .so-tabs--view-outline)) {
 		&:where(.so-tabs--orientation-horizontal)
 			> :where(.so-tabs__bar)
 			> :where(.so-tabs__list)
@@ -70,7 +70,9 @@
 				padding-inline: calc(var(--so-burg-tabs-space) * 5);
 			}
 		}
+	}
 
+	:where(.so-tabs:not(.so-code-block__tabs, .so-tabs--view-contained, .so-tabs--view-outline)) {
 		&
 			> :where(.so-tabs__bar)
 			> :where(.so-tabs__list)
@@ -118,10 +120,7 @@
 			border-radius: var(--so-burg-tabs-radius);
 
 			& > :where(.so-button:not(.so-tabs-item__close)) {
-				block-size: calc(var(--so-tabs-row-height) - var(--so-burg-tabs-space));
-				min-block-size: var(--so-target-size);
 				padding-block: var(--so-tabs-row-padding, 0px);
-				padding-inline: calc(var(--so-burg-tabs-space) * 2);
 			}
 
 			& > :where(.so-tabs-item__close) {
