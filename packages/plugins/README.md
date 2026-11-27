@@ -123,7 +123,7 @@ formatName(ruRU.translations.tabs.close, 'Почта') // 'Закрыть Поч
 
 ## License
 
-Soxa-owned code in this package is under the [Soxa Runtime License](LICENSE).
+Soxa-owned code in this package is under the [Soxa Runtime License](LICENSE-SOXA-RUNTIME).
 Use and redistribution in applications are free, including for commercial use.
 Changes to the covered implementation require written permission.
 
