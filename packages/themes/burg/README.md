@@ -90,7 +90,8 @@ and `outline`. Accordion uses simple dividers between sections. Breadcrumbs
 keeps its overflow menu and wraps long trails. Pagination keeps its arrows
 visible beside a scrollable page list when space is tight. Stepper uses
 22px circular markers and 13px labels at normal size, with distinct current,
-completed, error, and unavailable states.
+completed, error, and unavailable states. Tree follows the ListBox row scale
+and selection color, with an inset keyboard focus ring and optional branch guides.
 
 ### Date controls
 

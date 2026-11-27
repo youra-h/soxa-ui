@@ -1,0 +1,82 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	&:where(.so-tree),
+	:where(.so-tree) {
+		--so-tree-spacing-unit: var(--so-spacing);
+		--so-tree-guide-color: var(--so-burg-border);
+		color: var(--so-burg-text);
+	}
+
+	:where(.so-tree-item > .so-tree-item__row) {
+		--so-burg-button-fill: transparent;
+	}
+
+	:where(.so-tree-item__toggle) {
+		color: var(--so-burg-muted);
+	}
+
+	@media (hover: hover) {
+		:where(.so-tree-item:not([data-disabled='true']) > .so-tree-item__row:hover) {
+			--so-burg-button-background: color-mix(in oklab, var(--so-burg-text) 3%, transparent);
+		}
+	}
+
+	:where(.so-tree-item:is([data-highlighted='true'], [data-selected='true']))
+		> :where(.so-tree-item__row) {
+		--so-burg-button-background: var(--so-burg-row-highlight);
+	}
+
+	/* The item owns focus. Draw its ring inside the visible row, including in Virtual. */
+	:where(.so-tree-item:focus-visible:has(> .so-tree-item__row)) {
+		outline: none;
+	}
+
+	:where(.so-tree-item:focus-visible) > :where(.so-tree-item__row) {
+		outline: var(--so-burg-focus-ring);
+		outline-offset: -3px;
+	}
+
+	:where(.so-tree-item[data-loading='true'] > .so-tree-item__row) :where(.so-tree-item__chevron) {
+		inline-size: 0.75em;
+		block-size: 0.75em;
+		border: 1px solid currentColor;
+		border-inline-end-color: transparent;
+		border-radius: 50%;
+		transform: none;
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-tree-item:focus-visible) > :where(.so-tree-item__row) {
+			outline-color: Highlight;
+		}
+
+		:where(.so-tree-item:is([data-highlighted='true'], [data-selected='true']))
+			> :where(.so-tree-item__row) {
+			--so-burg-button-background: Highlight;
+			--so-burg-button-ink: HighlightText;
+			forced-color-adjust: none;
+			outline-color: HighlightText;
+
+			& :where(.so-tree-item__toggle) {
+				color: inherit;
+			}
+		}
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:where(:root:not([data-so-motion='reduce']))
+		:where([data-so-theme='burg'] *, [data-so-theme='burg-dark'] *):where(
+			.so-tree-item[data-loading='true'] > .so-tree-item__row
+		)
+		:where(.so-tree-item__chevron) {
+		animation: so-burg-progress-spin 0.9s linear infinite;
+	}
+}
+
+:where(:root[data-so-motion='full'])
+	:where([data-so-theme='burg'] *, [data-so-theme='burg-dark'] *):where(
+		.so-tree-item[data-loading='true'] > .so-tree-item__row
+	)
+	:where(.so-tree-item__chevron) {
+	animation: so-burg-progress-spin 0.9s linear infinite;
+}
