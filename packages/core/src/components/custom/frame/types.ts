@@ -3,11 +3,6 @@ import type { ILayer, ILayerProps, TLayerEvents } from '../../base/layer'
 
 export type TFrameStrategy = 'fixed' | 'absolute'
 
-type TFrameSide = 'top' | 'bottom' | 'start' | 'end'
-
-/** Logical side of the anchor with optional alignment on that side. */
-export type TFramePlacement = TFrameSide | `${TFrameSide}-${'start' | 'end'}`
-
 export interface IFrameProps extends ILayerProps {
 	/** Позиция по оси X (px) */
 	x?: number

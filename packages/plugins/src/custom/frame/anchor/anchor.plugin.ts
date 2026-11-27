@@ -1,4 +1,4 @@
-import type { IFrame, TDefaultValues } from '@soxa-ui/core'
+import { TEvented, type IFrame, type TDefaultValues, type TValuePayload } from '@soxa-ui/core'
 import { TBasePlugin } from '../../../base'
 import type { IPluginContext } from '../../../base'
 import { TElementPlugin } from '../../element'
@@ -200,6 +200,10 @@ const samePoint = (a: TPoint | null, b: TPoint | null): boolean =>
  * scroll/resize окна.
  */
 export class TAnchorPlugin extends TBasePlugin<any, TAnchorPluginEvents> {
+	/** Measurements report geometry independently of the anchor input events. */
+	readonly rectEvents = new TEvented<{
+		change: (payload: TValuePayload<TAnchorRect | null>) => void
+	}>()
 	/**
 	 * Умолчания пропов плагина. Из них стартуют поля плагина, и их же
 	 * `definePlugin` кладёт в декларации пропов: значение живёт в одном месте.
@@ -457,7 +461,7 @@ export class TAnchorPlugin extends TBasePlugin<any, TAnchorPluginEvents> {
 			return
 
 		this._rect = value
-		this.events.emit('change:rect', { oldValue, newValue: value })
+		this.rectEvents.emit('change', { oldValue, newValue: value })
 	}
 
 	/**

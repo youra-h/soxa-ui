@@ -59,7 +59,7 @@ export default class TFrame<
 		this._applyContained(props.contained ?? ctor.defaultValues.contained)
 	}
 
-	protected override get _sink(): TEventSink<TFrameEvents> {
+	private get _frameSink(): TEventSink<TFrameEvents> {
 		return this.events
 	}
 
@@ -71,7 +71,7 @@ export default class TFrame<
 
 		if (this._x === value) return
 		this._x = value
-		this._sink.emit('change:x', { newValue: value, oldValue: oldX })
+		this._frameSink.emit('change:x', { newValue: value, oldValue: oldX })
 	}
 
 	get y(): number {
@@ -82,7 +82,7 @@ export default class TFrame<
 
 		if (this._y === value) return
 		this._y = value
-		this._sink.emit('change:y', { newValue: value, oldValue: oldY })
+		this._frameSink.emit('change:y', { newValue: value, oldValue: oldY })
 	}
 
 	get width(): number | string {
@@ -93,7 +93,7 @@ export default class TFrame<
 
 		if (this._width === value) return
 		this._width = value
-		this._sink.emit('change:width', { newValue: value, oldValue: oldWidth })
+		this._frameSink.emit('change:width', { newValue: value, oldValue: oldWidth })
 	}
 
 	get height(): number | string {
@@ -104,7 +104,7 @@ export default class TFrame<
 
 		if (this._height === value) return
 		this._height = value
-		this._sink.emit('change:height', { newValue: value, oldValue: oldHeight })
+		this._frameSink.emit('change:height', { newValue: value, oldValue: oldHeight })
 	}
 
 	get strategy(): TFrameStrategy {
@@ -115,7 +115,7 @@ export default class TFrame<
 
 		if (this._strategy === value) return
 		this._strategy = value
-		this._sink.emit('change:strategy', { newValue: value, oldValue: oldStrategy })
+		this._frameSink.emit('change:strategy', { newValue: value, oldValue: oldStrategy })
 	}
 
 	/**
@@ -135,7 +135,7 @@ export default class TFrame<
 		if (this._contained === value) return
 
 		this._applyContained(value)
-		this._sink.emit('change:contained', { newValue: value, oldValue: oldContained })
+		this._frameSink.emit('change:contained', { newValue: value, oldValue: oldContained })
 	}
 
 	getProps(): TProps {

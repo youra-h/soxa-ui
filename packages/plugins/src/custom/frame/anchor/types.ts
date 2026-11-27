@@ -1,8 +1,40 @@
-import type { TFramePlacement, TValuePayload } from '@soxa-ui/core'
+import type { TValuePayload } from '@soxa-ui/core'
 import type { TPluginEvents } from '../../../base'
 import type { TPoint } from '../../../utils'
 
-export type { TFramePlacement } from '@soxa-ui/core'
+/**
+ * Сторона и выравнивание панели относительно якоря — одной схемой: сначала
+ * сторона, затем выравнивание.
+ *
+ * Сторон четыре, на двух осях. `top` и `bottom` — стороны блока: панель над
+ * якорем или под ним, а выравнивание идёт вдоль строки. `start` и `end` —
+ * стороны строки: панель у начала или у конца строки якоря, а выравнивание
+ * идёт вдоль якоря по вертикали. Выравнивания три: `-start` — по началу якоря
+ * (у боковой стороны — верхние края вровень), `-end` — по концу (нижние края
+ * вровень), значение без суффикса — по центру (как у Floating UI).
+ *
+ * Логическое здесь всё, что лежит на оси строки: сторона `start`/`end` и
+ * выравнивание `-start`/`-end` у верха и низа — в RTL они меняются местами,
+ * как `placement` у Drawer. Ось блока от направления не зависит: верх и низ,
+ * выравнивание боковой панели и центр в RTL те же.
+ *
+ * Набор намеренно маленький: это выбор потребителя, а не подбор места.
+ * Автоматический переворот при нехватке места (flip) и сдвиг у края экрана
+ * (shift) плагин делает сам поверх этого выбора — см. `TAnchorPlugin`.
+ */
+export type TFramePlacement =
+	| 'bottom-start'
+	| 'bottom'
+	| 'bottom-end'
+	| 'top-start'
+	| 'top'
+	| 'top-end'
+	| 'end-start'
+	| 'end'
+	| 'end-end'
+	| 'start-start'
+	| 'start'
+	| 'start-end'
 
 /**
  * Прямоугольник места панели в координатах окна: якоря — его
@@ -34,7 +66,6 @@ export interface IAnchorPluginOptions {
 }
 
 export type TAnchorPluginEvents = TPluginEvents & {
-	'change:rect': (payload: TValuePayload<TAnchorRect | null>) => void
 	/** change:anchor */
 	'change:anchor': (payload: TValuePayload<Element | null>) => void
 	/** change:point */

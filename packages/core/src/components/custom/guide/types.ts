@@ -1,6 +1,6 @@
 import type { TValuePayload } from '../../../common'
 import type { ICloseRequestable, ILayerProps, TCloseEvent } from '../../base/layer'
-import type { IFrame, TFrameEvents, TFramePlacement } from '../frame'
+import type { IFrame, TFrameEvents } from '../frame'
 
 /** DOM reference or a point in viewport CSS pixels. */
 export type TGuideAnchor =
@@ -13,13 +13,28 @@ export interface IGuideAdvance {
 	readonly event: string
 }
 
+/** Logical panel placement shared by DOM and viewport anchors. */
+export type TGuidePlacement =
+	| 'bottom-start'
+	| 'bottom'
+	| 'bottom-end'
+	| 'top-start'
+	| 'top'
+	| 'top-end'
+	| 'end-start'
+	| 'end'
+	| 'end-end'
+	| 'start-start'
+	| 'start'
+	| 'start-end'
+
 export interface IGuideStep {
 	readonly id: string
 	readonly title: string
 	readonly description?: string
 	readonly mode?: 'modal' | 'nonmodal'
 	readonly anchor?: TGuideAnchor
-	readonly placement?: TFramePlacement
+	readonly placement?: TGuidePlacement
 	readonly advanceOn?: IGuideAdvance
 }
 

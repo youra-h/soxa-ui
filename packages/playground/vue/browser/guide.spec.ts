@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { page } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
 import { h } from 'vue'
 import { TGuide, type IGuideStep } from '@soxa-ui/core'
 import { Guide } from '@soxa-ui/vue'
@@ -31,7 +31,7 @@ describe('Guide', () => {
 		let targetClicks = 0
 		render({
 			render: () => [
-				h('button', { onClick: () => ctrl.start() }, 'Start guide'),
+				h('button', { id: 'start-guide', onClick: () => ctrl.start() }, 'Start guide'),
 				h(
 					'button',
 					{
@@ -48,7 +48,8 @@ describe('Guide', () => {
 		})
 
 		const dialog = page.getByRole('dialog')
-		await page.getByRole('button', { name: 'Start guide' }).click()
+		document.querySelector<HTMLButtonElement>('#start-guide')?.focus()
+		await userEvent.keyboard('{Enter}')
 		await expect.element(dialog).toHaveAttribute('aria-modal', 'true')
 		await expect
 			.poll(() => {

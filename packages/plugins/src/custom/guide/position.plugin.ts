@@ -1,7 +1,8 @@
 import type { IGuide } from '@soxa-ui/core'
 import { TBasePlugin, type IPluginContext, type TPluginEvents } from '../../base'
 import { TElementPlugin } from '../element'
-import { TAnchorPlugin, type TAnchorRect } from '../frame/anchor'
+import { TAnchorPlugin } from '../frame/anchor'
+import type { TAnchorRect } from '../frame/anchor/types'
 
 type TStyles = Record<string, number | string>
 type TGuidePositionEvents = TPluginEvents & { 'change:position': () => void }
@@ -38,7 +39,7 @@ export class TGuidePositionPlugin extends TBasePlugin<IGuide, TGuidePositionEven
 		this._listenTo(owner.events, 'change:step', () => this._sync())
 		this._listenTo(owner.events, 'change:visible', () => this._sync())
 		this._listenTo(owner.events, 'change:zIndex', () => this._publish(anchor.rect))
-		this._listenTo(anchor.events, 'change:rect', ({ newValue }) => this._publish(newValue))
+		this._listenTo(anchor.rectEvents, 'change', ({ newValue }) => this._publish(newValue))
 		this._root = element.element
 		this._sync()
 	}

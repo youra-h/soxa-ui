@@ -3,12 +3,9 @@
     "id": "file-upload-additive-contracts",
     "baseline": "48896a297de7fc62a1da6f6e4a0715e4e222117c3fb80af6d3a7d6d8b5dd3f7b",
     "impact": "compatible",
-    "reason": "The new translation section is optional and has a fallback for existing complete locales. The drag attribute gains the FileUpload root as an additional scope with its own boolean values. Slider and Table keep their existing scope and value semantics.",
+    "reason": "The drag attribute gains the FileUpload root as an additional scope with its own boolean values. Slider and Table keep their existing scope and value semantics.",
     "guide": "docs/upgrade/file-upload.md",
-    "changes": [
-      "c9d399ee31a33b09b164b0818a6c21c8bd1ccfb37e4da6919a34ed56e653ebc1",
-      "b46a264660723189bf117bea61641a5b78bb4817b663f0649d1e2d5f522a85e5"
-    ]
+    "changes": ["b46a264660723189bf117bea61641a5b78bb4817b663f0649d1e2d5f522a85e5"]
   },
   {
     "id": "file-upload-angular-descriptor-alias",
@@ -76,5 +73,46 @@
       "b6cb236c8f8b7a76fad2650c69c18ee56dd04c0e9ddb0d622c5699ebc3405aa1",
       "6c8b56c576a0969f3df660eebab5f4295130554b49f2f8f520f43dd1a22d7684"
     ]
+  },
+  {
+    "id": "guide-frame-default-types",
+    "baseline": "48896a297de7fc62a1da6f6e4a0715e4e222117c3fb80af6d3a7d6d8b5dd3f7b",
+    "impact": "compatible",
+    "reason": "Frame and IFrame add defaulted parameters matching IFrameProps and TFrameEvents. Existing adapter declarations and setup metadata spell out those same defaults. Existing construction, props and subclass hooks continue to type-check.",
+    "guide": "docs/upgrade/guide.md",
+    "changes": [
+      "148746e28d1ee7242655dc61b043f6caa34a2632ba585b6fbb88ba157c7e6241",
+      "048a76bf1c39fbaabc411243be285e54f5e9ccca2e95a0e6660b9cedda019b15",
+      "c9d156a4800fdfd24a25b6d7da999107aea1d52429e89aae538bb34eff21f77e",
+      "4ed6f56e3f005a44af9dbc751b78b7a333b4f81aeb9607e14e5e73adbb5c120a",
+      "171048a069fa64238dc960a3ff945e186266fd61c125ac82b8003b062485c0a3",
+      "f124de810bcaf928005ac5a7a39d4a3b504e493bacad88f7a93c50099f4ff9d6",
+      "5ef5df5891dc6cbfd2d833ebf9ace7bf2075a203353a692a8c58df517fea681e",
+      "0e6efc6a870bee4c22c2ea486f230d5003d67fcf2069242c5ada947df9abd580",
+      "a6112668fc05c42d258cba1d304adb6c739e4fcdde9897a5b9e84618ff4adc70",
+      "1ae214ae658dd49ed829d26b0def2448ec1972e4515b4ec74e7e2bfc0311af5b",
+      "5148749cb1f69aba60bcf08a4dd2c0755581aba94523adca9468629f1f463b6f",
+      "620f3ac2781a4785f9f348df9d328f1743876755b2336c9640536a05e6062472",
+      "6ed12bcdcff09d36bba068da231f2aa3f0b5728d4f054c9da1848ee547806f7a",
+      "6f8a9fc0c52f0862ce093f43228b3b35f60efa51f878a00c355ef87d70c6c982",
+      "64570bedb5c38593764ccf6c930d780e841dbdef34fe87b818178fada2f21907",
+      "144ccd090cb5ce3a72a5fefc2515817f6d92c8090cb4bd7aedc4e91b1fcea1f0"
+    ]
+  },
+  {
+    "id": "guide-anchor-geometry",
+    "baseline": "48896a297de7fc62a1da6f6e4a0715e4e222117c3fb80af6d3a7d6d8b5dd3f7b",
+    "impact": "compatible",
+    "reason": "The anchor plugin adds a read-only measurement and its event source. Its original positioning options and event map preserve their types.",
+    "guide": "docs/upgrade/guide.md",
+    "changes": ["25690fc1db29be163a6f63d320878bb4f3928772d4e0da1ae2c0153a7be09f09"]
+  },
+  {
+    "id": "guide-optional-localization",
+    "baseline": "48896a297de7fc62a1da6f6e4a0715e4e222117c3fb80af6d3a7d6d8b5dd3f7b",
+    "impact": "compatible",
+    "reason": "Guide and FileUpload add optional translation sections with defaults. A complete locale authored for the published contract can still be used without those sections.",
+    "guide": "docs/upgrade/guide.md",
+    "changes": ["e3a5f905a31b659a4f19b58591d0614db43da1f579004705f699cbbca48e7d7c"]
   }
 ]

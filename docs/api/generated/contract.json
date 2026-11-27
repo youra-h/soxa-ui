@@ -16489,20 +16489,20 @@
         {
           "name": "anchor_placement",
           "canonicalName": "anchor:placement",
-          "type": "import(\"@soxa-ui/core\").TFramePlacement | undefined",
+          "type": "import(\"@soxa-ui/plugins\").TFramePlacement | undefined",
           "values": [
             "start",
             "end",
             "top",
             "bottom",
-            "start-start",
-            "start-end",
-            "end-start",
-            "end-end",
+            "bottom-start",
+            "bottom-end",
             "top-start",
             "top-end",
-            "bottom-start",
-            "bottom-end"
+            "end-start",
+            "end-end",
+            "start-start",
+            "start-end"
           ],
           "required": false,
           "hasDefault": true,
@@ -16657,7 +16657,7 @@
         },
         {
           "name": "anchor:change:placement",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TFramePlacement>) => void"
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/plugins\").TFramePlacement>) => void"
         },
         {
           "name": "anchor:change:matchWidth",
@@ -24105,7 +24105,7 @@
           "canonicalName": "placement",
           "type": "import(\"@soxa-ui/core\").TMenuPlacement | undefined",
           "declaredType": "TMenuPlacement",
-          "values": ["top-start", "top-end", "bottom-start", "bottom-end"],
+          "values": ["bottom-start", "bottom-end", "top-start", "top-end"],
           "required": false,
           "description": "Сторона и выравнивание панели у триггера",
           "hasDefault": true,
@@ -30031,7 +30031,7 @@
           "canonicalName": "placement",
           "type": "import(\"@soxa-ui/core\").TPopoverPlacement | undefined",
           "declaredType": "TPopoverPlacement",
-          "values": ["top-start", "top-end", "bottom-start", "bottom-end"],
+          "values": ["bottom-start", "bottom-end", "top-start", "top-end"],
           "required": false,
           "description": "Сторона и выравнивание панели у триггера",
           "hasDefault": true,
@@ -48066,7 +48066,7 @@
           "canonicalName": "placement",
           "type": "import(\"@soxa-ui/core\").TToastsPlacement | undefined",
           "declaredType": "TToastsPlacement",
-          "values": ["top", "bottom", "top-start", "top-end", "bottom-start", "bottom-end"],
+          "values": ["top", "bottom", "bottom-start", "bottom-end", "top-start", "top-end"],
           "required": false,
           "description": "Где регион тостов. По умолчанию `bottom-end`",
           "hasDefault": true,
@@ -51068,7 +51068,7 @@
           "canonicalName": "placement",
           "type": "import(\"@soxa-ui/core\").TTooltipPlacement | undefined",
           "declaredType": "TTooltipPlacement",
-          "values": ["top", "bottom", "top-start", "top-end", "bottom-start", "bottom-end"],
+          "values": ["top", "bottom", "bottom-start", "bottom-end", "top-start", "top-end"],
           "required": false,
           "description": "Сторона и выравнивание подсказки у триггера",
           "hasDefault": true,
@@ -51823,20 +51823,20 @@
         {
           "name": "anchor_placement",
           "canonicalName": "anchor:placement",
-          "type": "import(\"@soxa-ui/core\").TFramePlacement | undefined",
+          "type": "import(\"@soxa-ui/plugins\").TFramePlacement | undefined",
           "values": [
             "start",
             "end",
             "top",
             "bottom",
-            "start-start",
-            "start-end",
-            "end-start",
-            "end-end",
+            "bottom-start",
+            "bottom-end",
             "top-start",
             "top-end",
-            "bottom-start",
-            "bottom-end"
+            "end-start",
+            "end-end",
+            "start-start",
+            "start-end"
           ],
           "required": false,
           "hasDefault": true,
@@ -51878,7 +51878,7 @@
         },
         {
           "name": "anchor:change:placement",
-          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/core\").TFramePlacement>) => void"
+          "type": "(payload: import(\"@soxa-ui/core\").TValuePayload<import(\"@soxa-ui/plugins\").TFramePlacement>) => void"
         },
         {
           "name": "anchor:change:matchWidth",
