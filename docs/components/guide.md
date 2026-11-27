@@ -46,3 +46,6 @@ function cubeSelected() {
 - Steps are nonmodal by default so that the highlighted control remains usable. With `mode: 'modal'`, Guide shows a backdrop and traps focus inside the panel. Set `backdrop` to `none`, `dim`, or `blur` to override the default appearance. An explicit `dim` or `blur` also displays a backdrop on nonmodal steps. The backdrop has a rounded cutout around an element and a circular cutout around a point. Nonmodal steps leave the page interactive.
 - The close button appears in the upper corner. Set `closable: false` to hide it. Escape inside the panel requests dismissal and restores focus to the opening element when available.
 - A guide can also be supplied declaratively with the `steps` prop and the layer's `visible` prop. With an external `ctrl`, write state through that instance.
+
+Guide is available in all six adapters. See the [generated API contract](../api/generated/contract.json)
+for framework bindings and the [upgrade guide](../upgrade/guide.md) for adoption details.

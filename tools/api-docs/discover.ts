@@ -32,10 +32,17 @@ function isDescriptor(value: unknown): value is IComponentDescriptor {
 
 /** Manifests already identify component/facade wiring, without executing framework components. */
 export async function discoverManifests(): Promise<TManifest[]> {
-	const directory = resolve(root, 'packages/ui/angular/src/components')
+	const directories = [
+		resolve(root, 'packages/ui/angular/src/components'),
+		resolve(root, 'tools/api-docs/manifests'),
+	]
+	const files = directories.flatMap((directory) =>
+		filesIn(directory)
+			.filter((file) => file.endsWith(`${sep}manifest.ts`))
+			.map((file) => ({ directory, file })),
+	)
 	const manifests: TManifest[] = []
-
-	for (const file of filesIn(directory).filter((file) => file.endsWith(`${sep}manifest.ts`))) {
+	for (const { directory, file } of files) {
 		const source = ts.createSourceFile(
 			file,
 			readFileSync(file, 'utf8'),
