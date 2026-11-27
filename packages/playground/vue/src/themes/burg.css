@@ -22,9 +22,3 @@
 	--so-positive-100: color-mix(in srgb, var(--so-burg-surface), var(--so-positive-500) 12%);
 	--so-caution-100: color-mix(in srgb, var(--so-burg-surface), var(--so-caution-500) 12%);
 }
-
-.pg__drawer {
-	background: var(--so-component-surface);
-	color: var(--so-component-text);
-	box-shadow: 0 0 16px #0003;
-}

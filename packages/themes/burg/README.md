@@ -47,6 +47,14 @@ and the error color for validation messages. RadioGroup takes its ring size
 from the CheckBox scale. Its `dot` view marks selection with a center dot and
 `ring` uses a thicker border.
 
+### Overlays
+
+Tooltip uses a compact inverse surface. Popover follows the radius of the
+collection panels. Dialog and AlertDialog use a 14px radius by default at a
+16px root font size. Drawer rounds the corners facing the page. All three
+modal components share the `dim`, `blur`, and `none` backdrop views. The
+`--so-backdrop-blur` variable defaults to 3px.
+
 Set `data-so-theme="burg"` or `data-so-theme="burg-dark"` on the document root
 or the container of the themed components. Load the stylesheet and register
 the layout plugins at the application entry point.

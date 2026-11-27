@@ -4,6 +4,8 @@
 	--so-spacing: 0.25rem;
 	--so-place-surface: var(--so-panel-surface, var(--so-burg-surface));
 	--so-burg-focus-edge: oklch(0.66 0 0);
+	--so-backdrop-blur: 3px;
+	--so-tooltip-line: 1rem;
 
 	--so-button-height-normal: 1.875rem;
 	--so-button-height-sm: calc(var(--so-button-height-normal) - 0.125rem);
@@ -55,6 +57,8 @@
 	--so-burg-focus: oklch(0.84 0 0);
 	--so-burg-progress-accent: #356aa0;
 	--so-burg-danger: #a6333a;
+	--so-burg-overlay-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+	--so-burg-backdrop-fill: rgb(35 37 41 / 32%);
 }
 
 [data-so-theme='burg-dark'] {
@@ -67,4 +71,6 @@
 	--so-burg-focus: oklch(0.48 0 0);
 	--so-burg-progress-accent: #a2c7ee;
 	--so-burg-danger: #ffa1a7;
+	--so-burg-overlay-shadow: 0 8px 24px rgb(0 0 0 / 32%);
+	--so-burg-backdrop-fill: rgb(0 0 0 / 48%);
 }
