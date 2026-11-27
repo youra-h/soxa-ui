@@ -1,0 +1,74 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-tags--variant-negative .so-tags-item, .so-tags-item--variant-negative) {
+		--so-burg-tag-ink: var(--so-burg-danger);
+	}
+
+	:where(.so-tags-item--variant-normal) {
+		--so-burg-tag-ink: var(--so-burg-text);
+	}
+
+	:where(.so-tags-item) {
+		--so-burg-tag-fill: var(--so-burg-row-highlight);
+		--so-burg-tag-border: transparent;
+		border-radius: calc(var(--so-radius) * 0.75);
+		border: 1px solid var(--so-burg-tag-border);
+		background-color: var(--so-burg-tag-fill);
+		color: var(--so-burg-tag-ink, var(--so-burg-text));
+	}
+
+	:where(:is(.so-tags--view-plain, .so-tags--view-outlined) .so-tags-item) {
+		--so-burg-tag-fill: transparent;
+	}
+
+	:where(.so-tags--view-outlined .so-tags-item) {
+		--so-burg-tag-border: var(--so-burg-border);
+	}
+
+	@media (hover: hover) {
+		:where(
+			.so-tags-item:not([data-disabled='true']):has(
+					> .so-button:not(.so-tags-item__close):hover
+				)
+		) {
+			background-color: color-mix(in oklab, var(--so-burg-tag-fill), currentColor 10%);
+		}
+	}
+
+	:where(.so-tags-item[data-selected='true']) {
+		--so-burg-tag-border: var(--so-burg-focus-edge);
+		background-color: color-mix(in oklab, var(--so-burg-subtle-surface), currentColor 12%);
+	}
+
+	:where(.so-tags-item > .so-button) {
+		--so-burg-button-ink: var(--so-burg-tag-ink, var(--so-burg-text));
+		--so-burg-button-fill: transparent;
+	}
+
+	:where(.so-tags-item--size-normal > .so-button) {
+		font-size: var(--so-tags-item-font-size-normal);
+	}
+
+	:where(.so-tags-item > .so-button:not(.so-tags-item__close)) {
+		--so-burg-button-background: transparent;
+	}
+
+	:where(.so-tags-item > .so-tags-item__close) {
+		--so-burg-button-ink: var(--so-burg-tag-ink, var(--so-burg-muted));
+		border-radius: calc(var(--so-radius) * 0.5);
+	}
+
+	/* The tag and its remove action are separate keyboard targets. */
+	:where(.so-tags-item:has(> .so-button:not(.so-tags-item__close):focus-visible)) {
+		--so-burg-tag-border: var(--so-burg-focus-edge);
+		outline: var(--so-burg-focus-ring);
+		outline-offset: 0;
+	}
+
+	:where(.so-tags-item > .so-button:not(.so-tags-item__close):focus-visible) {
+		outline: none;
+
+		&::after {
+			border-color: transparent;
+		}
+	}
+}
