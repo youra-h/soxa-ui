@@ -86,6 +86,13 @@ and `outline`. Accordion uses simple dividers between sections. Breadcrumbs
 keeps its overflow menu and wraps long trails. Pagination keeps its arrows
 visible beside a scrollable page list when space is tight.
 
+### Date controls
+
+DateInput and DatePicker use the Input scale and focus ring. A date range
+uses one frame for both fields. The calendar uses 30px day tiles with 13px
+text and a 3px focus allowance at normal size. A dashed border distinguishes
+a range preview from a committed range.
+
 Set `data-so-theme="burg"` or `data-so-theme="burg-dark"` on the document root
 or the container of the themed components. Load the stylesheet and register
 the layout plugins at the application entry point.
