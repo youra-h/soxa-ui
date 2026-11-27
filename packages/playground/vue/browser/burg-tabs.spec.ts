@@ -54,9 +54,11 @@ it.each(['burg', 'burg-dark'])(
 		expect(style(first).boxShadow).not.toBe('none')
 		expect(style(second).boxShadow).toBe('none')
 
-		await userEvent.tab()
+		await page.getByRole('tab', { name: 'Account' }).click()
 		await userEvent.keyboard('{ArrowRight}')
-		await expect.element(page.getByRole('tab', { name: 'Password' })).toHaveFocus()
+		const password = page.getByRole('tab', { name: 'Password' })
+		await expect.element(password).toHaveFocus()
+		await expect.element(password).toHaveAttribute('aria-selected', 'true')
 		expect(style(first).boxShadow).toBe('none')
 		expect(style(second).boxShadow).not.toBe('none')
 	},
