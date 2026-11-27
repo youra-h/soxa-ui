@@ -1,6 +1,6 @@
 ﻿import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { A11Y_ADAPTERS, A11Y_CASES } from '../../../shared/src/a11y.ts'
+import { A11Y_ADAPTERS, A11Y_CASES, auditCasesFor } from '../../../shared/src/a11y.ts'
 
 const [browser, requestedRun] = process.argv.slice(2)
 if (!['chromium', 'webkit'].includes(browser)) throw new Error('Expected chromium or webkit')
@@ -34,7 +34,7 @@ const summary = {
 	runId: manifest.runId,
 	browser,
 	startedAt: manifest.startedAt,
-	expectedReports: A11Y_ADAPTERS.length * A11Y_CASES.length,
+	expectedReports: A11Y_ADAPTERS.flatMap(auditCasesFor).length,
 	reports: 0,
 	coverageEntries: Object.fromEntries(
 		['direct', 'consumer', 'semantic-reference'].map((kind) => [
@@ -69,7 +69,7 @@ const count = (target, results) => {
 }
 
 for (const adapter of A11Y_ADAPTERS)
-	for (const entry of A11Y_CASES) {
+	for (const entry of auditCasesFor(adapter)) {
 		const directory = resolve(root, adapter, manifest.runId)
 		const stem = entry.id.replace('/', '--')
 		const file = resolve(directory, stem + '.json')

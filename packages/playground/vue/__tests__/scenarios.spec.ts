@@ -116,6 +116,7 @@ describe.each(IDS)('каталог сценариев %s', (framework) => {
 			auditInventoryErrors(
 				host,
 				COMPONENTS.map((entry) => entry.id),
+				framework,
 			),
 		).toEqual([])
 	})
