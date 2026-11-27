@@ -9,7 +9,7 @@
 	const mountId = $props.id()
 	const binding = setupStepperItem(() => props, mountId, (node) => (ref = node))
 	const state = binding.state
-	const scope = $derived({
+	const scope = () => ({
 		value: state.value ?? '',
 		number: state.stepper_number ?? 1,
 		active: state.active ?? false,
@@ -28,7 +28,7 @@
 	attributes={toRootProps(state, [state.dataset], toRootForward(binding.forwardProps))}
 	attach={binding.attachElement}>
 	{#if props.leading}
-		<div class="so-stepper-item__leading">{@render props.leading(scope)}</div>
+		<div class="so-stepper-item__leading">{@render props.leading(scope())}</div>
 	{/if}
 	<svelte:element this={state.stepper_interactive ? 'button' : 'span'} class="so-stepper-item__trigger"
 		{...state.aria} {...toControlAttrs<StepperItemAttributes>(binding.forwardProps)}
@@ -37,7 +37,7 @@
 		{@attach activate}>
 		<span class="so-stepper-item__indicator" aria-hidden="true">
 			{#if props.indicator}
-				{@render props.indicator(scope)}
+				{@render props.indicator(scope())}
 			{:else if state.active || state.error || state.completed}
 				<Icon embedded={state.active ? 'stepper.step-icon' : 'stepper.status-icon'}
 					class={state.active ? 'so-stepper-item__step-icon' : undefined}
@@ -48,19 +48,19 @@
 		</span>
 		<span class="so-stepper-item__body">
 			<span class="so-stepper-item__label">
-				{#if props.children}{@render props.children(scope)}{:else}{state.text}{/if}
+				{#if props.children}{@render props.children(scope())}{:else}{state.text}{/if}
 			</span>
 			{#if props.subtitle || state.description}
 				<span class="so-stepper-item__description">
-					{#if props.subtitle}{@render props.subtitle(scope)}{:else}{state.description}{/if}
+					{#if props.subtitle}{@render props.subtitle(scope())}{:else}{state.description}{/if}
 				</span>
 			{/if}
 		</span>
 	</svelte:element>
 	{#if state.stepper_hasSeparator}
-		<span class="so-stepper-item__separator" aria-hidden="true">{@render props.separator?.(scope)}</span>
+		<span class="so-stepper-item__separator" aria-hidden="true">{@render props.separator?.(scope())}</span>
 	{/if}
 	{#if props.details}
-		<div class="so-stepper-item__details">{@render props.details(scope)}</div>
+		<div class="so-stepper-item__details">{@render props.details(scope())}</div>
 	{/if}
 </Dynamic>

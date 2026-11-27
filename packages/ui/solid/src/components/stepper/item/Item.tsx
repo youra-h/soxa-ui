@@ -1,4 +1,4 @@
-import { createMemo, type JSX } from 'solid-js'
+import type { JSX } from 'solid-js'
 import { hasIcon } from '@soxa-ui/setup'
 import {
 	ResolvedSlot,
@@ -23,14 +23,14 @@ export function StepperItem(props: StepperItemProps): JSX.Element {
 		sets: [state.dataset],
 		forward: toRootForward(binding.forwardProps()),
 	}))
-	const trigger = createMemo(() => ({
+	const trigger = () => ({
 		...state.aria,
 		...toControlAttrs<StepperItemAttributes>(binding.forwardProps()),
 		class: 'so-stepper-item__trigger',
 		style: {},
 		type: state.stepper_interactive ? 'button' : undefined,
 		disabled: state.stepper_interactive && !state.stepper_canActivate ? true : undefined,
-	}))
+	})
 	const scope = () => ({
 		value: state.value ?? '',
 		number: state.stepper_number ?? 1,

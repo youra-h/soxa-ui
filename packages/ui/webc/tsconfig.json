@@ -53,6 +53,7 @@
       "@soxa-ui/webc/toggle-button": ["./src/components/toggle-button/index.ts"],
       "@soxa-ui/webc/toggle-group": ["./src/components/toggle-group/index.ts"],
       "@soxa-ui/webc/splitter": ["./src/components/splitter/index.ts"],
+      "@soxa-ui/webc/stepper": ["./src/components/stepper/index.ts"],
       "@soxa-ui/webc/file-upload": ["./src/components/file-upload/index.ts"],
       "@soxa-ui/webc/code-block": ["./src/components/code-block/index.ts"],
       "@soxa-ui/webc/avatar": ["./src/components/avatar/index.ts"],

@@ -1,5 +1,5 @@
 import { afterEach, expect, it } from 'vitest'
-import { TStepperElement } from '@soxa-ui/webc'
+import { TStepperElement } from '@soxa-ui/webc/stepper'
 
 afterEach(() => {
 	document.body.replaceChildren()
