@@ -46,6 +46,8 @@ import {
 	createEngineBreadcrumbs,
 	createEngineCalendar,
 	createEngineListBox,
+	createEngineTree,
+	TTree,
 	createEngineMenu,
 	createEnginePagination,
 	createEngineRadioGroup,
@@ -111,6 +113,14 @@ const ENGINES: Readonly<Record<string, () => TOwnedEngine>> = {
 		const owner = new TCalendar()
 
 		return { owner, engine: createEngineCalendar({ owner }) }
+	},
+	TreeDescriptor: () => {
+		const owner = new TTree()
+		const engine = createEngineTree()
+
+		engine.options.set({ owner })
+
+		return { owner, engine }
 	},
 	ListBoxDescriptor: () => {
 		const owner = new TListBox()

@@ -80,3 +80,4 @@ export {
 	StepperContentDescriptor,
 } from './stepper.descriptor'
 export { GuideDescriptor } from './guide.descriptor'
+export * from './tree'

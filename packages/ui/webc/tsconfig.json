@@ -26,6 +26,7 @@
       "@soxa-ui/webc/input": ["./src/components/input/index.ts"],
       "@soxa-ui/webc/label": ["./src/components/label/index.ts"],
       "@soxa-ui/webc/list-box": ["./src/components/list-box/index.ts"],
+      "@soxa-ui/webc/tree": ["./src/components/tree/index.ts"],
       "@soxa-ui/webc/locale-provider": ["./src/adapter/locale/index.ts"],
       "@soxa-ui/webc/menu": ["./src/components/menu/index.ts"],
       "@soxa-ui/webc/number-input": ["./src/components/number-input/index.ts"],

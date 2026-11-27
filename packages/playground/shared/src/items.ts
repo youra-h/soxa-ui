@@ -161,3 +161,31 @@ export const BREADCRUMBS_ITEMS = [
 	{ text: 'Смартфоны', href: '#smartphones' },
 	{ text: 'Товар', _: { active: true } },
 ]
+
+export const TREE_PREVIEW_PROPS = {
+	items: [
+		{
+			value: 'accounts',
+			text: 'Accounts',
+			children: [
+				{
+					value: 'acme',
+					text: 'Acme',
+					children: [{ value: 'acme-projects', text: 'Projects' }],
+				},
+				{ value: 'globex', text: 'Globex' },
+			],
+		},
+		{
+			value: 'support',
+			text: 'Support',
+			children: [
+				{ value: 'faq', text: 'Frequently asked questions' },
+				{ value: 'contact', text: 'Contact' },
+			],
+		},
+	],
+	expanded: ['accounts'],
+	guides: true,
+	aria_label: 'Sections',
+}

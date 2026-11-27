@@ -83,6 +83,7 @@ export const COMPONENTS: Readonly<Record<string, readonly string[]>> = {
 	input: ['icon', 'button', 'input'],
 	label: ['label'],
 	'list-box': ['icon', 'button', 'group', 'list-box'],
+	tree: ['button', 'tree'],
 	menu: ['icon', 'button', 'group', 'anchored', 'place', 'menu'],
 	'number-input': ['icon', 'button', 'number-input'],
 	pagination: ['icon', 'button', 'pagination'],

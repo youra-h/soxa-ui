@@ -43,6 +43,9 @@ import {
 	TItemContextRegistry,
 	TListBox,
 	TListBoxCollectionFacade,
+	TTreeCollectionFacade,
+	TTreeItemCollectionFacade,
+	TTree,
 	TListBoxItemCollectionFacade,
 	TMenu,
 	TMenuCheckboxItem,
@@ -200,6 +203,14 @@ const COLLECTIONS: Readonly<Record<string, readonly [string | null, () => TMount
 			const facade = new TCalendarCollectionFacade({}, { owner: new TCalendar() })
 
 			return withItem(facade, new TCalendarItemCollectionFacade())
+		},
+	],
+	TreeCollectionDescriptor: [
+		'TreeItemCollectionDescriptor',
+		() => {
+			const facade = new TTreeCollectionFacade({ items: SOURCES }, { owner: new TTree() })
+
+			return withItem(facade, new TTreeItemCollectionFacade())
 		},
 	],
 	ListBoxCollectionDescriptor: [

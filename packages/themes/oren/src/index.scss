@@ -83,6 +83,7 @@
 
 @layer components.so.list-box {
 	@include meta.load-css('components/list-box/list-box');
+	@include meta.load-css('components/tree/tree');
 }
 
 @layer components.so.menu {

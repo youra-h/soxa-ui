@@ -23,6 +23,7 @@ import type {
 } from '@soxa-ui/setup'
 import {
 	COLLECTION_ITEMS,
+	TREE_PREVIEW_PROPS,
 	COLLECTION_MANY_ITEMS,
 	TABLE_COLUMNS,
 	TABLE_MANY_ROWS,
@@ -56,6 +57,7 @@ import {
 	Badge,
 	CodeBlock,
 	Guide,
+	Tree,
 	FileUpload,
 	Splitter,
 	Stepper,
@@ -660,6 +662,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 	'alert-dialog': (bind) => h(AlertDialogPreview, bind),
 	dialog: (bind) => h(DialogPreview, bind),
 	guide: (bind) => h(GuidePreview, bind),
+	tree: (bind) => h(Tree, { ...TREE_PREVIEW_PROPS, ...bind }),
 
 	// A button opens the drawer, which runs on local state (see `DrawerPreview`)
 	drawer: (bind) => h(DrawerPreview, bind),

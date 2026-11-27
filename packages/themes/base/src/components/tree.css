@@ -1,0 +1,59 @@
+.so-tree {
+	min-inline-size: 0;
+}
+
+.so-tree-item {
+	display: block;
+	color: inherit;
+	text-decoration: none;
+}
+
+.so-tree-item > .so-tree-item__row {
+	display: flex;
+	inline-size: 100%;
+	justify-content: start;
+	text-align: start;
+}
+
+.so-tree-item__group {
+	padding-inline-start: var(--so-tree-indent, 1.25rem);
+}
+
+.so-tree[data-guides='true'] .so-tree-item__group {
+	border-inline-start: 1px solid var(--so-tree-guide-color, currentColor);
+	margin-inline-start: calc(var(--so-tree-indent, 1.25rem) / 2);
+	padding-inline-start: calc(var(--so-tree-indent, 1.25rem) / 2 - 1px);
+}
+
+.so-tree-item__toggle,
+.so-tree-item__spacer {
+	display: inline-grid;
+	place-items: center;
+	inline-size: 1.25em;
+	flex: 0 0 auto;
+}
+
+.so-tree-item__chevron {
+	inline-size: 0.45em;
+	block-size: 0.45em;
+	border: solid currentColor;
+	border-width: 0 1px 1px 0;
+	transform: scaleX(var(--so-dir-sign, 1)) rotate(-45deg);
+}
+
+.so-tree-item[data-expanded='true'] > .so-tree-item__row .so-tree-item__chevron {
+	transform: rotate(45deg);
+}
+
+.so-tree-item__accessible-name,
+.so-tree-item[data-window-ancestor] > .so-tree-item__row {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+}
+
+.so-tree__filler {
+	block-size: var(--so-filler-height);
+}

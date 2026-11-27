@@ -81,7 +81,8 @@
       "Tooltip",
       "Virtual",
       "roleIcon",
-      "useToasts"
+      "useToasts",
+      "Tree"
     ],
     "types": [
       "AccordionItemProps",
@@ -172,7 +173,8 @@
       "ToggleGroupProps",
       "TooltipProps",
       "ValueControlProps",
-      "VirtualProps"
+      "VirtualProps",
+      "TreeProps"
     ]
   },
   "react": {
@@ -254,7 +256,8 @@
       "Tooltip",
       "Virtual",
       "roleIcon",
-      "useToasts"
+      "useToasts",
+      "Tree"
     ],
     "types": [
       "AccordionEventProps",
@@ -444,7 +447,10 @@
       "ValueControlEventProps",
       "ValueControlProps",
       "VirtualEventProps",
-      "VirtualProps"
+      "VirtualProps",
+      "TreeAttributes",
+      "TreeEventProps",
+      "TreeProps"
     ]
   },
   "solid": {
@@ -526,7 +532,8 @@
       "Tooltip",
       "Virtual",
       "roleIcon",
-      "useToasts"
+      "useToasts",
+      "Tree"
     ],
     "types": [
       "AccordionEventProps",
@@ -716,7 +723,10 @@
       "ValueControlEventProps",
       "ValueControlProps",
       "VirtualEventProps",
-      "VirtualProps"
+      "VirtualProps",
+      "TreeAttributes",
+      "TreeEventProps",
+      "TreeProps"
     ]
   },
   "svelte": {
@@ -798,7 +808,8 @@
       "Tooltip",
       "Virtual",
       "roleIcon",
-      "useToasts"
+      "useToasts",
+      "Tree"
     ],
     "types": [
       "AccordionEventProps",
@@ -987,7 +998,10 @@
       "ValueControlEventProps",
       "ValueControlProps",
       "VirtualEventProps",
-      "VirtualProps"
+      "VirtualProps",
+      "TreeAttributes",
+      "TreeEventProps",
+      "TreeProps"
     ]
   },
   "webc": {
@@ -1071,7 +1085,8 @@
       "registerItemRowTag",
       "registerPopoverTag",
       "roleIcon",
-      "toastsOf"
+      "toastsOf",
+      "TTreeElement"
     ],
     "types": [
       "ICollectionInitialPanel",
@@ -1156,7 +1171,8 @@
       "TToggleGroupElementProps",
       "TToggleGroupItemElementProps",
       "TTooltipElementProps",
-      "TVirtualElementProps"
+      "TVirtualElementProps",
+      "TTreeElementProps"
     ],
     "subpaths": {
       "./accordion": {
@@ -1398,6 +1414,10 @@
       "./guide": {
         "values": ["TGuideElement"],
         "types": ["TGuideElementProps"]
+      },
+      "./tree": {
+        "values": ["TTreeElement"],
+        "types": ["TTreeElementProps"]
       }
     }
   },
@@ -1488,7 +1508,8 @@
       "provideAttrs",
       "useToasts",
       "ɵSubtreeDirective",
-      "ɵValueAccessorDirective"
+      "ɵValueAccessorDirective",
+      "TTreeComponent"
     ],
     "types": ["ICollectionInitialPanel", "ICollectionInitialSource", "TToastRender"]
   }

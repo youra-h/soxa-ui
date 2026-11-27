@@ -45,7 +45,7 @@
 
 @layer so.reset, so.settings, so.direction, so.disabled, so.caption, so.required, so.target, so.group,
 	so.anchored, so.swipe, so.place, so.icon, so.avatar, so.avatar-group, so.button, so.toggle-group, so.check-box, so.accordion, so.date-input,
-	so.modal, so.dialog, so.alert-dialog, so.drag-and-drop, so.drawer, so.input, so.badge, so.label, so.field, so.list-box,
+	so.modal, so.dialog, so.alert-dialog, so.drag-and-drop, so.drawer, so.input, so.badge, so.label, so.field, so.list-box, so.tree,
 	so.menu, so.breadcrumbs, so.number-input, so.pagination, so.popover, so.guide, so.calendar, so.date-picker,
 	so.progress-linear, so.progress-spinner, so.radio-group, so.rating, so.scroller, so.select,
 	so.separator, so.skeleton, so.slider, so.splitter, so.stepper, so.switch, so.table, so.tabs, so.tags, so.textarea, so.toasts,
@@ -80,6 +80,7 @@
 @import './components/label.css' layer(so.label);
 @import './components/field.css' layer(so.field);
 @import './components/list-box.css' layer(so.list-box);
+@import './components/tree.css' layer(so.tree);
 @import './components/menu.css' layer(so.menu);
 @import './components/breadcrumbs.css' layer(so.breadcrumbs);
 @import './components/number-input.css' layer(so.number-input);

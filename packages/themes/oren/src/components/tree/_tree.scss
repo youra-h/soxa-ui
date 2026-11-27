@@ -1,0 +1,17 @@
+@use '../button/mixins' as button;
+
+.so-tree {
+	--so-tree-guide-color: var(--so-neutral-300);
+}
+
+:where(.so-tree-item > .so-tree-item__row) {
+	@include button.button-view('plain');
+}
+
+.so-tree-item:focus-visible {
+	outline: none;
+}
+
+.so-tree-item:focus-visible > .so-tree-item__row {
+	@apply outline-2 outline-offset-[-2px] outline-so-component;
+}

@@ -426,6 +426,18 @@
       "sources": ["packages/core/src/components/custom/tooltip/tooltip.class.ts"],
       "description": "Root of tooltip. Inherited component classes use the concrete component's base name.",
       "scope": "so-tooltip"
+    },
+    {
+      "name": "so-tree",
+      "sources": ["packages/core/src/components/custom/tree/tree.class.ts"],
+      "description": "Root of the tree widget with its accessible name and grouped nodes.",
+      "scope": "so-tree"
+    },
+    {
+      "name": "so-tree-item",
+      "sources": ["packages/core/src/components/custom/tree/item.class.ts"],
+      "description": "Tree item shell containing the row and the group of revealed children.",
+      "scope": "so-tree-item"
     }
   ],
   "parts": [
@@ -3510,6 +3522,93 @@
       ],
       "description": "panel part of tooltip. Availability follows the rendered component structure.",
       "scope": "so-tooltip"
+    },
+    {
+      "name": "so-tree__filler",
+      "sources": [
+        "packages/ui/angular/src/components/tree/tree.component.html",
+        "packages/ui/react/src/components/tree/Tree.tsx",
+        "packages/ui/solid/src/components/tree/Tree.tsx",
+        "packages/ui/svelte/src/components/tree/Tree.svelte",
+        "packages/ui/vue/src/components/tree/Tree.vue",
+        "packages/ui/vue/src/components/tree/TreeRow.vue",
+        "packages/ui/webc/src/components/tree/tree.template.ts"
+      ],
+      "description": "Space reserved for rows omitted by Virtual.",
+      "scope": "so-tree"
+    },
+    {
+      "name": "so-tree-item__accessible-name",
+      "sources": [
+        "packages/ui/angular/src/components/tree/row/tree-item.component.html",
+        "packages/ui/react/src/components/tree/Tree.tsx",
+        "packages/ui/solid/src/components/tree/Tree.tsx",
+        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
+        "packages/ui/vue/src/components/tree/TreeRow.vue"
+      ],
+      "description": "Accessible label for an ancestor whose row is outside the virtual window.",
+      "scope": "so-tree-item"
+    },
+    {
+      "name": "so-tree-item__chevron",
+      "sources": [
+        "packages/ui/angular/src/components/tree/row/tree-item.component.html",
+        "packages/ui/react/src/components/tree/Tree.tsx",
+        "packages/ui/solid/src/components/tree/Tree.tsx",
+        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
+        "packages/ui/vue/src/components/tree/TreeRow.vue",
+        "packages/ui/webc/src/components/tree/tree-item.template.ts"
+      ],
+      "description": "Default disclosure indicator when no indicator icon is provided.",
+      "scope": "so-tree-item"
+    },
+    {
+      "name": "so-tree-item__group",
+      "sources": [
+        "packages/ui/angular/src/components/tree/row/tree-item.component.html",
+        "packages/ui/react/src/components/tree/Tree.tsx",
+        "packages/ui/solid/src/components/tree/Tree.tsx",
+        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
+        "packages/ui/vue/src/components/tree/TreeRow.vue",
+        "packages/ui/webc/src/components/tree/tree.template.ts"
+      ],
+      "description": "Group of children with a logical indentation and optional guide.",
+      "scope": "so-tree-item"
+    },
+    {
+      "name": "so-tree-item__row",
+      "sources": [
+        "packages/ui/angular/src/components/tree/row/tree-item.component.html",
+        "packages/ui/react/src/components/tree/Tree.tsx",
+        "packages/ui/solid/src/components/tree/Tree.tsx",
+        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
+        "packages/ui/vue/src/components/tree/TreeRow.vue",
+        "packages/ui/webc/src/components/tree/tree-item.template.ts"
+      ],
+      "description": "Row with the disclosure indicator, optional icon and label.",
+      "scope": "so-tree-item"
+    },
+    {
+      "name": "so-tree-item__spacer",
+      "sources": [
+        "packages/ui/react/src/components/tree/Tree.tsx",
+        "packages/ui/solid/src/components/tree/Tree.tsx",
+        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
+        "packages/ui/webc/src/components/tree/tree-item.template.ts"
+      ],
+      "description": "Space aligning the labels of leaves and branches.",
+      "scope": "so-tree-item"
+    },
+    {
+      "name": "so-tree-item__toggle",
+      "sources": [
+        "packages/ui/react/src/components/tree/Tree.tsx",
+        "packages/ui/solid/src/components/tree/Tree.tsx",
+        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
+        "packages/ui/webc/src/components/tree/tree-item.template.ts"
+      ],
+      "description": "Click target for expanding or collapsing an available branch.",
+      "scope": "so-tree-item"
     }
   ],
   "modifiers": [
@@ -3679,6 +3778,16 @@
       "presence": "TDataset serializes false as \"false\"; null/undefined removes the attribute. See scope for the bound DOM node."
     },
     {
+      "name": "data-branch",
+      "sources": [
+        "packages/core/src/components/custom/tree/collection/extensions/tree/tree.extension.ts"
+      ],
+      "description": "Whether the node owns children or can load them.",
+      "scope": "so-tree-item",
+      "values": "true | false",
+      "presence": "TDataset serializes booleans as strings."
+    },
+    {
       "name": "data-can-next",
       "sources": ["packages/core/src/components/custom/scroller/scroller.class.ts"],
       "description": "More content can be scrolled forward.",
@@ -3839,6 +3948,16 @@
       "presence": "TDataset serializes both boolean states."
     },
     {
+      "name": "data-expanded",
+      "sources": [
+        "packages/core/src/components/custom/tree/collection/extensions/tree/tree.extension.ts"
+      ],
+      "description": "Whether the branch is open in the visible hierarchy.",
+      "scope": "so-tree-item",
+      "values": "true | false",
+      "presence": "TDataset serializes booleans as strings."
+    },
+    {
       "name": "data-file-id",
       "sources": [
         "packages/ui/angular/src/components/file-upload/file-upload.component.html",
@@ -3862,6 +3981,14 @@
       "scope": "Table root",
       "values": "true | false",
       "presence": "TDataset serializes false as \"false\"; null/undefined removes the attribute. See scope for the bound DOM node."
+    },
+    {
+      "name": "data-guides",
+      "sources": ["packages/core/src/components/custom/tree/tree.class.ts"],
+      "description": "Whether to show vertical guides next to child groups.",
+      "scope": "so-tree",
+      "values": "true | false",
+      "presence": "TDataset serializes booleans as strings."
     },
     {
       "name": "data-header",
@@ -3985,6 +4112,16 @@
       "scope": "CodeBlock",
       "values": ["true", "false"],
       "presence": "Present with an explicit boolean string for the corresponding CodeBlock feature."
+    },
+    {
+      "name": "data-loading",
+      "sources": [
+        "packages/core/src/components/custom/tree/collection/extensions/tree/tree.extension.ts"
+      ],
+      "description": "Whether this branch is waiting for its children.",
+      "scope": "so-tree-item",
+      "values": "true | false",
+      "presence": "TDataset serializes booleans as strings."
     },
     {
       "name": "data-maximized",
@@ -4364,6 +4501,14 @@
       "scope": "Table root",
       "values": "true | false",
       "presence": "TDataset serializes false as \"false\"; null/undefined removes the attribute. See scope for the bound DOM node."
+    },
+    {
+      "name": "data-window-ancestor",
+      "sources": ["packages/ui/webc/src/components/tree/tree.template.ts"],
+      "description": "Marks an ancestor whose row is omitted by the virtual window.",
+      "scope": "so-tree-item",
+      "values": "empty string",
+      "presence": "Only when the ancestor remains mounted for ownership."
     },
     {
       "name": "data-wrap",
