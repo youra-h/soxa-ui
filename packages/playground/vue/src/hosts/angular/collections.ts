@@ -706,8 +706,9 @@ export class ScrollerPreview implements TFixture {
 				so-tree
 				[ctrl]="ctrl()"
 				[items]="items() ?? defaults.items"
-				[expanded]="expanded() ?? defaults.expanded"
+				[expanded]="expanded()"
 				[guides]="guides() ?? defaults.guides"
+				[indicator]="indicator()"
 				[mode]="mode()"
 				[value]="value()"
 				[disabled]="disabled()"
@@ -734,6 +735,7 @@ export class TreePreview implements TFixture {
 	readonly items = input<TTreeComponent['items']>()
 	readonly expanded = input<TTreeComponent['expanded']>()
 	readonly guides = input<TTreeComponent['guides']>()
+	readonly indicator = input<TTreeComponent['indicator']>()
 	readonly mode = input<TTreeComponent['mode']>()
 	readonly value = input<TTreeComponent['value']>()
 	readonly disabled = input<TTreeComponent['disabled']>()

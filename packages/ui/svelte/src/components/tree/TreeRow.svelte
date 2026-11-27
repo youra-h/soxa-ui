@@ -1,7 +1,8 @@
 <script lang="ts">
 	import type { TTreeItem, TTreeRenderItem } from '@soxa-ui/core'
 	import type { Snippet } from 'svelte'
-	import { Dynamic, toRootProps } from '../../adapter'
+	import { Dynamic, roleIcon, toRootProps } from '../../adapter'
+	import { Icon } from '../icon'
 	import { ItemRow } from '../item-row'
 	import type { TreeProps, TreeIconScope } from './base.component'
 	import { setupTreeRow } from './setup.component'
@@ -18,6 +19,8 @@
 	const mountId = $props.id()
 	const binding = setupTreeRow(() => ({ ctrl }), mountId, () => {})
 	const state = binding.state
+	const CHECK = roleIcon('check')
+	const indicatorSide = $derived(state.dataset?.['data-indicator'])
 
 	function scope(): TreeIconScope {
 		return {
@@ -28,6 +31,14 @@
 		}
 	}
 </script>
+
+{#snippet selectionMark()}
+	<span class="so-tree-item__selection-indicator" aria-hidden="true">
+		{#if state.selected}
+			<Icon embedded="tree.selection-indicator" tag={CHECK} size={state.size} />
+		{/if}
+	</span>
+{/snippet}
 
 <Dynamic
 	rendered={state.rendered}
@@ -49,13 +60,18 @@
 					{#if scope().branch}
 						{#if indicator}{@render indicator(scope())}{:else}<span class="so-tree-item__chevron"></span>{/if}
 					{/if}
-				</span>{@render icon?.(scope())}
+				</span>
+				{#if indicatorSide === 'start'}{@render selectionMark()}{/if}
+				{@render icon?.(scope())}
 			{/snippet}
 			{#if item}
 				{@render item({ ...scope(), text: state.text ?? '', selected: state.selected ?? false })}
 			{:else}
 				{state.text}
 			{/if}
+			{#snippet trailing()}
+				{#if indicatorSide === 'end'}{@render selectionMark()}{/if}
+			{/snippet}
 		</ItemRow>
 	{:else}
 		<span class="so-tree-item__accessible-name">{state.text}</span>

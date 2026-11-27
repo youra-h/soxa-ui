@@ -15,6 +15,7 @@ import { TElementPlugin } from '../element'
 import { TTypeahead, itemText } from '../list/typeahead'
 
 const ROW = '.so-tree-item__row'
+const DISCLOSURE = '.so-tree-item__toggle'
 const PIN = 'tree-tabstop'
 
 /** The root is a fallback tab stop while no enabled node can receive focus. */
@@ -182,12 +183,13 @@ export class TTreeKeyboardPlugin extends TBasePlugin<TTree, TPluginEvents> {
 	}
 
 	private readonly _onClick = (event: MouseEvent): void => {
-		const tree = this._engine?.extensions.tree
+		const extensions = this._engine?.extensions
 		const item = this._itemOf(event.target)
 		const target = event.target
 
-		if (!tree || !item || !(target instanceof Element) || !target.closest(ROW)) return
+		if (!extensions || !item || !(target instanceof Element) || !target.closest(ROW)) return
 
+		const { tree, selection } = extensions
 		if (!tree.isNavigable(item)) {
 			event.preventDefault()
 
@@ -198,7 +200,8 @@ export class TTreeKeyboardPlugin extends TBasePlugin<TTree, TPluginEvents> {
 
 		this._focus(item)
 
-		if (tree.activate(item)) event.preventDefault()
+		const disclosure = selection.mode !== 'none' && target.closest(DISCLOSURE)
+		if (disclosure ? tree.toggle(item) : tree.activate(item)) event.preventDefault()
 	}
 
 	private readonly _onKey = (event: KeyboardEvent): void => {

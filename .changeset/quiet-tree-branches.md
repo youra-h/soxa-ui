@@ -12,4 +12,4 @@
 '@soxa-ui/theme-oren': patch
 ---
 
-Add Tree for nested collections across all six adapters. Tree supports independent selection, keyboard navigation, deferred children, node and disclosure icon slots, optional branch guides, and Virtual.
+Add Tree for nested collections across all six adapters. Tree supports independent selection, an optional selection mark, keyboard navigation, deferred children, node and disclosure icon slots, optional branch guides, and Virtual.

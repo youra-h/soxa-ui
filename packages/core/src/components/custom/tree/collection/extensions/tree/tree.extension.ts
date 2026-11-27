@@ -1,6 +1,7 @@
 import { batchOf, selectionOf, TBaseExtension } from '../../../../../base/collection'
 import type { IExtensionContext, TQueryEvent } from '../../../../../base/collection'
 import type { TValuePayload } from '../../../../../../common'
+import { LIST_DEFAULTS, LIST_INDICATOR_ATTRIBUTE } from '../../../../list'
 import type { TTreeItem } from '../../../item.class'
 import type { TTree } from '../../../tree.class'
 import type { ITreeNode, TTreeKey, TTreeLoadChildren } from '../../../types'
@@ -42,6 +43,8 @@ export class TTreeExtension extends TBaseExtension<
 		if (!batch) throw new Error('Tree requires the batch extension')
 
 		batch.trackBy = (item) => item.value
+		ctx.driver.events.on('item:added', ({ item }) => this._inheritStyle(item))
+		ctx.driver.events.on('item:updated', ({ item }) => this._inheritStyle(item))
 
 		ctx.driver.events.on('item:removed', ({ item }) => {
 			this.cancelLoad(item)
@@ -63,8 +66,16 @@ export class TTreeExtension extends TBaseExtension<
 
 		ctx.options.watch('owner', (owner, scope) => {
 			if (owner) {
+				const syncStyle = () => {
+					for (const item of ctx.driver.valueOf()) this._inheritStyle(item, owner)
+				}
+
+				scope.on(owner.events, 'change:size', syncStyle)
+				scope.on(owner.events, 'change:variant', syncStyle)
 				scope.on(owner.events, 'change:disabled', this._syncShown)
+				scope.on(owner.events, 'change:indicator', this._syncShown)
 				scope.on(owner.events, 'change:loadChildren', () => this.cancelLoads())
+				syncStyle()
 			}
 
 			this.cancelLoads()
@@ -214,7 +225,7 @@ export class TTreeExtension extends TBaseExtension<
 		for (const item of this._loading.keys()) this.cancelLoad(item)
 	}
 
-	/** Activate the whole row and report whether a branch was toggled. */
+	/** Activate the row according to the selection mode. Return true on disclosure. */
 	activate(item: TTreeItem): boolean {
 		if (!this.isNavigable(item)) return false
 
@@ -224,10 +235,7 @@ export class TTreeExtension extends TBaseExtension<
 			this._syncCurrent()
 		}
 
-		const toggled = this.toggle(item)
-		this.choose(item)
-
-		return toggled
+		return !this.choose(item) && this.toggle(item)
 	}
 
 	toggle(item: TTreeItem): boolean {
@@ -286,6 +294,13 @@ export class TTreeExtension extends TBaseExtension<
 		if (oldValue !== item) this.events.emit('change:tabStop', { oldValue, newValue: item })
 	}
 
+	private _inheritStyle(item: TTreeItem, owner = this._ctx.options.get('owner')): void {
+		if (!owner) return
+
+		item.size = owner.size
+		item.variant = owner.variant
+	}
+
 	private _syncCurrent(): void {
 		const current = selectionOf(this._ctx)?.mode === 'none'
 		this._current?.dataset.add('highlighted', current ? true : null)
@@ -302,6 +317,12 @@ export class TTreeExtension extends TBaseExtension<
 
 	private readonly _syncShown = (): void => {
 		const shown = batchOf(this._ctx)?.shown ?? []
+		const owner = this._ctx.options.get('owner')
+		const selection = selectionOf(this._ctx)
+		const indicator =
+			selection?.mode === 'none'
+				? LIST_DEFAULTS.indicator
+				: (owner?.indicator ?? LIST_DEFAULTS.indicator)
 		const levels = new Map<TTreeItem, number>()
 		const siblingCounts = new Map<TTreeKey | null, number>()
 		const positions = new Map<TTreeKey | null, number>()
@@ -327,14 +348,12 @@ export class TTreeExtension extends TBaseExtension<
 			item.aria.add('aria-expanded', branch ? String(expanded) : null)
 			item.dataset.add('branch', branch)
 			item.dataset.add('expanded', expanded)
+			item.dataset.add(LIST_INDICATOR_ATTRIBUTE, indicator)
 			if (item !== this._tabStop) item.aria.add('tabindex', '-1')
 			this._syncSelected(item)
 		}
 
-		const selection = selectionOf(this._ctx)
-		this._ctx.options
-			.get('owner')
-			?.aria.add('aria-multiselectable', selection?.multiple ? 'true' : null)
+		owner?.aria.add('aria-multiselectable', selection?.multiple ? 'true' : null)
 
 		this._syncCurrent()
 		this._syncTabStop(shown)

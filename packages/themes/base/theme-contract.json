@@ -3585,7 +3585,20 @@
         "packages/ui/vue/src/components/tree/TreeRow.vue",
         "packages/ui/webc/src/components/tree/tree-item.template.ts"
       ],
-      "description": "Row with the disclosure indicator, optional icon and label.",
+      "description": "Row with disclosure, selection mark, optional icon and label.",
+      "scope": "so-tree-item"
+    },
+    {
+      "name": "so-tree-item__selection-indicator",
+      "sources": [
+        "packages/ui/angular/src/components/tree/row/tree-item.component.html",
+        "packages/ui/react/src/components/tree/Tree.tsx",
+        "packages/ui/solid/src/components/tree/Tree.tsx",
+        "packages/ui/svelte/src/components/tree/TreeRow.svelte",
+        "packages/ui/vue/src/components/tree/TreeRow.vue",
+        "packages/ui/webc/src/components/tree/tree-item.template.ts"
+      ],
+      "description": "Space for the selection mark at the configured side of the row.",
       "scope": "so-tree-item"
     },
     {
@@ -4043,12 +4056,13 @@
         "packages/core/src/components/custom/list-box/collection/extensions/list-box/list-box.extension.ts",
         "packages/core/src/components/custom/list-box/list-box.class.ts",
         "packages/core/src/components/custom/select/collection/extensions/select/select.extension.ts",
-        "packages/core/src/components/custom/select/select.class.ts"
+        "packages/core/src/components/custom/select/select.class.ts",
+        "packages/core/src/components/custom/tree/collection/extensions/tree/tree.extension.ts"
       ],
       "description": "Side reserved for the selection indicator.",
-      "scope": "ListBox and Select list root and item wrapper; none | start | end",
+      "scope": "ListBox and Select list root and item wrapper, Tree item and row",
       "values": "none | start | end",
-      "presence": "Written when the list extension is attached; removed on disposal."
+      "presence": "The collection sets the effective side on the item. Tree uses none in navigation mode."
     },
     {
       "name": "data-invalid",
@@ -4629,11 +4643,12 @@
         "packages/core/src/components/custom/list-box/collection/extensions/list-box/list-box.extension.ts",
         "packages/core/src/components/custom/list-box/list-box.class.ts",
         "packages/core/src/components/custom/select/collection/extensions/select/select.extension.ts",
-        "packages/core/src/components/custom/select/select.class.ts"
+        "packages/core/src/components/custom/select/select.class.ts",
+        "packages/core/src/components/custom/tree/collection/extensions/tree/tree.extension.ts"
       ],
       "pattern": "data-indicator",
-      "scope": "ListBox and Select list root and item wrapper; none | start | end",
-      "description": "Computed emission: ListBox and Select list root and item wrapper; none | start | end. This source expression is checked explicitly so new dynamic cases require a documented mapping."
+      "scope": "ListBox and Select list root and item wrapper, Tree item and row",
+      "description": "Computed emission of the side reserved for the selection indicator."
     },
     {
       "name": "TDragPlugin.DRAGGING_CLASS",

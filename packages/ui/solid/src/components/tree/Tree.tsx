@@ -1,10 +1,13 @@
 import type { Accessor, JSX } from 'solid-js'
 import type { TTreeRenderEntry, TTreeRenderItem } from '@soxa-ui/core'
-import { Elevate, KeyedFor, Root, createRootProps, resolveSlot } from '../../adapter'
+import { Elevate, KeyedFor, Root, createRootProps, resolveSlot, roleIcon } from '../../adapter'
 import { Show } from '../../adapter/runtime/flow'
+import { Icon } from '../icon'
 import { ItemRow } from '../item-row'
 import { setupTree, setupTreeRow } from './setup.component'
 import type { TreeProps, TreeRowProps } from './base.component'
+
+const CHECK = roleIcon('check')
 
 function TreeRow(props: TreeRowProps): JSX.Element {
 	const binding = setupTreeRow({
@@ -27,6 +30,14 @@ function TreeRow(props: TreeRowProps): JSX.Element {
 		sets: [state.attrs, state.aria, state.dataset, { href: link() ?? null }],
 		forward: {},
 	}))
+	const indicatorSide = () => state.dataset?.['data-indicator']
+	const selectionMark = () => (
+		<span class="so-tree-item__selection-indicator" aria-hidden="true">
+			<Show when={state.selected}>
+				<Icon embedded="tree.selection-indicator" tag={CHECK} size={state.size} />
+			</Show>
+		</span>
+	)
 	const icon = resolveSlot(() => props.slots['item-icon'], scope)
 	const indicator = resolveSlot(() => props.slots['item-indicator-icon'], scope)
 	const text = resolveSlot(
@@ -51,6 +62,7 @@ function TreeRow(props: TreeRowProps): JSX.Element {
 					size={state.size}
 					variant={state.variant}
 					{...state.dataset}
+					trailing={indicatorSide() === 'end' ? selectionMark() : null}
 					leading={
 						<>
 							<span
@@ -61,6 +73,7 @@ function TreeRow(props: TreeRowProps): JSX.Element {
 									{indicator() ?? <span class="so-tree-item__chevron" />}
 								</Show>
 							</span>
+							{indicatorSide() === 'start' ? selectionMark() : null}
 							{icon()}
 						</>
 					}

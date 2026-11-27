@@ -7,7 +7,9 @@ import {
 import type { TTreeItem, TTreeRenderItem } from '@soxa-ui/core'
 import {
 	createVueAdapterContext,
+	extendBinding,
 	joinBindings,
+	roleIcon,
 	useAdapter,
 	useCollectionAdapter,
 	useEmits,
@@ -17,6 +19,7 @@ import {
 	type SetupContext,
 } from '../../adapter'
 import type { TEmits, TProps, UseProps } from '../../types/common'
+import { Icon } from '../icon'
 import { ItemRow } from '../item-row'
 
 type IconScope = { item: TTreeItem; branch: boolean; expanded: boolean; loading: boolean }
@@ -27,7 +30,7 @@ type TreeItemProps = UseProps<typeof TreeItemDescriptor, TTreeItem>
 export default {
 	name: 'TreeRow',
 	expose: useExpose(),
-	components: { ItemRow },
+	components: { Icon, ItemRow },
 	emits: [
 		...useEmits(TreeItemDescriptor()),
 		...useEmits(TreeItemCollectionDescriptor()),
@@ -48,7 +51,9 @@ export default {
 		const collectionBinding = useCollectionAdapter(collectionAdapter, props, emit)
 		const itemBinding = useAdapter(adapter, props, emit)
 
-		return joinBindings(itemBinding, collectionBinding)
+		return extendBinding(joinBindings(itemBinding, collectionBinding), {
+			selectionIconTag: roleIcon('check'),
+		})
 	},
 }
 </script>
@@ -86,6 +91,18 @@ export default {
 						<span class="so-tree-item__chevron"></span>
 					</slot>
 				</span>
+				<span
+					v-if="dataset['data-indicator'] === 'start'"
+					class="so-tree-item__selection-indicator"
+					aria-hidden="true"
+				>
+					<Icon
+						v-if="selected"
+						embedded="tree.selection-indicator"
+						:tag="selectionIconTag"
+						:size="size"
+					/>
+				</span>
 				<slot
 					name="icon"
 					:item="entry.item"
@@ -103,6 +120,16 @@ export default {
 				:loading="aria['aria-busy'] === 'true'"
 				>{{ text }}</slot
 			>
+			<template v-if="dataset['data-indicator'] === 'end'" #trailing>
+				<span class="so-tree-item__selection-indicator" aria-hidden="true">
+					<Icon
+						v-if="selected"
+						embedded="tree.selection-indicator"
+						:tag="selectionIconTag"
+						:size="size"
+					/>
+				</span>
+			</template>
 		</ItemRow>
 		<span v-else class="so-tree-item__accessible-name">{{ text }}</span>
 		<div v-if="aria['aria-expanded'] === 'true'" role="group" class="so-tree-item__group">

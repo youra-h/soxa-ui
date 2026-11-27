@@ -2,6 +2,7 @@
 @let branch = !!aria?.['aria-expanded'];
 @let expanded = aria?.['aria-expanded'] === 'true';
 @let loading = aria?.['aria-busy'] === 'true';
+@let indicatorSide = state()['dataset']?.['data-indicator'];
 @let scope = { item: ctrl, branch, expanded, loading };
 @if (row) {
 	<div
@@ -28,6 +29,9 @@
 					}
 				}
 			</span>
+			@if (indicatorSide === 'start') {
+				<ng-container [ngTemplateOutlet]="selectionMark" />
+			}
 			<ng-container [ngTemplateOutlet]="iconSlot ?? null" [ngTemplateOutletContext]="scope" />
 		</ng-container>
 		@if (contentSlot) {
@@ -42,6 +46,11 @@
 		} @else {
 			{{ state()['text'] }}
 		}
+		<ng-container ngProjectAs="[slot=trailing]">
+			@if (indicatorSide === 'end') {
+				<ng-container [ngTemplateOutlet]="selectionMark" />
+			}
+		</ng-container>
 	</div>
 } @else {
 	<span class="so-tree-item__accessible-name">{{ state()['text'] }}</span>
@@ -54,3 +63,15 @@
 		/>
 	</div>
 }
+<ng-template #selectionMark>
+	<span class="so-tree-item__selection-indicator" aria-hidden="true">
+		@if (state()['selected']) {
+			<svg
+				so-icon
+				embedded="tree.selection-indicator"
+				so-role-icon="check"
+				[size]="state()['size']"
+			></svg>
+		}
+	</span>
+</ng-template>

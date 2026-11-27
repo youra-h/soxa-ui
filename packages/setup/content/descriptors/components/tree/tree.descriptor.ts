@@ -44,6 +44,7 @@ export const TreeDescriptor = defineDescriptor(() => {
 			props: {
 				loadChildren: { type: Function, triggers: ['change:loadChildren'] },
 				guides: { type: Boolean, triggers: ['change:guides'] },
+				indicator: { type: String, triggers: ['change:indicator'] },
 			},
 			slots: {
 				item: { scope: row, description: 'Content of a tree row' },
@@ -54,7 +55,7 @@ export const TreeDescriptor = defineDescriptor(() => {
 				},
 				empty: { description: 'Content when the tree is empty' },
 			},
-			events: ['change:guides', 'change:loadChildren'],
+			events: ['change:guides', 'change:indicator', 'change:loadChildren'],
 		},
 		plugins: [
 			ActionPluginDescriptor.with({ focusTarget: treeFocusTarget }),

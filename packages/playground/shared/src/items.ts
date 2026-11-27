@@ -162,6 +162,8 @@ export const BREADCRUMBS_ITEMS = [
 	{ text: 'Товар', _: { active: true } },
 ]
 
+export const TREE_PREVIEW_EXPANDED = ['accounts']
+
 export const TREE_PREVIEW_PROPS = {
 	items: [
 		{
@@ -185,7 +187,6 @@ export const TREE_PREVIEW_PROPS = {
 			],
 		},
 	],
-	expanded: ['accounts'],
 	guides: true,
 	aria_label: 'Sections',
 }

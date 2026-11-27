@@ -3,14 +3,18 @@ import type { TTreeRenderEntry } from '@soxa-ui/core'
 import {
 	Elevate,
 	renderSlot,
+	roleIcon,
 	toAriaProps,
 	toReactStyle,
 	toRootProps,
 	withRenderBoundary,
 } from '../../adapter'
+import { Icon } from '../icon'
 import { ItemRow } from '../item-row'
 import { useSetupTree, useSetupTreeRow } from './setup.component'
 import type { TreeProps, TreeRowProps } from './base.component'
+
+const CHECK = roleIcon('check')
 
 const TreeRow = withRenderBoundary(function TreeRow({
 	ctrl,
@@ -26,6 +30,13 @@ const TreeRow = withRenderBoundary(function TreeRow({
 	const link = branch ? undefined : href
 	const Tag = (link ? 'a' : tag) as ElementType
 	const scope = { item: ctrl, branch, expanded, loading }
+	const indicatorSide = dataset?.['data-indicator']
+	const selectionMark =
+		indicatorSide === 'start' || indicatorSide === 'end' ? (
+			<span className="so-tree-item__selection-indicator" aria-hidden="true">
+				{selected && <Icon embedded="tree.selection-indicator" tag={CHECK} size={size} />}
+			</span>
+		) : null
 
 	return (
 		<Tag {...toRootProps(ref, state, [attrs, aria, dataset], {})} href={link}>
@@ -37,6 +48,7 @@ const TreeRow = withRenderBoundary(function TreeRow({
 					size={size}
 					variant={variant}
 					{...toAriaProps(dataset)}
+					trailing={indicatorSide === 'end' ? selectionMark : null}
 					leading={
 						<>
 							<span
@@ -48,6 +60,7 @@ const TreeRow = withRenderBoundary(function TreeRow({
 										<span className="so-tree-item__chevron" />
 									))}
 							</span>
+							{indicatorSide === 'start' ? selectionMark : null}
 							{renderSlot(slots['item-icon'], scope)}
 						</>
 					}

@@ -19,13 +19,24 @@ const items = [
 ]
 
 describe('Tree', () => {
-	it('completes an external collection engine with the same Tree extensions', () => {
+	it('completes an external engine and forwards the Tree style to its rows', async () => {
 		const engine = createEngine()
-		const wrapper = mount(Tree, { props: { engine, items, expanded: ['accounts'] } })
+		const wrapper = mount(Tree, {
+			props: { engine, items, expanded: ['accounts'], size: 'lg', variant: 'danger' },
+		})
 
 		try {
 			expect(engine.has('tree')).toBe(true)
 			expect(wrapper.findAll('[role="treeitem"]')).toHaveLength(4)
+			const row = wrapper.get('[role="group"] .so-tree-item__row')
+			expect(row.classes()).toEqual(
+				expect.arrayContaining(['so-button--size-lg', 'so-button--variant-danger']),
+			)
+
+			await wrapper.setProps({ size: 'sm', variant: 'brand' })
+			expect(row.classes()).toEqual(
+				expect.arrayContaining(['so-button--size-sm', 'so-button--variant-brand']),
+			)
 		} finally {
 			wrapper.unmount()
 		}
@@ -99,21 +110,46 @@ describe('Tree', () => {
 	})
 
 	it.each(['single', 'multiple'] as const)(
-		'toggles a branch across its row in %s mode',
+		'keeps branch disclosure and selection independent in %s mode',
 		async (mode) => {
-			const wrapper = mount(Tree, { attachTo: document.body, props: { items, mode } })
+			const wrapper = mount(Tree, {
+				attachTo: document.body,
+				props: { items, mode, indicator: 'start' },
+			})
 
 			try {
 				const branch = wrapper.get('[aria-expanded]')
+				const label = branch.get('.so-button__text')
+				const arrow = branch.get('.so-tree-item__chevron')
+				const mark = branch.get('.so-tree-item__selection-indicator')
+				expect(mark.element.previousElementSibling).toBe(arrow.element.parentElement)
+				expect(mark.find('svg').exists()).toBe(false)
 
 				await vi.waitFor(async () => {
-					await branch.get('.so-button__text').trigger('click')
+					await arrow.trigger('click')
 					expect(branch.attributes('aria-expanded')).toBe('true')
 				})
+				expect(branch.attributes('aria-selected')).toBe('false')
+
+				await label.trigger('click')
+				expect(branch.attributes('aria-expanded')).toBe('true')
+				expect(branch.attributes('aria-selected')).toBe('true')
+				expect(mark.find('svg').exists()).toBe(true)
+
+				await arrow.trigger('click')
+				expect(branch.attributes('aria-expanded')).toBe('false')
 				expect(branch.attributes('aria-selected')).toBe('true')
 
-				await branch.get('.so-tree-item__chevron').trigger('click')
+				await label.trigger('click')
 				expect(branch.attributes('aria-expanded')).toBe('false')
+				expect(branch.attributes('aria-selected')).toBe('false')
+
+				await branch.trigger('keydown', { key: 'Enter' })
+				expect(branch.attributes('aria-expanded')).toBe('false')
+				expect(branch.attributes('aria-selected')).toBe('true')
+
+				await wrapper.setProps({ mode: 'none' })
+				expect(branch.find('.so-tree-item__selection-indicator').exists()).toBe(false)
 			} finally {
 				wrapper.unmount()
 			}

@@ -33,6 +33,7 @@ export const TreeInputNames = [
 	'name',
 	'loadChildren',
 	'guides',
+	'indicator',
 	'aria_label',
 	'aria_labelledBy',
 	'aria_describedBy',
@@ -49,6 +50,7 @@ export const TreeOutputNames = [
 	'soChangeValue',
 	'soChangeName',
 	'soChangeGuides',
+	'soChangeIndicator',
 	'soChangeLoadChildren',
 	'soActionPress',
 	'soActionClick',
@@ -73,6 +75,7 @@ export const TreeOutputNames = [
 	'nameChange',
 	'loadChildrenChange',
 	'guidesChange',
+	'indicatorChange',
 	'aria_labelChange',
 	'aria_labelledByChange',
 	'aria_describedByChange',
@@ -96,6 +99,7 @@ export const TreeOutputNames = [
 		'name',
 		'loadChildren',
 		{ name: 'guides', transform: booleanInput },
+		'indicator',
 		'aria_label',
 		'aria_labelledBy',
 		'aria_describedBy',
@@ -139,6 +143,7 @@ export abstract class TTreeSurface<TInstance extends IEntity> extends TViewSurfa
 	declare name: TInputValue<typeof descriptor, 'name'>
 	declare loadChildren: TInputValue<typeof descriptor, 'loadChildren'>
 	declare guides: TInputValue<typeof descriptor, 'guides'>
+	declare indicator: TInputValue<typeof descriptor, 'indicator'>
 	declare aria_label: TInputValue<typeof descriptor, 'aria_label'>
 	declare aria_labelledBy: TInputValue<typeof descriptor, 'aria_labelledBy'>
 	declare aria_describedBy: TInputValue<typeof descriptor, 'aria_describedBy'>
@@ -164,6 +169,7 @@ export abstract class TTreeSurface<TInstance extends IEntity> extends TViewSurfa
 	declare readonly soChangeValue: TOutputEmitter<typeof descriptor, 'change:value'>
 	declare readonly soChangeName: TOutputEmitter<typeof descriptor, 'change:name'>
 	declare readonly soChangeGuides: TOutputEmitter<typeof descriptor, 'change:guides'>
+	declare readonly soChangeIndicator: TOutputEmitter<typeof descriptor, 'change:indicator'>
 	declare readonly soChangeLoadChildren: TOutputEmitter<typeof descriptor, 'change:loadChildren'>
 	declare readonly soElementReady: TOutputEmitter<typeof descriptor, 'element:ready'>
 	declare readonly soElementRemoved: TOutputEmitter<typeof descriptor, 'element:removed'>
@@ -196,6 +202,7 @@ export abstract class TTreeSurface<TInstance extends IEntity> extends TViewSurfa
 	declare readonly nameChange: TModelEmitter<typeof descriptor, 'name'>
 	declare readonly loadChildrenChange: TModelEmitter<typeof descriptor, 'loadChildren'>
 	declare readonly guidesChange: TModelEmitter<typeof descriptor, 'guides'>
+	declare readonly indicatorChange: TModelEmitter<typeof descriptor, 'indicator'>
 	declare readonly aria_labelChange: TModelEmitter<typeof descriptor, 'aria_label'>
 	declare readonly aria_labelledByChange: TModelEmitter<typeof descriptor, 'aria_labelledBy'>
 	declare readonly aria_describedByChange: TModelEmitter<typeof descriptor, 'aria_describedBy'>

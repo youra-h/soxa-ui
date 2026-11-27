@@ -72,6 +72,15 @@
 	flex: 0 0 auto;
 }
 
+.so-tree-item__selection-indicator {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	inline-size: 1em;
+	block-size: 1em;
+}
+
 .so-tree-item__chevron {
 	inline-size: 0.45em;
 	block-size: 0.45em;
