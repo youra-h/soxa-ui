@@ -39,8 +39,16 @@
 				border-radius: var(--so-burg-tabs-radius);
 			}
 
-			&:where([data-selected='true']) > :where(.so-button) {
-				--so-burg-button-ink: var(--so-burg-tabs-marker);
+			&:where([data-selected='true']) {
+				& > :where(.so-button) {
+					--so-burg-button-ink: var(--so-burg-tabs-marker);
+				}
+
+				@media (hover: hover) {
+					& > :where(.so-button:hover:not(:active, .so-tabs-item__close)) {
+						--so-burg-button-background: var(--so-burg-button-fill);
+					}
+				}
 			}
 
 			& > :where(.so-button:focus-visible) {
@@ -132,12 +140,6 @@
 				box-shadow:
 					0 1px 2px light-dark(rgb(0 0 0 / 10%), rgb(0 0 0 / 32%)),
 					0 2px 4px light-dark(rgb(0 0 0 / 12%), rgb(0 0 0 / 28%));
-
-				@media (hover: hover) {
-					& > :where(.so-button:hover:not(:active, .so-tabs-item__close)) {
-						--so-burg-button-background: var(--so-burg-button-fill);
-					}
-				}
 			}
 		}
 	}
