@@ -1,0 +1,90 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-rating) {
+		--so-burg-rating-fill: var(--so-burg-caution);
+		padding-block: max(0px, calc((var(--so-target-size) - var(--so-rating-star-size)) / 2));
+		--so-burg-rating-empty: color-mix(
+			in oklab,
+			var(--so-place-surface),
+			var(--so-burg-text) 28%
+		);
+	}
+
+	:where(.so-rating--variant-normal) {
+		--so-burg-rating-fill: var(--so-burg-text);
+	}
+
+	:where(.so-rating--variant-accent) {
+		--so-burg-rating-fill: var(--so-burg-progress-accent);
+	}
+
+	:where(.so-rating--variant-positive) {
+		--so-burg-rating-fill: var(--so-burg-positive);
+	}
+
+	:where(.so-rating--variant-negative) {
+		--so-burg-rating-fill: var(--so-burg-danger);
+	}
+
+	:where(.so-rating[data-invalid='true'], .so-rating:has(.so-rating__input:user-invalid)) {
+		--so-burg-rating-empty: color-mix(
+			in oklab,
+			var(--so-place-surface),
+			var(--so-burg-danger) 65%
+		);
+	}
+
+	:where(.so-rating__star) {
+		color: var(--so-burg-rating-empty);
+	}
+
+	:where(.so-rating__star-fill) {
+		color: var(--so-burg-rating-fill);
+	}
+
+	:where(.so-rating__star svg) {
+		--so-icon-color: currentColor;
+	}
+
+	:where(.so-rating__thumb) {
+		border-radius: var(--so-rating-radius, var(--so-radius));
+	}
+
+	:where(.so-rating__thumb:has(> .so-rating__input:focus-visible)) {
+		outline: var(--so-burg-focus-ring);
+		outline-offset: 0;
+		box-shadow: inset 0 0 0 1px var(--so-burg-focus-edge);
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-rating__star) {
+			forced-color-adjust: none;
+			color: CanvasText;
+		}
+
+		:where(.so-rating__star > svg) * {
+			fill: none;
+			stroke: currentColor;
+			stroke-width: 1.5px;
+			stroke-linejoin: round;
+			vector-effect: non-scaling-stroke;
+		}
+
+		:where(.so-rating__star-fill) {
+			color: Highlight;
+		}
+
+		:where(.so-rating[data-disabled='true']) :where(.so-rating__star, .so-rating__star-fill) {
+			color: GrayText;
+		}
+
+		:where(.so-rating[data-invalid='true'], .so-rating:has(.so-rating__input:user-invalid))
+			:where(.so-rating__star > svg)
+			* {
+			stroke-width: 3px;
+		}
+
+		:where(.so-rating__thumb:has(> .so-rating__input:focus-visible)) {
+			outline-color: Highlight;
+		}
+	}
+}
