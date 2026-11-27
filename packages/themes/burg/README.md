@@ -55,6 +55,10 @@ collection panels. Dialog and AlertDialog use a 14px radius by default at a
 modal components share the `dim`, `blur`, and `none` backdrop views. The
 `--so-backdrop-blur` variable defaults to 3px.
 
+Guide uses a panel up to 320px wide, a muted step count, and compact Button
+actions. The same panel is used for centered and anchored steps. The spotlight
+outlines the target and remains visible in forced colors.
+
 ### Chat content and attachments
 
 CodeBlock uses a muted code surface and a 34px toolbar at normal size.

@@ -33,31 +33,6 @@
 		border-radius: var(--so-popover-radius, var(--so-radius));
 	}
 
-	&:where(.so-guide),
-	:where(.so-guide) {
-		border-radius: var(--so-radius);
-		padding: 1rem;
-	}
-
-	:where(.so-guide__title) {
-		margin: 0.25rem 0;
-		font-weight: 600;
-	}
-
-	:where(.so-guide__progress, .so-guide__description) {
-		margin: 0;
-	}
-
-	:where(.so-guide__actions) {
-		margin-block-start: 1rem;
-	}
-
-	:where(.so-guide__spotlight) {
-		border-radius: var(--so-radius);
-		outline: 2px solid var(--so-burg-focus-edge);
-		outline-offset: 3px;
-	}
-
 	&:where(.so-dialog, .so-alert-dialog, .so-drawer),
 	:where(.so-dialog, .so-alert-dialog, .so-drawer) {
 		--so-burg-modal-radius: calc(var(--so-radius) * 1.75);

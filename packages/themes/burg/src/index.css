@@ -3,6 +3,7 @@
 @import './components/button.css' layer(so.burg);
 @import './components/collections.css' layer(so.burg);
 @import './components/overlays.css' layer(so.burg);
+@import './components/guide.css' layer(so.burg);
 @import './components/fields.css' layer(so.burg);
 @import './components/toggles.css' layer(so.burg);
 @import './components/radio-group.css' layer(so.burg);
