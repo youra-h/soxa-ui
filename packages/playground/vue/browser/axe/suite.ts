@@ -80,6 +80,24 @@ async function confirmState(entry: TAuditCase) {
 				timeout: 4000,
 			})
 			.toBe(false)
+	if (entry.component === 'alert-dialog') {
+		// The open state precedes the fade to Oren's final dialog and dim backdrop opacities.
+		await expect
+			.poll(
+				() => {
+					const dialog = document.querySelector('.so-alert-dialog[data-open="true"]')
+					const backdrop = dialog?.previousElementSibling
+					return {
+						dialog: dialog && getComputedStyle(dialog).opacity,
+						backdrop: backdrop?.matches('.so-backdrop[data-open="true"]')
+							? getComputedStyle(backdrop).opacity
+							: null,
+					}
+				},
+				{ message: entry.id + ': fully opened dialog and backdrop' },
+			)
+			.toEqual({ dialog: '1', backdrop: '0.5' })
+	}
 	if (entry.count) {
 		const count = document.querySelectorAll(entry.count.selector).length
 		expect(count, entry.id + ': actual part count').toBeGreaterThanOrEqual(entry.count.min)
