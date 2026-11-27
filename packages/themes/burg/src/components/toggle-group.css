@@ -1,0 +1,58 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-toggle-group) {
+		padding: var(--so-toggle-group-bleed);
+		border: 1px solid var(--so-burg-border);
+		border-radius: var(--so-toggle-group-radius, var(--so-radius));
+		background-color: var(--so-burg-subtle-surface);
+	}
+
+	:where(.so-toggle-group-item) {
+		border-radius: var(--so-button-radius, calc(var(--so-radius) * 0.75));
+	}
+
+	:where(
+		.so-toggle-button:not(.so-button--view-filled),
+		.so-toggle-group-item:not(.so-button--view-filled)
+	) {
+		--so-burg-button-fill: transparent;
+		--so-burg-button-ink: var(--so-burg-button-tone);
+	}
+
+	:where(.so-toggle-button:not(.so-button--view-filled, .so-button--view-plain)) {
+		--so-burg-button-border: var(--so-burg-border);
+	}
+
+	:where(.so-toggle-button:not(.so-button--view-filled)[data-selected='true']) {
+		--so-burg-button-fill: var(--so-burg-row-highlight);
+		--so-burg-button-background: var(--so-burg-button-fill);
+		--so-burg-button-border: var(--so-burg-focus-edge);
+	}
+
+	:where(.so-toggle-group-item:not(.so-button--view-filled)[data-selected='true']) {
+		--so-burg-button-fill: var(--so-burg-surface);
+		--so-burg-button-background: var(--so-burg-button-fill);
+		--so-burg-button-border: var(--so-burg-focus-edge);
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-toggle-group) {
+			border-color: ButtonText;
+		}
+
+		:where(.so-toggle-button, .so-toggle-group-item):where(
+			[data-selected='true']:not([data-disabled='true'])
+		) {
+			forced-color-adjust: none;
+			color: HighlightText;
+
+			&::after {
+				background-color: Highlight;
+				border-color: Highlight;
+			}
+
+			&:focus-visible {
+				outline-color: Highlight;
+			}
+		}
+	}
+}

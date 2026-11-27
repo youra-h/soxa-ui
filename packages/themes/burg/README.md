@@ -71,6 +71,14 @@ can override the manager view. Badge keeps the shared size scale and offers
 filled and outlined treatments. Skeleton uses a subtle pulse by default.
 The `wave` animation falls back to a pulse when motion is reduced.
 
+### Parameter controls
+
+ToggleButton and ToggleGroup use the Button scale. ToggleGroup keeps the
+shared scroll and keyboard behavior and pairs quiet segments with a visible
+selection. NumberInput uses the Input height, font size, and focus ring.
+At normal size, Slider uses a 3px rail and a 17px thumb. Rating uses a 20px
+star box and preserves fractional values.
+
 Set `data-so-theme="burg"` or `data-so-theme="burg-dark"` on the document root
 or the container of the themed components. Load the stylesheet and register
 the layout plugins at the application entry point.

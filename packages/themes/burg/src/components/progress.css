@@ -13,12 +13,6 @@
 	}
 
 	:where(.so-progress-linear) {
-		--so-slider-rail-size-sm: 0.125rem;
-		--so-slider-rail-size-normal: 0.1875rem;
-		--so-slider-rail-size-lg: 0.25rem;
-		--so-slider-rail-size-xl: 0.3125rem;
-		--so-slider-rail-size-2xl: 0.375rem;
-
 		background-color: var(--so-burg-progress-track);
 		border-radius: 9999px;
 	}

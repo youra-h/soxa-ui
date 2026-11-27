@@ -15,3 +15,6 @@
 @import './components/feedback.css' layer(so.burg);
 @import './components/toasts.css' layer(so.burg);
 @import './components/skeleton.css' layer(so.burg);
+@import './components/toggle-group.css' layer(so.burg);
+@import './components/slider.css' layer(so.burg);
+@import './components/rating.css' layer(so.burg);

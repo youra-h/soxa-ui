@@ -1,0 +1,112 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-slider) {
+		--so-slider-thumb-border: 1px;
+		--so-burg-slider-fill: var(--so-burg-text);
+		--so-burg-slider-rail: var(--so-burg-border);
+	}
+
+	:where(.so-slider--variant-accent) {
+		--so-burg-slider-fill: var(--so-burg-progress-accent);
+	}
+
+	:where(.so-slider--variant-positive) {
+		--so-burg-slider-fill: var(--so-burg-positive);
+	}
+
+	:where(.so-slider--variant-caution) {
+		--so-burg-slider-fill: var(--so-burg-caution);
+	}
+
+	:where(.so-slider--variant-negative) {
+		--so-burg-slider-fill: var(--so-burg-danger);
+	}
+
+	:where(.so-slider__track)::before,
+	:where(.so-slider__range, .so-slider__thumb),
+	:where(.so-slider__mark)::before {
+		border-radius: 9999px;
+	}
+
+	:where(.so-slider__track)::before {
+		background-color: var(--so-burg-slider-rail);
+	}
+
+	:where(.so-slider__range) {
+		background-color: var(--so-burg-slider-fill);
+	}
+
+	:where(.so-slider__thumb) {
+		border: var(--so-slider-thumb-border) solid var(--so-burg-slider-fill);
+		background-color: var(--so-burg-surface);
+	}
+
+	@media (hover: hover) {
+		:where(.so-slider:not([data-disabled='true'])) :where(.so-slider__thumb:hover) {
+			box-shadow: 0 0 0 2px var(--so-burg-row-highlight);
+		}
+	}
+
+	:where(.so-slider__thumb[data-dragging='true']) {
+		background-color: var(--so-burg-row-highlight);
+	}
+
+	:where(.so-slider__thumb:has(> .so-slider__input:focus-visible)) {
+		border-color: var(--so-burg-focus-edge);
+		outline: var(--so-burg-focus-ring);
+		outline-offset: 0;
+	}
+
+	:where(.so-slider__mark)::before {
+		background-color: var(--so-burg-muted);
+	}
+
+	:where(.so-slider__mark[data-in-range='true'])::before {
+		background-color: var(--so-burg-surface);
+	}
+
+	:where(.so-slider__mark-label) {
+		color: var(--so-burg-muted);
+	}
+
+	:where(.so-slider__mark[data-current='true']) > :where(.so-slider__mark-label) {
+		color: var(--so-burg-text);
+		font-weight: 600;
+	}
+
+	:where(.so-slider[data-invalid='true']) > :where(.so-slider__track)::before {
+		outline: 1px solid var(--so-burg-danger);
+		outline-offset: 1px;
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-slider__track)::before,
+		:where(.so-slider__range),
+		:where(.so-slider__mark)::before {
+			forced-color-adjust: none;
+		}
+
+		:where(.so-slider__track)::before {
+			background-color: GrayText;
+		}
+
+		:where(.so-slider__range) {
+			background-color: Highlight;
+		}
+
+		:where(.so-slider__mark)::before {
+			background-color: CanvasText;
+		}
+
+		:where(.so-slider__mark[data-in-range='true'])::before {
+			background-color: HighlightText;
+		}
+
+		:where(.so-slider[data-invalid='true']) > :where(.so-slider__track)::before {
+			outline-color: CanvasText;
+		}
+
+		:where(.so-slider__thumb:has(> .so-slider__input:focus-visible)) {
+			outline-color: Highlight;
+		}
+	}
+}
