@@ -1,7 +1,7 @@
 import { hasIcon } from '@soxa-ui/setup'
 import type { JSX } from 'solid-js'
-import { Root, createRootProps, hasSlot, renderSlot, roleIcon } from '../../adapter'
-import { For, Show } from '../../adapter/runtime/flow'
+import { KeyedFor, Root, createRootProps, hasSlot, renderSlot, roleIcon } from '../../adapter'
+import { Show } from '../../adapter/runtime/flow'
 import { setupFileUpload } from './setup.component'
 import { Button } from '../button'
 import { Icon } from '../icon'
@@ -64,27 +64,27 @@ export function FileUpload(props: FileUploadProps): JSX.Element {
 				</div>
 				<Show when={state.names_rows?.length}>
 					<ul class="so-file-upload__list" role="list">
-						<For each={state.names_rows}>
+						<KeyedFor each={state.names_rows} by={(row) => row.id}>
 							{(row) => (
 								<li class="so-file-upload__item">
 									<div class="so-file-upload__preview" aria-hidden="true">
 										<Show
-											when={state.native_previews?.[row.id]}
-											fallback={<span>{row.extension}</span>}
+											when={state.native_previews?.[row().id]}
+											fallback={<span>{row().extension}</span>}
 										>
-											<img src={state.native_previews?.[row.id]} alt="" />
+											<img src={state.native_previews?.[row().id]} alt="" />
 										</Show>
 									</div>
 									<div class="so-file-upload__details">
-										<bdi>{row.file.name}</bdi>
-										<span class="so-file-upload__size">{row.sizeText}</span>
+										<bdi>{row().file.name}</bdi>
+										<span class="so-file-upload__size">{row().sizeText}</span>
 									</div>
 									<Button
 										embedded="file-upload.remove"
 										class="so-file-upload__remove"
 										type="button"
-										data-file-id={row.id}
-										aria-label={row.removeLabel}
+										data-file-id={row().id}
+										aria-label={row().removeLabel}
 										disabled={state.disabled}
 									>
 										<Icon embedded="file-upload.remove-icon" tag={CLOSE} />
@@ -92,14 +92,14 @@ export function FileUpload(props: FileUploadProps): JSX.Element {
 									<Show when={hasSlot(props['item-progress'])}>
 										<div class="so-file-upload__progress">
 											{renderSlot(props['item-progress'], {
-												file: row.file,
-												id: row.id,
+												file: row().file,
+												id: row().id,
 											})}
 										</div>
 									</Show>
 								</li>
 							)}
-						</For>
+						</KeyedFor>
 					</ul>
 				</Show>
 			</Root>
