@@ -21,6 +21,7 @@ import { exportedDescriptors } from './helpers'
 const ROOT_HOLDS_FOCUS = new Set([
 	'ButtonDescriptor',
 	'ToggleButtonDescriptor',
+	'SidebarItemDescriptor',
 	'ToggleGroupItemDescriptor',
 	// Строка элемента коллекции — корень кнопки, фокус ставят на неё элементы
 	'ItemRowDescriptor',

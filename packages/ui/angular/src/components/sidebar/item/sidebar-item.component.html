@@ -1,0 +1,18 @@
+<ng-content select="ng-template[slot]" />
+<span class="so-sidebar-item__leading" aria-hidden="true">
+	@if (slot('leading'); as icon) {
+		<ng-container [ngTemplateOutlet]="icon" />
+	} @else {
+		<ng-content select="[slot=leading]" />
+	}
+</span>
+<span class="so-sidebar-item__text">
+	@if (slot('default'); as label) {
+		<ng-container
+			[ngTemplateOutlet]="label"
+			[ngTemplateOutletContext]="{ text: state()['text'] }"
+		/>
+	} @else {
+		<ng-content>{{ state()['text'] }}</ng-content>
+	}
+</span>

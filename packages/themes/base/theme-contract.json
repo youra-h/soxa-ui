@@ -296,6 +296,18 @@
       "scope": "so-separator"
     },
     {
+      "name": "so-sidebar",
+      "sources": ["packages/core/src/components/custom/sidebar/sidebar.class.ts"],
+      "description": "Root of the collapsible sidebar panel.",
+      "scope": "Sidebar"
+    },
+    {
+      "name": "so-sidebar-item",
+      "sources": ["packages/core/src/components/custom/sidebar/item.class.ts"],
+      "description": "Native link or button inside the sidebar.",
+      "scope": "Sidebar.Item"
+    },
+    {
       "name": "so-skeleton",
       "sources": ["packages/core/src/components/custom/skeleton/skeleton.class.ts"],
       "description": "Root of skeleton. Inherited component classes use the concrete component's base name.",
@@ -2855,6 +2867,45 @@
       "scope": "so-select-item"
     },
     {
+      "name": "so-sidebar__content",
+      "sources": [
+        "packages/ui/angular/src/components/sidebar/sidebar.component.html",
+        "packages/ui/react/src/components/sidebar/Sidebar.tsx",
+        "packages/ui/solid/src/components/sidebar/Sidebar.tsx",
+        "packages/ui/svelte/src/components/sidebar/Sidebar.svelte",
+        "packages/ui/vue/src/components/sidebar/Sidebar.vue",
+        "packages/ui/webc/src/components/sidebar/Sidebar.element.ts"
+      ],
+      "description": "Scrollable content that slides with the panel.",
+      "scope": "so-sidebar"
+    },
+    {
+      "name": "so-sidebar-item__leading",
+      "sources": [
+        "packages/ui/angular/src/components/sidebar/item/sidebar-item.component.html",
+        "packages/ui/react/src/components/sidebar/item/Item.tsx",
+        "packages/ui/solid/src/components/sidebar/item/Item.tsx",
+        "packages/ui/svelte/src/components/sidebar/item/Item.svelte",
+        "packages/ui/vue/src/components/sidebar/item/Item.vue",
+        "packages/ui/webc/src/components/sidebar/item/SidebarItem.element.ts"
+      ],
+      "description": "Decorative icon retained in the compact sidebar.",
+      "scope": "so-sidebar-item"
+    },
+    {
+      "name": "so-sidebar-item__text",
+      "sources": [
+        "packages/ui/angular/src/components/sidebar/item/sidebar-item.component.html",
+        "packages/ui/react/src/components/sidebar/item/Item.tsx",
+        "packages/ui/solid/src/components/sidebar/item/Item.tsx",
+        "packages/ui/svelte/src/components/sidebar/item/Item.svelte",
+        "packages/ui/vue/src/components/sidebar/item/Item.vue",
+        "packages/ui/webc/src/components/sidebar/item/SidebarItem.element.ts"
+      ],
+      "description": "Visible label that remains accessible in the compact sidebar.",
+      "scope": "so-sidebar-item"
+    },
+    {
       "name": "so-skeleton__placeholder",
       "sources": [
         "packages/ui/angular/src/components/skeleton/skeleton.component.html",
@@ -3907,10 +3958,21 @@
       "presence": "Always present on applicable component instances, including the initial render; false is serialized as \"false\"."
     },
     {
+      "name": "data-collapse",
+      "sources": ["packages/core/src/components/custom/sidebar/sidebar.class.ts"],
+      "description": "How the sidebar collapses when closed.",
+      "scope": "so-sidebar",
+      "values": "icon | offcanvas",
+      "presence": "Always on the sidebar root"
+    },
+    {
       "name": "data-collapsed",
-      "sources": ["packages/core/src/components/custom/splitter/panel/panel.class.ts"],
-      "description": "Indicates a panel that consumes no space in the Splitter.",
-      "scope": "so-splitter",
+      "sources": [
+        "packages/core/src/components/custom/sidebar/sidebar.class.ts",
+        "packages/core/src/components/custom/splitter/panel/panel.class.ts"
+      ],
+      "description": "Indicates a collapsed sidebar or a Splitter panel that consumes no space.",
+      "scope": "so-sidebar, so-splitter",
       "values": "empty",
       "presence": "When the state applies"
     },
@@ -4433,6 +4495,14 @@
       "scope": "Table column header",
       "values": "start | end; absent for unshifted columns",
       "presence": "Present only while applicable; null/undefined removes it. Boolean true is serialized as \"true\"."
+    },
+    {
+      "name": "data-side",
+      "sources": ["packages/core/src/components/custom/sidebar/sidebar.class.ts"],
+      "description": "Physical side of the sidebar in the layout.",
+      "scope": "so-sidebar",
+      "values": "left | right",
+      "presence": "Always on the sidebar root"
     },
     {
       "name": "data-sized",

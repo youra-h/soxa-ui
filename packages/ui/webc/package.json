@@ -209,6 +209,10 @@
       "types": "./dist/components/stepper/index.d.ts",
       "default": "./dist/components/stepper/index.js"
     },
+    "./sidebar": {
+      "types": "./dist/components/sidebar/index.d.ts",
+      "default": "./dist/components/sidebar/index.js"
+    },
     "./splitter": {
       "types": "./dist/components/splitter/index.d.ts",
       "default": "./dist/components/splitter/index.js"

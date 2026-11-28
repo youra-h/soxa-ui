@@ -1,5 +1,7 @@
 {
   "base-reads": {
+    "--so-sidebar-width": "Expanded Sidebar width. The base defaults to 16rem.",
+    "--so-sidebar-icon-width": "Width of the collapsed Sidebar in icon mode. The base defaults to 3rem.",
     "--so-splitter-panel-size": "Share of available panel space written by the Splitter layout model.",
     "--so-splitter-handle-size": "Theme thickness of a Splitter handle along its resize axis. Base defaults to 8px.",
     "--so-splitter-width": "Optional exact thickness of every handle in the current Splitter.",

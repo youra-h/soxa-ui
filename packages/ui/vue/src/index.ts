@@ -231,6 +231,8 @@ export type { SelectSeparatorProps } from './components/select/separator'
 export { ListBoxSeparator } from './components/list-box/separator'
 export type { ListBoxSeparatorProps } from './components/list-box/separator'
 
+export { Sidebar, SidebarItem } from './components/sidebar'
+export type { SidebarProps, SidebarItemProps } from './components/sidebar'
 export { Splitter, SplitterPanel, SplitterHandle } from './components/splitter'
 export type { SplitterProps, SplitterPanelProps, SplitterHandleProps } from './components/splitter'
 export { Stepper, StepperItem, StepperContent } from './components/stepper'

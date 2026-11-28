@@ -1,0 +1,47 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-sidebar__content) {
+		padding: 0.25rem;
+		background: var(--so-burg-surface);
+	}
+
+	:where(.so-sidebar-item) {
+		border-radius: 0.375rem;
+		cursor: pointer;
+	}
+
+	:where(.so-sidebar-item:not([data-disabled='true'])):hover {
+		background: var(--so-burg-subtle-surface);
+	}
+
+	:where(.so-sidebar-item):focus-visible {
+		outline: 2px solid var(--so-burg-focus-edge);
+		outline-offset: -2px;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:where(:root:not([data-so-motion='reduce']))
+		:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+		:where(.so-sidebar) {
+			transition: width 180ms ease;
+		}
+
+		:where(.so-sidebar__content) {
+			transition:
+				width 180ms ease,
+				translate 180ms ease;
+		}
+	}
+}
+
+:where(:root[data-so-motion='full']) :where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-sidebar) {
+		transition: width 180ms ease;
+	}
+
+	:where(.so-sidebar__content) {
+		transition:
+			width 180ms ease,
+			translate 180ms ease;
+	}
+}

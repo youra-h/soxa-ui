@@ -175,6 +175,14 @@ export { TFileUploadElement } from './components/file-upload'
 export type { TFileUploadElementProps } from './components/file-upload'
 
 export {
+	TSidebarElement,
+	TSidebarItemElement,
+	TSidebarLinkElement,
+	type TSidebarElementProps,
+	type TSidebarItemElementProps,
+	type TSidebarLinkElementProps,
+} from './components/sidebar'
+export {
 	TSplitterElement,
 	TSplitterPanelElement,
 	TSplitterHandleElement,
