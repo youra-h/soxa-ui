@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { effectScope } from 'vue'
 import { userEvent } from 'vitest/browser'
 import type { IPreviewHandle } from '@soxa-ui/playground-shared'
-import { enUS } from '@soxa-ui/plugins'
+import { enUS, ruRU } from '@soxa-ui/plugins'
 import { useLanguage } from '../src/composables/useLanguage'
 import { FRAMEWORKS, loadHost } from '../src/hosts'
 import '@soxa-ui/theme-oren'
@@ -127,9 +127,16 @@ describe.each(FRAMEWORKS)('FileUpload · $id', ({ id }) => {
 		expect(remove.classList.contains('so-button')).toBe(true)
 		expect(remove.querySelector('svg')).not.toBeNull()
 		remove.focus()
+		host.setLocale(ruRU)
+		await expect
+			.poll(() => target.querySelector('.so-file-upload__remove')?.getAttribute('aria-label'))
+			.toBe('Удалить picked.txt')
+		expect(target.querySelector('.so-file-upload__remove')).toBe(remove)
+		expect(document.activeElement).toBe(remove)
 		await userEvent.keyboard('{Enter}')
 		expect(names()).toEqual(['image.png'])
 		expect(document.activeElement).toBe(choose)
+		host.setLocale(enUS)
 
 		handle.update({ ...props, disabled: true })
 		await expect.poll(() => input.disabled).toBe(true)
