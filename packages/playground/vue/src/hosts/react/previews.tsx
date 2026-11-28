@@ -476,7 +476,6 @@ export const PREVIEWS: Record<string, TPreview> = {
 					trigger={({ triggerAria, triggerDataset }: TMenuTriggerScope) => (
 						<Sidebar.Item
 							text={SIDEBAR_PROFILE.name}
-							aria-label={SIDEBAR_PROFILE.label}
 							{...triggerAria}
 							{...triggerDataset}
 							leading={
@@ -490,6 +489,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 							<span className="pg-sidebar-profile-label">
 								<span className="pg-sidebar-identity">
 									<strong>{SIDEBAR_PROFILE.name}</strong>
+									<br />
 									<small>{SIDEBAR_PROFILE.role}</small>
 								</span>
 								<Icon tag={ARROW_DOWN} size="sm" aria-hidden="true" />

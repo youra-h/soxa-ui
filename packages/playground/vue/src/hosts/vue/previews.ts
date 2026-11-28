@@ -579,7 +579,6 @@ export const PREVIEWS: Record<string, TPreview> = {
 								Sidebar.Item,
 								{
 									text: SIDEBAR_PROFILE.name,
-									'aria-label': SIDEBAR_PROFILE.label,
 									...triggerAria,
 									...triggerDataset,
 								},
@@ -594,6 +593,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 										h('span', { class: 'pg-sidebar-profile-label' }, [
 											h('span', { class: 'pg-sidebar-identity' }, [
 												h('strong', SIDEBAR_PROFILE.name),
+												h('br'),
 												h('small', SIDEBAR_PROFILE.role),
 											]),
 											h(Icon, {

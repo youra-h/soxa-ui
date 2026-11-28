@@ -755,7 +755,6 @@ export const PREVIEWS: Record<string, TPreview> = {
 											tag: 'button',
 											is: 'so-sidebar-item',
 											props: { text: SIDEBAR_PROFILE.name },
-											attributes: { 'aria-label': SIDEBAR_PROFILE.label },
 											slots: {
 												leading: [
 													{
@@ -793,6 +792,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 																					],
 																				},
 																			},
+																			{ tag: 'br' },
 																			{
 																				tag: 'small',
 																				slots: {

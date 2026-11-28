@@ -6,13 +6,9 @@ export const SIDEBAR_BRAND = {
 
 export const SIDEBAR_SEARCH = 'Поиск по разделам'
 
-const profileName = 'Анна Волкова'
-const profileRole = 'Редактор'
-
 export const SIDEBAR_PROFILE = {
-	name: profileName,
-	role: profileRole,
-	label: `${profileName} ${profileRole}`,
+	name: 'Анна Волкова',
+	role: 'Редактор',
 	initials: 'АВ',
 	items: [
 		{ value: 'profile', text: 'Мой профиль' },

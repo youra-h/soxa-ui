@@ -171,6 +171,7 @@ const SLOT_CONTENT: Readonly<Record<string, string>> = {
 	popover: '.so-popover > :not(.so-popover__panel), .so-popover__content > *',
 	tooltip: '.so-tooltip > :not(.so-tooltip__panel), .so-tooltip__content > *',
 	menu: '.so-menu > :not(.so-menu__panel)',
+	sidebar: '.pg-sidebar-header .so-input, .pg-sidebar-footer .so-menu',
 }
 
 /**

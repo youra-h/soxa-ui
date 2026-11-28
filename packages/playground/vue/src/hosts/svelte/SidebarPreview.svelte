@@ -46,7 +46,6 @@
 			{#snippet trigger({ triggerAria, triggerDataset }: TTriggerScope)}
 				<Sidebar.Item
 					text={SIDEBAR_PROFILE.name}
-					aria-label={SIDEBAR_PROFILE.label}
 					{...triggerAria}
 					{...triggerDataset}
 				>
@@ -54,6 +53,7 @@
 					<span class="pg-sidebar-profile-label">
 						<span class="pg-sidebar-identity">
 							<strong>{SIDEBAR_PROFILE.name}</strong>
+							<br />
 							<small>{SIDEBAR_PROFILE.role}</small>
 						</span>
 						<Icon tag={ArrowDown} size="sm" aria-hidden="true" />

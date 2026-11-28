@@ -1560,7 +1560,6 @@ export class FileUploadPreview implements TFixture {
 							<button
 								so-sidebar-item
 								[text]="profile.name"
-								[attr.aria-label]="profile.label"
 								[so-attributes]="{ ...triggerAria, ...triggerDataset }"
 							>
 								<span
@@ -1573,6 +1572,7 @@ export class FileUploadPreview implements TFixture {
 								<span class="pg-sidebar-profile-label">
 									<span class="pg-sidebar-identity">
 										<strong>{{ profile.name }}</strong>
+										<br />
 										<small>{{ profile.role }}</small>
 									</span>
 									<svg

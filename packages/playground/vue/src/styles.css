@@ -982,6 +982,13 @@ a:not([class^='so-'], [class*=' so-']) {
 	gap: var(--so-spacing);
 }
 
+.pg-sidebar-profile-label .pg-sidebar-identity {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .pg-sidebar-group {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr);
