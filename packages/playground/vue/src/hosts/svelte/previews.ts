@@ -3,6 +3,7 @@ import AlertPreview from './AlertPreview.svelte'
 import AvatarPreview from './AvatarPreview.svelte'
 import AvatarGroupPreview from './AvatarGroupPreview.svelte'
 import SeparatorPreview from './SeparatorPreview.svelte'
+import SidebarPreview from './SidebarPreview.svelte'
 import SplitterPreview from './SplitterPreview.svelte'
 import StepperPreview from './StepperPreview.svelte'
 import FileUploadPreview from './FileUploadPreview.svelte'
@@ -85,6 +86,7 @@ export const PREVIEWS: Record<string, TPreview> = {
 	avatar: AvatarPreview,
 	'avatar-group': AvatarGroupPreview,
 	'file-upload': FileUploadPreview,
+	sidebar: SidebarPreview,
 	splitter: SplitterPreview,
 	stepper: StepperPreview,
 	'code-block': CodeBlockPreview,

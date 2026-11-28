@@ -59,6 +59,7 @@ import {
 	Guide,
 	Tree,
 	FileUpload,
+	Sidebar,
 	Splitter,
 	Stepper,
 	Label,
@@ -517,6 +518,15 @@ export const PREVIEWS: Record<string, TPreview> = {
 			default: () => ALERT_SAMPLE.message,
 			action: () => h(Button, { type: 'button' }, () => ALERT_SAMPLE.action),
 		}),
+	sidebar: (bind) =>
+		h('div', { class: 'pg-sidebar-preview' }, [
+			h(Sidebar, { aria_label: 'Рабочая область', ...bind }, () => [
+				h('strong', { class: 'pg-sidebar-preview__label' }, 'Проекты'),
+				h(Sidebar.Item, { text: 'Обзор' }, { leading: () => '◈' }),
+				h(Sidebar.Item, { text: 'Настройки' }, { leading: () => '⚙' }),
+			]),
+			h('div', { class: 'pg-sidebar-preview__main' }, 'Рабочая область'),
+		]),
 	splitter: (bind) =>
 		h(Splitter, { ...bind, class: 'pg-splitter-preview' }, () => [
 			h(Splitter.Panel, { panel: 'files' }, () =>

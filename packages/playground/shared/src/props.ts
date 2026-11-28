@@ -281,6 +281,11 @@ const OWN: Record<string, Record<string, string>> = {
 		tagsOverflow:
 			'Что делать с тегами в поле, когда они не помещаются в строку: переносить или прокручивать. Нужен множественный выбор',
 	},
+	sidebar: {
+		side: 'Сторона панели: слева или справа',
+		collapse: 'Как сворачивать панель: до иконок или полностью за край',
+		collapsed: 'Свернуть панель',
+	},
 	splitter: {
 		orientation: 'Направление панелей: horizontal — в ряд, vertical — друг под другом',
 		offset: 'Расстояние от центра разделителя до края каждой панели, px. При 0 панели соприкасаются',
@@ -610,6 +615,7 @@ const OPTIONS: Record<string, Record<string, readonly string[]>> = {
 		tagsOverflow: TAGS_OVERFLOWS,
 	},
 	popover: { placement: POPOVER_PLACEMENTS, edge: POPOVER_EDGES, swipe: SWIPES },
+	sidebar: { side: ['left', 'right'], collapse: ['icon', 'offcanvas'] },
 	menu: { placement: MENU_PLACEMENTS, openOn: MENU_OPEN_ONS },
 	tooltip: { placement: TOOLTIP_PLACEMENTS, type: TOOLTIP_TYPES },
 	slider: { snap: SLIDE_SNAPS, tooltip: SLIDER_TOOLTIPS },

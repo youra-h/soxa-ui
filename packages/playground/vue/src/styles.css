@@ -908,6 +908,25 @@ a:not([class^='so-'], [class*=' so-']) {
 	text-decoration: underline;
 }
 
+.pg-sidebar-preview {
+	display: flex;
+	width: min(100%, 34rem);
+	min-height: 12rem;
+}
+
+.pg-sidebar-preview__label {
+	padding: 0.5rem;
+}
+
+.so-sidebar[data-collapse='icon'][data-collapsed] .pg-sidebar-preview__label {
+	display: none;
+}
+
+.pg-sidebar-preview__main {
+	flex: 1 1 0;
+	padding: 1rem;
+}
+
 .pg-splitter-preview {
 	inline-size: min(100%, 36rem);
 	block-size: 9rem;

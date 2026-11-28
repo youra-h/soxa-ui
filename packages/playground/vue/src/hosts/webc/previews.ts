@@ -635,6 +635,55 @@ export const PREVIEWS: Record<string, TPreview> = {
 		},
 	},
 	stepper: { tag: 'div', is: 'so-stepper', props: { items: STEPPER_ITEMS } },
+	sidebar: {
+		tag: 'aside',
+		is: 'so-sidebar',
+		props: { aria_label: 'Рабочая область' },
+		wrap: (root) => {
+			const layout = document.createElement('div')
+			layout.className = 'pg-sidebar-preview'
+			const main = document.createElement('div')
+			main.className = 'pg-sidebar-preview__main'
+			main.textContent = 'Рабочая область'
+			layout.append(root, main)
+			return layout
+		},
+		slots: {
+			default: [
+				{
+					tag: 'strong',
+					attributes: { class: 'pg-sidebar-preview__label' },
+					slots: { default: [() => document.createTextNode('Проекты')] },
+				},
+				{
+					tag: 'button',
+					is: 'so-sidebar-item',
+					props: { text: 'Обзор' },
+					slots: {
+						leading: [
+							{
+								tag: 'span',
+								slots: { default: [() => document.createTextNode('◈')] },
+							},
+						],
+					},
+				},
+				{
+					tag: 'button',
+					is: 'so-sidebar-item',
+					props: { text: 'Настройки' },
+					slots: {
+						leading: [
+							{
+								tag: 'span',
+								slots: { default: [() => document.createTextNode('⚙')] },
+							},
+						],
+					},
+				},
+			],
+		},
+	},
 	splitter: {
 		tag: 'div',
 		is: 'so-splitter',

@@ -15,6 +15,8 @@ import {
 	TAvatarGroupComponent,
 	TCodeBlockComponent,
 	TFileUploadComponent,
+	TSidebarComponent,
+	TSidebarItemComponent,
 	TSplitterComponent,
 	TSplitterHandleComponent,
 	TSplitterPanelComponent,
@@ -1480,6 +1482,46 @@ export class FileUploadPreview implements TFixture {
 	readonly maxFiles = input<TFileUploadComponent['maxFiles']>()
 	readonly copy = viewChild.required(CopyDirective)
 	readonly subjects = viewChildren(TFileUploadComponent)
+}
+
+@Component({
+	selector: 'pg-sidebar-preview',
+	imports: [TSidebarComponent, TSidebarItemComponent, CopyDirective],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: { style: 'display: contents' },
+	template: `
+		<ng-template pg-copy>
+			<div class="pg-sidebar-preview">
+				<aside
+					so-sidebar
+					aria_label="Рабочая область"
+					[ctrl]="ctrl()"
+					[rendered]="rendered()"
+					[visible]="visible()"
+					[direction]="direction()"
+					[side]="side()"
+					[collapse]="collapse()"
+					[collapsed]="collapsed()"
+				>
+					<strong class="pg-sidebar-preview__label">Проекты</strong>
+					<button so-sidebar-item text="Обзор"><span slot="leading">◈</span></button>
+					<button so-sidebar-item text="Настройки"><span slot="leading">⚙</span></button>
+				</aside>
+				<div class="pg-sidebar-preview__main">Рабочая область</div>
+			</div>
+		</ng-template>
+	`,
+})
+export class SidebarPreview implements TFixture {
+	readonly ctrl = input<TSidebarComponent['ctrl']>()
+	readonly rendered = input<TSidebarComponent['rendered']>()
+	readonly visible = input<TSidebarComponent['visible']>()
+	readonly direction = input<TSidebarComponent['direction']>()
+	readonly side = input<TSidebarComponent['side']>()
+	readonly collapse = input<TSidebarComponent['collapse']>()
+	readonly collapsed = input<TSidebarComponent['collapsed']>()
+	readonly copy = viewChild.required(CopyDirective)
+	readonly subjects = viewChildren(TSidebarComponent)
 }
 
 @Component({
