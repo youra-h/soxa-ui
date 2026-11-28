@@ -36,7 +36,10 @@ export function Menu(props: MenuProps): ReactElement | null {
 		<Tag {...toRootProps(ref, state, [attrs, dataset], forwardProps)}>
 			<Elevate layer={layer}>
 				{renderSlot(props.trigger, {
-					triggerAria: triggerAria ?? {},
+					triggerAria:
+						!rootElement && triggerAria?.['aria-controls']
+							? { ...triggerAria, 'aria-controls': null }
+							: (triggerAria ?? {}),
 					triggerDataset: triggerDataset ?? {},
 				})}
 				<Frame

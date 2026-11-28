@@ -2462,8 +2462,8 @@ describe('React', () => {
 	 * Hydration matches: there is no panel on the server and during hydration;
 	 * after it the panel appears in `body`, the markup items enter the
 	 * collection with the first opening — by a key too — and the keys move
-	 * over them. The trigger's link (`id`, `aria-controls`) comes from the
-	 * mount id of `useId`, the same on the server and in the browser.
+	 * over them. The trigger's `id` comes from `useId` and stays the same across
+	 * hydration. `aria-controls` is projected after the client mounts the menu.
 	 */
 	it('гидратация без расхождений; после неё панель в body, пункты в коллекции, клавиши работают', async () => {
 		const engine = createEngineMenu()
@@ -2481,6 +2481,9 @@ describe('React', () => {
 		document.body.append(container)
 
 		const serverTrigger = triggerNode()
+
+		expect(serverTrigger.getAttribute('aria-haspopup')).toBe('menu')
+		expect(serverTrigger.hasAttribute('aria-controls')).toBe(false)
 
 		act(() => {
 			track(hydrateRoot(container, element, { onRecoverableError }))

@@ -864,7 +864,10 @@ Tags — рисует деталь разметки `ItemRow` (`ItemRowDescripto
   корня, как у Popover, панель — `Frame` с `role="menu"`, `id` и
   `aria-labelledby` на триггер (имя меню — текст кнопки), у триггера —
   `aria-haspopup="menu"`, `aria-expanded`, `id` и `aria-controls`
-  (`triggerAria`; формула одна, в `TMenuIdsPlugin`), открытый выглядит нажатым
+  (`triggerAria`; формула одна, в `TMenuIdsPlugin`). React, Svelte и Solid
+  отдают `aria-controls` после клиентского монтирования, когда их Frame
+  появляется в документе. `id`, `aria-haspopup` и `aria-expanded` есть и
+  в серверной разметке. Открытый триггер выглядит нажатым
   (`triggerDataset`). Слой, якорь и закрытие — общие: Frame, `TAnchorPlugin` и
   `TDismissPlugin` с `focusOutside`; ListBox не переиспользуется (см.
   «Граница переиспользования»). **Пункты — с первого открытия**: меню, которое

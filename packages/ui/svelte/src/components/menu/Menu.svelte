@@ -25,7 +25,10 @@
 	attach={binding.attachElement}
 >
 	{@render props.trigger?.({
-		triggerAria: state.triggerAria ?? {},
+		triggerAria:
+			!binding.rootElement && state.triggerAria?.['aria-controls']
+				? { ...state.triggerAria, 'aria-controls': null }
+				: (state.triggerAria ?? {}),
 		triggerDataset: state.triggerDataset ?? {},
 	})}<Frame
 		embedded="menu.frame"
