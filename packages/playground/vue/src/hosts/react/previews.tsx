@@ -433,12 +433,12 @@ export const PREVIEWS: Record<string, TPreview> = {
 	stepper: (bind) => <Stepper items={STEPPER_ITEMS} {...bind} />,
 	sidebar: (bind) => (
 		<div className="pg-sidebar-preview">
+			<div className="pg-sidebar-preview__main">Рабочая область</div>
 			<Sidebar aria_label="Рабочая область" {...bind}>
 				<strong className="pg-sidebar-preview__label">Проекты</strong>
 				<Sidebar.Item text="Обзор" leading="◈" />
 				<Sidebar.Item text="Настройки" leading="⚙" />
 			</Sidebar>
-			<div className="pg-sidebar-preview__main">Рабочая область</div>
 		</div>
 	),
 	splitter: (bind) => (

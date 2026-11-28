@@ -520,12 +520,12 @@ export const PREVIEWS: Record<string, TPreview> = {
 		}),
 	sidebar: (bind) =>
 		h('div', { class: 'pg-sidebar-preview' }, [
+			h('div', { class: 'pg-sidebar-preview__main' }, 'Рабочая область'),
 			h(Sidebar, { aria_label: 'Рабочая область', ...bind }, () => [
 				h('strong', { class: 'pg-sidebar-preview__label' }, 'Проекты'),
 				h(Sidebar.Item, { text: 'Обзор' }, { leading: () => '◈' }),
 				h(Sidebar.Item, { text: 'Настройки' }, { leading: () => '⚙' }),
 			]),
-			h('div', { class: 'pg-sidebar-preview__main' }, 'Рабочая область'),
 		]),
 	splitter: (bind) =>
 		h(Splitter, { ...bind, class: 'pg-splitter-preview' }, () => [

@@ -6,6 +6,7 @@
 </script>
 
 <div class="pg-sidebar-preview">
+	<div class="pg-sidebar-preview__main">Рабочая область</div>
 	<Sidebar aria_label="Рабочая область" {...bind}>
 		<strong class="pg-sidebar-preview__label">Проекты</strong>
 		<Sidebar.Item text="Обзор">
@@ -15,5 +16,4 @@
 			{#snippet leading()}⚙{/snippet}
 		</Sidebar.Item>
 	</Sidebar>
-	<div class="pg-sidebar-preview__main">Рабочая область</div>
 </div>

@@ -1492,6 +1492,7 @@ export class FileUploadPreview implements TFixture {
 	template: `
 		<ng-template pg-copy>
 			<div class="pg-sidebar-preview">
+				<div class="pg-sidebar-preview__main">Рабочая область</div>
 				<aside
 					so-sidebar
 					aria_label="Рабочая область"
@@ -1507,7 +1508,6 @@ export class FileUploadPreview implements TFixture {
 					<button so-sidebar-item text="Обзор"><span slot="leading">◈</span></button>
 					<button so-sidebar-item text="Настройки"><span slot="leading">⚙</span></button>
 				</aside>
-				<div class="pg-sidebar-preview__main">Рабочая область</div>
 			</div>
 		</ng-template>
 	`,
