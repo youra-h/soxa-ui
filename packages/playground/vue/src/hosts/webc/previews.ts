@@ -639,14 +639,18 @@ export const PREVIEWS: Record<string, TPreview> = {
 		tag: 'aside',
 		is: 'so-sidebar',
 		props: { aria_label: 'Рабочая область' },
-		wrap: (root) => {
-			const layout = document.createElement('div')
-			layout.className = 'pg-sidebar-preview'
-			const main = document.createElement('div')
-			main.className = 'pg-sidebar-preview__main'
-			main.textContent = 'Рабочая область'
-			layout.append(root, main)
-			return layout
+		wrapper: {
+			tag: 'div',
+			attributes: { class: 'pg-sidebar-preview' },
+			slots: {
+				default: [
+					{
+						tag: 'div',
+						attributes: { class: 'pg-sidebar-preview__main' },
+						slots: { default: [text('Рабочая область')] },
+					},
+				],
+			},
 		},
 		slots: {
 			default: [
