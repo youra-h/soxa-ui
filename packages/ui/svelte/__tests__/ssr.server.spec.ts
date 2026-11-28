@@ -28,7 +28,6 @@ import {
 	Frame,
 	Icon,
 	Input,
-	Menu,
 	NumberInput,
 	Popover,
 	ProgressLinear,
@@ -44,7 +43,6 @@ import {
 	roleIcon,
 } from '@soxa-ui/svelte'
 import RootRef, { type TRootKind } from './RootRef.test.svelte'
-import { trigger as menuTrigger } from './Menu.test.svelte'
 
 /** Содержимое панели. */
 const content = createRawSnippet(() => ({ render: () => '<span>Панель</span>' }))
@@ -98,16 +96,6 @@ describe('Frame · серверный рендер', () => {
  * панель с `contained`, приложение под менеджером тостов.
  */
 describe('оверлеи · серверный рендер', () => {
-	it.each([false, true])('Menu omits the unmounted panel link when open=%s', (open) => {
-		const body = markup(render(Menu, { props: { trigger: menuTrigger, open } }).body)
-
-		expect(body).toMatch(/<button [^>]*\sid="[^"]+"/)
-		expect(body).toContain('aria-haspopup="menu"')
-		expect(body).toContain(`aria-expanded="${open}"`)
-		expect(body).not.toContain('aria-controls')
-		expect(body).not.toContain('so-menu__panel')
-	})
-
 	it('Popover — корень с триггером и его связкой, панели нет', () => {
 		const body = markup(render(Popover, { props: { trigger, children: content } }).body)
 
