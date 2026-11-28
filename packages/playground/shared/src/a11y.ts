@@ -19,6 +19,7 @@ export const A11Y_COMPONENTS = [
 	'label',
 	'field',
 	'slider',
+	'sidebar',
 	'splitter',
 	'stepper',
 	'rating',
@@ -192,6 +193,10 @@ export const A11Y_CASES: readonly TAuditCase[] = [
 	),
 	audit('stepper', 'current-step', '.so-stepper', { aria_label: 'Checkout steps' }, [
 		'.so-stepper-item__trigger[aria-current="step"]',
+	]),
+	audit('sidebar', 'expanded', '.so-sidebar', {}, ['.so-sidebar-item']),
+	audit('sidebar', 'icon', '.so-sidebar[data-collapsed]', { collapse: 'icon', collapsed: true }, [
+		'.so-sidebar-item__leading',
 	]),
 	audit('splitter', 'initial', '.so-splitter', {}, ['.so-splitter__thumb']),
 	audit('file-upload', 'choose', '.so-file-upload', { required: true }, [
