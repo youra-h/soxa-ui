@@ -4,6 +4,7 @@ import { h } from 'vue'
 import { TSidebar } from '@soxa-ui/core'
 import { ListBox, Sidebar } from '@soxa-ui/vue'
 import '@soxa-ui/theme-oren'
+import '@soxa-ui/theme-burg'
 import { FRAMEWORKS, loadHost } from '../src/hosts'
 import SidebarDemo from '../src/components/SidebarDemo.vue'
 import '../src/styles.css'
@@ -126,6 +127,37 @@ it('collapses and reopens the grouped panel from the workspace', async () => {
 	await expect.element(search).toHaveValue('Черновики')
 	await expect.element(demo.getByText('Команда выпуска')).toBeVisible()
 	await expect.element(demo.getByText('Редактор')).toBeVisible()
+})
+
+it.each(['burg', 'burg-dark'])('styles Sidebar like a collection in %s', async (scheme) => {
+	const host = await loadHost('vue')
+	const root = render({
+		render: () =>
+			h('div', { 'data-so-theme': scheme }, [
+				h(SidebarDemo, { host }),
+				h(ListBox, {
+					items: [{ value: 'apple', text: 'Яблоко', _: { group: 'fruit' } }],
+					groups: [{ key: 'fruit', label: 'Фрукты' }],
+					value: 'apple',
+				}),
+			]),
+	})
+	const panel = getComputedStyle(element(root, '.so-sidebar__content'))
+	const list = getComputedStyle(element(root, '.so-list-box'))
+	const label = getComputedStyle(element(root, '.so-sidebar-group__label'))
+	const listLabel = getComputedStyle(element(root, '.so-list-box-group__label'))
+	const active = getComputedStyle(element(root, '.so-sidebar-item[data-selected="true"]'))
+	const option = element(root, '.so-list-box-item[data-selected="true"] .so-button')
+
+	expect(panel.backgroundColor).toBe(list.backgroundColor)
+	expect(panel.borderRightColor).toBe(list.borderRightColor)
+	expect(label.color).toBe(listLabel.color)
+	expect(label.fontWeight).toBe(listLabel.fontWeight)
+	expect(active.color).toBe(getComputedStyle(option).color)
+	expect(active.borderRadius).toBe(getComputedStyle(option).borderRadius)
+	expect(active.getPropertyValue('--so-icon-color').trim()).toBe('currentColor')
+	expect(active.backgroundColor).toBe(getComputedStyle(option, '::after').backgroundColor)
+	expect(active.backgroundColor).not.toBe('rgba(0, 0, 0, 0)')
 })
 
 it('keeps a Web Components sidebar link native', async () => {
