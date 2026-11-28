@@ -145,11 +145,15 @@ $tone-steps: 300, 400, 500, 800;
 	}
 }
 
-// Переменные цвета нейтрали — вуаль своей плотности (`button-tones`).
-@mixin button-neutral-tones {
+@mixin button-neutral-tone-steps {
 	@each $step in $tone-steps {
 		--so-tone-#{$step}: var(--so-neutral-#{$step});
 	}
+}
+
+// Переменные цвета нейтрали — вуаль своей плотности (`button-tones`).
+@mixin button-neutral-tones {
+	@include button-neutral-tone-steps;
 
 	--so-tone-filled: #{veil.tint('neutral', var(--so-component-fill))};
 	--so-tone-filled-hover: #{veil.tint(

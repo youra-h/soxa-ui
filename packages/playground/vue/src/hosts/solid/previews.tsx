@@ -1,4 +1,5 @@
 import { STEPPER_ITEMS, ALERT_SAMPLE, SIDEBAR_GROUPS } from '@soxa-ui/playground-shared'
+import { SIDEBAR_BRAND, SIDEBAR_PROFILE, SIDEBAR_SEARCH } from '../sidebar-content'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -465,7 +466,19 @@ export const PREVIEWS: Record<string, TPreview> = {
 	),
 	stepper: (bind) => <Stepper items={STEPPER_ITEMS} {...bind} />,
 	sidebar: (bind) => (
-		<Sidebar aria_label="Редакция «Поле»" {...bind}>
+		<Sidebar aria_label={SIDEBAR_BRAND.name} {...bind}>
+			<header class="pg-sidebar-header">
+				<div class="pg-sidebar-brand">
+					<img src={SIDEBAR_BRAND.mark} alt="" class="pg-sidebar-brand__mark" />
+					<Sidebar.ExpandedOnly class="pg-sidebar-identity">
+						<strong>{SIDEBAR_BRAND.name}</strong>
+						<small>{SIDEBAR_BRAND.subtitle}</small>
+					</Sidebar.ExpandedOnly>
+				</div>
+				<Sidebar.ExpandedOnly>
+					<Input aria_label={SIDEBAR_SEARCH} placeholder={SIDEBAR_SEARCH} size="sm" />
+				</Sidebar.ExpandedOnly>
+			</header>
 			{sidebarGroups.map((group) => (
 				<div class="pg-sidebar-group" role="group" aria-label={group.label}>
 					<div class="so-sidebar-group__label">{group.label}</div>
@@ -479,6 +492,35 @@ export const PREVIEWS: Record<string, TPreview> = {
 					))}
 				</div>
 			))}
+			<footer class="pg-sidebar-footer">
+				<Menu
+					items={SIDEBAR_PROFILE.items}
+					placement="top-start"
+					trigger={(scope: TMenuTriggerScope) => (
+						<Sidebar.Item
+							text={SIDEBAR_PROFILE.name}
+							aria-label={SIDEBAR_PROFILE.label}
+							{...scope.triggerAria}
+							{...scope.triggerDataset}
+							leading={
+								<Avatar
+									initials={SIDEBAR_PROFILE.initials}
+									size="sm"
+									variant="accent"
+								/>
+							}
+						>
+							<span class="pg-sidebar-profile-label">
+								<span class="pg-sidebar-identity">
+									<strong>{SIDEBAR_PROFILE.name}</strong>
+									<small>{SIDEBAR_PROFILE.role}</small>
+								</span>
+								<Icon tag={ARROW_DOWN} size="sm" aria-hidden="true" />
+							</span>
+						</Sidebar.Item>
+					)}
+				/>
+			</footer>
 		</Sidebar>
 	),
 	splitter: (bind) => (

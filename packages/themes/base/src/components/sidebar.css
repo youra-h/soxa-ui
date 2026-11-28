@@ -45,6 +45,11 @@
 	translate: var(--so-sidebar-slide) 0;
 }
 
+/* The collapse state also hides blocks with a custom display value. */
+.so-sidebar[data-collapsed] [data-so-sidebar-expanded-only] {
+	display: none !important;
+}
+
 .so-sidebar-group__label {
 	padding-block: var(--so-spacing, 0.25rem);
 }

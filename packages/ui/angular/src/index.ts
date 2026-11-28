@@ -95,7 +95,11 @@ export { TListBoxSeparatorComponent } from './components/list-box/separator'
 
 export { TFileUploadComponent } from './components/file-upload'
 
-export { TSidebarComponent, TSidebarItemComponent } from './components/sidebar'
+export {
+	TSidebarComponent,
+	TSidebarExpandedOnlyDirective,
+	TSidebarItemComponent,
+} from './components/sidebar'
 export {
 	TSplitterComponent,
 	TSplitterPanelComponent,

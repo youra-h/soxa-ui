@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { page } from 'vitest/browser'
+import { page, userEvent } from 'vitest/browser'
 import { h } from 'vue'
 import { TSidebar } from '@soxa-ui/core'
 import { ListBox, Sidebar } from '@soxa-ui/vue'
@@ -31,7 +31,7 @@ describe.each(FRAMEWORKS)('Sidebar preview · $id', ({ id }) => {
 			const item = sidebar?.querySelector('.so-sidebar-item')
 			expect(item?.textContent).toContain('Календарь публикаций')
 			expect(sidebar?.querySelectorAll('[role="group"]')).toHaveLength(2)
-			expect(sidebar?.querySelectorAll('.so-sidebar-item')).toHaveLength(6)
+			expect(sidebar?.querySelectorAll('.pg-sidebar-group .so-sidebar-item')).toHaveLength(6)
 
 			preview.update({ collapse: 'icon', collapsed: true })
 			await expect.poll(() => sidebar?.hasAttribute('data-collapsed')).toBe(true)
@@ -72,6 +72,8 @@ it('collapses and reopens the grouped panel from the workspace', async () => {
 	const collapse = demo.getByRole('button', { name: 'Свернуть панель' })
 	const expand = demo.getByRole('button', { name: 'Развернуть панель' })
 	const hide = demo.getByRole('switch', { name: 'Скрывать целиком' })
+	const search = demo.getByRole('textbox', { name: 'Поиск по разделам' })
+	const profile = demo.getByRole('button', { name: /Анна Волкова/ })
 	const sidebar = element(root, '.so-sidebar')
 	const width = () => sidebar.getBoundingClientRect().width
 	const expandedWidth = width()
@@ -90,12 +92,28 @@ it('collapses and reopens the grouped panel from the workspace', async () => {
 		expect(labelStyle[property]).toBe(listBoxStyle[property])
 	}
 
+	await search.fill('Черновики')
 	await collapse.click()
 	await expect.poll(width).toBeLessThan(expandedWidth)
 	expect(width()).toBeGreaterThan(0)
 	expect(getComputedStyle(sidebarLabel).display).toBe('none')
 	await expect.element(expand).toHaveAttribute('aria-expanded', 'false')
 	await expect.element(demo.getByRole('button', { name: 'Напоминания' })).toBeVisible()
+	const searchBlock = element(sidebar, '.pg-sidebar-header > [data-so-sidebar-expanded-only]')
+	expect(getComputedStyle(searchBlock).display).toBe('none')
+	await expect.element(demo.getByText('Команда выпуска')).not.toBeVisible()
+	const profileLabel = element(sidebar, '.pg-sidebar-footer .so-sidebar-item__text')
+	expect(getComputedStyle(profileLabel).clipPath).toBe('inset(50%)')
+	expect(element(sidebar, '.pg-sidebar-brand__mark').getBoundingClientRect().width).toBe(32)
+	expect(
+		element(sidebar, '.pg-sidebar-footer .so-avatar').getBoundingClientRect().width,
+	).toBeGreaterThan(0)
+
+	await profile.click()
+	await expect.element(page.getByRole('menuitem', { name: 'Мой профиль' })).toBeVisible()
+	await expect.element(page.getByRole('menu')).toHaveFocus()
+	await userEvent.keyboard('{Escape}')
+	await expect.element(profile).toHaveFocus()
 
 	await hide.click()
 	await expect.poll(width).toBe(0)
@@ -105,6 +123,9 @@ it('collapses and reopens the grouped panel from the workspace', async () => {
 	await expect.poll(width).toBe(expandedWidth)
 	await expect.element(collapse).toHaveAttribute('aria-expanded', 'true')
 	await expect.element(demo.getByRole('group', { name: 'Материалы' })).toBeVisible()
+	await expect.element(search).toHaveValue('Черновики')
+	await expect.element(demo.getByText('Команда выпуска')).toBeVisible()
+	await expect.element(demo.getByText('Редактор')).toBeVisible()
 })
 
 it('keeps a Web Components sidebar link native', async () => {

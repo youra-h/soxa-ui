@@ -1542,6 +1542,7 @@
       "TSelectSeparatorComponent",
       "TSeparatorComponent",
       "TSidebarComponent",
+      "TSidebarExpandedOnlyDirective",
       "TSidebarItemComponent",
       "TSkeletonComponent",
       "TSliderComponent",

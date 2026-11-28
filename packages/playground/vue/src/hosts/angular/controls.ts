@@ -1,4 +1,5 @@
 import { ALERT_SAMPLE, SIDEBAR_GROUPS } from '@soxa-ui/playground-shared'
+import { SIDEBAR_BRAND, SIDEBAR_PROFILE, SIDEBAR_SEARCH } from '../sidebar-content'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -7,6 +8,7 @@ import {
 } from '@soxa-ui/playground-shared'
 import { ChangeDetectionStrategy, Component, input, viewChild, viewChildren } from '@angular/core'
 import {
+	AttributesDirective,
 	RoleIconDirective,
 	SlotDirective,
 	TAlertComponent,
@@ -15,7 +17,9 @@ import {
 	TAvatarGroupComponent,
 	TCodeBlockComponent,
 	TFileUploadComponent,
+	TMenuComponent,
 	TSidebarComponent,
+	TSidebarExpandedOnlyDirective,
 	TSidebarItemComponent,
 	TSplitterComponent,
 	TSplitterHandleComponent,
@@ -1488,9 +1492,15 @@ export class FileUploadPreview implements TFixture {
 	selector: 'pg-sidebar-preview',
 	imports: [
 		TSidebarComponent,
+		TSidebarExpandedOnlyDirective,
 		TSidebarItemComponent,
+		TAvatarComponent,
 		TIconComponent,
+		TInputComponent,
+		TMenuComponent,
+		AttributesDirective,
 		RoleIconDirective,
+		SlotDirective,
 		CopyDirective,
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -1499,7 +1509,7 @@ export class FileUploadPreview implements TFixture {
 		<ng-template pg-copy>
 			<aside
 				so-sidebar
-				aria_label="Редакция «Поле»"
+				[aria_label]="brand.name"
 				[ctrl]="ctrl()"
 				[rendered]="rendered()"
 				[visible]="visible()"
@@ -1508,6 +1518,18 @@ export class FileUploadPreview implements TFixture {
 				[collapse]="collapse()"
 				[collapsed]="collapsed()"
 			>
+				<header class="pg-sidebar-header">
+					<div class="pg-sidebar-brand">
+						<img [src]="brand.mark" alt="" class="pg-sidebar-brand__mark" />
+						<div so-sidebar-expanded-only class="pg-sidebar-identity">
+							<strong>{{ brand.name }}</strong>
+							<small>{{ brand.subtitle }}</small>
+						</div>
+					</div>
+					<div so-sidebar-expanded-only>
+						<div so-input [aria_label]="search" [placeholder]="search" size="sm"></div>
+					</div>
+				</header>
 				@for (group of groups; track group.label) {
 					<div class="pg-sidebar-group" role="group" [attr.aria-label]="group.label">
 						<div class="so-sidebar-group__label">{{ group.label }}</div>
@@ -1528,11 +1550,50 @@ export class FileUploadPreview implements TFixture {
 						}
 					</div>
 				}
+				<footer class="pg-sidebar-footer">
+					<span so-menu [items]="profile.items" placement="top-start">
+						<ng-template
+							slot="trigger"
+							let-triggerAria="triggerAria"
+							let-triggerDataset="triggerDataset"
+						>
+							<button
+								so-sidebar-item
+								[text]="profile.name"
+								[attr.aria-label]="profile.label"
+								[so-attributes]="{ ...triggerAria, ...triggerDataset }"
+							>
+								<span
+									so-avatar
+									slot="leading"
+									[initials]="profile.initials"
+									size="sm"
+									variant="accent"
+								></span>
+								<span class="pg-sidebar-profile-label">
+									<span class="pg-sidebar-identity">
+										<strong>{{ profile.name }}</strong>
+										<small>{{ profile.role }}</small>
+									</span>
+									<svg
+										so-icon
+										so-role-icon="arrowDown"
+										aria-hidden="true"
+										size="sm"
+									></svg>
+								</span>
+							</button>
+						</ng-template>
+					</span>
+				</footer>
 			</aside>
 		</ng-template>
 	`,
 })
 export class SidebarPreview implements TFixture {
+	readonly brand = SIDEBAR_BRAND
+	readonly profile = SIDEBAR_PROFILE
+	readonly search = SIDEBAR_SEARCH
 	readonly groups = SIDEBAR_GROUPS
 	readonly ctrl = input<TSidebarComponent['ctrl']>()
 	readonly rendered = input<TSidebarComponent['rendered']>()

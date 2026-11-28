@@ -1,4 +1,5 @@
 import { STEPPER_ITEMS, ALERT_SAMPLE, SIDEBAR_GROUPS } from '@soxa-ui/playground-shared'
+import { SIDEBAR_BRAND, SIDEBAR_PROFILE, SIDEBAR_SEARCH } from '../sidebar-content'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -523,8 +524,24 @@ export const PREVIEWS: Record<string, TPreview> = {
 			action: () => h(Button, { type: 'button' }, () => ALERT_SAMPLE.action),
 		}),
 	sidebar: (bind) =>
-		h(Sidebar, { aria_label: 'Редакция «Поле»', ...bind }, () =>
-			sidebarGroups.map((group) =>
+		h(Sidebar, { aria_label: SIDEBAR_BRAND.name, ...bind }, () => [
+			h('header', { class: 'pg-sidebar-header' }, [
+				h('div', { class: 'pg-sidebar-brand' }, [
+					h('img', { src: SIDEBAR_BRAND.mark, alt: '', class: 'pg-sidebar-brand__mark' }),
+					h(Sidebar.ExpandedOnly, { class: 'pg-sidebar-identity' }, () => [
+						h('strong', SIDEBAR_BRAND.name),
+						h('small', SIDEBAR_BRAND.subtitle),
+					]),
+				]),
+				h(Sidebar.ExpandedOnly, () =>
+					h(Input, {
+						aria_label: SIDEBAR_SEARCH,
+						placeholder: SIDEBAR_SEARCH,
+						size: 'sm',
+					}),
+				),
+			]),
+			...sidebarGroups.map((group) =>
 				h(
 					'div',
 					{
@@ -550,7 +567,47 @@ export const PREVIEWS: Record<string, TPreview> = {
 					],
 				),
 			),
-		),
+			h(
+				'footer',
+				{ class: 'pg-sidebar-footer' },
+				h(
+					Menu,
+					{ placement: 'top-start', items: SIDEBAR_PROFILE.items },
+					{
+						trigger: ({ triggerAria, triggerDataset }: TMenuTriggerScope) =>
+							h(
+								Sidebar.Item,
+								{
+									text: SIDEBAR_PROFILE.name,
+									'aria-label': SIDEBAR_PROFILE.label,
+									...triggerAria,
+									...triggerDataset,
+								},
+								{
+									leading: () =>
+										h(Avatar, {
+											initials: SIDEBAR_PROFILE.initials,
+											size: 'sm',
+											variant: 'accent',
+										}),
+									default: () =>
+										h('span', { class: 'pg-sidebar-profile-label' }, [
+											h('span', { class: 'pg-sidebar-identity' }, [
+												h('strong', SIDEBAR_PROFILE.name),
+												h('small', SIDEBAR_PROFILE.role),
+											]),
+											h(Icon, {
+												tag: ARROW_DOWN,
+												size: 'sm',
+												'aria-hidden': 'true',
+											}),
+										]),
+								},
+							),
+					},
+				),
+			),
+		]),
 	splitter: (bind) =>
 		h(Splitter, { ...bind, class: 'pg-splitter-preview' }, () => [
 			h(Splitter.Panel, { panel: 'files' }, () =>

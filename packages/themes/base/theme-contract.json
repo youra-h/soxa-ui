@@ -4524,6 +4524,20 @@
       "presence": "TDataset serializes false as \"false\"; null/undefined removes the attribute. See scope for the bound DOM node."
     },
     {
+      "name": "data-so-sidebar-expanded-only",
+      "sources": [
+        "packages/ui/angular/src/components/sidebar/sidebar-expanded-only.directive.ts",
+        "packages/ui/react/src/components/sidebar/ExpandedOnly.tsx",
+        "packages/ui/solid/src/components/sidebar/ExpandedOnly.tsx",
+        "packages/ui/svelte/src/components/sidebar/ExpandedOnly.svelte",
+        "packages/ui/vue/src/components/sidebar/ExpandedOnly.vue"
+      ],
+      "description": "Hides a Sidebar block while collapsed and preserves its mounted contents.",
+      "scope": "A descendant of a Sidebar; the attribute can also be set on native markup",
+      "values": "Present or absent",
+      "presence": "Present on content that should only appear when the Sidebar is expanded"
+    },
+    {
       "name": "data-so-theme",
       "sources": ["packages/plugins/src/custom/frame/theme/theme.plugin.ts"],
       "description": "Mirrors the nearest anchor theme onto a teleported Frame panel while preserving an explicit panel theme.",

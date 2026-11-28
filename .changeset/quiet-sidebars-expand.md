@@ -12,4 +12,4 @@
 '@soxa-ui/theme-burg': patch
 ---
 
-Add Sidebar with compact icon and off-canvas collapse modes, custom content, and native links or buttons for its items.
+Add Sidebar with compact icon and off-canvas collapse modes, custom content, and native links or buttons for its items. Mark content as expanded-only to hide it while collapsed and preserve its state.

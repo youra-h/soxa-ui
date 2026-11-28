@@ -36,7 +36,7 @@
 }
 
 .so-sidebar-item {
-	@include button.button-neutral-tones;
+	@include button.button-neutral-tone-steps;
 	@include button.button-surface-look;
 	@include button.button-view('plain');
 
