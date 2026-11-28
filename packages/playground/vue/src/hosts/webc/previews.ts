@@ -1,4 +1,5 @@
-import { STEPPER_ITEMS, ALERT_SAMPLE } from '@soxa-ui/playground-shared'
+import { STEPPER_ITEMS, ALERT_SAMPLE, SIDEBAR_GROUPS } from '@soxa-ui/playground-shared'
+import { SIDEBAR_BRAND, SIDEBAR_PROFILE, SIDEBAR_SEARCH } from '../sidebar-content'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -635,6 +636,200 @@ export const PREVIEWS: Record<string, TPreview> = {
 		},
 	},
 	stepper: { tag: 'div', is: 'so-stepper', props: { items: STEPPER_ITEMS } },
+	sidebar: {
+		tag: 'aside',
+		is: 'so-sidebar',
+		props: { aria_label: SIDEBAR_BRAND.name },
+		slots: {
+			default: [
+				{
+					tag: 'header',
+					attributes: { class: 'pg-sidebar-header' },
+					slots: {
+						default: [
+							{
+								tag: 'div',
+								attributes: { class: 'pg-sidebar-brand' },
+								slots: {
+									default: [
+										{
+											tag: 'img',
+											attributes: {
+												class: 'pg-sidebar-brand__mark',
+												src: SIDEBAR_BRAND.mark,
+												alt: '',
+											},
+										},
+										{
+											tag: 'div',
+											attributes: {
+												class: 'pg-sidebar-identity',
+												'data-so-sidebar-expanded-only': '',
+											},
+											slots: {
+												default: [
+													{
+														tag: 'strong',
+														slots: {
+															default: [text(SIDEBAR_BRAND.name)],
+														},
+													},
+													{
+														tag: 'small',
+														slots: {
+															default: [text(SIDEBAR_BRAND.subtitle)],
+														},
+													},
+												],
+											},
+										},
+									],
+								},
+							},
+							{
+								tag: 'div',
+								attributes: { 'data-so-sidebar-expanded-only': '' },
+								slots: {
+									default: [
+										{
+											tag: 'div',
+											is: 'so-input',
+											props: {
+												aria_label: SIDEBAR_SEARCH,
+												placeholder: SIDEBAR_SEARCH,
+												size: 'sm',
+											},
+										},
+									],
+								},
+							},
+						],
+					},
+				},
+				...SIDEBAR_GROUPS.map((group): TPreview => ({
+					tag: 'div',
+					attributes: {
+						class: 'pg-sidebar-group',
+						role: 'group',
+						'aria-label': group.label,
+					},
+					slots: {
+						default: [
+							{
+								tag: 'div',
+								attributes: { class: 'so-sidebar-group__label' },
+								slots: { default: [text(group.label)] },
+							},
+							...group.items.map((item): TPreview => ({
+								tag: 'button',
+								is: 'so-sidebar-item',
+								props: { text: item.text },
+								attributes: item.current
+									? { 'aria-current': 'page', 'data-selected': 'true' }
+									: undefined,
+								slots: {
+									leading: [
+										{
+											tag: 'span',
+											is: 'so-icon',
+											attributes: { icon: item.icon, size: 'lg' },
+										},
+									],
+								},
+							})),
+						],
+					},
+				})),
+				{
+					tag: 'footer',
+					attributes: { class: 'pg-sidebar-footer' },
+					slots: {
+						default: [
+							{
+								tag: 'span',
+								is: 'so-menu',
+								props: { items: SIDEBAR_PROFILE.items, placement: 'top-start' },
+								slots: {
+									trigger: [
+										{
+											tag: 'button',
+											is: 'so-sidebar-item',
+											props: { text: SIDEBAR_PROFILE.name },
+											slots: {
+												leading: [
+													{
+														tag: 'span',
+														is: 'so-avatar',
+														props: {
+															initials: SIDEBAR_PROFILE.initials,
+															size: 'sm',
+															variant: 'accent',
+														},
+													},
+												],
+												default: [
+													{
+														tag: 'span',
+														attributes: {
+															class: 'pg-sidebar-profile-label',
+														},
+														slots: {
+															default: [
+																{
+																	tag: 'span',
+																	attributes: {
+																		class: 'pg-sidebar-identity',
+																	},
+																	slots: {
+																		default: [
+																			{
+																				tag: 'strong',
+																				slots: {
+																					default: [
+																						text(
+																							SIDEBAR_PROFILE.name,
+																						),
+																					],
+																				},
+																			},
+																			{ tag: 'br' },
+																			{
+																				tag: 'small',
+																				slots: {
+																					default: [
+																						text(
+																							SIDEBAR_PROFILE.role,
+																						),
+																					],
+																				},
+																			},
+																		],
+																	},
+																},
+																{
+																	tag: 'span',
+																	is: 'so-icon',
+																	attributes: {
+																		icon: 'arrowDown',
+																		size: 'sm',
+																		'aria-hidden': 'true',
+																	},
+																},
+															],
+														},
+													},
+												],
+											},
+										},
+									],
+								},
+							},
+						],
+					},
+				},
+			],
+		},
+	},
 	splitter: {
 		tag: 'div',
 		is: 'so-splitter',

@@ -28,8 +28,9 @@ describe('mandatory axe inventory', () => {
 		const entries = [
 			...new Map(A11Y_CASES.map((entry) => [entry.component, entry.coverage])).entries(),
 		]
-		expect(entries.filter(([, coverage]) => coverage === 'direct')).toHaveLength(49)
+		expect(entries.filter(([, coverage]) => coverage === 'direct')).toHaveLength(50)
 		expect(entries).toContainEqual(['tree', 'direct'])
+		expect(entries).toContainEqual(['sidebar', 'direct'])
 		expect(entries.filter(([, coverage]) => coverage === 'consumer')).toHaveLength(7)
 		expect(entries.filter(([, coverage]) => coverage === 'semantic-reference')).toEqual([
 			['interactive', 'semantic-reference'],

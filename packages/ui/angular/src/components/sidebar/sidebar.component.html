@@ -1,0 +1,11 @@
+<ng-content select="ng-template[slot]" />
+<div class="so-sidebar__content" [attr.inert]="state()['offcanvasHidden'] ? '' : null">
+	@if (slot('default'); as content) {
+		<ng-container
+			[ngTemplateOutlet]="content"
+			[ngTemplateOutletContext]="{ collapsed: state()['collapsed'] }"
+		/>
+	} @else {
+		<ng-content />
+	}
+</div>

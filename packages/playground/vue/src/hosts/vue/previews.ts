@@ -1,4 +1,5 @@
-import { STEPPER_ITEMS, ALERT_SAMPLE } from '@soxa-ui/playground-shared'
+import { STEPPER_ITEMS, ALERT_SAMPLE, SIDEBAR_GROUPS } from '@soxa-ui/playground-shared'
+import { SIDEBAR_BRAND, SIDEBAR_PROFILE, SIDEBAR_SEARCH } from '../sidebar-content'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -59,6 +60,7 @@ import {
 	Guide,
 	Tree,
 	FileUpload,
+	Sidebar,
 	Splitter,
 	Stepper,
 	Label,
@@ -218,6 +220,10 @@ const menuItems = (parts: TParts) => [
  */
 const ALERT_ICON = roleIcon('warning')
 const ARROW_DOWN = roleIcon('arrowDown')
+const sidebarGroups = SIDEBAR_GROUPS.map((group) => ({
+	label: group.label,
+	items: group.items.map((item) => ({ ...item, iconTag: roleIcon(item.icon) })),
+}))
 
 /**
  * On the playground a button opens the dialog: closed it is hidden, and open
@@ -517,6 +523,91 @@ export const PREVIEWS: Record<string, TPreview> = {
 			default: () => ALERT_SAMPLE.message,
 			action: () => h(Button, { type: 'button' }, () => ALERT_SAMPLE.action),
 		}),
+	sidebar: (bind) =>
+		h(Sidebar, { aria_label: SIDEBAR_BRAND.name, ...bind }, () => [
+			h('header', { class: 'pg-sidebar-header' }, [
+				h('div', { class: 'pg-sidebar-brand' }, [
+					h('img', { src: SIDEBAR_BRAND.mark, alt: '', class: 'pg-sidebar-brand__mark' }),
+					h(Sidebar.ExpandedOnly, { class: 'pg-sidebar-identity' }, () => [
+						h('strong', SIDEBAR_BRAND.name),
+						h('small', SIDEBAR_BRAND.subtitle),
+					]),
+				]),
+				h(Sidebar.ExpandedOnly, () =>
+					h(Input, {
+						aria_label: SIDEBAR_SEARCH,
+						placeholder: SIDEBAR_SEARCH,
+						size: 'sm',
+					}),
+				),
+			]),
+			...sidebarGroups.map((group) =>
+				h(
+					'div',
+					{
+						key: group.label,
+						class: 'pg-sidebar-group',
+						role: 'group',
+						'aria-label': group.label,
+					},
+					[
+						h('div', { class: 'so-sidebar-group__label' }, group.label),
+						...group.items.map((item) =>
+							h(
+								Sidebar.Item,
+								{
+									key: item.text,
+									text: item.text,
+									'aria-current': item.current ? 'page' : undefined,
+									'data-selected': item.current ? 'true' : undefined,
+								},
+								{ leading: () => h(Icon, { tag: item.iconTag, size: 'lg' }) },
+							),
+						),
+					],
+				),
+			),
+			h(
+				'footer',
+				{ class: 'pg-sidebar-footer' },
+				h(
+					Menu,
+					{ placement: 'top-start', items: SIDEBAR_PROFILE.items },
+					{
+						trigger: ({ triggerAria, triggerDataset }: TMenuTriggerScope) =>
+							h(
+								Sidebar.Item,
+								{
+									text: SIDEBAR_PROFILE.name,
+									...triggerAria,
+									...triggerDataset,
+								},
+								{
+									leading: () =>
+										h(Avatar, {
+											initials: SIDEBAR_PROFILE.initials,
+											size: 'sm',
+											variant: 'accent',
+										}),
+									default: () =>
+										h('span', { class: 'pg-sidebar-profile-label' }, [
+											h('span', { class: 'pg-sidebar-identity' }, [
+												h('strong', SIDEBAR_PROFILE.name),
+												h('br'),
+												h('small', SIDEBAR_PROFILE.role),
+											]),
+											h(Icon, {
+												tag: ARROW_DOWN,
+												size: 'sm',
+												'aria-hidden': 'true',
+											}),
+										]),
+								},
+							),
+					},
+				),
+			),
+		]),
 	splitter: (bind) =>
 		h(Splitter, { ...bind, class: 'pg-splitter-preview' }, () => [
 			h(Splitter.Panel, { panel: 'files' }, () =>

@@ -209,6 +209,10 @@
 	@include meta.load-css('components/stepper/stepper');
 }
 
+@layer components.so.sidebar {
+	@include meta.load-css('components/sidebar/sidebar');
+}
+
 @layer components.so.splitter {
 	@include meta.load-css('components/splitter/splitter');
 }

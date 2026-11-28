@@ -1,4 +1,5 @@
-import { ALERT_SAMPLE } from '@soxa-ui/playground-shared'
+import { ALERT_SAMPLE, SIDEBAR_GROUPS } from '@soxa-ui/playground-shared'
+import { SIDEBAR_BRAND, SIDEBAR_PROFILE, SIDEBAR_SEARCH } from '../sidebar-content'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -7,6 +8,7 @@ import {
 } from '@soxa-ui/playground-shared'
 import { ChangeDetectionStrategy, Component, input, viewChild, viewChildren } from '@angular/core'
 import {
+	AttributesDirective,
 	RoleIconDirective,
 	SlotDirective,
 	TAlertComponent,
@@ -15,6 +17,10 @@ import {
 	TAvatarGroupComponent,
 	TCodeBlockComponent,
 	TFileUploadComponent,
+	TMenuComponent,
+	TSidebarComponent,
+	TSidebarExpandedOnlyDirective,
+	TSidebarItemComponent,
 	TSplitterComponent,
 	TSplitterHandleComponent,
 	TSplitterPanelComponent,
@@ -1480,6 +1486,124 @@ export class FileUploadPreview implements TFixture {
 	readonly maxFiles = input<TFileUploadComponent['maxFiles']>()
 	readonly copy = viewChild.required(CopyDirective)
 	readonly subjects = viewChildren(TFileUploadComponent)
+}
+
+@Component({
+	selector: 'pg-sidebar-preview',
+	imports: [
+		TSidebarComponent,
+		TSidebarExpandedOnlyDirective,
+		TSidebarItemComponent,
+		TAvatarComponent,
+		TIconComponent,
+		TInputComponent,
+		TMenuComponent,
+		AttributesDirective,
+		RoleIconDirective,
+		SlotDirective,
+		CopyDirective,
+	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	host: { style: 'display: contents' },
+	template: `
+		<ng-template pg-copy>
+			<aside
+				so-sidebar
+				[aria_label]="brand.name"
+				[ctrl]="ctrl()"
+				[rendered]="rendered()"
+				[visible]="visible()"
+				[direction]="direction()"
+				[side]="side()"
+				[collapse]="collapse()"
+				[collapsed]="collapsed()"
+			>
+				<header class="pg-sidebar-header">
+					<div class="pg-sidebar-brand">
+						<img [src]="brand.mark" alt="" class="pg-sidebar-brand__mark" />
+						<div so-sidebar-expanded-only class="pg-sidebar-identity">
+							<strong>{{ brand.name }}</strong>
+							<small>{{ brand.subtitle }}</small>
+						</div>
+					</div>
+					<div so-sidebar-expanded-only>
+						<div so-input [aria_label]="search" [placeholder]="search" size="sm"></div>
+					</div>
+				</header>
+				@for (group of groups; track group.label) {
+					<div class="pg-sidebar-group" role="group" [attr.aria-label]="group.label">
+						<div class="so-sidebar-group__label">{{ group.label }}</div>
+						@for (item of group.items; track item.text) {
+							<button
+								so-sidebar-item
+								[text]="item.text"
+								[attr.aria-current]="item.current ? 'page' : null"
+								[attr.data-selected]="item.current ? 'true' : null"
+							>
+								<svg
+									so-icon
+									slot="leading"
+									size="lg"
+									[so-role-icon]="item.icon"
+								></svg>
+							</button>
+						}
+					</div>
+				}
+				<footer class="pg-sidebar-footer">
+					<span so-menu [items]="profile.items" placement="top-start">
+						<ng-template
+							slot="trigger"
+							let-triggerAria="triggerAria"
+							let-triggerDataset="triggerDataset"
+						>
+							<button
+								so-sidebar-item
+								[text]="profile.name"
+								[so-attributes]="{ ...triggerAria, ...triggerDataset }"
+							>
+								<span
+									so-avatar
+									slot="leading"
+									[initials]="profile.initials"
+									size="sm"
+									variant="accent"
+								></span>
+								<span class="pg-sidebar-profile-label">
+									<span class="pg-sidebar-identity">
+										<strong>{{ profile.name }}</strong>
+										<br />
+										<small>{{ profile.role }}</small>
+									</span>
+									<svg
+										so-icon
+										so-role-icon="arrowDown"
+										aria-hidden="true"
+										size="sm"
+									></svg>
+								</span>
+							</button>
+						</ng-template>
+					</span>
+				</footer>
+			</aside>
+		</ng-template>
+	`,
+})
+export class SidebarPreview implements TFixture {
+	readonly brand = SIDEBAR_BRAND
+	readonly profile = SIDEBAR_PROFILE
+	readonly search = SIDEBAR_SEARCH
+	readonly groups = SIDEBAR_GROUPS
+	readonly ctrl = input<TSidebarComponent['ctrl']>()
+	readonly rendered = input<TSidebarComponent['rendered']>()
+	readonly visible = input<TSidebarComponent['visible']>()
+	readonly direction = input<TSidebarComponent['direction']>()
+	readonly side = input<TSidebarComponent['side']>()
+	readonly collapse = input<TSidebarComponent['collapse']>()
+	readonly collapsed = input<TSidebarComponent['collapsed']>()
+	readonly copy = viewChild.required(CopyDirective)
+	readonly subjects = viewChildren(TSidebarComponent)
 }
 
 @Component({

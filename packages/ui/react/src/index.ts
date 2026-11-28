@@ -271,6 +271,13 @@ export type {
 export { FileUpload } from './components/file-upload'
 export type { FileUploadProps, FileUploadEventProps } from './components/file-upload'
 
+export { Sidebar, SidebarItem } from './components/sidebar'
+export type {
+	SidebarProps,
+	SidebarEventProps,
+	SidebarItemProps,
+	SidebarItemEventProps,
+} from './components/sidebar'
 export { Splitter, SplitterPanel, SplitterHandle } from './components/splitter'
 export type {
 	SplitterProps,

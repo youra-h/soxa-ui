@@ -33,13 +33,15 @@
 		border-radius: calc(var(--so-radius) * 0.75);
 	}
 
-	:where(.so-list-box-item, .so-select-item, .so-menu-item, .so-tree-item) > :where(.so-button) {
+	:where(.so-list-box-item, .so-select-item, .so-menu-item, .so-tree-item) > :where(.so-button),
+	:where(.so-sidebar-item) {
 		--so-burg-button-ink: var(--so-burg-button-tone);
 		border-radius: var(--so-button-radius, calc(var(--so-radius) * 0.75));
 		font-weight: 450;
 	}
 
-	:where(.so-list-box-item, .so-select-item, .so-menu-item) > :where(.so-button:focus-visible) {
+	:where(.so-list-box-item, .so-select-item, .so-menu-item) > :where(.so-button:focus-visible),
+	:where(.so-sidebar-item:focus-visible) {
 		outline: 2px solid var(--so-burg-focus-edge);
 		outline-offset: -2px;
 	}
@@ -58,18 +60,27 @@
 			[data-open='true'],
 			[data-selected='true']
 		):not(:where([data-disabled='true']))
-		> :where(.so-button:not(.so-button--view-filled)) {
+		> :where(.so-button:not(.so-button--view-filled)),
+	:where(.so-sidebar-item:is([data-highlighted='true'], [data-selected='true'])):not(
+		:where([data-disabled='true'])
+	) {
 		--so-burg-button-background: var(--so-burg-row-highlight);
 	}
 
 	@media (hover: hover) {
 		:where(.so-list-box-item, .so-select-item, .so-menu-item)
-			> :where(.so-button:hover:not(.so-button--view-filled, [data-disabled='true'])) {
+			> :where(.so-button:hover:not(.so-button--view-filled, [data-disabled='true'])),
+		:where(.so-sidebar-item:hover:not([data-disabled='true'])) {
 			--so-burg-button-background: var(--so-burg-row-highlight);
 		}
 	}
 
-	:where(.so-list-box-group__label, .so-select-group__label, .so-menu-group__label) {
+	:where(
+		.so-list-box-group__label,
+		.so-select-group__label,
+		.so-menu-group__label,
+		.so-sidebar-group__label
+	) {
 		color: var(--so-burg-muted);
 		font-weight: 600;
 	}

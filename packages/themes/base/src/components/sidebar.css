@@ -1,0 +1,113 @@
+.so-sidebar {
+	--so-sidebar-current-width: var(--so-sidebar-width, 16rem);
+	--so-sidebar-content-width: var(--so-sidebar-current-width);
+	--so-sidebar-slide: -100%;
+	--so-sidebar-order: -1;
+
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	justify-items: left;
+	flex: 0 0 auto;
+	width: var(--so-sidebar-current-width);
+	min-width: 0;
+	min-height: 0;
+	overflow: clip;
+	order: calc(var(--so-sidebar-order) * var(--so-dir-sign, 1));
+}
+
+.so-sidebar[data-side='right'] {
+	--so-sidebar-slide: 100%;
+	--so-sidebar-order: 1;
+	justify-items: right;
+}
+
+.so-sidebar[data-collapse='icon'][data-collapsed] {
+	--so-sidebar-current-width: var(--so-sidebar-icon-width, 3rem);
+}
+
+.so-sidebar[data-collapse='offcanvas'] {
+	--so-sidebar-content-width: var(--so-sidebar-width, 16rem);
+}
+
+.so-sidebar[data-collapse='offcanvas'][data-collapsed] {
+	--so-sidebar-current-width: 0px;
+}
+
+.so-sidebar__content {
+	display: flex;
+	flex-direction: column;
+	width: var(--so-sidebar-content-width);
+	height: 100%;
+	overflow: hidden auto;
+}
+
+.so-sidebar[data-collapse='offcanvas'][data-collapsed] > .so-sidebar__content {
+	translate: var(--so-sidebar-slide) 0;
+}
+
+/* The collapse state also hides blocks with a custom display value. */
+.so-sidebar[data-collapsed] [data-so-sidebar-expanded-only] {
+	display: none !important;
+}
+
+.so-sidebar-group__label {
+	flex-shrink: 0;
+	padding-block: var(--so-spacing, 0.25rem);
+	padding-inline: var(
+		--so-button-padding-normal,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-control-scale-normal, 1))
+	);
+	overflow: hidden;
+	font-size: var(--so-caption-note-font-size-normal);
+	line-height: var(--so-caption-note-line-height-normal);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.so-sidebar-group__label:empty,
+.so-sidebar[data-collapse='icon'][data-collapsed] .so-sidebar-group__label {
+	display: none;
+}
+
+.so-sidebar-item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: calc(var(--so-spacing, 0.25rem) * 2);
+	inline-size: 100%;
+	min-block-size: max(var(--so-button-height-normal, 2rem), var(--so-target-size, 2rem));
+	padding-inline: var(--so-button-padding-normal, calc(var(--so-spacing, 0.25rem) * 3));
+	text-align: start;
+}
+
+.so-sidebar-item__leading {
+	display: inline-grid;
+	flex: none;
+	place-items: center;
+}
+
+.so-sidebar-item__leading:empty {
+	display: none;
+}
+
+.so-sidebar-item__text {
+	min-inline-size: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.so-sidebar[data-collapse='icon'][data-collapsed] .so-sidebar-item {
+	justify-content: center;
+	padding-inline: 0;
+}
+
+/* Keep the label in the accessible name while the compact item shows its icon. */
+.so-sidebar[data-collapse='icon'][data-collapsed]
+	.so-sidebar-item:has(> .so-sidebar-item__leading:not(:empty))
+	> .so-sidebar-item__text {
+	position: absolute;
+	inline-size: 1px;
+	block-size: 1px;
+	clip-path: inset(50%);
+}

@@ -1,0 +1,49 @@
+@use '../button/mixins' as button;
+@use '../../mixins/group';
+@use '../../mixins/motion';
+@use '../../mixins/place';
+
+.so-sidebar {
+	@include motion.allowed {
+		transition: width 180ms ease;
+	}
+}
+
+.so-sidebar__content {
+	padding: calc(var(--so-spacing) * 2);
+	border-right: 1px solid var(--so-neutral-300);
+	color: var(--so-component-text);
+	@include place.panel-surface(var(--so-component-surface));
+
+	@include motion.allowed {
+		transition:
+			width 180ms ease,
+			translate 180ms ease;
+	}
+}
+
+.so-sidebar[data-side='right'] > .so-sidebar__content {
+	border-right-width: 0;
+	border-left: 1px solid var(--so-neutral-300);
+}
+
+.so-sidebar[data-collapse='icon'][data-collapsed] > .so-sidebar__content {
+	padding-inline: var(--so-spacing);
+}
+
+.so-sidebar-group__label {
+	@include group.label;
+}
+
+.so-sidebar-item {
+	@include button.button-neutral-tone-steps;
+	@include button.button-surface-look;
+	@include button.button-view('plain');
+
+	cursor: pointer;
+
+	&:focus-visible {
+		@include button.button-focus-ring;
+		outline-offset: -2px;
+	}
+}

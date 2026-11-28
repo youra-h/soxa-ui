@@ -80,6 +80,7 @@ export function applyAttributes(
 	element: Element,
 	wanted: TAppliedAttributes,
 	applied: TAppliedAttributes,
+	layout: TElementAttributes,
 ): TAppliedAttributes {
 	const values: Record<string, string> = {}
 
@@ -98,9 +99,12 @@ export function applyAttributes(
 	for (const [name, value] of Object.entries(applied.values)) {
 		if (Object.hasOwn(values, name)) continue
 
-		if (applied.inputs.has(name) || element.getAttribute(name) === value) {
-			element.removeAttribute(name)
-		}
+		const current = element.getAttribute(name)
+		const isInput = applied.inputs.has(name)
+		if (current === null || (!isInput && current !== value)) continue
+
+		if (isInput) layout.removeInput(name, current)
+		else element.removeAttribute(name)
 	}
 
 	// Входы раскладка пишет всегда — записанные входы те же, что желанные
@@ -221,8 +225,32 @@ export class TElementAttributes {
 		return attributes
 	}
 
+	/** Consume the reflected removal, including notifications delayed by the polyfill. */
+	static consumeInputRemoval(element: Element, name: string, oldValue: string): boolean {
+		const removals = LAID_OUT.get(element)?._inputRemovals
+		const values = removals?.get(name)
+		const index = values?.indexOf(oldValue) ?? -1
+		if (!values || index === -1) return false
+
+		values.splice(index, 1)
+		if (values.length === 0) removals?.delete(name)
+		return true
+	}
+
+	/** A reflected removal hides the native attribute without clearing the source prop. */
+	removeInput(name: string, value = this._element.getAttribute(name)): void {
+		if (value === null) return
+
+		const removals = (this._inputRemovals ??= new Map())
+		const pending = removals.get(name)
+		if (pending) pending.push(value)
+		else removals.set(name, [value])
+		this._element.removeAttribute(name)
+	}
+
 	private readonly _layers: Partial<Record<TAttributeLayer, TLayer>> = {}
 	private _applied: TAppliedAttributes = NO_ATTRIBUTES
+	private _inputRemovals?: Map<string, string[]>
 
 	/** Раскладчик поля; `null` — поле ещё не построено; `undefined` — поля нет. */
 	private _field: TElementAttributes | null | undefined = undefined
@@ -239,7 +267,7 @@ export class TElementAttributes {
 		}
 
 		this._layers[layer] = { set, inputs }
-		this._applied = applyAttributes(this._element, this._sum(), this._applied)
+		this._applied = applyAttributes(this._element, this._sum(), this._applied, this)
 	}
 
 	/**

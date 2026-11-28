@@ -1,0 +1,68 @@
+:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-sidebar__content) {
+		padding: calc(var(--so-spacing) * 2);
+		color: var(--so-burg-text);
+		background-color: var(--so-burg-surface);
+		border-right: 1px solid var(--so-burg-border);
+	}
+
+	:where(.so-sidebar[data-side='right'] > .so-sidebar__content) {
+		border-right-width: 0;
+		border-left: 1px solid var(--so-burg-border);
+	}
+
+	:where(.so-sidebar[data-collapse='icon'][data-collapsed] > .so-sidebar__content) {
+		padding-inline: var(--so-spacing);
+	}
+
+	:where(.so-sidebar-item) {
+		--so-burg-button-tone: var(--so-burg-text);
+		--so-icon-color: currentColor;
+		color: var(--so-burg-button-ink);
+		font-size: var(--so-burg-button-font-size-normal);
+		background-color: var(--so-burg-button-background, transparent);
+		cursor: pointer;
+	}
+
+	@media (forced-colors: active) {
+		:where(.so-sidebar-item:focus-visible) {
+			outline-color: Highlight;
+		}
+
+		:where(.so-sidebar-item:is([data-highlighted='true'], [data-selected='true'])):not(
+			:where([data-disabled='true'])
+		) {
+			--so-burg-button-background: Highlight;
+			--so-burg-button-ink: HighlightText;
+			forced-color-adjust: none;
+			outline-color: HighlightText;
+		}
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:where(:root:not([data-so-motion='reduce']))
+		:where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+		:where(.so-sidebar) {
+			transition: width 180ms ease;
+		}
+
+		:where(.so-sidebar__content) {
+			transition:
+				width 180ms ease,
+				translate 180ms ease;
+		}
+	}
+}
+
+:where(:root[data-so-motion='full']) :where([data-so-theme='burg'], [data-so-theme='burg-dark']) {
+	:where(.so-sidebar) {
+		transition: width 180ms ease;
+	}
+
+	:where(.so-sidebar__content) {
+		transition:
+			width 180ms ease,
+			translate 180ms ease;
+	}
+}

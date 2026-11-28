@@ -72,6 +72,8 @@ import {
 	SeparatorDescriptor,
 	SkeletonDescriptor,
 	SliderDescriptor,
+	SidebarDescriptor,
+	SidebarItemDescriptor,
 	SplitterDescriptor,
 	SplitterPanelDescriptor,
 	SplitterHandleDescriptor,
@@ -172,6 +174,16 @@ export const COMPONENTS: readonly TComponentEntry[] = [
 		group: 'display',
 		span: 1,
 		description: 'Перекрывающаяся группа с явным числом скрытых пользователей',
+	},
+	{
+		id: 'sidebar',
+		label: 'Sidebar',
+		descriptor: SidebarDescriptor,
+		parts: { Item: () => [SidebarItemDescriptor()] },
+		group: 'utilities',
+		span: 2,
+		description:
+			'Боковая панель с произвольным содержимым и сворачиванием до иконок или за край',
 	},
 	{
 		id: 'splitter',
