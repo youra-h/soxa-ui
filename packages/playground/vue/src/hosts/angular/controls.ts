@@ -1,4 +1,4 @@
-import { ALERT_SAMPLE } from '@soxa-ui/playground-shared'
+import { ALERT_SAMPLE, SIDEBAR_GROUPS } from '@soxa-ui/playground-shared'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -1486,33 +1486,54 @@ export class FileUploadPreview implements TFixture {
 
 @Component({
 	selector: 'pg-sidebar-preview',
-	imports: [TSidebarComponent, TSidebarItemComponent, CopyDirective],
+	imports: [
+		TSidebarComponent,
+		TSidebarItemComponent,
+		TIconComponent,
+		RoleIconDirective,
+		CopyDirective,
+	],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: { style: 'display: contents' },
 	template: `
 		<ng-template pg-copy>
-			<div class="pg-sidebar-preview">
-				<div class="pg-sidebar-preview__main">Рабочая область</div>
-				<aside
-					so-sidebar
-					aria_label="Рабочая область"
-					[ctrl]="ctrl()"
-					[rendered]="rendered()"
-					[visible]="visible()"
-					[direction]="direction()"
-					[side]="side()"
-					[collapse]="collapse()"
-					[collapsed]="collapsed()"
-				>
-					<strong class="pg-sidebar-preview__label">Проекты</strong>
-					<button so-sidebar-item text="Обзор"><span slot="leading">◈</span></button>
-					<button so-sidebar-item text="Настройки"><span slot="leading">⚙</span></button>
-				</aside>
-			</div>
+			<aside
+				so-sidebar
+				aria_label="Редакция «Поле»"
+				[ctrl]="ctrl()"
+				[rendered]="rendered()"
+				[visible]="visible()"
+				[direction]="direction()"
+				[side]="side()"
+				[collapse]="collapse()"
+				[collapsed]="collapsed()"
+			>
+				@for (group of groups; track group.label) {
+					<div class="pg-sidebar-group" role="group" [attr.aria-label]="group.label">
+						<div class="so-sidebar-group__label">{{ group.label }}</div>
+						@for (item of group.items; track item.text) {
+							<button
+								so-sidebar-item
+								[text]="item.text"
+								[attr.aria-current]="item.current ? 'page' : null"
+								[attr.data-selected]="item.current ? 'true' : null"
+							>
+								<svg
+									so-icon
+									slot="leading"
+									size="lg"
+									[so-role-icon]="item.icon"
+								></svg>
+							</button>
+						}
+					</div>
+				}
+			</aside>
 		</ng-template>
 	`,
 })
 export class SidebarPreview implements TFixture {
+	readonly groups = SIDEBAR_GROUPS
 	readonly ctrl = input<TSidebarComponent['ctrl']>()
 	readonly rendered = input<TSidebarComponent['rendered']>()
 	readonly visible = input<TSidebarComponent['visible']>()

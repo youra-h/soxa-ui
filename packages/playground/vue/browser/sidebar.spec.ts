@@ -2,9 +2,11 @@ import { describe, expect, it } from 'vitest'
 import { page } from 'vitest/browser'
 import { h } from 'vue'
 import { TSidebar } from '@soxa-ui/core'
-import { Sidebar } from '@soxa-ui/vue'
+import { ListBox, Sidebar } from '@soxa-ui/vue'
 import '@soxa-ui/theme-oren'
 import { FRAMEWORKS, loadHost } from '../src/hosts'
+import SidebarDemo from '../src/components/SidebarDemo.vue'
+import '../src/styles.css'
 import { render } from './render'
 
 function element(root: ParentNode, selector: string): HTMLElement {
@@ -27,7 +29,9 @@ describe.each(FRAMEWORKS)('Sidebar preview · $id', ({ id }) => {
 				.toBe('right')
 			const sidebar = root.querySelector<HTMLElement>('.so-sidebar')
 			const item = sidebar?.querySelector('.so-sidebar-item')
-			expect(item?.textContent).toContain('Обзор')
+			expect(item?.textContent).toContain('Календарь публикаций')
+			expect(sidebar?.querySelectorAll('[role="group"]')).toHaveLength(2)
+			expect(sidebar?.querySelectorAll('.so-sidebar-item')).toHaveLength(6)
 
 			preview.update({ collapse: 'icon', collapsed: true })
 			await expect.poll(() => sidebar?.hasAttribute('data-collapsed')).toBe(true)
@@ -50,6 +54,57 @@ describe.each(FRAMEWORKS)('Sidebar preview · $id', ({ id }) => {
 			root.remove()
 		}
 	})
+})
+
+it('collapses and reopens the grouped panel from the workspace', async () => {
+	const host = await loadHost('vue')
+	const root = render({
+		render: () =>
+			h('div', { 'data-so-theme': 'oren' }, [
+				h(SidebarDemo, { host }),
+				h(ListBox, {
+					items: [{ value: 'apple', text: 'Яблоко', _: { group: 'fruit' } }],
+					groups: [{ key: 'fruit', label: 'Фрукты' }],
+				}),
+			]),
+	})
+	const demo = page.getByRole('region', { name: 'Редакция «Поле»' })
+	const collapse = demo.getByRole('button', { name: 'Свернуть панель' })
+	const expand = demo.getByRole('button', { name: 'Развернуть панель' })
+	const hide = demo.getByRole('switch', { name: 'Скрывать целиком' })
+	const sidebar = element(root, '.so-sidebar')
+	const width = () => sidebar.getBoundingClientRect().width
+	const expandedWidth = width()
+	const sidebarLabel = element(root, '.so-sidebar-group__label')
+	const listBoxLabel = element(root, '.so-list-box-group__label')
+	const labelStyle = getComputedStyle(sidebarLabel)
+	const listBoxStyle = getComputedStyle(listBoxLabel)
+
+	for (const property of [
+		'textTransform',
+		'color',
+		'fontSize',
+		'fontWeight',
+		'paddingInlineStart',
+	] as const) {
+		expect(labelStyle[property]).toBe(listBoxStyle[property])
+	}
+
+	await collapse.click()
+	await expect.poll(width).toBeLessThan(expandedWidth)
+	expect(width()).toBeGreaterThan(0)
+	expect(getComputedStyle(sidebarLabel).display).toBe('none')
+	await expect.element(expand).toHaveAttribute('aria-expanded', 'false')
+	await expect.element(demo.getByRole('button', { name: 'Напоминания' })).toBeVisible()
+
+	await hide.click()
+	await expect.poll(width).toBe(0)
+	await expect.element(expand).toBeVisible()
+
+	await expand.click()
+	await expect.poll(width).toBe(expandedWidth)
+	await expect.element(collapse).toHaveAttribute('aria-expanded', 'true')
+	await expect.element(demo.getByRole('group', { name: 'Материалы' })).toBeVisible()
 })
 
 it('keeps a Web Components sidebar link native', async () => {

@@ -1,4 +1,7 @@
+@use '../button/mixins' as button;
+@use '../../mixins/group';
 @use '../../mixins/motion';
+@use '../../mixins/place';
 
 .so-sidebar {
 	@include motion.allowed {
@@ -7,8 +10,10 @@
 }
 
 .so-sidebar__content {
-	padding: 0.25rem;
-	background: var(--so-place-surface);
+	padding: calc(var(--so-spacing) * 2);
+	border-right: 1px solid var(--so-neutral-300);
+	color: var(--so-component-text);
+	@include place.panel-surface(var(--so-component-surface));
 
 	@include motion.allowed {
 		transition:
@@ -17,16 +22,28 @@
 	}
 }
 
+.so-sidebar[data-side='right'] > .so-sidebar__content {
+	border-right-width: 0;
+	border-left: 1px solid var(--so-neutral-300);
+}
+
+.so-sidebar[data-collapse='icon'][data-collapsed] > .so-sidebar__content {
+	padding-inline: var(--so-spacing);
+}
+
+.so-sidebar-group__label {
+	@include group.label;
+}
+
 .so-sidebar-item {
-	border-radius: 0.375rem;
+	@include button.button-neutral-tones;
+	@include button.button-surface-look;
+	@include button.button-view('plain');
+
 	cursor: pointer;
 
-	&:not([data-disabled='true']):hover {
-		background: var(--so-neutral-200);
-	}
-
 	&:focus-visible {
-		outline: 2px solid var(--so-component-focus-ring);
+		@include button.button-focus-ring;
 		outline-offset: -2px;
 	}
 }

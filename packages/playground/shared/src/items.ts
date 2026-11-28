@@ -15,6 +15,25 @@ export const COLLECTION_ITEMS = [
 	{ value: 'e', text: 'Пятый' },
 ] as const
 
+export const SIDEBAR_GROUPS = [
+	{
+		label: 'Выпуск',
+		items: [
+			{ text: 'Календарь публикаций', icon: 'calendar', current: true },
+			{ text: 'Задачи редакции', icon: 'check', current: false },
+			{ text: 'Напоминания', icon: 'notification', current: false },
+		],
+	},
+	{
+		label: 'Материалы',
+		items: [
+			{ text: 'Черновики', icon: 'copy', current: false },
+			{ text: 'Избранные статьи', icon: 'star', current: false },
+			{ text: 'Редакционный справочник', icon: 'info', current: false },
+		],
+	},
+] as const
+
 /** Значения состава — то, чем задают выбор целиком. */
 export const COLLECTION_VALUES = COLLECTION_ITEMS.map((item) => item.value)
 

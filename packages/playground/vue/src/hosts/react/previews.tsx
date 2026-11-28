@@ -1,4 +1,4 @@
-import { STEPPER_ITEMS, ALERT_SAMPLE } from '@soxa-ui/playground-shared'
+import { STEPPER_ITEMS, ALERT_SAMPLE, SIDEBAR_GROUPS } from '@soxa-ui/playground-shared'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -111,6 +111,10 @@ const ITEMS = COLLECTION_ITEMS
 /** The Icon preview's glyph is a role's component: Icon's `tag` is its root, not a role. */
 const ALERT_ICON = roleIcon('warning')
 const ARROW_DOWN = roleIcon('arrowDown')
+const sidebarGroups = SIDEBAR_GROUPS.map((group) => ({
+	label: group.label,
+	items: group.items.map((item) => ({ ...item, iconTag: roleIcon(item.icon) })),
+}))
 
 /**
  * Tabs in markup — for the Tabs and DragAndDrop previews, like `tabsSlots` in
@@ -432,14 +436,27 @@ export const PREVIEWS: Record<string, TPreview> = {
 	),
 	stepper: (bind) => <Stepper items={STEPPER_ITEMS} {...bind} />,
 	sidebar: (bind) => (
-		<div className="pg-sidebar-preview">
-			<div className="pg-sidebar-preview__main">Рабочая область</div>
-			<Sidebar aria_label="Рабочая область" {...bind}>
-				<strong className="pg-sidebar-preview__label">Проекты</strong>
-				<Sidebar.Item text="Обзор" leading="◈" />
-				<Sidebar.Item text="Настройки" leading="⚙" />
-			</Sidebar>
-		</div>
+		<Sidebar aria_label="Редакция «Поле»" {...bind}>
+			{sidebarGroups.map((group) => (
+				<div
+					key={group.label}
+					className="pg-sidebar-group"
+					role="group"
+					aria-label={group.label}
+				>
+					<div className="so-sidebar-group__label">{group.label}</div>
+					{group.items.map((item) => (
+						<Sidebar.Item
+							key={item.text}
+							text={item.text}
+							aria-current={item.current ? 'page' : undefined}
+							data-selected={item.current ? 'true' : undefined}
+							leading={<Icon tag={item.iconTag} size="lg" />}
+						/>
+					))}
+				</div>
+			))}
+		</Sidebar>
 	),
 	splitter: (bind) => (
 		<Splitter {...bind} className="pg-splitter-preview">

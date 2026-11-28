@@ -45,14 +45,22 @@
 	translate: var(--so-sidebar-slide) 0;
 }
 
+.so-sidebar-group__label {
+	padding-block: var(--so-spacing, 0.25rem);
+}
+
+.so-sidebar[data-collapse='icon'][data-collapsed] .so-sidebar-group__label {
+	display: none;
+}
+
 .so-sidebar-item {
 	position: relative;
 	display: flex;
 	align-items: center;
 	gap: calc(var(--so-spacing, 0.25rem) * 2);
 	inline-size: 100%;
-	min-block-size: var(--so-target-size, 2rem);
-	padding-inline: calc(var(--so-spacing, 0.25rem) * 2);
+	min-block-size: max(var(--so-button-height-normal, 2rem), var(--so-target-size, 2rem));
+	padding-inline: var(--so-button-padding-normal, calc(var(--so-spacing, 0.25rem) * 3));
 	text-align: start;
 }
 

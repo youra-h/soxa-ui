@@ -30,6 +30,7 @@
 
 .so-list-box-group__label,
 .so-select-group__label,
+.so-sidebar-group__label,
 .so-menu-group__label {
 	flex-shrink: 0;
 	overflow: hidden;
@@ -39,6 +40,7 @@
 
 .so-list-box-group__label:empty,
 .so-select-group__label:empty,
+.so-sidebar-group__label:empty,
 .so-menu-group__label:empty {
 	display: none;
 }
@@ -56,6 +58,7 @@
 
 .so-list-box-group:has(> .so-list-box-item > .so-button--size-normal) > .so-list-box-group__label,
 .so-select-group:has(> .so-select-item > .so-button--size-normal) > .so-select-group__label,
+.so-sidebar-group__label,
 .so-menu__panel--size-normal .so-menu-group__label {
 	padding-inline: var(
 		--so-button-padding-normal,

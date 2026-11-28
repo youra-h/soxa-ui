@@ -1,4 +1,4 @@
-import { STEPPER_ITEMS, ALERT_SAMPLE } from '@soxa-ui/playground-shared'
+import { STEPPER_ITEMS, ALERT_SAMPLE, SIDEBAR_GROUPS } from '@soxa-ui/playground-shared'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -638,54 +638,38 @@ export const PREVIEWS: Record<string, TPreview> = {
 	sidebar: {
 		tag: 'aside',
 		is: 'so-sidebar',
-		props: { aria_label: 'Рабочая область' },
-		wrapper: {
-			tag: 'div',
-			attributes: { class: 'pg-sidebar-preview' },
-			slots: {
-				default: [
-					{
-						tag: 'div',
-						attributes: { class: 'pg-sidebar-preview__main' },
-						slots: { default: [text('Рабочая область')] },
-					},
-				],
-			},
-		},
+		props: { aria_label: 'Редакция «Поле»' },
 		slots: {
-			default: [
-				{
-					tag: 'strong',
-					attributes: { class: 'pg-sidebar-preview__label' },
-					slots: { default: [() => document.createTextNode('Проекты')] },
-				},
-				{
-					tag: 'button',
-					is: 'so-sidebar-item',
-					props: { text: 'Обзор' },
-					slots: {
-						leading: [
-							{
-								tag: 'span',
-								slots: { default: [() => document.createTextNode('◈')] },
+			default: SIDEBAR_GROUPS.map((group): TPreview => ({
+				tag: 'div',
+				attributes: { class: 'pg-sidebar-group', role: 'group', 'aria-label': group.label },
+				slots: {
+					default: [
+						{
+							tag: 'div',
+							attributes: { class: 'so-sidebar-group__label' },
+							slots: { default: [text(group.label)] },
+						},
+						...group.items.map((item): TPreview => ({
+							tag: 'button',
+							is: 'so-sidebar-item',
+							props: { text: item.text },
+							attributes: item.current
+								? { 'aria-current': 'page', 'data-selected': 'true' }
+								: undefined,
+							slots: {
+								leading: [
+									{
+										tag: 'span',
+										is: 'so-icon',
+										attributes: { icon: item.icon, size: 'lg' },
+									},
+								],
 							},
-						],
-					},
+						})),
+					],
 				},
-				{
-					tag: 'button',
-					is: 'so-sidebar-item',
-					props: { text: 'Настройки' },
-					slots: {
-						leading: [
-							{
-								tag: 'span',
-								slots: { default: [() => document.createTextNode('⚙')] },
-							},
-						],
-					},
-				},
-			],
+			})),
 		},
 	},
 	splitter: {

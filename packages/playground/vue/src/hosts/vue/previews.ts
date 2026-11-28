@@ -1,4 +1,4 @@
-import { STEPPER_ITEMS, ALERT_SAMPLE } from '@soxa-ui/playground-shared'
+import { STEPPER_ITEMS, ALERT_SAMPLE, SIDEBAR_GROUPS } from '@soxa-ui/playground-shared'
 import {
 	BREADCRUMBS_ITEMS,
 	EDITOR_ALIGNMENT_ITEMS,
@@ -219,6 +219,10 @@ const menuItems = (parts: TParts) => [
  */
 const ALERT_ICON = roleIcon('warning')
 const ARROW_DOWN = roleIcon('arrowDown')
+const sidebarGroups = SIDEBAR_GROUPS.map((group) => ({
+	label: group.label,
+	items: group.items.map((item) => ({ ...item, iconTag: roleIcon(item.icon) })),
+}))
 
 /**
  * On the playground a button opens the dialog: closed it is hidden, and open
@@ -519,14 +523,34 @@ export const PREVIEWS: Record<string, TPreview> = {
 			action: () => h(Button, { type: 'button' }, () => ALERT_SAMPLE.action),
 		}),
 	sidebar: (bind) =>
-		h('div', { class: 'pg-sidebar-preview' }, [
-			h('div', { class: 'pg-sidebar-preview__main' }, 'Рабочая область'),
-			h(Sidebar, { aria_label: 'Рабочая область', ...bind }, () => [
-				h('strong', { class: 'pg-sidebar-preview__label' }, 'Проекты'),
-				h(Sidebar.Item, { text: 'Обзор' }, { leading: () => '◈' }),
-				h(Sidebar.Item, { text: 'Настройки' }, { leading: () => '⚙' }),
-			]),
-		]),
+		h(Sidebar, { aria_label: 'Редакция «Поле»', ...bind }, () =>
+			sidebarGroups.map((group) =>
+				h(
+					'div',
+					{
+						key: group.label,
+						class: 'pg-sidebar-group',
+						role: 'group',
+						'aria-label': group.label,
+					},
+					[
+						h('div', { class: 'so-sidebar-group__label' }, group.label),
+						...group.items.map((item) =>
+							h(
+								Sidebar.Item,
+								{
+									key: item.text,
+									text: item.text,
+									'aria-current': item.current ? 'page' : undefined,
+									'data-selected': item.current ? 'true' : undefined,
+								},
+								{ leading: () => h(Icon, { tag: item.iconTag, size: 'lg' }) },
+							),
+						),
+					],
+				),
+			),
+		),
 	splitter: (bind) =>
 		h(Splitter, { ...bind, class: 'pg-splitter-preview' }, () => [
 			h(Splitter.Panel, { panel: 'files' }, () =>

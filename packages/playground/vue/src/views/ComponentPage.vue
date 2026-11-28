@@ -12,6 +12,7 @@ import { useTheme } from '../composables/useTheme'
 import PropRow from '../components/PropRow.vue'
 import GroupsDemo from '../components/GroupsDemo.vue'
 import ComponentScene from '../components/ComponentScene.vue'
+import SidebarDemo from '../components/SidebarDemo.vue'
 
 const props = defineProps<{ framework: string; id: string }>()
 
@@ -65,6 +66,8 @@ function sink(column: 'props' | 'instance'): TPreviewEventSink {
 		<p class="pg__page-lead">
 			{{ entry.description }} · события идут в консоль браузера с пометкой источника
 		</p>
+
+		<SidebarDemo v-if="entry.id === 'sidebar'" :host="host" />
 
 		<!--
 			Строк нет — одна сцена с теми же колонками. Ключ — идентификатор
