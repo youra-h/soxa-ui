@@ -151,7 +151,7 @@ $tone-steps: 300, 400, 500, 800;
 	}
 }
 
-// Переменные цвета нейтрали — вуаль своей плотности (`button-tones`).
+// Neutral fills use a color veil whose density depends on the button state.
 @mixin button-neutral-tones {
 	@include button-neutral-tone-steps;
 
