@@ -51,9 +51,20 @@
 }
 
 .so-sidebar-group__label {
+	flex-shrink: 0;
 	padding-block: var(--so-spacing, 0.25rem);
+	padding-inline: var(
+		--so-button-padding-normal,
+		calc(var(--so-spacing, 0.25rem) * 2.5 * var(--so-control-scale-normal, 1))
+	);
+	overflow: hidden;
+	font-size: var(--so-caption-note-font-size-normal);
+	line-height: var(--so-caption-note-line-height-normal);
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
+.so-sidebar-group__label:empty,
 .so-sidebar[data-collapse='icon'][data-collapsed] .so-sidebar-group__label {
 	display: none;
 }
