@@ -5,7 +5,7 @@ import { TSidebarItemSurface } from '../../../generated/sidebar-item.metadata'
 import { setupSidebarItem } from './setup.component'
 
 @Component({
-	selector: 'a[so-sidebar-item], button[so-sidebar-item]',
+	selector: 'button[so-sidebar-item], [so-sidebar-item]',
 	imports: [NgTemplateOutlet],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	host: { '[attr.title]': "state()['text'] || null" },

@@ -5,7 +5,7 @@ import { TSidebarSurface } from '../../generated/sidebar.metadata'
 import { setupSidebar } from './setup.component'
 
 @Component({
-	selector: '[so-sidebar]',
+	selector: 'aside[so-sidebar], [so-sidebar]',
 	imports: [NgTemplateOutlet],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 	templateUrl: './sidebar.component.html',

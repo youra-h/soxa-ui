@@ -71,6 +71,8 @@ import {
 	TSeparator,
 	TSkeleton,
 	TSlider,
+	TSidebar,
+	TSidebarItem,
 	TStepper,
 	TStepperItem,
 	TStepperContent,
@@ -148,6 +150,7 @@ import {
 	Separator,
 	Skeleton,
 	Slider,
+	Sidebar,
 	Stepper,
 	Splitter,
 	Switch,
@@ -955,6 +958,21 @@ const COMPONENTS: Readonly<Record<string, Readonly<Record<string, TCase>>>> = {
 			() => new TSeparator(),
 			(ctrl) => <Separator ctrl={ctrl} />,
 		),
+	},
+	Sidebar: {
+		'owner and item with external ctrl': () => {
+			const ctrl = new TSidebar()
+			const item = new TSidebarItem({ text: 'Overview', href: '/overview' })
+
+			return {
+				node: (
+					<Sidebar ctrl={ctrl}>
+						<Sidebar.Item ctrl={item} />
+					</Sidebar>
+				),
+				buses: [ctrl.events, item.events],
+			}
+		},
 	},
 	Skeleton: {
 		ctrl: overCtrl(

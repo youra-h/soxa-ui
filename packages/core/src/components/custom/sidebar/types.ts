@@ -30,6 +30,7 @@ export interface ISidebar extends IComponentView<ISidebarProps, TSidebarEvents> 
 }
 
 export interface ISidebarItemProps extends ITextableProps {
+	/** Link destination. In Web Components, use an anchor with is="so-sidebar-link". */
 	href?: string
 }
 

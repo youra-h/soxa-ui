@@ -52,6 +52,38 @@ describe.each(FRAMEWORKS)('Sidebar preview · $id', ({ id }) => {
 	})
 })
 
+it('keeps a Web Components sidebar link native', async () => {
+	await loadHost('webc')
+	const link = document.createElement('a', { is: 'so-sidebar-link' })
+	link.setAttribute('href', '#settings')
+	link.setAttribute('text', 'Settings')
+	link.setAttribute('disabled', '')
+	document.body.append(link)
+
+	try {
+		await expect.poll(() => link.classList.contains('so-sidebar-item')).toBe(true)
+		await expect.poll(() => link.getAttribute('href')).toBeNull()
+
+		link.removeAttribute('disabled')
+		await expect
+			.element(page.getByRole('link', { name: 'Settings' }))
+			.toHaveAttribute('href', '#settings')
+
+		link.setAttribute('disabled', '')
+		await expect.poll(() => link.getAttribute('href')).toBeNull()
+
+		link.setAttribute('href', '#billing')
+		await expect.poll(() => link.getAttribute('href')).toBeNull()
+
+		link.removeAttribute('disabled')
+		await expect.poll(() => link.getAttribute('href')).toBe('#billing')
+		link.removeAttribute('href')
+		await expect.poll(() => link.getAttribute('href')).toBeNull()
+	} finally {
+		link.remove()
+	}
+})
+
 describe.each(['left', 'right'] as const)('Sidebar on the %s', (side) => {
 	it('moves to the correct side, keeps the icon link and releases its width off-canvas', async () => {
 		const ctrl = new TSidebar({ side })

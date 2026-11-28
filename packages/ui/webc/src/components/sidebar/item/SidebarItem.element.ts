@@ -8,6 +8,7 @@ import {
 	type TElementClassOf,
 	type TElementType,
 } from '../../../adapter'
+import { TElementAttributes } from '../../../adapter/runtime/paint'
 import { setupSidebarItem } from './setup.component'
 
 const sidebarItemTemplate: ITemplate<ISidebarItem> = {
@@ -28,6 +29,11 @@ const sidebarItemTemplate: ITemplate<ISidebarItem> = {
 		}
 	},
 	bindings: [
+		bind(['disabled', 'href'], ({ root, state }) => {
+			// A native href can be written while disabled, before there is a reflected href to remove.
+			if (root instanceof HTMLAnchorElement && state.disabled)
+				TElementAttributes.of(root).removeInput('href')
+		}),
 		bind('text', ({ content, state, hasSlot, root }) => {
 			if (!hasSlot('default')) content.textContent = state.text ?? ''
 			root.title = state.text ?? ''
@@ -45,7 +51,7 @@ export const TSidebarItemElement: TElementClassOf<
 	setup: setupSidebarItem,
 })
 
-export const TSidebarLinkElement: TElementClassOf<
+const TSidebarLinkElement: TElementClassOf<
 	typeof HTMLAnchorElement,
 	typeof SidebarItemDescriptor,
 	ISidebarItem
@@ -58,4 +64,3 @@ export const TSidebarLinkElement: TElementClassOf<
 defineElement('so-sidebar-item', TSidebarItemElement, 'button')
 defineElement('so-sidebar-link', TSidebarLinkElement, 'a')
 export type TSidebarItemElementProps = TElementType<typeof TSidebarItemElement>
-export type TSidebarLinkElementProps = TElementType<typeof TSidebarLinkElement>

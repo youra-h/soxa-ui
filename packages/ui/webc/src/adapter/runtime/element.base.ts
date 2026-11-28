@@ -349,7 +349,14 @@ export function ElementBase<
 			if (!this.isConnected) TTeleport.recall(this)
 		}
 
-		attributeChangedCallback(name: string, _old: string | null, value: string | null): void {
+		attributeChangedCallback(name: string, old: string | null, value: string | null): void {
+			if (
+				value === null &&
+				old !== null &&
+				TElementAttributes.consumeInputRemoval(this, name, old)
+			)
+				return
+
 			// The customized-built-in polyfill delivers callbacks later. A newer
 			// attribute value supersedes an older reflected notification.
 			if (this.getAttribute(name) !== value) return
