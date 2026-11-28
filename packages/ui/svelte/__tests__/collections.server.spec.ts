@@ -256,26 +256,25 @@ describe('Select · серверный рендер', () => {
 })
 
 /**
- * Меню на сервере — корень с триггером и его связкой. Панель — Frame, а
- * телепорта на сервере нет, как у Popover: ни панели, ни пунктов — разметкой
- * и из данных — в серверной разметке нет. Пункты разметкой стоят в панели и
- * входят в коллекцию в браузере, когда `Teleport` её смонтирует.
+ * The trigger keeps its name and expanded state on the server. The panel
+ * and its items mount in the browser through Teleport, so the server does
+ * not emit the trigger's aria-controls reference.
  */
 describe('Menu · серверный рендер', () => {
 	/** Триггер — кнопка из scope: её атрибуты. */
 	const triggerOf = (body: string) => withClass(body, 'so-test-trigger')[0]?.attributes ?? {}
 
-	it('у кнопки — корень с триггером и связкой, панели и пунктов нет', () => {
-		const { body } = render(MenuHarness, { props: { case: 'groups' } })
+	it.each([false, true])('omits the unmounted panel link when open=%s', (open) => {
+		const { body } = render(MenuHarness, { props: { case: 'groups', menu: { open } } })
 		const button = triggerOf(body)
 
 		expect(tagsOf(body)[0]?.name).toBe('span')
 		expect(tagsOf(body)[0]?.attributes.class?.split(' ')).toContain('so-menu')
 		expect(button['aria-haspopup']).toBe('menu')
-		expect(button['aria-expanded']).toBe('false')
-		expect(button['aria-controls']).toMatch(/.+/)
+		expect(button['aria-expanded']).toBe(String(open))
+		expect(button['aria-controls']).toBeUndefined()
 		expect(button.id).toMatch(/.+/)
-		expect(button['data-selected']).toBe('false')
+		expect(button['data-selected']).toBe(String(open))
 		expect(withClass(body, 'so-menu__panel')).toEqual([])
 		expect(textOf(body)).not.toContain('Изменить')
 		expect(textOf(body)).not.toContain('Сетка')

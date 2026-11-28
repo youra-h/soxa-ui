@@ -27,10 +27,17 @@ export function Menu(props: MenuProps): JSX.Element {
 		sets: [state.attrs, state.dataset],
 		forward: binding.forwardProps(),
 	}))
-	const trigger = liveScope(() => ({
-		triggerAria: state.triggerAria ?? {},
-		triggerDataset: state.triggerDataset ?? {},
-	}))
+	const trigger = liveScope(() => {
+		const { triggerAria, triggerDataset } = state
+
+		return {
+			triggerAria:
+				!binding.rootElement() && triggerAria?.['aria-controls']
+					? { ...triggerAria, 'aria-controls': null }
+					: (triggerAria ?? {}),
+			triggerDataset: triggerDataset ?? {},
+		}
+	})
 
 	return (
 		<Show when={state.rendered}>

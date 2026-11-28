@@ -266,7 +266,7 @@ describe('Menu · серверный рендер', () => {
 		expect(body).toMatch(/^<span [^>]*class="so-menu[^"]*"/)
 		expect(body).toMatch(/<button [^>]*aria-haspopup="menu"/)
 		expect(body).toContain('aria-expanded="false"')
-		expect(body).toMatch(/<button [^>]*aria-controls="[^"]+"/)
+		expect(body).not.toContain('aria-controls')
 		expect(body).toMatch(/<button [^>]*\sid="[^"]+"/)
 		expect(body).toContain('data-selected="false"')
 		expect(body).not.toContain('so-menu__panel')
