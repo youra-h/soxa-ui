@@ -4527,10 +4527,10 @@
       "name": "data-so-sidebar-expanded-only",
       "sources": [
         "packages/ui/angular/src/components/sidebar/sidebar-expanded-only.directive.ts",
-        "packages/ui/react/src/components/sidebar/ExpandedOnly.tsx",
+        "packages/ui/react/src/components/sidebar/expanded-only/ExpandedOnly.tsx",
         "packages/ui/solid/src/components/sidebar/ExpandedOnly.tsx",
         "packages/ui/svelte/src/components/sidebar/ExpandedOnly.svelte",
-        "packages/ui/vue/src/components/sidebar/ExpandedOnly.vue"
+        "packages/ui/vue/src/components/sidebar/index.ts"
       ],
       "description": "Hides a Sidebar block while collapsed and preserves its mounted contents.",
       "scope": "A descendant of a Sidebar; the attribute can also be set on native markup",
